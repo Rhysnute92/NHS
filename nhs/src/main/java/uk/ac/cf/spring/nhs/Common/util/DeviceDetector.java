@@ -5,8 +5,11 @@ import jakarta.servlet.http.HttpServletRequest;
 public class DeviceDetector {
 
     public static boolean isMobile(HttpServletRequest request) {
-        String userAgent = request.getHeader("User-Agent").toLowerCase();
-        return userAgent.contains("mobi");
+        String userAgent = request.getHeader("User-Agent");
+        if (userAgent == null) {
+            return false;
+        }
+        return userAgent.toLowerCase().contains("mobi");
     }
 
 }
