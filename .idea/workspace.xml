@@ -4,7 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="762d850a-8e13-42ba-bb00-e1c5c66af521" name="Changes" comment="">
+    <list default="true" id="2037e2eb-7bae-4ba3-b53a-d09bcf78b353" name="Changes" comment="Comm">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/GuestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/common/util/DeviceDetector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/css/guest.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/images/contact-book-line-icon.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/images/maps-pin-black-icon.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/images/stethoscope-icon.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/desktop/guestLanding.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/guestAppointment.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/guestFindUs.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/guestLanding.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/guestServices.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/landing.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nhs/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,13 +52,7 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="nhs" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="nhs" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -52,17 +65,24 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Kotlin Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2j6JgfSD7Mi7v6jUDeAgTsbNNrV" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -74,17 +94,28 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/c23102007/OneDrive - Cardiff University/Autumn Semester/Client Project Rhys/team-5-smart-towns-rhys-nute",
+    "last_opened_file_path": "C:/Users/c1810126/OneDrive - Cardiff University/Documents/dissertation-nhs-lymphoedema",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "4719aa9ba73cc957c4e88b9e675e757a",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.nhs [build]">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\c1810126\OneDrive - Cardiff University\Documents\dissertation-nhs-lymphoedema\nhs\src\main\resources\templates\guestMobile" />
+      <recent name="C:\Users\c1810126\OneDrive - Cardiff University\Documents\dissertation-nhs-lymphoedema\nhs\src\main\resources\static\css" />
+      <recent name="C:\Users\c1810126\OneDrive - Cardiff University\Documents\dissertation-nhs-lymphoedema\nhs\src\main\resources\static\images" />
+      <recent name="C:\Users\c1810126\OneDrive - Cardiff University\Documents\dissertation-nhs-lymphoedema\nhs\src\main\resources" />
+      <recent name="C:\Users\c1810126\OneDrive - Cardiff University\Documents\dissertation-nhs-lymphoedema\nhs\src\main\resources\static" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.nhs [bootRun]">
     <configuration name="NhsApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -159,8 +190,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.nhs [build]" />
         <item itemvalue="Gradle.nhs [bootRun]" />
+        <item itemvalue="Gradle.nhs [build]" />
         <item itemvalue="Gradle.NhsApplicationTests" />
       </list>
     </recent_temporary>
@@ -168,13 +199,14 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="762d850a-8e13-42ba-bb00-e1c5c66af521" name="Changes" comment="" />
+      <changelist id="2037e2eb-7bae-4ba3-b53a-d09bcf78b353" name="Changes" comment="" />
       <created>1720701706878</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1720701706878</updated>
       <workItem from="1720701709917" duration="147000" />
       <workItem from="1721031283958" duration="9886000" />
+      <workItem from="1721226411687" duration="7629000" />
     </task>
     <servers />
   </component>
