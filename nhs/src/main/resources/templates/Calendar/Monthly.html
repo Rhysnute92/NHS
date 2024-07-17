@@ -35,12 +35,12 @@
           Clear
         </button>
       </div>
-      <div id="reminder-section">
+      <div id="schedule">
         <h3>Appointment Schedule</h3>
 
         <ul id="reminderList">
           <li data-event-id="1">
-            <strong>Event Title</strong>
+            <strong>Appointment</strong>
             - Appointment description on appointment date
             <button class="delete-event"
                     onclick="deleteEvent(1)">
@@ -54,13 +54,8 @@
       <h3 id="monthAndYear"></h3>
       <div class="button-container-calendar">
         <button id="previous"
-                onclick="previous()">
-          ‹
-        </button>
-        <button id="next"
-                onclick="next()">
-          ›
-        </button>
+                onclick="previous()">‹</button>
+        <button id="next" onclick="next()">›</button>
       </div>
       <table class="table-calendar"
              id="calendar"
