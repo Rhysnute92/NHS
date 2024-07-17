@@ -16,21 +16,18 @@
   <div class="container-calendar">
     <div id="left">
       <h1>Calendar</h1>
-      <div id="event-section">
-        <h3>Add Event</h3>
-        <input type="date" id="eventDate">
-        <input type="text"
-               id="eventTitle"
-               placeholder="Event Title">
-        <input type="text"
-               id="eventDescription"
-               placeholder="Event Description">
+      <div id="appointment">
+        <h3>Add Appointment</h3>
+        <input type="date" id="appointmentDate"><br>
+        <input type="time" id="appointmentTime"><br>
+        <input type="text" id="dr" placeholder="Please enter Dr's name"><br>
+        <input type="text" id="eventDescription" placeholder="Event Description"><br>
         <button id="addEvent" onclick="addEvent()">
           Add
         </button>
       </div>
       <div id="reminder-section">
-        <h3>Reminders</h3>
+        <h3>Appointment schedule</h3>
         <!-- List to display reminders -->
         <ul id="reminderList">
           <li data-event-id="1">
