@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/components/header.css" th:href="@{/css/components/header.css}"/>
     <title>Test</title>
 </head>
 <body>
-<div>
+    <div th:replace="~{fragments/header :: header}"></div>
     <h1>The application works :)</h1>
-</div>
 </body>
 </html>
