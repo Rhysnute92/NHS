@@ -25,7 +25,7 @@ body {
 }
 
 /* Event section styling */
-#event-section {
+#appointment {
     padding: 10px;
     background: #f5f5f5;
     margin: 20px 0;
@@ -40,20 +40,21 @@ body {
     padding: 10px 0;
 }
 
-#event-section h3 {
+#appointment h3 {
     color: green;
     font-size: 18px;
     margin: 0;
 }
 
-#event-section input[type="date"],
-#event-section input[type="text"] {
+#appointment input[type="date"],
+#appointment input[type="time"],
+#appointment input[type="text"] {
     margin: 10px 0;
     padding: 5px;
     width: 80%;
 }
 
-#event-section button {
+#appointment button {
     background: green;
     color: white;
     border: none;
