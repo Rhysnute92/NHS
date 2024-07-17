@@ -4,27 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2037e2eb-7bae-4ba3-b53a-d09bcf78b353" name="Changes" comment="Comm">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/GuestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/common/util/DeviceDetector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/css/guest.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/images/contact-book-line-icon.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/images/maps-pin-black-icon.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/images/stethoscope-icon.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/desktop/guestLanding.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/guestAppointment.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/guestFindUs.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/guestLanding.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/guestServices.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/landing.html" afterDir="false" />
+    <list default="true" id="2037e2eb-7bae-4ba3-b53a-d09bcf78b353" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dissertation-nhs-lymphoedema.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/Common/util/DeviceDetector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/Dashboard/Controller/DashboardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/Dashboard/Service/DashboardService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/Education/Controller/EducationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/desktop/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/desktop/information.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/information.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Common/util/DeviceDetectorTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Dashboard/Controller/DashboardControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Education/Controller/EducationControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nhs/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/GuestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/Guest/GuestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/common/util/DeviceDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/common/util/DeviceDetector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,11 +208,23 @@
       <updated>1720701706878</updated>
       <workItem from="1720701709917" duration="147000" />
       <workItem from="1721031283958" duration="9886000" />
-      <workItem from="1721226411687" duration="7629000" />
+      <workItem from="1721226411687" duration="8082000" />
     </task>
+    <task id="LOCAL-00001" summary="Mobile view for landing, guest landing and basic info sections. Desktop View for future development for guest page and info.">
+      <created>1721241383895</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1721241383895</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Mobile view for landing, guest landing and basic info sections. Desktop View for future development for guest page and info." />
+    <option name="LAST_COMMIT_MESSAGE" value="Mobile view for landing, guest landing and basic info sections. Desktop View for future development for guest page and info." />
   </component>
 </project>

@@ -1,8 +1,8 @@
-package uk.ac.cf.spring.nhs;
+package uk.ac.cf.spring.nhs.Guest;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import uk.ac.cf.spring.nhs.common.util.DeviceDetector;
+import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 
 @Controller
 public class GuestController {
