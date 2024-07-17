@@ -27,7 +27,7 @@ body {
 }
 
 .container-calendar #left h1 {
-    color: white;
+    color: #000000;
     text-align: center;
     background-color: #f2f2f2;
     margin: 0;
