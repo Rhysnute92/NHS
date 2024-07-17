@@ -3,6 +3,7 @@
   <head>
     <title>Mobile Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/mobilenav.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
@@ -10,5 +11,6 @@
       <h2 class="text-xl font-bold">Mobile Dashboard</h2>
       <p>Welcome</p>
     </div>
+    <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
   </body>
 </html>
