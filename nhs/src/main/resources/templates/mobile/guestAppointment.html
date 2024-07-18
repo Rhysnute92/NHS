@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Guest Appointment</title>
+  <head>
+    <title>Your Appointment</title>
     <link rel="stylesheet" th:href="@{/css/guest.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
-<div>
-    <h1>Your First Appointment</h1>
-    <p>Mobile version</p>
-</div>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Your First Appointment</h1>
+      <p>Mobile version</p>
+    </div>
 
-<div class="btn-container">
-    <button class="log-in-btn">Log In</button>
-</div>
-<div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
-</body>
+    <div class="btn-container">
+      <button class="log-in-btn">Log In</button>
+    </div>
+    <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>s
+  </body>
 </html>

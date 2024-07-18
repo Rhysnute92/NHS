@@ -1,8 +1,5 @@
-.header {
-    background-color: var(--nhs-blue);
-    color: white;
+.header-desktop {
     padding: 0.5rem;
-    font-size: 1.5rem;
 }
 
 .nav-list {

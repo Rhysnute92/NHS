@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+  </head>
+  <body>
+    <header class="header" th:fragment="header">
+      <div class="header-mobile">
+        <img
+          th:src="@{/images/NHS_logos/mobile/nhs-logo-mobile.png}"
+          alt="NHS Logo"
+          class="header-logo"
+        />
+      </div>
+      <div class="header-title-mobile">
+        <span id="page-title"></span>
+      </div>
+    </header>
+  </body>
+</html>
