@@ -12,22 +12,22 @@ public class calendarController {
     public ModelAndView Calendar(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         if (DeviceDetector.isMobile(request)) {
-            modelAndView.setViewName("Calendar/html/mobileMonth");
+            modelAndView.setViewName("mobile/calendar");
         } else {
-            modelAndView.setViewName("Calendar/html/Monthly");
+            modelAndView.setViewName("desktop/calendar");
         }
         return modelAndView;
     }
 
     @GetMapping("mobilesched")
     public ModelAndView getMobileSched(){
-        ModelAndView modelAndView = new ModelAndView("Calendar/html/mobileSchedule");
+        ModelAndView modelAndView = new ModelAndView("schedule");
         return modelAndView;
     }
 
     @GetMapping("mobileaddappt")
     public ModelAndView getMobileAddAppt(){
-        ModelAndView modelAndView = new ModelAndView("Calendar/html/mobileAddAppt");
+        ModelAndView modelAndView = new ModelAndView("calendar");
         return modelAndView;
     }
 }
