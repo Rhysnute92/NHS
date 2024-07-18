@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Education</title>
+    <title>Information</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div>
-      <h2>Information on Lymphedema</h2>
+    <div class="continer">
+      <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
       <p>Mobile version</p>
     </div>
     <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
+    <script th:src="@{/js/components/header.js}"></script>
   </body>
 </html>
