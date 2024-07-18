@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Mobile Dashboard</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <div class="container">
+      <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
       <h2 class="text-xl font-bold">Mobile Dashboard</h2>
       <p>Welcome</p>
     </div>
