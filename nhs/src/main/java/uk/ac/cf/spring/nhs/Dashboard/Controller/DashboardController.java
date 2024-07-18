@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class DashboardController {
-    
+
     @GetMapping("/dashboard")
     public String dashboard(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
@@ -16,4 +16,4 @@ public class DashboardController {
             return "desktop/dashboard";
         }
     }
-}   
+}
