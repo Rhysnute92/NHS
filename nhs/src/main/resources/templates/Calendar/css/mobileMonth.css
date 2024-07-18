@@ -5,14 +5,16 @@ and (max-device-width: 640px) {
         --font-headers: 20px;
         --font-body: 20px;
     }
-}
 
-body {
-    font-family: Frutiger, sans-serif;
-    background-color: white;
-    margin: 0;
+    body {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        font-family: Frutiger, sans-serif;
+        background-color: white;
+        margin: 0;
+    }
 }
-
 
 
 .container-calendar {
