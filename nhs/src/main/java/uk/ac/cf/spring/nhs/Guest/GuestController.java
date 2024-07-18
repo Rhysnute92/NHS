@@ -11,7 +11,7 @@ public class GuestController {
         if (DeviceDetector.isMobile(request)) {
             return "/mobile/guestLanding";
         } else {
-            return "/desktop/guestlanding";
+            return "/desktop/guestLanding";
         }
     }
 
