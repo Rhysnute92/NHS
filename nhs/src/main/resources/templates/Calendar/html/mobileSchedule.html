@@ -2,25 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/Monthly.css">
     <link rel="stylesheet" href="../css/mobileMonthly.css">
     <title>Mobile Schedule</title>
 </head>
 <body>
 <div class="container-calendar">
-    <div id="center">
-        <h3>Appointment Schedule</h3>
+    <div id="mobileSchedule">
+        <div id="moblist">
+            <select id="nav">
+                <option id="month1">Month</option>
+                <option id="schedule1">Schedule</option>
+            </select>
+            <button><link href="mobileAddAppt.html">Add new Appointment</button>
+        </div>
+            <h3>Appointment Schedule</h3>
 
-        <ul id="apptList">
-            <li data-event-id="1">
-                <strong>Appointment</strong>
-                - Appointment description on appointment date
-                <button class="delete-event"
-                    onclick="deleteEvent(1)">
-                Delete
-                </button>
-            </li>
-        </ul>
+            <ul id="apptList">
+                <li data-event-id="1">
+                    <strong>Appointment</strong>
+                    - Appointment description on appointment date
+                    <button class="delete-event"
+                        onclick="deleteEvent(1)">
+                    Delete
+                    </button>
+                </li>
+            </ul>
     </div>
 </div>
 <script src="../Monthly.js"></script>
