@@ -1,0 +1,53 @@
+@font-face {
+    font-family: 'Frutiger 55 Roman';
+    src: url('/fonts/Frutiger 55 Roman.otf');
+}
+
+@font-face {
+    font-family: 'Frutiger 65 Bold';
+    src: url('/fonts/Frutiger 65 Bold.otf');
+}
+
+@font-face {
+    font-family: 'Frutiger 45 Light';
+    src: url('/fonts/Frutiger 45 Light Regular.otf');
+}
+
+:root {
+    /* Font families */
+    --regular-font-family: 'Frutiger 55 Roman', 'Arial', sans-serif;
+    --heading-font-family: 'Frutiger 65 Bold', 'Arial', sans-serif;
+    --light-font-family: 'Frutiger 45 Light', 'Arial', sans-serif;
+
+    /* Font sizes */
+    --regular-font-size: 1em;
+    --heading-font-size: 2em;
+
+    /* Level 1: NHS blues */
+    --nhs-blue: #005eb8;
+    --nhs-bright-blue: #0072CE;
+    --nhs-dark-blue: #003087;
+
+    /* Level 2: NHS neutrals */
+    --nhs-black: #231f20;
+    --nhs-dark-grey: #425563;
+    --nhs-mid-grey: #768692;
+    --nhs-pale-grey: #E8EDEE;
+    --nhs-white: #ffffff;
+
+    /* Level 3: NHS support greens */
+    --nhs-dark-green: #006747;
+    --nhs-green: #006747;
+    --nhs-light-green: #78BE20;
+    --nhs-aqua-green: #00A499;
+
+    /* Level 4: NHS highlights */
+    --nhs-purple: #330072;
+    --nhs-dark-pink: #7C2855;
+    --nhs-pink: #AE2573;
+    --nhs-dark-red: #8A1538;
+    --emergency-services-red: #DA291C;
+    --nhs-orange: #ED8B00;
+    --nhs-warm-yellow: #FFB81C;
+    --nhs-yellow: #FAE100;
+}
