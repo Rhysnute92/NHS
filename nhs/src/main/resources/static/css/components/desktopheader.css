@@ -1,5 +1,5 @@
 .header {
-    background-color: #005eb8;
+    background-color: var(--nhs-blue);
     color: white;
     padding: 0.5rem;
     font-size: 1.5rem;
@@ -10,10 +10,10 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 .nav-list a {
-    color: white;
+    color: var(--nhs-white);
     text-decoration: none;
 }

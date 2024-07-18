@@ -2,11 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Desktop Dashboard</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/base/main.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <div class="container">
+      <div th:replace="~{desktop/fragments/header :: header}"></div>
       <h2 class="text-xl font-bold">Desktop Dashboard</h2>
       <p>Welcome</p>
     </div>
