@@ -18,9 +18,11 @@
 /* Import utility styles */
 @import url('/css/utility/variables.css');
 
-body {
+body, html {
     font-family: var(--regular-font-family);
     font-size: var(--regular-font-size);
     margin: 0;
     padding: 0;
+    width: 100%;
+    height: 100%;
 }
