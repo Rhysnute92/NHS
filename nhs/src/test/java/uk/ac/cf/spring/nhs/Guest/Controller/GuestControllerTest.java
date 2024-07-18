@@ -45,20 +45,20 @@ public class GuestControllerTest {
     public void testGuestAppointment() throws Exception {
         mockMvc.perform(get("/guest/appointment"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("desktop/guestAppointment"));
+                .andExpect(view().name("mobile/guestAppointment"));
     }
 
     @Test
     public void testGuestServices() throws Exception {
         mockMvc.perform(get("/guest/services"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("desktop/guestServices"));
+                .andExpect(view().name("mobile/guestServices"));
     }
 
     @Test
     public void testGuestFindUs() throws Exception {
         mockMvc.perform(get("/guest/find"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("desktop/guestFindUs"));
+                .andExpect(view().name("mobile/guestFindUs"));
     }
 }

@@ -9,29 +9,29 @@ public class GuestController {
     @GetMapping("/guest")
     public String showGuestLandingPage(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
-            return "/mobile/guestLanding";
+            return "mobile/guestLanding";
         } else {
-            return "/desktop/guestLanding";
+            return "desktop/guestLanding";
         }
     }
 
     @GetMapping("/landing")
     public String showLandingPage(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
-            return "/mobile/landing";
+            return "mobile/landing";
         } else {
-            return "/desktop/guestLanding";
+            return "desktop/guestLanding";
         }
     }
 
     @GetMapping("/guest/appointment")
-    public String showGuestAppointmentPage() {return "/mobile/guestAppointment";}
+    public String showGuestAppointmentPage() {return "mobile/guestAppointment";}
 
     @GetMapping("/guest/services")
-    public String showGuestServicesPage() {return "/mobile/guestServices";}
+    public String showGuestServicesPage() {return "mobile/guestServices";}
 
     @GetMapping("/guest/find")
-    public String showGuestFindUsPage() {return "/mobile/guestFindUs";}
+    public String showGuestFindUsPage() {return "mobile/guestFindUs";}
 
 }
 
