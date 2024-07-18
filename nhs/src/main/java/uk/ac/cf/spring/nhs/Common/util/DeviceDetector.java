@@ -1,5 +1,4 @@
 package uk.ac.cf.spring.nhs.Common.util;
-
 import jakarta.servlet.http.HttpServletRequest;
 
 public class DeviceDetector {
