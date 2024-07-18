@@ -1,0 +1,10 @@
+@import url('/css/base/variables.css');
+@import url('/css/components/desktopheader.css');
+@import url('/css/components/mobilenav.css');
+
+body {
+    font-family: var(--regular-font-family);
+    font-size: var(--regular-font-size);
+    margin: 0;
+    padding: 0;
+}
