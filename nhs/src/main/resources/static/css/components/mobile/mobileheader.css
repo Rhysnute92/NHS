@@ -1,0 +1,18 @@
+/*Mobile-specific header styles*/
+
+.header-mobile {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-logo {
+  height: 30px;
+}
+
+.header-bar {
+  background-color: --nhs-pale-grey;
+  height: 1px;
+  width: 100%;
+}
