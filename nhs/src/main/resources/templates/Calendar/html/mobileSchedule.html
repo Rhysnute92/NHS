@@ -2,24 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/Monthly.css">
     <link rel="stylesheet" href="../css/mobileMonthly.css">
-    <title>Title</title>
+    <title>Mobile Schedule</title>
 </head>
 <body>
-<div id="center">
-    <h3>Appointment Schedule</h3>
+<div class="container-calendar">
+    <div id="center">
+        <h3>Appointment Schedule</h3>
 
-    <ul id="apptList">
-        <li data-event-id="1">
-            <strong>Appointment</strong>
-            - Appointment description on appointment date
-            <button class="delete-event"
+        <ul id="apptList">
+            <li data-event-id="1">
+                <strong>Appointment</strong>
+                - Appointment description on appointment date
+                <button class="delete-event"
                     onclick="deleteEvent(1)">
                 Delete
-            </button>
-        </li>
-    </ul>
-</div>
+                </button>
+            </li>
+        </ul>
+    </div>
 </div>
 <script src="../Monthly.js"></script>
 </body>
