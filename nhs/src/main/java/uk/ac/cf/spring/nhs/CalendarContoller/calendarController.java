@@ -1,18 +1,21 @@
+package uk.ac.cf.spring.nhs.CalendarContoller;
+
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
+import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 
 @Controller
 public class calendarController {
     @GetMapping("/Calendar")
-    public ModelAndView getCalendar(){
-        ModelAndView modelAndView = new ModelAndView("Calendar/html/Monthly");
-        return modelAndView;
-    }
-
-    @GetMapping("/mobilecal")
-    public ModelAndView getMobileCal(){
-        ModelAndView modelAndView = new ModelAndView("Calendar/html/mobileMonth");
+    public ModelAndView Calendar(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (DeviceDetector.isMobile(request)) {
+            modelAndView.setViewName("Calendar/html/mobileMonth");
+        } else {
+            modelAndView.setViewName("Calendar/html/Monthly");
+        }
         return modelAndView;
     }
 
