@@ -9,7 +9,6 @@
     <title>Login</title>
 </head>
 <body>
-<div th:replace="~{desktop/fragments/header :: header}"></div>
 <h2>Desktop Login Page</h2>
 <form th:action="@{/login}" method="post">
     <input type="text" name="username" placeholder="Username" required />
