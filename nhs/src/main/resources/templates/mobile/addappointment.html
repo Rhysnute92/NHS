@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/Monthly.css}">
+    <link rel="stylesheet" th:href="@{/css/mobileMonthly.css}">
+    <title>Mobile Add Appointment</title>
+</head>
+<body>
+<div class="container-calendar">
+    <div id="mobileAdd">
+        <h1>Appointment Calendar</h1>
+        <div id="appointments">
+            <h3>Add Appointment</h3>
+            <label>Date of Appointment:</label><br>
+            <input type="date" id="appointmentDate"><br>
+            <label>Time of Appointment:</label><br>
+            <input type="time" id="appointmentTime"><br>
+            <label>Appointment Type:</label><br>
+            <input type="text" id="appointmentType" placeholder="Please enter what you appointment is"><br>
+            <label>Doctor's Name:</label><br>
+            <input type="text" id="dr" placeholder="Please enter the name of your Dr"><br>
+            <label>Information about your Appointment:</label><br>
+            <textarea id="comments" placeholder="Info about your appointment"></textarea><br>
+            <button id="addEvent" onclick="addEvent()">
+                Add
+            </button>
+            <button id="deleteAppointment" onclick="deleteEvent()">
+                Clear
+            </button>
+        </div>
+    </div>
+</div>
+<script src="../../static/javascript/Monthly.js"></script>
+</body>
+</html>
