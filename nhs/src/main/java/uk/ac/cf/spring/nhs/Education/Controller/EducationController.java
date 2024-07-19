@@ -28,7 +28,7 @@ public class EducationController {
     }
 
     @GetMapping("/resources")
-    public String resources(HttpServletRequest request) {
+    public String res(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
             return "mobile/Education/infoRes";
         } else {
