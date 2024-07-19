@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<div th:fragment="diaryEntry" class="diaryEntry">
+    <div class="day-title-container">
+        <h2 class="day-title">[[${diaryEntry.formattedDate}]]</h2>
+    </div>
+    <div class="day-content">
+        <p>[[${diaryEntry.content}]]</p>
+    </div>
+</div>
