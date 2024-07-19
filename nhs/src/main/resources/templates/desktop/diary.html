@@ -8,15 +8,14 @@
 <body>
 <div th:replace="~{fragments/desktop/header :: header}"></div>
 <div class="diary-container">
-    </div>
     <div class="diary-entry-container">
         <div th:if="${diaryEntries.empty}">
             <h2>No diary entries yet</h2>
         </div>
-        <div th:each="diaryEntry : ${diaryEntries}">
+        <th:block th:each="diaryEntry : ${diaryEntries}">
             <div th:replace="~{fragments/diary/diaryEntry :: diaryEntry(diaryEntry=${diaryEntry})}">
             </div>
-        </div>
+        </th:block>
     </div>
 </div>
 </body>
