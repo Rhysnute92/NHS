@@ -9,30 +9,11 @@ import jakarta.servlet.http.HttpServletRequest;
 public class EducationController {
 
     @GetMapping("/information")
-    public String education(HttpServletRequest request) {
+    public String dashboard(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
             return "mobile/Education/information";
         } else {
-            return "desktop/Education/information";
-        }
-    }
-
-    //Controllers for temporary pages
-    @GetMapping("/cellulitis")
-    public String cellulitis(HttpServletRequest request) {
-        if (DeviceDetector.isMobile(request)) {
-            return "mobile/Education/infoCell";
-        } else {
-            return "desktop/Education/infoCell";
-        }
-    }
-
-    @GetMapping("/resources")
-    public String resources(HttpServletRequest request) {
-        if (DeviceDetector.isMobile(request)) {
-            return "mobile/Education/infoRes";
-        } else {
-            return "desktop/Education/infoRes";
+            return "desktop/information";
         }
     }
 
