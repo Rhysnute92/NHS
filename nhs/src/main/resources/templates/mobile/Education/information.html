@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Information</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
+    <div class="continer">
+      <div class="container">
+        <h2 class="title">What is Lymphedema?</h2>
+        <p>Here is a text about what this condition is.</p>
+        <h2 class="title">Causes of lymphedema</h1>
+        <h3 class="subtitle">Primary</h1>
+        <p>Here is a text about causes of primary lymphedema.</p>
+        <h3 class="subtitle">Secondary</h1>
+        <p>Here is a text about causes of secondary lymphedema.</p>
+        <h4 class="subsection">Cause A</h4>
+        <p>Here is a text about cause A.</p>
+      </div>
+      <div class="section_nav">
+        <a th:href="@{/cellulitis}" class="section_link">Cellulitis &rarr;</a>
+      </div>
+      <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
+      <script th:src="@{/js/components/header.js}"></script>
+  </body>
+</html>

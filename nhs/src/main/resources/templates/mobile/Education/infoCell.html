@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Education</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
+    <div class="container">
+        <h2 class="title">Cellulitis</h2>
+        <p>Here is a text about what this condition is.</p>
+        <h3 class="subtitle">Treatment</h1>
+        <p>Here is a text about treatment options for cellulitis.</p>
+        <h3 class="subtitle">Prevention</h1>
+        <p>Here is a text about prevention of cellulitis.</p>
+      </div>
+      <div class="section_nav">
+          <a th:href="@{/information}" class="section_link">&larr; What is Lymphedema?</a>
+          <a href="" class="section_link">Treatments &rarr;</a>
+      </div>
+    <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
+    <script th:src="@{/js/components/header.js}"></script>
+  </body>
+</html>
