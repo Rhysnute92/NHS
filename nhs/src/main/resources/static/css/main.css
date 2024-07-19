@@ -10,6 +10,7 @@
 /* Import mobile-specific component styles */
 @import url('/css/components/mobile/mobilenav.css');
 @import url('/css/components/mobile/mobileheader.css');
+@import url('/css/components/mobile/mobileinfomenu.css');
 
 /* Import desktop page styles */
 
