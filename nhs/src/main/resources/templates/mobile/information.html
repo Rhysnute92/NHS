@@ -7,10 +7,10 @@
   </head>
   <body>
     <div class="continer">
-      <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
+      <div th:replace="~{fragments/mobile/header :: header}"></div>
       <p>Mobile version</p>
     </div>
-    <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
+    <div th:replace="~{fragments/mobile/nav :: mobilenav}"></div>
     <script th:src="@{/js/components/header.js}"></script>
   </body>
 </html>
