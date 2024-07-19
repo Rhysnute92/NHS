@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/css/calendar/mobile/mobilecalendar.css}"/>
-    <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
+    <link rel="stylesheet" th:href="@{css/mobilecalendar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <title>Calendar</title>
 </head>
 <body>
-<div th:replace="~{common/fragments/header}"></div>
-<nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+<div th:replace="~{fragments/common/header}"></div>
+<nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
+<div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
 <div id="moblist">
     <button onclick="location. href='/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
 </div>
@@ -66,6 +67,6 @@
 </div>
 </div>
 <script th:src="@{/js/calendar/calendar.js}"></script>
-<script th:src="@{/js/common/header.js}"></script>
+<script th:src="@{/js/components/header.js}"></script>
 </body>
 </html>

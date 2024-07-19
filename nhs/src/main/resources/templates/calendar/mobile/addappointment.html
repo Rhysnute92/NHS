@@ -3,12 +3,13 @@
 <head>
     <title>Add Appointment</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/css/calendar/mobile/mobilecalendar.css}"/>
-    <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mobilecalendar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
-<div th:replace="~{common/fragments/header}"></div>
-<nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+<div th:replace="~{fragments/common/header}"></div>
+<nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
+<div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
 <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
 <div class="container-calendar">
     <div id="appointments">
@@ -31,6 +32,6 @@
     </div>
 </div>
 <script th:src="@{/js/calendar/calendar.js}"></script>
-<script th:src="@{/js/common/header.js}"></script>
+<script th:src="@{/js/components/header.js}"></script>
 </body>
 </html>
