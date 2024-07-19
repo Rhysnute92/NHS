@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
-    <div class="continer">
       <div class="container">
+        <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
+        <div th:replace="~{mobile/fragments/mobileinfomenu :: mobileinfomenu}"></div>
         <h2 class="title">What is Lymphedema?</h2>
         <p>Here is a text about what this condition is.</p>
         <h2 class="title">Causes of lymphedema</h1>
@@ -18,11 +18,13 @@
         <p>Here is a text about causes of secondary lymphedema.</p>
         <h4 class="subsection">Cause A</h4>
         <p>Here is a text about cause A.</p>
+        <div class="section_nav">
+          <a th:href="@{/cellulitis}" class="section_link">Cellulitis &rarr;</a>
+        </div>
       </div>
-      <div class="section_nav">
-        <a th:href="@{/cellulitis}" class="section_link">Cellulitis &rarr;</a>
-      </div>
+      <div class="spacer">&nbsp;</div>
       <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
       <script th:src="@{/js/components/header.js}"></script>
+      <script th:src="@{/js/components/mbinfomenu.js}"></script>
   </body>
 </html>
