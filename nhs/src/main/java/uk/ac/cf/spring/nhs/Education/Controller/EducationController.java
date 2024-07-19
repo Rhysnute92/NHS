@@ -11,9 +11,28 @@ public class EducationController {
     @GetMapping("/information")
     public String dashboard(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
-            return "mobile/information";
+            return "mobile/Education/information";
         } else {
-            return "desktop/information";
+            return "desktop/Education/information";
+        }
+    }
+
+    //Controllers for temporary pages
+    @GetMapping("/cellulitis")
+    public String cellulitis(HttpServletRequest request) {
+        if (DeviceDetector.isMobile(request)) {
+            return "mobile/Education/infoCell";
+        } else {
+            return "desktop/Education/infoCell";
+        }
+    }
+
+    @GetMapping("/resources")
+    public String res(HttpServletRequest request) {
+        if (DeviceDetector.isMobile(request)) {
+            return "mobile/Education/infoRes";
+        } else {
+            return "desktop/Education/infoRes";
         }
     }
 
