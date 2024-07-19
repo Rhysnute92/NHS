@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<div class="login-container">
+    <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
+    <h2>Mobile Login Page</h2>
+    <form th:action="@{/login}" method="post">
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+    </form>
+</div>
+<div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
+<script th:src="@{/js/components/header.js}"></script>
+</body>
+</html>
