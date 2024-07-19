@@ -1,19 +1,35 @@
 package uk.ac.cf.spring.nhs.Diary.Controller;
 
-import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
+import uk.ac.cf.spring.nhs.Diary.DiaryEntry;
+import uk.ac.cf.spring.nhs.Diary.Service.DiaryService;
 
-import jakarta.servlet.http.HttpServletRequest;
+import java.util.List;
+
 @Controller
 public class DiaryController {
 
+    @Autowired
+    DiaryService diaryService;
+
     @GetMapping("/diary")
-    public String diary(HttpServletRequest request) {
+    public ModelAndView diary(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<DiaryEntry> diaryEntries = diaryService.getDiaryEntries();
+
+        modelAndView.addObject("diaryEntries", diaryEntries);
+
         if (DeviceDetector.isMobile(request)) {
-            return "mobile/diary";
+            modelAndView.setViewName("mobile/diary");
         } else {
-            return "desktop/diary";
+            modelAndView.setViewName("desktop/diary");
         }
+
+        return modelAndView;
     }
-}   
+}
