@@ -11,7 +11,7 @@ and (max-device-width: 640px) {
         flex-direction: column;
         align-content: center;
         font-family: Frutiger, sans-serif;
-        background-color: white;
+        background-color: #d3d3d3;
         margin: 0;
         width: 100vw;
         min-height: 100svh;
@@ -140,6 +140,8 @@ and (max-device-width: 640px) {
     }
 
     #monthAndYear {
+        display: inline;
+        top: 50%;
         text-align: center;
         margin-top: 0;
     }
@@ -162,7 +164,7 @@ and (max-device-width: 640px) {
 
 
     .footer-container-calendar {
-        margin-top: 1em;
+        margin-top: 1100em;
         padding: 10px 0;
     }
 
