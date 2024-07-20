@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../../static/css/mobilecalendar.css">
     <link rel="stylesheet" href="../../static/css/components/mobile/mobileheader.css">
     <link rel="stylesheet" href="../../static/css/components/mobile/mobilenav.css">
+    <link rel="stylesheet" href="../../static/css/components/common/header.css">
     <title>Mobile calendar</title>
 </head>
 <body>
@@ -28,9 +29,7 @@
                     >
                 </button>
             </div>
-            <table class="table-calendar"
-                   id="calendar"
-                   data-lang="en">
+            <table class="table-calendar" id="calendar" data-lang="en">
                 <thead id="thead-month"></thead>
 
                 <tbody id="calendar-body"></tbody>
@@ -56,7 +55,22 @@
                 <select id="year" onchange="jump()"></select>
             </div>
         </div>
+<div id="mobileSchedule">
+        <h3>Appointment Schedule</h3>
+
+        <ul id="apptList">
+            <li data-event-id="1">
+                <strong>Appointment</strong>
+                - Appointment description on appointment date
+                <button class="delete-event"
+                        onclick="deleteEvent(1)">
+                    Delete
+                </button>
+            </li>
+        </ul>
     </div>
+</div>
+</div>
 </div>
 <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
 <script src="../../static/javascript/Monthly.js"></script>
