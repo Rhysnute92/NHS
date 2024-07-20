@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+<header th:replace="~{fragments/common/header}"></header>
 <div class="wrapper">
   <div class="container-calendar">
     <div id="left">
@@ -86,6 +86,10 @@
     </div>
   </div>
 </div>
+<footer>
+  <nav th:replace="~{fragments/common/nav}" class="nav"></nav>
+</footer>
+<script th:src="@{/js/screen.js}"></script>
 <script src="../../static/javascript/Monthly.js"></script>
 </body>
 

@@ -7,7 +7,7 @@
 </head>
 <body>
 <div>
-    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+    <header th:replace="~{fragments/common/header}"></header>
     <h1>Find Us</h1>
     <p>Mobile version</p>
 </div>
@@ -15,6 +15,9 @@
 <div class="btn-container">
     <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
 </div>
-<div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
+<footer>
+    <nav th:replace="~{fragments/common/nav :: nav}" class="nav"></nav>
+</footer>
+<script th:src="@{/js/screen.js}"></script>
 </body>
 </html>

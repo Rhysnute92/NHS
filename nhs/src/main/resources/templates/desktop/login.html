@@ -9,11 +9,16 @@
     <title>Login</title>
 </head>
 <body>
+<header th:replace="~{fragments/common/header}"></header>
 <h2>Desktop Login Page</h2>
 <form th:action="@{/login}" method="post">
     <input type="text" name="username" placeholder="Username" required />
     <input type="password" name="password" placeholder="Password" required />
     <button type="submit">Login</button>
-    </form>
+</form>
+<footer>
+    <nav th:replace="~{fragments/common/nav}" class="nav"></nav>
+</footer>
+<script th:src="@{/js/screen.js}"></script>
 </body>
 </html>

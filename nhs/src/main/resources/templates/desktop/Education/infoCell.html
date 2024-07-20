@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div th:replace="~{fragments/desktop/header :: header}"></div>
+    <header th:replace="~{fragments/common/header}"></header>
     <div th:replace="~{fragments/desktop/infomenu :: infomenu}"></div>
     <div class="container">
       <h2 class="title">Cellulitis</h2>
@@ -20,5 +20,9 @@
         <a th:href="@{/information}" class="section_link">&larr; What is Lymphedema?</a>
         <a href="" class="section_link">Treatments &rarr;</a>
     </div>
+    <footer>
+      <nav th:replace="~{fragments/common/nav}" class="nav"></nav>
+    </footer>
+    <script th:src="@{/js/screen.js}"></script>
   </body>
 </html>
