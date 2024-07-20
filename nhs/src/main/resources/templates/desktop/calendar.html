@@ -2,15 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Appointment Calendar</title>
   <link rel="stylesheet" href="../../static/css/calendar.css">
   <link rel="stylesheet" href="../../static/css/mobilecalendar.css">
   <link rel="stylesheet" href="../../static/css/components/desktop/desktopheader.css">
+  <link rel="stylesheet" href="../../static/css/components/common/header.css">
+  <title>Appointment Calendar</title>
 </head>
 
 <body>
-
 <div class="wrapper">
   <div class="container-calendar">
     <div replace="fragments/header :: header"></div>
@@ -35,6 +34,7 @@
             Clear
           </button>
         </div>
+      </div>
         <div id="center">
           <h3>Appointment Schedule</h3>
 
@@ -49,7 +49,6 @@
             </li>
           </ul>
         </div>
-      </div>
       <div id="right">
         <h3 id="monthAndYear"></h3>
         <div class="button-container-calendar">
@@ -88,6 +87,7 @@
 
           <select id="year" onchange="jump()"></select>
         </div>
+      </div>
       </div>
     </div>
 </div>
