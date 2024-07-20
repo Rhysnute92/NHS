@@ -21,7 +21,7 @@ public class EducationControllerTest {
                 .header("User-Agent",
                         "Mozilla/5.0 (Linux; Android 10; Pixel 3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4076.0 Mobile Safari/537.36"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("mobile/information"));
+                .andExpect(view().name("mobile/Education/information"));
     }
 
     @Test
@@ -30,13 +30,13 @@ public class EducationControllerTest {
                 .header("User-Agent",
                         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("desktop/information"));
+                .andExpect(view().name("desktop/Education/information"));
             }
 
     @Test
     void infopageTest() throws Exception {
         mockMvc.perform(get("/information"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("desktop/information"));
+                .andExpect(view().name("desktop/Education/information"));
     }
 }

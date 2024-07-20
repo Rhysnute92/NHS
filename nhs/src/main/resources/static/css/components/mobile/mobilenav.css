@@ -1,7 +1,12 @@
+.spacer{
+    height: 20%;
+    width: 100%;
+}
+
 .mobilenav{
-    margin-left: -8px;
-    margin-right: -8px;
     position: fixed;
+    right: 0;
+    left: 0;
     bottom: 0;
     width: 100%;
 }
