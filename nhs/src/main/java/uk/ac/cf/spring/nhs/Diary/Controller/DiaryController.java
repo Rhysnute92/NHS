@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
-import uk.ac.cf.spring.nhs.Diary.DiaryEntry;
+import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryService;
 
 import java.util.List;

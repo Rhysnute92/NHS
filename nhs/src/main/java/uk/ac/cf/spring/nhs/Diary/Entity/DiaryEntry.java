@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Diary;
+package uk.ac.cf.spring.nhs.Diary.Entity;
 
 import lombok.Getter;
 import lombok.Setter;

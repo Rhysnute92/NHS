@@ -1,7 +1,7 @@
 package uk.ac.cf.spring.nhs.Diary.Service;
 
 import org.springframework.stereotype.Service;
-import uk.ac.cf.spring.nhs.Diary.DiaryEntry;
+import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
