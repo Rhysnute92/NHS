@@ -7,8 +7,8 @@
   </head>
   <body>
       <div class="container">
-        <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
-        <div th:replace="~{mobile/fragments/mobileinfomenu :: mobileinfomenu}"></div>
+        <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+        <div th:replace="~{fragments/mobile/mobileinfomenu :: mobileinfomenu}"></div>
         <h2 class="title">What is Lymphedema?</h2>
         <p>Here is a text about what this condition is.</p>
         <h2 class="title">Causes of lymphedema</h1>
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="spacer">&nbsp;</div>
-      <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
+      <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
       <script th:src="@{/js/components/header.js}"></script>
       <script th:src="@{/js/components/mbinfomenu.js}"></script>
   </body>

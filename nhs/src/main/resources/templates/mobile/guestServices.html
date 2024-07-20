@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
+  <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
     <div>
       <h1>Our Services</h1>
       <p>Mobile version</p>
@@ -14,6 +15,6 @@
     <div class="btn-container">
       <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
     </div>
-    <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
+    <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
   </body>
 </html>
