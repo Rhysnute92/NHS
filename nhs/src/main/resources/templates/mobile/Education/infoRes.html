@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
-    <div th:replace="~{mobile/fragments/mobileinfomenu :: mobileinfomenu}"></div>
+    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+    <div th:replace="~{fragments/mobile/mobileinfomenu :: mobileinfomenu}"></div>
     <div class="container">
       <h2 class="title">Helpful resources</h2>
       <h3 class="subtitle">Lymphedema</h1>
@@ -23,7 +23,7 @@
     <div class="section_nav">
         <a href="" class="section_link">&larr; Treatments</a>
     </div>
-    <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
+    <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
     <script th:src="@{/js/components/header.js}"></script>
     <script th:src="@{/js/components/mbinfomenu.js}"></script>
   </body>

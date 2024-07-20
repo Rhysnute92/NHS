@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="~{fragments/mobile/header :: header}"></div>
+    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
     <div class="diary-container">
         <div class="diary-entry-container">
             <div th:if="${diaryEntries.empty}">
@@ -20,7 +20,7 @@
             </th:block>
         </div>
     </div>
-    <div th:replace="~{fragments/mobile/nav :: mobilenav}"></div>
+    <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
 </div>
 <script th:src="@{/js/components/header.js}"></script>
 </body>
