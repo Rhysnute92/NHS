@@ -3,12 +3,20 @@
 <head>
     <title>My Diary</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/diary.css}" />
 </head>
 <body>
-<div th:replace="~{desktop/fragments/header :: header}"></div>
-<div class="container">
-    <h1>My Diary</h1>
-    <div class="day-container"></div>
+<div th:replace="~{fragments/desktop/header :: header}"></div>
+<div class="diary-container">
+    <div class="diary-entry-container">
+        <div th:if="${diaryEntries.empty}">
+            <h2>No diary entries yet</h2>
+        </div>
+        <th:block th:each="diaryEntry : ${diaryEntries}">
+            <div th:replace="~{fragments/diary/diaryEntry :: diaryEntry(diaryEntry=${diaryEntry})}">
+            </div>
+        </th:block>
+    </div>
 </div>
 </body>
 </html>
