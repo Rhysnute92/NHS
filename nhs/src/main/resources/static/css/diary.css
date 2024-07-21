@@ -7,7 +7,7 @@
 .diary-entry-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     padding: 1rem;
     flex: 5;
@@ -55,7 +55,7 @@
     background-color: var(--nhs-pale-grey);
     width: 100%;
     justify-content: center;
-
+    height: 100%;
 }
 
 @media (max-width: 768px) {
@@ -64,3 +64,4 @@
         background-color: transparent;
     }
 }
+
