@@ -19,12 +19,6 @@ public class calendarController {
         return modelAndView;
     }
 
-    @GetMapping("mobileschedule")
-    public ModelAndView getMobileSched(){
-        ModelAndView modelAndView = new ModelAndView("mobile/schedule");
-        return modelAndView;
-    }
-
     @GetMapping("mobileaddappt")
     public ModelAndView getMobileAddAppt(){
         ModelAndView modelAndView = new ModelAndView("mobile/addappointment");
