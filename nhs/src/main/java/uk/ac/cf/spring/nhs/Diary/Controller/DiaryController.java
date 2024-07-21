@@ -11,6 +11,7 @@ import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryService;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/diary")
@@ -25,20 +26,25 @@ public class DiaryController {
         List<DiaryEntry> diaryEntries = diaryService.getDiaryEntries();
 
         modelAndView.addObject("diaryEntries", diaryEntries);
-        modelAndView.setViewName("diary/diary");
-//        if (DeviceDetector.isMobile(request)) {
-//            modelAndView.setViewName("mobile/diary");
-//        } else {
-//            modelAndView.setViewName("desktop/diary");
-//        }
+//        modelAndView.setViewName("diary/diary");
+        if (DeviceDetector.isMobile(request)) {
+            modelAndView.setViewName("mobile/diary");
+        } else {
+            modelAndView.setViewName("desktop/diary");
+        }
 
         return modelAndView;
     }
 
     @GetMapping("/checkin")
-    public ModelAndView addDiaryEntry() {
+    public ModelAndView addDiaryEntry(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("diary/checkin");
+//        modelAndView.setViewName("diary/checkin");
+        if (DeviceDetector.isMobile(request)) {
+            modelAndView.setViewName("mobile/checkin");
+        } else {
+            modelAndView.setViewName("desktop/checkin");
+        }
         return modelAndView;
     }
 }
