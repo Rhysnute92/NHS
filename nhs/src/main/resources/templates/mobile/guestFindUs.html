@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
+    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
     <h1>Find Us</h1>
     <p>Find information here on how to find us and the location of our clinic.</p>
 </div>
@@ -28,5 +28,6 @@
             onclick="location. href='/guest'"
     />
 </div>
+<script th:src="@{/js/components/header.js}"></script>
 </body>
 </html>

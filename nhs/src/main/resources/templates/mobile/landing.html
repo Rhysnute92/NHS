@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container">
-      <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
+      <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
       <h1>Welcome to the app!</h1>
       <p>Login or continue to our guest pages</p>
     </div>
@@ -16,5 +16,6 @@
       <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
       <button onclick="location. href='/guest'" class="guest-btn">Guest</button>
     </div>
+    <script th:src="@{/js/components/header.js}"></script>
   </body>
 </html>
