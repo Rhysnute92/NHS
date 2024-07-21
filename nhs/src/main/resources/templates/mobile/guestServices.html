@@ -2,19 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Our Services</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/guest.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-  <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
-    <div>
+    <div class="container">
+      <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
       <h1>Our Services</h1>
-      <p>Mobile version</p>
+      <p>The services that we offer and how this application can help you.</p>
     </div>
 
     <div class="btn-container">
       <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
     </div>
-    <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
+    <div class="back-btn">
+      <img
+              src="/images/back-button.svg"
+              alt="Back Button Icon"
+              class="icon"
+              onclick="location. href='/guest'"
+      />
+    </div>
+    <script th:src="@{/js/components/header.js}"></script>
   </body>
 </html>
