@@ -12,9 +12,9 @@ public class calendarController {
     public ModelAndView Calendar(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         if (DeviceDetector.isMobile(request)) {
-            modelAndView.setViewName("mobile/calendar");
-        } else {
             modelAndView.setViewName("desktop/calendar");
+        } else {
+            modelAndView.setViewName("mobile/calendar");
         }
         return modelAndView;
     }
