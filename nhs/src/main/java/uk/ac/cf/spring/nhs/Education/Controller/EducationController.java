@@ -9,11 +9,20 @@ import jakarta.servlet.http.HttpServletRequest;
 public class EducationController {
 
     @GetMapping("/information")
-    public String dashboard(HttpServletRequest request) {
+    public String education(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
             return "mobile/Education/information";
         } else {
             return "desktop/Education/information";
+        }
+    }
+
+    @GetMapping("/treatment")
+    public String treatment(HttpServletRequest request) {
+        if(DeviceDetector.isMobile(request)){
+            return "mobile/Education/treatment";
+        } else {
+            return "desktop/Education/treatment";
         }
     }
 
