@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Education</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div th:replace="~{desktop/fragments/header :: header}"></div>
+    <div th:replace="~{desktop/fragments/infomenu :: infomenu}"></div>
+    <div class="container">
+    </div>
+    <div class="section_nav">
+        <a th:href="@{/cellulitis}" class="section_link">&larr; Cellulitis</a>
+        <a th:href="@{/resources}" class="section_link">Helpful resources &rarr;</a>
+    </div>
+  </body>
+</html>

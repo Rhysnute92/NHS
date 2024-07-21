@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
+    <div th:replace="~{mobile/fragments/mobileheader :: mobileheader}"></div>
     <div th:replace="~{mobile/fragments/mobileinfomenu :: mobileinfomenu}"></div>
     <div class="container">
       <h2 class="title">Helpful resources</h2>
@@ -21,8 +21,9 @@
         </ul>
     </div>
     <div class="section_nav">
-        <a href="" class="section_link">&larr; Treatments</a>
+        <a th:href="@{/treatment}" class="section_link">&larr; Treatments</a>
     </div>
+    <div class="spacer">&nbsp;</div>
     <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
     <script th:src="@{/js/components/header.js}"></script>
     <script th:src="@{/js/components/mbinfomenu.js}"></script>
