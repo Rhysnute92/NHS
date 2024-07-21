@@ -4,15 +4,11 @@
     const footer = document.querySelector('footer');
 
     function moveNav() {
-        if (window.innerWidth <= 767) {
-            nav.classList.remove('desktop-nav');
-            nav.classList.add('mobile-nav');
+        if (window.innerWidth <= 768) {
             if (!footer.contains(nav)) {
                 footer.appendChild(nav);
             }
         } else {
-            nav.classList.remove('mobile-nav');
-            nav.classList.add('desktop-nav');
             if (!header.contains(nav)) {
                 header.appendChild(nav);
             }
