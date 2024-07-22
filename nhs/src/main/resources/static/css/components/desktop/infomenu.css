@@ -1,0 +1,15 @@
+.infomenu_desktop{
+      width: 50%;
+    }
+.edmenu_list{
+      list-style-type: none;
+      background-color: #0072CE;
+      margin-left: 3vw;
+      padding: 1vh;
+    }
+.edmenu_item{
+      margin: 1vh;
+    }
+.edmenu_item a{
+    color: white;
+}

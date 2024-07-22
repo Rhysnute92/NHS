@@ -10,19 +10,21 @@
     <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
     <div th:replace="~{fragments/mobile/mobileinfomenu :: mobileinfomenu}"></div>
     <div class="container">
-      <h2 class="title">Helpful resources</h2>
-      <h3 class="subtitle">Lymphedema</h1>
-        <ul class="resource_list">
-            <li class="res_item"><a href="https://www.lymphoedema.org/">Lymphoedema Support Network</a></li>
+      <h2 class="title">Treatments for lymphedema</h2>
+      <p>Here is a sample text about treatment options for lymphedema.</p>
+      <h2 class="subtitle">Skincare</h2>
+      <p>Here is some text about proper skincare for patients.</p>
+      <button type="button" class="reminder">Set Reminder</button>
+      <nav class="t_types">
+        <ul>
+          <li><a th:href="@{/treatmentSpec}">Treatments for lymphedema of the legs</a></li>
+          <li><a href="">Treatments for lymphedema of head and neck</a></li>
         </ul>
-      <h3 class="subtitle">Cancer</h1>
-        <ul class="resource_list">
-            <li class="res_item"><a href="https://www.maggies.org/">Maggie's</a> - Cancer care centers</li>
-            <li class="res_item"><a href="https://theswallows.org.uk/">Swallows</a> - Head and Neck cancer support groups</li>
-        </ul>
+      </nav>
     </div>
     <div class="section_nav">
-        <a th:href="@{/treatment}" class="section_link">&larr; Treatments</a>
+        <a th:href="@{/cellulitis}" class="section_link">&larr; Cellulitis</a>
+        <a th:href="@{/resources}" class="section_link">Helpful resources &rarr;</a>
     </div>
     <div class="spacer">&nbsp;</div>
     <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>

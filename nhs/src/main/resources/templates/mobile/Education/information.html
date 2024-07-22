@@ -3,12 +3,13 @@
   <head>
     <title>Information</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/information.css}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
+    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+    <div th:replace="~{fragments/mobile/mobileinfomenu :: mobileinfomenu}"></div>
       <div class="container">
-        <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
-        <div th:replace="~{fragments/mobile/mobileinfomenu :: mobileinfomenu}"></div>
         <h2 class="title">What is Lymphedema?</h2>
         <p>Here is a text about what this condition is.</p>
         <h2 class="title">Causes of lymphedema</h1>
