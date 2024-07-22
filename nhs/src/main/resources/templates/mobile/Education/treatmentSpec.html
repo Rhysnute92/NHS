@@ -10,8 +10,7 @@
     <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
     <div th:replace="~{mobile/fragments/mobileinfomenu :: mobileinfomenu}"></div>
     <div class="container">
-      <h2>Treatments for lymphedema of the legs</h2>
-    </div>
+      <h2 class="title">Treatments for lymphedema of the legs</h2>
     <div>
         <button type="button" class="collapsible_button">Garments</button>
         <div class="collapsible">
@@ -36,28 +35,31 @@
         </div>
         <button type="button" class="collapsible_button">Excercises</button>
         <div class="collapsible">
+          <div class="excercise">
             <p>Text about importance of excercise and explanation for the section.</p>
-            <button type="button">Set Reminder</button>
+            <button type="button" class="reminder">Set Reminder</button>
             <h3>Excercise 1: Knee bends</h3>
             <img src="/images/tempInfo/ex1.png">
             <p>Instructions</p>
             <h3>Excercise 2: Ankle bends/circles</h3>
             <img src="/images/tempInfo/ex2.png">
             <p>Instructions</p>
+          </div>
         </div>
         <button type="button" class="collapsible_button">Lymph drainage</button>
         <div class="collapsible">
             <p>Explanation of what LDM is and how it can help.</p>
-            <button type="button">Set Reminder</button>
+            <button type="button" class="reminder">Set Reminder</button>
             <h3>Techniques</h3>
             <h4>Lower leg</h4>
-            <iframe height="200" src="https://www.youtube.com/embed/MIv8f2bp3Qc"></iframe>
+            <iframe src="https://www.youtube.com/embed/MIv8f2bp3Qc"></iframe>
             <p>Description of the technique.</p>
             <h4>Foot</h4>
-            <iframe height="200" src="https://www.youtube.com/embed/Hl96LEUwniQ"></iframe>
+            <iframe src="https://www.youtube.com/embed/Hl96LEUwniQ"></iframe>
             <p>Description of the technique.</p>
         </div>
     </div>
+  </div>
     <div class="section_nav">
         <a th:href="@{/treatment}" class="section_link">&larr; Back to full list</a>
     </div>

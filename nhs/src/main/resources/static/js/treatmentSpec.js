@@ -14,12 +14,12 @@ for (var i = 0; i < coll.length; i++) {
 let gallery = document.getElementById("display_item").getElementsByTagName("img");
 function backClick(){
   for (var i = 0; i < gallery.length; i++){
-    if (gallery[i].style.display === "block"){
+    if (gallery[i].style.display === "inline-block"){
       gallery[i].style.display = "none";
       if (i === 0){
-        gallery[gallery.length-1].style.display = "block";
+        gallery[gallery.length-1].style.display = "inline-block";
       } else {
-        gallery[i-1].style.display = "block";
+        gallery[i-1].style.display = "inline-block";
       }
       break;
     }
@@ -27,12 +27,12 @@ function backClick(){
 }
 function forwardClick(){
   for (var i = 0; i < gallery.length; i++){
-    if (gallery[i].style.display === "block"){
+    if (gallery[i].style.display === "inline-block"){
       gallery[i].style.display = "none";
       if (i === gallery.length-1){
-        gallery[0].style.display = "block";
+        gallery[0].style.display = "inline-block";
       } else {
-        gallery[i+1].style.display = "block";
+        gallery[i+1].style.display = "inline-block";
       }
       break;
     }
