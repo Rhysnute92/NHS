@@ -9,7 +9,6 @@
 <body>
 <div class="container-calendar">
     <div th:include="~{mobile/fragments/mobileheader :: header}"></div>
-    <div th:include="~{mobile/fragments/mobilenav :: mobilenav}"></div>
     <div id="moblist">
         <button><link href="addappointment.html">Add new Appointment</button>
     </div>
@@ -67,6 +66,7 @@
 </div>
 </div>
 </div>
+<div th:include="~{mobile/fragments/mobilenav :: mobilenav}"></div>
 <script src="../../static/javascript/Monthly.js"></script>
 </body>
 </html>
