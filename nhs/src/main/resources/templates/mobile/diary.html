@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-  <head>
+<head>
     <title>My Diary</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/diary.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <div class="container">
-      <div th:replace="~{mobile/fragments/mobileheader :: header}"></div>
-      <div class="day-container"></div>
-      <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+    <div class="diary-container">
+        <div class="diary-entry-container">
+            <div th:if="${diaryEntries.empty}">
+                <h2>No diary entries yet</h2>
+            </div>
+            <th:block th:each="diaryEntry : ${diaryEntries}">
+                <div th:replace="~{fragments/diary/diaryEntry :: diaryEntry(diaryEntry=${diaryEntry})}">
+                </div>
+            </th:block>
+        </div>
     </div>
-    <script th:src="@{/js/components/header.js}"></script>
-  </body>
+    <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
+</div>
+<script th:src="@{/js/components/header.js}"></script>
+</body>
 </html>

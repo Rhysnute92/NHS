@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/guest.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome</title>
 </head>
 <body>
 <div class="container">
-    <h1> Welcome to [Insert App Name Here]!</h1>
+    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+    <h1>Welcome to the app!</h1>
     <div class="icon-container">
         <div id="firstAppointment">
             <img
@@ -41,6 +43,6 @@
 <div class="btn-container">
     <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
 </div>
-<div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
+<script th:src="@{/js/components/header.js}"></script>
 </body>
 </html>
