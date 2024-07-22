@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Education</title>
+    <link rel="stylesheet" th:href="@{/css/treatmentSpec.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div th:replace="~{desktop/fragments/header :: header}"></div>
+    <div th:replace="~{desktop/fragments/infomenu :: infomenu}"></div>
+    <div class="container">
+      <h2>Treatments for lymphedema of the legs</h2>
+    </div>
+    <div>
+        <button type="button" class="collapsible_button">Garments</button>
+        <div class="collapsible">
+            <p>Description of different garments.</p>
+            <h3>How to don</h3>
+            <h3>How to doff</h3>
+            <h3>Care instructions</h3>
+        </div>
+        <button type="button" class="collapsible_button">Excercises</button>
+        <div class="collapsible">
+            <p>Text about importance of excercise and explanation for the section.</p>
+            <button type="button">Set Reminder</button>
+            <h3>Excercise 1</h3>
+            <p>Instructions</p>
+            <h3>Excercise 2</h3>
+            <p>Instructions</p>
+        </div>
+        <button type="button" class="collapsible_button">Lymph drainage</button>
+        <div class="collapsible">
+            <p>Explanation of what LDM is and how it can help.</p>
+            <button type="button">Set Reminder</button>
+            <h3>Techniques</h3>
+        </div>
+    </div>
+    <div class="section_nav">
+        <a th:href="@{/treatment}" class="section_link">&larr; Back to full list</a>
+    </div>
+    <script th:src="@{/js/treatmentSpec.js}"></script>
+  </body>
+</html>

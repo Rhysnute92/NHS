@@ -45,4 +45,13 @@ public class EducationController {
         }
     }
 
+    @GetMapping("/treatmentSpec")
+    public String spec(HttpServletRequest request) {
+        if (DeviceDetector.isMobile(request)) {
+            return "mobile/Education/treatmentSpec";
+        } else {
+            return "desktop/Education/treatmentSpec";
+        }
+    }
+
 }
