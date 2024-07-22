@@ -1,5 +1,19 @@
-.collapsible {
+.collapsible{
     display: none;
-    overflow: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
     background-color: #b7b7b7;
-  }
+}
+.display_item img{
+    height: 20vh;
+    width: auto;
+    display: none;
+}
+
+.gallery_item{
+    display: inline-block;
+}
+.gallery_item img{
+    height: 20vh;
+    width: auto;
+}
