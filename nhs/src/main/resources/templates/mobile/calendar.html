@@ -8,8 +8,8 @@
 </head>
 <body>
 <div class="container-calendar">
-    <div th:replace="~{mobile/fragments/mobileheader :: mobileheader}"></div>
-    <div th:replace="~{mobile/fragments/mobilenav :: mobilenav}"></div>
+    <div th:include="~{mobile/fragments/mobileheader :: mobileheader}"></div>
+    <div th:include="~{mobile/fragments/mobilenav :: mobilenav}"></div>
     <div id="moblist">
         <button><link href="addappointment.html">Add new Appointment</button>
     </div>
