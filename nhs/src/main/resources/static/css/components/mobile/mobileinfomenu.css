@@ -1,6 +1,7 @@
 .mobileinfomenu{
   position: fixed;
   right: 0;
+  top: 0;
 }
 .menu_icon{
   background-color: #005eb8;
@@ -10,9 +11,19 @@
 }
 .infomenu_mobile{
     width: 0px;
-    background-color: #005eb8;
+    background-color:#005eb8;
     overflow-x: hidden;
     margin-right: 17vw;
-    margin-top: 1vh;
+    margin-top: 30vh;
     transition: 0.5s;
+  }
+
+  .mobmenu_list{
+    list-style-type: none;
+  }
+  .mobmenu_item{
+    margin-bottom: 1vh;
+  }
+  .mobmenu_item a{
+    color: white;
   }
