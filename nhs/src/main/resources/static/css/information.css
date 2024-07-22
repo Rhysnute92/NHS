@@ -1,0 +1,18 @@
+.container{
+    margin-left: 2vw;
+}
+
+.reminder{
+    background-color: #007f3b;
+    color: white;
+    border: none;
+}
+
+.section_nav{
+    margin-top: 5vh;
+    text-align: center;
+}
+
+.t_types ul li{
+    margin-bottom: 1vh;
+}

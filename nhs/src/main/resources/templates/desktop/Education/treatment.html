@@ -3,18 +3,19 @@
   <head>
     <title>Education</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/information.css}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <div th:replace="~{desktop/fragments/header :: header}"></div>
     <div th:replace="~{desktop/fragments/infomenu :: infomenu}"></div>
     <div class="container">
-      <h2>Treatments for lymphedema</h2>
+      <h2 class="title">Treatments for lymphedema</h2>
       <p>Here is a sample text about treatment options for lymphedema.</p>
-      <h2>Skincare</h2>
+      <h2 class="subtitle">Skincare</h2>
       <p>Here is some text about proper skincare for patients.</p>
-      <button type="button">Set Reminder</button>
-      <nav>
+      <button type="button" class="reminder">Set Reminder</button>
+      <nav class="t_types">
         <ul>
           <li><a th:href="@{/treatmentSpec}">Treatments for lymphedema of the legs</a></li>
           <li><a href="">Treatments for lymphedema of head and neck</a></li>
