@@ -8,9 +8,7 @@ checkinSections.forEach((section) => {
 
     const inputs = section.querySelectorAll('input, textarea');
     inputs.forEach((input) => {
-        console.log("section: ", input);
         input.addEventListener('input', () => {
-            console.log("input: ", input);
             section.classList.add('completed');
         });
     });
