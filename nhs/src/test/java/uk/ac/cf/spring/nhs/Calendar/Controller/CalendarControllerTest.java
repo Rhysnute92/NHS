@@ -24,14 +24,22 @@ public class CalendarControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-     @Test
-    public void testMobileCalendar() throws Exception {
+    @Test
+    public void testCalendarForMobile() throws Exception {
         mockMvc.perform(get("/calendar")
                         .header("User-Agent",
-                                "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1"))
+                                "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("mobile/calendar"));
     }
 
+    @Test
+    public void testCalendarForDesktop() throws Exception {
+        mockMvc.perform(get("/calendar")
+                        .header("User-Agent",
+                                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("desktop/calendar"));
+    }
 }
 
