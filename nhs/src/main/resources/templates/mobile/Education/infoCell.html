@@ -3,6 +3,7 @@
   <head>
     <title>Education</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/information.css}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
@@ -18,8 +19,9 @@
       </div>
       <div class="section_nav">
           <a th:href="@{/information}" class="section_link">&larr; What is Lymphedema?</a>
-          <a href="" class="section_link">Treatments &rarr;</a>
+          <a th:href="@{/treatment}" class="section_link">Treatments &rarr;</a>
       </div>
+      <div class="spacer">&nbsp;</div>
     <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
     <script th:src="@{/js/components/header.js}"></script>
     <script th:src="@{/js/components/mbinfomenu.js}"></script>
