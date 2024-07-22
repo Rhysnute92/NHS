@@ -7,14 +7,14 @@
 .diary-entry-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     padding: 1rem;
     flex: 5;
     margin: 2rem;
     background-color: var(--nhs-white);
     width: 80%;
-    max-width: 800px;
+    /*max-width: 800px;*/
     border-radius: 0.4rem;
 }
 
@@ -55,12 +55,19 @@
     background-color: var(--nhs-pale-grey);
     width: 100%;
     justify-content: center;
-
+    height: 100%;
+    min-height: 100vh;
 }
 
 @media (max-width: 768px) {
     .diary-entry-container {
         margin: 0;
         background-color: transparent;
+        font-size: 1.2rem;
+    }
+
+    h1 {
+        display: none;
     }
 }
+
