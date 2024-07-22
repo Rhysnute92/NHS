@@ -14,7 +14,7 @@
     margin: 2rem;
     background-color: var(--nhs-white);
     width: 80%;
-    max-width: 800px;
+    /*max-width: 800px;*/
     border-radius: 0.4rem;
 }
 
@@ -56,12 +56,18 @@
     width: 100%;
     justify-content: center;
     height: 100%;
+    min-height: 100vh;
 }
 
 @media (max-width: 768px) {
     .diary-entry-container {
         margin: 0;
         background-color: transparent;
+        font-size: 1.2rem;
+    }
+
+    h1 {
+        display: none;
     }
 }
 
