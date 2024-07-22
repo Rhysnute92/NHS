@@ -6,6 +6,7 @@
 
 /* Import desktop-specific component styles */
 @import url('/css/components/desktop/desktopheader.css');
+@import url('/css/components/desktop/infomenu.css');
 
 /* Import mobile-specific component styles */
 @import url('/css/components/mobile/mobilenav.css');
