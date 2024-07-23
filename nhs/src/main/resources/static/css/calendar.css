@@ -162,6 +162,9 @@
 }
 
 #monthAndYear {
+    position: relative;
+    right: 200px;
+    top: 25px;
     text-align: center;
     margin-top: 0;
 }
@@ -172,7 +175,7 @@
     margin-bottom: 1em;
     overflow: hidden;
     clear: both;
-    right: 180px;
+    right: 200px;
     top: 5%;
 }
 

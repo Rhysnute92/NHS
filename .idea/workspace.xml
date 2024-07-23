@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d3a4c0bc-30f3-4cf9-bf02-24f143907b44" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/CalendarContoller/calendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/CalendarContoller/Controller/CalendarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nhs/src/main/resources/static/css/calendar.css" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/css/calendar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nhs/src/main/resources/static/css/mobilecalendar.css" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/css/mobilecalendar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nhs/src/main/resources/templates/desktop/calendar.html" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/desktop/calendar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/addappointment.html" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/addappointment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/calendar.html" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/calendar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/Controller/CalendarControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/Controller/CalendarControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,6 +188,13 @@
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
+    </configuration>
+    <configuration name="NhsApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="uk.ac.cf.spring.nhs.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="uk.ac.cf.spring.nhs.NhsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="NhsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="nhs.main" />
