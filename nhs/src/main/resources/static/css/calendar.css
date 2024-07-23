@@ -191,6 +191,8 @@
 .footer-container-calendar {
     margin-top: 1em;
     padding: 10px 0;
+    position: relative;
+    right: 200px;
 }
 
 .footer-container-calendar select {

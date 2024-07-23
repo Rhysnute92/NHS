@@ -1,4 +1,3 @@
-
 let appointments = [];
 
 let appointmentDateInput = document.getElementById("appointmentDate");
@@ -10,21 +9,25 @@ let apptList = document.getElementById("apptList");
 
 let appointmentIdCounter = 1;
 
-function addappointment() {
+function addAppointment() {
     let date = appointmentDateInput.value;
     let time = appointmentTimeInput.value;
     let appointmentType = appointmentAppointmentTypeInput.value;
     let dr = appointmentDrInput.value;
     let comment = appointmentCommentInput.value;
 
-    if (date && title) {
+    if (date && time && appointmentType && dr) {
         let appointmentId = appointmentIdCounter++;
 
-        appointments.push(
-            {
-                id: appointmentId, date: date, time: time, appointmentType: appointmentType, dr: dr, comment: comment
-            }
-        );
+        appointments.push({
+            id: appointmentId,
+            date: date,
+            time: time,
+            appointmentType: appointmentType,
+            dr: dr,
+            comment: comment
+        });
+
         showCalendar(currentMonth, currentYear);
         appointmentDateInput.value = "";
         appointmentTimeInput.value = "";
@@ -36,9 +39,7 @@ function addappointment() {
 }
 
 function deleteAppointment(appointmentId) {
-    let appointmentIndex =
-        appointments.findIndex((appointment) =>
-            appointment.id === appointmentId);
+    let appointmentIndex = appointments.findIndex(appointment => appointment.id === appointmentId);
 
     if (appointmentIndex !== -1) {
         appointments.splice(appointmentIndex, 1);
@@ -52,26 +53,19 @@ function apptSchedule() {
     for (let i = 0; i < appointments.length; i++) {
         let appointment = appointments[i];
         let appointmentDate = new Date(appointment.date);
-        if (appointmentDate.getMonth() ===
-            currentMonth &&
-            appointmentDate.getFullYear() ===
-            currentYear) {
+        if (appointmentDate.getMonth() === currentMonth && appointmentDate.getFullYear() === currentYear) {
             let listItem = document.createElement("li");
-            listItem.innerHTML =
-                `<strong>${appointment.title}</strong> - 
-			${appointment.description} on 
-			${appointmentDate.toLocaleDateString()}`;
+            listItem.innerHTML = `<strong>${appointment.appointmentType}</strong> with Dr. ${appointment.dr} on ${appointmentDate.toLocaleDateString()} at ${appointment.time}`;
 
-            let deleteButton =
-                document.createElement("button");
+            let deleteButton = document.createElement("button");
             deleteButton.className = "delete-appt";
             deleteButton.textContent = "Delete";
             deleteButton.onclick = function () {
-                deleteAppt(appointment.id);
+                deleteAppointment(appointment.id);
             };
 
             listItem.appendChild(deleteButton);
-            reminderList.appendChild(listItem);
+            apptList.appendChild(listItem);
         }
     }
 }
@@ -79,70 +73,47 @@ function apptSchedule() {
 function generate_year_range(start, end) {
     let years = "";
     for (let year = start; year <= end; year++) {
-        years += "<option value='" +
-            year + "'>" + year + "</option>";
+        years += `<option value='${year}'>${year}</option>`;
     }
     return years;
 }
 
-today = new Date();
-currentMonth = today.getMonth();
-currentYear = today.getFullYear();
-selectYear = document.getElementById("year");
-selectMonth = document.getElementById("month");
+let today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+let selectYear = document.getElementById("year");
+let selectMonth = document.getElementById("month");
 
-createYear = generate_year_range(1970, 2050);
-
-document.getElementById("year").innerHTML = createYear;
+let createYear = generate_year_range(1970, 2050);
+selectYear.innerHTML = createYear;
 
 let calendar = document.getElementById("calendar");
 
 let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
 ];
-let days = [
-    "Sun", "Mon", "Tue", "Wed",
-    "Thu", "Fri", "Sat"];
+let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-$dataHead = "<tr>";
-for (dhead in days) {
-    $dataHead += "<th data-days='" +
-        days[dhead] + "'>" +
-        days[dhead] + "</th>";
+let dataHead = "<tr>";
+for (let dhead in days) {
+    dataHead += `<th data-days='${days[dhead]}'>${days[dhead]}</th>`;
 }
-$dataHead += "</tr>";
+dataHead += "</tr>";
 
-document.getElementById("thead-month").innerHTML = $dataHead;
+document.getElementById("thead-month").innerHTML = dataHead;
 
-monthAndYear =
-    document.getElementById("monthAndYear");
-showCalendar(currentMonth, currentYear);
+let monthAndYear = document.getElementById("monthAndYear");
 
-// Function to navigate to the next month
 function next() {
-    currentYear = currentMonth === 11 ?
-        currentYear + 1 : currentYear;
+    currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
     currentMonth = (currentMonth + 1) % 12;
     showCalendar(currentMonth, currentYear);
 }
 
-// Function to navigate to the previous month
 function previous() {
-    currentYear = currentMonth === 0 ?
-        currentYear - 1 : currentYear;
-    currentMonth = currentMonth === 0 ?
-        11 : currentMonth - 1;
+    currentYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+    currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
     showCalendar(currentMonth, currentYear);
 }
 
@@ -154,9 +125,9 @@ function jump() {
 
 function showCalendar(month, year) {
     let firstDay = new Date(year, month, 1).getDay();
-    tbl = document.getElementById("calendar-body");
+    let tbl = document.getElementById("calendar-body");
     tbl.innerHTML = "";
-    monthAndYear.innerHTML = months[month] + " " + year;
+    monthAndYear.innerHTML = `${months[month]} ${year}`;
     selectYear.value = year;
     selectMonth.value = month;
 
@@ -165,20 +136,20 @@ function showCalendar(month, year) {
         let row = document.createElement("tr");
         for (let j = 0; j < 7; j++) {
             if (i === 0 && j < firstDay) {
-                cell = document.createElement("td");
-                cellText = document.createTextNode("");
+                let cell = document.createElement("td");
+                let cellText = document.createTextNode("");
                 cell.appendChild(cellText);
                 row.appendChild(cell);
             } else if (date > daysInMonth(month, year)) {
                 break;
             } else {
-                cell = document.createElement("td");
+                let cell = document.createElement("td");
                 cell.setAttribute("data-date", date);
                 cell.setAttribute("data-month", month + 1);
                 cell.setAttribute("data-year", year);
                 cell.setAttribute("data-month_name", months[month]);
                 cell.className = "date-picker";
-                cell.innerHTML = "<span>" + date + "</span";
+                cell.innerHTML = `<span>${date}</span>`;
 
                 if (
                     date === today.getDate() &&
@@ -188,12 +159,9 @@ function showCalendar(month, year) {
                     cell.className = "date-picker selected";
                 }
 
-                // Check if there are appointments on this date
-                if (hasappointmentOnDate(date, month, year)) {
+                if (hasAppointmentOnDate(date, month, year)) {
                     cell.classList.add("appointment-marker");
-                    cell.appendChild(
-                        createappointmentTooltip(date, month, year)
-                    );
+                    cell.appendChild(createAppointmentTooltip(date, month, year));
                 }
 
                 row.appendChild(cell);
@@ -202,8 +170,7 @@ function showCalendar(month, year) {
         }
         tbl.appendChild(row);
     }
-
-    displayReminders();
+    apptSchedule();
 }
 
 function createAppointmentTooltip(date, month, year) {
@@ -213,9 +180,7 @@ function createAppointmentTooltip(date, month, year) {
     for (let i = 0; i < appointmentsOnDate.length; i++) {
         let appointment = appointmentsOnDate[i];
         let appointmentDate = new Date(appointment.date);
-        let appointmentText = `<strong>${appointment.title}</strong> - 
-			${appointment.description} on 
-			${appointmentDate.toLocaleDateString()}`;
+        let appointmentText = `<strong>${appointment.appointmentType}</strong> with Dr. ${appointment.dr} on ${appointmentDate.toLocaleDateString()} at ${appointment.time}`;
         let appointmentElement = document.createElement("p");
         appointmentElement.innerHTML = appointmentText;
         tooltip.appendChild(appointmentElement);
@@ -235,11 +200,11 @@ function getAppointmentsOnDate(date, month, year) {
 }
 
 function hasAppointmentOnDate(date, month, year) {
-    return getappointmentsOnDate(date, month, year).length > 0;
+    return getAppointmentsOnDate(date, month, year).length > 0;
 }
 
-function daysInMonth(iMonth, iYear) {
-    return 32 - new Date(iYear, iMonth, 32).getDate();
+function daysInMonth(month, year) {
+    return 32 - new Date(year, month, 32).getDate();
 }
 
 showCalendar(currentMonth, currentYear);
