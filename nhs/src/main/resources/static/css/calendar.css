@@ -61,7 +61,6 @@ body {
     color: #000000;
     text-align: center;
     position: relative;
-    right: 219px;
     top: 10%;
     margin: 0;
 }
@@ -100,7 +99,7 @@ body {
     font-size: 18px;
     position: relative;
     top:  21%;
-    right: 500px;
+    right: 287px;
 }
 
 #apptList {
