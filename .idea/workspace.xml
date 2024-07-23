@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d3a4c0bc-30f3-4cf9-bf02-24f143907b44" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nhs/src/main/resources/static/css/calendar.css" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/css/calendar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nhs/src/main/resources/static/js/Monthly.js" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/js/Monthly.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
