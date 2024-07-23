@@ -7,12 +7,8 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-<div class="wrapper">
   <div class="container-calendar">
-    <div th:include="~{fragments/desktop/header :: header}" ></div>
-<div class="wrapper">
-  <div class="container-calendar">
+    <div th:insert="~{fragments/desktop/header :: header}" ></div>
       <div id="left">
         <h1>Appointment Calendar</h1>
         <div id="appointments">
@@ -89,9 +85,8 @@
         </div>
       </div>
       </div>
-    </div>
 </div>
-<script src="../../static/javascript/Monthly.js"></script>
+<script th:src="@{static/js/Monthly.js}"></script>
 </body>
 
 </html>
