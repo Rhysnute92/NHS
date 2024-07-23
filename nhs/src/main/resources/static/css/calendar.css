@@ -2,42 +2,42 @@
 @import url('/static/css/utility/variables.css');
 
 /* TITLE */
-.container h1 {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1rem;
-    color: #005EB8;
-}
-.header {
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: var(--nhs-blue);
-    width: 100%;
-    box-sizing: border-box;
-    font-size: var(--regular-font-size);
-    padding: 0.25rem 0.5rem;
-    z-index: 1000;
-}
+/*.container h1 {*/
+/*    position: relative;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    margin: 1rem;*/
+/*    color: #005EB8;*/
+/*}*/
+/*.header {*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    background-color: var(--nhs-blue);*/
+/*    width: 100%;*/
+/*    box-sizing: border-box;*/
+/*    font-size: var(--regular-font-size);*/
+/*    padding: 0.25rem 0.5rem;*/
+/*    z-index: 1000;*/
+/*}*/
 
-.header h2 {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--nhs-white);
-    text-decoration: none;
-    margin: 0;
-    padding: 1rem;
-}
+/*.header h2 {*/
+/*    position: relative;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    color: var(--nhs-white);*/
+/*    text-decoration: none;*/
+/*    margin: 0;*/
+/*    padding: 1rem;*/
+/*}*/
 
-body {
-    font-family: Frutiger, sans-serif;
-    background-color: #d3d3d3;
-    margin: 0;
-}
+/*body {*/
+/*    font-family: Frutiger, sans-serif;*/
+/*    background-color: #d3d3d3;*/
+/*    margin: 0;*/
+/*}*/
 
 .container-calendar {
     margin: 0 auto;
@@ -45,7 +45,6 @@ body {
     justify-content: space-between;
     display: flex;
     position: relative;
-    top: 20%;
 }
 
 #appointments {
@@ -53,7 +52,6 @@ body {
     margin: 20px 0;
     width: 100%;
     position: relative;
-    right: 570px;
     top: 5%;
 }
 
@@ -61,13 +59,12 @@ body {
     color: #000000;
     text-align: center;
     position: relative;
-    top: 10%;
     margin: 0;
+    left: 750px;
 }
 
 #appointments h3 {
     color: black;
-    font-size: 18px;
     margin: 0;
 }
 
@@ -99,7 +96,6 @@ body {
     font-size: 18px;
     position: relative;
     top:  21%;
-    right: 287px;
 }
 
 #apptList {
@@ -109,10 +105,8 @@ body {
 }
 
 #apptList li {
-    font-size: 16px;
     position: relative;
     top: 107px;
-    right: 500px;
 }
 
 #right {
@@ -178,7 +172,7 @@ body {
     margin-bottom: 1em;
     overflow: hidden;
     clear: both;
-    right: 500px;
+    right: 180px;
     top: 5%;
 }
 

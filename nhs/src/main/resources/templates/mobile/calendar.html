@@ -10,7 +10,7 @@
 <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
 <div class="container-calendar">
     <div id="moblist">
-        <button><a href="mobileaddappt">Add new Appointment</a></button>
+        <button onclick="location. href='/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
     </div>
        <div id="mobileMonth">
             <h3 id="monthAndYear"></h3>
@@ -48,7 +48,6 @@
 
                 <select id="year" onchange="jump()"></select>
             </div>
-        </div>
     <div id="mobileSchedule">
         <h3>Appointment Schedule</h3>
         <ul id="apptList">
@@ -63,7 +62,9 @@
         </ul>
     </div>
 </div>
+</div>
 <div th:insert="~{fragments/mobile/mobilenav :: mobilenav}"></div>
-<script th:src="@{static/js/Monthly.js}"></script>
+<script th:src="@{/static/js/Monthly.js}"></script>
+<script th:src="@{/js/components/header.js}"></script>
 </body>
 </html>

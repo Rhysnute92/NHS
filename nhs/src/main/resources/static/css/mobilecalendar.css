@@ -1,58 +1,58 @@
 /* Import utility styles */
 @import url('/static/css/utility/variables.css');
 
-@media only screen
-and (min-device-width: 320px)
-and (max-device-width: 640px) {
-    :root {
-        --font-headers: 20px;
-        --font-body: 20px;
-    }
+/*@media only screen*/
+/*and (min-device-width: 320px)*/
+/*and (max-device-width: 640px) {*/
+/*    :root {*/
+/*        --font-headers: 20px;*/
+/*        --font-body: 20px;*/
+/*    }*/
 
     /* TITLE */
-    .container h1 {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 1rem;
-        color: #005EB8;
-    }
-    .header {
-        top: 0;
-        left: 0;
-        right: 0;
-        background-color: var(--nhs-blue);
-        width: 100%;
-        box-sizing: border-box;
-        font-size: var(--regular-font-size);
-        padding: 0.25rem 0.5rem;
-        z-index: 1000;
-    }
+    /*.container h1 {*/
+    /*    position: relative;*/
+    /*    display: flex;*/
+    /*    align-items: center;*/
+    /*    justify-content: center;*/
+    /*    margin: 1rem;*/
+    /*    color: #005EB8;*/
+    /*}*/
+    /*.header {*/
+    /*    top: 0;*/
+    /*    left: 0;*/
+    /*    right: 0;*/
+    /*    background-color: var(--nhs-blue);*/
+    /*    width: 100%;*/
+    /*    box-sizing: border-box;*/
+    /*    font-size: var(--regular-font-size);*/
+    /*    padding: 0.25rem 0.5rem;*/
+    /*    z-index: 1000;*/
+    /*}*/
 
-    .header h2 {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--nhs-white);
-        text-decoration: none;
-        margin: 0;
-        padding: 1rem;
-    }
+    /*.header h2 {*/
+    /*    position: relative;*/
+    /*    display: flex;*/
+    /*    align-items: center;*/
+    /*    justify-content: center;*/
+    /*    color: var(--nhs-white);*/
+    /*    text-decoration: none;*/
+    /*    margin: 0;*/
+    /*    padding: 1rem;*/
+    /*}*/
 
-    body {
-        display: flex;
-        align-content: center;
-        position: fixed;
-        font-family: Frutiger, sans-serif;
-        background-color: #d3d3d3;
-        margin: 0;
-        width: 100vw;
-        min-height: 100svh;
-        font-size: 2em;
-        row-gap: 2svh;
-    }
+    /*body {*/
+    /*    display: flex;*/
+    /*    align-content: center;*/
+    /*    position: fixed;*/
+    /*    font-family: Frutiger, sans-serif;*/
+    /*    background-color: #d3d3d3;*/
+    /*    margin: 0;*/
+    /*    width: 100vw;*/
+    /*    min-height: 100svh;*/
+    /*    font-size: 2em;*/
+    /*    row-gap: 2svh;*/
+    /*}*/
 
     .container-calendar {
         padding: 15px;
@@ -113,13 +113,13 @@ and (max-device-width: 640px) {
     #appointments input[type="text"],
     #appointments textarea {
         margin: 10px 0;
-        width: 90%;
+        width: 80%;
     }
 
     #appointments {
         position: absolute;
-        top: 13%;
-        right: -27px;
+        top: 4%;
+        width: 90%;
     }
 
     #moblist button {
@@ -133,21 +133,11 @@ and (max-device-width: 640px) {
         background: #005EB8;
         color: white;
         border: none;
-        padding: 5px 10px;
         cursor: pointer;
     }
 
     #mobileSchedule {
         position: relative;
-        top: 400px;
-        right: 530px;
-    }
-
-    #mobileSchedule h3 {
-        /*position: relative;*/
-        color: black;
-        align-content: center;
-        font-size: 18px;
     }
 
     #apptList {
@@ -157,7 +147,6 @@ and (max-device-width: 640px) {
 
     #apptList li {
         display: inline-block;
-        font-size: 16px;
     }
 
     .delete-event {
@@ -232,7 +221,7 @@ and (max-device-width: 640px) {
 
 
     .footer-container-calendar {
-        margin-top: 1100em;
+        margin-top: 100px;
         padding: 10px 0;
     }
 
@@ -244,4 +233,3 @@ and (max-device-width: 640px) {
         border-radius: 3px;
         padding: 5px;
     }
-}
