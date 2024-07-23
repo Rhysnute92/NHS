@@ -10,7 +10,7 @@
 <body>
 <div th:replace="~{fragments/desktop/header}"></div>
 <div class="checkin-container">
-  <div th:replace="~{fragments/common/navmenu}" th:with="(links=${links})"></div>
+  <div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
   <div class="checkin-form-container">
     <h1>Check-in</h1>
     <div th:replace="~{fragments/diary/checkinForm}"></div>

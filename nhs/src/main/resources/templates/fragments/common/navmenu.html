@@ -1,22 +1,12 @@
 <!DOCTYPE html>
-<!--<div th:fragment="navmenu (links)" class="navmenu">-->
-<div th:fragment="navmenu" class="navmenu-container">
-  <i class="fa-solid fa-bars navmenu-toggle"></i>
-  <div class="navmenu">
-    <div class="navmenu-links">
-      <nav>
-        <ul class="navmenu-links">
-  <!--      <ul th:each="link : ${links}">-->
-          <li class="navmenu-link">
-  <!--          <a th:href="@{${link.url}}" th:text="${link.text}"></a>-->
-            <a th:href="@{/diary}">Diary</a>
-          </li>
-          <li class="navmenu-link">
-            <a th:href="@{/diary/checkin}">Check-in</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <script th:src="@{/js/components/navmenu.js}"></script>
+<div th:fragment="navmenu (items)" class="navmenu">
+    <nav>
+      <ul th:each="item : ${items}" class="navmenu-links">
+        <li class="navmenu-link">
+          <a th:href="@{${item.url}}" th:text="${item.name}"></a>
+        </li>
+      </ul>
+    </nav>
 </div>
+<script th:src="@{/js/components/navmenu.js}"></script>
+

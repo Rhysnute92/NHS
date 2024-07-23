@@ -9,7 +9,7 @@
 <body>
 <div th:replace="~{fragments/desktop/header}"></div>
 <div class="diary-container">
-    <div th:replace="~{fragments/common/navmenu}"></div>
+    <div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
     <div class="diary-entry-container">
         <h1>Diary</h1>
         <div th:if="${diaryEntries.empty}">
