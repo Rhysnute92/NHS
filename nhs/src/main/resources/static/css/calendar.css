@@ -1,3 +1,6 @@
+/* Import utility styles */
+@import url('/static/css/utility/variables.css');
+
 body {
     font-family: Frutiger, sans-serif;
     background-color: #d3d3d3;

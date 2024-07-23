@@ -1,3 +1,6 @@
+/* Import utility styles */
+@import url('/static/css/utility/variables.css');
+
 @media only screen
 and (min-device-width: 320px)
 and (max-device-width: 640px) {
@@ -6,9 +9,42 @@ and (max-device-width: 640px) {
         --font-body: 20px;
     }
 
+    /* TITLE */
+    .container h1 {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem;
+        color: #005EB8;
+    }
+    .header {
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: var(--nhs-blue);
+        width: 100%;
+        box-sizing: border-box;
+        font-size: var(--regular-font-size);
+        padding: 0.25rem 0.5rem;
+        z-index: 1000;
+    }
+
+    .header h2 {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--nhs-white);
+        text-decoration: none;
+        margin: 0;
+        padding: 1rem;
+    }
+
     body {
         display: flex;
         align-content: center;
+        position: fixed;
         font-family: Frutiger, sans-serif;
         background-color: #d3d3d3;
         margin: 0;
@@ -51,8 +87,18 @@ and (max-device-width: 640px) {
         padding: 10px 0;
     }
 
+    .container-calendar #mobileAdd {
+        position: relative;
+        top: 5%;
+        right: 124px;
+    }
+
+    .container-calendar #mobileAdd p {
+        font-size: 15px;
+    }
+
     .container-calendar #mobileAdd h1 {
-        font-size: 40px;
+        font-size: 30px;
     }
 
     #appointments h3 {
@@ -68,6 +114,12 @@ and (max-device-width: 640px) {
     #appointments textarea {
         margin: 10px 0;
         width: 90%;
+    }
+
+    #appointments {
+        position: absolute;
+        top: 13%;
+        right: -27px;
     }
 
     #moblist button {

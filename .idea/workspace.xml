@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="762d850a-8e13-42ba-bb00-e1c5c66af521" name="Changes" comment="" />
+    <list default="true" id="d3a4c0bc-30f3-4cf9-bf02-24f143907b44" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nhs/src/main/resources/static/css/calendar.css" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/css/calendar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nhs/src/main/resources/static/css/mobilecalendar.css" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/resources/static/css/mobilecalendar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nhs/src/main/resources/templates/desktop/calendar.html" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/desktop/calendar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/addappointment.html" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/addappointment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/calendar.html" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/resources/templates/mobile/calendar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/Controller/CalendarControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/Controller/CalendarControllerTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +47,17 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="application" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="nhs" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="nhs" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -67,22 +86,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/c23102007/OneDrive - Cardiff University/Autumn Semester/Client Project Rhys/team-5-smart-towns-rhys-nute&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/c23102007/OneDrive - Cardiff University/Autumn Semester/Client Project Rhys/team-5-smart-towns-rhys-nute",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "4719aa9ba73cc957c4e88b9e675e757a",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Gradle.nhs [bootRun]">
+    <configuration name="CalendarControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/nhs" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;uk.ac.cf.spring.nhs.Calendar.Controller.CalendarControllerTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="NhsApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -127,6 +170,27 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="nhs [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/nhs" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="NhsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="nhs.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="uk.ac.cf.spring.nhs.NhsApplication" />
@@ -137,6 +201,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.nhs [bootRun]" />
+        <item itemvalue="Gradle.nhs [clean]" />
+        <item itemvalue="Gradle.CalendarControllerTest" />
         <item itemvalue="Gradle.NhsApplicationTests" />
       </list>
     </recent_temporary>
@@ -144,13 +210,14 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="762d850a-8e13-42ba-bb00-e1c5c66af521" name="Changes" comment="" />
+      <changelist id="d3a4c0bc-30f3-4cf9-bf02-24f143907b44" name="Changes" comment="" />
       <created>1720701706878</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1720701706878</updated>
       <workItem from="1720701709917" duration="147000" />
       <workItem from="1721031283958" duration="5417000" />
+      <workItem from="1721676303392" duration="8858000" />
     </task>
     <task id="LOCAL-00001" summary="updated">
       <created>1721659394488</created>

@@ -8,13 +8,9 @@
 </head>
 <body>
 <div class="container-calendar">
-    <div th:include="~{mobile/fragments/mobileheader :: header}"></div>
-<<<<<<< HEAD
-    <div th:include="~{mobile/fragments/mobilenav :: mobilenav}"></div>
-=======
->>>>>>> 84028f2d3aa939543d33c4985355f841b215a8cf
+    <div th:insert="~{fragments/mobile/mobileheader :: header}"></div>
     <div id="moblist">
-        <button><link href="addappointment.html">Add new Appointment</button>
+        <button><a href="mobileaddappt">Add new Appointment</a></button>
     </div>
        <div id="mobileMonth">
             <h3 id="monthAndYear"></h3>
@@ -53,9 +49,8 @@
                 <select id="year" onchange="jump()"></select>
             </div>
         </div>
-<div id="mobileSchedule">
+    <div id="mobileSchedule">
         <h3>Appointment Schedule</h3>
-
         <ul id="apptList">
             <li data-event-id="1">
                 <strong>Appointment</strong>
@@ -68,12 +63,7 @@
         </ul>
     </div>
 </div>
-</div>
-</div>
-<<<<<<< HEAD
-=======
-<div th:include="~{mobile/fragments/mobilenav :: mobilenav}"></div>
->>>>>>> 84028f2d3aa939543d33c4985355f841b215a8cf
+<div th:insert="~{fragments/mobile/mobilenav :: mobilenav}"></div>
 <script src="../../static/javascript/Monthly.js"></script>
 </body>
 </html>
