@@ -1,44 +1,6 @@
 /* Import utility styles */
 @import url('/static/css/utility/variables.css');
 
-/* TITLE */
-/*.container h1 {*/
-/*    position: relative;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    margin: 1rem;*/
-/*    color: #005EB8;*/
-/*}*/
-/*.header {*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    right: 0;*/
-/*    background-color: var(--nhs-blue);*/
-/*    width: 100%;*/
-/*    box-sizing: border-box;*/
-/*    font-size: var(--regular-font-size);*/
-/*    padding: 0.25rem 0.5rem;*/
-/*    z-index: 1000;*/
-/*}*/
-
-/*.header h2 {*/
-/*    position: relative;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    color: var(--nhs-white);*/
-/*    text-decoration: none;*/
-/*    margin: 0;*/
-/*    padding: 1rem;*/
-/*}*/
-
-/*body {*/
-/*    font-family: Frutiger, sans-serif;*/
-/*    background-color: #d3d3d3;*/
-/*    margin: 0;*/
-/*}*/
-
 .container-calendar {
     margin: 0 auto;
     overflow: auto;
@@ -93,15 +55,16 @@
 
 #center h3 {
     color: black;
-    font-size: 18px;
     position: relative;
     top:  21%;
+    right: 120px;
 }
 
 #apptList {
     list-style: none;
     padding: 0;
     position: relative;
+    right: 120px;
 }
 
 #apptList li {
@@ -134,6 +97,9 @@
 .table-calendar {
     border-collapse: collapse;
     width: 100%;
+    position: relative;
+    right: 200px;
+    top: 20px;
 }
 
 .table-calendar td,
