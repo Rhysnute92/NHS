@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.CalendarContoller.Controller;
+package uk.ac.cf.spring.nhs.Calendar.Controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
