@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3a4c0bc-30f3-4cf9-bf02-24f143907b44" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/Calendar/Entity/CalendarEntry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/Calendar/Service/CalendarService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/App/CalendarAppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/Entity/CalendarEntryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/HTTP/CalendarHTTPTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/LightweightMVC/CalendarLightweightTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/MockMVC/CalendarMockMVCTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/Security/CalendarSecurityTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/Service/CalendarServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/WebDriver/CalendarFirefoxTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/jUnit/CalendarjUnitTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/CalendarContoller/Controller/CalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/main/java/uk/ac/cf/spring/nhs/Calendar/Controller/CalendarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/Controller/CalendarControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/Controller/CalendarControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nhs/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,22 +87,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/c23102007/OneDrive - Cardiff University/Autumn Semester/Client Project Rhys/team-5-smart-towns-rhys-nute&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;4719aa9ba73cc957c4e88b9e675e757a&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/c23102007/OneDrive - Cardiff University/Spring Semester/CMT654 - DevOps/Assignment/rhys_devops2.1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "4719aa9ba73cc957c4e88b9e675e757a",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\c23102007\OneDrive - Cardiff University\Dissertation\dissertation-nhs-lymphoedema\nhs\src\main\resources\static\js\calendar" />
@@ -108,54 +114,8 @@
       <recent name="uk.ac.cf.spring.nhs.CalendarContoller.Controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.nhs [bootRun]">
-    <configuration name="CalendarControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/nhs" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;uk.ac.cf.spring.nhs.Calendar.Controller.CalendarControllerTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="NhsApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/nhs" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;uk.ac.cf.spring.nhs.NhsApplicationTests&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="nhs [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.C:/Users/c23102007/OneDrive - Cardiff University/Dissertation/dissertation-nhs-lymphoedema/nhs [dependencies]">
+    <configuration name="C:/Users/c23102007/OneDrive - Cardiff University/Dissertation/dissertation-nhs-lymphoedema/nhs [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/nhs" />
@@ -166,7 +126,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="bootRun" />
+            <option value="dependencies" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -176,29 +136,79 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="nhs [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/nhs" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+    <configuration name="CalendarAppTest.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="nhs.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="uk.ac.cf.spring.nhs.Calendar.App.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="uk.ac.cf.spring.nhs.Calendar.App" />
+      <option name="MAIN_CLASS_NAME" value="uk.ac.cf.spring.nhs.Calendar.App.CalendarAppTest" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarEntryTest.testCalendarGetters" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="nhs.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="uk.ac.cf.spring.nhs.Calendar.Entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="uk.ac.cf.spring.nhs.Calendar.Entity" />
+      <option name="MAIN_CLASS_NAME" value="uk.ac.cf.spring.nhs.Calendar.Entity.CalendarEntryTest" />
+      <option name="METHOD_NAME" value="testCalendarGetters" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarEntryTest.testCalendarSetters" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="nhs.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="uk.ac.cf.spring.nhs.Calendar.Entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="uk.ac.cf.spring.nhs.Calendar.Entity" />
+      <option name="MAIN_CLASS_NAME" value="uk.ac.cf.spring.nhs.Calendar.Entity.CalendarEntryTest" />
+      <option name="METHOD_NAME" value="testCalendarSetters" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DiaryEntryTest.testDiaryEntrySetters" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="nhs.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="uk.ac.cf.spring.nhs.Diary.Entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="uk.ac.cf.spring.nhs.Diary.Entity" />
+      <option name="MAIN_CLASS_NAME" value="uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntryTest" />
+      <option name="METHOD_NAME" value="testDiaryEntrySetters" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="NhsApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="uk.ac.cf.spring.nhs.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="uk.ac.cf.spring.nhs.NhsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NhsApplication (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="nhs_main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="uk.ac.cf.spring.nhs.NhsApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -213,10 +223,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.nhs [bootRun]" />
-        <item itemvalue="Gradle.nhs [clean]" />
-        <item itemvalue="Gradle.CalendarControllerTest" />
-        <item itemvalue="Gradle.NhsApplicationTests" />
+        <item itemvalue="Gradle.C:/Users/c23102007/OneDrive - Cardiff University/Dissertation/dissertation-nhs-lymphoedema/nhs [dependencies]" />
+        <item itemvalue="JUnit.CalendarAppTest.contextLoads" />
+        <item itemvalue="JUnit.DiaryEntryTest.testDiaryEntrySetters" />
+        <item itemvalue="JUnit.CalendarEntryTest.testCalendarSetters" />
+        <item itemvalue="JUnit.CalendarEntryTest.testCalendarGetters" />
       </list>
     </recent_temporary>
   </component>
@@ -231,7 +242,8 @@
       <workItem from="1720701709917" duration="147000" />
       <workItem from="1721031283958" duration="5417000" />
       <workItem from="1721676303392" duration="18220000" />
-      <workItem from="1721812478334" duration="5890000" />
+      <workItem from="1721812478334" duration="6715000" />
+      <workItem from="1721839995025" duration="5045000" />
     </task>
     <task id="LOCAL-00001" summary="updated">
       <created>1721659394488</created>
@@ -268,7 +280,14 @@
       <option name="project" value="LOCAL" />
       <updated>1721763399029</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added entity and service to Calendar">
+      <created>1721839348148</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1721839348148</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,6 +295,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated" />
+    <MESSAGE value="Added entity and service to Calendar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added entity and service to Calendar" />
   </component>
 </project>
