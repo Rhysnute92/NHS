@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>My Diary</title>
+    <title>Diary</title>
+    <script src="https://kit.fontawesome.com/846d357ac5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/diary.css}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-
-<header th:replace="~{fragments/common/header}"></header>
+<div th:replace="~{fragments/desktop/header}"></div>
 <div class="diary-container">
+    <div th:replace="~{fragments/common/navmenu}"></div>
     <div class="diary-entry-container">
+        <h1>Diary</h1>
         <div th:if="${diaryEntries.empty}">
             <h2>No diary entries yet</h2>
         </div>
         <th:block th:each="diaryEntry : ${diaryEntries}">
-            <div th:replace="~{fragments/diary/diaryEntry :: diaryEntry(diaryEntry=${diaryEntry})}"></div>
+            <div th:replace="~{fragments/diary/diaryEntry :: diaryEntry(diaryEntry=${diaryEntry})}">
+            </div>
         </th:block>
     </div>
 </div>
-<footer>
-    <nav th:replace="~{fragments/common/nav}" class="nav"></nav>
-</footer>
-<script th:src="@{/js/components/header.js}"></script>
-<script th:src="@{/js/screen.js}"></script>
 </body>
 </html>

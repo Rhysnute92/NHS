@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://kit.fontawesome.com/846d357ac5.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" th:href="@{/css/main.css}" />
+  <link rel="stylesheet" th:href="@{/css/checkin.css}" />
+  <title>Check-in</title>
+</head>
+<body>
+<div th:replace="~{fragments/desktop/header}"></div>
+<div class="checkin-container">
+  <div th:replace="~{fragments/common/navmenu}" th:with="(links=${links})"></div>
+  <div class="checkin-form-container">
+    <h1>Check-in</h1>
+    <div th:replace="~{fragments/diary/checkinForm}"></div>
+  </div>
+</div>
+
+<script th:src="@{/js/components/checkin.js}"></script>
+</body>
+</html>

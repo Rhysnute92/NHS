@@ -1,37 +1,32 @@
-body {
-    font-family: Frutiger, sans-serif;
-    background-color: white;
-    margin: 0;
-}
-
-
+/* Import utility styles */
+@import url('/static/css/utility/variables.css');
 
 .container-calendar {
-    background: #d3d3d3;
-    padding: 15px;
     margin: 0 auto;
     overflow: auto;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    display: flex;
     justify-content: space-between;
+    display: flex;
+    position: relative;
 }
 
 #appointments {
     padding: 10px;
     margin: 20px 0;
     width: 100%;
+    position: relative;
+    top: 5%;
 }
 
 .container-calendar #left h1 {
     color: #000000;
     text-align: center;
+    position: relative;
     margin: 0;
-    padding: 10px 0;
+    left: 750px;
 }
 
 #appointments h3 {
     color: black;
-    font-size: 18px;
     margin: 0;
 }
 
@@ -55,24 +50,32 @@ body {
 
 #center {
     position: relative;
-    bottom: 440px;
-    left: 420px;
+    top: 15%;
 }
 
 #center h3 {
     color: black;
-    font-size: 18px;
+    position: relative;
+    top:  21%;
+    right: 120px;
 }
 
 #apptList {
     list-style: none;
     padding: 0;
+    position: relative;
+    right: 120px;
 }
 
 #apptList li {
-    font-size: 16px;
+    position: relative;
+    top: 107px;
 }
 
+#right {
+    position: relative;
+    top: 75px;
+}
 .delete-event {
     background: rgb(237, 19, 19);
     color: white;
@@ -94,6 +97,9 @@ body {
 .table-calendar {
     border-collapse: collapse;
     width: 100%;
+    position: relative;
+    right: 200px;
+    top: 20px;
 }
 
 .table-calendar td,
@@ -122,6 +128,9 @@ body {
 }
 
 #monthAndYear {
+    position: relative;
+    right: 200px;
+    top: 25px;
     text-align: center;
     margin-top: 0;
 }
@@ -132,6 +141,8 @@ body {
     margin-bottom: 1em;
     overflow: hidden;
     clear: both;
+    right: 200px;
+    top: 5%;
 }
 
 #previous {
@@ -146,6 +157,8 @@ body {
 .footer-container-calendar {
     margin-top: 1em;
     padding: 10px 0;
+    position: relative;
+    right: 200px;
 }
 
 .footer-container-calendar select {

@@ -3,10 +3,11 @@
   <head>
     <title>Education</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/information.css}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div th:replace="~{fragments/common/header}"></div>
+    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
     <div th:replace="~{fragments/mobile/mobileinfomenu :: mobileinfomenu}"></div>
     <div class="container">
       <h2 class="title">Helpful resources</h2>
@@ -21,12 +22,10 @@
         </ul>
     </div>
     <div class="section_nav">
-        <a href="" class="section_link">&larr; Treatments</a>
+        <a th:href="@{/treatment}" class="section_link">&larr; Treatments</a>
     </div>
-    <footer>
-      <nav th:replace="~{fragments/common/nav}" class="nav"></nav>
-    </footer>
-    <script th:src="@{/js/screen.js}"></script>
+    <div class="spacer">&nbsp;</div>
+    <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
     <script th:src="@{/js/components/header.js}"></script>
     <script th:src="@{/js/components/mbinfomenu.js}"></script>
   </body>

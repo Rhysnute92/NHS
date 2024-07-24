@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<form th:fragment="checkinForm" class="checkin-form" id="checkin-form">
+  <div class="checkin-section">
+    <div class="checkin-section-title">
+      <h3>Mood</h3>
+      <i class="fa-solid fa-check checkin-icon"></i>
+    </div>
+    <div class="checkin-section-content checkin-mood hidden">
+      <div class="checkin-mood-button">
+        <input type="radio" id="great" name="mood">
+        <i class="fa-regular fa-face-grin-beam checkin-icon"></i>
+        <label for="great">Great</label>
+      </div>
+      <div class="checkin-mood-button">
+        <input type="radio" id="good" name="mood">
+        <i class="fa-regular fa-face-smile checkin-icon"></i>
+        <label for="good">Good</label>
+      </div>
+      <div class="checkin-mood-button">
+      <input type="radio" id="okay" name="mood">
+        <i class="fa-regular fa-face-meh checkin-icon"></i>
+        <label for="okay">Okay</label>
+      </div>
+      <div class="checkin-mood-button">
+        <input type="radio" id="bad" name="mood">
+        <i class="fa-regular fa-face-frown checkin-icon"></i>
+        <label for="bad">Bad</label>
+      </div>
+      <div class="checkin-mood-button">
+        <input type="radio" id="awful" name="mood">
+        <i class="fa-regular fa-face-sad-tear checkin-icon"></i>
+        <label for="awful">Awful</label>
+      </div>
+    </div>
+  </div>
+  <div class="checkin-section">
+    <div class="checkin-section-title">
+      <h3>Symptoms</h3>
+      <i class="fa-solid fa-check checkin-icon"></i>
+    </div>
+    <div class="checkin-section-content checkin-symptoms hidden">
+      <h4>Trouble sleeping</h4>
+      <div class="checkin-symptom-selection">
+        <div>
+          <input type="radio" id="trouble-sleeping-1" name="trouble-sleeping-severity" value="1" class="checkin-symptom" />
+          <label for="trouble-sleeping-1">Not at all</label>
+        </div>
+        <div>
+          <input type="radio" id="trouble-sleeping-2" name="trouble-sleeping-severity" value="2" class="checkin-symptom" />
+          <label for="trouble-sleeping-2">A little</label>
+        </div>
+        <div>
+          <input type="radio" id="trouble-sleeping-3" name="trouble-sleeping-severity" value="3" class="checkin-symptom" />
+          <label for="trouble-sleeping-3">Quite a bit</label>
+        </div>
+        <div>
+          <input type="radio" id="trouble-sleeping-4" name="trouble-sleeping-severity" value="4" class="checkin-symptom" />
+          <label for="trouble-sleeping-4">A lot</label>
+        </div>
+      </div>
+      <h4>Pain</h4>
+      <div class="checkin-symptom-selection">
+        <div>
+          <input type="radio" id="pain-1" name="pain-severity" value="1" class="checkin-symptom" />
+          <label for="pain-1">Not at all</label>
+        </div>
+        <div>
+          <input type="radio" id="pain-2" name="pain-severity" value="2" class="checkin-symptom" />
+          <label for="pain-2">A little</label>
+        </div>
+        <div>
+          <input type="radio" id="pain-3" name="pain-severity" value="3" class="checkin-symptom" />
+          <label for="pain-3">Quite a bit</label>
+        </div>
+        <div>
+          <input type="radio" id="pain-4" name="pain-severity" value="4" class="checkin-symptom" />
+          <label for="pain-4">A lot</label>
+        </div>
+      </div>
+      <h4>Numbness</h4>
+      <div class="checkin-symptom-selection">
+        <div>
+          <input type="radio" id="numbness-1" name="numbness-severity" value="1" class="checkin-symptom" />
+          <label for="numbness-1">Not at all</label>
+        </div>
+        <div>
+          <input type="radio" id="numbness-2" name="numbness-severity" value="2" class="checkin-symptom" />
+          <label for="numbness-2">A little</label>
+        </div>
+        <div>
+          <input type="radio" id="numbness-3" name="numbness-severity" value="3" class="checkin-symptom" />
+          <label for="numbness-3">Quite a bit</label>
+        </div>
+        <div>
+          <input type="radio" id="numbness-4" name="numbness-severity" value="4" class="checkin-symptom" />
+          <label for="numbness-4">A lot</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="checkin-section">
+    <div class="checkin-section-title">
+      <h3>Photos</h3>
+      <i class="fa-solid fa-check checkin-icon"></i>
+    </div>
+    <div class="checkin-section-content checkin-photos hidden">
+      <input type="file" id="checkin-photos-upload" name="checkin-photos-upload" class="checkin-photos-upload" accept="image/*" multiple />
+      <label for="checkin-photos-upload" class="checkin-photos-label">
+        <i class="fa-solid fa-camera checkin-icon"></i>
+        <span>Upload a photo</span>
+      </label>
+      <div class="checkin-photos-preview"></div>
+    </div>
+  </div>
+  <div class="checkin-section">
+    <div class="checkin-section-title">
+      <h3>Notes</h3>
+      <i class="fa-solid fa-check checkin-icon"></i>
+    </div>
+    <div class="checkin-section-content checkin-notes hidden">
+      <label for="notes">Add notes</label>
+      <textarea form="checkin-form" id="notes" name="notes" class="checkin-notes"></textarea>
+    </div>
+  </div>
+</form>

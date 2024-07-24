@@ -2,18 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Guest</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/guest.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-<div class="container">
-    <header th:replace="~{fragments/common/header}"></header>
-    <h2>Welcome to [Insert App Name Here]!</h2>
-    <p>Desktop version</p>
+<div class="header">
+    <h2>Welcome!</h2>
 </div>
-<footer>
-    <nav th:replace="~{fragments/common/nav}" class="nav"></nav>
-</footer>
-<script th:src="@{/js/screen.js}"></script>
+<div class="container">
+    <div class="main-content">
+        <div id="info1" class="info-box">What to expect from your first appointment.</div>
+        <div id="info2" class="info-box">Our services</div>
+        <div id="info3" class="info-box">How to find us</div>
+    </div>
+    <div class="sidebar">
+        <button id="show-info1" onclick="showInfo('info1')">First Appointment</button>
+        <button id="show-info2" onclick="showInfo('info2')">Our Services</button>
+        <button id="show-info3" onclick="showInfo('info3')">Find Us</button>
+    </div>
+</div>
+<div class="bottom-container">
+    <div class="bottom-box" id="Contact-us">
+        <p>Contact Us</p>
+        <p>Here find methods of contacting us.</p>
+    </div>
+    <div class="bottom-box" id="bottom-button">
+        <div class="btn-container">
+            <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
+        </div>
+    </div>
+    <div class="bottom-box" id="about-us">
+        <p>About Us</p>
+        <p>Here find information about us and our app.</p>
+    </div>
+</div>
+<script>
+    function showInfo(infoId) {
+        document.querySelectorAll('.info-box').forEach(function(box) {
+            box.style.display = 'none';
+        });
+        document.getElementById(infoId).style.display = 'block';
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        showInfo('info1');
+    });
+</script>
 </body>
 </html>

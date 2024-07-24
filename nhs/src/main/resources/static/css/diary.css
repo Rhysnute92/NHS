@@ -7,14 +7,14 @@
 .diary-entry-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 2vh;
-    padding: 2vh;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1rem;
     flex: 5;
-    margin: 2vh;
+    margin: 2rem;
     background-color: var(--nhs-white);
     width: 80%;
-    max-width: 800px;
+    /*max-width: 800px;*/
     border-radius: 0.4rem;
 }
 
@@ -40,16 +40,13 @@
 
 .diary-entry-title {
     text-align: left;
-    font-size: 1.5rem;
-
 }
 
 .diary-entry-content {
     display: flex;
     flex-direction: column;
-    gap: 2vh;
-    padding: 2vh;
-    font-size: 1.2rem;
+    gap: 1rem;
+    padding: 1rem;
 }
 
 .diary-container {
@@ -57,15 +54,20 @@
     flex-direction: row;
     background-color: var(--nhs-pale-grey);
     width: 100%;
-    height: 100%;
-    align-items: flex-start;
     justify-content: center;
-
+    height: 100%;
+    min-height: 100vh;
 }
 
 @media (max-width: 768px) {
     .diary-entry-container {
         margin: 0;
         background-color: transparent;
+        font-size: 1.2rem;
+    }
+
+    h1 {
+        display: none;
     }
 }
+

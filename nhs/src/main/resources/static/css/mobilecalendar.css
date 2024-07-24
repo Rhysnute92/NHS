@@ -1,35 +1,15 @@
-@media only screen
-and (min-device-width: 320px)
-and (max-device-width: 640px) {
-    :root {
-        --font-headers: 20px;
-        --font-body: 20px;
-    }
-
-    body {
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        font-family: Frutiger, sans-serif;
-        background-color: white;
-        margin: 0;
-        width: 100vw;
-        min-height: 100svh;
-        font-size: 2em;
-        row-gap: 2svh;
-    }
+/* Import utility styles */
+@import url('/static/css/utility/variables.css');
 
     .container-calendar {
-        background: #d3d3d3;
         padding: 15px;
         margin: 0 auto;
         overflow: auto;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         display: flex;
         justify-content: space-between;
     }
 
-    .container-calendar #moblist {
+    .container-calendar button #moblist {
         background-color: #005EB8;
         display: flex;
     }
@@ -40,6 +20,12 @@ and (max-device-width: 640px) {
         width: 100%;
     }
 
+    #mobileMonth {
+        position: relative;
+        top: 21px;
+        right: 89px;
+    }
+
     .container-calendar #mobileMonth h1 {
         color: #000000;
         text-align: center;
@@ -47,9 +33,22 @@ and (max-device-width: 640px) {
         padding: 10px 0;
     }
 
+    .container-calendar #mobileAdd {
+        position: relative;
+        top: 5%;
+        right: 124px;
+    }
+
+    .container-calendar #mobileAdd p {
+        font-size: 15px;
+    }
+
+    .container-calendar #mobileAdd h1 {
+        font-size: 30px;
+    }
+
     #appointments h3 {
         position: relative;
-        top: 20px;
         color: black;
         font-size: 18px;
         margin: 0;
@@ -60,26 +59,32 @@ and (max-device-width: 640px) {
     #appointments input[type="text"],
     #appointments textarea {
         margin: 10px 0;
-        padding: 5px;
-        width: 75%;
+        width: 80%;
+    }
+
+    #appointments {
+        position: absolute;
+        top: 8%;
+        width: 90%;
+    }
+
+    #moblist button {
+        background: #005EB8;
+        color: white;
+        position: relative;
+        left: 120px;
+        width: 150px;
     }
 
     #appointments button {
         background: #005EB8;
         color: white;
         border: none;
-        padding: 5px 10px;
         cursor: pointer;
     }
 
     #mobileSchedule {
         position: relative;
-    }
-
-    #mobileSchedule h3 {
-        color: black;
-        align-content: center;
-        font-size: 18px;
     }
 
     #apptList {
@@ -88,7 +93,7 @@ and (max-device-width: 640px) {
     }
 
     #apptList li {
-        font-size: 16px;
+        display: inline-block;
     }
 
     .delete-event {
@@ -140,6 +145,7 @@ and (max-device-width: 640px) {
     }
 
     #monthAndYear {
+        top: 50%;
         text-align: center;
         margin-top: 0;
     }
@@ -162,7 +168,6 @@ and (max-device-width: 640px) {
 
 
     .footer-container-calendar {
-        margin-top: 1em;
         padding: 10px 0;
     }
 
@@ -174,4 +179,3 @@ and (max-device-width: 640px) {
         border-radius: 3px;
         padding: 5px;
     }
-}
