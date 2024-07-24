@@ -62,4 +62,9 @@ header {
     .header-logo-desktop {
         display: none;
     }
+
+    header {
+        position: sticky;
+        top: 0;
+    }
 }
