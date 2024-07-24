@@ -20,7 +20,7 @@ public class CalendarController {
         return modelAndView;
     }
 
-    @GetMapping("mobileaddappt")
+    @GetMapping("/mobileaddappt")
     public ModelAndView getMobileAddAppt(){
         ModelAndView modelAndView = new ModelAndView("mobile/Calendar/addappointment");
         return modelAndView;

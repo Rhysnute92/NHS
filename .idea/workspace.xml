@@ -5,15 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3a4c0bc-30f3-4cf9-bf02-24f143907b44" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/App/CalendarAppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/Entity/CalendarEntryTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/HTTP/CalendarHTTPTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/LightweightMVC/CalendarLightweightTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/MockMVC/CalendarMockMVCTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/Security/CalendarSecurityTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/Service/CalendarServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/WebDriver/CalendarFirefoxTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nhs/src/test/java/uk/ac/cf/spring/nhs/Calendar/jUnit/CalendarjUnitTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nhs/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/nhs/build.gradle" afterDir="false" />
     </list>
@@ -90,6 +81,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
@@ -114,7 +109,7 @@
       <recent name="uk.ac.cf.spring.nhs.CalendarContoller.Controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.C:/Users/c23102007/OneDrive - Cardiff University/Dissertation/dissertation-nhs-lymphoedema/nhs [dependencies]">
+  <component name="RunManager" selected="Spring Boot.NhsApplication">
     <configuration name="C:/Users/c23102007/OneDrive - Cardiff University/Dissertation/dissertation-nhs-lymphoedema/nhs [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -243,7 +238,7 @@
       <workItem from="1721031283958" duration="5417000" />
       <workItem from="1721676303392" duration="18220000" />
       <workItem from="1721812478334" duration="6715000" />
-      <workItem from="1721839995025" duration="5045000" />
+      <workItem from="1721839995025" duration="5645000" />
     </task>
     <task id="LOCAL-00001" summary="updated">
       <created>1721659394488</created>
@@ -287,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1721839348148</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added more tests">
+      <created>1721845212720</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1721845212720</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,6 +298,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="updated" />
     <MESSAGE value="Added entity and service to Calendar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added entity and service to Calendar" />
+    <MESSAGE value="Added more tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added more tests" />
   </component>
 </project>
