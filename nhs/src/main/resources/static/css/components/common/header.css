@@ -5,22 +5,25 @@ header {
     font-size: 1.5rem;
 }
 
-.header-mobile {
-    height: 34px;
+.header {
+    height: 8vh;
+    min-height: 30px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 4px 0;
+    padding: clamp(15px, 4vh, 4vh);
+    background-color: var(--nhs-white);
+    justify-content: flex-start;
+    box-sizing: content-box;
 }
 
 .header-logo {
-    height: 30px;
+    height: 100%;
 }
 
-.header-title-mobile {
+.header-title {
     background-color: var(--nhs-blue);
     border-top: 1px solid var(--nhs-pale-grey);
-    height: 32px;
+    height: 6vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,4 +33,33 @@ header {
     text-align: center;
     width: 100%;
     box-sizing: border-box;
+}
+
+.header-title {
+    display: none;
+}
+
+.header-logo-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .header {
+        background-color: var(--nhs-blue);
+        justify-content: center;
+        height: 4vh;
+        padding: clamp(15px, 2vh, 2vh);
+    }
+
+    .header-title {
+        display: flex;
+    }
+
+    .header-logo-mobile {
+        display: block;
+    }
+
+    .header-logo-desktop {
+        display: none;
+    }
 }

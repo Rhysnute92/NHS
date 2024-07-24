@@ -3,7 +3,7 @@
     padding: 2vh;
     width: 100%;
     box-sizing: border-box;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
 }
@@ -45,14 +45,6 @@
     display: none;
 }
 
-header .header-mobile {
-    display: none;
-}
-
-header .header-title-mobile {
-    display: none;
-}
-
 .nav-text {
     display: block;
 }
@@ -68,14 +60,6 @@ header .header-title-mobile {
 
     .nav-icon {
         display: block;
-    }
-
-    header .header-mobile {
-        display: flex;
-    }
-
-    header .header-title-mobile {
-        display: flex;
     }
 
     .nav {
