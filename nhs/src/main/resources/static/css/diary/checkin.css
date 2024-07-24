@@ -8,18 +8,7 @@ body {
     box-sizing: border-box;
 }
 
-/*.checkin-form-container {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    background-color: var(--nhs-white);*/
-/*    width: 80%;*/
-/*    max-width: 800px;*/
-/*    justify-content: center;*/
-/*    height: 100%;*/
-/*}*/
-
 .checkin-container {
-    font-size: 1.2rem;
     display: flex;
     flex-direction: row;
     justify-content: center;

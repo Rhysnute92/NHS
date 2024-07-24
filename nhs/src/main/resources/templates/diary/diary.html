@@ -4,11 +4,11 @@
     <title>Diary</title>
     <script src="https://kit.fontawesome.com/846d357ac5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
-    <link rel="stylesheet" th:href="@{/css/diary.css}" />
+    <link rel="stylesheet" th:href="@{/css/diary/diary.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-<div th:replace="~{fragments/mobile/mobileheader}"></div>
+<div th:replace="~{fragments/common/header}"></div>
 <div class="diary-container">
     <div th:replace="~{fragments/common/navmenu}"></div>
     <div class="diary-entry-container">
@@ -22,7 +22,9 @@
         </th:block>
     </div>
 </div>
-<div th:replace="~{fragments/mobile/mobilenav}"></div>
-<script th:src="@{/js/components/header.js}"></script>
+<footer>
+    <nav th:replace="~{fragments/common/nav}" class="nav"></nav>
+</footer>
+<script th:src="@{/js/screen.js}"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
-<div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+<div th:replace="~{fragments/common/header}"></div>
 <div class="container-calendar">
     <div id="appointments">
         <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
@@ -29,8 +29,11 @@
         </button>
     </div>
 </div>
-<div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
+<footer>
+    <nav th:replace="~{fragments/common/nav}" class="nav"></nav>
+</footer>
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/components/header.js}"></script>
+<script th:src="@{/js/screen.js}"></script>
 </body>
 </html>

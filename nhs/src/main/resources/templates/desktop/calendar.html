@@ -7,88 +7,90 @@
 </head>
 
 <body>
-<div th:insert="~{fragments/desktop/header :: header}" ></div>
-  <div class="container-calendar">
-      <div id="left">
-        <h1>Appointment Calendar</h1>
-        <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
-        <div id="appointments">
-          <h3>Add Appointment</h3>
-          <label>Date of Appointment:</label><br>
-          <input type="date" id="appointmentDate"><br>
-          <label>Time of Appointment:</label><br>
-          <input type="time" id="appointmentTime"><br>
-          <label>Appointment Type:</label><br>
-          <input type="text" id="appointmentType" placeholder="Please enter what you appointment is"><br>
-          <label>Doctor's Name:</label><br>
-          <input type="text" id="dr" placeholder="Please enter the name of your Dr"><br>
-          <label>Information about your Appointment:</label><br>
-          <textarea id="comments" placeholder="Info about your appointment"></textarea><br>
-          <button id="addEvent" onclick="addEvent()">
-            Add
-          </button>
-          <button id="deleteAppointment" onclick="deleteEvent()">
-            Clear
-          </button>
-        </div>
+<div th:insert="~{fragments/common/header}" ></div>
+<div class="container-calendar">
+    <div id="left">
+      <h1>Appointment Calendar</h1>
+      <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
+      <div id="appointments">
+        <h3>Add Appointment</h3>
+        <label>Date of Appointment:</label><br>
+        <input type="date" id="appointmentDate"><br>
+        <label>Time of Appointment:</label><br>
+        <input type="time" id="appointmentTime"><br>
+        <label>Appointment Type:</label><br>
+        <input type="text" id="appointmentType" placeholder="Please enter what you appointment is"><br>
+        <label>Doctor's Name:</label><br>
+        <input type="text" id="dr" placeholder="Please enter the name of your Dr"><br>
+        <label>Information about your Appointment:</label><br>
+        <textarea id="comments" placeholder="Info about your appointment"></textarea><br>
+        <button id="addEvent" onclick="addEvent()">
+          Add
+        </button>
+        <button id="deleteAppointment" onclick="deleteEvent()">
+          Clear
+        </button>
       </div>
-        <div id="center">
-          <h3>Appointment Schedule</h3>
+    </div>
+      <div id="center">
+        <h3>Appointment Schedule</h3>
 
-          <ul id="apptList">
-            <li data-event-id="1">
-              <strong>Appointment</strong>
-              - Appointment description on appointment date
-              <button class="delete-event"
-                      onclick="deleteEvent(1)">
-                Delete
-              </button>
-            </li>
-          </ul>
-        </div>
-      <div id="right">
-        <h3 id="monthAndYear"></h3>
-        <div class="button-container-calendar">
-          <button id="previous"
-                  onclick="previous()">
-            <
-          </button>
-          <button id="next" onclick="next()">
-            >
-          </button>
-        </div>
-        <table class="table-calendar"
-               id="calendar"
-               data-lang="en">
-          <thead id="thead-month"></thead>
-
-          <tbody id="calendar-body"></tbody>
-        </table>
-        <div class="footer-container-calendar">
-          <label for="month">Jump To: </label>
-
-          <select id="month" onchange="jump()">
-            <option value=0>Jan</option>
-            <option value=1>Feb</option>
-            <option value=2>Mar</option>
-            <option value=3>Apr</option>
-            <option value=4>May</option>
-            <option value=5>Jun</option>
-            <option value=6>Jul</option>
-            <option value=7>Aug</option>
-            <option value=8>Sep</option>
-            <option value=9>Oct</option>
-            <option value=10>Nov</option>
-            <option value=11>Dec</option>
-          </select>
-
-          <select id="year" onchange="jump()"></select>
-        </div>
+        <ul id="apptList">
+          <li data-event-id="1">
+            <strong>Appointment</strong>
+            - Appointment description on appointment date
+            <button class="delete-event"
+                    onclick="deleteEvent(1)">
+              Delete
+            </button>
+          </li>
+        </ul>
       </div>
+    <div id="right">
+      <h3 id="monthAndYear"></h3>
+      <div class="button-container-calendar">
+        <button id="previous"
+                onclick="previous()">
+          <
+        </button>
+        <button id="next" onclick="next()">
+          >
+        </button>
       </div>
-</div>
+      <table class="table-calendar"
+             id="calendar"
+             data-lang="en">
+        <thead id="thead-month"></thead>
+
+        <tbody id="calendar-body"></tbody>
+      </table>
+      <div class="footer-container-calendar">
+        <label for="month">Jump To: </label>
+
+        <select id="month" onchange="jump()">
+          <option value=0>Jan</option>
+          <option value=1>Feb</option>
+          <option value=2>Mar</option>
+          <option value=3>Apr</option>
+          <option value=4>May</option>
+          <option value=5>Jun</option>
+          <option value=6>Jul</option>
+          <option value=7>Aug</option>
+          <option value=8>Sep</option>
+          <option value=9>Oct</option>
+          <option value=10>Nov</option>
+          <option value=11>Dec</option>
+        </select>
+
+        <select id="year" onchange="jump()"></select>
+      </div>
+    </div>
+  </div>
+<footer>
+  <nav th:replace="~{fragments/common/nav}" class="nav"></nav>
+</footer>
 <script th:src="@{/js/calendar/calendar.js}"></script>
+<script th:src="@{/js/screen.js}"></script>
 </body>
-
 </html>
 

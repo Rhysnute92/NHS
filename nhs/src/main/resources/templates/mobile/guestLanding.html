@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/guest.css}" />
@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+    <div th:replace="~{fragments/common/header}"></div>
     <h1>Welcome to the app!</h1>
     <div class="icon-container">
         <div id="firstAppointment">
@@ -44,5 +44,6 @@
     <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
 </div>
 <script th:src="@{/js/components/header.js}"></script>
+<script th:src="@{/js/screen.js}"></script>
 </body>
 </html>

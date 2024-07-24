@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
   <head>
     <title>Education</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+    <div th:replace="~{fragments/common/header}"></div>
     <div th:replace="~{fragments/mobile/mobileinfomenu :: mobileinfomenu}"></div>
     <div class="container">
         <h2 class="title">Cellulitis</h2>
@@ -22,8 +22,11 @@
           <a th:href="@{/treatment}" class="section_link">Treatments &rarr;</a>
       </div>
       <div class="spacer">&nbsp;</div>
-    <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
+    <footer>
+      <nav th:replace="~{fragments/common/nav}" class="nav"></nav>
+    </footer>
     <script th:src="@{/js/components/header.js}"></script>
     <script th:src="@{/js/components/mbinfomenu.js}"></script>
+    <script th:src="@{/js/screen.js}"></script>
   </body>
 </html>

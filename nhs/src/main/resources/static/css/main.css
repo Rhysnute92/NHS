@@ -3,6 +3,7 @@
 
 /* Import common component styles */
 @import url('/css/components/common/header.css');
+@import url('/css/components/common/nav.css');
 @import url('/css/components/common/navmenu.css');
 
 /* Import desktop-specific component styles */
