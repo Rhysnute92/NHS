@@ -1,31 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/css/Monthly.css}">
-    <link rel="stylesheet" th:href="@{/css/mobileMonthly.css}">
-    <title>Mobile calendar</title>
+    <link rel="stylesheet" th:href="@{css/mobilecalendar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <title>Calendar</title>
 </head>
 <body>
+<div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
 <div class="container-calendar">
     <div id="moblist">
-        <select id="nav">
-            <option id="month1">Month</option>
-            <option id="schedule1">Schedule</option>
-        </select>
-        <button><link href="addappointment.html">Add new Appointment</button>
+        <button onclick="location. href='/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
     </div>
        <div id="mobileMonth">
             <h3 id="monthAndYear"></h3>
             <div class="button-container-calendar">
                 <button id="previous"
-                        onclick="previous()">‹</button>
-                <button id="next" onclick="next()">›</button>
+                        onclick="previous()">
+                     <
+                </button>
+                <button id="next" onclick="next()">
+                    >
+                </button>
             </div>
-            <table class="table-calendar"
-                   id="calendar"
-                   data-lang="en">
+            <table class="table-calendar" id="calendar" data-lang="en">
                 <thead id="thead-month"></thead>
 
                 <tbody id="calendar-body"></tbody>
@@ -50,9 +48,23 @@
 
                 <select id="year" onchange="jump()"></select>
             </div>
-        </div>
+    <div id="mobileSchedule">
+        <h3>Appointment Schedule</h3>
+        <ul id="apptList">
+            <li data-event-id="1">
+                <strong>Appointment</strong>
+                - Appointment description on appointment date
+                <button class="delete-event"
+                        onclick="deleteEvent(1)">
+                    Delete
+                </button>
+            </li>
+        </ul>
     </div>
 </div>
-<script src="../../static/javascript/Monthly.js"></script>
+</div>
+<div th:insert="~{fragments/mobile/mobilenav :: mobilenav}"></div>
+<script th:src="@{/js/calendar/calendar.js}"></script>
+<script th:src="@{/js/components/header.js}"></script>
 </body>
 </html>
