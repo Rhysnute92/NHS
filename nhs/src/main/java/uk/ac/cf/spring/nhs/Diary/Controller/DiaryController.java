@@ -31,7 +31,7 @@ public class DiaryController {
     }
 
     @GetMapping("/checkin")
-    public ModelAndView addDiaryEntry(HttpServletRequest request) {
+    public ModelAndView checkin(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("diary/checkin");
         return modelAndView;
