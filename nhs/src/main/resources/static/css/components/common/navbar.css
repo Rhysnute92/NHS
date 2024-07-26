@@ -1,4 +1,4 @@
-.nav {
+.navbar {
     background-color: var(--nhs-blue);
     padding: 2vh;
     width: 100%;
@@ -8,61 +8,63 @@
     align-items: center;
 }
 
-.nav-list {
+.navbar-list {
     list-style: none;
     display: flex;
     padding: 0;
     margin: 0;
     width: 100%;
     height: 100%;
-    gap: 2vh;
     justify-content: flex-start;
+    gap: 5vh;
 }
 
-.nav-list a {
+.navbar-list a {
     color: var(--nhs-white);
     text-decoration: none;
-    height: 80%;
-}
-
-.nav-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 0.3vh;
     height: 100%;
 }
 
-.nav-link {
+.navbar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+}
+
+.navbar-link {
     text-decoration: none;
 }
 
-.nav-icon {
-    width: 100%;
-    height: 100%;
+.navbar-icon {
+    height: 80%;
     object-fit: contain;
 }
 
-.nav-icon {
+.navbar-icon {
     display: none;
 }
 
-.nav-text {
+.navbar-text {
     display: block;
 }
 
-.nav-icon {
+.navbar-icon {
     display: none;
 }
 
 @media (max-width: 768px) {
-    .nav-text {
-        display: none;
-    }
-
-    .nav-icon {
+    .navbar-icon {
         display: block;
     }
 
-    .nav {
+    .navbar {
         position: fixed;
         bottom: 0;
         height: 11vh;
@@ -70,9 +72,14 @@
         justify-content: center;
     }
 
-    .nav-list {
+    .navbar-item {
+        width: 20%;
+    }
+
+    .navbar-list {
         justify-content: space-around;
         max-width: 400px;
+        gap: 2vh;
     }
 
     footer {
