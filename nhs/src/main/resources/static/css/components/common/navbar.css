@@ -42,17 +42,15 @@
 }
 
 .navbar-icon {
-    height: 80%;
+    height: 4.5vh;
     object-fit: contain;
-}
-
-.navbar-icon {
     display: none;
 }
 
 .navbar-text {
     display: block;
     font-size: 1.2rem;
+    /*height: 2vh;*/
 }
 
 .navbar-icon {
