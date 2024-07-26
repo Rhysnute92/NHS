@@ -6,7 +6,7 @@
     const footer = document.querySelector('footer');
 
     function moveNav() {
-        if (window.innerWidth <= 480) {
+        if (window.innerWidth <= 768) {
             if (!footer.contains(nav)) {
                 footer.appendChild(nav);
             }
