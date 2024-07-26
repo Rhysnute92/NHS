@@ -1,7 +1,70 @@
-/* Common header styles */
-.header {
+header {
     background-color:var(--nhs-blue);
     width: 100%;
     box-sizing: border-box;
     font-size: 1.5rem;
+}
+
+.header {
+    height: 8vh;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    padding: clamp(15px, 4vh, 4vh);
+    background-color: var(--nhs-white);
+    justify-content: flex-start;
+    box-sizing: content-box;
+}
+
+.header-logo {
+    height: 100%;
+}
+
+.header-title {
+    background-color: var(--nhs-blue);
+    border-top: 1px solid var(--nhs-pale-grey);
+    height: 6vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--nhs-white);
+    font-family: var(--regular-font-family);
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.header-title {
+    display: none;
+}
+
+.header-logo-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .header {
+        background-color: var(--nhs-blue);
+        justify-content: center;
+        height: 4vh;
+        padding: clamp(15px, 2vh, 2vh);
+    }
+
+    .header-title {
+        display: flex;
+    }
+
+    .header-logo-mobile {
+        display: block;
+    }
+
+    .header-logo-desktop {
+        display: none;
+    }
+
+    header {
+        position: sticky;
+        top: 0;
+    }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
   <head>
     <title>Education</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div th:replace="~{fragments/desktop/header :: header}"></div>
+    <header th:replace="~{fragments/common/header}"></header>
     <div th:replace="~{fragments/desktop/infomenu :: infomenu}"></div>
     <div class="container">
       <h2 class="title">Helpful resources</h2>
@@ -24,5 +24,9 @@
     <div class="section_nav">
         <a th:href="@{/treatment}" class="section_link">&larr;Treatments</a>
     </div>
+    <footer>
+      <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
+    </footer>
+    <script th:src="@{/js/screen.js}"></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
   <head>
     <title>Landing Page</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container">
-      <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+      <div th:replace="~{fragments/common/header}"></div>
       <h1>Welcome to the app!</h1>
       <p>Login or continue to our guest pages</p>
     </div>
@@ -17,5 +17,6 @@
       <button onclick="location. href='/guest'" class="guest-btn">Guest</button>
     </div>
     <script th:src="@{/js/components/header.js}"></script>
+    <script th:src="@{/js/screen.js}"></script>
   </body>
 </html>

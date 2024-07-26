@@ -70,41 +70,24 @@ public class DiaryControllerTest {
     }
 
     @Test
-    public void returnsMobileViewForMobileDevices() {
-        mockedStatic.when(() -> DeviceDetector.isMobile(request)).thenReturn(true);
-
+    public void diaryReturnsCorrectView() {
         ModelAndView modelAndView = diaryController.diary(request);
-        assertEquals("mobile/diary", modelAndView.getViewName());
+        assertEquals("diary/diary", modelAndView.getViewName());
         assertEquals(dummyEntries, modelAndView.getModel().get("diaryEntries"));
     }
 
     @Test
-    public void returnsDesktopViewForNonMobileDevices() {
-        mockedStatic.when(() -> DeviceDetector.isMobile(request)).thenReturn(false);
-
-        ModelAndView modelAndView = diaryController.diary(request);
-        assertEquals("desktop/diary", modelAndView.getViewName());
+    public void checkinReturnsCorrectView() {
+        ModelAndView modelAndView = diaryController.checkin(request);
+        assertEquals("diary/checkin", modelAndView.getViewName());
         assertEquals(dummyEntries, modelAndView.getModel().get("diaryEntries"));
     }
 
     @Test
-    public void testDiaryOnDesktop() throws Exception {
-        when(DeviceDetector.isMobile(any(HttpServletRequest.class))).thenReturn(false);
-
+    public void testDiary() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/diary"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("desktop/diary"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("diaryEntries"))
-                .andExpect(MockMvcResultMatchers.model().attribute("diaryEntries", dummyEntries));
-    }
-
-    @Test
-    public void testDiaryOnMobile() throws Exception {
-        when(DeviceDetector.isMobile(any(HttpServletRequest.class))).thenReturn(true);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/diary"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("mobile/diary"))
+                .andExpect(MockMvcResultMatchers.view().name("diary/diary"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("diaryEntries"))
                 .andExpect(MockMvcResultMatchers.model().attribute("diaryEntries", dummyEntries));
     }

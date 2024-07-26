@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
   <head>
     <title>Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
@@ -7,11 +7,14 @@
   </head>
   <body>
     <div class="container">
-      <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+      <header th:replace="~{fragments/common/header}"></header>
       <h2 class="text-xl font-bold">Mobile Dashboard</h2>
       <p>Welcome</p>
     </div>
-    <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
+    <footer>
+      <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
+    </footer>
+    <script th:src="@{/js/screen.js}"></script>
     <script th:src="@{/js/components/header.js}"></script>
   </body>
 </html>

@@ -1,9 +1,11 @@
-.navmenu {
+.navmenu-container {
     flex: 1;
-    font-size: 1.2rem;
-    background-color: var(--nhs-white);
+}
+
+.navmenu {
+    width: 100%;
     height: 100%;
-    min-height: 100vh;
+    background-color: var(--nhs-white);
 }
 
 .navmenu-links {
@@ -42,11 +44,11 @@
         top: 5vh;
         left: 0;
         width: 100%;
-        font-size: 1.2rem;
     }
 
     .navmenu-toggle {
         display: block;
     }
-}
 
+
+}

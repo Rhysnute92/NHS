@@ -7,11 +7,14 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+    <div th:replace="~{fragments/common/header}"></div>
     <h1>My Lymphoedema Management</h1>
     <p>The Lymphoedema management page.</p>
-    <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
+    <footer>
+        <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
+    </footer>
 </div>
 <script th:src="@{/js/components/header.js}"></script>
+<script th:src="@{/js/screen.js}"></script>
 </body>
 </html>
