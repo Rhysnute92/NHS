@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.CalendarContoller.Controller;
+package uk.ac.cf.spring.nhs.Calendar.Controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ public class CalendarController {
         return modelAndView;
     }
 
-    @GetMapping("mobileaddappt")
+    @GetMapping("/mobileaddappt")
     public ModelAndView getMobileAddAppt(){
         ModelAndView modelAndView = new ModelAndView("mobile/Calendar/addappointment");
         return modelAndView;
