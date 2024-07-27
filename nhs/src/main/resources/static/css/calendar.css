@@ -6,23 +6,21 @@
     overflow: auto;
     justify-content: space-between;
     display: flex;
-    position: relative;
 }
 
 #appointments {
     padding: 10px;
-    margin: 20px 0;
+    margin: 0.5rem;
     width: 100%;
     position: relative;
-    top: 5%;
 }
 
-.container-calendar #left h1 {
+.container-calendar #header h1 p {
     color: #000000;
     text-align: center;
     position: relative;
     margin: 0;
-    left: 750px;
+    position: relative;
 }
 
 #appointments h3 {
@@ -50,31 +48,26 @@
 
 #center {
     position: relative;
-    top: 15%;
 }
 
 #center h3 {
     color: black;
     position: relative;
-    top:  21%;
-    right: 120px;
 }
 
 #apptList {
     list-style: none;
     padding: 0;
     position: relative;
-    right: 120px;
 }
 
 #apptList li {
     position: relative;
-    top: 107px;
 }
 
 #right {
     position: relative;
-    top: 75px;
+    margin: 1rem;
 }
 .delete-event {
     background: rgb(237, 19, 19);
@@ -98,8 +91,6 @@
     border-collapse: collapse;
     width: 100%;
     position: relative;
-    right: 200px;
-    top: 20px;
 }
 
 .table-calendar td,
@@ -129,8 +120,6 @@
 
 #monthAndYear {
     position: relative;
-    right: 200px;
-    top: 25px;
     text-align: center;
     margin-top: 0;
 }
@@ -141,8 +130,6 @@
     margin-bottom: 1em;
     overflow: hidden;
     clear: both;
-    right: 200px;
-    top: 5%;
 }
 
 #previous {
@@ -155,10 +142,8 @@
 
 
 .footer-container-calendar {
-    margin-top: 1em;
     padding: 10px 0;
     position: relative;
-    right: 200px;
 }
 
 .footer-container-calendar select {
