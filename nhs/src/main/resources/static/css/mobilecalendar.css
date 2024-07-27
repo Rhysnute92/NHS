@@ -14,16 +14,8 @@
         display: flex;
     }
 
-    #appointments {
-        padding: 10px;
-        margin: 20px 0;
-        width: 100%;
-    }
-
     #mobileMonth {
         position: relative;
-        top: 21px;
-        right: 89px;
     }
 
     .container-calendar #mobileMonth h1 {
@@ -37,14 +29,6 @@
         position: relative;
         top: 5%;
         right: 124px;
-    }
-
-    .container-calendar #mobileAdd p {
-        font-size: 15px;
-    }
-
-    .container-calendar #mobileAdd h1 {
-        font-size: 30px;
     }
 
     #appointments h3 {
@@ -64,7 +48,6 @@
 
     #appointments {
         position: absolute;
-        top: 8%;
         width: 90%;
     }
 
@@ -72,8 +55,11 @@
         background: #005EB8;
         color: white;
         position: relative;
-        left: 120px;
-        width: 150px;
+        left: 8.5rem;
+        top: 0.5rem;
+        width: 10rem;
+        height: 2rem;
+        border-radius: 5px;
     }
 
     #appointments button {
@@ -81,6 +67,9 @@
         color: white;
         border: none;
         cursor: pointer;
+        border-radius: 5px;
+        width: 3rem;
+        height: 2rem;
     }
 
     #mobileSchedule {
@@ -100,9 +89,11 @@
         background: rgb(237, 19, 19);
         color: white;
         border: none;
-        padding: 5px 10px;
+        border-radius: 5px;
         cursor: pointer;
-        margin-left: 10px;
+        margin-left: 11rem;
+        width: 4rem;
+        height: 2rem;
     }
 
     .button-container-calendar button {
