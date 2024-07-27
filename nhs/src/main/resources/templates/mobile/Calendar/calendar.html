@@ -8,10 +8,10 @@
 </head>
 <body>
 <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+<div id="moblist">
+    <button onclick="location. href='/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
+</div>
 <div class="container-calendar">
-    <div id="moblist">
-        <button onclick="location. href='/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
-    </div>
        <div id="mobileMonth">
             <h3 id="monthAndYear"></h3>
             <div class="button-container-calendar">
