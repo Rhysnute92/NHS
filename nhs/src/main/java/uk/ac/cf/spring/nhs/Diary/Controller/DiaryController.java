@@ -28,13 +28,7 @@ public class DiaryController {
         List<DiaryEntry> diaryEntries = diaryService.getDiaryEntries();
 
         modelAndView.addObject("diaryEntries", diaryEntries);
-//        modelAndView.setViewName("diary/diary");
-        if (DeviceDetector.isMobile(request)) {
-            modelAndView.setViewName("mobile/diary");
-        } else {
-            modelAndView.setViewName("desktop/diary");
-        }
-
+        modelAndView.setViewName("diary/diary");
         return modelAndView;
     }
 
@@ -42,21 +36,16 @@ public class DiaryController {
     public ModelAndView addDiaryEntry(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
 
-//        modelAndView.setViewName("diary/checkin");
-        if (DeviceDetector.isMobile(request)) {
-            modelAndView.setViewName("mobile/checkin");
-        } else {
-            modelAndView.setViewName("desktop/checkin");
-        }
+        modelAndView.setViewName("diary/checkin");
         return modelAndView;
     }
 
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {
         return List.of(
-            new NavMenuItem("Home", "/"),
-            new NavMenuItem("Diary", "/diary"),
-            new NavMenuItem("Check-in", "/diary/checkin")
+            new NavMenuItem("Diary", "/diary", "fa-solid fa-book"),
+            new NavMenuItem("Check-in", "/diary/checkin", "fa-solid fa-user-check"),
+            new NavMenuItem("Photos", "/diary/photos", "fa-solid fa-camera")
         );
     }
 }
