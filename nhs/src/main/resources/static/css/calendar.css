@@ -15,7 +15,7 @@
     position: relative;
 }
 
-.container-calendar #header h1 p {
+#header {
     color: #000000;
     text-align: center;
     position: relative;
