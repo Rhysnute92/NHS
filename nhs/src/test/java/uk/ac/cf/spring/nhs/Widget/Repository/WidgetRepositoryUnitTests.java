@@ -49,4 +49,5 @@ public class WidgetRepositoryUnitTests {
             verify(jpaWidgetRepositoryInternal, times(1)).findAll();
             
         }
+    }
 }
