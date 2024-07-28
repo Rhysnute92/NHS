@@ -11,7 +11,7 @@ public class TaskCompletionWidget implements Widget {
 
     @Override
     public String getTitle() {
-        return "Task Completion";
+        return "Task Completion tracker";
     }
 
     @Override
