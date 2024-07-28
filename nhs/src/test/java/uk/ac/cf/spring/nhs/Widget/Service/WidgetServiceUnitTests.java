@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import uk.ac.cf.spring.nhs.Widget.Factory.WidgetFactory;
 import uk.ac.cf.spring.nhs.Widget.Model.Widget;
+import uk.ac.cf.spring.nhs.Widget.Repository.WidgetRepositoryInterface;
 
 public class WidgetServiceUnitTests {
 

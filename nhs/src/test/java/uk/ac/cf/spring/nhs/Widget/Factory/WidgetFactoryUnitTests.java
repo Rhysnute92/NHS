@@ -1,8 +1,15 @@
-package uk.ac.cf.spring.nhs.Widget.Factory;
+package uk.ac.cf.spring.nhs.WidgetModule.Widget.Factory;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import uk.ac.cf.spring.nhs.Widget.Model.AppointmentWidget;
+import uk.ac.cf.spring.nhs.Widget.Model.TaskCompletionWidget;
 import uk.ac.cf.spring.nhs.Widget.Model.Widget;
 
 public class WidgetFactoryUnitTests {
