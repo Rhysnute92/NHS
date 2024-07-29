@@ -17,7 +17,7 @@ import uk.ac.cf.spring.nhs.Widget.Service.WidgetService;
 public class WidgetRepositoryUnitTests {
 
     @Mock
-    private WidgetRepository widgetRepository;
+    private WidgetRepositoryInterface widgetRepository;
 
     @InjectMocks
     private WidgetService widgetService;

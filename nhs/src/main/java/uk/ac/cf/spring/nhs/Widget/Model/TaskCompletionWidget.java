@@ -15,6 +15,11 @@ public class TaskCompletionWidget implements Widget {
     }
 
     @Override
+    public String getDescription() {
+        return "Track your task completion progress";
+    }
+
+    @Override
     public String getHtmlContent(HttpServletRequest request) {
         return "<div id='taskCompletion-widget' class='task-completion-widget'>" +
                 "<div class='circle-container'>" +
