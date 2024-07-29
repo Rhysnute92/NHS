@@ -8,13 +8,10 @@
   <body>
     <div class="container">
       <header th:replace="~{fragments/common/header}"></header>
+      <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
       <h2 class="text-xl font-bold">Mobile Dashboard</h2>
       <p>Welcome</p>
     </div>
-    <footer>
-      <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
-    </footer>
-    <script th:src="@{/js/screen.js}"></script>
     <script th:src="@{/js/components/header.js}"></script>
   </body>
 </html>

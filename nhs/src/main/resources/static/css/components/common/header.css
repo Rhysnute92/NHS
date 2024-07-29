@@ -43,7 +43,7 @@ header {
     font-size: 1.5rem;
 }
 
-@media (max-width: 768px) {
+@media (pointer: coarse) and (max-width: 768px) {
     .header {
         background-color: var(--nhs-blue);
         justify-content: center;

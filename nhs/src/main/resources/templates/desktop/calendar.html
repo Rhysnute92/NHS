@@ -4,10 +4,11 @@
   <title>Appointment Calendar</title>
   <link rel="stylesheet" th:href="@{/css/calendar.css}"/>
   <link rel="stylesheet" th:href="@{/css/main.css}"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
-
 <body>
 <div th:insert="~{fragments/common/header}" ></div>
+<nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
 <div class="container-calendar">
     <div id="left">
       <h1>Appointment Calendar</h1>
@@ -86,11 +87,8 @@
       </div>
     </div>
   </div>
-<footer>
-  <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
-</footer>
 <script th:src="@{/js/calendar/calendar.js}"></script>
-<script th:src="@{/js/screen.js}"></script>
+<script th:src="@{/js/components/header.js}"></script>
 </body>
 </html>
 
