@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.WidgetModule.Widget.Factory;
+package uk.ac.cf.spring.nhs.Widget.Factory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -25,7 +25,7 @@ public class WidgetFactoryUnitTests {
     public void testCreateTaskCompletionWidget() {
         Widget widget = widgetFactory.createWidget("task-completion-widget");
         assertNotNull(widget);
-        assertTrue(widget insatnceof TaskCompletionWidget);
+        assertTrue(widget instanceof TaskCompletionWidget);
         assertEquals("task-completion-widget", widget.getId());
         assertEquals("Task Completion tracker", widget.getTitle());
     }
