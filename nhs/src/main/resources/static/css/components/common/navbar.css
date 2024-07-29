@@ -57,7 +57,7 @@
     display: none;
 }
 
-@media (hover: none) and (max-width: 768px) {
+@media (max-width: 480px) {
     .navbar-text {
         font-size: 0.9rem;
     }

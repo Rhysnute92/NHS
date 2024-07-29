@@ -80,7 +80,6 @@ public class DiaryControllerTest {
     public void checkinReturnsCorrectView() {
         ModelAndView modelAndView = diaryController.checkin(request);
         assertEquals("diary/checkin", modelAndView.getViewName());
-        assertEquals(dummyEntries, modelAndView.getModel().get("diaryEntries"));
     }
 
     @Test

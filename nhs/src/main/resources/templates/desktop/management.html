@@ -6,14 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
+<div th:replace="~{fragments/common/header}"></div>
+<nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
 <div class="container">
-    <div th:replace="~{fragments/common/header}"></div>
     <h1>My Lymphoedema Management</h1>
     <p>The Lymphoedema management page.</p>
 </div>
-<footer>
-    <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
-</footer>
-<script th:src="@{/js/screen.js}"></script>
+<script th:src="@{/js/components/header.js}"></script>
 </body>
 </html>

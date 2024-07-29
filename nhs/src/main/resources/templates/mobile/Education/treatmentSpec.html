@@ -9,6 +9,7 @@
   </head>
   <body>
     <div th:replace="~{fragments/common/header}"></div>
+    <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
     <div th:replace="~{fragments/mobile/mobileinfomenu :: mobileinfomenu}"></div>
     <div class="container_tr_mb">
       <h2 class="title">Treatments for lymphedema of the legs</h2>
@@ -65,12 +66,8 @@
         <a th:href="@{/treatment}" class="section_link">&larr; Back to full list</a>
     </div>
     <div class="spacer">&nbsp;</div>
-    <footer>
-      <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
-    </footer>
     <script th:src="@{/js/components/header.js}"></script>
     <script th:src="@{/js/components/mbinfomenu.js}"></script>
     <script th:src="@{/js/treatmentSpec.js}"></script>
-    <script th:src="@{/js/screen.js}"></script>
   </body>
 </html>

@@ -13,7 +13,7 @@ header {
     align-items: center;
     padding: clamp(15px, 4vh, 4vh);
     background-color: var(--nhs-blue);
-    justify-content: space-between;
+    justify-content: flex-start;
     box-sizing: content-box;
     border-bottom: 1px solid var(--nhs-pale-grey);
     color: var(--nhs-white);
@@ -52,7 +52,7 @@ header {
     display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .header {
         background-color: var(--nhs-blue);
         height: 4vh;
@@ -61,14 +61,6 @@ header {
 
     .header-title {
         display: flex;
-    }
-
-    .header-logo-mobile {
-        display: block;
-    }
-
-    .header-logo-desktop {
-        display: none;
     }
 
     header {

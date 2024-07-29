@@ -8,6 +8,7 @@
   </head>
   <body>
     <div th:replace="~{fragments/common/header}"></div>
+    <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
     <div th:replace="~{fragments/mobile/mobileinfomenu :: mobileinfomenu}"></div>
       <div class="container">
         <h2 class="title">What is Lymphedema?</h2>
@@ -24,11 +25,7 @@
         </div>
       </div>
       <div class="spacer">&nbsp;</div>
-      <footer>
-        <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
-      </footer>
       <script th:src="@{/js/components/header.js}"></script>
       <script th:src="@{/js/components/mbinfomenu.js}"></script>
-      <script th:src="@{/js/screen.js}"></script>
   </body>
 </html>

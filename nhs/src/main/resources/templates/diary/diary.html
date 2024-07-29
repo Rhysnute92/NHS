@@ -8,6 +8,7 @@
 </head>
 <body>
 <div th:replace="~{fragments/common/header}"></div>
+<nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
 <div class="diary-container">
     <div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
     <div class="diary-entry-container">
@@ -21,10 +22,6 @@
         </th:block>
     </div>
 </div>
-<footer>
-    <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
-</footer>
 <script th:src="@{/js/components/header.js}"></script>
-<script th:src="@{/js/screen.js}"></script>
 </body>
 </html>

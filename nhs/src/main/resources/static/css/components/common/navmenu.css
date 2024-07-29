@@ -45,7 +45,7 @@ body.navmenu-open::before {
     pointer-events: auto;
 }
 
-@media (hover: none) and (max-width: 768px) {
+@media (max-width: 480px) {
     .navmenu {
         width: 80%;
         position: fixed;

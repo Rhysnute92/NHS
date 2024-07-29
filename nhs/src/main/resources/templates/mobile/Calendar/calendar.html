@@ -8,6 +8,7 @@
 </head>
 <body>
 <div th:replace="~{fragments/common/header}"></div>
+<nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
 <div class="container-calendar">
     <div id="moblist">
         <button onclick="location. href='/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
@@ -63,11 +64,7 @@
     </div>
 </div>
 </div>
-<footer>
-    <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
-</footer>
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/components/header.js}"></script>
-<script th:src="@{/js/screen.js}"></script>
 </body>
 </html>

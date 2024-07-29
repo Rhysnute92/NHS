@@ -9,6 +9,7 @@
 </head>
 <body>
   <div th:replace="~{fragments/common/header}"></div>
+  <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
   <div class="checkin-container">
     <div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
     <div class="checkin-form-container">
@@ -16,11 +17,7 @@
       <div th:replace="~{fragments/diary/checkinForm}"></div>
     </div>
 </div>
-<footer>
-  <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
-</footer>
 <script th:src="@{/js/components/checkin.js}"></script>
 <script th:src="@{/js/components/header.js}"></script>
-<script th:src="@{/js/screen.js}"></script>
 </body>
 </html>
