@@ -54,13 +54,14 @@
             <li data-event-id="1">
                 <strong>Appointment</strong>
                 - Appointment description on appointment date
-                <button class="delete-event"
-                        onclick="deleteEvent(1)">
-                    Delete
-                </button>
             </li>
         </ul>
     </div>
+           <div>
+               <button class="delete-event" onclick="deleteEvent(1)">
+               Delete
+               </button>
+           </div>
 </div>
 </div>
 <div th:insert="~{fragments/mobile/mobilenav :: mobilenav}"></div>
