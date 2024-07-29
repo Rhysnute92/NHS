@@ -33,7 +33,7 @@
 }
 
 
-@media (pointer: coarse) and (max-width: 768px) {
+@media (max-width: 480px) {
     .navmenu-container {
         flex: 0;
     }
