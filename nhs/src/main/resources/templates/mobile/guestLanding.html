@@ -6,32 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome</title>
 </head>
-<body>
+<body class="guest-page">
 <div class="container">
     <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
     <h1>Welcome to the app!</h1>
     <div class="icon-container">
-        <div id="firstAppointment">
+        <div class="icon-wrapper" id="firstAppointment">
             <img
-                    src="/images/contact-book-line-icon.webp"
+                    src="/images/appointment.jpg"
                     alt="Address Book Icon"
                     class="icon"
                     onclick="location. href='/guest/appointment'"
             />
             <p class="icon-text">Your First Appointment</p>
         </div>
-        <div id="ourServices">
+        <div class="icon-wrapper" id="ourServices">
             <img
-                    src="/images/stethoscope-icon.webp"
+                    src="/images/services.jpg"
                     alt="Stethoscope Icon"
                     class="icon"
                     onclick="location. href='/guest/services'"
             />
             <p class="icon-text">Our Services</p>
         </div>
-        <div id="findUs">
+        <div class="icon-wrapper" id="findUs">
             <img
-                    src="/images/maps-pin-black-icon.webp"
+                    src="/images/find.jpg"
                     alt="Map Pin Icon"
                     class="icon"
                     onclick="location. href='/guest/find'"

@@ -40,7 +40,7 @@ h1 {
     justify-content: center;
     text-align: center;
     margin: 2rem;
-    color: #005EB8;
+    color: var(--nhs-blue);
 }
 
 p {
@@ -55,37 +55,130 @@ p {
     border: 2px solid #000;
     margin: 2rem;
 }
+/* LANDING PAGE */
+body.landing-page {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #005EB8, #003087);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nhs-logo {
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+    width: 125px;
+    height: auto;
+}
+
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.separator {
+    width: 80%;
+    max-width: 300px;
+    height: 2px;
+    background-color: var(--nhs-white);
+    margin-bottom: 1rem;
+}
+
+#landing-text {
+    color: var(--nhs-white);
+    margin: 0;
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+}
+
+body.landing-page .btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+body.landing-page .btn-container button {
+    background-color: var(--nhs-white);
+    color: #003087;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0.5rem 0;
+    width: 80%;
+    max-width: 300px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* MOBILE GUEST */
+body.guest-page {
+    background: var(--nhs-blue);
+}
 
 /* ICONS */
 .icon-container {
-    position: relative;
-    align-items: center;
-    justify-content: center;
     display: flex;
     flex-direction: column;
-    margin: 1rem 0;
-    padding: 1rem;
-}
-
-.icon {
-    display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    margin: 2rem;
-    width: 100px;
-    height: 100px;
+    margin-top: -2rem;
 }
 
-.icon img {
-    max-width: 50px;
+.icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    border: 5px solid #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    text-align: center;
+    margin: 1rem 0;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.icon-wrapper img {
+    width: 175px;
     height: auto;
-    cursor: pointer;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
 .icon-text {
-    text-align: center;
+    margin: 0;
+    color: #333;
+    font-size: 0.9rem;
+    padding: 10px;
+    background: #fff;
+    border-top: 5px solid #fff;
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+body.guest-page .btn-container button{
+    background-color: var(--nhs-white);
+    color: #003087;
+    border: none;
+    padding: 1rem 2rem;
     margin: 0.5rem 0;
+    width: 50%;
+    max-width: 300px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 .back-btn {
@@ -124,7 +217,7 @@ p {
 
 }
 
-/* DESKTOP CSS */
+/* DESKTOP GUEST */
 .main-content {
     flex-grow: 1;
     display: flex;
