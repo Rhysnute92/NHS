@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <title>Add A Patient</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/guest.css}" />
-    <style>
-
-    </style>
-    <title>Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-<div class="header">
-    <h2>Patient Search</h2>
+<div class="container">
+    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+    <h1> Add a New Patient </h1>
 </div>
 <div class="back-btn">
     <img
@@ -21,5 +19,6 @@
             onclick="location. href='/guest'"
     />
 </div>
+<script th:src="@{/js/components/header.js}"></script>
 </body>
 </html>

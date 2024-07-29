@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Search;
+package uk.ac.cf.spring.nhs.AddPatient;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 
 @Controller
-public class SearchController {
-    @GetMapping("/search")
-    public String showGuestLandingPage(HttpServletRequest request) {
+public class AddPatientController {
+    @GetMapping("/addpatient")
+    public String showAddPatientPage(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
-            return "mobile/search";
+            return "mobile/addPatient";
         } else {
-            return "desktop/search";
+            return "desktop/addPatient";
         }
     }
 }
