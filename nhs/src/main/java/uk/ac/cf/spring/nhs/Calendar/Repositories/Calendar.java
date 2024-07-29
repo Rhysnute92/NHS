@@ -16,10 +16,6 @@ public class Calendar {
     private String appt_provider;
     private String appt_info;
 
-    public Calendar(String appt_date, String appt_time, String appt_type, String appt_provider, String appt_info) {
-
-    }
-
     @Override
     public String toString() {
         return "Calendar{" +
