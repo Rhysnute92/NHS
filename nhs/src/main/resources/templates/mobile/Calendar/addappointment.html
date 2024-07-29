@@ -12,15 +12,15 @@
 <div class="container-calendar">
     <div id="appointments">
         <label>Date of Appointment:</label><br>
-        <input type="date" id="appointmentDate"><br>
+        <input type="date" id="appointmentDate" th:field="*{appt_date}"><br>
         <label>Time of Appointment:</label><br>
-        <input type="time" id="appointmentTime"><br>
+        <input type="time" id="appointmentTime" th:field="*{appt_time}"><br>
         <label>Appointment Type:</label><br>
-        <input type="text" id="appointmentType" placeholder="Please enter what you appointment is"><br>
+        <input type="text" id="appointmentType" placeholder="Please enter what you appointment is" th:field="*{appt_type}"><br>
         <label>Doctor's Name:</label><br>
-        <input type="text" id="dr" placeholder="Please enter the name of your Dr"><br>
+        <input type="text" id="dr" placeholder="Please enter the name of your Dr" th:field="*{appt_provider}"><br>
         <label>Information about your Appointment:</label><br>
-        <textarea id="comments" placeholder="Info about your appointment"></textarea><br>
+        <textarea id="comments" placeholder="Info about your appointment" th:field="*{appt_info}"></textarea><br>
         <button id="addEvent" onclick="addEvent()">
             Add
         </button>
