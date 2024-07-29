@@ -15,7 +15,7 @@ public class GuestController {
         }
     }
 
-    @GetMapping("/landing")
+    @GetMapping("/")
     public String showLandingPage(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
             return "mobile/landing";
