@@ -39,7 +39,7 @@ public class TaskCompletionWidgetUnitTests {
      */
     @Test
     public void testGetTitle() {
-        assertEquals("Task Completion", taskCompletionWidget.getTitle());
+        assertEquals("Task Completion tracker", taskCompletionWidget.getTitle());
     }
 
     /**

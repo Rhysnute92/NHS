@@ -11,7 +11,8 @@ public class UserWidgetRepositryUnitTests {
     @Autowired
     private UserWidgetRepositry userWidgetRepositry;
 
-    @Testpublic void testFindAllByUserId() {
+    @Test
+    public void testFindAllByUserId() {
         UserWidget userWidget = new UserWidget();
         
     

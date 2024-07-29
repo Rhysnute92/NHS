@@ -11,4 +11,10 @@ public interface WidgetRepositoryInterface {
 
     List<Widget> findAll();
 
+    void save(Widget widget);
+
+    void delete(Widget widget);
+
+    void update(Widget widget);
+
 }

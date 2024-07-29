@@ -15,7 +15,7 @@ import uk.ac.cf.spring.nhs.Widget.Repository.WidgetRepositoryInterface;
 public class WidgetServiceUnitTests {
 
     private WidgetService widgetService;
-    private WidgetRepositoryInterface WidgetRepository;
+    private WidgetRepositoryInterface widgetRepository;
     private WidgetFactory widgetFactory;
 
     @BeforeEach

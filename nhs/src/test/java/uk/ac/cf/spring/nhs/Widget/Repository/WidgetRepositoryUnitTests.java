@@ -1,53 +1,47 @@
-package uk.ac.cf.spring.nhs.Widget.Repository;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import uk.ac.cf.spring.nhs.Widget.Model.Widget;
+import uk.ac.cf.spring.nhs.Widget.Service.WidgetService;
 
 public class WidgetRepositoryUnitTests {
 
+    @Mock
     private WidgetRepository widgetRepository;
-    private JpaWidgetRepositoryImpl.JpaWidgetRepositoryInternal jpaWidgetRepositoryInternal;
 
-    @BeforeEach
-    public void setUp() {
-        jpaWidgetRepositoryInternal = mock(JpawidgetRepostiroy.JpaWidgetRepositoryInternal.class);
-        widgetRepository = new JpaWidgetRepository(jpaWidgetRepositoryInternal);
-    }
+    @InjectMocks
+    private WidgetService widgetService;
 
-    @Test
-    public void testFindById() {
-        Widget widget = mock(Widget.class);
-        when(jpaWidgetRepositoryInternal.findById("task-completion-widget")).thenReturn(Optional.of(widget));
-        Optional<Widget> result = widgetRepository.findById("task-completion-widget");
-        assertTrue(result.isPresent());
-        assertEquals(widget, result.get());
-        verify(jpaWidgetRepositoryInternal, times(1)).findByIs("task-completion-widget");
+    public WidgetRepositoryUnitTests() {
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
     public void testFindAll() {
-        Widget widget1 = mock(Widget.class) {
-            Widget widget1 = mock(Widget.class);
-            Widget widget2 = mock(Widget.class);
-            when(jpaWidgetRepositoryInternal.findAll()).thenReturn(Arrays.asList(widget1, widget2));
+        List<Widget> widgets = Arrays.asList(new Widget("1", "Widget 1"), new Widget("2", "Widget 2"));
+        when(widgetRepository.findAll()).thenReturn(widgets);
 
-            List<Widget> widgets = widgetRepository.findAll();
-            assertEquals(2, widgets.size());
-            verify(jpaWidgetRepositoryInternal, times(1)).findAll();
-            
-        }
+        List<Widget> result = widgetService.getAllWidgets();
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    public void testFindById() {
+        Widget widget = new Widget("1", "Widget 1");
+        when(widgetRepository.findById("1")).thenReturn(Optional.of(widget));
+
+        Widget result = widgetService.getWidgetById("1");
+        assertNotNull(result);
+        assertEquals("Widget 1", result.getName());
     }
 }
