@@ -10,6 +10,7 @@
     justify-content: center;
     width: 100%;
     background-color: var(--nhs-pale-grey);
+    position: relative;
 }
 
 .checkin-form {
@@ -26,7 +27,6 @@
     justify-content: flex-start;
     gap: 1rem;
     padding: 1rem;
-    flex: 5;
     margin: 2rem;
     background-color: var(--nhs-white);
     width: 80%;

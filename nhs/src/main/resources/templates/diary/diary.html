@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Diary</title>
-    <script src="https://kit.fontawesome.com/846d357ac5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/diary/diary.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +10,7 @@
 <div th:replace="~{fragments/common/header}"></div>
 <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
 <div class="diary-container">
-    <div th:replace="~{fragments/common/navmenu}"></div>
+    <div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
     <div class="diary-entry-container">
         <h1>Diary</h1>
         <div th:if="${diaryEntries.empty}">
