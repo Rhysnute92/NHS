@@ -9,10 +9,10 @@
 <body>
 <div th:replace="~{fragments/common/header}"></div>
 <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
+<div id="moblist">
+    <button onclick="location. href='/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
+</div>
 <div class="container-calendar">
-    <div id="moblist">
-        <button onclick="location. href='/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
-    </div>
        <div id="mobileMonth">
             <h3 id="monthAndYear"></h3>
             <div class="button-container-calendar">
@@ -55,13 +55,14 @@
             <li data-event-id="1">
                 <strong>Appointment</strong>
                 - Appointment description on appointment date
-                <button class="delete-event"
-                        onclick="deleteEvent(1)">
-                    Delete
-                </button>
             </li>
         </ul>
     </div>
+           <div>
+               <button class="delete-event" onclick="deleteEvent(1)">
+               Delete
+               </button>
+           </div>
 </div>
 </div>
 <script th:src="@{/js/calendar/calendar.js}"></script>
