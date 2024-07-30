@@ -38,9 +38,4 @@ public class CalendarController {
         ModelAndView modelAndView = new ModelAndView("mobile/Calendar/addappointment");
         return modelAndView;
     }
-
-    @PostMapping
-    public ModelAndView appointmentAddedToCalendar(@Valid @ModelAttribute("appt_sent")Calendar calendar, BindingResult bindingResult, Model model) {
-        ModelAndView modelAndView = new ModelAndView("addappointment")
-    }
 }
