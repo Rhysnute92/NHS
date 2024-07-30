@@ -19,7 +19,10 @@
 /* Import utility styles */
 @import url('/css/utility/variables.css');
 
-body, html {
+/* Import base styles */
+@import url('/css/common/defaultLayout.css');
+
+body {
     font-family: var(--regular-font-family);
     margin: 0;
     padding: 0;
