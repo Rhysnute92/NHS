@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
   <head>
     <title>Desktop Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
+  <header th:replace="~{fragments/common/header}"></header>
+  <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
     <div class="container">
-      <div th:replace="~{fragments/desktop/header :: header}"></div>
       <h2 class="text-xl font-bold">Desktop Dashboard</h2>
       <p>Welcome</p>
     </div>
+  <script th:src="@{/js/components/header.js}"></script>
   </body>
 </html>

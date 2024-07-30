@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
   <head>
     <title>Education</title>
     <link rel="stylesheet" th:href="@{/css/treatment.css}"/>
@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div th:replace="~{fragments/desktop/header :: header}"></div>
+    <div th:replace="~{fragments/common/header}"></div>
+    <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
     <div th:replace="~{fragments/desktop/infomenu :: infomenu}"></div>
     <div class="container">
       <h2>Treatments for lymphedema of the legs</h2>
@@ -64,5 +65,6 @@
         <a th:href="@{/treatment}" class="section_link">&larr; Back to full list</a>
     </div>
     <script th:src="@{/js/treatmentSpec.js}"></script>
+    <script th:src="@{/js/components/header.js}"></script>
   </body>
 </html>

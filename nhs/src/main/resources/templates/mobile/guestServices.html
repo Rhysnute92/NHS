@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
   <head>
     <title>Our Services</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container">
-      <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+      <div th:replace="~{fragments/common/header}"></div>
       <h1>Our Services</h1>
       <p>The services that we offer and how this application can help you.</p>
     </div>
@@ -25,5 +25,6 @@
       />
     </div>
     <script th:src="@{/js/components/header.js}"></script>
+
   </body>
 </html>

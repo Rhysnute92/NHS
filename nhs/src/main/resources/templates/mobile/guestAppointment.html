@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
   <head>
     <title>Your Appointment</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container">
-      <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+      <div th:replace="~{fragments/common/header}"></div>
       <h1>Your First Appointment</h1>
       <p>Find information here about what to expect during your first appointment.</p>
     </div>
@@ -23,6 +23,6 @@
             onclick="location. href='/guest'"
     />
   </div>
-    <script th:src="@{/js/components/header.js}"></script>
+  <script th:src="@{/js/components/header.js}"></script>
   </body>
 </html>

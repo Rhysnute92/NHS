@@ -1,6 +1,5 @@
 .navmenu-container {
     flex: 1;
-    font-size: 1.2rem;
 }
 
 .navmenu {
@@ -34,7 +33,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .navmenu-container {
         flex: 0;
     }
@@ -45,7 +44,6 @@
         top: 5vh;
         left: 0;
         width: 100%;
-        font-size: 1.2rem;
     }
 
     .navmenu-toggle {

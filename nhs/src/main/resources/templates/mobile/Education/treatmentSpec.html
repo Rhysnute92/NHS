@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
   <head>
     <title>Education</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+    <div th:replace="~{fragments/common/header}"></div>
+    <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
     <div th:replace="~{fragments/mobile/mobileinfomenu :: mobileinfomenu}"></div>
     <div class="container_tr_mb">
       <h2 class="title">Treatments for lymphedema of the legs</h2>
@@ -34,15 +35,15 @@
             <h3>Care instructions</h3>
             <p>Information on how to take care of your garments.</p>
         </div>
-        <button type="button" class="collapsible_button">Excercises</button>
+        <button type="button" class="collapsible_button">Exercises</button>
         <div class="collapsible">
-          <div class="excercise">
-            <p>Text about importance of excercise and explanation for the section.</p>
+          <div class="exercise">
+            <p>Text about importance of exercise and explanation for the section.</p>
             <button type="button" class="reminder">Set Reminder</button>
-            <h3>Excercise 1: Knee bends</h3>
+            <h3>Exercise 1: Knee bends</h3>
             <img src="/images/tempInfo/ex1.png">
             <p>Instructions</p>
-            <h3>Excercise 2: Ankle bends/circles</h3>
+            <h3>Exercise 2: Ankle bends/circles</h3>
             <img src="/images/tempInfo/ex2.png">
             <p>Instructions</p>
           </div>
@@ -65,7 +66,6 @@
         <a th:href="@{/treatment}" class="section_link">&larr; Back to full list</a>
     </div>
     <div class="spacer">&nbsp;</div>
-    <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
     <script th:src="@{/js/components/header.js}"></script>
     <script th:src="@{/js/components/mbinfomenu.js}"></script>
     <script th:src="@{/js/treatmentSpec.js}"></script>
