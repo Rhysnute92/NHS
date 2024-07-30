@@ -1,7 +1,62 @@
-/* Common header styles */
-.header {
+header {
     background-color:var(--nhs-blue);
     width: 100%;
     box-sizing: border-box;
     font-size: 1.5rem;
+}
+
+.header {
+    height: 8vh;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    padding: clamp(15px, 4vh, 4vh);
+    background-color: var(--nhs-blue);
+    justify-content: flex-start;
+    box-sizing: content-box;
+    border-bottom: 1px solid var(--nhs-pale-grey);
+}
+
+.header-logo {
+    height: 100%;
+}
+
+.header-title {
+    background-color: var(--nhs-blue);
+    height: 6vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--nhs-white);
+    font-family: var(--regular-font-family);
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.header-title {
+    display: none;
+    padding: 1vh;
+}
+
+.page-title {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 480px) {
+    .header {
+        background-color: var(--nhs-blue);
+        justify-content: center;
+        height: 4vh;
+        padding: clamp(15px, 2vh, 2vh);
+    }
+
+    .header-title {
+        display: flex;
+    }
+
+    header {
+        position: sticky;
+        top: 0;
+    }
 }
