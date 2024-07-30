@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uk.ac.cf.spring.nhs.Widget.Model.Widget;
-import uk.ac.cf.spring.nhs.Widget.Repository.WidgetRepositoryInterface;
+import uk.ac.cf.spring.nhs.Widget.Repository.WidgetRepository;
 
 @Service
 public class WidgetService {
     @Autowired
-    private WidgetRepositoryInterface widgetRepository;
+    private WidgetRepository widgetRepository;
 
     public List<Widget> getAllWidgets() {
         return widgetRepository.findAll();

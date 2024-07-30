@@ -11,7 +11,7 @@ import uk.ac.cf.spring.nhs.UserWidget.Repository.UserWidgetRepositoryInterface;
 public class UserWidgetService {
 
     @Autowired
-    private UserWidgetRepositoryInterface userWidgetRepository;
+    private UserWidgetRepository userWidgetRepository;
 
     public List<UserWidget> getUserWidgets(String userId) {
         return userWidgetRepository.findByAllByUserId(userId);
