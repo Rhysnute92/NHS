@@ -119,23 +119,27 @@ body.landing-page .btn-container button {
 
 /* MOBILE GUEST */
 body.guest-page {
-    background: var(--nhs-blue);
+    background: linear-gradient(#005EB8, #003087);
+    overflow: hidden;
 }
 
-/* ICONS */
+#app-name{
+    color: var(--nhs-white);
+}
+
 .icon-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: -2rem;
+    margin-top: 2rem;
 }
 
 .icon-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 200px;
+    width: 250px;
     height: 200px;
     padding: 10px;
     border: 5px solid #fff;
