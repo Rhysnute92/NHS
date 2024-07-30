@@ -1,40 +1,44 @@
 package uk.ac.cf.spring.nhs.UserWidget.Model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class UserWidget {
 
     @Id
-    private String id;
-/* 
-    @ManyToOne
-    private User user; */
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private String widgetId;
-    private int position;
+    private Long userId;
+    private String widgetName;
+    private Integer position;
     /**
      * @return the id
      */
-    public String getId() {
+    public Long getId() {
         return id;
     }
     /**
-     * @return the widgetId
+     * @return the userId
      */
-    public String getWidgetId() {
-        return widgetId;
+    public Long getUserId() {
+        return userId;
+    }
+    /**
+     * @return the widgetName
+     */
+    public String getWidgetName() {
+        return widgetName;
     }
     /**
      * @return the position
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
-    // Getters and setters
-    
-    
+    // Getters and Setters
 }

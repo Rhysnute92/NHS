@@ -6,22 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uk.ac.cf.spring.nhs.UserWidget.Model.UserWidget;
-import uk.ac.cf.spring.nhs.UserWidget.Repository.UserWidgetRepositoryInterface;
+import uk.ac.cf.spring.nhs.UserWidget.Repository.JpaUserWidgetRepository;
+
 @Service
 public class UserWidgetService {
 
     @Autowired
-    private UserWidgetRepository userWidgetRepository;
+    private JpaUserWidgetRepository userWidgetRepository;
 
-    public List<UserWidget> getUserWidgets(String userId) {
-        return userWidgetRepository.findByAllByUserId(userId);
+    public List<UserWidget> getUserWidgets(Long userId) {
+        return userWidgetRepository.findAllByUserId(userId);
     }
 
-    public UserWidget addUserWidget(UserWidget userWidget) {
+    public UserWidget saveUserWidget(UserWidget userWidget) {
         return userWidgetRepository.save(userWidget);
-    }
-
-    public void removeUserWidget(String userWidgetId) {
-        userWidgetRepository.deleteById(userWidgetId);
     }
 }
