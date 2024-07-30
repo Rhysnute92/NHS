@@ -7,17 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-<div th:replace="~{fragments/common/header}"></div>
-<nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
+<div th:replace="~{common/fragments/header}"></div>
 <div class="diary-container">
-    <div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
+    <div th:replace="~{common/fragments/navmenu}"></div>
     <div class="diary-entry-container">
         <h1>Diary</h1>
         <div th:if="${diaryEntries.empty}">
             <h2>No diary entries yet</h2>
         </div>
         <th:block th:each="diaryEntry : ${diaryEntries}">
-            <div th:replace="~{fragments/diary/diaryEntry :: diaryEntry(diaryEntry=${diaryEntry})}">
+            <div th:replace="~{diary/fragments/diaryEntry :: diaryEntry(diaryEntry=${diaryEntry})}">
             </div>
         </th:block>
     </div>

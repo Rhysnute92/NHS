@@ -8,13 +8,13 @@
   <title>Check-in</title>
 </head>
 <body>
-  <div th:replace="~{fragments/common/header}"></div>
-  <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
+  <div th:replace="~{common/fragments/header}"></div>
+  <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
   <div class="checkin-container">
-    <div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
+    <div th:replace="~{common/fragments/navmenu}"></div>
     <div class="checkin-form-container">
       <h1>Check-in</h1>
-      <div th:replace="~{fragments/diary/checkinForm}"></div>
+      <div th:replace="~{diary/fragments/checkinForm}"></div>
     </div>
 </div>
 <script th:src="@{/js/components/checkin.js}"></script>

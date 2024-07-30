@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/guest.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{common/fragments/header}"></div>
+    <h1>Welcome to the app!</h1>
+    <div class="icon-container">
+        <div id="firstAppointment">
+            <img
+                    src="/images/contact-book-line-icon.webp"
+                    alt="Address Book Icon"
+                    class="icon"
+                    onclick="location. href='/guest/appointment'"
+            />
+            <p class="icon-text">Your First Appointment</p>
+        </div>
+        <div id="ourServices">
+            <img
+                    src="/images/stethoscope-icon.webp"
+                    alt="Stethoscope Icon"
+                    class="icon"
+                    onclick="location. href='/guest/services'"
+            />
+            <p class="icon-text">Our Services</p>
+        </div>
+        <div id="findUs">
+            <img
+                    src="/images/maps-pin-black-icon.webp"
+                    alt="Map Pin Icon"
+                    class="icon"
+                    onclick="location. href='/guest/find'"
+            />
+            <p class="icon-text">Come and Find Us</p>
+        </div>
+    </div>
+</div>
+<div class="btn-container">
+    <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
+</div>
+<script th:src="@{/js/components/header.js}"></script>
+</body>
+</html>
