@@ -4,13 +4,10 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: var(--nhs-pale-grey);
-}
-
 .main-container {
     display: flex;
     width: 100%;
+    background-color: var(--nhs-pale-grey);
 }
 
 .main-content {
