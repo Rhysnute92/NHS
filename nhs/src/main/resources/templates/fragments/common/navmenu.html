@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<nav th:fragment="navmenu (items)" class="navmenu hidden">
+<nav th:fragment="navmenu (items)" class="navmenu">
   <ul class="navmenu-links">
     <li class="navmenu-link" th:each="item : ${items}">
       <i th:classappend="${item.icon}" class="navmenu-icon fa-fw"></i>
