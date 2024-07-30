@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-<div th:insert="~{fragments/desktop/header :: header}" ></div>
+<div th:insert="~{fragments/common/header :: header}" ></div>
 <div id="header">
   <h1>Appointment Calendar</h1>
   <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
@@ -34,7 +34,7 @@
           </button>
         </div>
       </div>
-    </div>
+
       <div id="center">
         <h3>Appointment Schedule</h3>
 
@@ -89,6 +89,7 @@
       </div>
     </div>
   </div>
+</div>
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/components/header.js}"></script>
 </body>
