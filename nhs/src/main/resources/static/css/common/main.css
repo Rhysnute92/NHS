@@ -2,15 +2,15 @@
 /*Import base styles*/
 
 /* Import common component styles */
-@import url('/css/components/common/header.css');
-@import url('/css/components/common/navbar.css');
-@import url('/css/components/common/navmenu.css');
+@import url('/css/common/header.css');
+@import url('/css/common/navbar.css');
+@import url('/css/common/navmenu.css');
 
 /* Import desktop-specific component styles */
-@import url('/css/components/desktop/infomenu.css');
+@import url('/css/education/desktop/infomenu.css');
 
 /* Import mobile-specific component styles */
-@import url('/css/components/mobile/mobileinfomenu.css');
+@import url('/css/education/mobile/mobileinfomenu.css');
 
 /* Import desktop page styles */
 
@@ -21,8 +21,6 @@
 
 body, html {
     font-family: var(--regular-font-family);
-    font-size: var(--regular-font-size);
     margin: 0;
     padding: 0;
-    min-height: 100vh;
 }
