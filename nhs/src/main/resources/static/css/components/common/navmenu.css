@@ -1,11 +1,11 @@
 .navmenu {
-    flex: 1;
-    width: 100%;
+    width: 15vw;
     color: var(--nhs-white);
     background-color: var(--nhs-blue);
     border-top: 1px solid var(--nhs-pale-grey);
     min-height: 100vh;
-    min-width: 180px;
+    min-width: 150px;
+    max-width: 250px;
 }
 
 .navmenu-links {
