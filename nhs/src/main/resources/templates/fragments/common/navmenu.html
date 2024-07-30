@@ -3,7 +3,7 @@
   <ul class="navmenu-links">
     <li class="navmenu-link" th:each="item : ${items}">
       <i th:classappend="${item.icon}" class="navmenu-icon fa-fw"></i>
-      <a th:href="@{${item.url}}" th:text="${item.name}"></a>
+      <a th:href="@{${item.url}}" th:text="${item.title}"></a>
     </li>
   </ul>
   <script th:src="@{/js/components/navmenu.js}"></script>
