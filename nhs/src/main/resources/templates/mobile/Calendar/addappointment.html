@@ -11,22 +11,24 @@
 <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
 <div class="container-calendar">
     <div id="appointments">
-        <label>Date of Appointment:</label><br>
-        <input type="date" id="appointmentDate" th:field="*{appt_date}"><br>
-        <label>Time of Appointment:</label><br>
-        <input type="time" id="appointmentTime" th:field="*{appt_time}"><br>
-        <label>Appointment Type:</label><br>
-        <input type="text" id="appointmentType" placeholder="Please enter what you appointment is" th:field="*{appt_type}"><br>
-        <label>Doctor's Name:</label><br>
-        <input type="text" id="dr" placeholder="Please enter the name of your Dr" th:field="*{appt_provider}"><br>
-        <label>Information about your Appointment:</label><br>
-        <textarea id="comments" placeholder="Info about your appointment" th:field="*{appt_info}"></textarea><br>
-        <button id="addEvent" onclick="addEvent()">
-            Add
-        </button>
-        <button id="deleteAppointment" onclick="deleteEvent()">
-            Clear
-        </button>
+            <form id="addAppt" action="/mobileaddappt" method="post">
+            <label>Date of Appointment:</label><br>
+            <input type="date" id="appointmentDate"><br>
+            <label>Time of Appointment:</label><br>
+            <input type="time" id="appointmentTime"><br>
+            <label>Appointment Type:</label><br>
+            <input type="text" id="appointmentType" placeholder="Please enter what you appointment is"><br>
+            <label>Doctor's Name:</label><br>
+            <input type="text" id="dr" placeholder="Please enter the name of your Dr"><br>
+            <label>Information about your Appointment:</label><br>
+            <textarea id="comments" placeholder="Info about your appointment"></textarea><br>
+            <button id="addEvent" type="submit">
+                Add
+            </button>
+            <button id="deleteAppointment" onclick="deleteEvent()">
+                Clear
+            </button>
+        </form>
     </div>
 </div>
 <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>

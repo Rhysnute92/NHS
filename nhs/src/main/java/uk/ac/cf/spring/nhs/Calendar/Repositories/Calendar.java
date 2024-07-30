@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.Calendar.Repositories;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.StoredProcedureQuery;
 import lombok.AllArgsConstructor;
 import lombok.Data;
