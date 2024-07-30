@@ -54,6 +54,7 @@ body.navmenu-open::before {
         z-index: 3;
         font-size: 1.5rem;
         left: -100%;
+        max-width: 100%;
     }
 
     .navmenu.visible {
