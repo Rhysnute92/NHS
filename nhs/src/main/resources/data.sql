@@ -1,2 +1,2 @@
-INSERT INTO user_widgets (user_id, widget_name, position)
+INSERT INTO user_widget (user_id, widget_name, position)
 VALUES (1, 'task-completion', 1);
