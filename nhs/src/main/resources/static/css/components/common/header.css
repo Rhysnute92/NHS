@@ -48,10 +48,6 @@ header {
     font-size: 3.5vh;
 }
 
-.navmenu-toggle {
-    display: none;
-}
-
 @media (max-width: 480px) {
     .header {
         background-color: var(--nhs-blue);
@@ -67,8 +63,10 @@ header {
         position: sticky;
         top: 0;
     }
+}
 
-    .navmenu-toggle {
-        display: block;
+@media (min-width: 481px) {
+    .header .navmenu-toggle {
+        display: none;
     }
 }
