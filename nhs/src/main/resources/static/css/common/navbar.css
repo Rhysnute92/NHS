@@ -39,10 +39,21 @@
 
 .navbar-link {
     text-decoration: none;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.navbar-link:active {
+    transform: scale(0.95);  /* Subtle "push" feeling */
+    transition: transform 0.1s;
 }
 
 .navbar-icon {
-    height: 4vh;
+    height: 2rem;
     object-fit: contain;
     display: none;
 }
@@ -53,11 +64,12 @@
     /*height: 2vh;*/
 }
 
-.navbar-icon {
-    display: none;
-}
 
 @media (max-width: 480px) {
+    html {
+        padding-bottom: 5rem; /* Prevents the navbar from covering the content */
+    }
+
     .navbar-text {
         font-size: 0.9rem;
     }
@@ -69,10 +81,10 @@
     .navbar {
         position: fixed;
         bottom: 0;
-        height: 9vh;
-        margin-top: 9vh;
+        height: 5rem;
         justify-content: center;
         padding: 0;
+        z-index: 1000;
     }
 
     .navbar-item {
@@ -85,9 +97,5 @@
         gap: 2vh;
         width: 90%;
     }
-
-    footer {
-        height: 9vh;
-        bottom: 0;
-    }
 }
+
