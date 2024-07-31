@@ -33,6 +33,15 @@ public class CalendarController {
         return modelAndView;
     }
 
+        public String showCalendar(Model model) {
+            Repositories repositories = new CalendarRepository();
+            repositories.setCalendar(new Calendar());
+            model.addAttribute("Repositories", repositories);
+            return "mobile/Calendar/addappointment";
+        }
+    }
+
+
     @GetMapping("/mobileaddappt")
     public ModelAndView getMobileAddAppt(){
         ModelAndView modelAndView = new ModelAndView("mobile/Calendar/addappointment");
