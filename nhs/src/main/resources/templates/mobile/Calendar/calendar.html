@@ -7,7 +7,9 @@
     <title>Calendar</title>
 </head>
 <body>
-<div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+<div th:replace="~{fragments/common/header}"></div>
+<nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
+<div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
 <div id="moblist">
     <button onclick="location. href='/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
 </div>
@@ -54,16 +56,16 @@
             <li data-event-id="1">
                 <strong>Appointment</strong>
                 - Appointment description on appointment date
-                <button class="delete-event"
-                        onclick="deleteEvent(1)">
-                    Delete
-                </button>
             </li>
         </ul>
     </div>
+           <div>
+               <button class="delete-event" onclick="deleteEvent(1)">
+               Delete
+               </button>
+           </div>
 </div>
 </div>
-<div th:insert="~{fragments/mobile/mobilenav :: mobilenav}"></div>
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/components/header.js}"></script>
 </body>

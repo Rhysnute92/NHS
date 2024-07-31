@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
-  <script src="https://kit.fontawesome.com/846d357ac5.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" th:href="@{/css/main.css}" />
-  <link rel="stylesheet" th:href="@{/css/checkin.css}" />
+  <link rel="stylesheet" th:href="@{/css/diary/checkin.css}" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Check-in</title>
 </head>
 <body>
-  <div th:replace="~{fragments/mobile/mobileheader}"></div>
+  <div th:replace="~{fragments/common/header}"></div>
+  <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
   <div class="checkin-container">
-    <div th:replace="~{fragments/common/navmenu}"></div>
+    <div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
     <div class="checkin-form-container">
       <h1>Check-in</h1>
       <div th:replace="~{fragments/diary/checkinForm}"></div>
     </div>
 </div>
-<div class="spacer" style="height: 10vh">&nbsp;</div>
-<div th:replace="~{fragments/mobile/mobilenav}"></div>
 <script th:src="@{/js/components/checkin.js}"></script>
+<script th:src="@{/js/components/header.js}"></script>
 </body>
 </html>

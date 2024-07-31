@@ -1,0 +1,15 @@
+<header>
+  <script src="https://kit.fontawesome.com/846d357ac5.js" crossorigin="anonymous"></script>
+  <div th:fragment="header" class="header">
+    <i class="fa-solid fa-bars navmenu-toggle header-icon"></i>
+    <img
+      th:src="@{/images/NHS_logos/mobile/nhs-logo.jpg}"
+      alt="NHS Logo"
+      class="header-logo"
+    />
+    <i class="fa-solid fa-user header-icon"></i>
+  </div>
+  <div class="header-title">
+    <span id="page-title"></span>
+  </div>
+</header>

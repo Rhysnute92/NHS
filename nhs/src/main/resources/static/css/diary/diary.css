@@ -10,7 +10,6 @@
     justify-content: flex-start;
     gap: 1rem;
     padding: 1rem;
-    flex: 5;
     margin: 2rem;
     background-color: var(--nhs-white);
     width: 80%;
@@ -55,11 +54,13 @@
     background-color: var(--nhs-pale-grey);
     width: 100%;
     justify-content: center;
-    height: 100%;
-    min-height: 100vh;
 }
 
 @media (max-width: 768px) {
+    .diary-container {
+        background-color: var(--nhs-white);
+    }
+
     .diary-entry-container {
         margin: 0;
         background-color: transparent;

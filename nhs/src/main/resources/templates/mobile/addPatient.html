@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Find Us</title>
+    <title>Add A Patient</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/guest.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,16 +9,7 @@
 <body>
 <div class="container">
     <div th:replace="~{fragments/common/header}"></div>
-    <h1>Find Us</h1>
-    <p>Find information here on how to find us and the location of our clinic.</p>
-</div>
-<div class="map-container">
-<p>
-    Clinic Map Placeholder.
-</p>
-</div>
-<div class="btn-container">
-    <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
+    <h1> Add a New Patient </h1>
 </div>
 <div class="back-btn">
     <img
@@ -29,6 +20,5 @@
     />
 </div>
 <script th:src="@{/js/components/header.js}"></script>
-
 </body>
 </html>

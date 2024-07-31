@@ -2,7 +2,7 @@
 @import url('/static/css/utility/variables.css');
 
     .container-calendar {
-        padding: 15px;
+        padding: 0.5rem;
         margin: 0 auto;
         overflow: auto;
         display: flex;
@@ -55,8 +55,8 @@
         background: #005EB8;
         color: white;
         position: relative;
-        left: 8.5rem;
-        top: 0.5rem;
+        left: 8rem;
+        top: 0.1rem;
         width: 10rem;
         height: 2rem;
         border-radius: 5px;
@@ -91,7 +91,6 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        margin-left: 11rem;
         width: 4rem;
         height: 2rem;
     }
@@ -160,6 +159,7 @@
 
     .footer-container-calendar {
         padding: 10px 0;
+        text-align: center;
     }
 
     .footer-container-calendar select {

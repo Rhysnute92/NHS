@@ -14,8 +14,11 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
+import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryService;
 
@@ -26,8 +29,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @WebMvcTest(DiaryController.class)
 public class DiaryControllerTest {
@@ -51,6 +53,8 @@ public class DiaryControllerTest {
 
     @BeforeEach
     public void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(diaryController).build();
+
         closeable = MockitoAnnotations.openMocks(this);
         request = new MockHttpServletRequest();
         mockedStatic = mockStatic(DeviceDetector.class);
@@ -70,42 +74,44 @@ public class DiaryControllerTest {
     }
 
     @Test
-    public void returnsMobileViewForMobileDevices() {
-        mockedStatic.when(() -> DeviceDetector.isMobile(request)).thenReturn(true);
-
+    public void diaryReturnsCorrectView() {
         ModelAndView modelAndView = diaryController.diary(request);
-        assertEquals("mobile/diary", modelAndView.getViewName());
+        assertEquals("diary/diary", modelAndView.getViewName());
         assertEquals(dummyEntries, modelAndView.getModel().get("diaryEntries"));
     }
 
     @Test
-    public void returnsDesktopViewForNonMobileDevices() {
-        mockedStatic.when(() -> DeviceDetector.isMobile(request)).thenReturn(false);
-
-        ModelAndView modelAndView = diaryController.diary(request);
-        assertEquals("desktop/diary", modelAndView.getViewName());
-        assertEquals(dummyEntries, modelAndView.getModel().get("diaryEntries"));
+    public void checkinReturnsCorrectView() {
+        ModelAndView modelAndView = diaryController.checkin(request);
+        assertEquals("diary/checkin", modelAndView.getViewName());
     }
 
     @Test
-    public void testDiaryOnDesktop() throws Exception {
-        when(DeviceDetector.isMobile(any(HttpServletRequest.class))).thenReturn(false);
-
+    public void testDiary() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/diary"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("desktop/diary"))
+                .andExpect(MockMvcResultMatchers.view().name("diary/diary"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("diaryEntries"))
                 .andExpect(MockMvcResultMatchers.model().attribute("diaryEntries", dummyEntries));
     }
 
-    @Test
-    public void testDiaryOnMobile() throws Exception {
-        when(DeviceDetector.isMobile(any(HttpServletRequest.class))).thenReturn(true);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/diary"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("mobile/diary"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("diaryEntries"))
-                .andExpect(MockMvcResultMatchers.model().attribute("diaryEntries", dummyEntries));
+    @Test
+    void testNavMenuItems() {
+        List<NavMenuItem> expectedNavMenuItems = List.of(
+                new NavMenuItem("Diary", "/diary", "fa-solid fa-book"),
+                new NavMenuItem("Check-in", "/diary/checkin", "fa-solid fa-user-check"),
+                new NavMenuItem("Photos", "/diary/photos", "fa-solid fa-camera")
+        );
+
+        List<NavMenuItem> actualNavMenuItems = diaryController.navMenuItems();
+
+        assertEquals(expectedNavMenuItems.size(), actualNavMenuItems.size());
+
+        for (int i = 0; i < expectedNavMenuItems.size(); i++) {
+            assertEquals(expectedNavMenuItems.get(i).getTitle(), actualNavMenuItems.get(i).getTitle());
+            assertEquals(expectedNavMenuItems.get(i).getUrl(), actualNavMenuItems.get(i).getUrl());
+            assertEquals(expectedNavMenuItems.get(i).getIcon(), actualNavMenuItems.get(i).getIcon());
+        }
     }
 }
