@@ -37,6 +37,8 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'jakarta.servlet:jakarta.servlet-api'
 	implementation 'com.mysql:mysql-connector-j:9.0.0'
+	implementation 'org.mariadb.jdbc:mariadb-java-client:3.4.1'
+
 }
 
 tasks.named('test') {
