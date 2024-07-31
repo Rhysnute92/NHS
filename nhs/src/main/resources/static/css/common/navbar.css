@@ -91,7 +91,7 @@
     .navbar-list {
         justify-content: space-around;
         max-width: 400px;
-        gap: 2vh;
+        gap: 0.5rem;
         width: 90%;
     }
 

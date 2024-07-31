@@ -1,13 +1,14 @@
 .mobileinfomenu{
-  position: fixed;
-  right: 0;
-  top: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 4;
 }
 .menu_icon{
-  background-color: #005eb8;
-  height: 8vh;
-  position: fixed;
-  right: 0;
+    background-color: #005eb8;
+    height: 8vh;
+    position: fixed;
+    right: 0;
 }
 .infomenu_mobile{
     width: 0px;
