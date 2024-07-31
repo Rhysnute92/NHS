@@ -9,6 +9,7 @@
 <body>
 <div th:replace="~{fragments/common/header}"></div>
 <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
+<div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
 <div id="moblist">
     <button onclick="location. href='/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
 </div>
