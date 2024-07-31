@@ -1,4 +1,3 @@
-
 -- Drop all tables for testing purposes
 DROP TABLE IF EXISTS UserTasks;
 DROP TABLE IF EXISTS Tasks;
@@ -20,7 +19,6 @@ DROP TABLE IF EXISTS PatientDiagnosis;
 DROP TABLE IF EXISTS Patients;
 DROP TABLE IF EXISTS ProviderCredentials;
 DROP TABLE IF EXISTS PatientCredentials;
-
 --Log in information and credentials--
 CREATE TABLE PatientCredentials (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
@@ -74,9 +72,9 @@ CREATE TABLE Providers (
 CREATE TABLE UserWidgets (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     UserID INT,
-    widget_name VARCHAR(255) NOT NULL, 
+    widget_name VARCHAR(255) NOT NULL,
     position INT,
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID),
+    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
 );
 --Calendar--
 CREATE TABLE Appointments (
@@ -193,7 +191,7 @@ CREATE TABLE Tasks (
     TaskName VARCHAR(255),
     TaskDesc TEXT
 );
-CREATE TABLE UserTasks (  
+CREATE TABLE UserTasks (
     UserTaskID INT AUTO_INCREMENT PRIMARY KEY,
     TaskIsCompleted BOOLEAN,
     TaskDuedate DATETIME,
@@ -210,4 +208,3 @@ CREATE TABLE UserTasks (
 --CREATE TABLE LoginRecords ()
 --CREATE TABLE Record ()
 -----------------------
-
