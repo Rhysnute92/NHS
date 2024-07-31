@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Guest</title>
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/guest/guest.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<div th:replace="~{fragments/common/header}"></div>
+
+<div class="container">
+    <div class="main-content">
+        <div id="infoContainer">
+            <div th:replace="~{fragments/Guest/appointment :: info1}"></div>
+            <div th:replace="~{fragments/Guest/services :: info2}"></div>
+            <div th:replace="~{fragments/Guest/findUs :: info3}"></div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <button id="show-info1">First Appointment</button>
+        <button id="show-info2">Our Services</button>
+        <button id="show-info3">Find Us</button>
+    </div>
+</div>
+<div class="bottom-container">
+    <div class="bottom-box" id="Contact-us">
+        <p>Contact Us</p>
+        <p class="contact">
+            Florence Nightingale Community Hospital:
+            <span class="telephone">01332 254828</span>
+        </p>
+        <p class="contact">
+            Long Eaton Health Centre:
+            <span class="telephone">0115 8554177</span>
+        </p>
+        <p class="contact">
+            Kings Mill Hospital:
+            <span class="telephone">01623 672416</span>
+        </p>
+    </div>
+    <div class="bottom-box" id="bottom-button">
+        <div class="btn-container">
+            <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
+        </div>
+    </div>
+    <div class="bottom-box" id="about-us">
+        <p>About Us</p>
+        <p>Our team provide a specialist service for patients with lymphoedema and chronic oedema in Derbyshire.
+        </p>
+    </div>
+</div>
+<script th:src="@{/js/Guest/guest.js}"></script>
+</body>
+</html>

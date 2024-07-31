@@ -1,0 +1,104 @@
+.navbar {
+    background-color: var(--nhs-blue);
+    padding: 2vh;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-list {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    gap: 5vh;
+}
+
+.navbar-list a {
+    color: var(--nhs-white);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5vh;
+    height: 100%;
+}
+
+.navbar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+}
+
+.navbar-link {
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.navbar-link:active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
+}
+
+.navbar-icon {
+    height: 2rem;
+    object-fit: contain;
+    display: none;
+}
+
+.navbar-text {
+    display: block;
+    font-size: 1.2rem;
+    /*height: 2vh;*/
+}
+
+
+@media (max-width: 480px) {
+    html {
+        padding-bottom: 5rem; /* Prevents the navbar from covering the content */
+    }
+
+    .navbar-text {
+        font-size: 0.9rem;
+    }
+
+    .navbar-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: fixed;
+        bottom: 0;
+        height: 5rem;
+        justify-content: center;
+        padding: 0;
+        z-index: 1;
+    }
+
+    .navbar-item {
+        width: 20%;
+    }
+
+    .navbar-list {
+        justify-content: space-around;
+        max-width: 400px;
+        gap: 0.5rem;
+        width: 90%;
+    }
+
+    .navbar-link {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 0.5rem;
+    }
+}
+
