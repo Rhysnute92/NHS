@@ -8,13 +8,12 @@
   <body>
     <div class="container">
       <header th:replace="~{fragments/common/header}"></header>
-      <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
+      <div th:replace="~{fragments/common/navbar :: nav}"></div>
       <h2 class="text-xl font-bold">Mobile Dashboard</h2>
       <p>Welcome</p>
     </div>
     <div id="widget-container"></div>
-    <div th:replace="~{fragments/common/navmenu :: navmenu}"></div>
     <script th:src="@{/js/components/header.js}"></script>
-    <script th:src="@{/js/Widget/widget.js}"></script>
+    <script type="module" th:src="@{/js/Widget/widget.js}"></script>
   </body>
 </html>

@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.UserWidget.Model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,35 +11,32 @@ public class UserWidget {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "user_widgetid")
+    private Long userWidgetID;
 
-    private Long userId;
+    @Column(name = "user_id")
+    private Long userID;
+
+    @Column(name = "widget_name")
     private String widgetName;
+
+    @Column(name = "position")
     private Integer position;
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
+
+    // Getters and Setters
+    public Long getUserwidgetID() {
+        return userWidgetID;
     }
-    /**
-     * @return the userId
-     */
-    public Long getUserId() {
-        return userId;
+
+    public Long getUserID() {
+        return userID;
     }
-    /**
-     * @return the widgetName
-     */
+
     public String getWidgetName() {
         return widgetName;
     }
-    /**
-     * @return the position
-     */
+
     public Integer getPosition() {
         return position;
     }
-
-    // Getters and Setters
 }

@@ -1,10 +1,8 @@
 package uk.ac.cf.spring.nhs.UserWidget.Service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import uk.ac.cf.spring.nhs.UserWidget.Model.UserWidget;
 import uk.ac.cf.spring.nhs.UserWidget.Repository.JpaUserWidgetRepository;
 
@@ -14,8 +12,8 @@ public class UserWidgetService {
     @Autowired
     private JpaUserWidgetRepository userWidgetRepository;
 
-    public List<UserWidget> getUserWidgets(Long userId) {
-        return userWidgetRepository.findAllByUserId(userId);
+    public List<UserWidget> getUserWidgets(Long userID) {
+        return userWidgetRepository.findAllByUserID(userID);
     }
 
     public UserWidget saveUserWidget(UserWidget userWidget) {
