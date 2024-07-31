@@ -20,11 +20,8 @@ import java.util.Map;
 @RequestMapping("/diary")
 public class DiaryController {
 
-    private final DiaryService diaryService;
-
-    public DiaryController(DiaryService diaryService) {
-        this.diaryService = diaryService;
-    }
+    @Autowired
+    DiaryService diaryService;
 
     @GetMapping("")
     public String diary(Model model) {
@@ -41,9 +38,9 @@ public class DiaryController {
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {
         return List.of(
-            new NavMenuItem("Diary", "/diary", "fa-solid fa-book"),
-            new NavMenuItem("Check-in", "/diary/checkin", "fa-solid fa-user-check"),
-            new NavMenuItem("Photos", "/diary/photos", "fa-solid fa-camera")
+                new NavMenuItem("Diary", "/diary", "fa-solid fa-book"),
+                new NavMenuItem("Check-in", "/diary/checkin", "fa-solid fa-user-check"),
+                new NavMenuItem("Photos", "/diary/photos", "fa-solid fa-camera")
         );
     }
 }
