@@ -66,3 +66,357 @@
 2024-07-31T12:27:30.487+01:00  INFO 20328 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
 2024-07-31T12:27:55.641+01:00  INFO 20328 --- [nhs] [http-nio-8080-exec-2] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
 2024-07-31T12:28:05.349+01:00  INFO 20328 --- [nhs] [http-nio-8080-exec-4] u.a.c.s.n.D.C.DashboardController        : Device is mobile: false
+2024-07-31T12:30:36.374+01:00  INFO 288 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 288 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T12:30:36.376+01:00 DEBUG 288 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T12:30:36.377+01:00  INFO 288 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T12:30:36.428+01:00  INFO 288 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T12:30:36.428+01:00  INFO 288 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T12:30:37.283+01:00  INFO 288 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T12:30:37.358+01:00  INFO 288 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 1 JPA repository interface.
+2024-07-31T12:30:38.060+01:00  INFO 288 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T12:30:38.073+01:00  INFO 288 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T12:30:38.073+01:00  INFO 288 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T12:30:38.145+01:00  INFO 288 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T12:30:38.145+01:00  INFO 288 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1716 ms
+2024-07-31T12:30:38.301+01:00  INFO 288 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T12:30:38.381+01:00  INFO 288 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T12:30:38.433+01:00  INFO 288 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T12:30:38.845+01:00  INFO 288 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T12:30:38.882+01:00  INFO 288 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T12:30:39.057+01:00  INFO 288 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@50b4ab6a
+2024-07-31T12:30:39.060+01:00  INFO 288 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T12:30:39.106+01:00  WARN 288 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T12:30:39.111+01:00  WARN 288 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T12:30:40.124+01:00  INFO 288 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T12:30:40.127+01:00  INFO 288 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T12:30:40.470+01:00  WARN 288 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T12:30:40.493+01:00  INFO 288 --- [nhs] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-07-31T12:30:40.925+01:00  INFO 288 --- [nhs] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-31T12:30:40.954+01:00  INFO 288 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-07-31T12:30:40.963+01:00  INFO 288 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Started NhsApplication in 5.075 seconds (process running for 5.592)
+2024-07-31T12:30:43.187+01:00  INFO 288 --- [nhs] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-31T12:30:43.187+01:00  INFO 288 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-31T12:30:43.188+01:00  INFO 288 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-31T12:30:43.227+01:00  INFO 288 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T12:31:52.796+01:00  INFO 17636 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 17636 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T12:31:52.798+01:00 DEBUG 17636 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T12:31:52.799+01:00  INFO 17636 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T12:31:52.847+01:00  INFO 17636 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T12:31:52.848+01:00  INFO 17636 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T12:31:53.627+01:00  INFO 17636 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T12:31:53.696+01:00  INFO 17636 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 1 JPA repository interface.
+2024-07-31T12:31:54.335+01:00  INFO 17636 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T12:31:54.348+01:00  INFO 17636 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T12:31:54.348+01:00  INFO 17636 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T12:31:54.417+01:00  INFO 17636 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T12:31:54.417+01:00  INFO 17636 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1569 ms
+2024-07-31T12:31:54.572+01:00  INFO 17636 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T12:31:54.653+01:00  INFO 17636 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T12:31:54.699+01:00  INFO 17636 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T12:31:55.104+01:00  INFO 17636 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T12:31:55.140+01:00  INFO 17636 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T12:31:55.311+01:00  INFO 17636 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@918093a
+2024-07-31T12:31:55.314+01:00  INFO 17636 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T12:31:55.359+01:00  WARN 17636 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T12:31:55.363+01:00  WARN 17636 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T12:31:56.356+01:00  INFO 17636 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T12:31:56.360+01:00  INFO 17636 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T12:31:56.698+01:00  WARN 17636 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T12:31:56.723+01:00  INFO 17636 --- [nhs] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-07-31T12:31:57.133+01:00  INFO 17636 --- [nhs] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-31T12:31:57.164+01:00  INFO 17636 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-07-31T12:31:57.172+01:00  INFO 17636 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Started NhsApplication in 4.841 seconds (process running for 5.315)
+2024-07-31T12:31:59.291+01:00  INFO 17636 --- [nhs] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-31T12:31:59.291+01:00  INFO 17636 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-31T12:31:59.292+01:00  INFO 17636 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-31T12:31:59.330+01:00  INFO 17636 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T12:32:59.766+01:00  INFO 12848 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 12848 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T12:32:59.768+01:00 DEBUG 12848 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T12:32:59.769+01:00  INFO 12848 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T12:32:59.818+01:00  INFO 12848 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T12:32:59.818+01:00  INFO 12848 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T12:33:00.617+01:00  INFO 12848 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T12:33:00.688+01:00  INFO 12848 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 1 JPA repository interface.
+2024-07-31T12:33:01.339+01:00  INFO 12848 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T12:33:01.352+01:00  INFO 12848 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T12:33:01.352+01:00  INFO 12848 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T12:33:01.422+01:00  INFO 12848 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T12:33:01.423+01:00  INFO 12848 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1603 ms
+2024-07-31T12:33:01.577+01:00  INFO 12848 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T12:33:01.665+01:00  INFO 12848 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T12:33:01.710+01:00  INFO 12848 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T12:33:02.111+01:00  INFO 12848 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T12:33:02.146+01:00  INFO 12848 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T12:33:02.322+01:00  INFO 12848 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@13faee8
+2024-07-31T12:33:02.325+01:00  INFO 12848 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T12:33:02.375+01:00  WARN 12848 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T12:33:02.381+01:00  WARN 12848 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T12:33:03.475+01:00  INFO 12848 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T12:33:03.479+01:00  INFO 12848 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T12:33:03.820+01:00  WARN 12848 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T12:33:03.843+01:00  INFO 12848 --- [nhs] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-07-31T12:33:04.260+01:00  INFO 12848 --- [nhs] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-31T12:33:04.289+01:00  INFO 12848 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-07-31T12:33:04.298+01:00  INFO 12848 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Started NhsApplication in 4.994 seconds (process running for 5.466)
+2024-07-31T12:33:04.513+01:00  INFO 12848 --- [nhs] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-31T12:33:04.513+01:00  INFO 12848 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-31T12:33:04.514+01:00  INFO 12848 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-31T12:33:04.553+01:00  INFO 12848 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T12:37:57.100+01:00  INFO 12848 --- [nhs] [http-nio-8080-exec-2] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T12:43:32.644+01:00  INFO 18960 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 18960 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T12:43:32.647+01:00 DEBUG 18960 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T12:43:32.647+01:00  INFO 18960 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T12:43:32.698+01:00  INFO 18960 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T12:43:32.698+01:00  INFO 18960 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T12:43:33.531+01:00  INFO 18960 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T12:43:33.603+01:00  INFO 18960 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 62 ms. Found 1 JPA repository interface.
+2024-07-31T12:43:34.278+01:00  INFO 18960 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T12:43:34.291+01:00  INFO 18960 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T12:43:34.292+01:00  INFO 18960 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T12:43:34.362+01:00  INFO 18960 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T12:43:34.362+01:00  INFO 18960 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1663 ms
+2024-07-31T12:43:34.516+01:00  INFO 18960 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T12:43:34.597+01:00  INFO 18960 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T12:43:34.645+01:00  INFO 18960 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T12:43:35.058+01:00  INFO 18960 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T12:43:35.095+01:00  INFO 18960 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T12:43:35.288+01:00  INFO 18960 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@918093a
+2024-07-31T12:43:35.290+01:00  INFO 18960 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T12:43:35.336+01:00  WARN 18960 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T12:43:35.341+01:00  WARN 18960 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T12:43:36.382+01:00  INFO 18960 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T12:43:36.386+01:00  INFO 18960 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T12:43:36.757+01:00  WARN 18960 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T12:43:36.780+01:00  INFO 18960 --- [nhs] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-07-31T12:43:37.197+01:00  INFO 18960 --- [nhs] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-31T12:43:37.226+01:00  INFO 18960 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-07-31T12:43:37.234+01:00  INFO 18960 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Started NhsApplication in 5.075 seconds (process running for 5.556)
+2024-07-31T12:43:37.621+01:00  INFO 18960 --- [nhs] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-31T12:43:37.621+01:00  INFO 18960 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-31T12:43:37.622+01:00  INFO 18960 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-31T12:43:37.662+01:00  INFO 18960 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T12:51:37.767+01:00  INFO 2184 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 2184 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T12:51:37.769+01:00 DEBUG 2184 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T12:51:37.770+01:00  INFO 2184 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T12:51:37.823+01:00  INFO 2184 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T12:51:37.823+01:00  INFO 2184 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T12:51:38.618+01:00  INFO 2184 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T12:51:38.689+01:00  INFO 2184 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 61 ms. Found 1 JPA repository interface.
+2024-07-31T12:51:39.491+01:00  INFO 2184 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T12:51:39.505+01:00  INFO 2184 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T12:51:39.505+01:00  INFO 2184 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T12:51:39.579+01:00  INFO 2184 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T12:51:39.580+01:00  INFO 2184 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1755 ms
+2024-07-31T12:51:39.733+01:00  INFO 2184 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T12:51:39.816+01:00  INFO 2184 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T12:51:39.865+01:00  INFO 2184 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T12:51:40.264+01:00  INFO 2184 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T12:51:40.301+01:00  INFO 2184 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T12:51:40.477+01:00  INFO 2184 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@918093a
+2024-07-31T12:51:40.479+01:00  INFO 2184 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T12:51:40.527+01:00  WARN 2184 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T12:51:40.532+01:00  WARN 2184 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T12:51:41.550+01:00  INFO 2184 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T12:51:41.554+01:00  INFO 2184 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T12:51:41.911+01:00  WARN 2184 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T12:51:41.934+01:00  INFO 2184 --- [nhs] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-07-31T12:51:42.355+01:00  INFO 2184 --- [nhs] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-31T12:51:42.383+01:00  INFO 2184 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-07-31T12:51:42.392+01:00  INFO 2184 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Started NhsApplication in 5.098 seconds (process running for 5.574)
+2024-07-31T12:51:46.137+01:00  INFO 2184 --- [nhs] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-31T12:51:46.138+01:00  INFO 2184 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-31T12:51:46.139+01:00  INFO 2184 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-31T12:51:46.178+01:00  INFO 2184 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T15:43:24.424+01:00  INFO 2184 --- [nhs] [http-nio-8080-exec-6] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T15:46:30.362+01:00  INFO 20356 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 20356 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T15:46:30.364+01:00 DEBUG 20356 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T15:46:30.365+01:00  INFO 20356 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T15:46:30.419+01:00  INFO 20356 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T15:46:30.419+01:00  INFO 20356 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T15:46:31.385+01:00  INFO 20356 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T15:46:31.570+01:00  INFO 20356 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 176 ms. Found 1 JPA repository interface.
+2024-07-31T15:46:32.382+01:00  INFO 20356 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T15:46:32.399+01:00  INFO 20356 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T15:46:32.399+01:00  INFO 20356 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T15:46:32.482+01:00  INFO 20356 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T15:46:32.482+01:00  INFO 20356 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2062 ms
+2024-07-31T15:46:32.664+01:00  INFO 20356 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T15:46:32.773+01:00  INFO 20356 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T15:46:32.831+01:00  INFO 20356 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T15:46:33.355+01:00  INFO 20356 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T15:46:33.398+01:00  INFO 20356 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T15:46:33.629+01:00  INFO 20356 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@918093a
+2024-07-31T15:46:33.632+01:00  INFO 20356 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T15:46:33.687+01:00  WARN 20356 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T15:46:33.694+01:00  WARN 20356 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T15:46:34.825+01:00  INFO 20356 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T15:46:34.829+01:00  INFO 20356 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T15:46:35.183+01:00  WARN 20356 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T15:46:35.210+01:00  INFO 20356 --- [nhs] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-07-31T15:46:35.625+01:00  INFO 20356 --- [nhs] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-31T15:46:35.675+01:00  INFO 20356 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-07-31T15:46:35.684+01:00  INFO 20356 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Started NhsApplication in 5.941 seconds (process running for 7.079)
+2024-07-31T15:46:39.103+01:00  INFO 20356 --- [nhs] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-31T15:46:39.104+01:00  INFO 20356 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-31T15:46:39.104+01:00  INFO 20356 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-07-31T15:46:39.146+01:00  INFO 20356 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T15:50:32.362+01:00  INFO 1216 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 1216 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T15:50:32.364+01:00 DEBUG 1216 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T15:50:32.365+01:00  INFO 1216 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T15:50:32.415+01:00  INFO 1216 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T15:50:32.415+01:00  INFO 1216 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T15:50:33.244+01:00  INFO 1216 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T15:50:33.315+01:00  INFO 1216 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 61 ms. Found 1 JPA repository interface.
+2024-07-31T15:50:33.967+01:00  INFO 1216 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T15:50:33.980+01:00  INFO 1216 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T15:50:33.980+01:00  INFO 1216 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T15:50:34.059+01:00  INFO 1216 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T15:50:34.059+01:00  INFO 1216 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1643 ms
+2024-07-31T15:50:34.230+01:00  INFO 1216 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T15:50:34.317+01:00  INFO 1216 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T15:50:34.364+01:00  INFO 1216 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T15:50:34.766+01:00  INFO 1216 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T15:50:34.802+01:00  INFO 1216 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T15:50:34.972+01:00  INFO 1216 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@918093a
+2024-07-31T15:50:34.974+01:00  INFO 1216 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T15:50:35.020+01:00  WARN 1216 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T15:50:35.024+01:00  WARN 1216 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T15:50:36.067+01:00  INFO 1216 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T15:50:36.073+01:00  INFO 1216 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T15:50:36.430+01:00  WARN 1216 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T15:50:36.454+01:00  INFO 1216 --- [nhs] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-07-31T15:50:36.876+01:00  INFO 1216 --- [nhs] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-31T15:50:36.905+01:00  INFO 1216 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-07-31T15:50:36.913+01:00  INFO 1216 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Started NhsApplication in 5.03 seconds (process running for 5.509)
+2024-07-31T15:50:45.362+01:00  INFO 1216 --- [nhs] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-31T15:50:45.362+01:00  INFO 1216 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-31T15:50:45.363+01:00  INFO 1216 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-31T15:50:45.403+01:00  INFO 1216 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T15:54:30.619+01:00  INFO 16720 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 16720 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T15:54:30.621+01:00 DEBUG 16720 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T15:54:30.622+01:00  INFO 16720 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T15:54:30.671+01:00  INFO 16720 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T15:54:30.672+01:00  INFO 16720 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T15:54:31.443+01:00  INFO 16720 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T15:54:31.514+01:00  INFO 16720 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 61 ms. Found 1 JPA repository interface.
+2024-07-31T15:54:32.198+01:00  INFO 16720 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T15:54:32.211+01:00  INFO 16720 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T15:54:32.211+01:00  INFO 16720 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T15:54:32.279+01:00  INFO 16720 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T15:54:32.279+01:00  INFO 16720 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1607 ms
+2024-07-31T15:54:32.434+01:00  INFO 16720 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T15:54:32.517+01:00  INFO 16720 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T15:54:32.563+01:00  INFO 16720 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T15:54:32.983+01:00  INFO 16720 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T15:54:33.019+01:00  INFO 16720 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T15:54:33.190+01:00  INFO 16720 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@918093a
+2024-07-31T15:54:33.193+01:00  INFO 16720 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T15:54:33.238+01:00  WARN 16720 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T15:54:33.243+01:00  WARN 16720 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T15:54:34.275+01:00  INFO 16720 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T15:54:34.279+01:00  INFO 16720 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T15:54:34.632+01:00  WARN 16720 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T15:54:34.655+01:00  INFO 16720 --- [nhs] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-07-31T15:54:35.072+01:00  INFO 16720 --- [nhs] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-31T15:54:35.101+01:00  INFO 16720 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-07-31T15:54:35.109+01:00  INFO 16720 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Started NhsApplication in 4.959 seconds (process running for 5.421)
+2024-07-31T15:54:36.720+01:00  INFO 16720 --- [nhs] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-31T15:54:36.721+01:00  INFO 16720 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-31T15:54:36.722+01:00  INFO 16720 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-31T15:54:36.761+01:00  INFO 16720 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T16:03:16.049+01:00  INFO 10316 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 10316 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T16:03:16.051+01:00 DEBUG 10316 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T16:03:16.052+01:00  INFO 10316 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T16:03:16.103+01:00  INFO 10316 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T16:03:16.103+01:00  INFO 10316 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T16:03:16.879+01:00  INFO 10316 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T16:03:16.948+01:00  INFO 10316 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 1 JPA repository interface.
+2024-07-31T16:03:17.606+01:00  INFO 10316 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T16:03:17.622+01:00  INFO 10316 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T16:03:17.622+01:00  INFO 10316 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T16:03:17.686+01:00  INFO 10316 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T16:03:17.686+01:00  INFO 10316 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1582 ms
+2024-07-31T16:03:17.841+01:00  INFO 10316 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T16:03:17.924+01:00  INFO 10316 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T16:03:17.970+01:00  INFO 10316 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T16:03:18.366+01:00  INFO 10316 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T16:03:18.403+01:00  INFO 10316 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T16:03:18.573+01:00  INFO 10316 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@918093a
+2024-07-31T16:03:18.575+01:00  INFO 10316 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T16:03:18.622+01:00  WARN 10316 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T16:03:18.627+01:00  WARN 10316 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T16:03:19.643+01:00  INFO 10316 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T16:03:19.647+01:00  INFO 10316 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T16:03:19.987+01:00  WARN 10316 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T16:03:20.010+01:00  INFO 10316 --- [nhs] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-07-31T16:03:20.428+01:00  INFO 10316 --- [nhs] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-31T16:03:20.457+01:00  INFO 10316 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-07-31T16:03:20.465+01:00  INFO 10316 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Started NhsApplication in 4.895 seconds (process running for 5.413)
+2024-07-31T16:03:29.726+01:00  INFO 10316 --- [nhs] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-31T16:03:29.726+01:00  INFO 10316 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-31T16:03:29.727+01:00  INFO 10316 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-31T16:03:29.770+01:00  INFO 10316 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T16:19:14.245+01:00  INFO 18936 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 18936 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T16:19:14.247+01:00 DEBUG 18936 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T16:19:14.248+01:00  INFO 18936 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T16:19:14.296+01:00  INFO 18936 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T16:19:14.297+01:00  INFO 18936 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T16:19:15.083+01:00  INFO 18936 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T16:19:15.153+01:00  INFO 18936 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 61 ms. Found 1 JPA repository interface.
+2024-07-31T16:19:15.817+01:00  INFO 18936 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T16:19:15.829+01:00  INFO 18936 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T16:19:15.830+01:00  INFO 18936 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T16:19:15.902+01:00  INFO 18936 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T16:19:15.902+01:00  INFO 18936 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1605 ms
+2024-07-31T16:19:16.054+01:00  INFO 18936 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T16:19:16.134+01:00  INFO 18936 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T16:19:16.179+01:00  INFO 18936 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T16:19:16.599+01:00  INFO 18936 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T16:19:16.636+01:00  INFO 18936 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T16:19:16.810+01:00  INFO 18936 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@918093a
+2024-07-31T16:19:16.813+01:00  INFO 18936 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T16:19:16.859+01:00  WARN 18936 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T16:19:16.863+01:00  WARN 18936 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T16:19:17.874+01:00  INFO 18936 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T16:19:17.877+01:00  INFO 18936 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T16:19:18.228+01:00  WARN 18936 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T16:19:18.254+01:00  INFO 18936 --- [nhs] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-07-31T16:19:18.707+01:00  INFO 18936 --- [nhs] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-31T16:19:18.738+01:00  INFO 18936 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-07-31T16:19:18.746+01:00  INFO 18936 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Started NhsApplication in 4.97 seconds (process running for 5.451)
+2024-07-31T16:19:20.020+01:00  INFO 18936 --- [nhs] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-31T16:19:20.020+01:00  INFO 18936 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-31T16:19:20.021+01:00  INFO 18936 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-31T16:19:20.061+01:00  INFO 18936 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T16:20:10.951+01:00  INFO 20356 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 20356 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T16:20:10.954+01:00 DEBUG 20356 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T16:20:10.955+01:00  INFO 20356 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T16:20:11.010+01:00  INFO 20356 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T16:20:11.010+01:00  INFO 20356 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T16:20:11.822+01:00  INFO 20356 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T16:20:11.893+01:00  INFO 20356 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 1 JPA repository interface.
+2024-07-31T16:20:12.557+01:00  INFO 20356 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T16:20:12.570+01:00  INFO 20356 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T16:20:12.570+01:00  INFO 20356 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T16:20:12.640+01:00  INFO 20356 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T16:20:12.641+01:00  INFO 20356 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1630 ms
+2024-07-31T16:20:12.808+01:00  INFO 20356 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T16:20:12.890+01:00  INFO 20356 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T16:20:12.936+01:00  INFO 20356 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T16:20:13.338+01:00  INFO 20356 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T16:20:13.375+01:00  INFO 20356 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T16:20:13.555+01:00  INFO 20356 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@918093a
+2024-07-31T16:20:13.557+01:00  INFO 20356 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T16:20:13.602+01:00  WARN 20356 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T16:20:13.607+01:00  WARN 20356 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T16:20:14.621+01:00  INFO 20356 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T16:20:14.624+01:00  INFO 20356 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T16:20:14.970+01:00  WARN 20356 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T16:20:14.993+01:00  INFO 20356 --- [nhs] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-07-31T16:20:15.406+01:00  INFO 20356 --- [nhs] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-31T16:20:15.435+01:00  INFO 20356 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-07-31T16:20:15.444+01:00  INFO 20356 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Started NhsApplication in 4.958 seconds (process running for 5.433)
+2024-07-31T16:20:24.634+01:00  INFO 20356 --- [nhs] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-31T16:20:24.634+01:00  INFO 20356 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-31T16:20:24.635+01:00  INFO 20356 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-31T16:20:24.681+01:00  INFO 20356 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
