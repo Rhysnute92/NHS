@@ -11,7 +11,7 @@
 <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
 <div class="container-calendar">
     <div id="appointments">
-            <form  action="/calendar" id="addAppt" name="addAppt" method="post" th:object="${Repositories.Calendar}">
+<!--            <form  action="/calendar" id="addAppt" name="addAppt" method="post" th:object="${Repositories.Calendar}">-->
             <label>Date of Appointment:</label><br>
             <input type="date" id="appointmentDate"><br>
             <label>Time of Appointment:</label><br>
@@ -28,7 +28,7 @@
             <button id="deleteAppointment" onclick="deleteEvent()">
                 Clear
             </button>
-        </form>
+<!--        </form>-->
     </div>
 </div>
 <div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>

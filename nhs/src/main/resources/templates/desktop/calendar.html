@@ -16,6 +16,7 @@
       <div id="left">
         <div id="appointments">
           <h3>Add Appointment</h3>
+<!--          <form action="/calendar" id="appointment" name="appointment" method="post" th:object="${Repositories.Calendar}">-->
             <label>Date of Appointment:</label><br>
               <input type="date" id="appointmentDate"><br>
             <label>Time of Appointment:</label><br>
@@ -26,12 +27,13 @@
               <input type="text" id="dr" placeholder="Please enter the name of your Dr"><br>
             <label>Information about your Appointment:</label><br>
               <textarea id="comments" placeholder="Info about your appointment"></textarea><br>
-            <button id="addEvent" onclick="addEvent()">
+            <button id="addEvent" type="submit">
               Add
             </button>
             <button id="deleteAppointment" onclick="deleteEvent()">
               Clear
             </button>
+<!--          </form>-->
         </div>
       </div>
         <div id="center">

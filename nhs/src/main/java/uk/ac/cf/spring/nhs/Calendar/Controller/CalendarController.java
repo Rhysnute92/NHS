@@ -21,6 +21,7 @@ public class CalendarController {
 
     @Autowired
     private CalendarRepository calendarRepository;
+
     @GetMapping("/calendar")
     public ModelAndView Calendar(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
@@ -32,15 +33,6 @@ public class CalendarController {
         }
         return modelAndView;
     }
-
-        public String showCalendar(Model model) {
-            Repositories repositories = new CalendarRepository();
-            repositories.setCalendar(new Calendar());
-            model.addAttribute("Repositories", repositories);
-            return "mobile/Calendar/addappointment";
-        }
-    }
-
 
     @GetMapping("/mobileaddappt")
     public ModelAndView getMobileAddAppt(){
