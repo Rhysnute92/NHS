@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS Symptoms;
 DROP TABLE IF EXISTS Measurments;
 DROP TABLE IF EXISTS Photos;
 DROP TABLE IF EXISTS Appointments;
-DROP TABLE IF EXISTS UserWidget;
+DROP TABLE IF EXISTS UserWidgets;
 DROP TABLE IF EXISTS Widgets;
 DROP TABLE IF EXISTS Providers;
 DROP TABLE IF EXISTS PatientDiagnosis;
@@ -77,7 +77,7 @@ CREATE TABLE Widgets (
     WidgetDesc VARCHAR(255),
     WidgetIcon VARCHAR(255)
 );
-CREATE TABLE UserWidget (
+CREATE TABLE UserWidgets (
     UserID INT,
     WidgetID INT,
     WidgetLocation INT,
