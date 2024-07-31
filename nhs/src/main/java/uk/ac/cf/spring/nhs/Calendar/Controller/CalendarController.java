@@ -39,4 +39,6 @@ public class CalendarController {
         ModelAndView modelAndView = new ModelAndView("mobile/Calendar/addappointment");
         return modelAndView;
     }
+
+    @PostMapping("/calendar")
 }
