@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<div th:insert="~{fragments/common/header}" ></div>
+<div th:insert="~{common/fragments/header}" ></div>
 <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
 <div class="container-calendar">
     <div id="left">
@@ -88,9 +88,6 @@
       </div>
     </div>
   </div>
-<footer>
-  <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
-</footer>
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
