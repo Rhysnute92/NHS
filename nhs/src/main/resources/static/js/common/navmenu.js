@@ -1,7 +1,7 @@
 const navmenu = document.querySelector('.navmenu');
 const navmenuToggle = document.querySelector('.navmenu-toggle');
 const body = document.body;
-const mobileBreakpoint = 768;
+const mobileBreakpoint = 480;
 
 function toggleNavmenu() {
     // Only toggle the visibility and prevent scroll if we're below the breakpoint
