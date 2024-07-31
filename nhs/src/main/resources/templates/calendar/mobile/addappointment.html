@@ -9,6 +9,7 @@
 <body>
 <div th:replace="~{common/fragments/header}"></div>
 <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+<div th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
 <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
 <div class="container-calendar">
     <div id="appointments">
