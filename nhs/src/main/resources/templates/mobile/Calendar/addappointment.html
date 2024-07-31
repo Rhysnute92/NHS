@@ -7,10 +7,12 @@
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
-<div th:replace="~{fragments/mobile/mobileheader :: header}"></div>
+<div th:replace="~{fragments/common/header}"></div>
+<nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
+<div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
+<p>You do not have to add lymphoedema appointments these will be done by your physician</p>
 <div class="container-calendar">
     <div id="appointments">
-        <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
         <label>Date of Appointment:</label><br>
         <input type="date" id="appointmentDate"><br>
         <label>Time of Appointment:</label><br>
@@ -29,7 +31,6 @@
         </button>
     </div>
 </div>
-<div th:replace="~{fragments/mobile/mobilenav :: mobilenav}"></div>
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/components/header.js}"></script>
 </body>

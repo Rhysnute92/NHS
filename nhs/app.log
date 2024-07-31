@@ -420,3 +420,117 @@
 2024-07-31T16:20:24.634+01:00  INFO 20356 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2024-07-31T16:20:24.635+01:00  INFO 20356 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 2024-07-31T16:20:24.681+01:00  INFO 20356 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T16:32:46.419+01:00  INFO 21992 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 21992 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T16:32:46.421+01:00 DEBUG 21992 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T16:32:46.421+01:00  INFO 21992 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T16:32:46.472+01:00  INFO 21992 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T16:32:46.472+01:00  INFO 21992 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T16:32:47.276+01:00  INFO 21992 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T16:32:47.354+01:00  INFO 21992 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 69 ms. Found 1 JPA repository interface.
+2024-07-31T16:32:48.107+01:00  INFO 21992 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T16:32:48.120+01:00  INFO 21992 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T16:32:48.120+01:00  INFO 21992 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T16:32:48.194+01:00  INFO 21992 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T16:32:48.195+01:00  INFO 21992 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1722 ms
+2024-07-31T16:32:48.350+01:00  INFO 21992 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T16:32:48.432+01:00  INFO 21992 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T16:32:48.481+01:00  INFO 21992 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T16:32:48.892+01:00  INFO 21992 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T16:32:48.928+01:00  INFO 21992 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T16:32:49.108+01:00  INFO 21992 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@918093a
+2024-07-31T16:32:49.109+01:00  INFO 21992 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T16:32:49.156+01:00  WARN 21992 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T16:32:49.161+01:00  WARN 21992 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T16:32:50.178+01:00  INFO 21992 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T16:32:50.182+01:00  INFO 21992 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T16:32:50.528+01:00  WARN 21992 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T16:32:50.555+01:00  INFO 21992 --- [nhs] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-07-31T16:32:50.975+01:00  INFO 21992 --- [nhs] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-31T16:32:51.004+01:00  INFO 21992 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-07-31T16:32:51.012+01:00  INFO 21992 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Started NhsApplication in 5.065 seconds (process running for 5.533)
+2024-07-31T16:38:06.051+01:00  INFO 21992 --- [nhs] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-31T16:38:06.052+01:00  INFO 21992 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-31T16:38:06.053+01:00  INFO 21992 --- [nhs] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-31T16:38:06.098+01:00  INFO 21992 --- [nhs] [http-nio-8080-exec-1] u.a.c.s.n.D.C.DashboardController        : Device is mobile: true
+2024-07-31T16:58:32.368+01:00  INFO 7192 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Starting NhsApplication using Java 17.0.9 with PID 7192 (C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\classes\java\main started by Olser in C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs)
+2024-07-31T16:58:32.370+01:00 DEBUG 7192 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2024-07-31T16:58:32.370+01:00  INFO 7192 --- [nhs] [restartedMain] uk.ac.cf.spring.nhs.NhsApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-07-31T16:58:32.421+01:00  INFO 7192 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-31T16:58:32.421+01:00  INFO 7192 --- [nhs] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-31T16:58:33.206+01:00  INFO 7192 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-31T16:58:33.275+01:00  INFO 7192 --- [nhs] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 1 JPA repository interface.
+2024-07-31T16:58:33.920+01:00  INFO 7192 --- [nhs] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-31T16:58:33.932+01:00  INFO 7192 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-31T16:58:33.933+01:00  INFO 7192 --- [nhs] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-31T16:58:34.003+01:00  INFO 7192 --- [nhs] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-31T16:58:34.004+01:00  INFO 7192 --- [nhs] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1582 ms
+2024-07-31T16:58:34.160+01:00  INFO 7192 --- [nhs] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-31T16:58:34.241+01:00  INFO 7192 --- [nhs] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-31T16:58:34.287+01:00  INFO 7192 --- [nhs] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-31T16:58:34.690+01:00  INFO 7192 --- [nhs] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-31T16:58:34.728+01:00  INFO 7192 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-31T16:58:34.902+01:00  INFO 7192 --- [nhs] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@574f97f6
+2024-07-31T16:58:34.904+01:00  INFO 7192 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-31T16:58:34.949+01:00  WARN 7192 --- [nhs] [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2024-07-31T16:58:34.954+01:00  WARN 7192 --- [nhs] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-31T16:58:35.972+01:00  INFO 7192 --- [nhs] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-31T16:58:35.975+01:00  INFO 7192 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T16:58:36.323+01:00  WARN 7192 --- [nhs] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-31T16:58:36.664+01:00  WARN 7192 --- [nhs] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Failed to execute SQL script statement #1 of file [C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\resources\main\schema.sql]: <<<<<<< HEAD DROP TABLE IF EXISTS user_widget
+2024-07-31T16:58:36.665+01:00  INFO 7192 --- [nhs] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-31T16:58:36.669+01:00  INFO 7192 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-07-31T16:58:36.674+01:00  INFO 7192 --- [nhs] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-07-31T16:58:36.676+01:00  INFO 7192 --- [nhs] [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2024-07-31T16:58:36.688+01:00  INFO 7192 --- [nhs] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-07-31T16:58:36.720+01:00 ERROR 7192 --- [nhs] [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Failed to execute SQL script statement #1 of file [C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\resources\main\schema.sql]: <<<<<<< HEAD DROP TABLE IF EXISTS user_widget
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1788) ~[spring-beans-6.1.10.jar:6.1.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.10.jar:6.1.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.10.jar:6.1.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.10.jar:6.1.10]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.10.jar:6.1.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.10.jar:6.1.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.10.jar:6.1.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313) ~[spring-beans-6.1.10.jar:6.1.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.10.jar:6.1.10]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975) ~[spring-beans-6.1.10.jar:6.1.10]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:962) ~[spring-context-6.1.10.jar:6.1.10]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624) ~[spring-context-6.1.10.jar:6.1.10]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.3.1.jar:3.3.1]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.3.1.jar:3.3.1]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.3.1.jar:3.3.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335) ~[spring-boot-3.3.1.jar:3.3.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) ~[spring-boot-3.3.1.jar:3.3.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352) ~[spring-boot-3.3.1.jar:3.3.1]
+	at uk.ac.cf.spring.nhs.NhsApplication.main(NhsApplication.java:10) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.3.1.jar:3.3.1]
+Caused by: org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #1 of file [C:\Users\Olser\OneDrive\Documents\University Files\course files\Dissertation-Lymphoedema\Application\dissertation-nhs-lymphoedema\nhs\build\resources\main\schema.sql]: <<<<<<< HEAD DROP TABLE IF EXISTS user_widget
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:282) ~[spring-jdbc-6.1.10.jar:6.1.10]
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:254) ~[spring-jdbc-6.1.10.jar:6.1.10]
+	at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:54) ~[spring-jdbc-6.1.10.jar:6.1.10]
+	at org.springframework.boot.jdbc.init.DataSourceScriptDatabaseInitializer.runScripts(DataSourceScriptDatabaseInitializer.java:87) ~[spring-boot-3.3.1.jar:3.3.1]
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.runScripts(AbstractScriptDatabaseInitializer.java:146) ~[spring-boot-3.3.1.jar:3.3.1]
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.applyScripts(AbstractScriptDatabaseInitializer.java:108) ~[spring-boot-3.3.1.jar:3.3.1]
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.applySchemaScripts(AbstractScriptDatabaseInitializer.java:98) ~[spring-boot-3.3.1.jar:3.3.1]
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.initializeDatabase(AbstractScriptDatabaseInitializer.java:76) ~[spring-boot-3.3.1.jar:3.3.1]
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.afterPropertiesSet(AbstractScriptDatabaseInitializer.java:66) ~[spring-boot-3.3.1.jar:3.3.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1835) ~[spring-beans-6.1.10.jar:6.1.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1784) ~[spring-beans-6.1.10.jar:6.1.10]
+	... 23 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '<<<<<<< HEAD DROP TABLE IF EXISTS user_widget' at line 1
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:112) ~[mysql-connector-j-9.0.0.jar:9.0.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114) ~[mysql-connector-j-9.0.0.jar:9.0.0]
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:875) ~[mysql-connector-j-9.0.0.jar:9.0.0]
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:723) ~[mysql-connector-j-9.0.0.jar:9.0.0]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-5.1.0.jar:na]
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:261) ~[spring-jdbc-6.1.10.jar:6.1.10]
+	... 33 common frames omitted
+
