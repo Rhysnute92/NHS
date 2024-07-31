@@ -7,14 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-<div th:replace="~{fragments/common/header}"></div>
+<header th:replace="~{common/fragments/header}"></header>
+<nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
 
 <div class="container">
     <div class="main-content">
         <div id="infoContainer">
-            <div th:replace="~{fragments/Guest/appointment :: info1}"></div>
-            <div th:replace="~{fragments/Guest/services :: info2}"></div>
-            <div th:replace="~{fragments/Guest/findUs :: info3}"></div>
+            <div th:replace="~{guest/fragments/appointment :: info1}"></div>
+            <div th:replace="~{guest/fragments/services :: info2}"></div>
+            <div th:replace="~{guest/fragments/findUs :: info3}"></div>
         </div>
     </div>
     <div class="sidebar">
