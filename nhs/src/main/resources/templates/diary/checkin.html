@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" th:href="@{/css/main.css}" />
-  <link rel="stylesheet" th:href="@{/css/diary/checkin.css}" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Check-in</title>
+  <link layout:fragment="css" rel="stylesheet" th:href="@{/css/diary/checkin.css}" />
 </head>
 <body>
-  <div th:replace="~{fragments/common/header}"></div>
-  <nav th:replace="~{fragments/common/navbar}" class="nav"></nav>
-  <div class="checkin-container">
-    <div th:replace="~{fragments/common/navmenu :: navmenu (${navMenuItems})}"></div>
-    <div class="checkin-form-container">
-      <h1>Check-in</h1>
-      <div th:replace="~{fragments/diary/checkinForm}"></div>
-    </div>
-</div>
-<script th:src="@{/js/components/checkin.js}"></script>
-<script th:src="@{/js/components/header.js}"></script>
+<main layout:fragment="content">
+  <h1 class="page-title">Check-in</h1>
+  <div class="container">
+    <div th:replace="~{diary/fragments/checkinForm}"></div>
+  </div>
+</main>
+<script layout:fragment="scripts" th:src="@{/js/diary/checkin.js}"></script>
 </body>
 </html>
