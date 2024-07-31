@@ -125,19 +125,11 @@ p {
 }
 
 /* DESKTOP CSS */
-.main-content {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    box-sizing: border-box;
-}
-
 .info-box {
     display: none;
     width: 50%;
-    height: 50vh;
+    max-width: 800px;
+    margin: 2rem auto;
     background-color: #E8EDEE;
     border: 1px solid #ccc;
     padding: 1rem;
@@ -150,10 +142,9 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
+    position: absolute;
     top: 5rem;
     right: 1rem;
-    height: calc(50vh - 5rem);
     padding: 1rem;
     box-sizing: border-box;
 }
@@ -173,7 +164,33 @@ p {
     background: #003087;
 }
 
+#hosp1, #hosp2, #hosp3 {
+    text-align: center;
+    margin: 1rem 0;
+}
 
+.appointment h3, .services h3, .findUs h3,
+.appointment p, .services p, .findUs p {
+    margin: 0.5rem 0;
+}
+
+#hosp1 img.map {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+#hosp2 {
+    padding: 2rem;
+}
+.contact {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.findUs h3, .telephone {
+    color: var(--nhs-blue);
+    font-weight: bold;
+}
 .bottom-container {
     display: flex;
     justify-content: space-between;
