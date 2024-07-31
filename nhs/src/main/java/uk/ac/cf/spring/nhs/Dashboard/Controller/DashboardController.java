@@ -1,5 +1,7 @@
 package uk.ac.cf.spring.nhs.Dashboard.Controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -9,17 +11,14 @@ import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 @Controller
 public class DashboardController {
 
-    /**
-     * Handles the GET request to the "/dashboard" endpoint and returns the
-     * appropriate view based on the device type.
-     *
-     * @param request the HttpServletRequest object representing the HTTP request
-     * @return the name of the view to be rendered, either "mobile/dashboard" or
-     *         "desktop/dashboard"
-     */
+    private static final Logger logger = LoggerFactory.getLogger(DashboardController.class);
+
     @GetMapping("/dashboard")
     public String dashboard(HttpServletRequest request) {
-        if (DeviceDetector.isMobile(request)) {
+        boolean isMobile = DeviceDetector.isMobile(request);
+        logger.info("Device is mobile: " + isMobile);
+
+        if (isMobile) {
             return "mobile/Dashboard/dashboard";
         } else {
             return "desktop/Dashboard/dashboard";
