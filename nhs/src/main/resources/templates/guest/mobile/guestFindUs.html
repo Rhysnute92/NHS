@@ -9,13 +9,13 @@
 <body>
 <div class="container">
     <div th:replace="~{common/fragments/header}"></div>
-    <h1>Find Us</h1>
-    <p>Find information here on how to find us and the location of our clinic.</p>
+    <div class="mobileFrag">
+        <div th:replace="~{guest/fragments/findUs :: info3}"></div>
+    </div>
 </div>
-<div class="map-container">
-<p>
-    Clinic Map Placeholder.
-</p>
+<div id="popup" class="popup-overlay" onclick="hidePopup()">
+    <span class="popup-close" onclick="hidePopup()">&times;</span>
+    <img id="popup-image" class="popup-image" />
 </div>
 <div class="btn-container">
     <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
@@ -29,5 +29,6 @@
     />
 </div>
 <script th:src="@{/js/common/header.js}"></script>
+<script th:src="@{/js/Guest/guestMobile.js}"></script>
 </body>
 </html>
