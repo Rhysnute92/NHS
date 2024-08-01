@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.spring.nhs.Calendar.Repositories.CalendarRepository;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
@@ -20,9 +21,6 @@ import java.util.List;
 
 @Controller
 public class CalendarController {
-
-    @Autowired
-    private CalendarRepository calendarRepository;
 
     @GetMapping("/calendar")
     public ModelAndView Calendar(HttpServletRequest request) {
@@ -41,6 +39,23 @@ public class CalendarController {
         ModelAndView modelAndView = new ModelAndView("mobile/Calendar/addappointment");
         return modelAndView;
     }
+
+//    @PostMapping("/calendar")
+//    public ModelAndView appointmentSent(@Valid @ModelAttribute("addappointment") Calendar calendar, BindingResult bindingResult, Model model) {
+//        ModelAndView modelAndView = new ModelAndView("/mobile/Calendar/calendar");
+//        if (bindingResult.hasErrors()) {
+//            Calendar cal = new Calendar(calendar.getAppointmentTime(), calendar.getAppointmentProvider());
+//            System.out.println(cal);
+//            CalendarRepository.getAllAppointments();
+//            List<uk.ac.cf.spring.nhs.Calendar.Repositories.Calendar> calendars = CalendarRepository.getAllAppointments();
+//            modelAndView.addObject("calendar", calendar);
+//        } else {
+//            Calendar cal = new Calendar(calendar.getAppointmentTime(), calendar.getAppointmentProvider());
+//            System.out.println(cal);
+//            CalendarRepository.getAllAppointments();
+//            List<uk.ac.cf.spring.nhs.Calendar.Repositories.Calendar> calendars = CalendarRepository.getAllAppointments();
+//            modelAndView.addObject("calendar", calendars);
+//        }
 
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {

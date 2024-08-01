@@ -57,7 +57,7 @@ CREATE TABLE PatientDiagnosis (
     FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
 );
 --Not implemented yet--
---CREATE TABLE PatientRecordsOld ()
+--CREATE TABLE PatientRecordsOld ()--
 --CREATE TABLE PatientRecordsOther ()
 --CREATE TABLE UserMedication ()
 -----------------------

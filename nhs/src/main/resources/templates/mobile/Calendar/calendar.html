@@ -52,11 +52,8 @@
             </div>
     <div id="mobileSchedule">
         <h3>Appointment Schedule</h3>
-        <ul id="apptList">
-            <li data-event-id="1">
-                <strong>Appointment</strong>
-                - Appointment description on appointment date
-            </li>
+        <ul id="apptList" th:each="appointment:${calendar}">
+            <li th:text="${appointment}"></li>
         </ul>
     </div>
            <div>

@@ -10,26 +10,31 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Calendar {
 
-    private String appt_date;
-    private String appt_time;
-    private String appt_type;
-    private String appt_provider;
-    private String appt_info;
+    private String ApptTime;
+    private String ApptType;
+    private String ApptProvider;
+    private String ApptInfo;
 
     @Override
     public String toString() {
         return "Calendar{" +
-                appt_date + '\'' +
-                appt_time + '\'' +
-                appt_type + '\'' +
-                appt_provider + '\'' +
-                appt_info + '\'' +
+                ApptTime + '\'' +
+                ApptType + '\'' +
+                ApptProvider + '\'' +
+                ApptInfo + '\'' +
                 '}';
     }
 
-    public String getAppointmentDate() {return appt_date;}
-    public String getAppointmentTime() {return appt_time;}
-    public String getAppointmentType() {return appt_type;}
-    public String getAppointmentProvider() {return appt_provider;}
-    public String getAppointmentInfo() {return appt_info;}
+    public String getAppointmentTime() {
+        return ApptTime;
+    }
+    public String getAppointmentType() {
+        return ApptType;
+    }
+    public String getAppointmentProvider() {
+        return ApptProvider;
+    }
+    public String getAppointmentInfo() {
+        return ApptInfo;
+    }
 }
