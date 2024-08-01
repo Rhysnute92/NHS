@@ -1,0 +1,427 @@
+/* Import utility styles */
+@import url('/static/css/utility/variables.css');
+
+/* TITLE */
+.container h1 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    color: #005EB8;
+}
+.header {
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--nhs-blue);
+    width: 100%;
+    box-sizing: border-box;
+    font-size: var(--regular-font-size);
+    padding: 0.25rem 0.5rem;
+    z-index: 1000;
+}
+
+.header h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--nhs-white);
+    text-decoration: none;
+    margin: 0;
+    padding: 1rem;
+}
+
+/* TEXT */
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 2rem;
+    color: var(--nhs-blue);
+}
+
+p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    margin: 5rem;
+}
+
+
+/* LANDING PAGE */
+body.landing-page {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #005EB8, #003087);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nhs-logo {
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+    width: 125px;
+    height: auto;
+}
+
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.separator {
+    width: 80%;
+    max-width: 300px;
+    height: 2px;
+    background-color: var(--nhs-white);
+    margin-bottom: 1rem;
+}
+
+#landing-text {
+    color: var(--nhs-white);
+    margin: 0;
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+}
+
+body.landing-page .btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+body.landing-page .btn-container button {
+    background-color: var(--nhs-white);
+    color: #003087;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0.5rem 0;
+    width: 80%;
+    max-width: 300px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* MOBILE GUEST */
+body.guest-page {
+    background: linear-gradient(#005EB8, #003087);
+    overflow: hidden;
+}
+
+#app-name{
+    color: var(--nhs-white);
+}
+
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    height: 200px;
+    padding: 10px;
+    border: 5px solid #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    text-align: center;
+    margin: 1rem 0;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.icon-wrapper img {
+    width: 175px;
+    height: auto;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.icon-text {
+    margin: 0;
+    color: #333;
+    font-size: 0.9rem;
+    padding: 10px;
+    background: #fff;
+    border-top: 5px solid #fff;
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+body.guest-page .btn-container button{
+    background-color: var(--nhs-white);
+    color: #003087;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0.5rem 0;
+    width: 50%;
+    max-width: 300px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.back-btn {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1000;
+}
+
+.back-btn img {
+    width: 50px;
+    height: auto;
+    cursor: pointer;
+}
+
+/* BUTTON */
+.btn-container {
+    display:flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.log-in-btn, .guest-btn {
+    font-weight: 600;
+    transition:all 300ms ease;
+    padding: 1rem;
+    width: 8rem;
+    border-radius: 1rem;
+    background-color: #005EB8;
+    color:white;
+    cursor:pointer;
+}
+
+.log-in-btn:hover, .guest-btn:hover {
+    background-color: #003087;
+
+}
+
+/* MOBILE CSS */
+.mobileFrag .info-box {
+    width: 90%;
+    max-width: none;
+    margin: 1rem auto;
+    padding: 0.5rem;
+    display: block;
+}
+
+.mobileFrag #map2 {
+    max-width: 100%;
+    height: auto;
+    width: 150px;
+    margin: 0 auto;
+}
+
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+/* DESKTOP GUEST */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: var(--nhs-white);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    max-width: 80%;
+    max-height: 80%;
+    overflow: auto;
+}
+
+.popup-image {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+    color: var(--nhs-blue);
+    cursor: pointer;
+    z-index: 1001;
+}
+
+
+/* DESKTOP CSS */
+.info-box {
+    display: none;
+    width: 50%;
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: #E8EDEE;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.sidebar {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 5rem;
+    right: 1rem;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.sidebar button {
+    background-color: var(--nhs-blue);
+    color: var(--nhs-white);
+    border: none;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.sidebar button:hover {
+    background: #003087;
+}
+
+#hosp1, #hosp2, #hosp3 {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.appointment h3, .services h3, .findUs h3,
+.appointment p, .services p, .findUs p {
+    margin: 0.5rem 0;
+}
+
+#hosp1 img.map {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+#hosp2 {
+    padding: 2rem;
+}
+.contact {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.findUs h3, .telephone {
+    color: var(--nhs-blue);
+    font-weight: bold;
+}
+.bottom-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 25vh;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.bottom-box {
+    flex: 1;
+    background-color: #E8EDEE;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 0.5rem;
+}
+
+.bottom-box p {
+    margin: 0;
+}
+
+.bottom-box p:first-of-type {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+#bottom-button {
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+
+/* LOGIN */
+
+#login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto;
+    padding: 3rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+#login input {
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+#login button {
+    padding: 1rem;
+    margin: 1rem 0;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: var(--nhs-blue);
+    color: var(--nhs-white);
+    border: none;
+    border-radius: 5px;
+}
+
+#login button:hover {
+    background-color: #003087;
+}

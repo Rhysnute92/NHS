@@ -1,33 +1,30 @@
 package uk.ac.cf.spring.nhs.Diary.Controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
+import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryService;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @WebMvcTest(DiaryController.class)
 public class DiaryControllerTest {
@@ -38,21 +35,16 @@ public class DiaryControllerTest {
     @MockBean
     private DiaryService diaryService;
 
-    private MockHttpServletRequest request;
-
-    private AutoCloseable closeable;
-
-    private MockedStatic<DeviceDetector> mockedStatic;
-
     @Autowired
     private MockMvc mockMvc;
 
+    private AutoCloseable closeable;
+    private MockedStatic<DeviceDetector> mockedStatic;
     private List<DiaryEntry> dummyEntries;
 
     @BeforeEach
     public void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
-        request = new MockHttpServletRequest();
         mockedStatic = mockStatic(DeviceDetector.class);
 
         dummyEntries = Arrays.asList(
@@ -70,42 +62,45 @@ public class DiaryControllerTest {
     }
 
     @Test
-    public void returnsMobileViewForMobileDevices() {
-        mockedStatic.when(() -> DeviceDetector.isMobile(request)).thenReturn(true);
-
-        ModelAndView modelAndView = diaryController.diary(request);
-        assertEquals("mobile/diary", modelAndView.getViewName());
-        assertEquals(dummyEntries, modelAndView.getModel().get("diaryEntries"));
+    public void diaryReturnsCorrectView() {
+        Model model = mock(Model.class);
+        String viewName = diaryController.diary(model);
+        assertEquals("diary/diary", viewName);
+        verify(model).addAttribute(eq("diaryEntries"), eq(dummyEntries));
     }
 
     @Test
-    public void returnsDesktopViewForNonMobileDevices() {
-        mockedStatic.when(() -> DeviceDetector.isMobile(request)).thenReturn(false);
-
-        ModelAndView modelAndView = diaryController.diary(request);
-        assertEquals("desktop/diary", modelAndView.getViewName());
-        assertEquals(dummyEntries, modelAndView.getModel().get("diaryEntries"));
+    public void checkinReturnsCorrectView() {
+        Model model = mock(Model.class);
+        String viewName = diaryController.checkin(model);
+        assertEquals("diary/checkin", viewName);
     }
 
     @Test
-    public void testDiaryOnDesktop() throws Exception {
-        when(DeviceDetector.isMobile(any(HttpServletRequest.class))).thenReturn(false);
-
+    public void testDiary() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/diary"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("desktop/diary"))
+                .andExpect(MockMvcResultMatchers.view().name("diary/diary"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("diaryEntries"))
                 .andExpect(MockMvcResultMatchers.model().attribute("diaryEntries", dummyEntries));
     }
 
     @Test
-    public void testDiaryOnMobile() throws Exception {
-        when(DeviceDetector.isMobile(any(HttpServletRequest.class))).thenReturn(true);
+    void testNavMenuItems() {
+        List<NavMenuItem> expectedNavMenuItems = List.of(
+                new NavMenuItem("Diary", "/diary", "fa-solid fa-book"),
+                new NavMenuItem("Check-in", "/diary/checkin", "fa-solid fa-user-check"),
+                new NavMenuItem("Photos", "/diary/photos", "fa-solid fa-camera")
+        );
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/diary"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("mobile/diary"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("diaryEntries"))
-                .andExpect(MockMvcResultMatchers.model().attribute("diaryEntries", dummyEntries));
+        List<NavMenuItem> actualNavMenuItems = diaryController.navMenuItems();
+
+        assertEquals(expectedNavMenuItems.size(), actualNavMenuItems.size());
+
+        for (int i = 0; i < expectedNavMenuItems.size(); i++) {
+            assertEquals(expectedNavMenuItems.get(i).getTitle(), actualNavMenuItems.get(i).getTitle());
+            assertEquals(expectedNavMenuItems.get(i).getUrl(), actualNavMenuItems.get(i).getUrl());
+            assertEquals(expectedNavMenuItems.get(i).getIcon(), actualNavMenuItems.get(i).getIcon());
+        }
     }
 }

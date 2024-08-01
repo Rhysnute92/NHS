@@ -1,0 +1,13 @@
+.diary-entry-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .diary-entry-container {
+        margin: 0;
+        background-color: transparent;
+    }
+}

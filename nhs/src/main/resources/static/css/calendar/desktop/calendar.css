@@ -1,0 +1,164 @@
+/* Import utility styles */
+@import url('/static/css/utility/variables.css');
+
+.container-calendar {
+    margin: 0 auto;
+    overflow: auto;
+    justify-content: space-between;
+    display: flex;
+}
+
+#appointments {
+    padding: 10px;
+    margin: 0.5rem;
+    width: 100%;
+    position: relative;
+}
+
+#header {
+    color: #000000;
+    text-align: center;
+    position: relative;
+    margin: 0;
+    position: relative;
+}
+
+#appointments h3 {
+    color: black;
+    margin: 0;
+}
+
+#appointments input[type="time"],
+#appointments input[type="date"],
+#appointments input[type="text"],
+#appointments textarea
+{
+    margin: 10px 0;
+    padding: 5px;
+    width: 75%;
+}
+
+#appointments button {
+    background: #005EB8;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 4rem;
+    height: 2rem;
+}
+
+#center {
+    position: relative;
+}
+
+#center h3 {
+    color: black;
+    position: relative;
+}
+
+#apptList {
+    list-style: none;
+    padding: 0;
+    position: relative;
+}
+
+#apptList li {
+    position: relative;
+}
+
+#right {
+    position: relative;
+    margin: 1rem;
+}
+.delete-event {
+    background: rgb(237, 19, 19);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+    height: 2rem;
+    width: 4rem;
+}
+
+.button-container-calendar button {
+    cursor: pointer;
+    background: #005eb8;
+    color: #fff;
+    border: 1px solid #005eb8;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 2rem;
+    height: 2rem;
+}
+
+.table-calendar {
+    border-collapse: collapse;
+    width: 100%;
+    position: relative;
+}
+
+.table-calendar td,
+.table-calendar th {
+    padding: 5px;
+    border: 1px solid #e2e2e2;
+    text-align: center;
+    vertical-align: top;
+}
+
+.date-picker.selected {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    outline: 1px dashed #005eb8;
+}
+
+.date-picker.selected span {
+    border-bottom: 2px solid currentColor;
+}
+
+
+.date-picker:hover {
+    background-color: #005EB8;
+    color: white;
+    cursor: pointer;
+}
+
+#monthAndYear {
+    position: relative;
+    text-align: center;
+    margin-top: 0;
+}
+
+
+.button-container-calendar {
+    position: relative;
+    margin-bottom: 1em;
+    overflow: hidden;
+    clear: both;
+}
+
+#previous {
+    float: left;
+}
+
+#next {
+    float: right;
+}
+
+
+.footer-container-calendar {
+    padding: 10px 0;
+    position: relative;
+}
+
+.footer-container-calendar select {
+    cursor: pointer;
+    background: #ffffff;
+    color: #585858;
+    border: 1px solid #bfc5c5;
+    border-radius: 3px;
+    padding: 5px;
+}

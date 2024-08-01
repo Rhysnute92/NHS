@@ -10,9 +10,9 @@ public class AddPatientController {
     @GetMapping("/addpatient")
     public String showAddPatientPage(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
-            return "mobile/addPatient";
+            return "admin/mobile/addPatient";
         } else {
-            return "desktop/addPatient";
+            return "admin/desktop/addPatient";
         }
     }
 }
