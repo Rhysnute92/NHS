@@ -8,9 +8,12 @@ DROP TABLE IF EXISTS UserResponses;
 DROP TABLE IF EXISTS UserQuestionnaires;
 DROP TABLE IF EXISTS Questions;
 DROP TABLE IF EXISTS Questionnaires;
+DROP TABLE IF EXISTS DiarySymptoms;
+DROP TABLE IF EXISTS DiaryMeasurements;
+DROP TABLE IF EXISTS DiaryPhotos;
 DROP TABLE IF EXISTS DiaryEntries;
 DROP TABLE IF EXISTS Symptoms;
-DROP TABLE IF EXISTS Measurments;
+DROP TABLE IF EXISTS Measurements;
 DROP TABLE IF EXISTS Photos;
 DROP TABLE IF EXISTS Appointments;
 DROP TABLE IF EXISTS UserWidgets;
@@ -98,32 +101,57 @@ CREATE TABLE Appointments (
 CREATE TABLE Photos (
     PhotoID INT AUTO_INCREMENT PRIMARY KEY,
     PhotoDateTaken DATETIME,
-    PhotoBodypart VARCHAR(255)
-);
-CREATE TABLE Measurments (
-    MeasurmentID INT AUTO_INCREMENT PRIMARY KEY,
-    MeasurmentType VARCHAR(255),
-    MeasurmentValue FLOAT,
-    MeasurmentUnit VARCHAR(100)
-);
-CREATE TABLE Symptoms (
-    SymptomID INT AUTO_INCREMENT PRIMARY KEY,
-    SymptomName VARCHAR(255),
-    SymptomSeverity VARCHAR(255),
-    SymptomStartDate DATETIME,
-    SymptomIsActive BOOLEAN
-);
-CREATE TABLE DiaryEntries (
-    EntryID INT AUTO_INCREMENT PRIMARY KEY,
-    EntryType VARCHAR(255),
-    PhotoID INT,
-    MeasurmentID INT,
-    SymptomID INT,
-    EntryNotes TEXT,
+    PhotoBodypart VARCHAR(255),
     UserID INT,
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID),
-    FOREIGN KEY (PhotoID) REFERENCES Photos(PhotoID),
-    FOREIGN KEY (MeasurmentID) REFERENCES Measurments(MeasurmentID),
+    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
+);
+CREATE TABLE Measurements (
+  MeasurementID INT AUTO_INCREMENT PRIMARY KEY,
+  MeasurementType VARCHAR(255),
+  MeasurementValue FLOAT,
+  MeasurementUnit VARCHAR(100),
+  UserID INT,
+  FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
+);
+
+CREATE TABLE Symptoms (
+      SymptomID INT AUTO_INCREMENT PRIMARY KEY,
+      SymptomName VARCHAR(255),
+      SymptomSeverity INT,
+      SymptomStartDate DATETIME,
+      SymptomIsActive BOOLEAN,
+      UserID INT,
+      FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
+);
+
+CREATE TABLE DiaryEntries (
+  EntryID INT AUTO_INCREMENT PRIMARY KEY,
+  EntryDate DATE NOT NULL,
+  EntryType VARCHAR(255) NOT NULL,
+  EntryNotes TEXT NOT NULL,
+  UserID INT NOT NULL,
+  CONSTRAINT fk_user FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
+);
+
+
+CREATE TABLE DiaryPhotos (
+    EntryID INT,
+    PhotoID INT,
+    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
+    FOREIGN KEY (PhotoID) REFERENCES Photos(PhotoID)
+);
+
+CREATE TABLE DiaryMeasurements (
+    EntryID INT,
+    MeasurementID INT,
+    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
+    FOREIGN KEY (MeasurementID) REFERENCES Measurements(MeasurementID)
+);
+
+CREATE TABLE DiarySymptoms (
+    EntryID INT,
+    SymptomID INT,
+    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
     FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
 );
 --Not implemented yet--
