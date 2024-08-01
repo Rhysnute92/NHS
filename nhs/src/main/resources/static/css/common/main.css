@@ -1,0 +1,26 @@
+
+/*Import base styles*/
+
+/* Import common component styles */
+@import url('/css/common/header.css');
+@import url('/css/common/navbar.css');
+@import url('/css/common/navmenu.css');
+
+/* Import desktop-specific component styles */
+@import url('/css/education/desktop/infomenu.css');
+
+/* Import mobile-specific component styles */
+@import url('/css/education/mobile/mobileinfomenu.css');
+
+/* Import desktop page styles */
+
+/* Import mobile page styles */
+
+/* Import utility styles */
+@import url('/css/utility/variables.css');
+
+body {
+    font-family: var(--regular-font-family);
+    margin: 0;
+    padding: 0;
+}
