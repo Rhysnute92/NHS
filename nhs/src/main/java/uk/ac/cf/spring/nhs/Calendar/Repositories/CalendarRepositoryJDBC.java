@@ -19,9 +19,7 @@ public class CalendarRepositoryJDBC implements CalendarRepository {
     private void setCalendarMapper() {
         calendarMapper = (rs, i) -> new Calendar(
                 rs.getString("ApptTime"),
-                rs.getString("ApptType"),
-                rs.getString("ApptProvider"),
-                rs.getString("ApptInfo")
+                rs.getString("ApptType")
         );
     }
 
@@ -33,7 +31,7 @@ public class CalendarRepositoryJDBC implements CalendarRepository {
 
     @Override
     public void addAppointment(Calendar calendar) {
-        String sql = "INSERT INTO appointments(ApptTime, ApptType, ApptProvider, ApptInfo, UserID) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO appointments(ApptTime, ApptType, ApptProvider, ApptInfo, UserID) VALUES (?, ?, ?, ?, ?)";
         jdbc.update(sql, calendar.getAppointmentTime(), calendar.getAppointmentType(), calendar.getAppointmentProvider(), calendar.getAppointmentInfo());
     }
 }

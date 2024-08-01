@@ -19,22 +19,14 @@ public class Calendar {
     public String toString() {
         return "Calendar{" +
                 ApptTime + '\'' +
-                ApptType + '\'' +
                 ApptProvider + '\'' +
-                ApptInfo + '\'' +
                 '}';
     }
 
     public String getAppointmentTime() {
         return ApptTime;
     }
-    public String getAppointmentType() {
-        return ApptType;
-    }
     public String getAppointmentProvider() {
         return ApptProvider;
-    }
-    public String getAppointmentInfo() {
-        return ApptInfo;
     }
 }

@@ -16,6 +16,7 @@
 
     #mobileMonth {
         position: relative;
+        width: 100%;
     }
 
     .container-calendar #mobileMonth h1 {
