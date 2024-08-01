@@ -21,7 +21,7 @@ public class EducationControllerTest {
                 .header("User-Agent",
                         "Mozilla/5.0 (Linux; Android 10; Pixel 3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4076.0 Mobile Safari/537.36"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("mobile/Education/information"));
+                .andExpect(view().name("education/mobile/information"));
     }
 
     @Test
@@ -30,14 +30,14 @@ public class EducationControllerTest {
                 .header("User-Agent",
                         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("desktop/Education/information"));
+                .andExpect(view().name("education/desktop/information"));
             }
 
     @Test
     void infopageTest() throws Exception {
         mockMvc.perform(get("/information"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("desktop/Education/information"));
+                .andExpect(view().name("education/desktop/information"));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class EducationControllerTest {
                 .header("User-Agent",
                         "Mozilla/5.0 (Linux; Android 10; Pixel 3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4076.0 Mobile Safari/537.36"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("mobile/Education/treatment"));
+                .andExpect(view().name("education/mobile/treatment"));
     }
 
     @Test
@@ -55,13 +55,13 @@ public class EducationControllerTest {
                 .header("User-Agent",
                         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("desktop/Education/treatment"));
+                .andExpect(view().name("education/desktop/treatment"));
             }
 
     @Test
     void treatmentPageTest() throws Exception {
         mockMvc.perform(get("/treatment"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("desktop/Education/treatment"));
+                .andExpect(view().name("education/desktop/treatment"));
     }
 }
