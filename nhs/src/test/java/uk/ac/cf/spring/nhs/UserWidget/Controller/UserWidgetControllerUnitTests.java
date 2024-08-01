@@ -31,6 +31,16 @@ class UserWidgetControllerUnitTests {
         MockitoAnnotations.openMocks(this);
     }
 
+    /**
+     * Test case for the getUserWidgets method when the user ID is valid and there are user widgets.
+     *
+     * This test verifies that when the getUserWidgets method is called with a valid user ID,
+     * and the userWidgetService returns a non-empty list of user widgets, the response status code is OK
+     * and the response body contains the correct list of user widgets.
+     *
+     * @param  userId  the valid user ID
+     * @return         void
+     */
     @Test
     void getUserWidgets_withValidUserId_returnsUserWidgets() {
 
@@ -56,6 +66,16 @@ class UserWidgetControllerUnitTests {
         assertEquals(userWidgets, response.getBody());
     }
 
+    /**
+     * Test case for the getUserWidgets method when the user ID is invalid and there are no widgets.
+     *
+     * This test verifies that when the getUserWidgets method is called with an invalid user ID,
+     * and the userWidgetService returns an empty list of widgets, the response status code is OK
+     * and the response body size is 0.
+     *
+     * @param  userId  the invalid user ID
+     * @return         void
+     */
     @Test
     void getUserWidgets_withInvalidUserId_returnsEmptyList() {
 
@@ -68,6 +88,15 @@ class UserWidgetControllerUnitTests {
         assertEquals(0, response.getBody().size());
     }
 
+    /**
+     * Test case for the getUserWidgets method when the user ID is null.
+     *
+     * This test verifies that when the getUserWidgets method is called with a null user ID,
+     * the response status code is BAD_REQUEST.
+     *
+     * @param  userId  the null user ID
+     * @return         void
+     */
     @Test
     void getUserWidgets_withNullUserId_returnsBadRequest() {
 
@@ -78,6 +107,15 @@ class UserWidgetControllerUnitTests {
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
+    /**
+     * Test case for the getUserWidgets method when the user ID is negative.
+     *
+     * This test verifies that when the getUserWidgets method is called with a negative user ID,
+     * the response status code is BAD_REQUEST.
+     *
+     * @param  userId  the negative user ID
+     * @return         void
+     */
     @Test
     void getUserWidgets_withNegativeUserId_returnsBadRequest() {
 
@@ -88,6 +126,16 @@ class UserWidgetControllerUnitTests {
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
+    /**
+     * Test case for the getUserWidgets method when the user has a valid ID and there are no widgets.
+     *
+     * This test verifies that when the getUserWidgets method is called with a valid user ID,
+     * and the userWidgetService returns an empty list of widgets, the response status code is OK
+     * and the response body size is 0.
+     *
+     * @param  userId  the valid user ID
+     * @return         void
+     */
     @Test
     void getUserWidgets_withValidUserId_returnsEmptyListWhenNoWidgets() {
 
@@ -100,6 +148,11 @@ class UserWidgetControllerUnitTests {
         assertEquals(0, response.getBody().size());
     }
 
+    /**
+     * Test case for the getUserWidgets method when the service throws an exception.
+     *
+     * @throws RuntimeException if the service throws an exception
+     */
     @Test
     void getUserWidgets_serviceThrowsException_returnsInternalServerError() {
         Long userId = 1L;
