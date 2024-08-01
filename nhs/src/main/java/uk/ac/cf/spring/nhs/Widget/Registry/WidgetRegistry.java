@@ -19,10 +19,7 @@ public class WidgetRegistry {
         if (name == null) {
             throw new IllegalArgumentException("Name cannot be null");
         }
-        Widget widget = widgets.get(name);
-        if (widget == null) {
-            throw new IllegalArgumentException("Widget with name " + name + " not found");
-        }
-        return widget;
+
+        return widgets.get(name);
     }
 }

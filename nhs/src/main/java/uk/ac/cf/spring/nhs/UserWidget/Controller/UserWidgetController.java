@@ -12,9 +12,18 @@ import uk.ac.cf.spring.nhs.UserWidget.Service.UserWidgetService;
 @RestController
 public class UserWidgetController {
 
+    /**
+     * Service for user widgets.
+     */
     @Autowired
     private UserWidgetService userWidgetService;
 
+    /**
+     * Retrieves user widgets for a given user ID.
+     * 
+     * @param userId the ID of the user
+     * @return the list of user widgets
+     */
     @GetMapping("/api/user-widgets/{userId}")
     public ResponseEntity<List<UserWidget>> getUserWidgets(@PathVariable Long userId) {
         List<UserWidget> userWidgets = userWidgetService.getUserWidgets(userId);
