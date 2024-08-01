@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.Widget.Model;
 
 public interface Widget {
-    String render(); //TODO: redress this to implement more complex rendering
+    // Should return the path to the fragment for rendering the widget
+    String render();
 }
