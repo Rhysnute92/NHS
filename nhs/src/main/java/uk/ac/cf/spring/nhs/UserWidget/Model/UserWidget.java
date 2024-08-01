@@ -23,20 +23,60 @@ public class UserWidget {
     @Column(name = "position")
     private Integer position;
 
-    // Getters and Setters
-    public Long getUserwidgetID() {
+    /**
+     * @return the userWidgetID
+     */
+    public Long getUserWidgetID() {
         return userWidgetID;
     }
 
+    /**
+     * @param userWidgetID the userWidgetID to set
+     */
+    public void setUserWidgetID(Long userWidgetID) {
+        this.userWidgetID = userWidgetID;
+    }
+
+    /**
+     * @return the userID
+     */
     public Long getUserID() {
         return userID;
     }
 
+    /**
+     * @param userID the userID to set
+     */
+    public void setUserID(Long userID) {
+        this.userID = userID;
+    }
+
+    /**
+     * @return the widgetName
+     */
     public String getWidgetName() {
         return widgetName;
     }
 
+    /**
+     * @param widgetName the widgetName to set
+     */
+    public void setWidgetName(String widgetName) {
+        this.widgetName = widgetName;
+    }
+
+    /**
+     * @return the position
+     */
     public Integer getPosition() {
         return position;
     }
+
+    /**
+     * @param position the position to set
+     */
+    public void setPosition(Integer position) {
+        this.position = position;
+    }
+
 }

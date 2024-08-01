@@ -8,6 +8,13 @@ import uk.ac.cf.spring.nhs.Widget.Model.Widget;
 public class WidgetRegistry {
     private static Map<String, Widget> widgets = new HashMap<>();
 
+    /**
+     * Registers a widget with the given name in the WidgetRegistry.
+     *
+     * @param  name   the name of the widget
+     * @param  widget the widget to be registered
+     * @throws IllegalArgumentException if the name or widget is null
+     */
     public static void registerWidget(String name, Widget widget) {
         if (name == null || widget == null) {
             throw new IllegalArgumentException("Name and widget cannot be null");
@@ -15,6 +22,13 @@ public class WidgetRegistry {
         widgets.put(name, widget);
     }
 
+    /**
+     * Retrieves a widget from the widget registry based on its name.
+     *
+     * @param  name   the name of the widget to retrieve
+     * @return        the widget with the specified name, or null if not found
+     * @throws IllegalArgumentException if the name is null
+     */
     public static Widget getWidget(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Name cannot be null");

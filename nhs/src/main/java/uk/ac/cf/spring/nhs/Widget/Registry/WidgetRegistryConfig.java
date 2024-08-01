@@ -9,6 +9,11 @@ import uk.ac.cf.spring.nhs.Widget.Model.TaskCompletionWidget;
 @Configuration
 public class WidgetRegistryConfig {
 
+    /**
+     * Creates and configures a new instance of the WidgetRegistry bean.
+     *
+     * @return the newly created WidgetRegistry bean
+     */
     @Bean
     public WidgetRegistry widgetRegistry() {
         WidgetRegistry registry = new WidgetRegistry();
