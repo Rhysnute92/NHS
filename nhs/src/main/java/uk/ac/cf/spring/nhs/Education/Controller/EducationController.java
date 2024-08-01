@@ -11,18 +11,18 @@ public class EducationController {
     @GetMapping("/information")
     public String education(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
-            return "mobile/Education/information";
+            return "education/mobile/information";
         } else {
-            return "desktop/Education/information";
+            return "education/desktop/information";
         }
     }
 
     @GetMapping("/treatment")
     public String treatment(HttpServletRequest request) {
         if(DeviceDetector.isMobile(request)){
-            return "mobile/Education/treatment";
+            return "education/mobile/treatment";
         } else {
-            return "desktop/Education/treatment";
+            return "education/desktop/treatment";
         }
     }
 
@@ -30,27 +30,27 @@ public class EducationController {
     @GetMapping("/cellulitis")
     public String cellulitis(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
-            return "mobile/Education/infoCell";
+            return "education/mobile/infoCell";
         } else {
-            return "desktop/Education/infoCell";
+            return "education/desktop/infoCell";
         }
     }
 
     @GetMapping("/resources")
     public String res(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
-            return "mobile/Education/infoRes";
+            return "education/mobile/infoRes";
         } else {
-            return "desktop/Education/infoRes";
+            return "education/desktop/infoRes";
         }
     }
 
     @GetMapping("/treatmentSpec")
     public String spec(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
-            return "mobile/Education/treatmentSpec";
+            return "education/mobile/treatmentSpec";
         } else {
-            return "desktop/Education/treatmentSpec";
+            return "education/desktop/treatmentSpec";
         }
     }
 

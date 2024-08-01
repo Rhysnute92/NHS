@@ -13,9 +13,9 @@ public class DashboardController {
     public String dashboard(HttpServletRequest request) {
         boolean isMobile = DeviceDetector.isMobile(request);
         if (isMobile) {
-            return "mobile/Dashboard/dashboard";
+            return "dashboard/mobile/dashboard";
         } else {
-            return "desktop/Dashboard/dashboard";
+            return "dashboard/desktop/dashboard";
         }
     }
 }

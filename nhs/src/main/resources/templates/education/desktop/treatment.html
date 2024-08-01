@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <title>Education</title>
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/education/information.css}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div th:replace="~{common/fragments/header}"></div>
+    <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+    <div th:replace="~{education/fragments/desktop/infomenu :: infomenu}"></div>
+    <div class="container">
+      <h2 class="title">Treatments for lymphedema</h2>
+      <p>Here is a sample text about treatment options for lymphedema.</p>
+      <h2 class="subtitle">Skincare</h2>
+      <p>Here is some text about proper skincare for patients.</p>
+      <button type="button" class="reminder">Set Reminder</button>
+      <nav class="t_types">
+        <ul>
+          <li><a th:href="@{/treatmentSpec}">Treatments for lymphedema of the legs</a></li>
+          <li><a href="">Treatments for lymphedema of head and neck</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="section_nav">
+        <a th:href="@{/cellulitis}" class="section_link">&larr; Cellulitis</a>
+        <a th:href="@{/resources}" class="section_link">Helpful resources &rarr;</a>
+    </div>
+    <script th:src="@{/js/common/header.js}"></script>
+  </body>
+</html>

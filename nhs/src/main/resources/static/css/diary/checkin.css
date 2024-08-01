@@ -4,13 +4,8 @@
     box-sizing: border-box;
 }
 
-.checkin-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-    background-color: var(--nhs-pale-grey);
-    position: relative;
+h1 {
+    margin-bottom: 1rem;
 }
 
 .checkin-form {
@@ -21,42 +16,20 @@
     gap: 1rem;
 }
 
-.checkin-form-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 1rem;
-    padding: 1rem;
-    margin: 2rem;
-    background-color: var(--nhs-white);
-    width: 80%;
-    /*max-width: 800px;*/
-    border-radius: 0.4rem;
-}
-
 .checkin-section-title {
     background-color: var(--nhs-bright-blue);
     color: var(--nhs-white);
     border-radius: 0.4rem;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem;
+    transition: opacity 0.5s;
 }
 
 .checkin-section-title:hover {
     cursor: pointer;
-    animation: highlight 0.5s;
     opacity: 80%;
-}
-
-@keyframes highlight {
-    0% {
-        opacity: 100%;
-    }
-    100% {
-        opacity: 80%;
-    }
 }
 
 .checkin-section-content {
@@ -89,7 +62,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
 }
 
 .checkin-mood-button {
@@ -102,8 +74,6 @@
 
 .checkin-mood-button input[type="radio"] {
     opacity: 0;
-    /*width: 0.1px;*/
-    /*height: 0.1px;*/
     position: absolute;
     width: 100%;
     height: 100%;
@@ -116,13 +86,12 @@
 
 .checkin-mood-button:hover {
     cursor: pointer;
-    animation: highlight 0.5s;
     opacity: 80%;
+    transition: opacity 0.5s;
 }
 
 .checkin-symptoms {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     gap: 1rem;
@@ -145,15 +114,14 @@
 
 .checkin-photos-label {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    transition: opacity 0.5s;
 }
 
 .checkin-photos-label:hover {
     cursor: pointer;
-    animation: highlight 0.5s;
     opacity: 80%;
 }
 
@@ -192,22 +160,10 @@
     display: block;
 }
 
-.checkin-section-title h3 {
-    padding: 1rem;
-}
-
 @media (max-width: 768px) {
-    .checkin-container {
-        background-color: var(--nhs-white);
-    }
-
     .checkin-form-container {
         width: 100%;
         margin: 0;
         font-size: 1.2rem;
-    }
-
-    h1 {
-        display: none;
     }
 }
