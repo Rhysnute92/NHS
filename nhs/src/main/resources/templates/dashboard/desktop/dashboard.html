@@ -6,21 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-<<<<<<<< HEAD:nhs/src/main/resources/templates/desktop/Dashboard/dashboard.html
-    <header th:replace="~{fragments/common/header}"></header>
-    <div th:replace="~{fragments/common/navbar :: nav}"></div>
-========
     <header th:replace="~{common/fragments/header}"></header>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <div class="container">
       <h2 class="text-xl font-bold">Desktop Dashboard</h2>
       <p>Welcome</p>
     </div>
-<<<<<<<< HEAD:nhs/src/main/resources/templates/desktop/Dashboard/dashboard.html
     <div id="widget-container"></div>
-    <script th:src="@{/js/components/header.js}"></script>
     <script type="module" th:src="@{/js/Widget/widget.js}"></script>
-========
-  <script th:src="@{/js/common/header.js}"></script>
+    <script th:src="@{/js/common/header.js}"></script>
   </body>
 </html>
