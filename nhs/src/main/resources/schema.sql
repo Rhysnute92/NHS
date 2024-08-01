@@ -13,17 +13,17 @@ DROP TABLE IF EXISTS Symptoms;
 DROP TABLE IF EXISTS Measurments;
 DROP TABLE IF EXISTS Photos;
 DROP TABLE IF EXISTS Appointments;
-DROP TABLE IF EXISTS user_widget;
+DROP TABLE IF EXISTS UserWidgets;
 DROP TABLE IF EXISTS Providers;
 DROP TABLE IF EXISTS PatientDiagnosis;
 DROP TABLE IF EXISTS Patients;
 DROP TABLE IF EXISTS ProviderCredentials;
-DROP TABLE IF EXISTS patient_credentials;
+DROP TABLE IF EXISTS PatientCredentials;
 --Log in information and credentials--
-CREATE TABLE patient_credentials (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_name VARCHAR(255),
-    user_password VARCHAR(255)
+CREATE TABLE PatientCredentials (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    UserName VARCHAR(255),
+    UserPassword VARCHAR(255)
 );
 CREATE TABLE ProviderCredentials (
     ProviderID INT AUTO_INCREMENT PRIMARY KEY,
@@ -42,17 +42,17 @@ CREATE TABLE Patients (
     PatientName VARCHAR(255),
     PatientLastName VARCHAR(255),
     PatientTitle VARCHAR(100),
-    user_id INT,
-    FOREIGN KEY (user_id) REFERENCES patient_credentials (user_id)
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES PatientCredentials (UserID)
 );
 CREATE TABLE PatientDiagnosis (
-    user_id INT,
+    UserID INT,
     PrimaryDiagnosis TEXT,
     DiagnosisDate DATETIME,
     IssueLocation VARCHAR(255),
     DiagnosisSeverity VARCHAR(255),
     DiagnosisDetails TEXT,
-    FOREIGN KEY (user_id) REFERENCES patient_credentials(user_id)
+    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
 );
 --Not implemented yet--
 --CREATE TABLE PatientRecordsOld ()
@@ -69,12 +69,12 @@ CREATE TABLE Providers (
     FOREIGN KEY (ProviderID) REFERENCES ProviderCredentials (ProviderID)
 );
 --Dashboard--
-CREATE TABLE user_widget (
-    user_widgetid BIGINT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    widget_name VARCHAR(255) NOT NULL,
-    position INT,
-    FOREIGN KEY (user_id) REFERENCES patient_credentials(user_id)
+CREATE TABLE UserWidgets (
+    UserWidgetID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT,
+    WidgetName VARCHAR(255) NOT NULL,
+    Position INT,
+    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
 );
 --Calendar--
 CREATE TABLE Appointments (
@@ -83,8 +83,8 @@ CREATE TABLE Appointments (
     ApptType VARCHAR(255),
     ApptProvider VARCHAR(255),
     ApptInfo TEXT,
-    user_id INT,
-    FOREIGN KEY (user_id) REFERENCES patient_credentials (user_id)
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES PatientCredentials (UserID)
 );
 --Diary--
 CREATE TABLE Photos (
@@ -112,8 +112,8 @@ CREATE TABLE DiaryEntries (
     MeasurmentID INT,
     SymptomID INT,
     EntryNotes TEXT,
-    user_id INT,
-    FOREIGN KEY (user_id) REFERENCES patient_credentials(user_id),
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID),
     FOREIGN KEY (PhotoID) REFERENCES Photos(PhotoID),
     FOREIGN KEY (MeasurmentID) REFERENCES Measurments(MeasurmentID),
     FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
@@ -140,11 +140,11 @@ CREATE TABLE Questions (
 CREATE TABLE UserQuestionnaires (
     UserQuestionnaireID INT AUTO_INCREMENT PRIMARY KEY,
     QuestionnaireID INT,
-    user_id INT,
+    UserID INT,
     QUestionnaireStartDate DATETIME,
     QuestionnaireIsCompleted BOOLEAN,
     QuestionnaireCompletionDate DATETIME,
-    FOREIGN KEY (user_id) REFERENCES patient_credentials(user_id),
+    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID),
     FOREIGN KEY (QuestionnaireID) REFERENCES Questionnaires(QuestionnaireID)
 );
 CREATE TABLE UserResponses (

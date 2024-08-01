@@ -1,4 +1,4 @@
-INSERT INTO patient_credentials (user_name, user_password)
+INSERT INTO PatientCredentials (UserName, UserPassword)
 VALUES ('testUser', 'testPW');
-INSERT INTO user_widget (user_id, widget_name, position)
+INSERT INTO UserWidgets (UserID, WidgetName, Position)
 VALUES (1, 'task-completion', 1);

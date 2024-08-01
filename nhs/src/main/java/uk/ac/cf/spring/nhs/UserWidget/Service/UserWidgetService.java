@@ -3,7 +3,7 @@ package uk.ac.cf.spring.nhs.UserWidget.Service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.ac.cf.spring.nhs.UserWidget.Model.UserWidget;
+import uk.ac.cf.spring.nhs.UserWidget.Model.UserWidgets;
 import uk.ac.cf.spring.nhs.UserWidget.Repository.JpaUserWidgetRepository;
 
 @Service
@@ -18,8 +18,8 @@ public class UserWidgetService {
      * @param userID the ID of the user
      * @return a list of UserWidgets associated with the given user ID
      */
-    public List<UserWidget> getUserWidgets(Long userID) {
-        return userWidgetRepository.findAllByUserID(userID);
+    public List<UserWidgets> getUserWidgets(Long UserID) {
+        return userWidgetRepository.findAllByUserID(UserID);
     }
 
     /**
@@ -28,7 +28,7 @@ public class UserWidgetService {
      * @param userWidget the UserWidget object to be saved
      * @return the saved UserWidget object
      */
-    public UserWidget saveUserWidget(UserWidget userWidget) {
-        return userWidgetRepository.save(userWidget);
+    public UserWidgets saveUserWidget(UserWidgets UserWidget) {
+        return userWidgetRepository.save(UserWidget);
     }
 }

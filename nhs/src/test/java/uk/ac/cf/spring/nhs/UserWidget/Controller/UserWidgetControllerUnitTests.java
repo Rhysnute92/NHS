@@ -15,7 +15,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import uk.ac.cf.spring.nhs.UserWidget.Model.UserWidget;
+import uk.ac.cf.spring.nhs.UserWidget.Model.UserWidgets;
 import uk.ac.cf.spring.nhs.UserWidget.Service.UserWidgetService;
 
 class UserWidgetControllerUnitTests {
@@ -45,22 +45,22 @@ class UserWidgetControllerUnitTests {
     void getUserWidgets_withValidUserId_returnsUserWidgets() {
 
         Long userId = 1L;
-        UserWidget widget1 = new UserWidget();
+        UserWidgets widget1 = new UserWidgets();
         widget1.setUserWidgetID(1L);
         widget1.setUserID(userId);
         widget1.setWidgetName("Widget 1");
         widget1.setPosition(1);
 
-        UserWidget widget2 = new UserWidget();
+        UserWidgets widget2 = new UserWidgets();
         widget2.setUserWidgetID(2L);
         widget2.setUserID(userId);
         widget2.setWidgetName("Widget 2");
         widget2.setPosition(2);
 
-        List<UserWidget> userWidgets = Arrays.asList(widget1, widget2);
+        List<UserWidgets> userWidgets = Arrays.asList(widget1, widget2);
         when(userWidgetService.getUserWidgets(userId)).thenReturn(userWidgets);
 
-        ResponseEntity<List<UserWidget>> response = userWidgetController.getUserWidgets(userId);
+        ResponseEntity<List<UserWidgets>> response = userWidgetController.getUserWidgets(userId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(userWidgets, response.getBody());
@@ -82,7 +82,7 @@ class UserWidgetControllerUnitTests {
         Long userId = 999L;
         when(userWidgetService.getUserWidgets(userId)).thenReturn(Collections.emptyList());
 
-        ResponseEntity<List<UserWidget>> response = userWidgetController.getUserWidgets(userId);
+        ResponseEntity<List<UserWidgets>> response = userWidgetController.getUserWidgets(userId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(0, response.getBody().size());
@@ -102,7 +102,7 @@ class UserWidgetControllerUnitTests {
 
         Long userId = null;
 
-        ResponseEntity<List<UserWidget>> response = userWidgetController.getUserWidgets(userId);
+        ResponseEntity<List<UserWidgets>> response = userWidgetController.getUserWidgets(userId);
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
@@ -121,7 +121,7 @@ class UserWidgetControllerUnitTests {
 
         Long userId = -1L;
 
-        ResponseEntity<List<UserWidget>> response = userWidgetController.getUserWidgets(userId);
+        ResponseEntity<List<UserWidgets>> response = userWidgetController.getUserWidgets(userId);
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
@@ -142,7 +142,7 @@ class UserWidgetControllerUnitTests {
         Long userId = 1L;
         when(userWidgetService.getUserWidgets(userId)).thenReturn(Collections.emptyList());
 
-        ResponseEntity<List<UserWidget>> response = userWidgetController.getUserWidgets(userId);
+        ResponseEntity<List<UserWidgets>> response = userWidgetController.getUserWidgets(userId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(0, response.getBody().size());
@@ -158,7 +158,7 @@ class UserWidgetControllerUnitTests {
         Long userId = 1L;
         when(userWidgetService.getUserWidgets(userId)).thenThrow(new RuntimeException("Service exception"));
 
-        ResponseEntity<List<UserWidget>> response = null;
+        ResponseEntity<List<UserWidgets>> response = null;
         try {
             response = userWidgetController.getUserWidgets(userId);
         } catch (RuntimeException e) {

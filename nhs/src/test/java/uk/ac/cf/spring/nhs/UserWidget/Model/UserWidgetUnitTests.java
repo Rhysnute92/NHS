@@ -20,7 +20,7 @@ class UserWidgetUnitTests {
      */
     @Test
     void testGetAndSetUserWidgetID() {
-        UserWidget userWidget = new UserWidget();
+        UserWidgets userWidget = new UserWidgets();
         Long id = 1L;
         userWidget.setUserWidgetID(id);
         assertEquals(id, userWidget.getUserWidgetID());
@@ -39,7 +39,7 @@ class UserWidgetUnitTests {
      */
     @Test
     void testGetAndSetUserID() {
-        UserWidget userWidget = new UserWidget();
+        UserWidgets userWidget = new UserWidgets();
         Long userId = 2L;
         userWidget.setUserID(userId);
         assertEquals(userId, userWidget.getUserID());
@@ -59,7 +59,7 @@ class UserWidgetUnitTests {
      */
     @Test
     void testGetAndSetWidgetName() {
-        UserWidget userWidget = new UserWidget();
+        UserWidgets userWidget = new UserWidgets();
         String widgetName = "Test Widget";
         userWidget.setWidgetName(widgetName);
         assertEquals(widgetName, userWidget.getWidgetName());
@@ -78,7 +78,7 @@ class UserWidgetUnitTests {
      */
     @Test
     void testGetAndSetPosition() {
-        UserWidget userWidget = new UserWidget();
+        UserWidgets userWidget = new UserWidgets();
         Integer position = 1;
         userWidget.setPosition(position);
         assertEquals(position, userWidget.getPosition());

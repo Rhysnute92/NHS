@@ -16,7 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import uk.ac.cf.spring.nhs.UserWidget.Model.UserWidget;
+import uk.ac.cf.spring.nhs.UserWidget.Model.UserWidgets;
 import uk.ac.cf.spring.nhs.UserWidget.Repository.JpaUserWidgetRepository;
 
 class UserWidgetServiceUnitTests {
@@ -55,17 +55,17 @@ class UserWidgetServiceUnitTests {
     @Test
     void getUserWidgets_validUserId_returnsUserWidgets() {
         Long userId = 1L;
-        UserWidget widget1 = new UserWidget();
+        UserWidgets widget1 = new UserWidgets();
         widget1.setUserID(userId);
         widget1.setWidgetName("Widget 1");
 
-        UserWidget widget2 = new UserWidget();
+        UserWidgets widget2 = new UserWidgets();
         widget2.setUserID(userId);
         widget2.setWidgetName("Widget 2");
 
         when(userWidgetRepository.findAllByUserID(userId)).thenReturn(Arrays.asList(widget1, widget2));
 
-        List<UserWidget> result = userWidgetService.getUserWidgets(userId);
+        List<UserWidgets> result = userWidgetService.getUserWidgets(userId);
 
         assertNotNull(result);
         assertEquals(2, result.size());
@@ -91,7 +91,7 @@ class UserWidgetServiceUnitTests {
         Long userId = 999L;
         when(userWidgetRepository.findAllByUserID(userId)).thenReturn(Arrays.asList());
 
-        List<UserWidget> result = userWidgetService.getUserWidgets(userId);
+        List<UserWidgets> result = userWidgetService.getUserWidgets(userId);
 
         assertNotNull(result);
         assertEquals(0, result.size());
@@ -111,13 +111,13 @@ class UserWidgetServiceUnitTests {
      */
     @Test
     void saveUserWidget_validUserWidget_returnsSavedWidget() {
-        UserWidget widget = new UserWidget();
+        UserWidgets widget = new UserWidgets();
         widget.setUserID(1L);
         widget.setWidgetName("Widget 1");
 
-        when(userWidgetRepository.save(any(UserWidget.class))).thenReturn(widget);
+        when(userWidgetRepository.save(any(UserWidgets.class))).thenReturn(widget);
 
-        UserWidget result = userWidgetService.saveUserWidget(widget);
+        UserWidgets result = userWidgetService.saveUserWidget(widget);
 
         assertNotNull(result);
         assertEquals("Widget 1", result.getWidgetName());
