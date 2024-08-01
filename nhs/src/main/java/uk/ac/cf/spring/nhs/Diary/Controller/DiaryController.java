@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
-import uk.ac.cf.spring.nhs.Diary.Service.DiaryService;
+import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
 
 import java.util.List;
 import java.util.Map;
@@ -20,12 +20,12 @@ import java.util.Map;
 public class DiaryController {
 
     @Autowired
-    DiaryService diaryService;
+    DiaryEntryService diaryEntryService;
 
     @GetMapping("")
     public ModelAndView diary(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        List<DiaryEntry> diaryEntries = diaryService.getDiaryEntries();
+        List<DiaryEntry> diaryEntries = diaryEntryService.getAllDiaryEntries();
 
         modelAndView.addObject("diaryEntries", diaryEntries);
         modelAndView.setViewName("diary/diary");
