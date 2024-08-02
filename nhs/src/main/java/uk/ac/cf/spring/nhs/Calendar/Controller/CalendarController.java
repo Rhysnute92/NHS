@@ -3,21 +3,18 @@ package uk.ac.cf.spring.nhs.Calendar.Controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.spring.nhs.Calendar.Repositories.CalendarRepository;
 import uk.ac.cf.spring.nhs.Calendar.Repositories.Calendar;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 
-import java.util.List;
-
-import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -29,6 +26,8 @@ public class CalendarController {
     @GetMapping("/calendar")
     public ModelAndView Calendar(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
+        List<Calendar> calendar = calendarRepository.getAllAppointments();
+        modelAndView.addObject("calendar", calendar);
         if (DeviceDetector.isMobile(request)) {
             modelAndView.setViewName("calendar/mobile/calendar");
         } else {
@@ -41,6 +40,7 @@ public class CalendarController {
     @GetMapping("/mobileaddappt")
     public ModelAndView getMobileAddAppt(){
         ModelAndView modelAndView = new ModelAndView("calendar/mobile/addappointment");
+        modelAndView.addObject("calendar", new Calendar());
         return modelAndView;
     }
 
@@ -51,16 +51,17 @@ public class CalendarController {
             Calendar cal = new Calendar(calendar.getAppointmentTime(), calendar.getAppointmentProvider());
             System.out.println(cal);
             calendarRepository.getAllAppointments();
-            List<uk.ac.cf.spring.nhs.Calendar.Repositories.Calendar> calendars = calendarRepository.getAllAppointments();
+            List<Calendar> calendars = calendarRepository.getAllAppointments();
             modelAndView.addObject("calendar", calendar);
         } else {
             Calendar cal = new Calendar(calendar.getAppointmentTime(), calendar.getAppointmentProvider());
             System.out.println(cal);
             calendarRepository.getAllAppointments();
-            List<uk.ac.cf.spring.nhs.Calendar.Repositories.Calendar> calendars = calendarRepository.getAllAppointments();
+            List<Calendar> calendars = calendarRepository.getAllAppointments();
             modelAndView.addObject("calendar", calendars);
         }
-
+        return modelAndView;
+    }
         @ModelAttribute("navMenuItems")
         public List<NavMenuItem> navMenuItems() {
             return List.of(
@@ -69,4 +70,3 @@ public class CalendarController {
             );
         }
     }
-}

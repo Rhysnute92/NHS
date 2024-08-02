@@ -1,44 +1,44 @@
 
 let events = [];
 
-let eventDateInput = document.getElementById("appointmentDate");
-let eventTimeInput = document.getElementById("appointmentTime");
-let eventAppointmentTypeInput = document.getElementById("appointmentType");
-let eventDrInput = document.getElementById("dr");
-let eventCommentInput = document.getElementById("comments");
+let appointmentDateInput = document.getElementById("appointmentDate");
+let appointmentTimeInput = document.getElementById("appointmentTime");
+let appointmentTypeInput = document.getElementById("appointmentType");
+let appointmentProviderInput = document.getElementById("dr");
+let appointmentInfoInput = document.getElementById("comments");
 let apptList = document.getElementById("apptList");
 
 let eventIdCounter = 1;
 
-function addEvent() {
-    let date = eventDateInput.value;
-    let time = eventTimeInput.value;
-    let appointmentType = eventAppointmentTypeInput.value;
-    let dr = eventDrInput.value;
-    let description = eventCommentInput.value;
+function addAppointment() {
+    let date = document.getElementById("appointmentDateInput").value;
+    let time = document.getElementById("appointmentTimeInput").value;
+    let appointmentType = document.getElementById("appointmentTypeInput").value;
+    let dr = document.getElementById("appointmentProviderInput").value;
+    let description = document.getElementById("appointmentInfoInput").value;
 
     if (date && title) {
-        let eventId = eventIdCounter++;
+        let appointmentId = appointmedIdCounter++;
 
         events.push(
             {
-                id: eventId, date: date, time: time, appointmentType: appointmentType, dr: dr, description: description
+                id: appointmentId, date: date, time: time, appointmentType: appointmentType, dr: dr, description: description
             }
         );
         showCalendar(currentMonth, currentYear);
-        eventDateInput.value = "";
-        eventTimeInput.value = "";
-        eventAppointmentTypeInput.value = "";
-        eventDrInput.value = "";
-        eventCommentInput.value = "";
+        appointmentDateInput.value = "";
+        appointmentTimeInput.value = "";
+        appointmentTypeInput.value = "";
+        appointmentProviderInput.value = "";
+        appointmentInfoInput.value = "";
         apptSchedule();
     }
 }
 
-function deleteAppointment(eventId) {
+function deleteAppointment(ApptID) {
     let eventIndex =
         events.findIndex((event) =>
-            event.id === eventId);
+            event.id === ApptID);
 
     if (eventIndex !== -1) {
         events.splice(eventIndex, 1);
@@ -71,7 +71,7 @@ function apptSchedule() {
             };
 
             listItem.appendChild(deleteButton);
-            reminderList.appendChild(listItem);
+            apptList.appendChild(listItem);
         }
     }
 }

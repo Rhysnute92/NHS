@@ -52,14 +52,12 @@
         </div>
         <div id="mobileSchedule">
             <h3>Appointment Schedule</h3>
-            <ul id="apptList">
-                <li data-event-id="1">
-
-                </li>
+            <ul id="apptList" th:each="appt:${calendar}">
+                <li data-event-id="1" th:text="${appt}"></li>
             </ul>
         </div>
         <div>
-            <button class="delete-event" onclick="deleteEvent(1)">
+            <button class="delete-event" onclick="'deleteEvent(' + ${appt.id} + ')'">
                 Delete
             </button>
         </div>

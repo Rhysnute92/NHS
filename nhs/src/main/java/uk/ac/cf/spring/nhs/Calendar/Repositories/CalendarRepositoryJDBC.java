@@ -1,10 +1,17 @@
 package uk.ac.cf.spring.nhs.Calendar.Repositories;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
 @Repository
 public class CalendarRepositoryJDBC implements CalendarRepository {
@@ -31,7 +38,7 @@ public class CalendarRepositoryJDBC implements CalendarRepository {
 
     @Override
     public void addAppointment(Calendar calendar) {
-        String sql = "INSERT INTO appointments(ApptTime, ApptType, ApptProvider, ApptInfo, UserID) VALUES (?, ?, ?, ?, ?)";
-        jdbc.update(sql, calendar.getAppointmentTime(), calendar.getAppointmentType(), calendar.getAppointmentProvider(), calendar.getAppointmentInfo());
+        String sql = "INSERT INTO appointments(ApptTime, ApptProvider) VALUES (?, ?)";
+        jdbc.update(sql, calendar.getAppointmentTime(), calendar.getAppointmentProvider());
     }
 }
