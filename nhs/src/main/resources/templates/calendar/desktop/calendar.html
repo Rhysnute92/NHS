@@ -33,10 +33,10 @@
         <label>Information about your Appointment:<br>
           <textarea id="comments" placeholder="Info about your appointment" th:field="*{apptInfo}"></textarea><br>
         </label>
-      <button onclick="addAppointment" id="addAppointment">
+      <button type="submit" id="addAppointment">
         Add
       </button>
-      <button onclick="deleteAppointment" id="deleteAppointment">
+      <button type="reset" id="deleteAppointment">
         Clear
       </button>
       </form>
