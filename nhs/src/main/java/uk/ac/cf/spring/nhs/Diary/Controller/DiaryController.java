@@ -3,6 +3,7 @@ package uk.ac.cf.spring.nhs.Diary.Controller;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,21 +24,15 @@ public class DiaryController {
     DiaryEntryService diaryEntryService;
 
     @GetMapping("")
-    public ModelAndView diary(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
-        List<DiaryEntry> diaryEntries = diaryEntryService.getAllDiaryEntries();
-
-        modelAndView.addObject("diaryEntries", diaryEntries);
-        modelAndView.setViewName("diary/diary");
-        return modelAndView;
+    public String diary(Model model) {
+        List<DiaryEntry> diaryEntries = diaryService.getDiaryEntries();
+        model.addAttribute("diaryEntries", diaryEntries);
+        return "diary/diary";
     }
 
     @GetMapping("/checkin")
-    public ModelAndView checkin(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
-
-        modelAndView.setViewName("diary/checkin");
-        return modelAndView;
+    public String checkin(Model model) {
+        return "diary/checkin";
     }
 
     @ModelAttribute("navMenuItems")

@@ -10,9 +10,9 @@ public class ManagementController {
     @GetMapping("/management")
     public String showManagementPage(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
-            return "mobile/management";
+            return "management/mobile/management";
         } else {
-            return "desktop/management";
+            return "management/desktop/management";
         }
     }
 }

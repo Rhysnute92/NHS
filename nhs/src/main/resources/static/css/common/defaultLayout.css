@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main-container {
+    display: flex;
+    width: 100%;
+    background-color: var(--nhs-pale-grey);
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 1rem;
+}
+
+.container {
+    background-color: var(--nhs-white);
+    border-radius: 0.4rem;
+    padding: 1rem;
+}
+
+.main-content .page-title {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 0;
+    }
+
+    .main-content .page-title {
+        display: none;
+    }
+}

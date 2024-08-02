@@ -11,9 +11,9 @@ public class LoginController {
     @GetMapping("/login")
     public String showLoginPage(HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
-            return "mobile/login";
+            return "login/mobile/login";
         } else {
-            return "desktop/login";
+            return "login/desktop/login";
         }
     }
 }
