@@ -8,29 +8,7 @@
     align-items: center;
     justify-content: center;
     margin: 1rem;
-    color: #005EB8;
-}
-.header {
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: var(--nhs-blue);
-    width: 100%;
-    box-sizing: border-box;
-    font-size: var(--regular-font-size);
-    padding: 0.25rem 0.5rem;
-    z-index: 1000;
-}
-
-.header h2 {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--nhs-white);
-    text-decoration: none;
-    margin: 0;
-    padding: 1rem;
+    color: var(--nhs-blue);
 }
 
 /* TEXT */
@@ -56,7 +34,7 @@ p {
 body.landing-page {
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom, #005EB8, #003087);
+    background: linear-gradient(to bottom, var(--nhs-blue), var(--nhs-dark-blue));
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -104,20 +82,23 @@ body.landing-page .btn-container {
 
 body.landing-page .btn-container button {
     background-color: var(--nhs-white);
-    color: #003087;
+    color: var(--nhs-dark-blue);
     border: none;
     padding: 1rem 2rem;
     margin: 0.5rem 0;
     width: 80%;
     max-width: 300px;
     cursor: pointer;
-    border-radius: 5px;
 }
 
 /* MOBILE GUEST */
 body.guest-page {
-    background: linear-gradient(#005EB8, #003087);
+    background: linear-gradient(var(--nhs-blue), var(--nhs-dark-blue));
     overflow: hidden;
+}
+
+.mobilePages {
+    background-color: var(--nhs-pale-grey);
 }
 
 #app-name{
@@ -139,10 +120,10 @@ body.guest-page {
     width: 250px;
     height: 200px;
     padding: 10px;
-    border: 5px solid #fff;
+    border: 5px solid var(--nhs-white);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    background: #fff;
+    background: var(--nhs-white);
     text-align: center;
     margin: 1rem 0;
     position: relative;
@@ -161,8 +142,8 @@ body.guest-page {
     color: #333;
     font-size: 0.9rem;
     padding: 10px;
-    background: #fff;
-    border-top: 5px solid #fff;
+    background: var(--nhs-white);
+    border-top: 5px solid var(--nhs-white);
     width: 100%;
     box-sizing: border-box;
     position: absolute;
@@ -170,55 +151,6 @@ body.guest-page {
     left: 0;
 }
 
-body.guest-page .btn-container button{
-    background-color: var(--nhs-white);
-    color: #003087;
-    border: none;
-    padding: 1rem 2rem;
-    margin: 0.5rem 0;
-    width: 50%;
-    max-width: 300px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.back-btn {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    z-index: 1000;
-}
-
-.back-btn img {
-    width: 50px;
-    height: auto;
-    cursor: pointer;
-}
-
-/* BUTTON */
-.btn-container {
-    display:flex;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.log-in-btn, .guest-btn {
-    font-weight: 600;
-    transition:all 300ms ease;
-    padding: 1rem;
-    width: 8rem;
-    border-radius: 1rem;
-    background-color: #005EB8;
-    color:white;
-    cursor:pointer;
-}
-
-.log-in-btn:hover, .guest-btn:hover {
-    background-color: #003087;
-
-}
-
-/* MOBILE CSS */
 .mobileFrag .info-box {
     width: 90%;
     max-width: none;
@@ -242,6 +174,55 @@ body.guest-page .btn-container button{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* BUTTONS */
+body.guest-page .btn-container button{
+    background-color: var(--nhs-white);
+    color: var(--nhs-dark-blue);
+    border: none;
+    width: 50%;
+    max-width: 300px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.back-btn {
+    bottom: 2px;
+    left: 2px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.back-btn img {
+    width: 50px;
+    height: auto;
+    cursor: pointer;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.log-in-btn, .guest-btn {
+    font-weight: 600;
+    transition:all 300ms ease;
+    padding: 1rem;
+    width: 8rem;
+    background-color: var(--nhs-blue);
+    color:white;
+    cursor:pointer;
+    border:none;
+}
+
+.log-in-btn:hover, .guest-btn:hover {
+    background-color: var(--nhs-dark-blue);
+
+}
+
 /* DESKTOP GUEST */
 .main-content {
     flex-grow: 1;
@@ -279,15 +260,15 @@ body.guest-page .btn-container button{
     cursor: pointer;
     z-index: 1001;
 }
-
-
-/* DESKTOP CSS */
+.guestLanding {
+    background-color: var(--nhs-pale-grey);
+}
 .info-box {
     display: none;
-    width: 50%;
+    width: 90%;
     max-width: 800px;
     margin: 2rem auto;
-    background-color: #E8EDEE;
+    background-color: var(--nhs-white);
     border: 1px solid #ccc;
     padding: 1rem;
     box-sizing: border-box;
@@ -318,7 +299,7 @@ body.guest-page .btn-container button{
 }
 
 .sidebar button:hover {
-    background: #003087;
+    background: var(--nhs-dark-blue);
 }
 
 #hosp1, #hosp2, #hosp3 {
@@ -359,7 +340,7 @@ body.guest-page .btn-container button{
 
 .bottom-box {
     flex: 1;
-    background-color: #E8EDEE;
+    background-color: var(--nhs-white);
     border: 1px solid #ccc;
     padding: 1rem;
     box-sizing: border-box;
@@ -423,5 +404,5 @@ body.guest-page .btn-container button{
 }
 
 #login button:hover {
-    background-color: #003087;
+    background-color: var(--nhs-dark-blue);
 }
