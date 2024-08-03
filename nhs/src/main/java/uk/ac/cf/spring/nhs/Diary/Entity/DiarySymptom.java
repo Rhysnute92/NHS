@@ -19,13 +19,14 @@ public class DiarySymptom {
     @JoinColumn(name = "SymptomID", nullable = false)
     private Symptom symptom;
 
-    protected DiarySymptom() {}
+    public DiarySymptom() {}
 
     public DiarySymptom(DiaryEntry diaryEntry, Symptom symptom) {
         this.diaryEntry = diaryEntry;
         this.symptom = symptom;
     }
 
+    // Getters and setters
     public int getId() {
         return id;
     }

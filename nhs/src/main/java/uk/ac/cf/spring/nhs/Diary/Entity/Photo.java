@@ -10,7 +10,7 @@ public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PhotoID")
-    private Long id;
+    private int id;
 
     @Column(name = "PhotoURL")
     private String url;
@@ -21,19 +21,23 @@ public class Photo {
     @Column(name = "PhotoBodyPart")
     private String bodyPart;
 
-    protected Photo() {}
+    @Column(name = "UserID")
+    private int userId;
 
-    public Photo(String url, Date date, String bodyPart) {
+    public Photo() {}
+
+    public Photo(String url, Date date, String bodyPart, int userId) {
         this.url = url;
         this.date = date;
         this.bodyPart = bodyPart;
+        this.userId = userId;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

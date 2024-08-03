@@ -29,6 +29,19 @@ public class Symptom {
     @OneToMany(mappedBy = "symptom", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DiarySymptom> diarySymptoms = new HashSet<>();
 
+    @Column(name = "UserID")
+    private int userId;
+
+    public Symptom() {}
+
+    public Symptom(String name, int severity, Date startDate, Boolean isActive, int userId) {
+        this.name = name;
+        this.severity = severity;
+        this.startDate = startDate;
+        this.isActive = isActive;
+        this.userId = userId;
+    }
+
     public int getId() {
         return id;
     }

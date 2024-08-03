@@ -9,7 +9,7 @@ public class Measurement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MeasurementID")
-    private Long id;
+    private int id;
 
     @Column(name = "MeasurementType")
     private String type;
@@ -20,19 +20,23 @@ public class Measurement {
     @Column(name = "MeasurementUnit")
     private String unit;
 
+    @Column(name = "UserID")
+    private int userId;
+
     protected Measurement() {}
 
-    public Measurement(String type, float value, String unit) {
+    public Measurement(String type, float value, String unit, int userId) {
         this.type = type;
         this.value = value;
         this.unit = unit;
+        this.userId = userId;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

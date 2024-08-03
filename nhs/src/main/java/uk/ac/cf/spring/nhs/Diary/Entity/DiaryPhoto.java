@@ -19,7 +19,7 @@ public class DiaryPhoto {
     @JoinColumn(name = "PhotoID", nullable = false)
     private Photo photo;
 
-    protected DiaryPhoto() {}
+    public DiaryPhoto() {}
 
     public DiaryPhoto(DiaryEntry diaryEntry, Photo photo) {
         this.diaryEntry = diaryEntry;
