@@ -24,9 +24,14 @@ public class CalendarController {
         return modelAndView;
     }
 
-    @GetMapping("/mobileaddappt")
-    public ModelAndView getMobileAddAppt(){
-        ModelAndView modelAndView = new ModelAndView("calendar/mobile/addappointment");
+    @GetMapping("/addappointment")
+    public ModelAndView getMobileAddAppt(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        if (DeviceDetector.isMobile(request)){
+            modelAndView.setViewName("calendar/mobile/addappointment");
+        } else {
+            modelAndView.setViewName("calendar/desktop/addappointment");
+        }
         return modelAndView;
     }
 
