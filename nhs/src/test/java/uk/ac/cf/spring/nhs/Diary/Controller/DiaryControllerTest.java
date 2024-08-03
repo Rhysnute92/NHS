@@ -53,7 +53,7 @@ public class DiaryControllerTest {
                 new DiaryEntry(2, new Date())
         ));
 
-        when(diaryService.getAllDiaryEntries()).thenReturn(dummyEntries);
+        when(diaryService.getDiaryEntriesByUserId(1)).thenReturn(dummyEntries);
     }
 
     @AfterEach
