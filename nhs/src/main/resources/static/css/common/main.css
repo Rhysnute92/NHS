@@ -12,6 +12,9 @@
 /* Import mobile-specific component styles */
 @import url('/css/education/mobile/mobileinfomenu.css');
 
+/* Import widget component styles */
+@import url('/css/components/widgets/taskCompletion.css');
+
 /* Import desktop page styles */
 
 /* Import mobile page styles */

@@ -11,7 +11,8 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String dashboard(HttpServletRequest request) {
-        if (DeviceDetector.isMobile(request)) {
+        boolean isMobile = DeviceDetector.isMobile(request);
+        if (isMobile) {
             return "dashboard/mobile/dashboard";
         } else {
             return "dashboard/desktop/dashboard";
