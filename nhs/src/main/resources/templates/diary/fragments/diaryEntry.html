@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <div th:fragment="diaryEntry" class="diary-entry">
     <div class="diary-entry-title-container">
-        <h3 class="diary-entry-title">[[${diaryEntry.formattedDate}]]</h3>
+        <h3 class="diary-entry-title" th:attr="data-date=${diaryEntry.date}"></h3>
     </div>
     <div class="diary-entry-content">
-        <p>[[${diaryEntry.content}]]</p>
     </div>
 </div>
