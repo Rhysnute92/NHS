@@ -25,12 +25,11 @@ class FileStorageServiceTest {
     private MultipartFile multipartFile;
 
     private final String uploadDir = "uploads/";
-    private final long maxFileSize = 5242880; // 5 MB
 
     @BeforeEach
     void setUp() throws IOException {
         MockitoAnnotations.openMocks(this);
-        fileStorageService = new FileStorageService(uploadDir, maxFileSize);
+        fileStorageService = new FileStorageService(uploadDir);
     }
 
     @Test
@@ -42,7 +41,6 @@ class FileStorageServiceTest {
 
         when(multipartFile.getOriginalFilename()).thenReturn(fileName);
         when(multipartFile.getInputStream()).thenReturn(inputStream);
-        when(multipartFile.getSize()).thenReturn((long) content.length);
 
         String storedFilePath = fileStorageService.storeFile(multipartFile);
 
@@ -69,20 +67,5 @@ class FileStorageServiceTest {
         assertThrows(NullPointerException.class, () -> {
             fileStorageService.storeFile(multipartFile);
         });
-    }
-
-    @Test
-    void storeFileThrowsExceptionWhenFileSizeExceedsLimit() {
-        String fileName = "largefile.png";
-        long largeFileSize = maxFileSize + 1;
-
-        when(multipartFile.getOriginalFilename()).thenReturn(fileName);
-        when(multipartFile.getSize()).thenReturn(largeFileSize);
-
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            fileStorageService.storeFile(multipartFile);
-        });
-
-        assertTrue(exception.getMessage().contains("File size exceeds the maximum allowed size"));
     }
 }
