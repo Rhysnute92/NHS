@@ -17,8 +17,9 @@ import org.springframework.ui.Model;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
-import uk.ac.cf.spring.nhs.Diary.Service.DiaryService;
+import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +34,7 @@ public class DiaryControllerTest {
     private DiaryController diaryController;
 
     @MockBean
-    private DiaryService diaryService;
+    private DiaryEntryService diaryService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -47,12 +48,12 @@ public class DiaryControllerTest {
         closeable = MockitoAnnotations.openMocks(this);
         mockedStatic = mockStatic(DeviceDetector.class);
 
-        dummyEntries = Arrays.asList(
-                new DiaryEntry(new Date(), "Formatted Date 1", "Content 1"),
-                new DiaryEntry(new Date(), "Formatted Date 2", "Content 2")
-        );
+        dummyEntries = new ArrayList<>(Arrays.asList(
+                new DiaryEntry(1, new Date()),
+                new DiaryEntry(2, new Date())
+        ));
 
-        when(diaryService.getDiaryEntries()).thenReturn(dummyEntries);
+        when(diaryService.getAllDiaryEntries()).thenReturn(dummyEntries);
     }
 
     @AfterEach
