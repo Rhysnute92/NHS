@@ -100,7 +100,8 @@ CREATE TABLE Appointments (
 --Diary--
 CREATE TABLE Photos (
     PhotoID INT AUTO_INCREMENT PRIMARY KEY,
-    PhotoDateTaken DATETIME,
+    PhotoURL TEXT,
+    PhotoDate DATETIME,
     PhotoBodypart VARCHAR(255),
     UserID INT,
     FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
@@ -127,14 +128,15 @@ CREATE TABLE Symptoms (
 CREATE TABLE DiaryEntries (
   EntryID INT AUTO_INCREMENT PRIMARY KEY,
   EntryDate DATE NOT NULL,
-  EntryType VARCHAR(255) NOT NULL,
-  EntryNotes TEXT NOT NULL,
+  EntryMood VARCHAR(255),
+  EntryNotes TEXT,
   UserID INT NOT NULL,
   CONSTRAINT fk_user FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
 );
 
 
 CREATE TABLE DiaryPhotos (
+    DiaryPhotoID INT AUTO_INCREMENT PRIMARY KEY,
     EntryID INT,
     PhotoID INT,
     FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
@@ -142,6 +144,7 @@ CREATE TABLE DiaryPhotos (
 );
 
 CREATE TABLE DiaryMeasurements (
+    DiaryMeasurementID INT AUTO_INCREMENT PRIMARY KEY,
     EntryID INT,
     MeasurementID INT,
     FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
@@ -149,11 +152,13 @@ CREATE TABLE DiaryMeasurements (
 );
 
 CREATE TABLE DiarySymptoms (
-    EntryID INT,
-    SymptomID INT,
-    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-    FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
+       DiarySymptomID INT AUTO_INCREMENT PRIMARY KEY,
+       EntryID INT NOT NULL,
+       SymptomID INT NOT NULL,
+       FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
+       FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
 );
+
 --Not implemented yet--
 --CREATE TABLE Event ()
 --CREATE TABLE DiaryQuestions ()

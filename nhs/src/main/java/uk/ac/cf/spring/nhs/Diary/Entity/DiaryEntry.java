@@ -17,9 +17,8 @@ public class DiaryEntry {
     @Column(name = "EntryDate", nullable = false)
     private Date date;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "EntryType", nullable = false)
-    private DiaryEntryType type;
+    @Column(name = "EntryMood")
+    private DiaryMood mood;
 
     @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DiaryPhoto> photos = new HashSet<>();
@@ -30,19 +29,17 @@ public class DiaryEntry {
     @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DiarySymptom> symptoms = new HashSet<>();
 
-    @Column(name = "EntryNotes", nullable = false)
+    @Column(name = "EntryNotes")
     private String notes;
 
     @Column(name = "UserID", nullable = false)
     private int userId;
 
-    protected DiaryEntry() {}
+    public DiaryEntry() {}
 
-    public DiaryEntry(int userId, Date date, DiaryEntryType type, String notes) {
+    public DiaryEntry(int userId, Date date) {
         this.userId = userId;
         this.date = date;
-        this.type = type;
-        this.notes = notes;
     }
 
     public int getId() {
@@ -69,12 +66,12 @@ public class DiaryEntry {
         this.date = date;
     }
 
-    public DiaryEntryType getType() {
-        return type;
+    public DiaryMood getMood() {
+        return mood;
     }
 
-    public void setType(DiaryEntryType type) {
-        this.type = type;
+    public void setMood(DiaryMood mood) {
+        this.mood = mood;
     }
 
     public Set<DiaryPhoto> getPhotos() {
