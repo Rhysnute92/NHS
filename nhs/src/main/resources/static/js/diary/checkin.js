@@ -95,3 +95,22 @@ function returnFileSize(number) {
     }
 }
 
+const checkinForm = document.querySelector('.checkin-form');
+checkinForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(checkinForm);
+
+    fetch('/diary/checkin', {
+        method: 'POST',
+        body: formData,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            alert(data.message);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('An error occurred while submitting the check-in.');
+        });
+});
