@@ -8,11 +8,14 @@
   <body>
     <header th:replace="~{common/fragments/header}"></header>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-    <div class="container">
-      <h2 class="text-xl font-bold">Mobile Dashboard</h2>
-      <p>Welcome</p>
+    <div class="dashboard-container">
+      <h1 id="welcome-message">Welcome,</h1>
+      <h2 class="dashboard-subtitle">
+        Last logged in: <span id="last-logged-in">July 31, 2024</span>
+      </h2>
+      <div id="widget-container"></div>
+      <div class="add-widget-line">+ Add Widget</div>
     </div>
-    <div id="widget-container"></div>
     <script th:src="@{/js/common/header.js}"></script>
     <script type="module" th:src="@{/js/Widget/widget.js}"></script>
   </body>

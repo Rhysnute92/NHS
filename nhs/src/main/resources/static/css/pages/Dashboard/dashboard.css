@@ -1,0 +1,29 @@
+.add-widget-line {
+  margin-top: 20px;
+  padding: 10px;
+  border: 2px dashed #ccc;
+  text-align: center;
+  cursor: pointer;
+}
+
+.add-widget-line:hover {
+  border-color: #aaa;
+  color: #555;
+}
+
+.dashboard-subtitle {
+  font-size: 1.25em;
+  font-weight: lighter;
+  padding: 0 0 1vh;
+}
+
+#welcome-message {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.dashboard-subtitle {
+  font-size: 1.25em;
+  font-weight: lighter;
+  padding: 0 0 1vh;
+}
