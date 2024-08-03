@@ -14,34 +14,34 @@
   <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
 </div>
 <div class="container-calendar">
-  <div id="left">
-    <div id="appointments">
-      <h3>Add Appointment</h3>
-      <form th:action="@{/calendar}" th:object="${calendar}" method="post">
-        <label>Date of Appointment:<br>
-          <input type="date" id="appointmentDate" th:field="*{apptTime}" required><br>
-        </label>
-        <label>Time of Appointment:<br>
-          <input type="time" id="appointmentTime" th:field="*{apptTime}" required><br>
-        </label>
-        <label>Appointment Type:<br>
-          <input type="text" id="appointmentType" placeholder="Please enter what you appointment is" th:field="*{apptType}"><br>
-        </label>
-        <label>Doctor's Name:<br>
-          <input type="text" i="dr" placeholder="Please enter the name of your Dr" th:field="*{apptProvider}"><br>
-        </label>
-        <label>Information about your Appointment:<br>
-          <textarea id="comments" placeholder="Info about your appointment" th:field="*{apptInfo}"></textarea><br>
-        </label>
-      <button type="submit" id="addAppointment">
-        Add
-      </button>
-      <button type="reset" id="deleteAppointment">
-        Clear
-      </button>
-      </form>
-    </div>
-  </div>
+<!--  <div id="left">-->
+<!--    <div id="appointments">-->
+<!--      <h3>Add Appointment</h3>-->
+<!--      <form th:action="@{/calendar}" th:object="${calendar}" method="post">-->
+<!--        <label>Date of Appointment:<br>-->
+<!--          <input type="date" id="appointmentDate" th:field="*{apptTime}" required><br>-->
+<!--        </label>-->
+<!--        <label>Time of Appointment:<br>-->
+<!--          <input type="time" id="appointmentTime" th:field="*{apptTime}" required><br>-->
+<!--        </label>-->
+<!--        <label>Appointment Type:<br>-->
+<!--          <input type="text" id="appointmentType" placeholder="Please enter what you appointment is" th:field="*{apptType}"><br>-->
+<!--        </label>-->
+<!--        <label>Doctor's Name:<br>-->
+<!--          <input type="text" id="dr" placeholder="Please enter the name of your Dr" th:field="*{apptProvider}"><br>-->
+<!--        </label>-->
+<!--        <label>Information about your Appointment:<br>-->
+<!--          <textarea id="comments" placeholder="Info about your appointment" th:field="*{apptInfo}"></textarea><br>-->
+<!--        </label>-->
+<!--      <button type="submit" id="addAppointment">-->
+<!--        Add-->
+<!--      </button>-->
+<!--      <button type="reset" id="deleteAppointment">-->
+<!--        Clear-->
+<!--      </button>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <div id="center">
     <h3>Appointment Schedule</h3>

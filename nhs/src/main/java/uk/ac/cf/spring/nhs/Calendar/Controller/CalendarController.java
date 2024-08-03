@@ -46,15 +46,15 @@ public class CalendarController {
 
     @PostMapping("/calendar")
     public ModelAndView appointmentSent(@Valid @ModelAttribute("addappointment") Calendar calendar, BindingResult bindingResult, Model model) {
-        ModelAndView modelAndView = new ModelAndView("/mobile/Calendar/calendar");
+        ModelAndView modelAndView = new ModelAndView("/mobile/calendar/calendar");
         if (bindingResult.hasErrors()) {
-            Calendar cal = new Calendar(calendar.getAppointmentTime(), calendar.getAppointmentProvider());
+            Calendar cal = new Calendar(calendar.getAppointmentTime(), calendar.getApptType(), calendar.getAppointmentProvider(), calendar.getApptInfo());
             System.out.println(cal);
             calendarRepository.getAllAppointments();
             List<Calendar> calendars = calendarRepository.getAllAppointments();
             modelAndView.addObject("calendar", calendar);
         } else {
-            Calendar cal = new Calendar(calendar.getAppointmentTime(), calendar.getAppointmentProvider());
+            Calendar cal = new Calendar(calendar.getAppointmentTime(), calendar.getAppointmentType(), calendar.getAppointmentProvider(), calendar.getApptInfo());
             System.out.println(cal);
             calendarRepository.getAllAppointments();
             List<Calendar> calendars = calendarRepository.getAllAppointments();

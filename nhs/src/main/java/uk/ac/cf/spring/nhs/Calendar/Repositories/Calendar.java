@@ -27,22 +27,27 @@ public class Calendar {
     public String toString() {
         return "Calendar{" +
                 ApptTime + '\'' +
+                ApptType + '\'' +
                 ApptProvider + '\'' +
+                ApptInfo + '\'' +
                 '}';
     }
 
     public String getAppointmentTime() {
+
         return ApptTime;
     }
     public String getAppointmentProvider() {
+
         return ApptProvider;
     }
 
-    public String getApptType() {
+    public String getAppointmentType() {
+
         return ApptType;
     }
 
-    public String getApptInfo() {
+    public String getAppointmentInfo() {
         return ApptInfo;
     }
 
