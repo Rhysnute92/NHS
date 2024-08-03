@@ -16,33 +16,32 @@ import java.util.Objects;
 public class FileStorageService {
 
     private final Path fileStorageLocation;
+    private final long maxFileSize;
 
-    public FileStorageService(@Value("${file.upload-dir}") String uploadDir) {
-        this.fileStorageLocation = Paths.get(uploadDir)
-                .toAbsolutePath().normalize();
-        System.out.println("File storage location: " + this.fileStorageLocation);
+    public FileStorageService(@Value("${file.upload-dir}") String uploadDir, @Value("${file.max-size}") long maxFileSize) {
+        this.fileStorageLocation = Paths.get(uploadDir).toAbsolutePath().normalize();
+        this.maxFileSize = maxFileSize;
 
-        // Create the directory if it doesn't exist
         try {
             Files.createDirectories(this.fileStorageLocation);
-            System.out.println("Directory created successfully.");
         } catch (Exception ex) {
-            ex.printStackTrace();
             throw new RuntimeException("Could not create the directory where the uploaded files will be stored", ex);
         }
     }
 
     public String storeFile(MultipartFile file) {
-        // Normalize file name
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
         try {
-            // Check if the file's name contains invalid characters
             if (fileName.contains("..")) {
                 throw new RuntimeException("Filename contains invalid path sequence " + fileName);
             }
 
-            // Copy file to the target location
+            // Check file size
+            if (file.getSize() > maxFileSize) {
+                throw new RuntimeException("File size exceeds the maximum allowed size of " + maxFileSize + " bytes");
+            }
+
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
