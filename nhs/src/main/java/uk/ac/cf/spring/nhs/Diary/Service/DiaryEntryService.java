@@ -73,13 +73,15 @@ public class DiaryEntryService {
         if (photos != null && !photos.isEmpty()) {
             Set<DiaryPhoto> diaryPhotos = new HashSet<>();
             for (MultipartFile photo : photos) {
-                String photoUrl = fileStorageService.storeFile(photo);
-                Photo photoEntity = new Photo(photoUrl, new Date(), "", userId);
-                photoRepository.save(photoEntity);
-                DiaryPhoto diaryPhoto = new DiaryPhoto();
-                diaryPhoto.setPhoto(photoEntity);
-                diaryPhoto.setDiaryEntry(diaryEntry);
-                diaryPhotos.add(diaryPhoto);
+                if (!photo.isEmpty()) {
+                    String photoUrl = fileStorageService.storeFile(photo);
+                    Photo photoEntity = new Photo(photoUrl, new Date(), "", userId);
+                    photoRepository.save(photoEntity);
+                    DiaryPhoto diaryPhoto = new DiaryPhoto();
+                    diaryPhoto.setPhoto(photoEntity);
+                    diaryPhoto.setDiaryEntry(diaryEntry);
+                    diaryPhotos.add(diaryPhoto);
+                }
             }
             diaryEntry.setPhotos(diaryPhotos);
         }
