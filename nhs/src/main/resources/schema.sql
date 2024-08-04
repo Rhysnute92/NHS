@@ -17,13 +17,11 @@ DROP TABLE IF EXISTS Measurements;
 DROP TABLE IF EXISTS Photos;
 DROP TABLE IF EXISTS Appointments;
 DROP TABLE IF EXISTS UserWidgets;
-DROP TABLE IF EXISTS Widgets;
 DROP TABLE IF EXISTS Providers;
 DROP TABLE IF EXISTS PatientDiagnosis;
 DROP TABLE IF EXISTS Patients;
 DROP TABLE IF EXISTS ProviderCredentials;
 DROP TABLE IF EXISTS PatientCredentials;
-
 --Log in information and credentials--
 CREATE TABLE PatientCredentials (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
@@ -74,18 +72,12 @@ CREATE TABLE Providers (
     FOREIGN KEY (ProviderID) REFERENCES ProviderCredentials (ProviderID)
 );
 --Dashboard--
-CREATE TABLE Widgets (
-    WidgetID INT AUTO_INCREMENT PRIMARY KEY,
-    WidgetName VARCHAR(255),
-    WidgetDesc VARCHAR(255),
-    WidgetIcon VARCHAR(255)
-);
 CREATE TABLE UserWidgets (
+    UserWidgetID BIGINT AUTO_INCREMENT PRIMARY KEY,
     UserID INT,
-    WidgetID INT,
-    WidgetLocation INT,
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID),
-    FOREIGN KEY (WidgetID) REFERENCES Widgets(WidgetID)
+    WidgetName VARCHAR(255) NOT NULL,
+    Position INT,
+    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
 );
 --Calendar--
 CREATE TABLE Appointments (
@@ -232,7 +224,7 @@ CREATE TABLE Tasks (
     TaskName VARCHAR(255),
     TaskDesc TEXT
 );
-CREATE TABLE UserTasks (  
+CREATE TABLE UserTasks (
     UserTaskID INT AUTO_INCREMENT PRIMARY KEY,
     TaskIsCompleted BOOLEAN,
     TaskDuedate DATETIME,
@@ -249,4 +241,3 @@ CREATE TABLE UserTasks (
 --CREATE TABLE LoginRecords ()
 --CREATE TABLE Record ()
 -----------------------
-
