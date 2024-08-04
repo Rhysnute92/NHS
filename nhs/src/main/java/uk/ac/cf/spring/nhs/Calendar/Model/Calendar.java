@@ -1,16 +1,11 @@
 package uk.ac.cf.spring.nhs.Calendar.Model;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import uk.ac.cf.spring.nhs.Appointments.Model.Appointments;
 
 @Entity
 @Table(name = "Calendar")
@@ -24,9 +19,6 @@ public class Calendar {
     private Integer userID;
 
     private String calendarName;
-
-    @OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
-    private List<Appointments> appointments;
 
     /**
      * @return the calendarID
@@ -55,19 +47,4 @@ public class Calendar {
     public void setCalendarName(String calendarName) {
         this.calendarName = calendarName;
     }
-
-    /**
-     * @return the appointments
-     */
-    public List<Appointments> getAppointments() {
-        return appointments;
-    }
-
-    /**
-     * @param appointments the appointments to set
-     */
-    public void setAppointments(List<Appointments> appointments) {
-        this.appointments = appointments;
-    }
-
 }
