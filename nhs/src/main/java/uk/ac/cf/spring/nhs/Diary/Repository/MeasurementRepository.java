@@ -1,4 +1,13 @@
 package uk.ac.cf.spring.nhs.Diary.Repository;
 
-public class MeasurementRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Diary.Entity.Measurement;
+
+import java.util.List;
+
+@Repository
+public interface MeasurementRepository extends JpaRepository<Measurement, Integer> {
+    List<Measurement> findByUserId(int userId);
 }
