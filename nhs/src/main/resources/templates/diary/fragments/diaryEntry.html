@@ -38,7 +38,20 @@
             <th:block th:each="symptom : ${diaryEntry.symptoms}">
                 <div class="diary-entry-symptom">
                     <h4 th:text="${symptom.symptom.name}"></h4>
-                    <p th:text="${symptom.symptom.severity}"></p>
+                    <th:block th:switch="${symptom.symptom.severity}">
+                        <div th:case="1">
+                            <span>Not at all</span>
+                        </div>
+                        <div th:case="2">
+                            <span>A little</span>
+                        </div>
+                        <div th:case="3">
+                            <span>Quite a bit</span>
+                        </div>
+                        <div th:case="4">
+                            <span>A lot</span>
+                        </div>
+                    </th:block>
                 </div>
             </th:block>
         </div>

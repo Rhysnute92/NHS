@@ -29,9 +29,6 @@ public class DiaryController {
     @GetMapping("")
     public String diary(Model model) {
         List<DiaryEntry> diaryEntries = diaryEntryService.getDiaryEntriesByUserId(1);
-        for (DiaryEntry diaryEntry : diaryEntries) {
-            System.out.println(diaryEntry.getMood());
-        }
         model.addAttribute("diaryEntries", diaryEntries);
         return "diary/diary";
     }
