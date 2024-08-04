@@ -16,13 +16,4 @@ public class LoginController {
             return "login/desktop/login";
         }
     }
-
-    @GetMapping("/login-error")
-    public String showLoginErrorPage(HttpServletRequest request) {
-        if (DeviceDetector.isMobile(request)) {
-            return "guest/mobile/guestLanding";
-        } else {
-            return "guest/desktop/guestLanding";
-        }
-    }
 }
