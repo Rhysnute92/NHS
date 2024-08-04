@@ -22,8 +22,8 @@ public class CalendarService {
         return calendarRepository.findById(id).orElse(null);
     }
 
-    public Calendar getCalendarByUserId(Integer userId) {
-        return calendarRepository.findByUserId(userId);
+    public Calendar getCalendarByUserId(Integer UserID) {
+        return calendarRepository.findByUserID(UserID);
     }
 
     public Calendar saveCalendar(Calendar calendar) {

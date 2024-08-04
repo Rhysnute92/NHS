@@ -3,6 +3,8 @@ package uk.ac.cf.spring.nhs.Calendar.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,13 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import uk.ac.cf.spring.nhs.Calendar.Model.Calendar;
 import uk.ac.cf.spring.nhs.Calendar.Service.CalendarService;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 
-@RestController
+@Controller
 @RequestMapping("/calendar")
 public class CalendarController {
 
@@ -24,10 +25,14 @@ public class CalendarController {
     private CalendarService calendarService;
 
     @GetMapping
-    public Calendar getCalendarForCurrentUser() {
+    public String getCalendarForCurrentUser(Model model) {
         Integer userId = 1; // TODO: get current user ID properly when implemented
+        Calendar calendar = calendarService.getCalendarByUserId(userId);
 
-        return calendarService.getCalendarByUserId(userId);
+        model.addAttribute("calendar", calendar);
+        model.addAttribute("appointments", calendar.getAppointments());
+
+        return "calendar/calendar";
     }
 
     @PostMapping

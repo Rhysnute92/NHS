@@ -20,7 +20,7 @@ public class Calendar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer calendarID;
 
-    @Column(name = "userID", nullable = false)
+    @Column(name = "UserID", nullable = false)
     private Integer userID;
 
     private String calendarName;
