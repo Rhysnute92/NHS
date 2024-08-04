@@ -11,14 +11,14 @@ public class PatientCredentials {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "UserID")
-    private int userId;
+    private Long userId;
     @Column(name = "UserName")
     private String userName;
     @Column(name = "UserPassword")
     private String userPassword;
 
     //Getters and setters
-    public int getUserId(){
+    public Long getUserId(){
         return userId;
     }
     public String getUserName(){

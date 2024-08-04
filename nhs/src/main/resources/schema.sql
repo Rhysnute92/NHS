@@ -22,12 +22,12 @@ DROP TABLE IF EXISTS PatientCredentials;
 DROP TABLE IF EXISTS Admin;
 --Log in information and credentials--
 CREATE TABLE PatientCredentials (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
     UserName VARCHAR(255),
     UserPassword VARCHAR(255)
 );
 CREATE TABLE ProviderCredentials (
-    ProviderID INT AUTO_INCREMENT PRIMARY KEY,
+    ProviderID BIGINT AUTO_INCREMENT PRIMARY KEY,
     ProviderName VARCHAR(255),
     ProviderPassword VARCHAR(255)
 );
