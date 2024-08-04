@@ -1,33 +1,36 @@
 package uk.ac.cf.spring.nhs.Calendar.Service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import uk.ac.cf.spring.nhs.CalendarEntry.Model.CalendarEntry;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import uk.ac.cf.spring.nhs.Calendar.Model.Calendar;
+import uk.ac.cf.spring.nhs.Calendar.Repositories.CalendarRepository;
 
 @Service
 public class CalendarService {
 
-    public CalendarService() {
+    @Autowired
+    private CalendarRepository calendarRepository;
+
+    public List<Calendar> getAllCalendars() {
+        return calendarRepository.findAll();
     }
 
-    public List<CalendarEntry> getCalendarEntries() {
-        List<CalendarEntry> calendarEntries = new ArrayList<>();
-        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM");
+    public Calendar getCalendarById(Integer id) {
+        return calendarRepository.findById(id).orElse(null);
+    }
 
-        for (int i = 0; i < 7; i++) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DAY_OF_YEAR, -i);
-            Date date = calendar.getTime();
-            String formattedDate = formatter.format(date);
-            calendarEntries.add(new CalendarEntry(date, formattedDate, "Test" + (i + 1)));
-        }
-        return calendarEntries;
+    public Calendar getCalendarByUserId(Integer userId) {
+        return calendarRepository.findByUserId(userId);
+    }
+
+    public Calendar saveCalendar(Calendar calendar) {
+        return calendarRepository.save(calendar);
+    }
+
+    public void deleteCalendar(Integer id) {
+        calendarRepository.deleteById(id);
     }
 }
-

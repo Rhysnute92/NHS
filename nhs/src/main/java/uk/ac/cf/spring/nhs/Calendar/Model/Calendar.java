@@ -1,52 +1,73 @@
 package uk.ac.cf.spring.nhs.Calendar.Model;
 
+import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import uk.ac.cf.spring.nhs.Appointments.Model.Appointments;
 
-@NoArgsConstructor
-@Data
-@AllArgsConstructor
+@Entity
+@Table(name = "Calendar")
 public class Calendar {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer calendarID;
 
-    private String ApptTime;
-    private String ApptType;
-    private String ApptProvider;
-    private String ApptInfo;
+    @Column(name = "userID", nullable = false)
+    private Integer userID;
 
-    public Calendar(String appointmentTime, String appointmentProvider) {
+    private String calendarName;
+
+    @OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
+    private List<Appointments> appointments;
+
+    /**
+     * @return the calendarID
+     */
+    public Integer getCalendarID() {
+        return calendarID;
     }
 
-    @Override
-    public String toString() {
-        return "Calendar{" +
-                ApptTime + '\'' +
-                ApptType + '\'' +
-                ApptProvider + '\'' +
-                ApptInfo + '\'' +
-                '}';
+    /**
+     * @param calendarID the calendarID to set
+     */
+    public void setCalendarID(Integer calendarID) {
+        this.calendarID = calendarID;
     }
 
-    public String getAppointmentTime() {
-
-        return ApptTime;
-    }
-    public String getAppointmentProvider() {
-
-        return ApptProvider;
+    /**
+     * @return the calendarName
+     */
+    public String getCalendarName() {
+        return calendarName;
     }
 
-    public String getAppointmentType() {
-
-        return ApptType;
+    /**
+     * @param calendarName the calendarName to set
+     */
+    public void setCalendarName(String calendarName) {
+        this.calendarName = calendarName;
     }
 
-    public String getAppointmentInfo() {
-        return ApptInfo;
+    /**
+     * @return the appointments
+     */
+    public List<Appointments> getAppointments() {
+        return appointments;
     }
 
-
+    /**
+     * @param appointments the appointments to set
+     */
+    public void setAppointments(List<Appointments> appointments) {
+        this.appointments = appointments;
+    }
 
 }

@@ -2,7 +2,7 @@ package uk.ac.cf.spring.nhs.Calendar.Entity;
 
 import org.junit.jupiter.api.Test;
 
-import uk.ac.cf.spring.nhs.CalendarEntry.Model.CalendarEntry;
+import uk.ac.cf.spring.nhs.Appointments.Model.Appointments;
 
 import java.util.Date;
 
@@ -16,7 +16,7 @@ public class CalendarEntryTest {
         String formattedDate = "Monday, 9 Sept";
         String info = "Lymphoedema";
 
-        CalendarEntry calendarEntry = new CalendarEntry(date, formattedDate, info);
+        Appointments calendarEntry = new Appointments(date, formattedDate, info);
 
         assertNotNull(calendarEntry);
         assertEquals(date, calendarEntry.getDate());
@@ -26,7 +26,7 @@ public class CalendarEntryTest {
 
     @Test
     public void testCalendarSetters() {
-        CalendarEntry calendarEntry = new CalendarEntry(null, null, null);
+        Appointments calendarEntry = new Appointments(null, null, null);
 
         Date date = new Date();
         String formattedDate = "Monday, 9 Sept";

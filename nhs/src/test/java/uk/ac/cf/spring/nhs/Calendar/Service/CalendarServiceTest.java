@@ -3,7 +3,7 @@ package uk.ac.cf.spring.nhs.Calendar.Service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import uk.ac.cf.spring.nhs.CalendarEntry.Model.CalendarEntry;
+import uk.ac.cf.spring.nhs.Appointments.Model.Appointments;
 
 import java.util.List;
 
@@ -21,14 +21,14 @@ public class CalendarServiceTest {
 
     @Test
     void getCalendarNotEmptyList() {
-        List<CalendarEntry> calendarEntries =   calendarService.getCalendarEntries();
+        List<Appointments> calendarEntries =   calendarService.getCalendarEntries();
         assertFalse(calendarEntries.isEmpty());
     }
 
     @Test
     void getCalendarNotNullValues() {
-        List<CalendarEntry> calendarEntries = calendarService.getCalendarEntries();
-        for (CalendarEntry calendarEntry : calendarEntries) {
+        List<Appointments> calendarEntries = calendarService.getCalendarEntries();
+        for (Appointments calendarEntry : calendarEntries) {
             assertNotNull(calendarEntry.getInfo());
         }
     }
