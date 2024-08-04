@@ -16,6 +16,8 @@ public class PatientCredentials {
     private String userName;
     @Column(name = "UserPassword")
     private String userPassword;
+    @Column(name = "UserRole")
+    private String userRole;
 
     //Getters and setters
     public Long getUserId(){
@@ -32,5 +34,11 @@ public class PatientCredentials {
     }
     public void setUserPassword(String pass){
         this.userName = pass;
+    }
+    public String getUserRole(){
+        return userRole;
+    }
+    public void setUserRole(String roles){
+        this.userRole = roles;
     }
 }

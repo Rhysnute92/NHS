@@ -4,5 +4,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProviderCredentialsRepository extends JpaRepository<ProviderCredentials, Long> {
-    
+    ProviderCredentials findByProviderName(String name);
 }

@@ -4,5 +4,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PatientCredentialsRepository extends JpaRepository<PatientCredentials, Long> {
-    
+    PatientCredentials findByUserName(String name);
 }

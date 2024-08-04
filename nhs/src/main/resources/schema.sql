@@ -24,16 +24,19 @@ DROP TABLE IF EXISTS Admin;
 CREATE TABLE PatientCredentials (
     UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
     UserName VARCHAR(255),
-    UserPassword VARCHAR(255)
+    UserPassword VARCHAR(255),
+    UserRole VARCHAR(255)
 );
 CREATE TABLE ProviderCredentials (
     ProviderID BIGINT AUTO_INCREMENT PRIMARY KEY,
     ProviderName VARCHAR(255),
-    ProviderPassword VARCHAR(255)
+    ProviderPassword VARCHAR(255),
+    ProviderRole VARCHAR(255)
 );
 CREATE TABLE Admin (
     AdminName VARCHAR(255),
-    AdminPassword VARCHAR(255)
+    AdminPassword VARCHAR(255),
+    AdminRole VARCHAR(255)
 );
 --Patient information--
 CREATE TABLE Patients (

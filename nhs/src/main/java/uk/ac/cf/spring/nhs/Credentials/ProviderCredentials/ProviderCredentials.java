@@ -16,6 +16,8 @@ public class ProviderCredentials {
     private String providerName;
     @Column(name = "ProviderPassword")
     private String providerPassword;
+    @Column(name = "ProviderRole")
+    private String providerRole;
 
     //Getters and setters
     public Long getProviderId(){
@@ -32,5 +34,11 @@ public class ProviderCredentials {
     }
     public void setProviderPassword(String pass){
         this.providerName = pass;
+    }
+    public String getProviderRole(){
+        return providerRole;
+    }
+    public void setProviderRole(String roles){
+        this.providerRole = roles;
     }
 }
