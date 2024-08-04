@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Appointment Calendar</title>
+  <title>Calendar</title>
   <link rel="stylesheet" th:href="@{/css/calendar/desktop/calendar.css}"/>
   <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -10,7 +9,8 @@
 <div th:replace="~{common/fragments/header}" ></div>
 <nav th:replace="~{common/fragments/navbar}"></nav>
 <div id="header">
-  <h1>Appointment Calendar</h1>  <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
+  <h1>Appointment Calendar</h1>
+  <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
 </div>
   <div class="container-calendar">
       <div id="left">
