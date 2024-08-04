@@ -11,7 +11,9 @@
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <div class="management-container">
       <section class="collapsible emergency-plan">
-        <h2 class="collapsible-header">Emergency Plan</h2>
+        <h2 class="collapsible-header" onclick="toggleSection(event)">
+          Emergency Plan
+        </h2>
         <div class="collapsible-content">
           <div class="emergency-contacts">
             <h3>Emergency Contacts</h3>
@@ -32,7 +34,9 @@
         </div>
       </section>
       <section class="collapsible your-actions">
-        <h2 class="collapsible-header">Your Actions</h2>
+        <h2 class="collapsible-header" onclick="toggleSection(event)">
+          Your Actions
+        </h2>
         <div class="collapsible-content">
           <div class="action-item">
             <h3>Complete Your Questionnaire</h3>
@@ -49,7 +53,9 @@
         </div>
       </section>
       <section class="collapsible your-treatment-plan">
-        <h2 class="collapsible-header">Your Treatment Plan</h2>
+        <h2 class="collapsible-header" onclick="toggleSection(event)">
+          Your Treatment Plan
+        </h2>
         <div class="collapsible-content">
           <div class="treatment-item">
             <h3>Diet and Nutrition</h3>
