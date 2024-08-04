@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.Diary.Entity;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -15,28 +16,12 @@ public class DiaryEntryTest {
         String formattedDate = "Wednesday, 20 July";
         String content = "Content for entry";
 
-        DiaryEntry diaryEntry = new DiaryEntry(date, formattedDate, content);
+        int userId = 1;
+
+        DiaryEntry diaryEntry = new DiaryEntry(userId, date);
 
         assertNotNull(diaryEntry);
+        assertEquals(userId, diaryEntry.getUserId());
         assertEquals(date, diaryEntry.getDate());
-        assertEquals(formattedDate, diaryEntry.getFormattedDate());
-        assertEquals(content, diaryEntry.getContent());
-    }
-
-    @Test
-    public void testDiaryEntrySetters() {
-        DiaryEntry diaryEntry = new DiaryEntry(null, null, null);
-
-        Date date = new Date();
-        String formattedDate = "Wednesday, 20 July";
-        String content = "Updated content for entry";
-
-        diaryEntry.setDate(date);
-        diaryEntry.setFormattedDate(formattedDate);
-        diaryEntry.setContent(content);
-
-        assertEquals(date, diaryEntry.getDate());
-        assertEquals(formattedDate, diaryEntry.getFormattedDate());
-        assertEquals(content, diaryEntry.getContent());
     }
 }
