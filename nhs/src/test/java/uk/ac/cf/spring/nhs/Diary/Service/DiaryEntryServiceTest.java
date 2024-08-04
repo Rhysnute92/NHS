@@ -38,8 +38,7 @@ class DiaryEntryServiceTest {
     }
 
     @Test
-    void createAndSaveDiaryEntry_ShouldSaveDiaryEntry() throws Exception {
-        // Arrange
+    void createAndSaveDiaryEntrySavesDiaryEntry() throws Exception {
         CheckinForm checkinForm = new CheckinForm();
         checkinForm.setMood("GOOD");
         checkinForm.setNotes("Feeling good");
@@ -55,10 +54,8 @@ class DiaryEntryServiceTest {
         when(symptomRepository.save(any(Symptom.class))).thenAnswer(invocation -> invocation.getArgument(0));
         when(diaryEntryRepository.save(any(DiaryEntry.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        // Act
         diaryEntryService.createAndSaveDiaryEntry(checkinForm, photos);
 
-        // Assert
         ArgumentCaptor<DiaryEntry> diaryEntryCaptor = ArgumentCaptor.forClass(DiaryEntry.class);
         verify(diaryEntryRepository).save(diaryEntryCaptor.capture());
         DiaryEntry savedDiaryEntry = diaryEntryCaptor.getValue();
@@ -71,8 +68,7 @@ class DiaryEntryServiceTest {
     }
 
     @Test
-    void createAndSaveDiaryEntry_ShouldHandleNullMoodAndNotes() throws Exception {
-        // Arrange
+    void createAndSaveDiaryEntryHandlesNullMoodAndNotes() throws Exception {
         CheckinForm checkinForm = new CheckinForm();
         checkinForm.setTroubleSleepingSeverity(2);
         checkinForm.setPainSeverity(3);
@@ -86,10 +82,8 @@ class DiaryEntryServiceTest {
         when(symptomRepository.save(any(Symptom.class))).thenAnswer(invocation -> invocation.getArgument(0));
         when(diaryEntryRepository.save(any(DiaryEntry.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        // Act
         diaryEntryService.createAndSaveDiaryEntry(checkinForm, photos);
 
-        // Assert
         ArgumentCaptor<DiaryEntry> diaryEntryCaptor = ArgumentCaptor.forClass(DiaryEntry.class);
         verify(diaryEntryRepository).save(diaryEntryCaptor.capture());
         DiaryEntry savedDiaryEntry = diaryEntryCaptor.getValue();
@@ -102,8 +96,7 @@ class DiaryEntryServiceTest {
     }
 
     @Test
-    void createAndSaveDiaryEntry_ShouldHandleNoPhotos() throws Exception {
-        // Arrange
+    void createAndSaveDiaryEntryHandlesNoPhotos() throws Exception {
         CheckinForm checkinForm = new CheckinForm();
         checkinForm.setMood("GOOD");
         checkinForm.setNotes("Feeling good");
@@ -114,10 +107,8 @@ class DiaryEntryServiceTest {
         when(symptomRepository.save(any(Symptom.class))).thenAnswer(invocation -> invocation.getArgument(0));
         when(diaryEntryRepository.save(any(DiaryEntry.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        // Act
         diaryEntryService.createAndSaveDiaryEntry(checkinForm, Collections.emptyList());
 
-        // Assert
         ArgumentCaptor<DiaryEntry> diaryEntryCaptor = ArgumentCaptor.forClass(DiaryEntry.class);
         verify(diaryEntryRepository).save(diaryEntryCaptor.capture());
         DiaryEntry savedDiaryEntry = diaryEntryCaptor.getValue();
