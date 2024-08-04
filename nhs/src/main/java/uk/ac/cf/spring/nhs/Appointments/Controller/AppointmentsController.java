@@ -21,9 +21,9 @@ public class AppointmentsController {
     @Autowired
     private AppointmentService appointmentService;
 
-    @GetMapping
-    public List<Appointments> getAllAppointments() {
-        return appointmentService.getAllAppointments();
+    @GetMapping("/calendar/{calendarId}")
+    public List<Appointments> getAppointmentsForCalendar(@PathVariable Integer calendarId) {
+        return appointmentService.getAppointmentsByCalendarID(calendarId);
     }
 
     @GetMapping("/{id}")

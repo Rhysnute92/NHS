@@ -1,12 +1,12 @@
 package uk.ac.cf.spring.nhs.Appointments.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uk.ac.cf.spring.nhs.Appointments.Model.Appointments;
 import uk.ac.cf.spring.nhs.Appointments.Repository.AppointmentsRepository;
-
-import java.util.List;
 
 @Service
 public class AppointmentService {
@@ -28,5 +28,9 @@ public class AppointmentService {
 
     public void deleteAppointment(Integer id) {
         appointmentRepository.deleteById(id);
+    }
+
+    public List<Appointments> getAppointmentsByCalendarID(Integer calendarID) {
+        return appointmentRepository.findByCalendarID(calendarID);
     }
 }
