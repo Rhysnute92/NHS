@@ -39,7 +39,7 @@ public class CalendarController {
     public List<NavMenuItem> navMenuItems() {
         return List.of(
                 new NavMenuItem("Schedule", "/calendar", "fa-regular fa-calendar-days"),
-                new NavMenuItem("Add Appointment", "/mobileaddappt", "fa-solid fa-calendar-check")
+                new NavMenuItem("Add Appointment", "/addappointment", "fa-solid fa-calendar-check")
         );
     }
 
