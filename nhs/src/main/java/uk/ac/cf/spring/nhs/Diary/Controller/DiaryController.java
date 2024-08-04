@@ -40,21 +40,20 @@ public class DiaryController {
 
 
     @PostMapping("/checkin")
-    public ResponseEntity<Map<String, String>> checkin(
+    public ModelAndView checkin(
             @ModelAttribute CheckinForm checkinForm,
             @RequestParam(value = "checkin-photos-upload", required = false) List<MultipartFile> photos
     ) {
-        Map<String, String> response = new HashMap<>();
+        ModelAndView modelAndView = new ModelAndView();
         try {
             diaryEntryService.createAndSaveDiaryEntry(checkinForm, photos);
 
-            response.put("message", "Check-in successful!");
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+            modelAndView.setViewName("redirect:/diary"); // Redirect to the desired view
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            response.put("message", "Check-in failed!");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+            modelAndView.setViewName("diary/checkin"); // Redirect to the check-in view if there's an error
         }
+        return modelAndView;
     }
 
     @ModelAttribute("navMenuItems")
