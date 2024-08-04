@@ -4,15 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import uk.ac.cf.spring.nhs.Files.Service.FileStorageService;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

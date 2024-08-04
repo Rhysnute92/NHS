@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinForm;
 import uk.ac.cf.spring.nhs.Diary.Entity.*;
 import uk.ac.cf.spring.nhs.Diary.Repository.*;
-import uk.ac.cf.spring.nhs.Common.util.FileStorageService;
+import uk.ac.cf.spring.nhs.Files.Service.FileStorageService;
 
 import java.util.*;
 
