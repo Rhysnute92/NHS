@@ -3,7 +3,7 @@
     <div class="diary-entry-title-container">
         <h2 class="diary-entry-title" th:attr="data-date=${diaryEntry.date}"></h2>
     </div>
-    <div class="diary-entry-content-container">
+    <div class="diary-entry-content">
         <div class="diary-entry-preview">
             <div th:if="${diaryEntry.mood}" th:switch="${diaryEntry.mood.name()}">
                 <div th:case="'GREAT'">
@@ -32,7 +32,7 @@
                 <i class="fa-solid fa-file-lines"></i>
             </div>
         </div>
-        <div class="diary-entry-content">
+        <div class="diary-entry-full hidden">
             <div class="diary-entry-section">
                 <h3>Mood</h3>
                 <th:block th:if="${diaryEntry.mood}" th:switch="${diaryEntry.mood.name()}">

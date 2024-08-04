@@ -9,3 +9,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
         element.textContent = formattedDate;
     });
 });
+
+const diaryEntries = document.querySelectorAll('.diary-entry');
+diaryEntries.forEach(entry => {
+    entry.addEventListener('click', (event) => {
+        const preview = entry.querySelector('.diary-entry-preview');
+        const full = entry.querySelector('.diary-entry-full');
+        preview.classList.toggle('hidden');
+        full.classList.toggle('hidden');
+    });
+});

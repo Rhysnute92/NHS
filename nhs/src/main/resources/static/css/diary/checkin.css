@@ -135,7 +135,7 @@ h1 {
 
 .checkin-photos-preview {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .checkin-photos-preview-image {
