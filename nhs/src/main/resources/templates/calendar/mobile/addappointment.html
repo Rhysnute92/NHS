@@ -13,16 +13,24 @@
 <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
 <div class="container-calendar">
     <div id="appointments">
-        <label>Date of Appointment:</label><br>
-        <input type="date" id="appointmentDate"><br>
-        <label>Time of Appointment:</label><br>
-        <input type="time" id="appointmentTime"><br>
-        <label>Appointment Type:</label><br>
-        <input type="text" id="appointmentType" placeholder="Please enter what you appointment is"><br>
-        <label>Doctor's Name:</label><br>
-        <input type="text" id="dr" placeholder="Please enter the name of your Dr"><br>
-        <label>Information about your Appointment:</label><br>
-        <textarea id="comments" placeholder="Info about your appointment"></textarea><br>
+        <label>Date of Appointment:<br>
+            <input type="date" id="appointmentDate"><br>
+        </label>
+        <label>Time of Appointment:<br>
+            <input type="time" id="appointmentTime"><br>
+        </label>
+        <label>Location of Appointment:<br>
+            <input type="text" id="appointmentLocation" placeholder="Please enter the location of your appointment"><br>
+        </label>
+        <label>Appointment Type:<br>
+            <input type="text" id="appointmentType" placeholder="Please enter what your appointment is for"><br>
+        </label>
+        <label>Healthcare Provider's Name (optional):<br>
+            <input type="text" id="dr" placeholder="Please enter the name of your healthcare provider"><br>
+        </label>
+        <label>Information about your Appointment:<br>
+            <textarea id="comments" placeholder="Info about your appointment"></textarea><br>
+        </label>
         <button id="addEvent" onclick="addEvent()">
             Add
         </button>

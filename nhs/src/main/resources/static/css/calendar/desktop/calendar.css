@@ -17,10 +17,8 @@
 
 #header {
     color: #000000;
-    text-align: center;
     position: relative;
-    margin: 0;
-    position: relative;
+    margin-left: 1rem;
 }
 
 #appointments h3 {
@@ -66,9 +64,10 @@
 
 #apptList li {
     position: relative;
+    margin-top: 2rem;
 }
 
-#right {
+#left {
     position: relative;
     margin: 1rem;
 }
@@ -79,7 +78,6 @@
     padding: 5px 10px;
     cursor: pointer;
     margin-left: 10px;
-    border-radius: 5px;
     height: 2rem;
     width: 4rem;
 }
@@ -89,7 +87,6 @@
     background: #005eb8;
     color: #fff;
     border: 1px solid #005eb8;
-    border-radius: 5px;
     padding: 5px 10px;
     width: 2rem;
     height: 2rem;
@@ -135,7 +132,7 @@
 
 .button-container-calendar {
     position: relative;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     overflow: hidden;
     clear: both;
 }
@@ -150,6 +147,7 @@
 
 
 .footer-container-calendar {
+    text-align: center;
     padding: 10px 0;
     position: relative;
 }
