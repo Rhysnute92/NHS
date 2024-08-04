@@ -17,8 +17,6 @@
     #mobileMonth {
         position: relative;
         top: 2rem;
-        height: 75vh;
-        width: 100vw;
     }
 
     .container-calendar #mobileMonth h1 {
@@ -46,8 +44,7 @@
     #appointments input[type="text"],
     #appointments textarea {
         margin: 10px 0;
-        width: 100%;
-        font-family: 'Frutiger', sans-serif;
+        width: 80%;
     }
 
     #appointments {
@@ -58,9 +55,9 @@
         background: #005EB8;
         color: white;
         position: relative;
-        left: 9rem;
-        top: 1.5rem;
-        width: 8rem;
+        left: 8rem;
+        top: 1rem;
+        width: 10rem;
         height: 2rem;
     }
 
@@ -110,12 +107,10 @@
 
     .table-calendar td,
     .table-calendar th {
+        padding: 5px;
         border: 1px solid #e2e2e2;
         text-align: center;
         vertical-align: top;
-        width: 3rem;
-        height: 3rem;
-        padding: 0;
     }
 
     .date-picker.selected {

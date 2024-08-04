@@ -1,6 +1,7 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <title>Calendar</title>
+  <title>Appointment Calendar</title>
   <link rel="stylesheet" th:href="@{/css/calendar/desktop/calendar.css}"/>
   <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,12 +14,38 @@
   <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
 </div>
   <div class="container-calendar">
+<!--      <div id="left">-->
+<!--        <div id="appointments">-->
+<!--          <h3>Add Appointment</h3>-->
+<!--          <label>Date of Appointment:</label><br>-->
+<!--          <input type="date" id="appointmentDate"><br>-->
+<!--          <label>Time of Appointment:</label><br>-->
+<!--          <input type="time" id="appointmentTime"><br>-->
+<!--          <label>Appointment Type:</label><br>-->
+<!--          <input type="text" id="appointmentType" placeholder="Please enter what you appointment is"><br>-->
+<!--          <label>Doctor's Name:</label><br>-->
+<!--          <input type="text" id="dr" placeholder="Please enter the name of your Dr"><br>-->
+<!--          <label>Information about your Appointment:</label><br>-->
+<!--          <textarea id="comments" placeholder="Info about your appointment"></textarea><br>-->
+<!--          <button id="addEvent" onclick="addEvent()">-->
+<!--            Add-->
+<!--          </button>-->
+<!--          <button id="deleteAppointment" onclick="deleteEvent()">-->
+<!--            Clear-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
+
       <div id="left">
         <h3>Appointment Schedule</h3>
 
         <ul id="apptList">
           <li data-event-id="1">
           <p>No appointments scheduled for today</p>
+            <button class="delete-event"
+                    onclick="deleteEvent(1)">
+              Delete
+            </button>
           </li>
         </ul>
       </div>
@@ -64,7 +91,6 @@
   </div>
 </div>
 <script th:src="@{/js/calendar/calendar.js}"></script>
-<script th:src="@{/js/calendar/deleteAppointment.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>
