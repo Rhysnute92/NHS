@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import uk.ac.cf.spring.nhs.Appointments.Model.Appointments;
 
+import java.lang.reflect.Type;
+import java.sql.Time;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,32 +14,29 @@ public class CalendarEntryTest {
 
     @Test
     public void testCalendarGetters() {
-        Date date = new Date();
-        String formattedDate = "Monday, 9 Sept";
+        String time = "15:15";
+        String type = "Lymphoedema";
         String info = "Lymphoedema";
 
-        Appointments calendarEntry = new Appointments(date, formattedDate, info);
+        Appointments calendarEntry = new Appointments();
 
         assertNotNull(calendarEntry);
-        assertEquals(date, calendarEntry.getDate());
-        assertEquals(formattedDate, calendarEntry.getFormattedDate());
-        assertEquals(info, calendarEntry.getInfo());
+        assertEquals(time, calendarEntry.getApptStartTime());
+        assertEquals(type, calendarEntry.getApptType());
+        assertEquals(info, calendarEntry.getApptInfo());
     }
 
     @Test
     public void testCalendarSetters() {
-        Appointments calendarEntry = new Appointments(null, null, null);
+        Appointments calendarEntry = new Appointments();
 
-        Date date = new Date();
-        String formattedDate = "Monday, 9 Sept";
+        String type = "Lymphoedema";
         String info = "Lymphoedema";
 
-        calendarEntry.setDate(date);
-        calendarEntry.setFormattedDate(formattedDate);
-        calendarEntry.setInfo(info);
+        calendarEntry.setApptType(type);
+        calendarEntry.setApptInfo(info);
 
-        assertEquals(date, calendarEntry.getDate());
-        assertEquals(formattedDate, calendarEntry.getFormattedDate());
-        assertEquals(info, calendarEntry.getInfo());
+        assertEquals(type, calendarEntry.getApptType());
+        assertEquals(info, calendarEntry.getApptInfo());
     }
 }
