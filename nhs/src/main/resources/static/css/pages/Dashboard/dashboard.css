@@ -3,6 +3,12 @@
   margin: 0;
 }
 
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
 #welcome-message {
   font-size: 2.25em;
   font-weight: bold;
@@ -23,16 +29,17 @@
   padding: 0 0 1vh;
 }
 
+.button-container {
+    width:100%;
+    display: flex;
+    justify-content: flex-end;;
+}
+
 .add-widget-button {
-  position: absolute;
-  bottom: 2em;
-  left: 50%;
-  transform: translateX(-50%);
   background-color: #006747;
   color: white;
   border: none;
   padding: 0.8em 1.6em;
-  border-radius: 0.4em;
   box-shadow: 0 0.4em 0.6em rgba(0, 0, 0, 0.1);
   cursor: pointer;
   font-size: 1em;
