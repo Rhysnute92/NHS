@@ -1,12 +1,12 @@
-package uk.ac.cf.spring.nhs.Credentials.PatientCredentials;
+package uk.ac.cf.spring.nhs.Credentials.UserCredentials;
 
 import org.hibernate.annotations.DynamicUpdate;
 import jakarta.persistence.*;
 
 @Entity
 @DynamicUpdate
-@Table (name = "PatientCredentials")
-public class PatientCredentials {
+@Table (name = "UserCredentials")
+public class UserCredentials {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

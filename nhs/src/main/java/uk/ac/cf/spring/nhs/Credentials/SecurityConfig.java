@@ -2,37 +2,37 @@ package uk.ac.cf.spring.nhs.Credentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfiguration{
+public class SecurityConfig{
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-}
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
+    public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
-    }
- 
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
     }
 
     public static final String[] FREE_ACCESS = { "/landing", "/guest/**"};
@@ -43,16 +43,24 @@ public class SecurityConfig extends WebSecurityConfiguration{
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http .authorizeHttpRequests(request -> request
+        http.authenticationProvider(authProvider())
+        .authorizeHttpRequests(request -> request
                 .requestMatchers(FREE_ACCESS).permitAll()
-                .requestMatchers(PATIENT_ACCESS).hasRole("PATIENT")
-                .requestMatchers(PROVIDER_ACCESS).hasRole("PROVIDER")
-                .anyRequest().hasRole("ADMIN"))
-            .csrf(csrf -> csrf.disable() )
-            .formLogin(form -> form.loginPage("/login"). permitAll());
-
+                .requestMatchers(new AntPathRequestMatcher("/login", "POST")).permitAll()
+                .requestMatchers(PATIENT_ACCESS).hasAnyRole("PATIENT", "ADMIN")
+                .requestMatchers(PROVIDER_ACCESS).hasAnyRole("PROVIDER", "ADMIN")
+                )
+            .formLogin(form -> form
+            .loginPage("/login")
+            .permitAll());
+        http.csrf((csrf) -> csrf.disable());
         return http.build();
     }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+    return web -> web.ignoring().requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**");
+}
     
  
 }
