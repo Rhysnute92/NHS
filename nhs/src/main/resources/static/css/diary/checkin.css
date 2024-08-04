@@ -72,7 +72,7 @@ h1 {
     position: relative;
 }
 
-.checkin-mood-button input[type="radio"] {
+.checkin-mood-button input[type="checkbox"] {
     opacity: 0;
     position: absolute;
     width: 100%;

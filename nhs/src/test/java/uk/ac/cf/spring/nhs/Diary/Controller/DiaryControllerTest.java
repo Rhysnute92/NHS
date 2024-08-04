@@ -10,21 +10,28 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
+import uk.ac.cf.spring.nhs.Diary.DTO.CheckinForm;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
-import uk.ac.cf.spring.nhs.Diary.Service.DiaryService;
+import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(DiaryController.class)
 public class DiaryControllerTest {
@@ -33,7 +40,7 @@ public class DiaryControllerTest {
     private DiaryController diaryController;
 
     @MockBean
-    private DiaryService diaryService;
+    private DiaryEntryService diaryEntryService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -47,12 +54,12 @@ public class DiaryControllerTest {
         closeable = MockitoAnnotations.openMocks(this);
         mockedStatic = mockStatic(DeviceDetector.class);
 
-        dummyEntries = Arrays.asList(
-                new DiaryEntry(new Date(), "Formatted Date 1", "Content 1"),
-                new DiaryEntry(new Date(), "Formatted Date 2", "Content 2")
-        );
+        dummyEntries = new ArrayList<>(Arrays.asList(
+                new DiaryEntry(1, new Date()),
+                new DiaryEntry(2, new Date())
+        ));
 
-        when(diaryService.getDiaryEntries()).thenReturn(dummyEntries);
+        when(diaryEntryService.getDiaryEntriesByUserId(1)).thenReturn(dummyEntries);
     }
 
     @AfterEach
@@ -79,10 +86,42 @@ public class DiaryControllerTest {
     @Test
     public void testDiary() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/diary"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("diary/diary"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("diaryEntries"))
-                .andExpect(MockMvcResultMatchers.model().attribute("diaryEntries", dummyEntries));
+                .andExpect(status().isOk())
+                .andExpect(view().name("diary/diary"))
+                .andExpect(model().attributeExists("diaryEntries"))
+                .andExpect(model().attribute("diaryEntries", dummyEntries));
+    }
+
+    @Test
+    public void testCheckinSuccess() throws Exception {
+        CheckinForm checkinForm = new CheckinForm();
+        MockMultipartFile photo = new MockMultipartFile("checkin-photos-upload", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
+
+        doNothing().when(diaryEntryService).createAndSaveDiaryEntry(any(CheckinForm.class), anyList());
+
+        mockMvc.perform(multipart("/diary/checkin")
+                        .file(photo)
+                        .flashAttr("checkinForm", checkinForm))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/diary"));
+
+        verify(diaryEntryService, times(1)).createAndSaveDiaryEntry(any(CheckinForm.class), anyList());
+    }
+
+    @Test
+    public void testCheckinFailure() throws Exception {
+        CheckinForm checkinForm = new CheckinForm();
+        MockMultipartFile photo = new MockMultipartFile("checkin-photos-upload", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
+
+        doThrow(new RuntimeException("Error")).when(diaryEntryService).createAndSaveDiaryEntry(any(CheckinForm.class), anyList());
+
+        mockMvc.perform(multipart("/diary/checkin")
+                        .file(photo)
+                        .flashAttr("checkinForm", checkinForm))
+                .andExpect(status().isOk())
+                .andExpect(view().name("diary/checkin"));
+
+        verify(diaryEntryService, times(1)).createAndSaveDiaryEntry(any(CheckinForm.class), anyList());
     }
 
     @Test

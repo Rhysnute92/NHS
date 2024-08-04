@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<form th:fragment="checkinForm" class="checkin-form" id="checkin-form">
+<form th:fragment="checkinForm" class="checkin-form" id="checkin-form" action="/diary/checkin" method="post" enctype="multipart/form-data">
   <div class="checkin-section">
     <div class="checkin-section-title">
       <h3>Mood</h3>
@@ -7,27 +7,27 @@
     </div>
     <div class="checkin-section-content checkin-mood hidden">
       <div class="checkin-mood-button">
-        <input type="radio" id="great" name="mood">
+        <input type="checkbox" id="great" name="mood" value="GREAT">
         <i class="fa-regular fa-face-grin-beam checkin-icon"></i>
         <label for="great">Great</label>
       </div>
       <div class="checkin-mood-button">
-        <input type="radio" id="good" name="mood">
+        <input type="checkbox" id="good" name="mood" value="GOOD">
         <i class="fa-regular fa-face-smile checkin-icon"></i>
         <label for="good">Good</label>
       </div>
       <div class="checkin-mood-button">
-      <input type="radio" id="okay" name="mood">
+      <input type="checkbox" id="okay" name="mood" value="OKAY">
         <i class="fa-regular fa-face-meh checkin-icon"></i>
         <label for="okay">Okay</label>
       </div>
       <div class="checkin-mood-button">
-        <input type="radio" id="bad" name="mood">
+        <input type="checkbox" id="bad" name="mood" value="BAD">
         <i class="fa-regular fa-face-frown checkin-icon"></i>
         <label for="bad">Bad</label>
       </div>
       <div class="checkin-mood-button">
-        <input type="radio" id="awful" name="mood">
+        <input type="checkbox" id="awful" name="mood" value="AWFUL">
         <i class="fa-regular fa-face-sad-tear checkin-icon"></i>
         <label for="awful">Awful</label>
       </div>
@@ -122,4 +122,5 @@
       <textarea form="checkin-form" id="notes" name="notes" class="checkin-notes"></textarea>
     </div>
   </div>
+  <button type="submit" class="checkin-submit">Submit</button>
 </form>
