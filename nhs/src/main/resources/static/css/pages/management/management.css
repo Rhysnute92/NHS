@@ -6,7 +6,7 @@ body {
 
 .management-container {
   padding: 1em;
-  background-color: #f9f9f9;
+  background-color: var(--nhs-pale-grey);
 }
 
 h1,
