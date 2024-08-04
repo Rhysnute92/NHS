@@ -1,17 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <title>Management</title>
+  <head>
+    <title>Treatment Plan</title>
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/pages/Management/management.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
-<div th:replace="~{common/fragments/header}"></div>
-<nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-<div class="container">
-    <h1>My Lymphoedema Management</h1>
-    <p>The Lymphoedema management page.</p>
-</div>
-<script th:src="@{/js/common/header.js}"></script>
-</body>
+  </head>
+  <body>
+    <div th:replace="~{common/fragments/header}"></div>
+    <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+    <div class="management-container">
+      <section class="collapsible emergency-plan">
+        <h2 class="collapsible-header">Emergency Plan</h2>
+        <div class="collapsible-content">
+          <div class="emergency-contacts">
+            <h3>Emergency Contacts</h3>
+            <ul>
+              <li>Healthcare Provider: 02920123456</li>
+              <li>Family Member: +44 123 456 789</li>
+            </ul>
+          </div>
+          <div class="immediate-steps">
+            <h3>Immediate Steps for Acute Symptoms</h3>
+            <ul>
+              <li>Infection signs: Contact healthcare provider immediately.</li>
+              <li>
+                Severe swelling: Follow the emergency swelling management steps.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="collapsible your-actions">
+        <h2 class="collapsible-header">Your Actions</h2>
+        <div class="collapsible-content">
+          <div class="action-item">
+            <h3>Complete Your Questionnaire</h3>
+            <p>
+              You have a new questionnaire assigned. Click
+              <a href="#">here</a> to complete it.
+            </p>
+          </div>
+          <div class="action-item">
+            <h3>Your Tasks</h3>
+            <p>Daily Exercise: 30 minutes of walking.</p>
+            <p>Hydration: Drink 8 glasses of water.</p>
+          </div>
+        </div>
+      </section>
+      <section class="collapsible your-treatment-plan">
+        <h2 class="collapsible-header">Your Treatment Plan</h2>
+        <div class="collapsible-content">
+          <div class="treatment-item">
+            <h3>Diet and Nutrition</h3>
+            <ul>
+              <li>Anti-inflammatory diet</li>
+              <li>Hydration guidelines</li>
+            </ul>
+          </div>
+          <div class="treatment-item">
+            <h3>Exercise Plans</h3>
+            <ul>
+              <li>Daily exercises</li>
+              <li>Activity recommendations</li>
+            </ul>
+          </div>
+          <!-- Add more treatment items as needed -->
+        </div>
+      </section>
+    </div>
+    <script th:src="@{/js/common/header.js}"></script>
+  </body>
 </html>

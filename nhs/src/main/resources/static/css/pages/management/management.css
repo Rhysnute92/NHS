@@ -1,0 +1,95 @@
+/* management.css */
+
+body {
+  background-color: var(--nhs-pale-grey);
+}
+
+.management-container {
+  padding: 1em;
+  background-color: #f9f9f9;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  border-bottom: 2px solid var(--nhs-dark-green);
+  padding-bottom: 0.2em;
+  cursor: pointer;
+  position: relative;
+  padding-right: 20px;
+}
+
+h2::after {
+  content: "▼";
+  font-size: 0.8em;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.collapsible {
+  margin-bottom: 1.5em;
+  padding: 1em;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.emergency-plan {
+  border: 2px solid var(--emergency-services-red);
+  background-color: #ffffff;
+}
+
+.your-actions {
+  border: 2px solid var(--nhs-green);
+  background-color: #ffffff;
+}
+
+.your-treatment-plan {
+  border: 2px solid var(--nhs-blue);
+  background-color: #ffffff;
+}
+
+ul {
+  padding-left: 1.5em;
+}
+
+.action-item,
+.treatment-item {
+  margin-bottom: 1em;
+}
+
+.action-item h3,
+.treatment-item h3 {
+  margin-bottom: 0.5em;
+}
+
+a {
+  color: var(--nhs-blue);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--nhs-dark-pink);
+  cursor: pointer;
+}
+
+.collapsible-content {
+  display: none;
+}
+
+.collapsible-content.expanded {
+  display: block;
+}
+
+.collapsible-header.expanded::after {
+  content: "▲";
+}
