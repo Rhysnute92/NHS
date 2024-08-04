@@ -62,6 +62,12 @@ public class CalendarController {
         }
         return modelAndView;
     }
+
+    @GetMapping("/mobile/calendar")
+    public String showCalendar() {
+        return "mobile/calendar/calendar";
+    }
+
         @ModelAttribute("navMenuItems")
         public List<NavMenuItem> navMenuItems() {
             return List.of(
