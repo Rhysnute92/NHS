@@ -39,7 +39,7 @@ public class SecurityConfig{
 
     public static final String[] FREE_ACCESS = { "/landing", "/guest/**"};
     public static final String[] PATIENT_ACCESS = { "/dashboard", "/diary/**", 
-    "/information","/treatment","/cellulitis", "/resources","/treatmentSpec", "/calendar", "/mobileaddappt" };
+    "/information","/treatment","/cellulitis", "/resources","/treatmentSpec", "/calendar", "/mobileaddappt", "/managment" };
     public static final String[] PROVIDER_ACCESS = { "/addpatient" };
     public static final String[] AUTH_ACCESS = { "/account" };
 
@@ -56,7 +56,6 @@ public class SecurityConfig{
                 )
         .sessionManagement(session -> session
                 .maximumSessions(1)
-                .maxSessionsPreventsLogin(true)
                 )
         .formLogin(form -> form
             .loginPage("/login")
