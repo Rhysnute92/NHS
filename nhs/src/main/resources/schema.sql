@@ -19,6 +19,7 @@ DROP TABLE IF EXISTS PatientDiagnosis;
 DROP TABLE IF EXISTS Patients;
 DROP TABLE IF EXISTS ProviderCredentials;
 DROP TABLE IF EXISTS PatientCredentials;
+DROP TABLE IF EXISTS Admin;
 --Log in information and credentials--
 CREATE TABLE PatientCredentials (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
@@ -30,9 +31,10 @@ CREATE TABLE ProviderCredentials (
     ProviderName VARCHAR(255),
     ProviderPassword VARCHAR(255)
 );
---Not implemented yet--
---CREATE TABLE Admin ()
------------------------
+CREATE TABLE Admin (
+    AdminName VARCHAR(255),
+    AdminPassword VARCHAR(255)
+);
 --Patient information--
 CREATE TABLE Patients (
     PatientEmail VARCHAR(255),
