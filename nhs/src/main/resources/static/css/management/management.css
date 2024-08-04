@@ -1,0 +1,66 @@
+@import url("collapsible.css");
+@import url("questionnaires.css");
+
+body {
+  background-color: var(--nhs-pale-grey);
+}
+
+.management-container {
+  padding: 1em;
+  background-color: var(--nhs-pale-grey);
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  border-bottom: 2px solid var(--nhs-dark-green);
+  padding-bottom: 0.2em;
+  cursor: pointer;
+  position: relative;
+  padding-right: 20px;
+  transition: background-color 0.5s ease;
+}
+
+h2::after {
+  content: "▼";
+  font-size: 0.8em;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.5s ease;
+}
+
+.urgent-care-plan {
+  border: 2px solid var(--emergency-services-red);
+  background-color: #ffffff;
+}
+
+.my-health-tasks {
+  border: 2px solid var(--nhs-green);
+  background-color: #ffffff;
+}
+
+.your-treatment-plan {
+  border: 2px solid var(--nhs-blue);
+  background-color: #ffffff;
+}
+
+ul {
+  padding-left: 1.5em;
+}
+
+.action-item,
+.treatment-item {
+  margin-bottom: 1em;
+}
+
+.action-item h3,
+.treatment-item h3 {
+  margin-bottom: 0.5em;
+}
