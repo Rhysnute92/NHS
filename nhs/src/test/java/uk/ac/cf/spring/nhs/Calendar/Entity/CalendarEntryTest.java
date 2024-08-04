@@ -2,6 +2,8 @@ package uk.ac.cf.spring.nhs.Calendar.Entity;
 
 import org.junit.jupiter.api.Test;
 
+import uk.ac.cf.spring.nhs.CalendarEntry.Model.CalendarEntry;
+
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;

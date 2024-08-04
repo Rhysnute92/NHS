@@ -10,8 +10,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import uk.ac.cf.spring.nhs.Calendar.Model.Calendar;
 import uk.ac.cf.spring.nhs.Calendar.Repositories.CalendarRepository;
-import uk.ac.cf.spring.nhs.Calendar.Repositories.Calendar;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 

@@ -2,7 +2,8 @@ package uk.ac.cf.spring.nhs.Calendar.Service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import uk.ac.cf.spring.nhs.Calendar.Entity.CalendarEntry;
+
+import uk.ac.cf.spring.nhs.CalendarEntry.Model.CalendarEntry;
 
 import java.util.List;
 

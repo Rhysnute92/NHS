@@ -1,7 +1,8 @@
 package uk.ac.cf.spring.nhs.Calendar.Service;
 
 import org.springframework.stereotype.Service;
-import uk.ac.cf.spring.nhs.Calendar.Entity.CalendarEntry;
+
+import uk.ac.cf.spring.nhs.CalendarEntry.Model.CalendarEntry;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Calendar.Repositories;
+package uk.ac.cf.spring.nhs.Calendar.Model;
 
 
 import lombok.AllArgsConstructor;

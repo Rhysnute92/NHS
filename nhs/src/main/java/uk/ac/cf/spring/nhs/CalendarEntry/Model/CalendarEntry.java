@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Calendar.Entity;
+package uk.ac.cf.spring.nhs.CalendarEntry.Model;
 
 import lombok.Getter;
 import lombok.Setter;
