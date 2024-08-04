@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -35,6 +36,11 @@ public class SecurityConfig{
         return authProvider;
     }
 
+    @Bean
+    public AuthenticationSuccessHandler customSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
+    }
+
     public static final String[] FREE_ACCESS = { "/landing", "/guest/**"};
     public static final String[] PATIENT_ACCESS = { "/dashboard", "/diary/**", 
     "/information","/treatment","/cellulitis", "/resources","/treatmentSpec", "/calendar", "/mobileaddappt" };
@@ -52,6 +58,7 @@ public class SecurityConfig{
                 )
             .formLogin(form -> form
             .loginPage("/login")
+            .successHandler(customSuccessHandler())
             .permitAll());
         http.csrf((csrf) -> csrf.disable());
         return http.build();
