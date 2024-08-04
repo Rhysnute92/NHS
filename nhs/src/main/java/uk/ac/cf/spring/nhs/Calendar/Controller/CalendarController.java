@@ -30,7 +30,6 @@ public class CalendarController {
         Calendar calendar = calendarService.getCalendarByUserId(userId);
 
         model.addAttribute("calendar", calendar);
-        model.addAttribute("appointments", calendar.getAppointments());
 
         return "calendar/calendar";
     }
