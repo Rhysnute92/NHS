@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{common/fragments/header}"></div>
+    <div>Hello, <span th:text="${#authentication.name}">username</span></div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="LOG OUT"/>
+    </form>
+</div>
+<script th:src="@{/js/common/header.js}"></script>
+</body>
+</html>

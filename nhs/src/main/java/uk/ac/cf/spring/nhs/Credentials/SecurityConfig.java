@@ -2,13 +2,9 @@ package uk.ac.cf.spring.nhs.Credentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,6 +41,7 @@ public class SecurityConfig{
     public static final String[] PATIENT_ACCESS = { "/dashboard", "/diary/**", 
     "/information","/treatment","/cellulitis", "/resources","/treatmentSpec", "/calendar", "/mobileaddappt" };
     public static final String[] PROVIDER_ACCESS = { "/addpatient" };
+    public static final String[] AUTH_ACCESS = { "/account" };
 
 
     @Bean
@@ -55,11 +52,23 @@ public class SecurityConfig{
                 .requestMatchers(new AntPathRequestMatcher("/login", "POST")).permitAll()
                 .requestMatchers(PATIENT_ACCESS).hasAnyRole("PATIENT", "ADMIN")
                 .requestMatchers(PROVIDER_ACCESS).hasAnyRole("PROVIDER", "ADMIN")
+                .requestMatchers(AUTH_ACCESS).hasAnyRole("PATIENT","PROVIDER", "ADMIN")
                 )
-            .formLogin(form -> form
+        .sessionManagement(session -> session
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true)
+                )
+        .formLogin(form -> form
             .loginPage("/login")
             .successHandler(customSuccessHandler())
-            .permitAll());
+            .permitAll()
+            )
+        .logout(logout -> logout                                                
+            .logoutUrl("/logout")                                            
+            .logoutSuccessUrl("/landing")                                                            
+            .invalidateHttpSession(true)                                                                            
+            .deleteCookies("remove")                                  
+        );
         http.csrf((csrf) -> csrf.disable());
         return http.build();
     }
