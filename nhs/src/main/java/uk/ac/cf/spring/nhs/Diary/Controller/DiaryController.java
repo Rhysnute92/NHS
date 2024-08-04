@@ -29,6 +29,9 @@ public class DiaryController {
     @GetMapping("")
     public String diary(Model model) {
         List<DiaryEntry> diaryEntries = diaryEntryService.getDiaryEntriesByUserId(1);
+        for (DiaryEntry diaryEntry : diaryEntries) {
+            System.out.println(diaryEntry.getMood());
+        }
         model.addAttribute("diaryEntries", diaryEntries);
         return "diary/diary";
     }
@@ -44,11 +47,12 @@ public class DiaryController {
             @ModelAttribute CheckinForm checkinForm,
             @RequestParam(value = "checkin-photos-upload", required = false) List<MultipartFile> photos
     ) {
+        System.out.println(checkinForm);
         ModelAndView modelAndView = new ModelAndView();
         try {
             diaryEntryService.createAndSaveDiaryEntry(checkinForm, photos);
 
-            modelAndView.setViewName("redirect:/diary"); // Redirect to the desired view
+            modelAndView.setViewName("redirect:/diary"); // Redirect to the diary view
         } catch (Exception e) {
             System.out.println(e.getMessage());
             modelAndView.setViewName("diary/checkin"); // Redirect to the check-in view if there's an error

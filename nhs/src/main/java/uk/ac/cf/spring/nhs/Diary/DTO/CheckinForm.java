@@ -72,4 +72,16 @@ public class CheckinForm {
         this.photos = photos;
     }
 
+    @Override
+    public String toString() {
+        return "CheckinForm{" +
+                "mood='" + mood + '\'' +
+                ", troubleSleepingSeverity=" + troubleSleepingSeverity +
+                ", painSeverity=" + painSeverity +
+                ", numbnessSeverity=" + numbnessSeverity +
+                ", notes='" + notes + '\'' +
+                ", photos=" + photos +
+                '}';
+    }
+
 }

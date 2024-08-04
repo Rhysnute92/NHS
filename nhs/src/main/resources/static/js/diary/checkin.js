@@ -17,19 +17,15 @@ checkinSections.forEach((section) => {
 const moodButtons = document.querySelectorAll('.checkin-mood-button');
 moodButtons.forEach((currentButton) => {
     currentButton.addEventListener('click', () => {
-        const isSelected = currentButton.classList.toggle('selected');
-
-        // Iterate through all buttons to manage their state
-        moodButtons.forEach((button) => {
-            if (button !== currentButton) {
-                // Remove selected class and uncheck input for other buttons
+        if (!currentButton.classList.contains('selected')) {
+            moodButtons.forEach((button) => {
                 button.classList.remove('selected');
-                button.querySelector('input').checked = false;
-            } else {
-                // Set the input checked state based on the selected class
-                button.querySelector('input').checked = isSelected;
-            }
-        });
+            });
+            currentButton.classList.add('selected');
+        } else {
+            currentButton.classList.remove('selected');
+            currentButton.querySelector('input').checked = false;
+        }
     });
 });
 
