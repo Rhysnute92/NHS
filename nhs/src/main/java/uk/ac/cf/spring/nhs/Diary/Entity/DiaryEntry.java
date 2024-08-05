@@ -106,6 +106,7 @@ public class DiaryEntry {
         this.notes = notes;
     }
 
+
     @Override
     public String toString() {
         return "DiaryEntry{" +

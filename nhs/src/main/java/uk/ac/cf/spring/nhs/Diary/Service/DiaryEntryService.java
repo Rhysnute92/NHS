@@ -17,18 +17,22 @@ public class DiaryEntryService {
     private final DiaryEntryRepository diaryEntryRepository;
     private final PhotoRepository photoRepository;
     private final SymptomRepository symptomRepository;
+    private final MeasurementRepository measurementRepository;
     private final FileStorageService fileStorageService;
 
     @Autowired
     public DiaryEntryService(DiaryEntryRepository diaryEntryRepository,
                              PhotoRepository photoRepository,
                              SymptomRepository symptomRepository,
+                             MeasurementRepository measurementRepository,
                              FileStorageService fileStorageService) {
         this.diaryEntryRepository = diaryEntryRepository;
         this.photoRepository = photoRepository;
         this.symptomRepository = symptomRepository;
+        this.measurementRepository = measurementRepository;
         this.fileStorageService = fileStorageService;
     }
+
 
     @Transactional
     public DiaryEntry saveDiaryEntry(DiaryEntry diaryEntry) {
@@ -113,6 +117,20 @@ public class DiaryEntryService {
             diarySymptoms.add(diarySymptom);
         }
         diaryEntry.setSymptoms(diarySymptoms);
+
+        // Measurements
+        List<Measurement> measurements = checkinForm.getMeasurements(userId);
+        if (measurements != null && !measurements.isEmpty()) {
+            Set<DiaryMeasurement> diaryMeasurements = new HashSet<>();
+            for (Measurement measurement : measurements) {
+                measurementRepository.save(measurement);
+                DiaryMeasurement diaryMeasurement = new DiaryMeasurement();
+                diaryMeasurement.setMeasurement(measurement);
+                diaryMeasurement.setDiaryEntry(diaryEntry);
+                diaryMeasurements.add(diaryMeasurement);
+            }
+            diaryEntry.setMeasurements(diaryMeasurements);
+        }
 
         diaryEntryRepository.save(diaryEntry);
     }
