@@ -10,6 +10,22 @@ body {
   background-color: var(--nhs-pale-grey);
 }
 
+.management-title-container {
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+.management-desktop-title {
+  margin-top: 1em;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.management-desktop-subtitle {
+  font-size: 1.25em;
+  color: var(--nhs-dark-grey);
+}
+
 h1,
 h2,
 h3 {
@@ -37,17 +53,17 @@ h2::after {
 }
 
 .urgent-care-plan {
-  border: 2px solid var(--emergency-services-red);
+  border-left-color: var(--emergency-services-red);
   background-color: #ffffff;
 }
 
 .my-health-tasks {
-  border: 2px solid var(--nhs-green);
+  border-left-color: var(--nhs-green);
   background-color: #ffffff;
 }
 
 .your-treatment-plan {
-  border: 2px solid var(--nhs-blue);
+  border-left-color: var(--nhs-blue);
   background-color: #ffffff;
 }
 
@@ -63,4 +79,15 @@ ul {
 .action-item h3,
 .treatment-item h3 {
   margin-bottom: 0.5em;
+}
+
+@media (max-width: 480px) {
+  .management-desktop-title,
+  .management-desktop-subtitle {
+    display: none;
+  }
+
+  .management-container {
+    margin-top: 1.5em;
+  }
 }
