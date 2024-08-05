@@ -346,7 +346,7 @@ body.guest-page {
     position: absolute;
     top: 100px;
     right: 10px;
-    font-size: 13rem;
+    font-size: 3rem;
     color: var(--nhs-blue);
     z-index: 1001;
 }
