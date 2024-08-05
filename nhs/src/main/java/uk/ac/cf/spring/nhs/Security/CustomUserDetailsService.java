@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentials;
 import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentialsRepository;
 
+//Service for User Details object that interacts directly with SecurityConfig authentication functions
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 

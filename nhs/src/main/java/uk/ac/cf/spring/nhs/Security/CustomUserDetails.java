@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentials;
 
+//Class that describes UserDetails object containing all information
+//about a given user in a format that can be used by Spring Security
+
 public class CustomUserDetails implements UserDetails{
     
     private Long userId;
@@ -26,7 +29,9 @@ public class CustomUserDetails implements UserDetails{
         this.authorities = authorities;
   }
 
+  //User Details object constructor that is used for credential authentification @ login
   public static CustomUserDetails build(UserCredentials user) {
+    //Granted authority constructor is capable handling multiple role assignments per user
     List<GrantedAuthority> authorities = Stream.of(user.getUserRole().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     return new CustomUserDetails(
         user.getUserId(),
@@ -70,6 +75,7 @@ public class CustomUserDetails implements UserDetails{
     return true;
   }
 
+  //Additional getter for userId column value
   public Long getUserId() {
     return userId;
   }
