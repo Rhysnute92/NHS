@@ -13,7 +13,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String redirectURL = request.getContextPath();
 
         if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-            redirectURL = "/landing";
+            redirectURL = "/account";
+        } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_PROVIDER"))) {
+            redirectURL = "/account";
         } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_PATIENT"))) {
             redirectURL = "/dashboard";
         }
