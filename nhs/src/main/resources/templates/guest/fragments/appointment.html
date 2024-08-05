@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <div id="info1" class="info-box" th:fragment="info1">
-    <div class="appointment">
-    <h2>Your First Appointment</h2>
-    <h3>Arrival and Check-In:</h3>
-        <p>Check in at reception and complete a questionnaire. Let the staff know if you need assistance.</p>
-
-    <h3>Initial Measurements:</h3>
-    <p>A clinical support worker will measure your height, weight, and calculate your BMI.</p>
-
-    <h3>Meeting with the Lymphoedema Therapist:</h3>
-    <p>You can bring a family member or friend. The therapist will ask about your medications and explain the process.</p>
-
-    <h3>Limb Measurement:</h3>
-    <p>For leg or arm swelling, a Perometer may be used. You may need to remove clothing from the affected area. If the Perometer isn't suitable, a tape measure will be used instead. Your privacy and dignity will be maintained throughout, and assistance will be provided if needed.</p>
-
-    <h3>Pulses Check:</h3>
-    <p>If you have leg swelling, the therapist may use an ultrasound device to check the pulses in your foot and ankle. This procedure involves a small amount of gel and is painless.</p>
-
-    <h3>Doctor Consultation:</h3>
-    <p>The doctor will ask about your symptoms, examine your skin, and check lymph nodes if needed. They will explain each step and obtain your consent, especially if photographs need to be taken for medical records.</p>
-
-        <h3>Diagnosis and Treatment:</h3>
-    <p>If lymphoedema is diagnosed, you'll discuss management options like compression garments, which may be fitted during the appointment or at a later date.</p>
-
+    <div class="slideshow-container">
+        <div class="slide">
+            <h2>Your First Appointment</h2>
+            <h3>Arrival and Check-In:</h3>
+            <p>Check in at reception and complete a questionnaire. Let the staff know if you need assistance.</p>
+        </div>
+        <div class="slide">
+            <h3>Initial Measurements:</h3>
+            <p>A clinical support worker will measure your height, weight, and calculate your BMI.</p>
+        </div>
+        <div class="slide">
+            <h3>Meeting with the Lymphoedema Therapist:</h3>
+            <p>You can bring a family member or friend. The therapist will ask about your medications and explain the process.</p>
+        </div>
+        <div class="slide">
+            <h3>Limb Measurement:</h3>
+            <p>For leg or arm swelling, a Perometer may be used. You may need to remove clothing from the affected area. If the Perometer isn't suitable, a tape measure will be used instead. Your privacy and dignity will be maintained throughout, and assistance will be provided if needed.</p>
+        </div>
+        <div class="slide">
+            <h3>Pulses Check:</h3>
+            <p>If you have leg swelling, the therapist may use an ultrasound device to check the pulses in your foot and ankle. This procedure involves a small amount of gel and is painless.</p>
+        </div>
+        <div class="slide">
+            <h3>Doctor Consultation:</h3>
+            <p>The doctor will ask about your symptoms, examine your skin, and check lymph nodes if needed. They will explain each step and obtain your consent, especially if photographs need to be taken for medical records.</p>
+        </div>
+        <div class="slide">
+            <h3>Diagnosis and Treatment:</h3>
+            <p>If lymphoedema is diagnosed, you'll discuss management options like compression garments, which may be fitted during the appointment or at a later date.</p>
+        </div>
+        <div class="slide">
             <h3>Follow-Up:</h3>
-    <p>You'll receive information leaflets and the doctor will inform your GP about the appointment. Consent will be sought if a copy of the letter is needed. If another appointment is required, you'll receive details by letter.</p>
+            <p>You'll receive information leaflets and the doctor will inform your GP about the appointment. Consent will be sought if a copy of the letter is needed. If another appointment is required, you'll receive details by letter.</p>
+        </div>
+    </div>
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
 </div>
-</div>
+</html>
