@@ -13,6 +13,13 @@
   <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
 </div>
   <div class="container-calendar">
+    <button id="openaddappt">Add Appointment</button>
+    <div id="myModel" class="model">
+      <div class="modelContent">
+        <span class="popup-close">&times;</span>
+        <iframe id="modelFrame" src="" frameborder="0" style="width: 100%; height: 400px;"></iframe>
+      </div>
+    </div>
       <div id="left">
         <h3>Appointment Schedule</h3>
         <ul id="apptList">
@@ -67,6 +74,7 @@
   </div>
 </div>
 <script th:src="@{/js/calendar/calendar.js}"></script>
+<script th:src="@{/js/appointment/appointment.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>

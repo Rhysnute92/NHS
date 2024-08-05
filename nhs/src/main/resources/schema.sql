@@ -30,10 +30,10 @@ CREATE TABLE ProviderCredentials (
     ProviderName VARCHAR(255),
     ProviderPassword VARCHAR(255)
 );
---Not implemented yet--
---CREATE TABLE Admin ()
------------------------
---Patient information--
+# --Not implemented yet--
+# --CREATE TABLE Admin ()
+# -----------------------
+# --Patient information--
 CREATE TABLE Patients (
     PatientEmail VARCHAR(255),
     PatientMobile INT,
@@ -54,10 +54,10 @@ CREATE TABLE PatientDiagnosis (
     DiagnosisDetails TEXT,
     FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
 );
---Not implemented yet--
---CREATE TABLE PatientRecordsOld ()
---CREATE TABLE PatientRecordsOther ()
---CREATE TABLE UserMedication ()
+# --Not implemented yet--
+# --CREATE TABLE PatientRecordsOld ()
+# --CREATE TABLE PatientRecordsOther ()
+# --CREATE TABLE UserMedication ()
 -----------------------
 --Provider information--
 CREATE TABLE Providers (
@@ -68,7 +68,7 @@ CREATE TABLE Providers (
     ProviderID INT,
     FOREIGN KEY (ProviderID) REFERENCES ProviderCredentials (ProviderID)
 );
---Dashboard--
+# --Dashboard--
 CREATE TABLE UserWidgets (
     UserWidgetID BIGINT AUTO_INCREMENT PRIMARY KEY,
     UserID INT,
@@ -76,7 +76,7 @@ CREATE TABLE UserWidgets (
     Position INT,
     FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
 );
---Calendar--
+# --Calendar--
 CREATE TABLE Appointments (
     ApptID INT AUTO_INCREMENT PRIMARY KEY,
     ApptTime DATETIME,
@@ -86,7 +86,7 @@ CREATE TABLE Appointments (
     UserID INT,
     FOREIGN KEY (UserID) REFERENCES PatientCredentials (UserID)
 );
---Diary--
+# --Diary--
 CREATE TABLE Photos (
     PhotoID INT AUTO_INCREMENT PRIMARY KEY,
     PhotoDateTaken DATETIME,
@@ -118,11 +118,11 @@ CREATE TABLE DiaryEntries (
     FOREIGN KEY (MeasurmentID) REFERENCES Measurments(MeasurmentID),
     FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
 );
---Not implemented yet--
---CREATE TABLE Event ()
---CREATE TABLE DiaryQuestions ()
------------------------
---Managment plan--
+# --Not implemented yet--
+# --CREATE TABLE Event ()
+# --CREATE TABLE DiaryQuestions ()
+# -----------------------
+# --Managment plan--
 CREATE TABLE Questionnaires (
     QuestionnaireID INT AUTO_INCREMENT PRIMARY KEY,
     QuestionnaireType VARCHAR(255),
@@ -154,12 +154,12 @@ CREATE TABLE UserResponses (
     FOREIGN KEY (QuestionID) REFERENCES Questions(QuestionID),
     FOREIGN KEY (UserQuestionnaireID) REFERENCES UserQuestionnaires(UserQuestionnaireID)
 );
---Not implemented yet--
---CREATE TABLE PatientPlan ()
---CREATE TABLE PlanMedication ()
---CREATE TABLE AppointmentRecord ()
------------------------
---Education--
+# --Not implemented yet--
+# --CREATE TABLE PatientPlan ()
+# --CREATE TABLE PlanMedication ()
+# --CREATE TABLE AppointmentRecord ()
+# -----------------------
+# --Education--
 CREATE TABLE Articles (
     ArticleID INT AUTO_INCREMENT PRIMARY KEY,
     ArticleTitle VARCHAR(255),
@@ -184,7 +184,7 @@ CREATE TABLE InfoAssets (
     SectionID INT,
     FOREIGN KEY (SectionID) REFERENCES InfoSections(SectionID)
 );
---General use--
+# --General use--
 CREATE TABLE Tasks (
     TaskID INT AUTO_INCREMENT PRIMARY KEY,
     TaskType VARCHAR(255),
@@ -200,11 +200,11 @@ CREATE TABLE UserTasks (
     TaskID INT,
     FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
 );
---Not implemented yet--
---CREATE TABLE Reminders ()
---CREATE TABLE Clinic ()
---CREATE TABLE Log ()
---CREATE TABLE Changes ()
---CREATE TABLE LoginRecords ()
---CREATE TABLE Record ()
------------------------
+# --Not implemented yet--
+# --CREATE TABLE Reminders ()
+# --CREATE TABLE Clinic ()
+# --CREATE TABLE Log ()
+# --CREATE TABLE Changes ()
+# --CREATE TABLE LoginRecords ()
+# --CREATE TABLE Record ()
+# -----------------------
