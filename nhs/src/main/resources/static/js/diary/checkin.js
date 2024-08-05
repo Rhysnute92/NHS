@@ -105,7 +105,7 @@ function addMeasurement() {
     const newMeasurement = document.createElement('div');
     newMeasurement.classList.add('measurement');
     newMeasurement.innerHTML = `
-        <select name="measurementTypes[${index}]">
+        <select class="type-select" name="measurementTypes[${index}]">
             <option value="WEIGHT">Weight</option>
             <option value="NECK">Neck</option>
             <option value="BREAST">Breast</option>
@@ -114,8 +114,8 @@ function addMeasurement() {
             <option value="FOREARM">Forearm</option>
         </select>
         <input type="number" name="measurementValues[${index}]" step="0.1" required>
-        <select name="measurementUnits[${index}]"></select>
-        <button type="button" class="remove-measurement-button">Remove</button>
+        <select class="unit-select" name="measurementUnits[${index}]"></select>
+        <button type="button" class="fa-solid fa-xmark remove-measurement-button"></button>
     `;
 
     const unitSelect = newMeasurement.querySelector(`select[name="measurementUnits[${index}]"]`);
