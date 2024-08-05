@@ -23,6 +23,7 @@ body {
 
 .management-desktop-subtitle {
   font-size: 1.25em;
+  padding-bottom: 1em;
   color: var(--nhs-dark-grey);
 }
 
