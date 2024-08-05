@@ -88,4 +88,8 @@
     *:hover {
         opacity: 100% !important;
     }
+
+    .diary-entry-section {
+        font-size: 1.2rem;
+    }
 }
