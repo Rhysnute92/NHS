@@ -1,10 +1,17 @@
 package uk.ac.cf.spring.nhs.AddPatient;
 
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -15,9 +22,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AddPatientControllerTest {
 
     @Autowired
+    private WebApplicationContext context;
+
+    @Autowired
+    private FilterChainProxy springSecurityFilterChain;
+
+    @Autowired
     private MockMvc mockMvc;
 
+    @Before
+    public void setup() {
+        this.mockMvc = webAppContextSetup(context)
+        .apply(springSecurity(springSecurityFilterChain))
+        .build();
+    }
+    
     @Test
+    @WithMockUser(username="admin",roles={"PROVIDER","ADMIN"})
     public void testMobileAddPatient() throws Exception {
         mockMvc.perform(get("/addpatient")
                         .header("User-Agent",
@@ -27,6 +48,7 @@ public class AddPatientControllerTest {
     }
 
     @Test
+    @WithMockUser(username="admin",roles={"PROVIDER","ADMIN"})
     public void testDesktopAddPatient() throws Exception {
         mockMvc.perform(get("/addpatient")
                         .header("User-Agent",

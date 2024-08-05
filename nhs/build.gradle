@@ -41,6 +41,7 @@ dependencies {
 	implementation 'org.mariadb.jdbc:mariadb-java-client:3.4.1'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
 	implementation 'org.springframework.boot:spring-boot-starter-security:'
+	implementation 'org.springframework.security:spring-security-test:'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 }
 

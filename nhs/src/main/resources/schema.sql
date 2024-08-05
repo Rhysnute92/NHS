@@ -90,7 +90,7 @@ CREATE TABLE Photos (
     PhotoURL TEXT,
     PhotoDate DATETIME,
     PhotoBodypart VARCHAR(255),
-    UserID BIGING,
+    UserID BIGINT,
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 CREATE TABLE Measurements (
