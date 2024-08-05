@@ -203,7 +203,7 @@ h1 {
 
 .measurement {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 1rem;
 }
