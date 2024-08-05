@@ -18,4 +18,13 @@ diaryEntries.forEach(entry => {
         preview.classList.toggle('hidden');
         full.classList.toggle('hidden');
     });
+
+});
+
+let measurementTypes = document.querySelectorAll('.measurement-type');
+measurementTypes.forEach((type) => {
+    let text = type.textContent;
+    text = text.toLowerCase();
+    text = text.charAt(0).toUpperCase() + text.slice(1);
+    type.textContent = text;
 });
