@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/calendar/mobile/mobilecalendar.css}"/>
@@ -11,7 +10,7 @@
 <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
 <div th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
 <div id="moblist">
-    <button onclick="location. href='/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
+    <button onclick="location. href='/addappointment'" class="add-apt-btn">Add Appointment</button>
 </div>
 <div class="container-calendar">
        <div id="mobileMonth">
@@ -54,8 +53,7 @@
         <h3>Appointment Schedule</h3>
         <ul id="apptList">
             <li data-event-id="1">
-                <strong>Appointment</strong>
-                - Appointment description on appointment date
+                <p>No appointments scheduled for today</p>
             </li>
         </ul>
     </div>
