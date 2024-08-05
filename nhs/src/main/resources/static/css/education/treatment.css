@@ -6,6 +6,8 @@
     text-align: left;
     outline: none;
     margin-top: 1vh;
+    width: 95%;
+    margin-left: 1vh;
 }
 
 .collapsible_button:after{
