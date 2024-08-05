@@ -323,3 +323,8 @@ p {
 #login button:hover {
     background-color: #003087;
 }
+
+.login_error{
+    text-align: center;
+    color: red;
+}
