@@ -229,7 +229,7 @@ body.guest-page {
     margin-top: 10rem;
 }
 
-.mobileFrag #info2 {
+#info2 {
     background: var(--nhs-white);
     padding: 1rem;
 }
