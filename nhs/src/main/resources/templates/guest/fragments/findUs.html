@@ -1,45 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <div id="info3" class="info-box" th:fragment="info3">
-<div class="findUs">
-    <h2>How to Find Us</h2>
-    <div id="hosp1">
-    <h3>Florence Nightingale Community Hospital</h3>
-        <img
-                src="/images/maps/FNCH-Floor-Map.svg"
-                alt="Florence Nightingale Community Hospital Map"
-                class="map"
-                id="map1"
-                onclick="showPopup('/images/maps/FNCH-Floor-Map.svg')"
-        />
-        <p> Outpatients Clinic A </p>
+    <div class="find-us-dropdown-container">
+        <h2>How to Find Us</h2>
 
-    <p> Location: Level 1, Florence Nightingale Community Hospital, London Road, Derby, DE1 2QY</p>
-    </div>
-    <div id="hosp2">
-        <h3>Long Eaton Health Centre</h3>
-        <p> Long Eaton Health Centre,
-            Midland Street,
-            Long Eaton,
-            Nottingham,
-            NG10 1RY</p>
-    </div>
+        <div class="find-us-dropdown-wrapper" id="florenceNightingale">
+            <div class="find-us-dropdown-header" onclick="toggleDropdown('find-us-content-1')">
+                <h3>Florence Nightingale Community Hospital</h3>
+                <div class="find-us-dropdown-arrow"></div>
+            </div>
+            <div class="find-us-dropdown-content" id="find-us-content-1">
+                <img
+                        src="/images/maps/FNCH-Floor-Map.svg"
+                        alt="Florence Nightingale Community Hospital Map"
+                        class="map"
+                        onclick="showPopup('/images/maps/FNCH-Floor-Map.svg')"
+                />
+                <p>Location: Outpatients Clinic A, Level 1, Florence Nightingale Community Hospital, London Road, Derby, DE1 2QY</p>
+            </div>
+        </div>
 
-    <div id="hosp3">
-        <h3>Sherwood Forrest Hospitals</h3>
-        <img
-                src="/images/maps/kmh-june2015-sitemap.svg"
-                alt="Florence Nightingale Community Hospital Map"
-                class="map"
-                id="map2"
-                onclick="showPopup('/images/maps/kmh-june2015-sitemap.svg')"
-        />
-        <p> Lymphoedema Clinic: Clinic 10 </p>
+        <div class="find-us-dropdown-wrapper" id="longEaton">
+            <div class="find-us-dropdown-header" onclick="toggleDropdown('find-us-content-2')">
+                <h3>Long Eaton Health Centre</h3>
+                <div class="find-us-dropdown-arrow"></div>
+            </div>
+            <div class="find-us-dropdown-content" id="find-us-content-2">
+                <p>Long Eaton Health Centre, Midland Street, Long Eaton, Nottingham, NG10 1RY</p>
+            </div>
+        </div>
 
-        <p> Location: Lymphoedema Clinic,
-            Clinic 10,
-            Kings Mill Hospital
-            NG19 4JL </p>
+        <div class="find-us-dropdown-wrapper" id="sherwoodForrest">
+            <div class="find-us-dropdown-header" onclick="toggleDropdown('find-us-content-3')">
+                <h3>Sherwood Forrest Hospitals</h3>
+                <div class="find-us-dropdown-arrow"></div>
+            </div>
+            <div class="find-us-dropdown-content" id="find-us-content-3">
+                <img
+                        src="/images/maps/kmh-june2015-sitemap.svg"
+                        alt="Sherwood Forrest Hospitals Map"
+                        class="map"
+                        onclick="showPopup('/images/maps/kmh-june2015-sitemap.svg')"
+                />
+                <p>Location: Lymphoedema Clinic, Clinic 10, Kings Mill Hospital, NG19 4JL</p>
+            </div>
+        </div>
     </div>
 </div>
-</div>
+</html>

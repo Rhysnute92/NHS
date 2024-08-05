@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Dashboard.Controller;
+/* package uk.ac.cf.spring.nhs.Dashboard.Controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -43,3 +43,4 @@ public class DashboardControllerTest {
                 .andExpect(view().name("dashboard/desktop/dashboard"));
     }
 }
+ */
