@@ -29,13 +29,14 @@
 
 .model {
     display: none;
-    position: fixed;
+    position: relative;
     z-index: 1;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
+    width: 25rem;
+    height: 25rem;
     overflow: auto;
+    background-color: grey;
 }
 
 .main-content {
@@ -59,7 +60,15 @@
     cursor: pointer;
 }
 
-
+#openaddappt button {
+    background: #005EB8;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    width: 4rem;
+    height: 2rem;
+}
 #appointments input[type="time"],
 #appointments input[type="date"],
 #appointments input[type="text"],
@@ -76,7 +85,6 @@
     border: none;
     padding: 5px 10px;
     cursor: pointer;
-    border-radius: 5px;
     width: 4rem;
     height: 2rem;
 }
