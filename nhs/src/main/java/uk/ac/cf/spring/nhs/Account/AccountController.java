@@ -28,7 +28,9 @@ public class AccountController {
     @GetMapping("/userFullName")
     @ResponseBody
     public String userFullName(){
+        //Get principal object from the authentication
         Object principal = authenticationFacade.getAuthentication().getPrincipal();
+        //Specify principle as CustomUserDetails and extract data
         String userId = ((CustomUserDetails)principal).getUsername();
         return userId;
     }
