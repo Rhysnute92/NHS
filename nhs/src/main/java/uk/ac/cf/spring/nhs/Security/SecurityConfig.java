@@ -54,6 +54,7 @@ public class SecurityConfig{
                 .requestMatchers(PATIENT_ACCESS).hasAnyRole("PATIENT", "ADMIN")
                 .requestMatchers(PROVIDER_ACCESS).hasAnyRole("PROVIDER", "ADMIN")
                 .requestMatchers(AUTH_ACCESS).hasAnyRole("PATIENT","PROVIDER", "ADMIN")
+                .anyRequest().authenticated()
                 )
         .sessionManagement(session -> session
                 .maximumSessions(1)

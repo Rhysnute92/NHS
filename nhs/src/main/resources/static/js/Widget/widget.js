@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
-// TODO: Replace the getUserId function with actual implementation
-// function getUserId() {
-//   console.log("Getting user ID");
-//   return "1";
-// }
+//TODO: Replace the getUserId function with actual implementation
+function getUserId() {
+  console.log("Getting user ID");
+  return "1";
+}

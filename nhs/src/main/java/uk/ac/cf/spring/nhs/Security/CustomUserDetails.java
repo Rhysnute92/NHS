@@ -1,6 +1,5 @@
 package uk.ac.cf.spring.nhs.Security;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -71,7 +70,7 @@ public class CustomUserDetails implements UserDetails{
     return true;
   }
 
-  public Long getUserID() {
+  public Long getUserId() {
     return userId;
   }
 }
