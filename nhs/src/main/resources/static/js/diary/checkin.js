@@ -17,23 +17,17 @@ checkinSections.forEach((section) => {
 const moodButtons = document.querySelectorAll('.checkin-mood-button');
 moodButtons.forEach((currentButton) => {
     currentButton.addEventListener('click', () => {
-        const isSelected = currentButton.classList.toggle('selected');
-
-        // Iterate through all buttons to manage their state
-        moodButtons.forEach((button) => {
-            if (button !== currentButton) {
-                // Remove selected class and uncheck input for other buttons
+        if (!currentButton.classList.contains('selected')) {
+            moodButtons.forEach((button) => {
                 button.classList.remove('selected');
-                button.querySelector('input').checked = false;
-            } else {
-                // Set the input checked state based on the selected class
-                button.querySelector('input').checked = isSelected;
-            }
-        });
+            });
+            currentButton.classList.add('selected');
+        } else {
+            currentButton.classList.remove('selected');
+            currentButton.querySelector('input').checked = false;
+        }
     });
 });
-
-
 
 const input = document.querySelector('.checkin-photos-upload');
 const preview = document.querySelector('.checkin-photos-preview');
@@ -103,22 +97,71 @@ function returnFileSize(number) {
     }
 }
 
-const checkinForm = document.querySelector('.checkin-form');
-// checkinForm.addEventListener('submit', (event) => {
-//     event.preventDefault();
-//     const formData = new FormData(checkinForm);
-//
-//     fetch('/diary/checkin', {
-//         method: 'POST',
-//         body: formData,
-//     })
-//         .then((response) => response.json())
-//         .then((data) => {
-//             console.log(data);
-//             alert(data.message);
-//         })
-//         .catch((error) => {
-//             console.error('Error:', error);
-//             alert('An error occurred while submitting the check-in.');
-//         });
-// });
+const addMeasurementButton = document.getElementById('add-measurement-button');
+addMeasurementButton.addEventListener('click', addMeasurement);
+function addMeasurement() {
+    const container = document.querySelector('.checkin-measurements-container');
+    const index = container.querySelectorAll('.measurement').length;
+    const newMeasurement = document.createElement('div');
+    newMeasurement.classList.add('measurement');
+    newMeasurement.innerHTML = `
+        <select name="measurementTypes[${index}]">
+            <option value="WEIGHT">Weight</option>
+            <option value="NECK">Neck</option>
+            <option value="BREAST">Breast</option>
+            <option value="CALF">Calf</option>
+            <option value="THIGH">Thigh</option>
+            <option value="FOREARM">Forearm</option>
+        </select>
+        <input type="number" name="measurementValues[${index}]" step="0.1" required>
+        <select name="measurementUnits[${index}]"></select>
+        <button type="button" class="remove-measurement-button">Remove</button>
+    `;
+
+    const unitSelect = newMeasurement.querySelector(`select[name="measurementUnits[${index}]"]`);
+    changeUnits(unitSelect, newMeasurement);
+
+    const typeSelect = newMeasurement.querySelector(`select[name="measurementTypes[${index}]"]`);
+    typeSelect.addEventListener('change', () => {
+        changeUnits(unitSelect, newMeasurement);
+    });
+
+    newMeasurement.querySelector('.remove-measurement-button').addEventListener('click', () => {
+        newMeasurement.remove();
+        updateMeasurementNames();
+    });
+
+    container.appendChild(newMeasurement);
+}
+
+function changeUnits(unitSelect, newMeasurement) {
+    unitSelect.innerHTML = '';
+
+    const weightUnits = ['KG', 'LBS'];
+    const bodyPartUnits = ['CM', 'INCHES'];
+
+    if (newMeasurement.querySelector('select[name*="measurementTypes"]').value === 'WEIGHT') {
+        for (const unit of weightUnits) {
+            const option = document.createElement('option');
+            option.value = unit;
+            option.textContent = unit.toLowerCase();
+            unitSelect.appendChild(option);
+        }
+    } else {
+        for (const unit of bodyPartUnits) {
+            const option = document.createElement('option');
+            option.value = unit;
+            option.textContent = unit.toLowerCase();
+            unitSelect.appendChild(option);
+        }
+    }
+}
+
+function updateMeasurementNames() {
+    const measurementItems = document.querySelectorAll('.measurement');
+    measurementItems.forEach((item, index) => {
+        item.querySelector('select[name*="measurementTypes"]').name = `measurementTypes[${index}]`;
+        item.querySelector('input[name*="measurementValues"]').name = `measurementValues[${index}]`;
+        item.querySelector('select[name*="measurementUnits"]').name = `measurementUnits[${index}]`;
+    });
+}
