@@ -1,13 +1,14 @@
 package uk.ac.cf.spring.nhs.Diary.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinForm;
 import uk.ac.cf.spring.nhs.Diary.Entity.*;
 import uk.ac.cf.spring.nhs.Diary.Repository.*;
-import uk.ac.cf.spring.nhs.Common.util.FileStorageService;
+import uk.ac.cf.spring.nhs.Files.Service.FileStorageService;
 
 import java.util.*;
 
@@ -51,7 +52,7 @@ public class DiaryEntryService {
 
     @Transactional(readOnly = true)
     public List<DiaryEntry> getDiaryEntriesByUserId(int userId) {
-        return diaryEntryRepository.findByUserId(userId);
+        return diaryEntryRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"));
     }
 
     @Transactional
