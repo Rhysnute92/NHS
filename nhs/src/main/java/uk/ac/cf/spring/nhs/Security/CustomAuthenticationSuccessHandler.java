@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Credentials;
+package uk.ac.cf.spring.nhs.Security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;

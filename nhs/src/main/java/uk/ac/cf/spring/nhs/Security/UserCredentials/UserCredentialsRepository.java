@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Credentials.UserCredentials;
+package uk.ac.cf.spring.nhs.Security.UserCredentials;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

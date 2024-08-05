@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Credentials;
+package uk.ac.cf.spring.nhs.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -6,8 +6,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import uk.ac.cf.spring.nhs.Credentials.UserCredentials.UserCredentials;
-import uk.ac.cf.spring.nhs.Credentials.UserCredentials.UserCredentialsRepository;
+
+import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentials;
+import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentialsRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
