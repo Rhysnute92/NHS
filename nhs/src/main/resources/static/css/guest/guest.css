@@ -26,6 +26,7 @@ p {
     align-items: center;
     justify-content: center;
     text-align: justify;
+    font-size: medium;
 }
 
 
@@ -121,9 +122,9 @@ body.landing-page .btn-container button {
     top: 43%;
     width: auto;
     padding: 16px;
-    color: var(--nhs-blue);
+    color: var(--nhs-black);
     font-weight: bold;
-    font-size: 18px;
+    font-size: 30px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
@@ -142,7 +143,7 @@ body.landing-page .btn-container button {
 @media (max-width: 768px) {
     .prev, .next {
         padding: 12px;
-        top: 50%;
+        top: 70%;
     }
 
     .next {
@@ -216,14 +217,23 @@ body.guest-page {
 .mobileFrag .info-box {
     width: 100%;
     max-width: none;
-    margin: 1rem auto;
-    padding: 0.5rem;
+    padding: 1rem;
     display: block;
     background: transparent;
     box-shadow: none;
     border: none;
     text-align: left;
 }
+
+.mobileFrag #info1 {
+    margin-top: 10rem;
+}
+
+.mobileFrag #info2 {
+    background: var(--nhs-white);
+    padding: 1rem;
+}
+
 
 /* DROP DOWN FIND US */
 .find-us-dropdown-container {
@@ -294,16 +304,6 @@ body.guest-page {
     border-radius: 5px;
 }
 
-.popup-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color:rgba(255, 255, 255, 0.8);
-}
-
 /* POPUP */
 .main-content {
     flex-grow: 1;
@@ -312,6 +312,16 @@ body.guest-page {
     align-items: center;
     text-align: center;
     z-index: 1000;
+}
+
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(255, 255, 255, 0.8);
 }
 
 .popup-content {
@@ -334,11 +344,10 @@ body.guest-page {
 
 .popup-close {
     position: absolute;
-    top: 10px;
+    top: 100px;
     right: 10px;
-    font-size: 2rem;
+    font-size: 13rem;
     color: var(--nhs-blue);
-    cursor: pointer;
     z-index: 1001;
 }
 
@@ -370,7 +379,6 @@ body.guest-page {
 }
 
 .sidebar button {
-    background-color: var(--nhs-blue);
     color: var(--nhs-white);
     border: none;
     padding: 1rem;
@@ -380,8 +388,16 @@ body.guest-page {
     text-align: center;
 }
 
-.sidebar button:hover {
-    background: var(--nhs-dark-blue);
+#show-info1 {
+    background-color: var(--nhs-bright-blue);
+}
+
+#show-info2 {
+    background-color: var(--nhs-dark-blue);
+}
+
+#show-info3 {
+    background-color: var(--nhs-purple);
 }
 
 #hosp1, #hosp2, #hosp3 {
@@ -477,6 +493,7 @@ body.guest-page .btn-container button{
 
 .log-in-btn, .guest-btn {
     font-weight: 600;
+    font-size: medium;
     transition:all 300ms ease;
     padding: 1rem;
     width: 8rem;
@@ -490,6 +507,10 @@ body.guest-page .btn-container button{
     background-color: var(--nhs-dark-blue);
 
 }
+.landing-page .log-in-btn {
+    background-color: var(--nhs-yellow)!important;
+}
+
 
 /* LOGIN */
 
