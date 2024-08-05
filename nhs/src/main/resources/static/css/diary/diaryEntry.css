@@ -74,3 +74,18 @@
     flex-direction: column;
     gap: 0.5rem;
 }
+
+
+.measurement-unit {
+    text-transform: lowercase;
+}
+
+@media (max-width: 768px) {
+    .diary-entry-photos-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    *:hover {
+        opacity: 100% !important;
+    }
+}

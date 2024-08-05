@@ -1,6 +1,7 @@
 package uk.ac.cf.spring.nhs.Diary.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,7 +52,7 @@ public class DiaryEntryService {
 
     @Transactional(readOnly = true)
     public List<DiaryEntry> getDiaryEntriesByUserId(int userId) {
-        return diaryEntryRepository.findByUserId(userId);
+        return diaryEntryRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"));
     }
 
     @Transactional

@@ -93,6 +93,16 @@
                 </div>
             </div>
             <div class="diary-entry-section">
+                <h3>Measurements</h3>
+                <th:block th:each="measurement : ${diaryEntry.measurements}">
+                    <div class="diary-entry-measurement">
+                        <h4 class="measurement-type" th:text="${measurement.measurement.type}"></h4>
+                        <span class="measurement-value" th:text="${measurement.measurement.value}"></span>
+                        <span class="measurement-unit" th:text="${measurement.measurement.unit}"></span>
+                    </div>
+                </th:block>
+            </div>
+            <div class="diary-entry-section">
                 <h3>Notes</h3>
                 <p th:text="${diaryEntry.notes}"></p>
             </div>
