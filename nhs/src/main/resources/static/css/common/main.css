@@ -38,3 +38,8 @@ a:hover {
   color: var(--nhs-dark-pink);
   cursor: pointer;
 }
+
+
+.profile-icon {
+    opacity: 0;
+}
