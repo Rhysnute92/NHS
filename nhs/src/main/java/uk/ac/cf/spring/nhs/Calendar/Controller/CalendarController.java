@@ -24,9 +24,14 @@ public class CalendarController {
         return modelAndView;
     }
 
-    @GetMapping("/mobileaddappt")
-    public ModelAndView getMobileAddAppt(){
-        ModelAndView modelAndView = new ModelAndView("calendar/mobile/addappointment");
+    @GetMapping("/addappointment")
+    public ModelAndView getMobileAddAppt(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        if (DeviceDetector.isMobile(request)){
+            modelAndView.setViewName("calendar/mobile/addappointment");
+        } else {
+            modelAndView.setViewName("calendar/desktop/addappointment");
+        }
         return modelAndView;
     }
 
@@ -34,7 +39,7 @@ public class CalendarController {
     public List<NavMenuItem> navMenuItems() {
         return List.of(
                 new NavMenuItem("Schedule", "/calendar", "fa-regular fa-calendar-days"),
-                new NavMenuItem("Add Appointment", "/mobileaddappt", "fa-solid fa-calendar-check")
+                new NavMenuItem("Add Appointment", "/addappointment", "fa-solid fa-calendar-check")
         );
     }
 
