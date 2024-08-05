@@ -26,6 +26,7 @@ public class SecurityConfig{
     //BCrypt password encoder. Used to salt + hash passwords for the DB
     //and decrypt them during authentification.
     //When creating new users the function needs to use BCrypt to hash the provided password
+    //Ex. @Autowire PasswordEncoder newUser.setPassword(passwordEncoder.encode(rawPassword));
     //When adding new users manually to the DB use any online bcrypt salt+hasher @ strength 10
     @Bean
     public PasswordEncoder passwordEncoder() {

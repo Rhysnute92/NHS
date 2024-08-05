@@ -1,12 +1,20 @@
 package uk.ac.cf.spring.nhs.Account;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
+import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
+import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class AccountController {
+
+    @Autowired
+    private AuthenticationInterface authenticationFacade;
 
     @GetMapping("/account")
     public String account(HttpServletRequest request) {
@@ -15,5 +23,13 @@ public class AccountController {
         } else {
             return "account/account";
         }
+    }
+
+    @GetMapping("/userFullName")
+    @ResponseBody
+    public String userFullName(){
+        Object principal = authenticationFacade.getAuthentication().getPrincipal();
+        String userId = ((CustomUserDetails)principal).getUsername();
+        return userId;
     }
 }
