@@ -1,15 +1,31 @@
 package uk.ac.cf.spring.nhs.Education.Controller;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
+
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class EducationController {
 
+    @ModelAttribute("navMenuItems")
+    public List<NavMenuItem> navMenuItems() {
+        return List.of(
+            new NavMenuItem("What is Lymphedema?", "/information", "fa-solid fa-book"),
+            new NavMenuItem("Cellulitis", "/cellulitis", "fa-solid fa-book"),
+            new NavMenuItem("Treatment", "/treatment", "fa-solid fa-user-check"),
+            new NavMenuItem("Helpful resources", "/resources", "fa-solid fa-camera")
+        );
+    }
+
     @GetMapping("/information")
-    public String education(HttpServletRequest request) {
+    public String education(Model model, HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
             return "education/mobile/information";
         } else {
@@ -18,7 +34,7 @@ public class EducationController {
     }
 
     @GetMapping("/treatment")
-    public String treatment(HttpServletRequest request) {
+    public String treatment(Model model, HttpServletRequest request) {
         if(DeviceDetector.isMobile(request)){
             return "education/mobile/treatment";
         } else {
@@ -28,7 +44,7 @@ public class EducationController {
 
     //Controllers for temporary pages
     @GetMapping("/cellulitis")
-    public String cellulitis(HttpServletRequest request) {
+    public String cellulitis(Model model, HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
             return "education/mobile/infoCell";
         } else {
@@ -37,7 +53,7 @@ public class EducationController {
     }
 
     @GetMapping("/resources")
-    public String res(HttpServletRequest request) {
+    public String res(Model model, HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
             return "education/mobile/infoRes";
         } else {
@@ -46,7 +62,7 @@ public class EducationController {
     }
 
     @GetMapping("/treatmentSpec")
-    public String spec(HttpServletRequest request) {
+    public String spec(Model model, HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
             return "education/mobile/treatmentSpec";
         } else {

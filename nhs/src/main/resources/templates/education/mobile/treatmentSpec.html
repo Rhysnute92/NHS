@@ -10,7 +10,7 @@
   <body>
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-    <div th:replace="~{education/fragments/mobile/mobileinfomenu :: mobileinfomenu}"></div>
+    <div th:if="${navMenuItems != null}" th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
     <div class="container_tr_mb">
       <h2 class="title">Treatments for lymphedema of the legs</h2>
     <div>
