@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <title>Treatment Plan</title>
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/management/management.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div th:replace="~{common/fragments/header}"></div>
+    <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+    <div class="management-container">
+      <div class="management-title-container">
+        <h1 class="management-desktop-title">My Lymphoedema Management Plan</h1>
+        <p class="management-desktop-subtitle">
+          Find support, your tasks, and information for your lymphoedema management
+          plan.
+        </p>
+      </div>
+      <section class="collapsible urgent-care-plan">
+        <h2 class="collapsible-header" onclick="toggleSection(event)">
+          Urgent Care Plan
+        </h2>
+        <div class="collapsible-content">
+          <div class="emergency-contacts">
+            <h3>Emergency Contacts</h3>
+            <ul>
+              <li>Healthcare Provider: 02920123456</li>
+              <li>Family Member: +44 123 456 789</li>
+            </ul>
+          </div>
+          <div class="immediate-steps">
+            <h3>Immediate Steps for Acute Symptoms</h3>
+            <ul>
+              <li>Infection signs: Contact healthcare provider immediately.</li>
+              <li>
+                Severe swelling: Follow the emergency swelling management steps.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="collapsible my-health-tasks">
+        <h2 class="collapsible-header" onclick="toggleSection(event)">
+          My Health Tasks
+        </h2>
+        <div class="collapsible-content">
+          <div class="action-item">
+            <div class="assigned-questionnaires">
+              <h3>Assigned Questionnaires</h3>
+              <!-- If there is a questionnaire assigned -->
+              <div class="questionnaire-item">
+                <p>
+                  You have a new questionnaire assigned. Click
+                  <a href="#">here</a> to complete it.
+                </p>
+              </div>
+              <!-- If no questionnaire is assigned -->
+              <div class="questionnaire-item no-assignment">
+                <p>No questionnaires assigned at the moment.</p>
+              </div>
+            </div>
+          </div>
+          <div class="action-item">
+            <h3>Your Tasks</h3>
+            <p>Daily Exercise: 30 minutes of walking.</p>
+            <p>Hydration: Drink 8 glasses of water.</p>
+          </div>
+        </div>
+      </section>
+      <section class="collapsible your-treatment-plan">
+        <h2 class="collapsible-header" onclick="toggleSection(event)">
+          Your Treatment Plan
+        </h2>
+        <div class="collapsible-content">
+          <div class="treatment-item">
+            <h3>Diet and Nutrition</h3>
+            <ul>
+              <li>Anti-inflammatory diet</li>
+              <li>Hydration guidelines</li>
+            </ul>
+          </div>
+          <div class="treatment-item">
+            <h3>Exercise Plans</h3>
+            <ul>
+              <li>Daily exercises</li>
+              <li>Activity recommendations</li>
+            </ul>
+          </div>
+          <!-- Add more treatment items as needed -->
+        </div>
+      </section>
+    </div>
+    <script th:src="@{/js/common/header.js}"></script>
+    <script type="module" th:src="@{/js/management/management.js}"></script>
+  </body>
+</html>
