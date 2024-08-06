@@ -1,8 +1,111 @@
 <!DOCTYPE html>
 <div th:fragment="diaryEntry" class="diary-entry">
     <div class="diary-entry-title-container">
-        <h3 class="diary-entry-title" th:attr="data-date=${diaryEntry.date}"></h3>
+        <h2 class="diary-entry-title" th:attr="data-date=${diaryEntry.date}"></h2>
     </div>
     <div class="diary-entry-content">
+        <div class="diary-entry-preview">
+            <div th:if="${diaryEntry.mood}" th:switch="${diaryEntry.mood.name()}">
+                <div th:case="'GREAT'">
+                    <i class="fa-regular fa-face-grin-beam"></i>
+                </div>
+                <div th:case="'GOOD'">
+                    <i class="fa-regular fa-face-smile"></i>
+                </div>
+                <div th:case="'OKAY'">
+                    <i class="fa-regular fa-face-meh"></i>
+                </div>
+                <div th:case="'BAD'">
+                    <i class="fa-regular fa-face-frown"></i>
+                </div>
+                <div th:case="'AWFUL'">
+                    <i class="fa-regular fa-face-sad-tear"></i>
+                </div>
+            </div>
+            <div th:if="${diaryEntry.symptoms.size > 0}">
+                <i class="fa-solid fa-notes-medical"></i>
+            </div>
+            <div th:if="${diaryEntry.photos.size > 0}">
+                <i class="fa-solid fa-camera"></i>
+            </div>
+            <div th:if="${diaryEntry.notes}">
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+        </div>
+        <div class="diary-entry-full hidden">
+            <div class="diary-entry-section">
+                <h3>Mood</h3>
+                <th:block th:if="${diaryEntry.mood}" th:switch="${diaryEntry.mood.name()}">
+                    <div th:case="'GREAT'">
+                        <i class="fa-regular fa-face-grin-beam"></i>
+                        <span>Great</span>
+                    </div>
+                    <div th:case="'GOOD'">
+                        <i class="fa-regular fa-face-smile"></i>
+                        <span>Good</span>
+                    </div>
+                    <div th:case="'OKAY'">
+                        <i class="fa-regular fa-face-meh"></i>
+                        <span>Okay</span>
+                    </div>
+                    <div th:case="'BAD'">
+                        <i class="fa-regular fa-face-frown"></i>
+                        <span>Bad</span>
+                    </div>
+                    <div th:case="'AWFUL'">
+                        <i class="fa-regular fa-face-sad-tear"></i>
+                        <span>Awful</span>
+                    </div>
+                    <div th:case="*">
+                        <i class="fa-regular fa-question-circle"></i>
+                        <span>Mood not set</span>
+                    </div>
+                </th:block>
+            </div>
+            <div class="diary-entry-section">
+                <h3>Symptoms</h3>
+                <th:block th:each="symptom : ${diaryEntry.symptoms}">
+                    <div class="diary-entry-symptom">
+                        <h4 th:text="${symptom.symptom.name}"></h4>
+                        <th:block th:switch="${symptom.symptom.severity}">
+                            <div th:case="1">
+                                <span>Not at all</span>
+                            </div>
+                            <div th:case="2">
+                                <span>A little</span>
+                            </div>
+                            <div th:case="3">
+                                <span>Quite a bit</span>
+                            </div>
+                            <div th:case="4">
+                                <span>A lot</span>
+                            </div>
+                        </th:block>
+                    </div>
+                </th:block>
+            </div>
+            <div class="diary-entry-section">
+                <h3>Photos</h3>
+                <div class="diary-entry-photos-container">
+                    <th:block th:each="photo : ${diaryEntry.photos}">
+                        <img th:src="@{/files/{filename}(filename=${photo.photo.url})}" class="diary-entry-photo" />
+                    </th:block>
+                </div>
+            </div>
+            <div class="diary-entry-section">
+                <h3>Measurements</h3>
+                <th:block th:each="measurement : ${diaryEntry.measurements}">
+                    <div class="diary-entry-measurement">
+                        <h4 class="measurement-type" th:text="${measurement.measurement.type}"></h4>
+                        <span class="measurement-value" th:text="${measurement.measurement.value}"></span>
+                        <span class="measurement-unit" th:text="${measurement.measurement.unit}"></span>
+                    </div>
+                </th:block>
+            </div>
+            <div class="diary-entry-section">
+                <h3>Notes</h3>
+                <p th:text="${diaryEntry.notes}"></p>
+            </div>
+        </div>
     </div>
 </div>

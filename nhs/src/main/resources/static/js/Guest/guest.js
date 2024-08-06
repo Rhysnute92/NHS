@@ -25,3 +25,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     showInfo('info1');
 });
+
+let slideIndex = 0;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function showSlides(n) {
+    let slides = document.getElementsByClassName("slide");
+    if (n >= slides.length) { slideIndex = 0 }
+    if (n < 0) { slideIndex = slides.length - 1 }
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slides[slideIndex].style.display = "block";
+}
+
+function toggleDropdown(contentId) {
+    var content = document.getElementById(contentId);
+    var parent = content.parentNode;
+
+    if (content.style.display === "block") {
+        content.style.display = "none";
+        parent.classList.remove('active');
+    } else {
+        content.style.display = "block";
+        parent.classList.add('active');
+    }
+}
