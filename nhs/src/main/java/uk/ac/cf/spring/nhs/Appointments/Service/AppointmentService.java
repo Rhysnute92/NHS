@@ -31,6 +31,6 @@ public class AppointmentService {
     }
 
     public List<Appointments> getAppointmentsByCalendarID(Integer calendarID) {
-        return appointmentRepository.findByCalendarID(calendarID);
+        return appointmentRepository.findByCalendar_CalendarID(calendarID);
     }
 }
