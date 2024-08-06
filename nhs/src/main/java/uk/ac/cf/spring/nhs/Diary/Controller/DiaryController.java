@@ -13,7 +13,9 @@ import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinForm;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Diary.Entity.Photo;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
+import uk.ac.cf.spring.nhs.Diary.Service.PhotoService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +27,9 @@ public class DiaryController {
 
     @Autowired
     DiaryEntryService diaryEntryService;
+
+    @Autowired
+    PhotoService photoService;
 
     @GetMapping("")
     public String diary(Model model) {
@@ -38,16 +43,14 @@ public class DiaryController {
         return "diary/checkin";
     }
 
-
     @PostMapping("/checkin")
     public ModelAndView checkin(
-            @ModelAttribute CheckinForm checkinForm,
-            @RequestParam(value = "checkin-photos-upload", required = false) List<MultipartFile> photos
+            @ModelAttribute CheckinForm checkinForm
     ) {
         System.out.println(checkinForm);
         ModelAndView modelAndView = new ModelAndView();
         try {
-            diaryEntryService.createAndSaveDiaryEntry(checkinForm, photos);
+            diaryEntryService.createAndSaveDiaryEntry(checkinForm);
 
             modelAndView.setViewName("redirect:/diary"); // Redirect to the diary view
         } catch (Exception e) {
@@ -56,6 +59,35 @@ public class DiaryController {
         }
         return modelAndView;
     }
+
+
+    @GetMapping("/photos")
+    public String photos(Model model) {
+        List<Photo> photos = photoService.getPhotosByUserId(1);
+        model.addAttribute("photos", photos);
+        return "diary/photos";
+    }
+
+    @PostMapping("/photos")
+    public ModelAndView uploadPhotos(
+            @RequestParam("photos") List<MultipartFile> photos,
+            HttpServletRequest request
+    ) {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            for (MultipartFile photo : photos) {
+                if (!photo.isEmpty()) {
+                    photoService.savePhoto(photo, 1);
+                }
+            }
+            modelAndView.setViewName("redirect:/diary/photos");
+        } catch (Exception e) {
+            modelAndView.setViewName("diary/photos");
+            modelAndView.addObject("error", e.getMessage());
+        }
+        return modelAndView;
+    }
+
 
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {
