@@ -1,245 +1,196 @@
+// Initialize events array and event ID counter
+let events = [], eventIdCounter = 1;
 
-let events = [];
+// Get current date, month, and year
+let currentDate = new Date();
+let currentMonth = currentDate.getMonth(), currentYear = currentDate.getFullYear();
 
-let eventDateInput = document.getElementById("appointmentDate");
-let eventTimeInput = document.getElementById("appointmentTime");
-let eventAppointmentTypeInput = document.getElementById("appointmentType");
-let eventDrInput = document.getElementById("dr");
-let eventCommentInput = document.getElementById("comments");
-let apptList = document.getElementById("apptList");
+// Arrays for days of the week and months of the year
+const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-let eventIdCounter = 1;
+// Populate year dropdown with a range of years and set the days of the week header
+document.getElementById("year").innerHTML = generateYearRange(1970, 2050);
+document.getElementById("thead-month").innerHTML = daysOfWeek.map(day => `<th>${day}</th>`).join("");
 
-function addEvent() {
-    let date = eventDateInput.value;
-    let time = eventTimeInput.value;
-    let appointmentType = eventAppointmentTypeInput.value;
-    let dr = eventDrInput.value;
-    let description = eventCommentInput.value;
+// Add event listeners for navigation and adding events
+document.getElementById("addEventBtn").addEventListener("click", addEvent);
+document.getElementById("prev").addEventListener("click", previous);
+document.getElementById("next").addEventListener("click", next);
+document.getElementById("jump").addEventListener("change", jump);
+document.getElementById("saveAppointmentBtn").addEventListener("click", saveAppointment);
+document.querySelector(".close").addEventListener("click", closeModal);
 
-    if (date && title) {
-        let eventId = eventIdCounter++;
+// Show the initial calendar for the current month and year
+window.onload = function() {
+    document.getElementById("year").value = currentYear; // Set the dropdown to the current year
+    document.getElementById("month").value = currentMonth; // Set the dropdown to the current month
+    showCalendar(currentMonth, currentYear);
+    displayAppointments(); // Display appointments on load
+};
 
-        events.push(
-            {
-                id: eventId, date: date, time: time, appointmentType: appointmentType, dr: dr, description: description
-            }
-        );
-        showCalendar(currentMonth, currentYear);
-        eventDateInput.value = "";
-        eventTimeInput.value = "";
-        eventAppointmentTypeInput.value = "";
-        eventDrInput.value = "";
-        eventCommentInput.value = "";
-        apptSchedule();
+// Generate a range of years for the year dropdown
+function generateYearRange(start, end) {
+    return Array.from({ length: end - start + 1 }, (_, i) => `<option value="${start + i}">${start + i}</option>`).join("");
+}
+
+// Show the modal to add an appointment
+function openModal(date) {
+    document.getElementById("appointmentDate").value = date.toISOString().split('T')[0]; // Set the date in the form
+    document.getElementById("appointmentModal").style.display = "block"; // Show the modal
+}
+
+// Close the modal
+function closeModal() {
+    document.getElementById("appointmentModal").style.display = "none"; // Hide the modal
+}
+
+// Add a new event to the calendar
+function saveAppointment() {
+    let eventDetails = {
+        id: eventIdCounter++, // Generate a unique ID for the event
+        date: document.getElementById("appointmentDate").value,
+        time: document.getElementById("appointmentTime").value,
+        appointmentType: document.getElementById("appointmentType").value,
+        dr: document.getElementById("dr").value,
+        description: document.getElementById("comments").value,
+    };
+    if (eventDetails.date) { // Ensure the event has a date before adding
+        events.push(eventDetails); // Add the event to the events array
+        closeModal(); // Close the modal
+        resetForm(); // Reset the form inputs
+        updateCalendar(); // Update the calendar and display the event
     }
 }
 
+// Delete an event by ID
 function deleteAppointment(eventId) {
-    let eventIndex =
-        events.findIndex((event) =>
-            event.id === eventId);
-
-    if (eventIndex !== -1) {
-        events.splice(eventIndex, 1);
-        showCalendar(currentMonth, currentYear);
-        displayReminders();
-    }
+    events = events.filter(event => event.id !== eventId); // Remove the event from the array
+    updateCalendar(); // Update the calendar display
 }
 
-function apptSchedule() {
-    apptList.innerHTML = "";
-    for (let i = 0; i < events.length; i++) {
-        let event = events[i];
-        let eventDate = new Date(event.date);
-        if (eventDate.getMonth() ===
-            currentMonth &&
-            eventDate.getFullYear() ===
-            currentYear) {
-            let listItem = document.createElement("li");
-            listItem.innerHTML =
-                `<strong>${event.title}</strong> - 
-			${event.description} on 
-			${eventDate.toLocaleDateString()}`;
-
-            let deleteButton =
-                document.createElement("button");
-            deleteButton.className = "delete-appt";
-            deleteButton.textContent = "Delete";
-            deleteButton.onclick = function () {
-                deleteAppt(event.id);
-            };
-
-            listItem.appendChild(deleteButton);
-            reminderList.appendChild(listItem);
-        }
-    }
+// Update the calendar and appointments list
+function updateCalendar() {
+    showCalendar(currentMonth, currentYear); // Refresh the calendar
+    displayAppointments(); // Refresh the appointments list
 }
 
-function generate_year_range(start, end) {
-    let years = "";
-    for (let year = start; year <= end; year++) {
-        years += "<option value='" +
-            year + "'>" + year + "</option>";
-    }
-    return years;
+// Display the list of appointments for the current month and year
+function displayAppointments() {
+    let apptList = document.getElementById("apptList");
+    let deleteBtn = document.getElementById("deleteBtn"); // Assuming you have a delete button with this ID
+
+    // Check if there are appointments for the current month
+    let hasAppointments = events.some(event => new Date(event.date).getMonth() === currentMonth && new Date(event.date).getFullYear() === currentYear);
+
+    // Toggle the delete button visibility based on whether there are appointments
+    deleteBtn.classList.toggle("hidden", !hasAppointments);
+
+    // Populate the appointments list
+    apptList.innerHTML = events
+        .filter(event => new Date(event.date).getMonth() === currentMonth && new Date(event.date).getFullYear() === currentYear)
+        .map(event => `
+            <li data-event-id="${event.id}">
+                <strong>${event.appointmentType}</strong> - ${event.description} on ${new Date(event.date).toLocaleDateString()}
+                <button class="delete-appt" onclick="deleteAppointment(${event.id})">Delete</button>
+            </li>`).join("");
 }
 
-today = new Date();
-currentMonth = today.getMonth();
-currentYear = today.getFullYear();
-selectYear = document.getElementById("year");
-selectMonth = document.getElementById("month");
-
-createYear = generate_year_range(1970, 2050);
-
-document.getElementById("year").innerHTML = createYear;
-
-let calendar = document.getElementById("calendar");
-
-let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-];
-let days = [
-    "Sun", "Mon", "Tue", "Wed",
-    "Thu", "Fri", "Sat"];
-
-$dataHead = "<tr>";
-for (dhead in days) {
-    $dataHead += "<th data-days='" +
-        days[dhead] + "'>" +
-        days[dhead] + "</th>";
-}
-$dataHead += "</tr>";
-
-document.getElementById("thead-month").innerHTML = $dataHead;
-
-monthAndYear =
-    document.getElementById("monthAndYear");
-showCalendar(currentMonth, currentYear);
-
-// Function to navigate to the next month
-function next() {
-    currentYear = currentMonth === 11 ?
-        currentYear + 1 : currentYear;
-    currentMonth = (currentMonth + 1) % 12;
-    showCalendar(currentMonth, currentYear);
-}
-
-// Function to navigate to the previous month
-function previous() {
-    currentYear = currentMonth === 0 ?
-        currentYear - 1 : currentYear;
-    currentMonth = currentMonth === 0 ?
-        11 : currentMonth - 1;
-    showCalendar(currentMonth, currentYear);
-}
-
-function jump() {
-    currentYear = parseInt(selectYear.value);
-    currentMonth = parseInt(selectMonth.value);
-    showCalendar(currentMonth, currentYear);
-}
-
+// Show the calendar for a specific month and year
 function showCalendar(month, year) {
-    let firstDay = new Date(year, month, 1).getDay();
-    tbl = document.getElementById("calendar-body");
-    tbl.innerHTML = "";
-    monthAndYear.innerHTML = months[month] + " " + year;
-    selectYear.value = year;
-    selectMonth.value = month;
+    let tbl = document.getElementById("calendar-body");
+    tbl.innerHTML = ""; // Clear the current calendar
+    document.getElementById("monthAndYear").textContent = `${months[month]} ${year}`;
+    document.getElementById("year").value = year;
+    document.getElementById("month").value = month;
 
-    let date = 1;
-    for (let i = 0; i < 6; i++) {
+    let firstDay = new Date(year, month, 1).getDay(); // Get the first day of the month
+    let date = 1, daysInMonth = 32 - new Date(year, month, 32).getDate(); // Calculate the number of days in the month
+
+    // Create calendar rows and cells
+    for (let i = 0; i < 6; i++) { // Loop through weeks
         let row = document.createElement("tr");
-        for (let j = 0; j < 7; j++) {
+        for (let j = 0; j < 7; j++) { // Loop through days
+            let cell = document.createElement("td");
             if (i === 0 && j < firstDay) {
-                cell = document.createElement("td");
-                cellText = document.createTextNode("");
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-            } else if (date > daysInMonth(month, year)) {
+                cell.textContent = ""; // Empty cells before the first day
+            } else if (date > daysInMonth) {
                 break;
             } else {
-                cell = document.createElement("td");
-                cell.setAttribute("data-date", date);
-                cell.setAttribute("data-month", month + 1);
-                cell.setAttribute("data-year", year);
-                cell.setAttribute("data-month_name", months[month]);
+                let cellDate = new Date(year, month, date);
+                cell.innerHTML = `<span>${date}</span>`;
                 cell.className = "date-picker";
-                cell.innerHTML = "<span>" + date + "</span";
+                if (cellDate.toDateString() === currentDate.toDateString()) cell.classList.add("selected"); // Highlight current date
 
-                if (
-                    date === today.getDate() &&
-                    year === today.getFullYear() &&
-                    month === today.getMonth()
-                ) {
-                    cell.className = "date-picker selected";
-                }
-
-                // Check if there are events on this date
-                if (hasEventOnDate(date, month, year)) {
+                if (hasEventOnDate(date, month, year)) { // Check for events on this date
                     cell.classList.add("event-marker");
-                    cell.appendChild(
-                        createEventTooltip(date, month, year)
-                    );
+                    cell.appendChild(createEventTooltip(date, month, year)); // Add event tooltip
                 }
 
-                row.appendChild(cell);
+                // Add click event to open the modal on date click
+                cell.addEventListener("click", function() {
+                    openModal(cellDate); // Open modal with the clicked date
+                });
+
                 date++;
             }
+            row.appendChild(cell);
         }
         tbl.appendChild(row);
     }
-
-    displayReminders();
 }
 
-function createEventTooltip(date, month, year) {
-    let tooltip = document.createElement("div");
-    tooltip.className = "event-tooltip";
-    let eventsOnDate = getEventsOnDate(date, month, year);
-    for (let i = 0; i < eventsOnDate.length; i++) {
-        let event = eventsOnDate[i];
+// Check if there are events on a specific date
+function hasEventOnDate(date, month, year) {
+    return events.some(event => {
         let eventDate = new Date(event.date);
-        let eventText = `<strong>${event.title}</strong> - 
-			${event.description} on 
-			${eventDate.toLocaleDateString()}`;
-        let eventElement = document.createElement("p");
-        eventElement.innerHTML = eventText;
-        tooltip.appendChild(eventElement);
-    }
-    return tooltip;
-}
-
-function getEventsOnDate(date, month, year) {
-    return events.filter(function (event) {
-        let eventDate = new Date(event.date);
-        return (
-            eventDate.getDate() === date &&
-            eventDate.getMonth() === month &&
-            eventDate.getFullYear() === year
-        );
+        return eventDate.getDate() === date && eventDate.getMonth() === month && eventDate.getFullYear() === year;
     });
 }
 
-function hasEventOnDate(date, month, year) {
-    return getEventsOnDate(date, month, year).length > 0;
+// Create a tooltip to display event details
+function createEventTooltip(date, month, year) {
+    let tooltip = document.createElement("div");
+    tooltip.className = "event-tooltip";
+    let eventsOnDate = events.filter(event => {
+        let eventDate = new Date(event.date);
+        return eventDate.getDate() === date && eventDate.getMonth() === month && eventDate.getFullYear() === year;
+    });
+    eventsOnDate.forEach(event => {
+        let eventText = `<strong>${event.appointmentType}</strong> - ${event.description} on ${new Date(event.date).toLocaleDateString()}`;
+        let eventElement = document.createElement("p");
+        eventElement.innerHTML = eventText;
+        tooltip.appendChild(eventElement);
+    });
+    return tooltip;
 }
 
-function daysInMonth(iMonth, iYear) {
-    return 32 - new Date(iYear, iMonth, 32).getDate();
+// Reset the event form inputs
+function resetForm() {
+    document.getElementById("appointmentDate").value = "";
+    document.getElementById("appointmentTime").value = "";
+    document.getElementById("appointmentType").value = "";
+    document.getElementById("dr").value = "";
+    document.getElementById("comments").value = "";
 }
 
-showCalendar(currentMonth, currentYear);
+// Navigate to the next month
+function next() {
+    currentMonth = (currentMonth + 1) % 12;
+    if (currentMonth === 0) currentYear++;
+    updateCalendar();
+}
+
+// Navigate to the previous month
+function previous() {
+    currentMonth = (currentMonth - 1 + 12) % 12;
+    if (currentMonth === 11) currentYear--;
+    updateCalendar();
+}
+
+// Jump to a specific month and year based on user input
+function jump() {
+    currentYear = parseInt(document.getElementById("year").value);
+    currentMonth = parseInt(document.getElementById("month").value);
+    updateCalendar();
+}
