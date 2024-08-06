@@ -1,0 +1,75 @@
+.task-widget {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 20px 0;
+}
+
+.task-widget-header {
+  margin-bottom: 20px;
+}
+
+.task-widget-header h3 {
+  font-size: 24px;
+  color: #111827;
+  margin: 0 0 10px 0;
+}
+
+.task-widget-header p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.task-widget-body {
+  position: relative;
+  display: inline-block;
+}
+
+.progress-circle {
+  transform: rotate(-90deg);
+}
+
+.bg-circle {
+  fill: none;
+  stroke: #e5e7eb;
+  stroke-width: 10;
+}
+
+.progress-circle .progress-circle {
+  fill: none;
+  stroke: #4f46e5; /* Your primary color */
+  stroke-width: 10;
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #111827;
+}
+
+.task-widget-footer {
+  margin-top: 20px;
+}
+
+.complete-task-button {
+  background-color: #4f46e5; /* Your primary color */
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.complete-task-button:hover {
+  background-color: #4338ca; /* Darker shade of your primary color */
+}

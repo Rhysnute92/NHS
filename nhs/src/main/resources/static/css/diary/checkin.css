@@ -19,12 +19,15 @@ h1 {
 .checkin-section-title {
     background-color: var(--nhs-bright-blue);
     color: var(--nhs-white);
-    border-radius: 0.4rem;
+    /*border-radius: 0.4rem;*/
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
     transition: opacity 0.5s;
+}
+
+.checkin-section-title h3 {
+    padding: 1rem;
 }
 
 .checkin-section-title:hover {
@@ -80,8 +83,24 @@ h1 {
     z-index: 1;
 }
 
-.selected .checkin-icon {
+.selected .checkin-icon.great {
+    color: var(--nhs-green);
+}
+
+.selected .checkin-icon.good {
     color: var(--nhs-light-green);
+}
+
+.selected .checkin-icon.okay {
+    color: var(--nhs-yellow);
+}
+
+.selected .checkin-icon.bad {
+    color: var(--nhs-orange);
+}
+
+.selected .checkin-icon.awful {
+    color: var(--nhs-dark-red);
 }
 
 .checkin-mood-button:hover {
@@ -102,6 +121,11 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 0.5rem
+}
+
+.checkin-symptom-selection h4, .photo-text, .add-measurement-button, .checkin-submit {
+    font-size: 1.15rem;
 }
 
 .checkin-photos {
@@ -135,7 +159,7 @@ h1 {
 
 .checkin-photos-preview {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .checkin-photos-preview-image {
@@ -147,7 +171,7 @@ h1 {
 
 .checkin-notes {
     font-family: var(--regular-font-family);
-    font-size: var(--regular-font-size);
+    padding: 0.5rem;
 }
 
 .checkin-section-title .checkin-icon {
@@ -160,10 +184,94 @@ h1 {
     display: block;
 }
 
+.add-measurement-button, .checkin-submit {
+    font-family: var(--regular-font-family);
+    background-color: var(--nhs-light-green);
+    color: var(--nhs-white);
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+    /*border-radius: 0.4rem;*/
+    transition: opacity 0.5s;
+}
+
+.add-measurement-button:hover, .checkin-submit:hover {
+    cursor: pointer;
+    opacity: 80%;
+}
+
+.measurement {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.measurement input[type="number"] {
+    width: 20%;
+    padding: 0.5rem;
+}
+
+.measurement .unit-select {
+    width: 20%;
+    padding: 0.5rem;
+}
+
+.measurement .type-select {
+    width: 30%;
+    padding: 0.5rem;
+}
+
+
+
+.measurement .remove-measurement-button {
+    background-color: var(--nhs-dark-red);
+    color: var(--nhs-white);
+    border: none;
+    padding: 0.5rem;
+    /*border-radius: 0.4rem;*/
+    transition: opacity 0.5s;
+    width: 2rem;
+    height: 2rem;
+}
+
+.measurement .remove-measurement-button:hover {
+    cursor: pointer;
+    opacity: 80%;
+}
+
+
+
+.measurement * {
+    font-family: var(--regular-font-family);
+}
+
 @media (max-width: 768px) {
     .checkin-form-container {
         width: 100%;
         margin: 0;
         font-size: 1.2rem;
+    }
+
+    .checkin-mood-button .checkin-icon {
+        font-size: 2.5rem;
+    }
+
+    .checkin-photos-preview {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    *:hover {
+        opacity: 100% !important;
+    }
+
+    .checkin-mood-button input[type="radio"] {
+        opacity: 0 !important;
+    }
+
+    .checkin-mood-button input[type="radio"]:hover {
+        opacity: 0 !important;
     }
 }

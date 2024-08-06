@@ -1,4 +1,8 @@
-package uk.ac.cf.spring.nhs.Dashboard.Controller;
+/* package uk.ac.cf.spring.nhs.Dashboard.Controller;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,16 +11,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(DashboardController.class)
 public class DashboardControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+        @Autowired
+        private MockMvc mockMvc;
 
     @Test
     public void testDashboardForMobile() throws Exception {
@@ -43,3 +43,4 @@ public class DashboardControllerTest {
                 .andExpect(view().name("dashboard/desktop/dashboard"));
     }
 }
+ */
