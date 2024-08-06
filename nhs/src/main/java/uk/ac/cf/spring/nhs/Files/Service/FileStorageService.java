@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Common.util;
+package uk.ac.cf.spring.nhs.Files.Service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,35 +18,27 @@ public class FileStorageService {
     private final Path fileStorageLocation;
 
     public FileStorageService(@Value("${file.upload-dir}") String uploadDir) {
-        this.fileStorageLocation = Paths.get(uploadDir)
-                .toAbsolutePath().normalize();
-        System.out.println("File storage location: " + this.fileStorageLocation);
+        this.fileStorageLocation = Paths.get(uploadDir).toAbsolutePath().normalize();
 
-        // Create the directory if it doesn't exist
         try {
             Files.createDirectories(this.fileStorageLocation);
-            System.out.println("Directory created successfully.");
         } catch (Exception ex) {
-            ex.printStackTrace();
             throw new RuntimeException("Could not create the directory where the uploaded files will be stored", ex);
         }
     }
 
     public String storeFile(MultipartFile file) {
-        // Normalize file name
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
         try {
-            // Check if the file's name contains invalid characters
             if (fileName.contains("..")) {
                 throw new RuntimeException("Filename contains invalid path sequence " + fileName);
             }
 
-            // Copy file to the target location
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            return targetLocation.toString();
+            return fileName;  // Return only the filename
         } catch (IOException ex) {
             throw new RuntimeException("Could not store file " + fileName + ". Please try again!", ex);
         }
