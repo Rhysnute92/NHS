@@ -66,14 +66,11 @@ public class DiaryControllerTest {
     }
 
     private AutoCloseable closeable;
-    private MockedStatic<DeviceDetector> mockedStatic;
     private List<DiaryEntry> dummyEntries;
 
     @BeforeEach
     public void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
-        mockedStatic = mockStatic(DeviceDetector.class);
-
         dummyEntries = new ArrayList<>(Arrays.asList(
                 new DiaryEntry(1, new Date()),
                 new DiaryEntry(2, new Date())
@@ -85,7 +82,6 @@ public class DiaryControllerTest {
     @AfterEach
     public void tearDown() throws Exception {
         closeable.close();
-        mockedStatic.close();
     }
 
     @Test

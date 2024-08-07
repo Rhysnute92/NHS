@@ -60,10 +60,12 @@ public class GuestControllerTest {
 
     @Test
     public void testMobileLanding() throws Exception {
-            mockStatic(DeviceDetector.class);
-            when(DeviceDetector.isMobile(any(HttpServletRequest.class))).thenReturn(true);
+            // mockStatic(DeviceDetector.class);
+            // when(DeviceDetector.isMobile(any(HttpServletRequest.class))).thenReturn(true);
 
-            mockMvc.perform(get("/"))
+            mockMvc.perform(get("/")
+                        .header("User-Agent",
+                                "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"))
                     .andExpect(status().isOk())
                     .andExpect(view().name("guest/mobile/landing"));
         }
