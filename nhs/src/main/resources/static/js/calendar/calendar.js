@@ -233,7 +233,11 @@ function getEventsOnDate(date, month, year) {
         );
     });
 }
-
+function mergeDateTime() {
+    var date = document.getElementById("appointmentDate").value;
+    var time = document.getElementById("appointmentTime").value;
+    document.getElementById("hiddenApptTime").value = date + "T" + time;
+}
 function hasEventOnDate(date, month, year) {
     return getEventsOnDate(date, month, year).length > 0;
 }

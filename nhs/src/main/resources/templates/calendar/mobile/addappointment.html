@@ -13,13 +13,14 @@
 <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
 <div class="container-calendar">
     <div id="appointments">
-        <form th:action="@{/calendar}" th:object="${calendar}" method="post">
+        <form th:action="@{/addappointment}" th:object="${appointment}" method="post">
             <label>Date of Appointment:<br>
-                <input type="date" id="appointmentDate" th:field="*{apptTime}" required><br>
+                <input type="date" id="appointmentDate" th:oninput="mergeDateTime()" required><br>
             </label>
             <label>Time of Appointment:<br>
-                <input type="time" id="appointmentTime" th:field="*{apptTime}" required><br>
+                <input type="time" id="appointmentTime" th:oninput="mergeDateTime()" required><br>
             </label>
+            <input type="hidden" th:field="*{apptTime}">
             <label>Appointment Type:<br>
                 <input type="text" id="appointmentType" placeholder="Please enter what you appointment is" th:field="*{apptType}"><br>
             </label>
@@ -29,12 +30,8 @@
             <label>Information about your Appointment:<br>
                 <textarea id="comments" placeholder="Info about your appointment" th:field="*{apptInfo}"></textarea><br>
             </label>
-            <button id="addEvent" type="submit">
-                Add
-            </button>
-            <button id="deleteAppointment" type="reset">
-                Clear
-            </button>
+            <button id="addEvent" type="submit">Add</button>
+            <button id="deleteAppointment" type="reset">Clear</button>
         </form>
     </div>
 </div>
