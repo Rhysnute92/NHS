@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-size: 1.1rem;
 }
 
 h1 {
@@ -55,7 +56,7 @@ h1 {
     padding: 0;
 }
 
-.checkin-icon {
+.checkin-icon, .photo-icon {
     font-size: 2rem;
     color: var(--nhs-dark-grey);
 }
@@ -73,6 +74,11 @@ h1 {
     align-items: center;
     justify-content: center;
     position: relative;
+}
+
+input[type="radio"] {
+    width: 1rem;
+    height: 1rem;
 }
 
 .checkin-mood-button input[type="radio"] {
@@ -136,7 +142,7 @@ h1 {
     gap: 1rem;
 }
 
-.checkin-photos-label {
+.photo-label {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -144,12 +150,12 @@ h1 {
     transition: opacity 0.5s;
 }
 
-.checkin-photos-label:hover {
+.photo-label:hover {
     cursor: pointer;
     opacity: 80%;
 }
 
-.checkin-photos-upload {
+.photo-upload {
     opacity: 0;
     position: absolute;
     z-index: -1;
@@ -159,6 +165,7 @@ h1 {
 
 .checkin-photos-preview {
     display: grid;
+    gap: 0.5rem;
     grid-template-columns: repeat(5, 1fr);
 }
 
@@ -203,9 +210,9 @@ h1 {
 
 .measurement {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .measurement input[type="number"] {
@@ -214,16 +221,14 @@ h1 {
 }
 
 .measurement .unit-select {
-    width: 20%;
+    width: 25%;
     padding: 0.5rem;
 }
 
 .measurement .type-select {
-    width: 30%;
+    width: 35%;
     padding: 0.5rem;
 }
-
-
 
 .measurement .remove-measurement-button {
     background-color: var(--nhs-dark-red);
@@ -254,7 +259,7 @@ h1 {
         font-size: 1.2rem;
     }
 
-    .checkin-mood-button .checkin-icon {
+    .checkin-mood-button .checkin-icon, .photo-icon {
         font-size: 2.5rem;
     }
 
