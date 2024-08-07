@@ -5,4 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   if (titleElement) {
     titleElement.innerText = pageTitle;
   }
+
+  const navMenu = document.querySelector(".navmenu");
+  const navmenuToggle = document.querySelector(".navmenu-toggle");
+  if (!navMenu) {
+    navmenuToggle.style.opacity = 0;
+  }
 });
+
+

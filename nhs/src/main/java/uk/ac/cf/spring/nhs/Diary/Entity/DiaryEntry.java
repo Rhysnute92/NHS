@@ -106,8 +106,18 @@ public class DiaryEntry {
         this.notes = notes;
     }
 
+
     @Override
     public String toString() {
-        return String.format("DiaryEntry[id=%d, date='%s']", id, date);
+        return "DiaryEntry{" +
+                "id=" + id +
+                ", date=" + date +
+                ", mood=" + mood +
+                ", photos=" + photos +
+                ", measurements=" + measurements +
+                ", symptoms=" + symptoms +
+                ", notes='" + notes + '\'' +
+                ", userId=" + userId +
+                '}';
     }
 }

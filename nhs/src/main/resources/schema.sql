@@ -22,6 +22,8 @@ DROP TABLE IF EXISTS PatientDiagnosis;
 DROP TABLE IF EXISTS Patients;
 DROP TABLE IF EXISTS ProviderCredentials;
 DROP TABLE IF EXISTS PatientCredentials;
+
+
 --Log in information and credentials--
 CREATE TABLE PatientCredentials (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
