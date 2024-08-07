@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class AccountController {
@@ -17,13 +16,7 @@ public class AccountController {
     private AuthenticationInterface authenticationFacade;
 
     @GetMapping("/account")
-    public String account(HttpServletRequest request) {
-        if (DeviceDetector.isMobile(request)) {
-            return "account/account";
-        } else {
-            return "account/account";
-        }
-    }
+    public String account() {return "account/account";}
 
     @GetMapping("/userFullName")
     @ResponseBody
