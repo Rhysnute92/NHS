@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinForm;
@@ -45,7 +46,8 @@ public class DiaryController {
 
     @PostMapping("/checkin")
     public ModelAndView checkin(
-            @ModelAttribute CheckinForm checkinForm
+            @ModelAttribute CheckinForm checkinForm,
+            RedirectAttributes redirectAttributes
     ) {
         System.out.println(checkinForm);
         ModelAndView modelAndView = new ModelAndView();
@@ -55,6 +57,7 @@ public class DiaryController {
             modelAndView.setViewName("redirect:/diary"); // Redirect to the diary view
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
             modelAndView.setViewName("diary/checkin"); // Redirect to the check-in view if there's an error
         }
         return modelAndView;
@@ -71,7 +74,8 @@ public class DiaryController {
     @PostMapping("/photos")
     public ModelAndView uploadPhotos(
             @RequestParam("photos") List<MultipartFile> photos,
-            HttpServletRequest request
+            HttpServletRequest request,
+            RedirectAttributes redirectAttributes
     ) {
         ModelAndView modelAndView = new ModelAndView();
         try {
@@ -80,11 +84,10 @@ public class DiaryController {
                     photoService.savePhoto(photo, 1);
                 }
             }
-            modelAndView.setViewName("redirect:/diary/photos");
         } catch (Exception e) {
-            modelAndView.setViewName("diary/photos");
-            modelAndView.addObject("error", e.getMessage());
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
+        modelAndView.setViewName("redirect:/diary/photos");
         return modelAndView;
     }
 
