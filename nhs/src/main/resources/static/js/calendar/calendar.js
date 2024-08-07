@@ -1,9 +1,16 @@
+//delete when database works testing only
+const appointmentsData = {
+    '2024-08-15' : ['Lymphoedema at 10:35'],
+    '2024-08-25' : ['Celulitus at 09:50'],
+};
+
 // Initialize events array and event ID counter
 let events = [], eventIdCounter = 1;
 
 // Get current date, month, and year
 let currentDate = new Date();
-let currentMonth = currentDate.getMonth(), currentYear = currentDate.getFullYear();
+let currentMonth = currentDate.getMonth(); // 0 = January, 11 = December
+let currentYear = currentDate.getFullYear(); // e.g., 2024
 
 // Arrays for days of the week and months of the year
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -12,14 +19,6 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
 // Populate year dropdown with a range of years and set the days of the week header
 document.getElementById("year").innerHTML = generateYearRange(1970, 2050);
 document.getElementById("thead-month").innerHTML = daysOfWeek.map(day => `<th>${day}</th>`).join("");
-
-// Add event listeners for navigation and adding events
-document.getElementById("addEventBtn").addEventListener("click", addEvent);
-document.getElementById("prev").addEventListener("click", previous);
-document.getElementById("next").addEventListener("click", next);
-document.getElementById("jump").addEventListener("change", jump);
-document.getElementById("saveAppointmentBtn").addEventListener("click", saveAppointment);
-document.querySelector(".close").addEventListener("click", closeModal);
 
 // Show the initial calendar for the current month and year
 window.onload = function() {
@@ -34,15 +33,15 @@ function generateYearRange(start, end) {
     return Array.from({ length: end - start + 1 }, (_, i) => `<option value="${start + i}">${start + i}</option>`).join("");
 }
 
-// Show the modal to add an appointment
+// Show the model to add an appointment
 function openModal(date) {
     document.getElementById("appointmentDate").value = date.toISOString().split('T')[0]; // Set the date in the form
-    document.getElementById("appointmentModal").style.display = "block"; // Show the modal
+    document.getElementById("appointmentModal").style.display = "block"; // Show the model
 }
 
-// Close the modal
+// Close the model
 function closeModal() {
-    document.getElementById("appointmentModal").style.display = "none"; // Hide the modal
+    document.getElementById("appointmentModal").style.display = "none"; // Hide the model
 }
 
 // Add a new event to the calendar
@@ -57,7 +56,7 @@ function saveAppointment() {
     };
     if (eventDetails.date) { // Ensure the event has a date before adding
         events.push(eventDetails); // Add the event to the events array
-        closeModal(); // Close the modal
+        closeModal(); // Close the model
         resetForm(); // Reset the form inputs
         updateCalendar(); // Update the calendar and display the event
     }
@@ -78,13 +77,12 @@ function updateCalendar() {
 // Display the list of appointments for the current month and year
 function displayAppointments() {
     let apptList = document.getElementById("apptList");
-    let deleteBtn = document.getElementById("deleteBtn"); // Assuming you have a delete button with this ID
 
     // Check if there are appointments for the current month
     let hasAppointments = events.some(event => new Date(event.date).getMonth() === currentMonth && new Date(event.date).getFullYear() === currentYear);
 
     // Toggle the delete button visibility based on whether there are appointments
-    deleteBtn.classList.toggle("hidden", !hasAppointments);
+    document.getElementById("deleteBtn").classList.toggle("hidden", !hasAppointments);
 
     // Populate the appointments list
     apptList.innerHTML = events
@@ -122,14 +120,15 @@ function showCalendar(month, year) {
                 cell.className = "date-picker";
                 if (cellDate.toDateString() === currentDate.toDateString()) cell.classList.add("selected"); // Highlight current date
 
-                if (hasEventOnDate(date, month, year)) { // Check for events on this date
+                // Check for events on this date
+                if (hasEventOnDate(date, month, year)) {
                     cell.classList.add("event-marker");
                     cell.appendChild(createEventTooltip(date, month, year)); // Add event tooltip
                 }
 
-                // Add click event to open the modal on date click
+                // Add click event to open the model on date click
                 cell.addEventListener("click", function() {
-                    openModal(cellDate); // Open modal with the clicked date
+                    openModal(cellDate); // Open model with the clicked date
                 });
 
                 date++;
