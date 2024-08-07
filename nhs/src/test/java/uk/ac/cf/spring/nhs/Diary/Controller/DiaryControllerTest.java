@@ -157,6 +157,7 @@ public class DiaryControllerTest {
     }
 
     @Test
+    @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
     public void testPhotos() throws Exception {
         // Ensure the method returns dummy photos
         when(photoService.getPhotosByUserId(1)).thenReturn(dummyPhotos);
@@ -169,13 +170,14 @@ public class DiaryControllerTest {
     }
 
     @Test
+    @WithMockUser
     public void testUploadPhotosSuccess() throws Exception {
         MockMultipartFile photo = new MockMultipartFile("photos", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
 
         when(photoService.savePhoto(any(MultipartFile.class), eq(1))).thenReturn(null);
 
         mockMvc.perform(multipart("/diary/photos")
-                        .file(photo))
+                        .file(photo).with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/diary/photos"));
 
@@ -183,13 +185,14 @@ public class DiaryControllerTest {
     }
 
     @Test
+    @WithMockUser
     public void testUploadPhotosFailure() throws Exception {
         MockMultipartFile photo = new MockMultipartFile("photos", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
 
         doThrow(new RuntimeException("Error")).when(photoService).savePhoto(any(MultipartFile.class), eq(1));
 
         mockMvc.perform(multipart("/diary/photos")
-                        .file(photo))
+                        .file(photo).with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/diary/photos"))
                 .andExpect(flash().attributeExists("error"));
