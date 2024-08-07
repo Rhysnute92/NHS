@@ -17,13 +17,14 @@
   <div id="left">
     <div id="appointments">
       <h3>Add Appointment</h3>
-      <form th:action="@{/calendar}" th:object="${calendar}" method="post">
+      <form th:action="@{/addappointment}" th:object="${calendar}" method="post">
         <label>Date of Appointment:<br>
-          <input type="date" id="appointmentDate" required><br>
+          <input type="date" id="appointmentDate" th:oninput="mergeDateTime()" required><br>
         </label>
         <label>Time of Appointment:<br>
-          <input type="time" id="appointmentTime" required><br>
+          <input type="time" id="appointmentTime" th:oninput="mergeDateTime() required"><br>
         </label>
+        <input type="hidden" th:field="*{apptTime}" id="hiddenApptTime">
         <label>Appointment Type:<br>
           <input type="text" id="appointmentType" placeholder="Please enter what you appointment is"><br>
         </label>
