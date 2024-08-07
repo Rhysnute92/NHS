@@ -26,15 +26,12 @@ public class LoginControllerTest {
     private WebApplicationContext context;
 
     @Autowired
-    private FilterChainProxy springSecurityFilterChain;
-
-    @Autowired
     private MockMvc mockMvc;
 
     @BeforeEach
     public void setup() {
         this.mockMvc = webAppContextSetup(context)
-        .apply(springSecurity(springSecurityFilterChain))
+        .apply(springSecurity())
         .build();
     }
 

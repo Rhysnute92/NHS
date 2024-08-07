@@ -23,15 +23,12 @@ public class EducationControllerTest {
         private WebApplicationContext context;
     
         @Autowired
-        private FilterChainProxy springSecurityFilterChain;
-    
-        @Autowired
         private MockMvc mockMvc;
     
         @Before
         public void setup() {
             this.mockMvc = webAppContextSetup(context)
-            .apply(springSecurity(springSecurityFilterChain))
+            .apply(springSecurity())
             .build();
         }
 
