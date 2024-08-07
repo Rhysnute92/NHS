@@ -65,7 +65,7 @@ public class GuestControllerTest {
 
             mockMvc.perform(get("/"))
                     .andExpect(status().isOk())
-                    .andExpect(view().name("mobile/landing"));
+                    .andExpect(view().name("guest/mobile/landing"));
         }
 
 

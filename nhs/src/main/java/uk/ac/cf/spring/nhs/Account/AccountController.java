@@ -29,8 +29,9 @@ public class AccountController {
     @ResponseBody
     public String userFullName(){
         //Get principal object from the authentication
+        //Principal contains the UserDetails object for the current user
         Object principal = authenticationFacade.getAuthentication().getPrincipal();
-        //Specify principle as CustomUserDetails and extract data
+        //Specify principle as CustomUserDetails and extract data using class functions
         String userId = ((CustomUserDetails)principal).getUsername();
         return userId;
     }
