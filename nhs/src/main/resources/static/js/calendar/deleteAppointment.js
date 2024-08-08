@@ -1,35 +1,46 @@
-// Example array of appointments
-const appointments = [
-    { id: 1, type: 'consultation', date: '2024-08-15' },
-    { id: 2, type: 'lymphoedema', date: '2024-08-16' },
-    { id: 3, type: 'therapy', date: '2024-08-17' },
-];
+// Function to update the visibility of the delete button based on appointments
+function updateDeleteButtonVisibility() {
+    const deleteButton = document.getElementById('deleteButton');
+    if (appointments.length === 0) {
+        deleteButton.style.display = 'none';
+    } else {
+        deleteButton.style.display = 'inline-block'; // Or 'block' depending on your layout
+    }
+}
 
 // Function to delete an appointment by ID
 function deleteAppointment(appointmentId) {
     // Find the appointment by ID
-    const appointment = appointments.find(appt => appt.id === appointmentId);
+    const appointmentIndex = appointments.findIndex(appt => appt.id === appointmentId);
 
-    if (!appointment) {
-        console.log("Appointment not found.");
-        return;
-    }
+    if (appointmentIndex !== -1) {
+        const appointment = appointments[appointmentIndex];
 
-    // Check if the appointment is related to lymphoedema
-    if (appointment.type === 'lymphoedema') {
-        console.log("Lymphoedema appointments cannot be deleted.");
-        return;
-    }
+        // Check if the appointment is of type 'lymphoedema'
+        if (appointment.type === 'lymphoedema') {
+            alert('This appointment cannot be deleted.');
+            return;
+        }
 
-    // Proceed with deletion if it's not lymphoedema
-    const index = appointments.indexOf(appointment);
-    if (index > -1) {
-        appointments.splice(index, 1);
-        console.log(`Appointment with ID ${appointmentId} deleted successfully.`);
+        // Ask for confirmation
+        const confirmDeletion = confirm(`Are you sure you want to delete the appointment: "${appointment.title}"?`);
+
+        if (confirmDeletion) {
+            // Delete the appointment
+            appointments.splice(appointmentIndex, 1);
+            alert('Appointment successfully deleted.');
+            updateDeleteButtonVisibility(); // Update visibility after deletion
+        }
+    } else {
+        alert('Appointment not found.');
     }
 }
 
-// Test the function
-deleteAppointment(2); // Should prevent deletion
-deleteAppointment(1); // Should allow deletion
-console.log(appointments); // Check the updated list of appointments
+// Example usage
+document.getElementById('delete-event').addEventListener('click', function() {
+    const appointmentId = parseInt(prompt('Enter the appointment ID to delete:'), 10);
+    deleteAppointment(appointmentId);
+});
+
+// Initial check for delete button visibility
+updateDeleteButtonVisibility();
