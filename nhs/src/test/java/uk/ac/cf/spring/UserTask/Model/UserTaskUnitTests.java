@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDateTime;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import uk.ac.cf.spring.nhs.Task.Model.Task;
 import uk.ac.cf.spring.nhs.UserTask.Model.UserTask;
@@ -39,12 +39,15 @@ public class UserTaskUnitTests {
     /**
      * Tests the equality of two UserTask objects.
      *
-     * This test creates two UserTask objects with the same ID, user, taskIsCompleted, and taskDuedate.
+     * This test creates two UserTask objects with the same ID, user,
+     * taskIsCompleted, and taskDuedate.
      * It also creates a Task object with the same ID and name.
      * The two UserTask objects are then set with the same Task object.
-     * Finally, the test asserts that the two UserTask objects are equal and have the same hash code.
+     * Finally, the test asserts that the two UserTask objects are equal and have
+     * the same hash code.
      *
-     * @throws AssertionError if the two UserTask objects are not equal or have different hash codes
+     * @throws AssertionError if the two UserTask objects are not equal or have
+     *                        different hash codes
      */
     @Test
     public void testUserTaskEquality() {
@@ -75,10 +78,13 @@ public class UserTaskUnitTests {
      *
      * This test creates two UserTask objects with different tasks.
      * The tasks are set with different IDs and names.
-     * The two UserTask objects are then set with the same ID, user, taskIsCompleted, and taskDuedate.
-     * Finally, the test asserts that the two UserTask objects are not equal and have different hash codes.
+     * The two UserTask objects are then set with the same ID, user,
+     * taskIsCompleted, and taskDuedate.
+     * Finally, the test asserts that the two UserTask objects are not equal and
+     * have different hash codes.
      *
-     * @throws AssertionError if the two UserTask objects are equal or have the same hash code
+     * @throws AssertionError if the two UserTask objects are equal or have the same
+     *                        hash code
      */
     @Test
     public void testUserTaskInequality() {
@@ -107,7 +113,5 @@ public class UserTaskUnitTests {
         assertNotEquals(userTask1, userTask2);
         assertNotEquals(userTask1.hashCode(), userTask2.hashCode());
     }
-
-    
 
 }

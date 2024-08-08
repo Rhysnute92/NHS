@@ -41,10 +41,6 @@ dependencies {
     // Jakarta Servlet API
     implementation 'jakarta.servlet:jakarta.servlet-api'
 
-    // Jakarta Validation
-    implementation 'jakarta.validation:jakarta.validation-api'
-    implementation 'org.hibernate.validator:hibernate-validator'
-
     // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

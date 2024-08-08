@@ -9,8 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotNull;
 import uk.ac.cf.spring.nhs.Task.Model.Task;
 
 @Entity
@@ -21,26 +19,21 @@ public class UserTask {
     @Column(name = "UserTaskID")
     private Long id;
 
-    @NotNull
     @Column(name = "TaskIsCompleted")
     private Boolean taskIsCompleted;
 
-    @NotNull
-    @FutureOrPresent
     @Column(name = "TaskDuedate")
     private java.time.LocalDateTime taskDuedate;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "TaskID", nullable = false)
     private Task task;
 
-    @NotNull
     @JoinColumn(name = "UserID", nullable = false)
     private Long userID;
 
     // Getters and Setters
-    
+
     /**
      * Retrieves the ID of the object.
      *
@@ -53,7 +46,7 @@ public class UserTask {
     /**
      * Sets the ID of the object.
      *
-     * @param  id  the new ID value
+     * @param id the new ID value
      */
     public void setId(Long id) {
         this.id = id;
@@ -71,7 +64,7 @@ public class UserTask {
     /**
      * Sets the value of the taskIsCompleted field.
      *
-     * @param  taskIsCompleted  the new value for the taskIsCompleted field
+     * @param taskIsCompleted the new value for the taskIsCompleted field
      */
     public void setTaskIsCompleted(Boolean taskIsCompleted) {
         this.taskIsCompleted = taskIsCompleted;
@@ -89,7 +82,7 @@ public class UserTask {
     /**
      * Sets the due date of the task.
      *
-     * @param  taskDuedate  the new due date of the task
+     * @param taskDuedate the new due date of the task
      */
     public void setTaskDuedate(java.time.LocalDateTime taskDuedate) {
         this.taskDuedate = taskDuedate;
@@ -98,7 +91,7 @@ public class UserTask {
     /**
      * Retrieves the task associated with this user task.
      *
-     * @return          the task associated with this user task
+     * @return the task associated with this user task
      */
     public Task getTask() {
         return task;
@@ -107,7 +100,7 @@ public class UserTask {
     /**
      * Sets the task associated with this user task.
      *
-     * @param  task  the new task to associate with this user task
+     * @param task the new task to associate with this user task
      */
     public void setTask(Task task) {
         this.task = task;
@@ -125,7 +118,7 @@ public class UserTask {
     /**
      * Sets the user ID for the object.
      *
-     * @param  userID   the new user ID to set
+     * @param userID the new user ID to set
      */
     public void setUser(Long userID) {
         this.userID = userID;
