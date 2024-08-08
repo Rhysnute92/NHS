@@ -12,8 +12,6 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer apptID;
-
-    private String apptTitle;
     private LocalDateTime apptDateTime; // Combined date and time
     private String apptType;
     private String apptProvider;
@@ -30,14 +28,6 @@ public class Appointment {
 
     public void setApptID(Integer apptID) {
         this.apptID = apptID;
-    }
-
-    public String getApptTitle() {
-        return apptTitle;
-    }
-
-    public void setApptTitle(String apptTitle) {
-        this.apptTitle = apptTitle;
     }
 
     public LocalDateTime getApptDateTime() {

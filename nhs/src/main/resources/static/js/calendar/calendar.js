@@ -1,77 +1,89 @@
 
-let events = [];
+let appointments = [];
 
-let eventDateInput = document.getElementById("appointmentDate");
-let eventTimeInput = document.getElementById("appointmentTime");
-let eventAppointmentTypeInput = document.getElementById("appointmentType");
-let eventDrInput = document.getElementById("dr");
-let eventCommentInput = document.getElementById("comments");
-let apptList = document.getElementById("apptList");
+const appointmentDateInput = document.getElementById("apptDate");
+const appointmentTimeInput = document.getElementById("apptTime");
+const appointmentTypeInput = document.getElementById("apptType");
+const appointmentProviderInput = document.getElementById("apptProvider");
+const appointmentInfoInput = document.getElementById("apptInfo");
+const appointmentList = document.getElementById("apptList");
 
-let eventIdCounter = 1;
+const appointmentForm = document.getElementById("apptForm");
+appointmentForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    addAppointment();
+});
 
-function addAppointment() {
-    let date = eventDateInput.value;
-    let time = eventTimeInput.value;
-    let appointmentType = eventAppointmentTypeInput.value;
-    let dr = eventDrInput.value;
-    let description = eventCommentInput.value;
+async function addAppointment() {
+    const appointment = {
+        date: appointmentDateInput.value,
+        time: appointmentTimeInput.value,
+        appointmentType: appointmentTypeInput.value,
+        provider: appointmentProviderInput.value,
+        description: appointmentInfoInput.value
+    };
 
-    if (date && title) {
-        let eventId = eventIdCounter++;
-
-        events.push(
-            {
-                id: eventId, date: date, time: time, appointmentType: appointmentType, dr: dr, description: description
-            }
-        );
-        showCalendar(currentMonth, currentYear);
-        eventDateInput.value = "";
-        eventTimeInput.value = "";
-        eventAppointmentTypeInput.value = "";
-        eventDrInput.value = "";
-        eventCommentInput.value = "";
-        apptSchedule();
+    const url = "/appointment";
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(appointment)
+        });
+        if (response.status === 201) {
+            const newAppointment = await response.json();
+            appointments.push(newAppointment);
+            appointmentDateInput.value = "";
+            appointmentTimeInput.value = "";
+            appointmentTypeInput.value = "";
+            appointmentProviderInput.value = "";
+            appointmentInfoInput.value = "";
+        }
+    } catch (error) {
+        console.error("Error:", error);
     }
+
 }
 
 function deleteAppointment(appointmentID) {
-    let eventIndex =
-        events.findIndex((appointment) =>
+    let appointmentIndex =
+        appointments.findIndex((appointment) =>
             appointment.id === appointmentID);
 
-    if (eventIndex !== -1) {
-        events.splice(eventIndex, 1);
+    if (appointmentIndex !== -1) {
+        appointments.splice(appointmentIndex, 1);
         showCalendar(currentMonth, currentYear);
-        apptSchedule();
+        appointmentSchedule();
     }
 }
 
-function apptSchedule() {
-    apptList.innerHTML = "";
-    for (let i = 0; i < events.length; i++) {
-        let event = events[i];
-        let eventDate = new Date(event.date);
-        if (eventDate.getMonth() ===
+function appointmentSchedule() {
+    appointmentList.innerHTML = "";
+    for (let i = 0; i < appointments.length; i++) {
+        let appointment = appointments[i];
+        let appointmentDate = new Date(appointment.date);
+        if (appointmentDate.getMonth() ===
             currentMonth &&
-            eventDate.getFullYear() ===
+            appointmentDate.getFullYear() ===
             currentYear) {
             let listItem = document.createElement("li");
             listItem.innerHTML =
-                `<strong>${event.title}</strong> - 
-			${event.description} on 
-			${eventDate.toLocaleDateString()}`;
+                `<strong>${appointment.title}</strong> - 
+			${appointment.description} on 
+			${appointmentDate.toLocaleDateString()}`;
 
             let deleteButton =
                 document.createElement("button");
-            deleteButton.className = "delete-appt";
+            deleteButton.className = "delete-appointment";
             deleteButton.textContent = "Delete";
             deleteButton.onclick = function () {
                 deleteAppointment(appointment.id);
             };
 
             listItem.appendChild(deleteButton);
-            apptList.appendChild(listItem);
+            appointmentList.appendChild(listItem);
         }
     }
 }
@@ -188,11 +200,11 @@ function showCalendar(month, year) {
                     cell.className = "date-picker selected";
                 }
 
-                // Check if there are events on this date
-                if (hasEventOnDate(date, month, year)) {
-                    cell.classList.add("event-marker");
+                // Check if there are appointments on this date
+                if (hasappointmentOnDate(date, month, year)) {
+                    cell.classList.add("appt-marker");
                     cell.appendChild(
-                        createEventTooltip(date, month, year)
+                        createappointmentTooltip(date, month, year)
                     );
                 }
 
@@ -206,36 +218,36 @@ function showCalendar(month, year) {
     displayReminders();
 }
 
-function createEventTooltip(date, month, year) {
+function createappointmentTooltip(date, month, year) {
     let tooltip = document.createElement("div");
-    tooltip.className = "event-tooltip";
-    let eventsOnDate = getEventsOnDate(date, month, year);
-    for (let i = 0; i < eventsOnDate.length; i++) {
-        let event = eventsOnDate[i];
-        let eventDate = new Date(event.date);
-        let eventText = `<strong>${event.title}</strong> - 
-			${event.description} on 
-			${eventDate.toLocaleDateString()}`;
-        let eventElement = document.createElement("p");
-        eventElement.innerHTML = eventText;
-        tooltip.appendChild(eventElement);
+    tooltip.className = "appt-tooltip";
+    let appointmentsOnDate = getappointmentsOnDate(date, month, year);
+    for (let i = 0; i < appointmentsOnDate.length; i++) {
+        let appointment = appointmentsOnDate[i];
+        let appointmentDate = new Date(appointment.date);
+        let appointmentText = `<strong>${appointment.title}</strong> - 
+			${appointment.description} on 
+			${appointmentDate.toLocaleDateString()}`;
+        let appointmentElement = document.createElement("p");
+        appointmentElement.innerHTML = appointmentText;
+        tooltip.appendChild(appointmentElement);
     }
     return tooltip;
 }
 
-function getEventsOnDate(date, month, year) {
-    return events.filter(function (event) {
-        let eventDate = new Date(event.date);
+function getappointmentsOnDate(date, month, year) {
+    return appointments.filter(function (appointment) {
+        let appointmentDate = new Date(appointment.date);
         return (
-            eventDate.getDate() === date &&
-            eventDate.getMonth() === month &&
-            eventDate.getFullYear() === year
+            appointmentDate.getDate() === date &&
+            appointmentDate.getMonth() === month &&
+            appointmentDate.getFullYear() === year
         );
     });
 }
 
-function hasEventOnDate(date, month, year) {
-    return getEventsOnDate(date, month, year).length > 0;
+function hasappointmentOnDate(date, month, year) {
+    return getappointmentsOnDate(date, month, year).length > 0;
 }
 
 function daysInMonth(iMonth, iYear) {

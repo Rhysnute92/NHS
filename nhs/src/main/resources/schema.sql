@@ -85,7 +85,6 @@ CREATE TABLE UserWidgets (
 --Calendar--
 CREATE TABLE Appointments (
     ApptID INT AUTO_INCREMENT PRIMARY KEY,
-    ApptTitle VARCHAR(100),
     ApptDateTime DATETIME NOT NULL,
     ApptType VARCHAR(255),
     ApptProvider VARCHAR(255),
