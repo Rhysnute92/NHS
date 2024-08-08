@@ -1,9 +1,10 @@
-<form th:action="@{/appointments}" method="post">
+<form th:action="@{/appointment}" method="post">
+<!-- Get date and time separately then combine later -->
   <label>Date of Appointment:<br>
-    <input type="date" id="appointmentDate" name="date" required><br>
+    <input type="date" id="appointmentDate" name="apptDate" required><br>
   </label>
   <label>Time of Appointment:<br>
-    <input type="time" id="appointmentTime" name="time" required><br>
+    <input type="time" id="appointmentTime" name="apptTime" required><br>
   </label>
   <label>Appointment Type:<br>
     <input type="text" id="appointmentType" placeholder="Please enter what your appointment is" name="apptType"><br>
