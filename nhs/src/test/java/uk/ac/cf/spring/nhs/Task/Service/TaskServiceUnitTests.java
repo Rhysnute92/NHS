@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,7 +19,7 @@ import uk.ac.cf.spring.nhs.Task.Model.Task;
 import uk.ac.cf.spring.nhs.Task.Repository.JpaTaskRepository;
 
 public class TaskServiceUnitTests {
-    
+
     @Mock
     private JpaTaskRepository taskRepository;
 
@@ -37,7 +37,7 @@ public class TaskServiceUnitTests {
         assertEquals(0, tasks.size());
     }
 
-/*     @Test
+    @Test
     public void testGetTaskById() {
         Task task = new Task();
         task.setId(1L);
@@ -48,14 +48,11 @@ public class TaskServiceUnitTests {
         assertEquals(1L, foundTask.get().getId());
         verify(taskRepository, times(1)).findById(1L);
     }
- */
+
     @Test
     public void testCreateTask() {
         Task task = new Task();
         task.setName("Test Task");
-        task.setStatus("Test Status");
-        task.setDueDate("Test Date");
-        task.setPriority(1);
         task.setDescription("Test Description");
         task.setPeriodicity("Test Periodicity");
         when(taskRepository.save(any(Task.class))).thenReturn(task);

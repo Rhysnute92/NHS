@@ -19,9 +19,8 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public Task getTaskById(Long id) {
-        Optional<Task> task = taskRepository.findById(id);
-        return task.orElse(null);
+    public Optional<Task> getTaskById(Long id) {
+        return taskRepository.findById(id);
     }
 
     public Task createTask(Task task) {
