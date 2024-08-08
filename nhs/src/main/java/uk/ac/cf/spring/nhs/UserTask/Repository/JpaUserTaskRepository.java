@@ -8,6 +8,6 @@ import uk.ac.cf.spring.nhs.UserTask.Model.UserTask;
 
 public interface JpaUserTaskRepository extends JpaRepository<UserTask, Long> {
 
-    public List<UserTask> findByUserId(Long userID);
+    public List<UserTask> findByUserID(Long userID);
     
 }

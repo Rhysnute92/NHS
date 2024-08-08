@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.UserTask.Model;
+package uk.ac.cf.spring.nhs.UserTask.Model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import uk.ac.cf.spring.nhs.Task.Model.Task;
-import uk.ac.cf.spring.nhs.UserTask.Model.UserTask;
 
 public class UserTaskUnitTests {
 
@@ -20,7 +19,7 @@ public class UserTaskUnitTests {
     public void testUserTaskCreation() {
         UserTask userTask = new UserTask();
         userTask.setId(1L);
-        userTask.setUser(1L);
+        userTask.setUserID(1L);
         userTask.setTaskIsCompleted(false);
         userTask.setTaskDuedate(LocalDateTime.of(2024, 8, 9, 0, 0));
 
@@ -30,7 +29,7 @@ public class UserTaskUnitTests {
         userTask.setTask(task);
 
         assertEquals(1L, userTask.getId());
-        assertEquals(1L, userTask.getUser());
+        assertEquals(1L, userTask.getUserID());
         assertEquals(false, userTask.getTaskIsCompleted());
         assertEquals(LocalDateTime.of(2024, 8, 9, 0, 0), userTask.getTaskDuedate());
         assertEquals(task, userTask.getTask());
@@ -57,14 +56,14 @@ public class UserTaskUnitTests {
 
         UserTask userTask1 = new UserTask();
         userTask1.setId(1L);
-        userTask1.setUser(1L);
+        userTask1.setUserID(1L);
         userTask1.setTaskIsCompleted(false);
         userTask1.setTaskDuedate(LocalDateTime.of(2024, 8, 9, 0, 0));
         userTask1.setTask(task);
 
         UserTask userTask2 = new UserTask();
         userTask2.setId(1L);
-        userTask2.setUser(1L);
+        userTask2.setUserID(1L);
         userTask2.setTaskIsCompleted(false);
         userTask2.setTaskDuedate(LocalDateTime.of(2024, 8, 9, 0, 0));
         userTask2.setTask(task);
@@ -98,14 +97,14 @@ public class UserTaskUnitTests {
 
         UserTask userTask1 = new UserTask();
         userTask1.setId(1L);
-        userTask1.setUser(1L);
+        userTask1.setUserID(1L);
         userTask1.setTaskIsCompleted(false);
         userTask1.setTaskDuedate(LocalDateTime.of(2024, 8, 9, 0, 0));
         userTask1.setTask(task);
 
         UserTask userTask2 = new UserTask();
         userTask2.setId(1L);
-        userTask2.setUser(1L);
+        userTask2.setUserID(1L);
         userTask2.setTaskIsCompleted(false);
         userTask2.setTaskDuedate(LocalDateTime.of(2024, 8, 9, 0, 0));
         userTask2.setTask(task2);

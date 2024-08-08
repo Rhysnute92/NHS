@@ -20,7 +20,7 @@ public class UserTaskService {
     }
 
     public List<UserTask> getTasksForUser(Long userID) {
-        return userTaskRepository.findByUserId(userID);
+        return userTaskRepository.findByUserID(userID);
     }
 
     public UserTask getUserTaskById(Long userTaskID) {
@@ -31,7 +31,7 @@ public class UserTaskService {
     public UserTask updateUserTask(Long userTaskID, UserTask userTaskDetails) {
         UserTask userTask = getUserTaskById(userTaskID);
         userTask.setTask(userTaskDetails.getTask());
-        userTask.setUser(userTaskDetails.getUser());
+        userTask.setUserID(userTaskDetails.getUserID());
         userTask.setTaskIsCompleted(userTaskDetails.getTaskIsCompleted());
         userTask.setTaskDuedate(userTaskDetails.getTaskDuedate());
         return userTaskRepository.save(userTask);
