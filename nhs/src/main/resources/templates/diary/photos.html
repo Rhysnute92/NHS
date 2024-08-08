@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default}"
@@ -10,7 +11,10 @@
 <main layout:fragment="content">
   <h1 class="page-title">Photos</h1>
   <div class="container">
-    <form class="photo-form" id="photo-form" action="/diary/photos" method="post" enctype="multipart/form-data">
+    <form class="photo-form" action="/diary/photos" method="post" enctype="multipart/form-data">
+      <input type="file" class="photo-upload" style="display: none;" />
+      <button type="button" class="open-camera">Open Camera</button>
+      <input type="hidden" name="photo" class="photo-data" />
       <div th:replace="~{diary/fragments/photoUpload :: photoUpload}"></div>
     </form>
     <h2 th:if="${photos.empty}" class="no-photos">No photos uploaded yet</h2>
@@ -19,6 +23,15 @@
         <img th:src="@{/files/{filename}(filename=${photo.url})}" class="photo" />
       </th:block>
     </div>
+  </div>
+  <div class="camera-container" style="display: none;">
+    <video class="video" autoplay playsinline></video>
+    <div class="horizontal-line"></div>
+    <div class="vertical-line"></div>
+    <button type="button" class="capture-button">Take Photo</button>
+    <button type="button" class="flip-camera-button">Flip Camera</button>
+    <button type="button" class="close-camera-button">Close Camera</button>
+    <canvas class="canvas" style="display: none;"></canvas>
   </div>
 </main>
 <script layout:fragment="scripts" th:src="@{/js/diary/photos.js}"></script>

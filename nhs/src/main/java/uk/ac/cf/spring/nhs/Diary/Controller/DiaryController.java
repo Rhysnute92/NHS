@@ -73,16 +73,13 @@ public class DiaryController {
 
     @PostMapping("/photos")
     public ModelAndView uploadPhotos(
-            @RequestParam("photos") List<MultipartFile> photos,
-            HttpServletRequest request,
+            @RequestParam("photo") MultipartFile photo,
             RedirectAttributes redirectAttributes
     ) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            for (MultipartFile photo : photos) {
-                if (!photo.isEmpty()) {
-                    photoService.savePhoto(photo, 1);
-                }
+            if (photo != null && !photo.isEmpty()) {
+                photoService.savePhoto(photo, 1);
             }
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
