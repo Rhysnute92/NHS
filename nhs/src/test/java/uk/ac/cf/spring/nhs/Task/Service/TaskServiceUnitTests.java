@@ -65,10 +65,13 @@ public class TaskServiceUnitTests {
 
     @Test
     public void testDeleteTask() {
-        Task task = new Task();
-        task.setId(1L);
-        taskService.deleteTask(1L);
-        verify(taskRepository, times(1)).deleteById(1L);
+        Long taskId = 1L;
+        when(taskRepository.existsById(taskId)).thenReturn(true);
+
+        taskService.deleteTask(taskId);
+
+        verify(taskRepository, times(1)).existsById(taskId);
+        verify(taskRepository, times(1)).deleteById(taskId);
     }
 
 }
