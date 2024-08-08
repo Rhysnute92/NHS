@@ -33,7 +33,7 @@ public class UserCredentials {
         return userPassword;
     }
     public void setUserPassword(String pass){
-        this.userName = pass;
+        this.userPassword = pass;
     }
     public String getUserRole(){
         return userRole;
