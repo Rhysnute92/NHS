@@ -17,7 +17,7 @@
   <div id="left">
     <div id="appointments">
       <h3>Add Appointment</h3>
-      <form th:action="@{/calendar}" id="appointment" name="appointment" method="post" th:object="${appointment}">
+      <form th:action="@{/addappointments}" id="appointment" name="appointment" method="post" th:object="${appointment}">
         <label>Date of Appointment:<br>
           <input type="date" id="appointmentDate" th:oninput="mergeDateTime()" required><br>
         </label>
