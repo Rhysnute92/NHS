@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AccountContollerTests {
+public class AccountControllerTests {
 
     @Autowired
     private WebApplicationContext context;
@@ -84,6 +84,6 @@ void providerAccountTest() throws Exception {
 //     mockMvc.perform(get("/userFullName"))
 //             .andExpect(status().isOk())
 //             .andExpect(content().string(containsString("username")));
-    
+
 // }
 }
