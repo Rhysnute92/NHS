@@ -5,24 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import uk.ac.cf.spring.nhs.Appointments.Model.Appointments;
-import uk.ac.cf.spring.nhs.Appointments.Repository.AppointmentsRepository;
+import uk.ac.cf.spring.nhs.Appointments.Model.Appointment;
+import uk.ac.cf.spring.nhs.Appointments.Repository.AppointmentRepository;
 
 @Service
 public class AppointmentService {
 
     @Autowired
-    private AppointmentsRepository appointmentRepository;
+    private AppointmentRepository appointmentRepository;
 
-    public List<Appointments> getAllAppointments() {
+    public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
     }
 
-    public Appointments getAppointmentById(Integer id) {
+    public Appointment getAppointmentById(Integer id) {
         return appointmentRepository.findById(id).orElse(null);
     }
 
-    public Appointments saveAppointment(Appointments appointment) {
+    public Appointment saveAppointment(Appointment appointment) {
         return appointmentRepository.save(appointment);
     }
 
@@ -30,7 +30,4 @@ public class AppointmentService {
         appointmentRepository.deleteById(id);
     }
 
-    public List<Appointments> getAppointmentsByCalendarID(Integer calendarID) {
-        return appointmentRepository.findByCalendar_CalendarID(calendarID);
-    }
 }

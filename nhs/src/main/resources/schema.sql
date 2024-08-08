@@ -83,23 +83,14 @@ CREATE TABLE UserWidgets (
     FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
 );
 --Calendar--
-CREATE TABLE Calendar (
-    CalendarID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT NOT NULL,
-    CalendarName VARCHAR(100),
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials (UserID)
-);
 CREATE TABLE Appointments (
     ApptID INT AUTO_INCREMENT PRIMARY KEY,
-    CalendarID INT NOT NULL,
-    ApptTitle VARCHAR(100) NOT NULL,
-    ApptStartTime DATETIME NOT NULL,
-    ApptEndTime DATETIME NOT NULL,
+    ApptTitle VARCHAR(100),
+    ApptDateTime DATETIME NOT NULL,
     ApptType VARCHAR(255),
     ApptProvider VARCHAR(255),
     ApptLocation VARCHAR(255),
-    ApptInfo TEXT,
-    FOREIGN KEY (CalendarID) REFERENCES Calendar (CalendarID)
+    ApptInfo TEXT
 );
 --Diary--
 CREATE TABLE Photos (
