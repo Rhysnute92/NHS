@@ -1,16 +1,12 @@
 package uk.ac.cf.spring.nhs.Diary.Controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinForm;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
@@ -18,9 +14,7 @@ import uk.ac.cf.spring.nhs.Diary.Entity.Photo;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
 import uk.ac.cf.spring.nhs.Diary.Service.PhotoService;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/diary")
@@ -71,22 +65,30 @@ public class DiaryController {
         return "diary/photos";
     }
 
+
     @PostMapping("/photos")
     public ModelAndView uploadPhotos(
             @RequestParam("photo") MultipartFile photo,
             RedirectAttributes redirectAttributes
     ) {
         ModelAndView modelAndView = new ModelAndView();
+
         try {
             if (photo != null && !photo.isEmpty()) {
                 photoService.savePhoto(photo, 1);
+
+                redirectAttributes.addFlashAttribute("message", "Photo uploaded successfully!");
+            } else {
+                redirectAttributes.addFlashAttribute("error", "Uploaded photo is empty");
             }
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
+
         modelAndView.setViewName("redirect:/diary/photos");
         return modelAndView;
     }
+
 
 
     @ModelAttribute("navMenuItems")

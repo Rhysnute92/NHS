@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class FileStorageService {
@@ -28,19 +29,22 @@ public class FileStorageService {
     }
 
     public String storeFile(MultipartFile file) {
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        // Generate a unique filename so files with the same name don't overwrite each other
+        String originalFilename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+        String uniqueFilename = UUID.randomUUID().toString() + extension;
 
         try {
-            if (fileName.contains("..")) {
-                throw new RuntimeException("Filename contains invalid path sequence " + fileName);
+            if (uniqueFilename.contains("..")) {
+                throw new RuntimeException("Filename contains invalid path sequence " + uniqueFilename);
             }
 
-            Path targetLocation = this.fileStorageLocation.resolve(fileName);
+            Path targetLocation = this.fileStorageLocation.resolve(uniqueFilename);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            return fileName;  // Return only the filename
+            return uniqueFilename;
         } catch (IOException ex) {
-            throw new RuntimeException("Could not store file " + fileName + ". Please try again!", ex);
+            throw new RuntimeException("Could not store file " + uniqueFilename + ". Please try again!", ex);
         }
     }
 }

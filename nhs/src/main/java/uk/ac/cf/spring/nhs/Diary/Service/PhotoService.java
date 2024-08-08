@@ -10,6 +10,7 @@ import uk.ac.cf.spring.nhs.Files.Service.FileStorageService;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PhotoService {
@@ -34,4 +35,5 @@ public class PhotoService {
 
         return photoRepository.save(photo);
     }
+
 }

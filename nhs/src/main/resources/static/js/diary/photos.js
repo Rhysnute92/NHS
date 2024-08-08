@@ -49,10 +49,12 @@ function takePhoto() {
     const width = video.videoWidth;
     const height = video.videoHeight;
 
+    // Set the canvas size to the video size and draw the video frame to the canvas
     canvas.width = width;
     canvas.height = height;
     context.drawImage(video, 0, 0, width, height);
 
+    // Convert the canvas to a blob so it can be sent to the server
     canvas.toBlob((blob) => {
         const formData = new FormData();
         formData.append('photo', blob, 'photo.png');
