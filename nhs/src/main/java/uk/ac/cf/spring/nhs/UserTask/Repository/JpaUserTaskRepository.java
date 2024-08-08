@@ -1,5 +1,13 @@
 package uk.ac.cf.spring.nhs.UserTask.Repository;
 
-public class JpaUserTaskRepository {
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import uk.ac.cf.spring.nhs.UserTask.Model.UserTask;
+
+public interface JpaUserTaskRepository extends JpaRepository<UserTask, Long> {
+
+    public List<UserTask> findByUserId(Long userID);
     
 }

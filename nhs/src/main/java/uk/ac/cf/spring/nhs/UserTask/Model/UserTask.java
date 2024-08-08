@@ -28,7 +28,7 @@ public class UserTask {
     private Task task;
 
     @JoinColumn(name = "UserID", nullable = false)
-    private String userID;
+    private Long userID;
 
     // Getters and Setters
     public Long getId() {
@@ -63,11 +63,11 @@ public class UserTask {
         this.task = task;
     }
 
-    public String getUser() {
+    public Long getUser() {
         return userID;
     }
 
-    public void setUser(String user) {
-        this.userID = user;
+    public void setUser(Long userID) {
+        this.userID = userID;
     }
 }
