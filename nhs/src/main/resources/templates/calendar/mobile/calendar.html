@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/calendar/mobile/mobilecalendar.css}"/>
@@ -57,10 +57,15 @@
             </li>
         </ul>
     </div>
+           <div>
+               <button class="delete-event" onclick="deleteAppointment()">
+               Delete
+               </button>
+           </div>
 </div>
 </div>
 <script th:src="@{/js/calendar/calendar.js}"></script>
-<script th:src="@{/js/calendar/deleteAppointment.js}"></script>
+<script th:src="@{/js/calendar/displayApptonCal.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>
