@@ -9,13 +9,19 @@ import uk.ac.cf.spring.nhs.Appointments.DTO.AppointmentDTO;
 import uk.ac.cf.spring.nhs.Appointments.Model.Appointment;
 import uk.ac.cf.spring.nhs.Appointments.Service.AppointmentService;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/appointment")
+@RequestMapping("/appointments")
 public class AppointmentController {
 
     @Autowired
     private AppointmentService appointmentService;
 
+    @GetMapping
+    public List<Appointment> getAllAppointments() {
+        return appointmentService.getAppointmentsByUserId(1);
+    }
 
     @GetMapping("/{id}")
     public Appointment getAppointmentById(@PathVariable Integer id) {

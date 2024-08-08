@@ -23,7 +23,7 @@ async function addAppointment() {
         description: appointmentInfoInput.value
     };
 
-    const url = "/appointment";
+    const url = "/appointments";
     try {
         const response = await fetch(url, {
             method: "POST",
