@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-<div th:replace="~{common/fragments/header}" ></div>
+<div th:replace="~{common/fragments/header}"></div>
 <nav th:replace="~{common/fragments/navbar}"></nav>
 <div id="header">
   <h1>Appointment Calendar</h1>
@@ -17,37 +17,14 @@
   <div id="left">
     <div id="appointments">
       <h3>Add Appointment</h3>
-      <form th:action="@{/addappointments}" id="appointment" name="appointment" method="post" th:object="${appointment}">
-        <label>Date of Appointment:<br>
-          <input type="date" id="appointmentDate" th:oninput="mergeDateTime()" required><br>
-        </label>
-        <label>Time of Appointment:<br>
-          <input type="time" id="appointmentTime" th:oninput="mergeDateTime()" required><br>
-        </label>
-        <input type="hidden" th:field="*{apptTime}" id="hiddenApptTime">
-        <label>Appointment Type:<br>
-          <input type="text" id="appointmentType" placeholder="Please enter what you appointment is" th:field="*{apptType}"><br>
-        </label>
-        <label>Doctor's Name:<br>
-          <input type="text" id="dr" placeholder="Please enter the name of your Dr" th:field="*{apptProvider}"><br>
-        </label>
-        <label>Information about your Appointment:<br>
-          <textarea id="comments" placeholder="Info about your appointment" th:field="*{apptInfo}"></textarea><br>
-        </label>
-      <button type="submit" id="addAppointment">
-        Add
-      </button>
-      <button type="reset" id="deleteAppointment">
-        Clear
-      </button>
-      </form>
+      <form th:replace="~{calendar/fragments/appointmentForm}"></form>
     </div>
   </div>
 
   <div id="center">
     <h3>Appointment Schedule</h3>
-    <ul id="apptList" th:each="appt:${calendar}">
-      <li data-event-id="1" th:text="${appt}">
+    <ul id="apptList" th:each="appt : ${appointments}">
+      <li th:data-event-id="${appt.apptID}" th:text="${appt}">
         <button class="delete-event" th:onclick="deleteAppointment">
           Delete
         </button>
@@ -57,8 +34,7 @@
   <div id="right">
     <h3 id="monthAndYear"></h3>
     <div class="button-container-calendar">
-      <button id="previous"
-              onclick="previous()">
+      <button id="previous" onclick="previous()">
         <
       </button>
       <button id="next" onclick="next()">
@@ -69,7 +45,6 @@
            id="calendar"
            data-lang="en">
       <thead id="thead-month"></thead>
-
       <tbody id="calendar-body"></tbody>
     </table>
     <div class="footer-container-calendar">
@@ -89,14 +64,11 @@
         <option value=10>Nov</option>
         <option value=11>Dec</option>
       </select>
-
       <select id="year" onchange="jump()"></select>
     </div>
   </div>
-</div>
 </div>
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>
-

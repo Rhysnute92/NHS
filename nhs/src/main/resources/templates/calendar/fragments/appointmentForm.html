@@ -1,0 +1,23 @@
+<form th:action="@{/appointments}" method="post">
+  <label>Date of Appointment:<br>
+    <input type="date" id="appointmentDate" name="date" required><br>
+  </label>
+  <label>Time of Appointment:<br>
+    <input type="time" id="appointmentTime" name="time" required><br>
+  </label>
+  <label>Appointment Type:<br>
+    <input type="text" id="appointmentType" placeholder="Please enter what your appointment is" name="apptType"><br>
+  </label>
+  <label>Doctor's Name:<br>
+    <input type="text" id="dr" placeholder="Please enter the name of your Dr" name="apptProvider"><br>
+  </label>
+  <label>Information about your Appointment:<br>
+    <textarea id="comments" placeholder="Info about your appointment" name="apptInfo"></textarea><br>
+  </label>
+  <button type="submit" id="addAppointment">
+    Add
+  </button>
+  <button type="reset" id="deleteAppointment">
+    Clear
+  </button>
+</form>
