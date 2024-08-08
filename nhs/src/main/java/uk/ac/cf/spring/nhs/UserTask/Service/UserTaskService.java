@@ -1,6 +1,7 @@
 package uk.ac.cf.spring.nhs.UserTask.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class UserTaskService {
 
     public UserTask getUserTaskById(Long userTaskID) {
         return userTaskRepository.findById(userTaskID)
-                .orElseThrow(() -> new ResourceNotFoundException("UserTask not found"));
+                .orElseThrow(() -> new NoSuchElementException("UserTask not found"));
     }
 
     public UserTask updateUserTask(Long userTaskID, UserTask userTaskDetails) {
