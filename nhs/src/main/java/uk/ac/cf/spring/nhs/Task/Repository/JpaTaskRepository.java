@@ -1,5 +1,8 @@
 package uk.ac.cf.spring.nhs.Task.Repository;
 
-public class JpaTaskRepository {
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import uk.ac.cf.spring.nhs.Task.Model.Task;
+
+public interface JpaTaskRepository extends JpaRepository<Task, Long> {
 }
