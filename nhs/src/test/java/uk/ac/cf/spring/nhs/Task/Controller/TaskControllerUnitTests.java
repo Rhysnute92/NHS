@@ -13,6 +13,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,12 +47,13 @@ public class TaskControllerUnitTests {
         mockMvc = MockMvcBuilders.standaloneSetup(taskController).build();
 
         task1 = new Task();
-        task2 = new Task();
-
+        task1.setId(1L);
         task1.setName("Test Task 1");
         task1.setDescription("Test Description 1");
         task1.setPeriodicity("Test Periodicity 1");
 
+        task2 = new Task();
+        task2.setId(2L);
         task2.setName("Test Task 2");
         task2.setDescription("Test Description 2");
         task2.setPeriodicity("Test Periodicity 2");
@@ -58,6 +61,8 @@ public class TaskControllerUnitTests {
 
     @Test
     public void testGetTasks() throws Exception {
+        when(taskService.getAllTasks()).thenReturn(Arrays.asList(task1, task2));
+
         mockMvc.perform(get("/tasks"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Test Task 1"))
@@ -66,18 +71,16 @@ public class TaskControllerUnitTests {
         verify(taskService, times(1)).getAllTasks();
     }
 
-    /*
-     * @Test
-     * public void testGetTaskById() throws Exception {
-     * when(taskService.getTaskById(task1.getId())).thenReturn(task1);
-     * 
-     * mockMvc.perform(get("/tasks/{id}", task1.getId()))
-     * .andExpect(status().isOk())
-     * .andExpect(jsonPath("$.name").value("Test Task 1"));
-     * 
-     * verify(taskService, times(1)).getTaskById(task1.getId());
-     * }
-     */
+    @Test
+    public void testGetTaskById() throws Exception {
+        when(taskService.getTaskById(1L)).thenReturn(java.util.Optional.of(task1));
+
+        mockMvc.perform(get("/tasks/{id}", 1L))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Test Task 1"));
+
+        verify(taskService, times(1)).getTaskById(1L);
+    }
 
     @Test
     public void testCreateTask() throws Exception {
@@ -98,9 +101,9 @@ public class TaskControllerUnitTests {
 
         mockMvc.perform(put("/tasks/{id}", task1.getId())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\": \"Medication\", \"description\": \"Take medication twice daily\"}"))
+                .content("{\"name\": \"Test Task 1\", \"description\": \"Test Description 1\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Medication"));
+                .andExpect(jsonPath("$.name").value("Test Task 1"));
 
         verify(taskService, times(1)).updateTask(anyLong(), any(Task.class));
     }
