@@ -1,18 +1,16 @@
-package uk.ac.cf.spring.nhs.Common.util;
+package uk.ac.cf.spring.nhs.Files.Service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import uk.ac.cf.spring.nhs.Files.Service.FileStorageService;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -35,7 +33,6 @@ class FileStorageServiceTest {
     @Test
     void storeFileStoresFileAndReturnsPath() throws IOException {
         String fileName = "testfile.png";
-        Path filePath = Path.of(uploadDir).resolve(fileName).toAbsolutePath().normalize();
         byte[] content = "file content".getBytes();
         InputStream inputStream = new ByteArrayInputStream(content);
 
@@ -44,7 +41,7 @@ class FileStorageServiceTest {
 
         String storedFilePath = fileStorageService.storeFile(multipartFile);
 
-        assertEquals(filePath.toString(), storedFilePath);
+        assertEquals(fileName, storedFilePath);
         verify(multipartFile, times(1)).getInputStream();
     }
 

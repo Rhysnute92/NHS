@@ -4,7 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,9 @@ import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinForm;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Diary.Entity.Photo;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
+import uk.ac.cf.spring.nhs.Diary.Service.PhotoService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +29,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -42,12 +43,16 @@ public class DiaryControllerTest {
     @MockBean
     private DiaryEntryService diaryEntryService;
 
+    @MockBean
+    private PhotoService photoService;
+
     @Autowired
     private MockMvc mockMvc;
 
     private AutoCloseable closeable;
     private MockedStatic<DeviceDetector> mockedStatic;
     private List<DiaryEntry> dummyEntries;
+    private List<Photo> dummyPhotos;
 
     @BeforeEach
     public void setUp() {
@@ -59,7 +64,13 @@ public class DiaryControllerTest {
                 new DiaryEntry(2, new Date())
         ));
 
+        dummyPhotos = new ArrayList<>(Arrays.asList(
+                new Photo("photo1.jpg", new Date(), "", 1),
+                new Photo("photo2.jpg", new Date(), "", 1)
+        ));
+
         when(diaryEntryService.getDiaryEntriesByUserId(1)).thenReturn(dummyEntries);
+        when(photoService.getPhotosByUserId(1)).thenReturn(dummyPhotos);
     }
 
     @AfterEach
@@ -95,9 +106,10 @@ public class DiaryControllerTest {
     @Test
     public void testCheckinSuccess() throws Exception {
         CheckinForm checkinForm = new CheckinForm();
-        MockMultipartFile photo = new MockMultipartFile("checkin-photos-upload", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
+        MockMultipartFile photo = new MockMultipartFile("photos", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
 
-        doNothing().when(diaryEntryService).createAndSaveDiaryEntry(any(CheckinForm.class), anyList());
+        // Mock the createAndSaveDiaryEntry method to not throw an exception
+        doNothing().when(diaryEntryService).createAndSaveDiaryEntry(any(CheckinForm.class));
 
         mockMvc.perform(multipart("/diary/checkin")
                         .file(photo)
@@ -105,15 +117,15 @@ public class DiaryControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/diary"));
 
-        verify(diaryEntryService, times(1)).createAndSaveDiaryEntry(any(CheckinForm.class), anyList());
+        verify(diaryEntryService, times(1)).createAndSaveDiaryEntry(any(CheckinForm.class));
     }
 
     @Test
     public void testCheckinFailure() throws Exception {
         CheckinForm checkinForm = new CheckinForm();
-        MockMultipartFile photo = new MockMultipartFile("checkin-photos-upload", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
+        MockMultipartFile photo = new MockMultipartFile("photos", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
 
-        doThrow(new RuntimeException("Error")).when(diaryEntryService).createAndSaveDiaryEntry(any(CheckinForm.class), anyList());
+        doThrow(new RuntimeException("Error")).when(diaryEntryService).createAndSaveDiaryEntry(any(CheckinForm.class));
 
         mockMvc.perform(multipart("/diary/checkin")
                         .file(photo)
@@ -121,7 +133,46 @@ public class DiaryControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("diary/checkin"));
 
-        verify(diaryEntryService, times(1)).createAndSaveDiaryEntry(any(CheckinForm.class), anyList());
+        verify(diaryEntryService, times(1)).createAndSaveDiaryEntry(any(CheckinForm.class));
+    }
+
+    @Test
+    public void testPhotos() throws Exception {
+        // Ensure the method returns dummy photos
+        when(photoService.getPhotosByUserId(1)).thenReturn(dummyPhotos);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/diary/photos"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("diary/photos"))
+                .andExpect(model().attributeExists("photos"))
+                .andExpect(model().attribute("photos", dummyPhotos));
+    }
+
+    @Test
+    public void testUploadPhotosSuccess() throws Exception {
+        MockMultipartFile photo = new MockMultipartFile("photos", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
+
+        when(photoService.savePhoto(any(MultipartFile.class), eq(1))).thenReturn(null);
+
+        mockMvc.perform(multipart("/diary/photos")
+                        .file(photo))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/diary/photos"));
+
+        verify(photoService, times(1)).savePhoto(any(MultipartFile.class), eq(1));
+    }
+
+    @Test
+    public void testUploadPhotosFailure() throws Exception {
+        MockMultipartFile photo = new MockMultipartFile("photos", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
+
+        doThrow(new RuntimeException("Error")).when(photoService).savePhoto(any(MultipartFile.class), eq(1));
+
+        mockMvc.perform(multipart("/diary/photos")
+                        .file(photo))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/diary/photos"))
+                .andExpect(flash().attributeExists("error"));
     }
 
     @Test
