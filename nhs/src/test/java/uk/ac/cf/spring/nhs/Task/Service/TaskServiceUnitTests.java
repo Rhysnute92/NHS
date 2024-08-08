@@ -19,6 +19,7 @@ import uk.ac.cf.spring.nhs.Task.Model.Task;
 import uk.ac.cf.spring.nhs.Task.Repository.JpaTaskRepository;
 
 public class TaskServiceUnitTests {
+    
     @Mock
     private JpaTaskRepository taskRepository;
 

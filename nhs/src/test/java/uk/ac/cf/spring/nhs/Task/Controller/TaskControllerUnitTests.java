@@ -48,16 +48,10 @@ public class TaskControllerUnitTests {
         task2 = new Task();
 
         task1.setName("Test Task 1");
-        task1.setStatus("Test Status 1");
-        task1.setDueDate("Test Date 1");
-        task1.setPriority(1);
         task1.setDescription("Test Description 1");
         task1.setPeriodicity("Test Periodicity 1");
 
         task2.setName("Test Task 2");
-        task2.setStatus("Test Status 2");
-        task2.setDueDate("Test Date 2");
-        task2.setPriority(2);
         task2.setDescription("Test Description 2");
         task2.setPeriodicity("Test Periodicity 2");
     }
@@ -78,7 +72,7 @@ public class TaskControllerUnitTests {
 
         mockMvc.perform(get("/tasks/{id}", task1.getId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Medication"));
+                .andExpect(jsonPath("$.name").value("Test Task 1"));
 
         verify(taskService, times(1)).getTaskById(task1.getId());
     }
@@ -102,7 +96,7 @@ public class TaskControllerUnitTests {
 
         mockMvc.perform(put("/tasks/{id}", task1.getId())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\": \"Medication\", \"description\": \"Take medication daily\"}"))
+                .content("{\"name\": \"Medication\", \"description\": \"Take medication twice daily\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Medication"));
 

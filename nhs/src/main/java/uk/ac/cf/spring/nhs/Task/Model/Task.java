@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.Task.Model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,19 +10,17 @@ import jakarta.persistence.Id;
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "TaskID")
     private Long id;
 
+    @Column(name = "TaskName")
     private String name;
 
+    @Column(name = "TaskDesc")
     private String description;
 
-    private String dueDate;
-
-    private int priority;
-
-    private String status;
-
+    @Column(name = "TaskRepeatPeriod")
     private String periodicity;
 
     /**
@@ -64,48 +63,6 @@ public class Task {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    /**
-     * @return the dueDate
-     */
-    public String getDueDate() {
-        return dueDate;
-    }
-
-    /**
-     * @param dueDate the dueDate to set
-     */
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    /**
-     * @return the priority
-     */
-    public int getPriority() {
-        return priority;
-    }
-
-    /**
-     * @param priority the priority to set
-     */
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
-
-    /**
-     * @return the status
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     /**

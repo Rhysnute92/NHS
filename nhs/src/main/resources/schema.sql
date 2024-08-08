@@ -1,6 +1,6 @@
 -- Drop all tables for testing purposes
-DROP TABLE IF EXISTS UserTasks;
-DROP TABLE IF EXISTS Tasks;
+DROP TABLE IF EXISTS UserTask;
+DROP TABLE IF EXISTS Task;
 DROP TABLE IF EXISTS InfoAssets;
 DROP TABLE IF EXISTS InfoSections;
 DROP TABLE IF EXISTS Articles;
@@ -219,20 +219,21 @@ CREATE TABLE InfoAssets (
     FOREIGN KEY (SectionID) REFERENCES InfoSections(SectionID)
 );
 --General use--
-CREATE TABLE Tasks (
+CREATE TABLE Task (
     TaskID INT AUTO_INCREMENT PRIMARY KEY,
-    TaskType VARCHAR(255),
     TaskName VARCHAR(255),
-    TaskDesc TEXT
+    TaskDesc TEXT,
+    TaskRepeatPeriod VARCHAR(100)
 );
-CREATE TABLE UserTasks (
+
+CREATE TABLE UserTask (
     UserTaskID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT,
     TaskIsCompleted BOOLEAN,
     TaskDuedate DATETIME,
-    TaskIsRepeatable BOOLEAN,
-    TaskRepeatPeriod TIMESTAMP,
     TaskID INT,
-    FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
+    FOREIGN KEY (TaskID) REFERENCES Task(TaskID),
+    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
 );
 --Not implemented yet--
 --CREATE TABLE Reminders ()
