@@ -17,7 +17,7 @@ function addAppointment() {
     let dr = document.getElementById("appointmentProviderInput").value;
     let description = document.getElementById("appointmentInfoInput").value;
 
-    if (date && title) {
+    if (date) {
         let appointmentId = appointmedIdCounter++;
 
         events.push(
@@ -57,10 +57,7 @@ function apptSchedule() {
             eventDate.getFullYear() ===
             currentYear) {
             let listItem = document.createElement("li");
-            listItem.innerHTML =
-                `<strong>${event.title}</strong> - 
-			${event.description} on 
-			${eventDate.toLocaleDateString()}`;
+            listItem.innerHTML =};
 
             let deleteButton =
                 document.createElement("button");
