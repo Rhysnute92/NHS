@@ -85,9 +85,9 @@ public class TaskControllerUnitTests {
 
         mockMvc.perform(post("/tasks")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\": \"Medication\", \"description\": \"Take medication daily\"}"))
+                .content("{\"name\": \"Test Task 1\", \"description\": \"Test Description 1\"}"))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.name").value("Medication"));
+                .andExpect(jsonPath("$.name").value("Test Task 1"));
 
         verify(taskService, times(1)).createTask(any(Task.class));
     }
