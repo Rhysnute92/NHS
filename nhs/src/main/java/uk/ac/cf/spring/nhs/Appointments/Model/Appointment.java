@@ -3,11 +3,7 @@ package uk.ac.cf.spring.nhs.Appointments.Model;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Appointments")
@@ -23,6 +19,8 @@ public class Appointment {
     private String apptProvider;
     private String apptLocation;
     private String apptInfo;
+    @Column(name = "UserID", nullable = false)
+    private Long userID;
 
     // Getters and setters
 
@@ -80,5 +78,13 @@ public class Appointment {
 
     public void setApptInfo(String apptInfo) {
         this.apptInfo = apptInfo;
+    }
+
+    public Long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 }

@@ -90,7 +90,8 @@ CREATE TABLE Appointments (
     ApptType VARCHAR(255),
     ApptProvider VARCHAR(255),
     ApptLocation VARCHAR(255),
-    ApptInfo TEXT
+    ApptInfo TEXT,
+    UserID INT
 );
 --Diary--
 CREATE TABLE Photos (
