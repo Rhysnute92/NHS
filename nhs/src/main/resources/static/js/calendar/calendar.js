@@ -1,49 +1,49 @@
 
 let events = [];
 
-let appointmentDateInput = document.getElementById("appointmentDate");
-let appointmentTimeInput = document.getElementById("appointmentTime");
-let appointmentTypeInput = document.getElementById("appointmentType");
-let appointmentProviderInput = document.getElementById("dr");
-let appointmentInfoInput = document.getElementById("comments");
+let eventDateInput = document.getElementById("appointmentDate");
+let eventTimeInput = document.getElementById("appointmentTime");
+let eventAppointmentTypeInput = document.getElementById("appointmentType");
+let eventDrInput = document.getElementById("dr");
+let eventCommentInput = document.getElementById("comments");
 let apptList = document.getElementById("apptList");
 
 let eventIdCounter = 1;
 
 function addAppointment() {
-    let date = document.getElementById("appointmentDateInput").value;
-    let time = document.getElementById("appointmentTimeInput").value;
-    let appointmentType = document.getElementById("appointmentTypeInput").value;
-    let dr = document.getElementById("appointmentProviderInput").value;
-    let description = document.getElementById("appointmentInfoInput").value;
+    let date = eventDateInput.value;
+    let time = eventTimeInput.value;
+    let appointmentType = eventAppointmentTypeInput.value;
+    let dr = eventDrInput.value;
+    let description = eventCommentInput.value;
 
-    if (date) {
-        let appointmentId = appointmedIdCounter++;
+    if (date && title) {
+        let eventId = eventIdCounter++;
 
         events.push(
             {
-                id: appointmentId, date: date, time: time, appointmentType: appointmentType, dr: dr, description: description
+                id: eventId, date: date, time: time, appointmentType: appointmentType, dr: dr, description: description
             }
         );
         showCalendar(currentMonth, currentYear);
-        appointmentDateInput.value = "";
-        appointmentTimeInput.value = "";
-        appointmentTypeInput.value = "";
-        appointmentProviderInput.value = "";
-        appointmentInfoInput.value = "";
+        eventDateInput.value = "";
+        eventTimeInput.value = "";
+        eventAppointmentTypeInput.value = "";
+        eventDrInput.value = "";
+        eventCommentInput.value = "";
         apptSchedule();
     }
 }
 
-function deleteAppointment(ApptID) {
+function deleteAppointment(appointmentID) {
     let eventIndex =
-        events.findIndex((event) =>
-            event.id === ApptID);
+        events.findIndex((appointment) =>
+            appointment.id === appointmentID);
 
     if (eventIndex !== -1) {
         events.splice(eventIndex, 1);
         showCalendar(currentMonth, currentYear);
-        displayReminders();
+        apptSchedule();
     }
 }
 
@@ -57,14 +57,17 @@ function apptSchedule() {
             eventDate.getFullYear() ===
             currentYear) {
             let listItem = document.createElement("li");
-            listItem.innerHTML =};
+            listItem.innerHTML =
+                `<strong>${event.title}</strong> - 
+			${event.description} on 
+			${eventDate.toLocaleDateString()}`;
 
             let deleteButton =
                 document.createElement("button");
             deleteButton.className = "delete-appt";
             deleteButton.textContent = "Delete";
             deleteButton.onclick = function () {
-                deleteAppt(event.id);
+                deleteAppointment(appointment.id);
             };
 
             listItem.appendChild(deleteButton);
@@ -230,11 +233,7 @@ function getEventsOnDate(date, month, year) {
         );
     });
 }
-function mergeDateTime() {
-    var date = document.getElementById("appointmentDate").value;
-    var time = document.getElementById("appointmentTime").value;
-    document.getElementById("hiddenApptTime").value = date + "T" + time;
-}
+
 function hasEventOnDate(date, month, year) {
     return getEventsOnDate(date, month, year).length > 0;
 }

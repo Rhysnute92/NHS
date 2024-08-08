@@ -30,8 +30,8 @@
             <label>Information about your Appointment:<br>
                 <textarea id="comments" placeholder="Info about your appointment" th:field="*{apptInfo}"></textarea><br>
             </label>
-            <button id="addEvent" type="submit">Add</button>
-            <button id="deleteAppointment" type="reset">Clear</button>
+            <button id="addEvent" onclick="addAppointment()">Add</button>
+            <button id="deleteAppointment" onclick="deleteAppointment()">Clear</button>
         </form>
     </div>
 </div>
