@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.AddPatient.Controller;
+package uk.ac.cf.spring.nhs.AddPatient;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

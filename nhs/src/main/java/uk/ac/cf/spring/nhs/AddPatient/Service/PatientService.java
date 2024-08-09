@@ -26,7 +26,7 @@ public class PatientService {
     private PasswordEncoder passwordEncoder;
 
 
-    public void registerPatient(RegisterRequest request) {
+    public String registerPatient(RegisterRequest request) {
         String genericPassword = generateGenericPassword();
 
         String encodedPassword = passwordEncoder.encode(genericPassword);
@@ -52,6 +52,8 @@ public class PatientService {
         patient.setPatientTitle(request.getPatientTitle());
         patient.setUserCredentials(userCredentials);
         patientRepository.save(patient);
+
+        return patient.getPatientName();
     }
     private String generateGenericPassword() {
         // Simple generic password generator for now
