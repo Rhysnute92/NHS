@@ -40,59 +40,62 @@
     </div>
     <div class="checkin-section-content checkin-symptoms hidden">
       <h4>Trouble sleeping</h4>
+      <input type="hidden" name="symptoms[0].name" value="troubleSleeping">
       <div class="checkin-symptom-selection">
         <div>
-          <input type="radio" id="trouble-sleeping-1" name="troubleSleepingSeverity" value="1" class="checkin-symptom" />
+          <input type="radio" id="trouble-sleeping-1" name="symptoms[0].severity" value="1" class="checkin-symptom" />
           <label for="trouble-sleeping-1">Not at all</label>
         </div>
         <div>
-          <input type="radio" id="trouble-sleeping-2" name="troubleSleepingSeverity" value="2" class="checkin-symptom" />
+          <input type="radio" id="trouble-sleeping-2" name="symptoms[0].severity" value="2" class="checkin-symptom" />
           <label for="trouble-sleeping-2">A little</label>
         </div>
         <div>
-          <input type="radio" id="trouble-sleeping-3" name="troubleSleepingSeverity" value="3" class="checkin-symptom" />
+          <input type="radio" id="trouble-sleeping-3" name="symptoms[0].severity" value="3" class="checkin-symptom" />
           <label for="trouble-sleeping-3">Quite a bit</label>
         </div>
         <div>
-          <input type="radio" id="trouble-sleeping-4" name="troubleSleepingSeverity" value="4" class="checkin-symptom" />
+          <input type="radio" id="trouble-sleeping-4" name="symptoms[0].severity" value="4" class="checkin-symptom" />
           <label for="trouble-sleeping-4">A lot</label>
         </div>
       </div>
       <h4>Pain</h4>
+      <input type="hidden" name="symptoms[1].name" value="pain">
       <div class="checkin-symptom-selection">
         <div>
-          <input type="radio" id="pain-1" name="painSeverity" value="1" class="checkin-symptom" />
+          <input type="radio" id="pain-1" name="symptoms[1].severity" value="1" class="checkin-symptom" />
           <label for="pain-1">Not at all</label>
         </div>
         <div>
-          <input type="radio" id="pain-2" name="painSeverity" value="2" class="checkin-symptom" />
+          <input type="radio" id="pain-2" name="symptoms[1].severity" value="2" class="checkin-symptom" />
           <label for="pain-2">A little</label>
         </div>
         <div>
-          <input type="radio" id="pain-3" name="painSeverity" value="3" class="checkin-symptom" />
+          <input type="radio" id="pain-3" name="symptoms[1].severity" value="3" class="checkin-symptom" />
           <label for="pain-3">Quite a bit</label>
         </div>
         <div>
-          <input type="radio" id="pain-4" name="painSeverity" value="4" class="checkin-symptom" />
+          <input type="radio" id="pain-4" name="symptoms[1].severity" value="4" class="checkin-symptom" />
           <label for="pain-4">A lot</label>
         </div>
       </div>
       <h4>Numbness</h4>
+      <input type="hidden" name="symptoms[2].name" value="numbness">
       <div class="checkin-symptom-selection">
         <div>
-          <input type="radio" id="numbness-1" name="numbnessSeverity" value="1" class="checkin-symptom" />
+          <input type="radio" id="numbness-1" name="symptoms[2].severity" value="1" class="checkin-symptom" />
           <label for="numbness-1">Not at all</label>
         </div>
         <div>
-          <input type="radio" id="numbness-2" name="numbnessSeverity" value="2" class="checkin-symptom" />
+          <input type="radio" id="numbness-2" name="symptoms[2].severity" value="2" class="checkin-symptom" />
           <label for="numbness-2">A little</label>
         </div>
         <div>
-          <input type="radio" id="numbness-3" name="numbnessSeverity" value="3" class="checkin-symptom" />
+          <input type="radio" id="numbness-3" name="symptoms[2].severity" value="3" class="checkin-symptom" />
           <label for="numbness-3">Quite a bit</label>
         </div>
         <div>
-          <input type="radio" id="numbness-4" name="numbnessSeverity" value="4" class="checkin-symptom" />
+          <input type="radio" id="numbness-4" name="symptoms[2].severity" value="4" class="checkin-symptom" />
           <label for="numbness-4">A lot</label>
         </div>
       </div>
@@ -104,11 +107,7 @@
       <i class="fa-solid fa-check checkin-icon"></i>
     </div>
     <div class="checkin-section-content checkin-photos hidden">
-      <input type="file" id="checkin-photos-upload" name="checkin-photos-upload" class="checkin-photos-upload" accept="image/*" multiple />
-      <label for="checkin-photos-upload" class="checkin-photos-label">
-        <i class="fa-solid fa-camera checkin-icon"></i>
-        <span class="photo-text">Upload a photo</span>
-      </label>
+      <div th:replace="~{diary/fragments/photoUpload :: photoUpload}"></div>
       <div class="checkin-photos-preview"></div>
     </div>
   </div>

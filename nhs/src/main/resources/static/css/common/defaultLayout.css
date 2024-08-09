@@ -16,9 +16,14 @@
 }
 
 .container {
-    background-color: var(--nhs-white);
+    /*background-color: var(--nhs-white);*/
     border-radius: 0.4rem;
     padding: 1rem;
+    min-height: 100vh;
+}
+
+.page-title {
+    font-size: 1.5rem;
 }
 
 .main-content .page-title {
