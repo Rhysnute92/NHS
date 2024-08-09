@@ -5,6 +5,11 @@
     width: 100%;
 }
 
+.no-entries {
+    text-align: center;
+    margin-top: 2rem;
+}
+
 @media (max-width: 768px) {
     .diary-entry-container {
         margin: 0;

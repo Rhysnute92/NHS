@@ -28,7 +28,10 @@
             <div th:if="${diaryEntry.photos.size > 0}">
                 <i class="fa-solid fa-camera"></i>
             </div>
-            <div th:if="${diaryEntry.notes}">
+            <div th:if="${diaryEntry.measurements.size > 0}">
+                <i class="fa-solid fa-ruler"></i>
+            </div>
+            <div th:if="${!#strings.isEmpty(diaryEntry.notes)}">
                 <i class="fa-solid fa-file-lines"></i>
             </div>
         </div>

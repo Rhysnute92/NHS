@@ -16,29 +16,21 @@ DROP TABLE IF EXISTS Symptoms;
 DROP TABLE IF EXISTS Measurements;
 DROP TABLE IF EXISTS Photos;
 DROP TABLE IF EXISTS Appointments;
-DROP TABLE IF EXISTS Calendar;
 DROP TABLE IF EXISTS UserWidgets;
 DROP TABLE IF EXISTS Providers;
 DROP TABLE IF EXISTS PatientDiagnosis;
 DROP TABLE IF EXISTS Patients;
 DROP TABLE IF EXISTS ProviderCredentials;
 DROP TABLE IF EXISTS PatientCredentials;
-
-
+DROP TABLE IF EXISTS Admin;
+DROP TABLE IF EXISTS UserCredentials;
 --Log in information and credentials--
-CREATE TABLE PatientCredentials (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE UserCredentials (
+    UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
     UserName VARCHAR(255),
-    UserPassword VARCHAR(255)
+    UserPassword VARCHAR(255),
+    UserRole VARCHAR(255)
 );
-CREATE TABLE ProviderCredentials (
-    ProviderID INT AUTO_INCREMENT PRIMARY KEY,
-    ProviderName VARCHAR(255),
-    ProviderPassword VARCHAR(255)
-);
---Not implemented yet--
---CREATE TABLE Admin ()
------------------------
 --Patient information--
 CREATE TABLE Patients (
     PatientEmail VARCHAR(255),
@@ -48,20 +40,20 @@ CREATE TABLE Patients (
     PatientName VARCHAR(255),
     PatientLastName VARCHAR(255),
     PatientTitle VARCHAR(100),
-    UserID INT,
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials (UserID)
+    UserID BIGINT,
+    FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID)
 );
 CREATE TABLE PatientDiagnosis (
-    UserID INT,
+    UserID BIGINT,
     PrimaryDiagnosis TEXT,
     DiagnosisDate DATETIME,
     IssueLocation VARCHAR(255),
     DiagnosisSeverity VARCHAR(255),
     DiagnosisDetails TEXT,
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 --Not implemented yet--
---CREATE TABLE PatientRecordsOld ()--
+--CREATE TABLE PatientRecordsOld ()
 --CREATE TABLE PatientRecordsOther ()
 --CREATE TABLE UserMedication ()
 -----------------------
@@ -71,26 +63,27 @@ CREATE TABLE Providers (
     ProviderLastName VARCHAR(255),
     ProviderTitle VARCHAR(255),
     ProviderOccupation VARCHAR(100),
-    ProviderID INT,
-    FOREIGN KEY (ProviderID) REFERENCES ProviderCredentials (ProviderID)
+    UserID BIGINT,
+    FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID)
 );
 --Dashboard--
 CREATE TABLE UserWidgets (
     UserWidgetID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT,
+    UserID BIGINT,
     WidgetName VARCHAR(255) NOT NULL,
     Position INT,
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 --Calendar--
 CREATE TABLE Appointments (
-    ApptID INT AUTO_INCREMENT PRIMARY KEY,
+    ApptID BIGINT AUTO_INCREMENT PRIMARY KEY,
     ApptDateTime DATETIME NOT NULL,
     ApptType VARCHAR(255),
     ApptProvider VARCHAR(255),
     ApptLocation VARCHAR(255),
     ApptInfo TEXT,
-    UserID INT
+    UserID BIGINT,
+    FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID)
 );
 --Diary--
 CREATE TABLE Photos (
@@ -98,34 +91,38 @@ CREATE TABLE Photos (
     PhotoURL TEXT,
     PhotoDate DATETIME,
     PhotoBodypart VARCHAR(255),
-    UserID INT,
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
+    UserID BIGINT,
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 CREATE TABLE Measurements (
-    MeasurementID INT AUTO_INCREMENT PRIMARY KEY,
-    MeasurementType VARCHAR(255),
-    MeasurementValue FLOAT,
-    MeasurementUnit VARCHAR(100),
-    UserID INT,
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
+  MeasurementID INT AUTO_INCREMENT PRIMARY KEY,
+  MeasurementType VARCHAR(255),
+  MeasurementValue FLOAT,
+  MeasurementUnit VARCHAR(100),
+  UserID BIGINT,
+  FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
+
 CREATE TABLE Symptoms (
-    SymptomID INT AUTO_INCREMENT PRIMARY KEY,
-    SymptomName VARCHAR(255),
-    SymptomSeverity INT,
-    SymptomStartDate DATETIME,
-    SymptomIsActive BOOLEAN,
-    UserID INT,
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
+      SymptomID INT AUTO_INCREMENT PRIMARY KEY,
+      SymptomName VARCHAR(255),
+      SymptomSeverity INT,
+      SymptomStartDate DATETIME,
+      SymptomIsActive BOOLEAN,
+      UserID BIGINT,
+      FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
+
 CREATE TABLE DiaryEntries (
-    EntryID INT AUTO_INCREMENT PRIMARY KEY,
-    EntryDate DATE NOT NULL,
-    EntryMood VARCHAR(255),
-    EntryNotes TEXT,
-    UserID INT NOT NULL,
-    CONSTRAINT fk_user FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
+  EntryID INT AUTO_INCREMENT PRIMARY KEY,
+  EntryDate DATE NOT NULL,
+  EntryMood VARCHAR(255),
+  EntryNotes TEXT,
+  UserID BIGINT NOT NULL,
+  CONSTRAINT fk_user FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
+
+
 CREATE TABLE DiaryPhotos (
     DiaryPhotoID INT AUTO_INCREMENT PRIMARY KEY,
     EntryID INT,
@@ -133,6 +130,7 @@ CREATE TABLE DiaryPhotos (
     FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
     FOREIGN KEY (PhotoID) REFERENCES Photos(PhotoID)
 );
+
 CREATE TABLE DiaryMeasurements (
     DiaryMeasurementID INT AUTO_INCREMENT PRIMARY KEY,
     EntryID INT,
@@ -140,45 +138,47 @@ CREATE TABLE DiaryMeasurements (
     FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
     FOREIGN KEY (MeasurementID) REFERENCES Measurements(MeasurementID)
 );
+
 CREATE TABLE DiarySymptoms (
-    DiarySymptomID INT AUTO_INCREMENT PRIMARY KEY,
-    EntryID INT NOT NULL,
-    SymptomID INT NOT NULL,
-    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-    FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
+       DiarySymptomID INT AUTO_INCREMENT PRIMARY KEY,
+       EntryID INT NOT NULL,
+       SymptomID INT NOT NULL,
+       FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
+       FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
 );
+
 --Not implemented yet--
 --CREATE TABLE Event ()
 --CREATE TABLE DiaryQuestions ()
 -----------------------
 --Managment plan--
 CREATE TABLE Questionnaires (
-    QuestionnaireID INT AUTO_INCREMENT PRIMARY KEY,
+    QuestionnaireID BIGINT AUTO_INCREMENT PRIMARY KEY,
     QuestionnaireType VARCHAR(255),
     QuestionnaireName VARCHAR(255),
     QuestionnaireDesc TEXT
 );
 CREATE TABLE Questions (
-    QuestionID INT AUTO_INCREMENT PRIMARY KEY,
+    QuestionID BIGINT AUTO_INCREMENT PRIMARY KEY,
     Question TEXT,
     QuestionCategory VARCHAR(255),
     QuestionResponseType VARCHAR(255),
-    QuestionnaireID INT,
+    QuestionnaireID BIGINT,
     FOREIGN KEY (QuestionnaireID) REFERENCES Questionnaires(QuestionnaireID)
 );
 CREATE TABLE UserQuestionnaires (
-    UserQuestionnaireID INT AUTO_INCREMENT PRIMARY KEY,
-    QuestionnaireID INT,
-    UserID INT,
+    UserQuestionnaireID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    QuestionnaireID BIGINT,
+    UserID BIGINT,
     QUestionnaireStartDate DATETIME,
     QuestionnaireIsCompleted BOOLEAN,
     QuestionnaireCompletionDate DATETIME,
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID),
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID),
     FOREIGN KEY (QuestionnaireID) REFERENCES Questionnaires(QuestionnaireID)
 );
 CREATE TABLE UserResponses (
-    UserQuestionnaireID INT,
-    QuestionID INT,
+    UserQuestionnaireID BIGINT,
+    QuestionID BIGINT,
     UserResponse TEXT,
     FOREIGN KEY (QuestionID) REFERENCES Questions(QuestionID),
     FOREIGN KEY (UserQuestionnaireID) REFERENCES UserQuestionnaires(UserQuestionnaireID)
@@ -215,18 +215,18 @@ CREATE TABLE InfoAssets (
 );
 --General use--
 CREATE TABLE Tasks (
-    TaskID INT AUTO_INCREMENT PRIMARY KEY,
+    TaskID BIGINT AUTO_INCREMENT PRIMARY KEY,
     TaskType VARCHAR(255),
     TaskName VARCHAR(255),
     TaskDesc TEXT
 );
 CREATE TABLE UserTasks (
-    UserTaskID INT AUTO_INCREMENT PRIMARY KEY,
+    UserTaskID BIGINT AUTO_INCREMENT PRIMARY KEY,
     TaskIsCompleted BOOLEAN,
     TaskDuedate DATETIME,
     TaskIsRepeatable BOOLEAN,
     TaskRepeatPeriod TIMESTAMP,
-    TaskID INT,
+    TaskID BIGINT,
     FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
 );
 --Not implemented yet--
