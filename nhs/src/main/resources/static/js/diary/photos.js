@@ -30,9 +30,20 @@ async function startCamera() {
 
         // Add event listener for the back button on mobile
         window.addEventListener('popstate', closeCamera);
+
+        window.addEventListener('keydown', handleKeyDown);
     } catch (error) {
         console.error('Error accessing the camera: ', error);
         alert('Unable to access camera. Please make sure you have granted permissions.');
+    }
+}
+
+function handleKeyDown(event) {
+    console.log(event.key)
+    if (event.key === 'Enter') {
+        takePhoto();
+    } else if (event.key === 'Escape') {
+        closeCamera();
     }
 }
 
@@ -97,6 +108,7 @@ function closeCamera() {
     }
     cameraContainer.style.display = 'none';
     window.removeEventListener('popstate', closeCamera);
+    window.removeEventListener('keyDown', handleKeyDown);
 }
 
 openCameraButton.addEventListener('click', openCamera);
