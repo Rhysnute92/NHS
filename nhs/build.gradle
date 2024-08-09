@@ -27,36 +27,6 @@ repositories {
 
 
 dependencies {
-<<<<<<< HEAD
-    // Spring Boot Starters
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-    // Database Connectors
-    implementation 'com.mysql:mysql-connector-j:9.0.0'
-    implementation 'org.mariadb.jdbc:mariadb-java-client:3.4.1'
-
-    // Thymeleaf Layout Dialect
-    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
-
-    // Jakarta Servlet API
-    implementation 'jakarta.servlet:jakarta.servlet-api'
-
-    // Lombok
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-
-    // Development Only
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
-    // Test Dependencies
-    testImplementation 'junit:junit:4.13.1'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.hamcrest:hamcrest:2.2'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	testImplementation 'com.h2database:h2'
-=======
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -76,7 +46,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
->>>>>>> origin/dev
 }
 
 tasks.named('test') {

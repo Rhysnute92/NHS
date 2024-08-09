@@ -22,11 +22,8 @@ DROP TABLE IF EXISTS PatientDiagnosis;
 DROP TABLE IF EXISTS Patients;
 DROP TABLE IF EXISTS ProviderCredentials;
 DROP TABLE IF EXISTS PatientCredentials;
-<<<<<<< HEAD
-=======
 DROP TABLE IF EXISTS Admin;
 DROP TABLE IF EXISTS UserCredentials;
->>>>>>> origin/dev
 --Log in information and credentials--
 CREATE TABLE UserCredentials (
     UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -97,57 +94,29 @@ CREATE TABLE Photos (
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 CREATE TABLE Measurements (
-<<<<<<< HEAD
     MeasurementID INT AUTO_INCREMENT PRIMARY KEY,
     MeasurementType VARCHAR(255),
     MeasurementValue FLOAT,
     MeasurementUnit VARCHAR(100),
-    UserID INT,
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
-=======
-  MeasurementID INT AUTO_INCREMENT PRIMARY KEY,
-  MeasurementType VARCHAR(255),
-  MeasurementValue FLOAT,
-  MeasurementUnit VARCHAR(100),
-  UserID BIGINT,
-  FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
->>>>>>> origin/dev
+    UserID BIGINT,
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 CREATE TABLE Symptoms (
-<<<<<<< HEAD
     SymptomID INT AUTO_INCREMENT PRIMARY KEY,
     SymptomName VARCHAR(255),
     SymptomSeverity INT,
     SymptomStartDate DATETIME,
     SymptomIsActive BOOLEAN,
-    UserID INT,
-    FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
-=======
-      SymptomID INT AUTO_INCREMENT PRIMARY KEY,
-      SymptomName VARCHAR(255),
-      SymptomSeverity INT,
-      SymptomStartDate DATETIME,
-      SymptomIsActive BOOLEAN,
-      UserID BIGINT,
-      FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
->>>>>>> origin/dev
+    UserID BIGINT,
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 CREATE TABLE DiaryEntries (
-<<<<<<< HEAD
     EntryID INT AUTO_INCREMENT PRIMARY KEY,
     EntryDate DATE NOT NULL,
     EntryMood VARCHAR(255),
     EntryNotes TEXT,
-    UserID INT NOT NULL,
-    CONSTRAINT fk_user FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
-=======
-  EntryID INT AUTO_INCREMENT PRIMARY KEY,
-  EntryDate DATE NOT NULL,
-  EntryMood VARCHAR(255),
-  EntryNotes TEXT,
-  UserID BIGINT NOT NULL,
-  CONSTRAINT fk_user FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
->>>>>>> origin/dev
+    UserID BIGINT NOT NULL,
+    CONSTRAINT fk_user FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 CREATE TABLE DiaryPhotos (
     DiaryPhotoID INT AUTO_INCREMENT PRIMARY KEY,
@@ -237,38 +206,21 @@ CREATE TABLE InfoAssets (
     FOREIGN KEY (SectionID) REFERENCES InfoSections(SectionID)
 );
 --General use--
-<<<<<<< HEAD
 CREATE TABLE Task (
-    TaskID INT AUTO_INCREMENT PRIMARY KEY,
-=======
-CREATE TABLE Tasks (
     TaskID BIGINT AUTO_INCREMENT PRIMARY KEY,
     TaskType VARCHAR(255),
->>>>>>> origin/dev
     TaskName VARCHAR(255),
     TaskDesc TEXT,
     TaskRepeatPeriod VARCHAR(100)
 );
-<<<<<<< HEAD
 CREATE TABLE UserTask (
     UserTaskID INT AUTO_INCREMENT PRIMARY KEY,
     UserID INT,
     TaskIsCompleted BOOLEAN,
     TaskDuedate DATETIME,
-    TaskID INT,
-    FOREIGN KEY (TaskID) REFERENCES Task(TaskID)
-=======
-CREATE TABLE UserTasks (
-    UserTaskID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    TaskIsCompleted BOOLEAN,
-    TaskDuedate DATETIME,
-    TaskIsRepeatable BOOLEAN,
-    TaskRepeatPeriod TIMESTAMP,
     TaskID BIGINT,
-    FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
->>>>>>> origin/dev
+    FOREIGN KEY (TaskID) REFERENCES Task(TaskID)
 );
-
 --Not implemented yet--
 --CREATE TABLE Reminders ()
 --CREATE TABLE Clinic ()
