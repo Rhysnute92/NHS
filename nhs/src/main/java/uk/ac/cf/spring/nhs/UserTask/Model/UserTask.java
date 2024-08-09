@@ -32,7 +32,7 @@ public class UserTask {
     private Task task;
 
     @Column(name = "UserID", nullable = false)
-    private Long userID; // Simple Long type to mock a user ID
+    private Long userID;
 
     // Getters and Setters
 
