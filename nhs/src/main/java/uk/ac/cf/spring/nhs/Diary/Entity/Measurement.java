@@ -21,11 +21,11 @@ public class Measurement {
     private String unit;
 
     @Column(name = "UserID")
-    private int userId;
+    private long userId;
 
     protected Measurement() {}
 
-    public Measurement(String type, float value, String unit, int userId) {
+    public Measurement(String type, float value, String unit, long userId) {
         this.type = type;
         this.value = value;
         this.unit = unit;

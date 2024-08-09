@@ -115,12 +115,11 @@ CREATE TABLE Symptoms (
 CREATE TABLE DiaryEntries (
   EntryID INT AUTO_INCREMENT PRIMARY KEY,
   EntryDate DATE NOT NULL,
-  EntryMood VARCHAR(255),
+  EntryMood TINYINT,
   EntryNotes TEXT,
   UserID BIGINT NOT NULL,
   CONSTRAINT fk_user FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
-
 
 CREATE TABLE DiaryPhotos (
     DiaryPhotoID INT AUTO_INCREMENT PRIMARY KEY,

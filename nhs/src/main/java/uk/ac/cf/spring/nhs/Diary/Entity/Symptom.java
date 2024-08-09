@@ -30,11 +30,11 @@ public class Symptom {
     private Set<DiarySymptom> diarySymptoms = new HashSet<>();
 
     @Column(name = "UserID")
-    private int userId;
+    private long userId;
 
     public Symptom() {}
 
-    public Symptom(String name, int severity, Date startDate, Boolean isActive, int userId) {
+    public Symptom(String name, int severity, Date startDate, Boolean isActive, long userId) {
         this.name = name;
         this.severity = severity;
         this.startDate = startDate;

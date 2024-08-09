@@ -15,6 +15,7 @@ public class DiaryEntry {
     private int id;
 
     @Column(name = "EntryDate", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     @Column(name = "EntryMood")
@@ -33,11 +34,11 @@ public class DiaryEntry {
     private String notes;
 
     @Column(name = "UserID", nullable = false)
-    private int userId;
+    private long userId;
 
     public DiaryEntry() {}
 
-    public DiaryEntry(int userId, Date date) {
+    public DiaryEntry(long userId, Date date) {
         this.userId = userId;
         this.date = date;
     }
@@ -50,11 +51,11 @@ public class DiaryEntry {
         this.id = id;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

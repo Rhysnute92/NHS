@@ -22,11 +22,11 @@ public class Photo {
     private String bodyPart;
 
     @Column(name = "UserID")
-    private int userId;
+    private long userId;
 
     public Photo() {}
 
-    public Photo(String url, Date date, String bodyPart, int userId) {
+    public Photo(String url, Date date, String bodyPart, long userId) {
         this.url = url;
         this.date = date;
         this.bodyPart = bodyPart;
