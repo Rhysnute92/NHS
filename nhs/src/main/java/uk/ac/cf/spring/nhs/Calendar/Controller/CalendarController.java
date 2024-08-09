@@ -33,10 +33,16 @@ public class CalendarController {
         }
     }
 
+    @GetMapping("/mobileaddappt")
+    public String addAppointment(Model model) {
+        model.addAttribute("appointment", new Appointment());
+        return "calendar/mobile/addappointment";
+    }
+
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {
         return List.of(
                 new NavMenuItem("Schedule", "/calendar", "fa-regular fa-calendar-days"),
-                new NavMenuItem("Add Appointment", "/mobileaddappt", "fa-solid fa-calendar-check"));
+                new NavMenuItem("Add Appointment", "/calendar/mobileaddappt", "fa-solid fa-calendar-check"));
     }
 }

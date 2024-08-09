@@ -35,16 +35,19 @@ async function addAppointment() {
         if (response.status === 201) {
             const newAppointment = await response.json();
             appointments.push(newAppointment);
-            appointmentDateInput.value = "";
-            appointmentTimeInput.value = "";
-            appointmentTypeInput.value = "";
-            appointmentProviderInput.value = "";
-            appointmentInfoInput.value = "";
+            clearForm();
         }
     } catch (error) {
         console.error("Error:", error);
     }
+}
 
+function clearForm() {
+    appointmentDateInput.value = "";
+    appointmentTimeInput.value = "";
+    appointmentTypeInput.value = "";
+    appointmentProviderInput.value = "";
+    appointmentInfoInput.value = "";
 }
 
 function deleteAppointment(appointmentID) {
