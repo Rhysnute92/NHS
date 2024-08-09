@@ -14,6 +14,24 @@ appointmentForm.addEventListener("submit", function (event) {
     addAppointment();
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    fetchAppointments();
+});
+
+async function fetchAppointments() {
+    try {
+        const response = await fetch('/appointments');
+        if (response.ok) {
+            appointments = await response.json();
+        } else {
+            console.error("Failed to fetch appointments");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+
 async function addAppointment() {
     const appointment = {
         date: appointmentDateInput.value,

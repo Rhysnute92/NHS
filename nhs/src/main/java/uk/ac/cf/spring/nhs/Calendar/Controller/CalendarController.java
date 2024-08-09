@@ -24,8 +24,6 @@ public class CalendarController {
 
     @GetMapping
     public String calendar(HttpServletRequest request, Model model) {
-        List<Appointment> appointments = appointmentService.getAppointmentsByUserId(1);
-        model.addAttribute("appointments", appointments);
         if (DeviceDetector.isMobile(request)) {
             return "calendar/mobile/calendar";
         } else {
