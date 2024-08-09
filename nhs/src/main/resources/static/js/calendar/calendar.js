@@ -35,6 +35,9 @@ async function addAppointment() {
             body: JSON.stringify(appointment)
         });
         if (response.status === 201) {
+            if (window.location.href.includes("appt")) {
+                window.location.href = "/calendar";
+            }
             const newAppointment = await response.json();
             appointments.push(newAppointment);
             clearForm();
