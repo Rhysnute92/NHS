@@ -4,5 +4,6 @@ VALUES
 ('testUser', '$2a$10$hznjz2afk0Dlu3ye10eoPuLWDvnFTuI3ZPegsFs1KJ1mbbfH1MVzq', 'ROLE_PATIENT'),
 ('testProvider', '$2a$10$cibnUtr2BBkAQ2HibZDFWOarJcCtfRg1uj0HcfEd8z2WQyN4EePlC', 'ROLE_PROVIDER');
 
+
 INSERT INTO UserWidgets (UserID, WidgetName, Position)
 VALUES (1, 'task-completion', 1);
