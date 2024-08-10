@@ -18,6 +18,43 @@ public class UserTaskService {
     @Autowired
     private JpaUserTaskRepository userTaskRepository;
 
+    /**
+     * Marks a specific task as completed for the current day.
+     * 
+     * <p>
+     * This method updates the bitmask of a given {@link UserTask} to reflect that
+     * the task was
+     * completed on the current day of the month. The bitmask is an integer where
+     * each bit represents
+     * a day in the month (e.g., the 1st day is represented by the 1st bit, the 2nd
+     * day by the 2nd bit, and so on).
+     * </p>
+     * 
+     * <p>
+     * For example, if today is the 5th day of the month and the user completes the
+     * task,
+     * the bitmask will be updated to mark the 5th bit as "1" (completed). This
+     * bitmask is
+     * then saved back to the database.
+     * </p>
+     * 
+     * @param userTask The {@link UserTask} entity that needs to be marked as
+     *                 completed for today.
+     * 
+     *                 <h3>Example Usage:</h3>
+     * 
+     *                 <pre>{@code
+     * // Retrieve the UserTask object using the service
+     * UserTask userTask = userTaskService.getUserTaskById(1L);
+     * 
+     * // Mark the task as completed for today
+     * userTaskService.markTaskCompleted(userTask);
+     * 
+     * // If today is the 5th of the month, the 5th bit in the task's bitmask will be set to "1".
+     * // For example, if the previous bitmask was 00000000000000000000000000000000 (binary for 0),
+     * // it will now be 00000000000000000000000000010000 (binary for 16), where the 5th bit is set.
+     * }</pre>
+     */
     @Transactional
     public void markTaskCompleted(UserTask userTask) {
         int currentDay = DateUtils.getCurrentDayOfMonth();
