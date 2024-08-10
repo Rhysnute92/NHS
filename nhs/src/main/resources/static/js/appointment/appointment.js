@@ -1,31 +1,31 @@
-// Get the modal
-var modal = document.getElementById("myModel");
+// Get the model
+var model = document.getElementById("myModel");
 
-// Get the button that opens the modal
+// Get the button that opens the model
 var btn = document.getElementById("openaddappt");
 
-// Get the <span> element that closes the modal
+// Get the <span> element that closes the model
 var span = document.getElementsByClassName("popup-close")[0];
 
-// Get the iframe element inside the modal
+// Get the iframe element inside the model
 var iframe = document.getElementById("modelFrame");
 
-// When the user clicks the button, open the modal and load the specific page
+// When the user clicks the button, open the model and load the specific page
 btn.onclick = function() {
-    modal.style.display = "block";
+    model.style.display = "block";
     iframe.src = "/addappointment"; // Replace with the URL you want to load
 }
 
-// When the user clicks on <span> (x), close the modal
+// When the user clicks on <span> (x), close the model
 span.onclick = function() {
-    modal.style.display = "none";
-    iframe.src = ""; // Clear the iframe content when the modal is closed
+    model.style.display = "none";
+    iframe.src = ""; // Clear the iframe content when the model is closed
 }
 
-// When the user clicks anywhere outside of the modal, close it
+// When the user clicks anywhere outside of the model, close it
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-        iframe.src = ""; // Clear the iframe content when the modal is closed
+    if (event.target == model) {
+        model.style.display = "none";
+        iframe.src = ""; // Clear the iframe content when the model is closed
     }
 }
