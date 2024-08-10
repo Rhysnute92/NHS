@@ -15,12 +15,16 @@ import uk.ac.cf.spring.nhs.Common.util.DateUtils;
 import uk.ac.cf.spring.nhs.UserTask.Model.UserTask;
 import uk.ac.cf.spring.nhs.UserTask.Repository.JpaUserTaskRepository;
 import uk.ac.cf.spring.nhs.UserTaskLog.Model.UserTaskLog;
+import uk.ac.cf.spring.nhs.UserTaskLog.Service.UserTaskLogService;
 
 @Service
 public class UserTaskService {
 
     @Autowired
     private JpaUserTaskRepository userTaskRepository;
+
+    @Autowired
+    private UserTaskLogService userTaskLogService;
 
     /**
      * Marks a specific task as completed for the current day.
@@ -77,12 +81,13 @@ public class UserTaskService {
     public void archiveAndResetMonthlyBitmask(UserTask userTask) {
         String monthYear = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
         UserTaskLog log = new UserTaskLog();
+        log.setUserId(userTask.getUserID());
         log.setUserTask(userTask);
         log.setBitmask(userTask.getBitmask());
         log.setMonthYear(monthYear);
         log.setCreatedAt(LocalDateTime.now());
 
-        userTaskLogService.saveUserTaskLog(log);
+        userTaskLogService.createUserTaskLog(log);
         userTask.setBitmask(BitmaskUtility.resetBitmask());
         userTaskRepository.save(userTask);
     }

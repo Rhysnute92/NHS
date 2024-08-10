@@ -18,7 +18,10 @@ public class UserTaskLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserTaskLogID")
     private Long id;
-    
+
+    @Column(name = "UserID", nullable = false)
+    private Long userId;
+
     @ManyToOne
     @JoinColumn(name = "UserTaskID", nullable = false)
     private UserTask userTask;
@@ -44,6 +47,20 @@ public class UserTaskLog {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the userId
+     */
+    public Long getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     /**
@@ -101,7 +118,5 @@ public class UserTaskLog {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-
-    
 
 }
