@@ -1,7 +1,6 @@
 package uk.ac.cf.spring.nhs.UserTask.Model;
 
 import java.util.Objects;
-import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
 import uk.ac.cf.spring.nhs.Task.Model.Task;
 
 @Entity
