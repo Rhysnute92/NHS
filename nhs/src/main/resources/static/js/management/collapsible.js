@@ -9,5 +9,5 @@ function toggleCollapsible(event) {
   const header = event.currentTarget;
   const content = header.nextElementSibling;
   content.classList.toggle("expanded");
-  header.classList.toggle("expanded");
+  header.classList.toggle("expanded"); //TODO: fix this
 }
