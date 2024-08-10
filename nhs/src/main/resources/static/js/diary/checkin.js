@@ -29,7 +29,7 @@ moodButtons.forEach((currentButton) => {
     });
 });
 
-const input = document.querySelector('.checkin-photos-upload');
+const input = document.querySelector('.photo-upload');
 const preview = document.querySelector('.checkin-photos-preview');
 
 input.addEventListener('change', updateImageDisplay);
@@ -96,16 +96,15 @@ function returnFileSize(number) {
         return `${(number / 1e6).toFixed(1)} MB`;
     }
 }
+document.getElementById('add-measurement-button').addEventListener('click', addMeasurement);
 
-const addMeasurementButton = document.getElementById('add-measurement-button');
-addMeasurementButton.addEventListener('click', addMeasurement);
 function addMeasurement() {
     const container = document.querySelector('.checkin-measurements-container');
     const index = container.querySelectorAll('.measurement').length;
     const newMeasurement = document.createElement('div');
     newMeasurement.classList.add('measurement');
     newMeasurement.innerHTML = `
-        <select class="type-select" name="measurementTypes[${index}]">
+        <select class="type-select" name="measurements[${index}].type">
             <option value="WEIGHT">Weight</option>
             <option value="NECK">Neck</option>
             <option value="BREAST">Breast</option>
@@ -113,15 +112,15 @@ function addMeasurement() {
             <option value="THIGH">Thigh</option>
             <option value="FOREARM">Forearm</option>
         </select>
-        <input type="number" name="measurementValues[${index}]" step="0.1" required>
-        <select class="unit-select" name="measurementUnits[${index}]"></select>
+        <input type="number" name="measurements[${index}].value" step="0.1" required>
+        <select class="unit-select" name="measurements[${index}].unit"></select>
         <button type="button" class="fa-solid fa-xmark remove-measurement-button"></button>
     `;
 
-    const unitSelect = newMeasurement.querySelector(`select[name="measurementUnits[${index}]"]`);
+    const unitSelect = newMeasurement.querySelector(`select[name="measurements[${index}].unit"]`);
     changeUnits(unitSelect, newMeasurement);
 
-    const typeSelect = newMeasurement.querySelector(`select[name="measurementTypes[${index}]"]`);
+    const typeSelect = newMeasurement.querySelector(`select[name="measurements[${index}].type"]`);
     typeSelect.addEventListener('change', () => {
         changeUnits(unitSelect, newMeasurement);
     });
@@ -140,7 +139,7 @@ function changeUnits(unitSelect, newMeasurement) {
     const weightUnits = ['KG', 'LBS'];
     const bodyPartUnits = ['CM', 'INCHES'];
 
-    if (newMeasurement.querySelector('select[name*="measurementTypes"]').value === 'WEIGHT') {
+    if (newMeasurement.querySelector('select[name*="type"]').value === 'WEIGHT') {
         for (const unit of weightUnits) {
             const option = document.createElement('option');
             option.value = unit;
@@ -160,8 +159,9 @@ function changeUnits(unitSelect, newMeasurement) {
 function updateMeasurementNames() {
     const measurementItems = document.querySelectorAll('.measurement');
     measurementItems.forEach((item, index) => {
-        item.querySelector('select[name*="measurementTypes"]').name = `measurementTypes[${index}]`;
-        item.querySelector('input[name*="measurementValues"]').name = `measurementValues[${index}]`;
-        item.querySelector('select[name*="measurementUnits"]').name = `measurementUnits[${index}]`;
+        item.querySelector('select[name*="type"]').name = `measurements[${index}].type`;
+        item.querySelector('input[name*="value"]').name = `measurements[${index}].value`;
+        item.querySelector('select[name*="unit"]').name = `measurements[${index}].unit`;
     });
 }
+

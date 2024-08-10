@@ -552,5 +552,10 @@ body.guest-page .btn-container button{
     background-color: var(--nhs-dark-blue);
 }
 
+.login_error{
+    text-align: center;
+    color: red;
+}
+
 
 /* HEADER ICON FIX */

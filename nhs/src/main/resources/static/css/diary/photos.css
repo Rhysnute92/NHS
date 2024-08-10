@@ -1,0 +1,57 @@
+.photo-form {
+    margin-bottom: 1rem;
+}
+
+.photo-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    transition: opacity 0.5s;
+    font-size: 1.2rem;
+}
+
+.photo-label:hover {
+    cursor: pointer;
+    opacity: 80%;
+}
+
+.photo-upload {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+    width: 0;
+    height: 0;
+}
+
+.photo-icon {
+    font-size: 2rem;
+    color: var(--nhs-dark-grey);
+}
+
+.photo-container {
+    background-color: var(--nhs-white);
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+}
+
+.no-photos {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.photo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 768px) {
+    .photo-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

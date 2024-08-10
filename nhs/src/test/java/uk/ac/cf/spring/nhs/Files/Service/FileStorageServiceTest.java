@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Common.util;
+package uk.ac.cf.spring.nhs.Files.Service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,6 @@ class FileStorageServiceTest {
     @Test
     void storeFileStoresFileAndReturnsPath() throws IOException {
         String fileName = "testfile.png";
-        Path filePath = Path.of(uploadDir).resolve(fileName).toAbsolutePath().normalize();
         byte[] content = "file content".getBytes();
         InputStream inputStream = new ByteArrayInputStream(content);
 
@@ -42,7 +41,7 @@ class FileStorageServiceTest {
 
         String storedFilePath = fileStorageService.storeFile(multipartFile);
 
-        assertEquals(filePath.toString(), storedFilePath);
+        assertEquals(fileName, storedFilePath);
         verify(multipartFile, times(1)).getInputStream();
     }
 
