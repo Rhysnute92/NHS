@@ -32,8 +32,7 @@ public class UserTaskService {
         UserTask userTask = getUserTaskById(userTaskID);
         userTask.setTask(userTaskDetails.getTask());
         userTask.setUserID(userTaskDetails.getUserID());
-        userTask.setTaskIsCompleted(userTaskDetails.getTaskIsCompleted());
-        userTask.setTaskDuedate(userTaskDetails.getTaskDuedate());
+        userTask.setBitmask(userTaskDetails.getBitmask());
         return userTaskRepository.save(userTask);
     }
 
@@ -42,5 +41,7 @@ public class UserTaskService {
         UserTask userTask = getUserTaskById(userTaskID);
         userTaskRepository.delete(userTask);
     }
+
+    
 
 }

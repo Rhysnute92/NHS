@@ -21,18 +21,15 @@ public class UserTask {
     @Column(name = "UserTaskID")
     private Long id;
 
-    @Column(name = "TaskIsCompleted")
-    private Boolean taskIsCompleted;
-
-    @Column(name = "TaskDuedate")
-    private LocalDateTime taskDuedate;
-
     @ManyToOne
     @JoinColumn(name = "TaskID", nullable = false)
     private Task task;
 
     @Column(name = "UserID", nullable = false)
     private Long userID;
+
+    @Column(name = "Bitmask", nullable = false)
+    private int bitmask;
 
     // Getters and Setters
 
@@ -42,22 +39,6 @@ public class UserTask {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Boolean getTaskIsCompleted() {
-        return taskIsCompleted;
-    }
-
-    public void setTaskIsCompleted(Boolean taskIsCompleted) {
-        this.taskIsCompleted = taskIsCompleted;
-    }
-
-    public LocalDateTime getTaskDuedate() {
-        return taskDuedate;
-    }
-
-    public void setTaskDuedate(LocalDateTime taskDuedate) {
-        this.taskDuedate = taskDuedate;
     }
 
     public Task getTask() {
@@ -76,6 +57,20 @@ public class UserTask {
         this.userID = userID;
     }
 
+    public int getBitmask() {
+        return bitmask;
+    }
+
+    public void setBitmask(int bitmask) {
+        this.bitmask = bitmask;
+    }
+
+    /**
+     * Checks if the current UserTask object is equal to another object.
+     *
+     * @param o the object to compare with the current UserTask object
+     * @return true if the objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -84,14 +79,18 @@ public class UserTask {
             return false;
         UserTask userTask = (UserTask) o;
         return Objects.equals(id, userTask.id) &&
-                Objects.equals(taskIsCompleted, userTask.taskIsCompleted) &&
-                Objects.equals(taskDuedate, userTask.taskDuedate) &&
                 Objects.equals(task, userTask.task) &&
-                Objects.equals(userID, userTask.userID);
+                Objects.equals(userID, userTask.userID) &&
+                Objects.equals(bitmask, userTask.bitmask);
     }
 
+    /**
+     * Generates a hash code for the object based on the values of its fields.
+     *
+     * @return the hash code for the object
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(id, taskIsCompleted, taskDuedate, task, userID);
+        return Objects.hash(id, task, userID, bitmask);
     }
 }

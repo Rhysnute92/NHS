@@ -2,9 +2,12 @@ package uk.ac.cf.spring.nhs.Task.Model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import uk.ac.cf.spring.nhs.Task.Model.Enum.Periodicity;
 
 @Entity
 public class Task {
@@ -20,8 +23,9 @@ public class Task {
     @Column(name = "TaskDesc")
     private String description;
 
-    @Column(name = "TaskRepeatPeriod")
-    private String periodicity;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "TaskRepeatPeriod", nullable = false)
+    private Periodicity periodicity;
 
     /**
      * @return the id
@@ -68,14 +72,14 @@ public class Task {
     /**
      * @return the periodicity
      */
-    public String getPeriodicity() {
+    public Periodicity getPeriodicity() {
         return periodicity;
     }
 
     /**
      * @param periodicity the periodicity to set
      */
-    public void setPeriodicity(String periodicity) {
+    public void setPeriodicity(Periodicity periodicity) {
         this.periodicity = periodicity;
     }
 
