@@ -45,23 +45,32 @@ public class DiaryController {
     }
 
     @PostMapping("/checkin")
-    public ModelAndView checkin(
+    public ResponseEntity<?> checkin(
             @ModelAttribute CheckinForm checkinForm,
             RedirectAttributes redirectAttributes
     ) {
         System.out.println(checkinForm);
-        ModelAndView modelAndView = new ModelAndView();
         try {
             diaryEntryService.createAndSaveDiaryEntry(checkinForm);
 
-            modelAndView.setViewName("redirect:/diary"); // Redirect to the diary view
+            Map<String, String> responseBody = new HashMap<>();
+            responseBody.put("status", "success");
+            responseBody.put("message", "Check-in successful. Redirecting to diary...");
+
+            return ResponseEntity.ok(responseBody);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            modelAndView.setViewName("diary/checkin"); // Redirect to the check-in view if there's an error
+
+            // Create a response body with error details
+            Map<String, String> responseBody = new HashMap<>();
+            responseBody.put("status", "error");
+            responseBody.put("message", "Error during check-in: " + e.getMessage());
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
         }
-        return modelAndView;
     }
+
+
 
 
     @GetMapping("/photos")
@@ -71,26 +80,25 @@ public class DiaryController {
         return "diary/photos";
     }
 
+
     @PostMapping("/photos")
-    public ModelAndView uploadPhotos(
-            @RequestParam("photos") List<MultipartFile> photos,
-            HttpServletRequest request,
+    public ResponseEntity<?> uploadPhoto(
+            @RequestParam("photo") MultipartFile photo,
             RedirectAttributes redirectAttributes
     ) {
-        ModelAndView modelAndView = new ModelAndView();
         try {
-            for (MultipartFile photo : photos) {
-                if (!photo.isEmpty()) {
-                    photoService.savePhoto(photo, 1);
-                }
+            if (photo != null && !photo.isEmpty()) {
+                Photo savedPhoto = photoService.savePhoto(photo, 1);
+                return ResponseEntity.ok(savedPhoto);  // Return the saved Photo object with a 200 OK status
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Uploaded photo is empty");  // Return a 400 Bad Request status with an error message
             }
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred: " + e.getMessage());  // Return a 500 Internal Server Error status with the error message
         }
-        modelAndView.setViewName("redirect:/diary/photos");
-        return modelAndView;
     }
-
 
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {

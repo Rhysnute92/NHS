@@ -4,7 +4,7 @@
       lang="en">
 <head>
   <title>Photos</title>
-  <link rel="stylesheet" th:href="@{/css/diary/photos.css}" />
+  <link rel="stylesheet" th:href="@{/css/diary/photoCapture.css}" />
 </head>
 <body>
 <main layout:fragment="content">
@@ -14,11 +14,12 @@
       <div th:replace="~{diary/fragments/photoUpload :: photoUpload}"></div>
     </form>
     <h2 th:if="${photos.empty}" class="no-photos">No photos uploaded yet</h2>
-    <div th:unless="${photos.empty}" class="photo-container">
+    <div class="photos-container">
       <th:block th:each="photo : ${photos}">
         <img th:src="@{/files/{filename}(filename=${photo.url})}" class="photo" />
       </th:block>
     </div>
+    <button type="button" class="submit-photos">Submit Photos</button>
   </div>
 </main>
 <script layout:fragment="scripts" th:src="@{/js/diary/photos.js}"></script>

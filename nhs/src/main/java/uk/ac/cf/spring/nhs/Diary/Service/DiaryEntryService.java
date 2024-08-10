@@ -64,7 +64,7 @@ public class DiaryEntryService {
     @Transactional
     public void createAndSaveDiaryEntry(CheckinForm checkinForm) throws Exception {
 
-        int userId = 1;
+        long userId = 1L;
 
         DiaryEntry diaryEntry = new DiaryEntry(userId, new Date());
 
