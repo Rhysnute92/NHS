@@ -1,16 +1,20 @@
 package uk.ac.cf.spring.nhs.UserTask.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.transaction.Transactional;
 import uk.ac.cf.spring.nhs.Common.util.BitmaskUtility;
 import uk.ac.cf.spring.nhs.Common.util.DateUtils;
 import uk.ac.cf.spring.nhs.UserTask.Model.UserTask;
 import uk.ac.cf.spring.nhs.UserTask.Repository.JpaUserTaskRepository;
+import uk.ac.cf.spring.nhs.UserTaskLog.Model.UserTaskLog;
 
 @Service
 public class UserTaskService {
@@ -63,6 +67,25 @@ public class UserTaskService {
         userTaskRepository.save(userTask);
     }
 
+    @Transactional(readOnly = true)
+    public boolean isTaskCompleted(UserTask userTask) {
+        int currentDay = DateUtils.getCurrentDayOfMonth();
+        return BitmaskUtility.isBitSet(userTask.getBitmask(), currentDay);
+    }
+
+    @Transactional
+    public void archiveAndResetMonthlyBitmask(UserTask userTask) {
+        String monthYear = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+        UserTaskLog log = new UserTaskLog();
+        log.setUserTask(userTask);
+        log.setBitmask(userTask.getBitmask());
+        log.setMonthYear(monthYear);
+        log.setCreatedAt(LocalDateTime.now());
+
+        userTaskLogService.saveUserTaskLog(log);
+        userTask.setBitmask(BitmaskUtility.resetBitmask());
+        userTaskRepository.save(userTask);
+    }
     // CRUD functions
 
     /**
@@ -76,11 +99,13 @@ public class UserTaskService {
     }
 
     /**
+     * 
      * Retrieves a list of user tasks associated with the specified user ID.
      *
      * @param userID the ID of the user to retrieve tasks for
      * @return a list of user tasks for the specified user
      */
+    @Transactional(readOnly = true)
     public List<UserTask> getTasksForUser(Long userID) {
         return userTaskRepository.findByUserID(userID); // TODO: add exception handling
     }
@@ -92,6 +117,7 @@ public class UserTaskService {
      * @return the user task with the specified ID, or throws an exception if not
      *         found
      */
+    @Transactional(readOnly = true)
     public UserTask getUserTaskById(Long userTaskID) {
         return userTaskRepository.findById(userTaskID)
                 .orElseThrow(() -> new NoSuchElementException("UserTask not found"));
