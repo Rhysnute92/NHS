@@ -1,0 +1,24 @@
+<form th:action="@{/appointments}" method="post" id="apptForm">
+<!-- Get date and time separately then combine later -->
+  <label>Date of Appointment:<br>
+    <input type="date" id="apptDate" name="apptDate" required><br>
+  </label>
+  <label>Time of Appointment:<br>
+    <input type="time" id="apptTime" name="apptTime" required><br>
+  </label>
+  <label>Appointment Type:<br>
+    <input type="text" id="apptType" placeholder="Please enter what your appointment is" name="apptType"><br>
+  </label>
+  <label>Provider's Name:<br>
+    <input type="text" id="apptProvider" placeholder="Please enter the name of your provider" name="apptProvider"><br>
+  </label>
+  <label>Information about your Appointment:<br>
+    <textarea id="apptInfo" placeholder="Info about your appointment" name="apptInfo"></textarea><br>
+  </label>
+  <button type="submit" id="addAppointment">
+    Add
+  </button>
+  <button type="reset" id="deleteAppointment">
+    Clear
+  </button>
+</form>

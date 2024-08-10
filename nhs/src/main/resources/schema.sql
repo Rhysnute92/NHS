@@ -79,9 +79,10 @@ CREATE TABLE UserWidgets (
 --Calendar--
 CREATE TABLE Appointments (
     ApptID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    ApptTime DATETIME,
+    ApptDateTime DATETIME NOT NULL,
     ApptType VARCHAR(255),
     ApptProvider VARCHAR(255),
+    ApptLocation VARCHAR(255),
     ApptInfo TEXT,
     UserID BIGINT,
     FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID)
