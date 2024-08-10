@@ -1,25 +1,31 @@
 package uk.ac.cf.spring.nhs.AddPatient.DTO;
 
-import jakarta.validation.constraints.NotEmpty;
-
 public class RegisterRequest {
-
-    @NotEmpty
-    private String patientEmail;
-    @NotEmpty
-    private String patientMobile;
-    @NotEmpty
-    private String nhsNumber;
-    @NotEmpty
-    private String patientDOB;
-    @NotEmpty
     private String patientName;
-    @NotEmpty
     private String patientLastName;
-    @NotEmpty
+    private String patientEmail;
+    private String patientMobile;
+    private String nhsNumber;
+    private String patientDOB;
     private String patientTitle;
 
-    // Getters and setters
+    // Getters and Setters
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public String getPatientLastName() {
+        return patientLastName;
+    }
+
+    public void setPatientLastName(String patientLastName) {
+        this.patientLastName = patientLastName;
+    }
+
     public String getPatientEmail() {
         return patientEmail;
     }
@@ -50,22 +56,6 @@ public class RegisterRequest {
 
     public void setPatientDOB(String patientDOB) {
         this.patientDOB = patientDOB;
-    }
-
-    public String getPatientName() {
-        return patientName;
-    }
-
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
-    }
-
-    public String getPatientLastName() {
-        return patientLastName;
-    }
-
-    public void setPatientLastName(String patientLastName) {
-        this.patientLastName = patientLastName;
     }
 
     public String getPatientTitle() {

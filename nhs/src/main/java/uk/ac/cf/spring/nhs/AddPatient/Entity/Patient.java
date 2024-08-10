@@ -30,6 +30,8 @@ public class Patient {
     @JoinColumn(name = "UserID", insertable = false, updatable = false)
     private UserCredentials userCredentials;
 
+    private String encryptionKey;
+
     // Getters and setters
     public Long getUserId() {
         return userId;
@@ -85,5 +87,11 @@ public class Patient {
     }
     public void setUserCredentials(UserCredentials userCredentials) {
         this.userCredentials = userCredentials;
+    }
+    public String getEncryptionKey() {
+        return encryptionKey;
+    }
+    public void setEncryptionKey(String encryptionKey) {
+        this.encryptionKey = encryptionKey;
     }
 }

@@ -34,13 +34,14 @@ CREATE TABLE UserCredentials (
 --Patient information--
 CREATE TABLE Patients (
     PatientEmail VARCHAR(255),
-    PatientMobile VARCHAR(11),
+    PatientMobile VARCHAR(255),
     NHSNumber INT,
     PatientDOB DATE,
     PatientName VARCHAR(255),
     PatientLastName VARCHAR(255),
     PatientTitle VARCHAR(100),
     UserID BIGINT,
+    EncryptionKey VARCHAR(255),
     FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID),
     PRIMARY KEY (UserID)
 );
