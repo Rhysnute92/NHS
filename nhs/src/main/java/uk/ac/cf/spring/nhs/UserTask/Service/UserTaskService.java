@@ -77,6 +77,44 @@ public class UserTaskService {
         return BitmaskUtility.isBitSet(userTask.getBitmask(), currentDay);
     }
 
+    /**
+     * Archives the current month's bitmask for a specific {@link UserTask} and
+     * resets the bitmask for the new month.
+     * 
+     * <p>
+     * This method is intended to be called at the end of each month. It first
+     * archives the current bitmask of the given
+     * {@link UserTask} by saving it to a new {@link UserTaskLog} entry, which
+     * stores the task's completion history for that month.
+     * The method then resets the bitmask to zero (0) to prepare the
+     * {@link UserTask} for tracking task completions in the new month.
+     * </p>
+     * 
+     * <p>
+     * For example, if the bitmask for a task at the end of June is
+     * "00000000000000000000000000011111" (binary for 31),
+     * this bitmask will be saved in the {@link UserTaskLog} with the associated
+     * month and year (e.g., "2024-06").
+     * After archiving, the bitmask in the {@link UserTask} is reset to
+     * "00000000000000000000000000000000" (binary for 0),
+     * ready to track task completions in July.
+     * </p>
+     * 
+     * @param userTask The {@link UserTask} entity whose bitmask is to be archived
+     *                 and reset.
+     * 
+     *                 <h3>Example Usage:</h3>
+     * 
+     *                 <pre>{@code
+     * // Retrieve the UserTask object using the service
+     * UserTask userTask = userTaskService.getUserTaskById(1L);
+     * 
+     * // Archive the current month's bitmask and reset it for the new month
+     * userTaskService.archiveAndResetMonthlyBitmask(userTask);
+     * 
+     * // The UserTask's bitmask will now be archived, and the bitmask will be reset to zero (0) for the new month.
+     * }</pre>
+     */
     @Transactional
     public void archiveAndResetMonthlyBitmask(UserTask userTask) {
         String monthYear = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
