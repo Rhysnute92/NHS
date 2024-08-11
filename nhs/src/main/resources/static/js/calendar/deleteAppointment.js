@@ -1,46 +1,61 @@
-// Function to update the visibility of the delete button based on appointments
-function updateDeleteButtonVisibility() {
-    const deleteButton = document.getElementById('deleteButton');
-    if (appointments.length === 0) {
-        deleteButton.style.display = 'none';
-    } else {
-        deleteButton.style.display = 'inline-block'; // Or 'block' depending on your layout
-    }
-}
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Get all appointment elements
+    var appointments = document.querySelectorAll('.appointment');
 
-// Function to delete an appointment by ID
-function deleteAppointment(appointmentId) {
-    // Find the appointment by ID
-    const appointmentIndex = appointments.findIndex(appt => appt.id === appointmentId);
+    appointments.forEach(function(appointment) {
+        var type = appointment.getAttribute('data-type');
+        var deleteButton = appointment.querySelector('.delete-button');
+        var specialMessage = appointment.querySelector('.special-message');
 
-    if (appointmentIndex !== -1) {
-        const appointment = appointments[appointmentIndex];
+        if (type === 'lymphoedema') {
+            // Option 1: Hide the delete button
+            // deleteButton.style.display = 'none'; // Uncomment to hide the button
 
-        // Check if the appointment is of type 'lymphoedema'
-        if (appointment.type === 'lymphoedema') {
-            alert('This appointment cannot be deleted.');
-            return;
+            // Option 2: Disable the delete button
+            deleteButton.disabled = true; // Uncomment to disable the button
+            deleteButton.title = "You cannot delete lymphoedema appointments."; // Optional tooltip
+
+            // Additional Condition: Show a special message
+            if (specialMessage) {
+                specialMessage.style.display = 'block'; // Show special message
+            }
+        } else {
+            // Attach delete functionality if not lymphoedema
+            deleteButton.addEventListener('click', function() {
+                var appointmentId = appointment.getAttribute('data-id');
+                deleteAppointment(appointmentId);
+            });
         }
-
-        // Ask for confirmation
-        const confirmDeletion = confirm(`Are you sure you want to delete the appointment: "${appointment.title}"?`);
-
-        if (confirmDeletion) {
-            // Delete the appointment
-            appointments.splice(appointmentIndex, 1);
-            alert('Appointment successfully deleted.');
-            updateDeleteButtonVisibility(); // Update visibility after deletion
-        }
-    } else {
-        alert('Appointment not found.');
-    }
-}
-
-// Example usage
-document.getElementById('delete-event').addEventListener('click', function() {
-    const appointmentId = parseInt(prompt('Enter the appointment ID to delete:'), 10);
-    deleteAppointment(appointmentId);
+    });
 });
 
-// Initial check for delete button visibility
-updateDeleteButtonVisibility();
+// Function to handle appointment deletion
+function deleteAppointment(appointmentId) {
+    if (confirm('Are you sure you want to delete this appointment?')) {
+        fetch(`/appointments/${appointmentId}/delete`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken() // Get CSRF token if needed
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Appointment deleted successfully.');
+                    location.reload(); // Reload the page or remove the element from the DOM
+                } else {
+                    alert('Failed to delete appointment.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred.');
+            });
+    }
+}
+
+// Function to get CSRF token (if using Django or similar)
+function getCsrfToken() {
+    var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    return csrfToken;
+}
