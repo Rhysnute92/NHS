@@ -67,24 +67,19 @@ function takePhoto() {
     const width = video.videoWidth;
     const height = video.videoHeight;
 
-    // Set the canvas size to the video size and draw the video frame to the canvas
     canvas.width = width;
     canvas.height = height;
     context.drawImage(video, 0, 0, width, height);
 
-    // Convert the canvas to a blob and store it in the capturedPhotos array
-    canvas.toBlob(async (blob) => {
+    canvas.toBlob((blob) => {
         if (blob) {
-            // Store the blob in the capturedPhotos array
-            capturedPhotos.push(blob);
-
-            // Show a preview image
             const img = document.createElement('img');
             img.src = URL.createObjectURL(blob);
             img.classList.add('captured-photo');
             photosContainer.appendChild(img);
 
-            photoIndex++;
+            capturedPhotos.push(blob);
+
             closeCamera();
         } else {
             alert('Failed to capture the photo. Please try again.');

@@ -30,7 +30,6 @@ moodButtons.forEach((currentButton) => {
 });
 
 const input = document.querySelector('.photo-upload');
-const preview = document.querySelector('.checkin-photos-preview');
 
 document.getElementById('add-measurement-button').addEventListener('click', addMeasurement);
 
@@ -92,6 +91,7 @@ function changeUnits(unitSelect, newMeasurement) {
     }
 }
 
+// Make sure the measurement names are updated when a measurement is removed
 function updateMeasurementNames() {
     const measurementItems = document.querySelectorAll('.measurement');
     measurementItems.forEach((item, index) => {
@@ -101,44 +101,31 @@ function updateMeasurementNames() {
     });
 }
 
-console.log(document.querySelector('.checkin-form'))
+document.querySelector('.checkin-form').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-document.querySelector('.checkin-form').addEventListener('submit', function (event) {
-    event.preventDefault();
+    const formData = new FormData(this);
 
-    const form = document.getElementById('checkin-form');
-    const formData = new FormData(form);
-
-    // Append the captured photos to the FormData object
+    // Append each captured photo to the form data
     capturedPhotos.forEach((blob, index) => {
-        const file = new File([blob], `photo_${index}.png`, { type: 'image/png' });
-        formData.append(`photos`, file);
+        formData.append(`photos[${index}].file`, blob);
+        formData.append(`photos[${index}].bodyPart`, `Photo ${index + 1}`);
     });
 
-    // Submit the form with the appended photos
+    // Send the form data to the server
     fetch('/diary/checkin', {
         method: 'POST',
-        body: formData,
+        body: formData
     })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => {
-                    throw new Error(err.message || 'Failed to submit form');
-                });
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            if (data.status === 'success') {
-                window.location.href = '/diary'; // Redirect on success
-            } else {
-                alert('Submission was not successful. Message: ' + data.message);
+            if (data.error) {
+                throw new Error(data.error);
             }
+            window.location.href = '/diary';
         })
-        .catch(error => {
-            console.error('Error submitting form: ', error);
-            alert('Error submitting form: ' + error.message);
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('An error occurred while submitting the form. Please try again.');
         });
 });
-
-

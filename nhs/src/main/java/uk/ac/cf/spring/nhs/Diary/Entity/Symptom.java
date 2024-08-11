@@ -20,25 +20,24 @@ public class Symptom {
     @Column(name = "SymptomSeverity", nullable = false)
     private int severity;
 
-    @Column(name = "SymptomStartDate", nullable = false)
+    @Column(name = "SymptomStartDate")
     private Date startDate;
 
-    @Column(name = "SymptomIsActive", nullable = false)
+    @Column(name = "SymptomIsActive")
     private Boolean isActive;
-
-    @OneToMany(mappedBy = "symptom", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DiarySymptom> diarySymptoms = new HashSet<>();
 
     @Column(name = "UserID")
     private long userId;
 
+    @ManyToMany(mappedBy = "symptoms")
+    private Set<DiaryEntry> diaryEntries;
+
     public Symptom() {}
 
-    public Symptom(String name, int severity, Date startDate, Boolean isActive, long userId) {
+    public Symptom(String name, int severity, Date startDate, long userId) {
         this.name = name;
         this.severity = severity;
         this.startDate = startDate;
-        this.isActive = isActive;
         this.userId = userId;
     }
 
@@ -82,11 +81,11 @@ public class Symptom {
         this.isActive = isActive;
     }
 
-    public Set<DiarySymptom> getDiarySymptoms() {
-        return diarySymptoms;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setDiarySymptoms(Set<DiarySymptom> diarySymptoms) {
-        this.diarySymptoms = diarySymptoms;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

@@ -2,6 +2,7 @@ package uk.ac.cf.spring.nhs.Diary.Entity;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "Photos")
@@ -23,6 +24,9 @@ public class Photo {
 
     @Column(name = "UserID")
     private long userId;
+
+    @ManyToMany(mappedBy = "photos")
+    private Set<DiaryEntry> diaryEntries;
 
     public Photo() {}
 

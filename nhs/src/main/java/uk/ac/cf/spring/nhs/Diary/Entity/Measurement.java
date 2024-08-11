@@ -2,6 +2,8 @@ package uk.ac.cf.spring.nhs.Diary.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "Measurements")
 public class Measurement {
@@ -10,6 +12,9 @@ public class Measurement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MeasurementID")
     private int id;
+
+    @ManyToMany(mappedBy = "measurements")
+    private Set<DiaryEntry> diaryEntries;
 
     @Column(name = "MeasurementType")
     private String type;
@@ -23,7 +28,7 @@ public class Measurement {
     @Column(name = "UserID")
     private long userId;
 
-    protected Measurement() {}
+    public Measurement() {}
 
     public Measurement(String type, float value, String unit, long userId) {
         this.type = type;
@@ -62,5 +67,13 @@ public class Measurement {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

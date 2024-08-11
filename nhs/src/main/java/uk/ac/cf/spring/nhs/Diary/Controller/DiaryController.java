@@ -1,18 +1,14 @@
 package uk.ac.cf.spring.nhs.Diary.Controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
-import uk.ac.cf.spring.nhs.Diary.DTO.CheckinForm;
+import uk.ac.cf.spring.nhs.Diary.DTO.CheckinFormDTO;
+import uk.ac.cf.spring.nhs.Diary.DTO.PhotoDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Diary.Entity.Photo;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
@@ -45,32 +41,23 @@ public class DiaryController {
     }
 
     @PostMapping("/checkin")
-    public ResponseEntity<?> checkin(
-            @ModelAttribute CheckinForm checkinForm,
-            RedirectAttributes redirectAttributes
-    ) {
-        System.out.println(checkinForm);
+    public ResponseEntity<?> checkin(@ModelAttribute CheckinFormDTO checkinForm) {
         try {
-            diaryEntryService.createAndSaveDiaryEntry(checkinForm);
+            System.out.println(checkinForm);
+            DiaryEntry savedEntry = diaryEntryService.createAndSaveDiaryEntry(checkinForm);
 
-            Map<String, String> responseBody = new HashMap<>();
-            responseBody.put("status", "success");
-            responseBody.put("message", "Check-in successful. Redirecting to diary...");
+            // Create a response object
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Check-in successful");
+            response.put("entryId", savedEntry.getId());
 
-            return ResponseEntity.ok(responseBody);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-
-            // Create a response body with error details
-            Map<String, String> responseBody = new HashMap<>();
-            responseBody.put("status", "error");
-            responseBody.put("message", "Error during check-in: " + e.getMessage());
-
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(errorResponse);
         }
     }
-
-
 
 
     @GetMapping("/photos")
@@ -83,20 +70,19 @@ public class DiaryController {
 
     @PostMapping("/photos")
     public ResponseEntity<?> uploadPhoto(
-            @RequestParam("photo") MultipartFile photo,
-            RedirectAttributes redirectAttributes
-    ) {
+            @RequestParam("photo") PhotoDTO photo
+            ) {
         try {
-            if (photo != null && !photo.isEmpty()) {
+            if (photo != null && !photo.getFile().isEmpty()) {
                 Photo savedPhoto = photoService.savePhoto(photo, 1);
-                return ResponseEntity.ok(savedPhoto);  // Return the saved Photo object with a 200 OK status
+                return ResponseEntity.ok(savedPhoto);
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("Uploaded photo is empty");  // Return a 400 Bad Request status with an error message
+                        .body("Uploaded photo is empty");
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An error occurred: " + e.getMessage());  // Return a 500 Internal Server Error status with the error message
+                    .body("An error occurred: " + e.getMessage());
         }
     }
 

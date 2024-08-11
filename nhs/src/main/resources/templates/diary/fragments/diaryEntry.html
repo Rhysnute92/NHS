@@ -69,8 +69,8 @@
                 <h3>Symptoms</h3>
                 <th:block th:each="symptom : ${diaryEntry.symptoms}">
                     <div class="diary-entry-symptom">
-                        <h4 th:text="${symptom.symptom.name}"></h4>
-                        <th:block th:switch="${symptom.symptom.severity}">
+                        <h4 th:text="${symptom.name}"></h4>
+                        <th:block th:switch="${symptom.severity}">
                             <div th:case="1">
                                 <span>Not at all</span>
                             </div>
@@ -91,7 +91,7 @@
                 <h3>Photos</h3>
                 <div class="diary-entry-photos-container">
                     <th:block th:each="photo : ${diaryEntry.photos}">
-                        <img th:src="@{/files/{filename}(filename=${photo.photo.url})}" class="diary-entry-photo" />
+                        <img th:src="@{/files/{filename}(filename=${photo.url})}" class="diary-entry-photo" />
                     </th:block>
                 </div>
             </div>
@@ -99,9 +99,9 @@
                 <h3>Measurements</h3>
                 <th:block th:each="measurement : ${diaryEntry.measurements}">
                     <div class="diary-entry-measurement">
-                        <h4 class="measurement-type" th:text="${measurement.measurement.type}"></h4>
-                        <span class="measurement-value" th:text="${measurement.measurement.value}"></span>
-                        <span class="measurement-unit" th:text="${measurement.measurement.unit}"></span>
+                        <h4 class="measurement-type" th:text="${measurement.type}"></h4>
+                        <span class="measurement-value" th:text="${measurement.value}"></span>
+                        <span class="measurement-unit" th:text="${measurement.unit}"></span>
                     </div>
                 </th:block>
             </div>
