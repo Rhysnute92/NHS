@@ -46,8 +46,7 @@
     #appointments input[type="text"],
     #appointments textarea {
         margin: 10px 0;
-        width: 100%;
-        font-family: 'Frutiger', sans-serif;
+        width: 80%;
     }
 
     #appointments {
