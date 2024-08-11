@@ -6,9 +6,13 @@ const flipCameraButton = document.querySelector('.flip-camera-button');
 const closeCameraButton = document.querySelector('.close-camera-button');
 const canvas = document.querySelector('.canvas');
 const context = canvas.getContext('2d');
+const photosContainer = document.querySelector('.photos-container');
+const form = document.querySelector('.checkin-form');
 
 let currentStream = null;
 let facingMode = 'environment'; // Default to back camera
+let photoIndex = 0;
+let capturedPhotos = [];
 
 async function startCamera() {
     if (currentStream) {
@@ -27,23 +31,26 @@ async function startCamera() {
         } else {
             video.classList.remove('mirror');
         }
-
         // Add event listener for the back button on mobile
         window.addEventListener('popstate', closeCamera);
 
-        window.addEventListener('keydown', handleKeyDown);
+        // Add event listener for the enter and escape keys
+        document.addEventListener('keydown', handleKeyPress);
     } catch (error) {
         console.error('Error accessing the camera: ', error);
         alert('Unable to access camera. Please make sure you have granted permissions.');
     }
 }
 
-function handleKeyDown(event) {
-    console.log(event.key)
-    if (event.key === 'Enter') {
-        takePhoto();
-    } else if (event.key === 'Escape') {
-        closeCamera();
+function handleKeyPress(event) {
+    // Check camera is open
+    if (cameraContainer.style.display === 'flex') {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            takePhoto();
+        } else if (event.key === 'Escape') {
+            closeCamera();
+        }
     }
 }
 
@@ -65,35 +72,23 @@ function takePhoto() {
     canvas.height = height;
     context.drawImage(video, 0, 0, width, height);
 
-    // Convert the canvas to a blob so it can be sent to the server
-    canvas.toBlob((blob) => {
-        const formData = new FormData();
-        formData.append('photo', blob, 'photo.png');
+    // Convert the canvas to a blob and store it in the capturedPhotos array
+    canvas.toBlob(async (blob) => {
+        if (blob) {
+            // Store the blob in the capturedPhotos array
+            capturedPhotos.push(blob);
 
-        // Stop the camera stream
-        currentStream.getTracks().forEach(track => track.stop());
+            // Show a preview image
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(blob);
+            img.classList.add('captured-photo');
+            photosContainer.appendChild(img);
 
-        // Hide camera container and submit form
-        cameraContainer.style.display = 'none';
-
-        // Remove event listener for the back button
-        window.removeEventListener('popstate', closeCamera);
-
-        // Send the photo to the server
-        fetch('/diary/photos', {
-            method: 'POST',
-            body: formData
-        }).then(response => {
-            if (response.ok) {
-                window.location.href = '/diary/photos';
-            } else {
-                console.error('Failed to upload photo');
-                alert('Failed to upload photo. Please try again.');
-            }
-        }).catch(error => {
-            console.error('Error:', error);
-            alert('Error uploading photo. Please try again.');
-        });
+            photoIndex++;
+            closeCamera();
+        } else {
+            alert('Failed to capture the photo. Please try again.');
+        }
     }, 'image/png');
 }
 
@@ -104,11 +99,12 @@ function flipCamera() {
 
 function closeCamera() {
     if (currentStream) {
+        // Stop the camera stream
         currentStream.getTracks().forEach(track => track.stop());
     }
     cameraContainer.style.display = 'none';
     window.removeEventListener('popstate', closeCamera);
-    window.removeEventListener('keyDown', handleKeyDown);
+    document.removeEventListener('keydown', handleKeyPress);
 }
 
 openCameraButton.addEventListener('click', openCamera);

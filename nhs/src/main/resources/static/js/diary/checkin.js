@@ -32,70 +32,6 @@ moodButtons.forEach((currentButton) => {
 const input = document.querySelector('.photo-upload');
 const preview = document.querySelector('.checkin-photos-preview');
 
-input.addEventListener('change', updateImageDisplay);
-
-function updateImageDisplay() {
-    while (preview.firstChild) {
-        preview.removeChild(preview.firstChild);
-    }
-
-    const curFiles = input.files;
-    if (curFiles.length === 0) {
-        const para = document.createElement("p");
-        para.textContent = "No files currently selected for upload";
-        preview.appendChild(para);
-    } else {
-
-        for (const file of curFiles) {
-            const photoContainer = document.createElement("div");
-            photoContainer.classList.add("checkin-photos-preview-container");
-            const para = document.createElement("p");
-            if (validFileType(file)) {
-                para.textContent = `File name ${file.name}, file size ${returnFileSize(
-                    file.size,
-                )}.`;
-                const image = document.createElement("img");
-                image.src = URL.createObjectURL(file);
-                image.alt = image.title = file.name;
-                image.classList.add("checkin-photos-preview-image");
-
-                photoContainer.appendChild(image);
-                preview.appendChild(photoContainer);
-            } else {
-                para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
-                preview.appendChild(para);
-            }
-
-        }
-    }
-}
-
-const fileTypes = [
-    "image/apng",
-    "image/bmp",
-    "image/gif",
-    "image/jpeg",
-    "image/pjpeg",
-    "image/png",
-    "image/svg+xml",
-    "image/tiff",
-    "image/webp",
-    "image/x-icon",
-];
-
-function validFileType(file) {
-    return fileTypes.includes(file.type);
-}
-
-function returnFileSize(number) {
-    if (number < 1e3) {
-        return `${number} bytes`;
-    } else if (number >= 1e3 && number < 1e6) {
-        return `${(number / 1e3).toFixed(1)} KB`;
-    } else {
-        return `${(number / 1e6).toFixed(1)} MB`;
-    }
-}
 document.getElementById('add-measurement-button').addEventListener('click', addMeasurement);
 
 function addMeasurement() {
@@ -164,4 +100,45 @@ function updateMeasurementNames() {
         item.querySelector('select[name*="unit"]').name = `measurements[${index}].unit`;
     });
 }
+
+console.log(document.querySelector('.checkin-form'))
+
+document.querySelector('.checkin-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const form = document.getElementById('checkin-form');
+    const formData = new FormData(form);
+
+    // Append the captured photos to the FormData object
+    capturedPhotos.forEach((blob, index) => {
+        const file = new File([blob], `photo_${index}.png`, { type: 'image/png' });
+        formData.append(`photos`, file);
+    });
+
+    // Submit the form with the appended photos
+    fetch('/diary/checkin', {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => {
+                    throw new Error(err.message || 'Failed to submit form');
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.status === 'success') {
+                window.location.href = '/diary'; // Redirect on success
+            } else {
+                alert('Submission was not successful. Message: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error submitting form: ', error);
+            alert('Error submitting form: ' + error.message);
+        });
+});
+
 

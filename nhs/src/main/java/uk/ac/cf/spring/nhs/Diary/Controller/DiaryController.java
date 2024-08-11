@@ -1,12 +1,16 @@
 package uk.ac.cf.spring.nhs.Diary.Controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinForm;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
@@ -14,7 +18,9 @@ import uk.ac.cf.spring.nhs.Diary.Entity.Photo;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
 import uk.ac.cf.spring.nhs.Diary.Service.PhotoService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/diary")
@@ -39,23 +45,32 @@ public class DiaryController {
     }
 
     @PostMapping("/checkin")
-    public ModelAndView checkin(
+    public ResponseEntity<?> checkin(
             @ModelAttribute CheckinForm checkinForm,
             RedirectAttributes redirectAttributes
     ) {
         System.out.println(checkinForm);
-        ModelAndView modelAndView = new ModelAndView();
         try {
             diaryEntryService.createAndSaveDiaryEntry(checkinForm);
 
-            modelAndView.setViewName("redirect:/diary"); // Redirect to the diary view
+            Map<String, String> responseBody = new HashMap<>();
+            responseBody.put("status", "success");
+            responseBody.put("message", "Check-in successful. Redirecting to diary...");
+
+            return ResponseEntity.ok(responseBody);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            modelAndView.setViewName("diary/checkin"); // Redirect to the check-in view if there's an error
+
+            // Create a response body with error details
+            Map<String, String> responseBody = new HashMap<>();
+            responseBody.put("status", "error");
+            responseBody.put("message", "Error during check-in: " + e.getMessage());
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
         }
-        return modelAndView;
     }
+
+
 
 
     @GetMapping("/photos")
@@ -67,29 +82,23 @@ public class DiaryController {
 
 
     @PostMapping("/photos")
-    public ModelAndView uploadPhotos(
+    public ResponseEntity<?> uploadPhoto(
             @RequestParam("photo") MultipartFile photo,
             RedirectAttributes redirectAttributes
     ) {
-        ModelAndView modelAndView = new ModelAndView();
-
         try {
             if (photo != null && !photo.isEmpty()) {
-                photoService.savePhoto(photo, 1);
-
-                redirectAttributes.addFlashAttribute("message", "Photo uploaded successfully!");
+                Photo savedPhoto = photoService.savePhoto(photo, 1);
+                return ResponseEntity.ok(savedPhoto);  // Return the saved Photo object with a 200 OK status
             } else {
-                redirectAttributes.addFlashAttribute("error", "Uploaded photo is empty");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Uploaded photo is empty");  // Return a 400 Bad Request status with an error message
             }
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred: " + e.getMessage());  // Return a 500 Internal Server Error status with the error message
         }
-
-        modelAndView.setViewName("redirect:/diary/photos");
-        return modelAndView;
     }
-
-
 
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {

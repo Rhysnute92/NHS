@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<div th:fragment="photoCapture">
+  <div class="photo-capture-container">
+    <button type="button" class="open-camera">
+      <i class="fa-solid fa-camera photo-icon"></i>
+      Take a photo
+    </button>
+    <div class="photos-container"></div>
+  </div>
+  <div class="camera-container" style="display: none;">
+    <video class="video" autoplay playsinline></video>
+    <div class="horizontal-line"></div>
+    <div class="vertical-line"></div>
+    <button type="button" class="capture-button">Take Photo</button>
+    <button type="button" class="flip-camera-button">Flip Camera</button>
+    <button type="button" class="close-camera-button">Close Camera</button>
+    <canvas class="canvas" style="display: none;"></canvas>
+  </div>
+  <script th:src="@{/js/diary/photoCapture.js}"></script>
+</div>
