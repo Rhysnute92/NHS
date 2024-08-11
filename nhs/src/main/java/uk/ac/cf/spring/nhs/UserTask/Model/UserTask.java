@@ -31,34 +31,74 @@ public class UserTask {
 
     // Getters and Setters
 
+    /**
+     * Retrieves the unique identifier of the UserTask object.
+     *
+     * @return  the unique identifier of the UserTask object
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Sets the ID of the UserTask object.
+     *
+     * @param id the ID to be set
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Retrieves the task associated with the UserTask object.
+     *
+     * @return the task object
+     */
     public Task getTask() {
         return task;
     }
 
+    /**
+     * Sets the task associated with the UserTask object.
+     *
+     * @param task the task to be set
+     */
     public void setTask(Task task) {
         this.task = task;
     }
 
+    /**
+     * Retrieves the user ID associated with the UserTask object.
+     *
+     * @return the user ID
+     */
     public Long getUserID() {
         return userID;
     }
 
+    /**
+     * Sets the user ID for the UserTask object.
+     *
+     * @param userID the user ID to be set
+     */
     public void setUserID(Long userID) {
         this.userID = userID;
     }
 
+    /**
+     * Retrieves the bitmask associated with the UserTask object.
+     *
+     * @return the bitmask value
+     */
     public int getBitmask() {
         return bitmask;
     }
 
+    /**
+     * Sets the bitmask for this object.
+     *
+     * @param  bitmask  the new bitmask value
+     */
     public void setBitmask(int bitmask) {
         this.bitmask = bitmask;
     }

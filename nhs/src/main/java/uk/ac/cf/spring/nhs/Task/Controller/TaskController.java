@@ -25,11 +25,22 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    /**
+     * Retrieves a list of all tasks.
+     *
+     * @return a list of tasks
+     */
     @GetMapping
     public List<Task> getAllTasks() {
         return taskService.getAllTasks();
     }
 
+    /**
+     * Retrieves a task by its ID.
+     *
+     * @param  id the ID of the task to retrieve
+     * @return    a ResponseEntity containing the task if found, or a not found response if the task is not found
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTaskById(@PathVariable("id") Long id) {
         Optional<Task> task = taskService.getTaskById(id);
@@ -37,12 +48,25 @@ public class TaskController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    /**
+     * Creates a new task.
+     *
+     * @param task the task details to be created
+     * @return the created task details
+     */
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
         Task createdTask = taskService.createTask(task);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
     }
 
+    /**
+     * Updates an existing task with the provided task details.
+     *
+     * @param  id       the ID of the task to update
+     * @param  task     the updated task details
+     * @return          a ResponseEntity containing the updated task if successful, or a not found response if the task is not found
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Task> updateTask(@PathVariable("id") Long id, @RequestBody Task task) {
         Task updatedTask = taskService.updateTask(id, task);
@@ -53,6 +77,12 @@ public class TaskController {
         }
     }
 
+    /**
+     * Deletes a task by its ID.
+     *
+     * @param  id the ID of the task to delete
+     * @return    an empty response entity indicating success
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable("id") Long id) {
         taskService.deleteTask(id);
