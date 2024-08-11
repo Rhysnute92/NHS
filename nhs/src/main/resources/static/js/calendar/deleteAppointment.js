@@ -1,61 +1,35 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    // Get all appointment elements
-    var appointments = document.querySelectorAll('.appointment');
+// Example array of appointments
+const appointments = [
+    { id: 1, type: 'consultation', date: '2024-08-15' },
+    { id: 2, type: 'lymphoedema', date: '2024-08-16' },
+    { id: 3, type: 'therapy', date: '2024-08-17' },
+];
 
-    appointments.forEach(function(appointment) {
-        var type = appointment.getAttribute('data-type');
-        var deleteButton = appointment.querySelector('.delete-button');
-        var specialMessage = appointment.querySelector('.special-message');
-
-        if (type === 'lymphoedema') {
-            // Option 1: Hide the delete button
-            // deleteButton.style.display = 'none'; // Uncomment to hide the button
-
-            // Option 2: Disable the delete button
-            deleteButton.disabled = true; // Uncomment to disable the button
-            deleteButton.title = "You cannot delete lymphoedema appointments."; // Optional tooltip
-
-            // Additional Condition: Show a special message
-            if (specialMessage) {
-                specialMessage.style.display = 'block'; // Show special message
-            }
-        } else {
-            // Attach delete functionality if not lymphoedema
-            deleteButton.addEventListener('click', function() {
-                var appointmentId = appointment.getAttribute('data-id');
-                deleteAppointment(appointmentId);
-            });
-        }
-    });
-});
-
-// Function to handle appointment deletion
+// Function to delete an appointment by ID
 function deleteAppointment(appointmentId) {
-    if (confirm('Are you sure you want to delete this appointment?')) {
-        fetch(`/appointments/${appointmentId}/delete`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCsrfToken() // Get CSRF token if needed
-            }
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert('Appointment deleted successfully.');
-                    location.reload(); // Reload the page or remove the element from the DOM
-                } else {
-                    alert('Failed to delete appointment.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred.');
-            });
+    // Find the appointment by ID
+    const appointment = appointments.find(appt => appt.id === appointmentId);
+
+    if (!appointment) {
+        console.log("Appointment not found.");
+        return;
+    }
+
+    // Check if the appointment is related to lymphoedema
+    if (appointment.type === 'lymphoedema') {
+        console.log("Lymphoedema appointments cannot be deleted.");
+        return;
+    }
+
+    // Proceed with deletion if it's not lymphoedema
+    const index = appointments.indexOf(appointment);
+    if (index > -1) {
+        appointments.splice(index, 1);
+        console.log(`Appointment with ID ${appointmentId} deleted successfully.`);
     }
 }
 
-// Function to get CSRF token (if using Django or similar)
-function getCsrfToken() {
-    var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    return csrfToken;
-}
+// Test the function
+deleteAppointment(2); // Should prevent deletion
+deleteAppointment(1); // Should allow deletion
+console.log(appointments); // Check the updated list of appointments
