@@ -29,8 +29,7 @@ public class DiaryEntryService {
     }
 
     @Transactional
-    public DiaryEntry createAndSaveDiaryEntry(CheckinFormDTO checkinForm) throws Exception {
-        long userId = 1L;
+    public DiaryEntry createAndSaveDiaryEntry(CheckinFormDTO checkinForm, Long userId) throws Exception {
         DiaryEntry diaryEntry = new DiaryEntry(userId, new Date());
 
         // Mood
@@ -65,6 +64,18 @@ public class DiaryEntryService {
         }
 
         return diaryEntryRepository.save(diaryEntry);
+    }
+
+    public void deleteDiaryEntryById(int id) {
+        diaryEntryRepository.deleteById(id);
+    }
+
+    public DiaryEntry getDiaryEntryById(int id) {
+        return diaryEntryRepository.findById(id).orElse(null);
+    }
+
+    public List<DiaryEntry> getAllDiaryEntries() {
+        return diaryEntryRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
     }
 
     public List<DiaryEntry> getDiaryEntriesByUserId(long userId) {

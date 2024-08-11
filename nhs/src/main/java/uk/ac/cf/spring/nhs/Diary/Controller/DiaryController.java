@@ -3,6 +3,7 @@ package uk.ac.cf.spring.nhs.Diary.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,10 @@ import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Diary.Entity.Photo;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
 import uk.ac.cf.spring.nhs.Diary.Service.PhotoService;
+import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
+import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 
+import java.nio.file.attribute.UserPrincipal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,9 +32,14 @@ public class DiaryController {
     @Autowired
     PhotoService photoService;
 
+    @Autowired
+    private AuthenticationInterface authenticationFacade;
+
     @GetMapping("")
-    public String diary(Model model) {
-        List<DiaryEntry> diaryEntries = diaryEntryService.getDiaryEntriesByUserId(1);
+    public String diary(Model model, @AuthenticationPrincipal CustomUserDetails user) {
+        Long userId = user.getUserId();
+        System.out.println("User ID: " + userId);
+        List<DiaryEntry> diaryEntries = diaryEntryService.getDiaryEntriesByUserId(userId);
         model.addAttribute("diaryEntries", diaryEntries);
         return "diary/diary";
     }
@@ -41,10 +50,11 @@ public class DiaryController {
     }
 
     @PostMapping("/checkin")
-    public ResponseEntity<?> checkin(@ModelAttribute CheckinFormDTO checkinForm) {
+    public ResponseEntity<?> checkin(@ModelAttribute CheckinFormDTO checkinForm,
+                                     @AuthenticationPrincipal CustomUserDetails user) {
         try {
-            System.out.println(checkinForm);
-            DiaryEntry savedEntry = diaryEntryService.createAndSaveDiaryEntry(checkinForm);
+            Long userId = user.getUserId();
+            DiaryEntry savedEntry = diaryEntryService.createAndSaveDiaryEntry(checkinForm, userId);
 
             // Create a response object
             Map<String, Object> response = new HashMap<>();
@@ -70,11 +80,13 @@ public class DiaryController {
 
     @PostMapping("/photos")
     public ResponseEntity<?> uploadPhoto(
-            @RequestParam("photo") PhotoDTO photo
+            @RequestParam("photo") PhotoDTO photo,
+            @AuthenticationPrincipal CustomUserDetails user
             ) {
         try {
+            Long userId = user.getUserId();
             if (photo != null && !photo.getFile().isEmpty()) {
-                Photo savedPhoto = photoService.savePhoto(photo, 1);
+                Photo savedPhoto = photoService.savePhoto(photo, userId);
                 return ResponseEntity.ok(savedPhoto);
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)

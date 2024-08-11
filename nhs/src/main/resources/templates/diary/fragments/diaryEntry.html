@@ -22,16 +22,16 @@
                     <i class="fa-regular fa-face-sad-tear"></i>
                 </div>
             </div>
-            <div th:if="${diaryEntry.symptoms.size > 0}">
+            <div th:if="${diaryEntry.symptoms != null and diaryEntry.symptoms.size > 0}">
                 <i class="fa-solid fa-notes-medical"></i>
             </div>
-            <div th:if="${diaryEntry.photos.size > 0}">
+            <div th:if="${diaryEntry.photos != null and diaryEntry.photos.size > 0}">
                 <i class="fa-solid fa-camera"></i>
             </div>
-            <div th:if="${diaryEntry.measurements.size > 0}">
+            <div th:if="${diaryEntry.measurements != null and diaryEntry.measurements.size > 0}">
                 <i class="fa-solid fa-ruler"></i>
             </div>
-            <div th:if="${!#strings.isEmpty(diaryEntry.notes)}">
+            <div th:if="${diaryEntry.notes != null and !#strings.isEmpty(diaryEntry.notes)}">
                 <i class="fa-solid fa-file-lines"></i>
             </div>
         </div>

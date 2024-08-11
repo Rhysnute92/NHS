@@ -34,10 +34,9 @@ public class Symptom {
 
     public Symptom() {}
 
-    public Symptom(String name, int severity, Date startDate, long userId) {
+    public Symptom(String name, int severity, long userId) {
         this.name = name;
         this.severity = severity;
-        this.startDate = startDate;
         this.userId = userId;
     }
 
