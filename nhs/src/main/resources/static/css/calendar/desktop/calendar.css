@@ -52,6 +52,8 @@
 #center {
     margin: 1rem;
     grid-column: 2;
+    padding-right: 1rem;
+    padding-left: 1rem;
 }
 
 #center h3 {
