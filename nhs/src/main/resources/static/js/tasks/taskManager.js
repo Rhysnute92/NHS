@@ -29,10 +29,11 @@ export class TaskManager {
             userTask.task.periodicity
           )
       );
-      this.displayTasks();
+
+      this.renderTasks();
     } catch (error) {
       console.error("Error fetching tasks:", error);
-      this.displayErrorMessage();
+      this.displayTaskErrorMessage();
     }
   }
 

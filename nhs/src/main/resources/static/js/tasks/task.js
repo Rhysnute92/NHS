@@ -1,5 +1,4 @@
 export class Task {
-  
   /**
    * Creates an instance of Task.
    *
@@ -9,7 +8,7 @@ export class Task {
    * @param {number} bitmask - The bitmask indicating the completion status of the task.
    * @param {string} periodicity - The periodicity of the task (e.g., Daily, Weekly).
    */
-  constructor(id, name, description, bitmask) {
+  constructor(id, name, description, bitmask, periodicity) {
     this.id = id;
     this.name = name;
     this.description = description;
@@ -23,6 +22,20 @@ export class Task {
     const currentDay = new Date().getDate();
     const isBitSet = (this.bitmask & (1 << (currentDay - 1))) !== 0;
     return isBitSet ? "Complete" : "Incomplete";
+  }
+
+  createCheckCircle() {
+    const checkCircleWrapper = document.createElement("div");
+    checkCircleWrapper.classList.add("check-circle-wrapper");
+
+    const checkmarkSVG = `
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+      </svg>
+    `;
+
+    checkCircleWrapper.innerHTML = checkmarkSVG;
   }
 
   /**
