@@ -30,7 +30,7 @@ public class UserTaskController {
      * @param userID the ID of the user to retrieve tasks for
      * @return a list of user tasks for the specified user
      */
-    @GetMapping("/{userID}")
+    @GetMapping("/user/{userID}")
     public ResponseEntity<List<UserTask>> getTasksForUser(@PathVariable("userID") Long userID) {
         List<UserTask> userTasks = userTaskService.getTasksForUser(userID);
         return ResponseEntity.ok(userTasks);
@@ -54,7 +54,7 @@ public class UserTaskController {
      * @param userTaskID the ID of the user task to retrieve
      * @return the user task with the specified ID, wrapped in a ResponseEntity
      */
-    @GetMapping("/{userTaskID}")
+    @GetMapping("/task/{userTaskID}")
     public ResponseEntity<UserTask> getUserTaskById(@PathVariable("userTaskID") Long userTaskID) {
         UserTask userTask = userTaskService.getUserTaskById(userTaskID);
         return ResponseEntity.ok(userTask);
@@ -67,7 +67,7 @@ public class UserTaskController {
      * @param userTaskDetails the updated task details
      * @return the updated user task
      */
-    @PutMapping("{userTaskID}")
+    @PutMapping("/task-update/{userTaskID}")
     public ResponseEntity<UserTask> updateUserTask(@PathVariable("userTaskID") Long userTaskID,
             @RequestBody UserTask userTaskDetails) {
         UserTask updatedUserTask = userTaskService.updateUserTask(userTaskID, userTaskDetails);
@@ -80,7 +80,7 @@ public class UserTaskController {
      * @param userTaskID the ID of the user task to delete
      * @return an empty response entity indicating success
      */
-    @DeleteMapping("{userTaskID}")
+    @DeleteMapping("/task-delete/{userTaskID}")
     public ResponseEntity<Void> deleteUserTask(@PathVariable("userTaskID") Long userTaskID) {
         userTaskService.deleteUserTask(userTaskID);
         return ResponseEntity.noContent().build();
