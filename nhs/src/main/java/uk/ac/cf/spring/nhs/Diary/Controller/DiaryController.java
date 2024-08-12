@@ -36,9 +36,10 @@ public class DiaryController {
     private AuthenticationInterface authenticationFacade;
 
     @GetMapping("")
-    public String diary(Model model, @AuthenticationPrincipal CustomUserDetails user) {
+    public String diary(Model model,
+                        @AuthenticationPrincipal CustomUserDetails user
+    ) {
         Long userId = user.getUserId();
-        System.out.println("User ID: " + userId);
         List<DiaryEntry> diaryEntries = diaryEntryService.getDiaryEntriesByUserId(userId);
         model.addAttribute("diaryEntries", diaryEntries);
         return "diary/diary";
@@ -51,9 +52,10 @@ public class DiaryController {
 
     @PostMapping("/checkin")
     public ResponseEntity<?> checkin(@ModelAttribute CheckinFormDTO checkinForm,
-                                     @AuthenticationPrincipal CustomUserDetails user) {
+                                     @AuthenticationPrincipal CustomUserDetails userDetails
+    ) {
         try {
-            Long userId = user.getUserId();
+            Long userId = userDetails.getUserId();
             DiaryEntry savedEntry = diaryEntryService.createAndSaveDiaryEntry(checkinForm, userId);
 
             // Create a response object
@@ -71,21 +73,22 @@ public class DiaryController {
 
 
     @GetMapping("/photos")
-    public String photos(Model model) {
-        List<Photo> photos = photoService.getPhotosByUserId(1);
+    public String photos(Model model,
+                         @AuthenticationPrincipal CustomUserDetails userDetails) {
+        Long userId = userDetails.getUserId();
+        List<Photo> photos = photoService.getPhotosByUserId(userId);
         model.addAttribute("photos", photos);
         return "diary/photos";
     }
 
 
     @PostMapping("/photos")
-    public ResponseEntity<?> uploadPhoto(
-            @RequestParam("photo") PhotoDTO photo,
-            @AuthenticationPrincipal CustomUserDetails user
-            ) {
+    public ResponseEntity<?> uploadPhoto(@ModelAttribute PhotoDTO photo,
+                                         @AuthenticationPrincipal CustomUserDetails userDetails) {
         try {
-            Long userId = user.getUserId();
-            if (photo != null && !photo.getFile().isEmpty()) {
+            Long userId = userDetails.getUserId();
+
+            if (photo != null && photo.getFile() != null) {
                 Photo savedPhoto = photoService.savePhoto(photo, userId);
                 return ResponseEntity.ok(savedPhoto);
             } else {
@@ -93,10 +96,12 @@ public class DiaryController {
                         .body("Uploaded photo is empty");
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("An error occurred: " + e.getMessage());
         }
     }
+
 
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {

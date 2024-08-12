@@ -11,7 +11,7 @@ public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PhotoID")
-    private int id;
+    private long id;
 
     @Column(name = "PhotoURL")
     private String url;
@@ -37,11 +37,11 @@ public class Photo {
         this.userId = userId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -87,7 +87,7 @@ CREATE TABLE Appointments (
 );
 --Diary--
 CREATE TABLE Photos (
-    PhotoID INT AUTO_INCREMENT PRIMARY KEY,
+    PhotoID BIGINT AUTO_INCREMENT PRIMARY KEY,
     PhotoURL TEXT,
     PhotoDate DATETIME,
     PhotoBodypart VARCHAR(255),
@@ -95,7 +95,7 @@ CREATE TABLE Photos (
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 CREATE TABLE Measurements (
-  MeasurementID INT AUTO_INCREMENT PRIMARY KEY,
+  MeasurementID BIGINT AUTO_INCREMENT PRIMARY KEY,
   MeasurementType VARCHAR(255),
   MeasurementValue FLOAT,
   MeasurementUnit VARCHAR(100),
@@ -104,7 +104,7 @@ CREATE TABLE Measurements (
 );
 
 CREATE TABLE Symptoms (
-      SymptomID INT AUTO_INCREMENT PRIMARY KEY,
+      SymptomID BIGINT AUTO_INCREMENT PRIMARY KEY,
       SymptomName VARCHAR(255),
       SymptomSeverity INT,
       SymptomStartDate DATETIME,
@@ -114,7 +114,7 @@ CREATE TABLE Symptoms (
 );
 
 CREATE TABLE DiaryEntries (
-  EntryID INT AUTO_INCREMENT PRIMARY KEY,
+  EntryID BIGINT AUTO_INCREMENT PRIMARY KEY,
   EntryDate DATE NOT NULL,
   EntryMood TINYINT,
   EntryNotes TEXT,
@@ -122,29 +122,6 @@ CREATE TABLE DiaryEntries (
   CONSTRAINT fk_user FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 
-CREATE TABLE DiaryPhotos (
-    DiaryPhotoID INT AUTO_INCREMENT PRIMARY KEY,
-    EntryID INT,
-    PhotoID INT,
-    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-    FOREIGN KEY (PhotoID) REFERENCES Photos(PhotoID)
-);
-
-CREATE TABLE DiaryMeasurements (
-    DiaryMeasurementID INT AUTO_INCREMENT PRIMARY KEY,
-    EntryID INT,
-    MeasurementID INT,
-    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-    FOREIGN KEY (MeasurementID) REFERENCES Measurements(MeasurementID)
-);
-
-CREATE TABLE DiarySymptoms (
-       DiarySymptomID INT AUTO_INCREMENT PRIMARY KEY,
-       EntryID INT NOT NULL,
-       SymptomID INT NOT NULL,
-       FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-       FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
-);
 
 --Not implemented yet--
 --CREATE TABLE Event ()

@@ -26,7 +26,7 @@ public class PhotoService {
     }
 
     @Transactional(readOnly = true)
-    public List<Photo> getPhotosByUserId(int userId) {
+    public List<Photo> getPhotosByUserId(long userId) {
         return photoRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"));
     }
 
