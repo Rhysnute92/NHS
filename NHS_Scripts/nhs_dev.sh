@@ -88,7 +88,7 @@ chmod 644 ~/.ssh/known_hosts
 
 echo "cloning project from git..."
 ssh-agent bash -c 'ssh-add nhs_keypair.key; git clone git@git.cardiff.ac.uk:c23102007/dissertation-nhs-lymphoedema.git'
-git checkout -b main
+
 
 echo "setting up gradle..."
 sudo dnf install unzip -y
@@ -103,6 +103,7 @@ gradle -v
 
 echo "running application..."
 cd dissertation-nhs-lymphoedema
+git checkout main
 cd nhs
 
 gradle build
