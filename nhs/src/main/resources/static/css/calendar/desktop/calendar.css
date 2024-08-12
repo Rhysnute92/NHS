@@ -1,18 +1,21 @@
 /* Import utility styles */
 @import url('/static/css/utility/variables.css');
 
+/* Container for the calendar, using a grid layout */
 .container-calendar {
     margin: 0 auto;
     overflow: auto;
     justify-content: space-between;
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 3fr; /* Two-column layout */
 }
 
+/* Header styling */
 #header h1 {
     font-size: 3em;
 }
 
+/* Appointments section styling */
 #appointments {
     padding: 10px;
     margin: 0.5rem;
@@ -20,28 +23,31 @@
     position: relative;
 }
 
+/* General header styling */
 #header {
     color: #000000;
     position: relative;
     margin-left: 1rem;
 }
 
+/* Styling for headings within the appointments section */
 #appointments h3 {
     color: black;
     margin: 0;
 }
 
+/* Input and textarea styling within the appointments section */
 #appointments input[type="time"],
 #appointments input[type="date"],
 #appointments input[type="text"],
-#appointments textarea
-{
+#appointments textarea {
     margin: 10px 0;
     padding: 5px;
     width: 75%;
     font-family: 'Frutiger', sans-serif;
 }
 
+/* Button styling within the appointments section */
 #appointments button {
     background: #005EB8;
     color: white;
@@ -53,6 +59,7 @@
     height: 2rem;
 }
 
+/* Center section styling in the grid */
 #center {
     margin: 1rem;
     grid-column: 2;
@@ -60,26 +67,32 @@
     padding-left: 4rem;
 }
 
+/* Header styling for the center section */
 #center h3 {
     color: black;
     font-size: 2em;
     position: relative;
 }
 
+/* Appointment list styling */
 #apptList {
     list-style: none;
     padding: 0;
     position: relative;
 }
 
+/* Styling for list items within the appointment list */
 #apptList li {
     margin-top: 2rem;
 }
 
+/* Left section styling in the grid */
 #left {
     margin: 1rem;
     grid-column: 1;
 }
+
+/* Styling for the delete event button */
 .delete-event {
     background: rgb(237, 19, 19);
     color: white;
@@ -91,6 +104,7 @@
     width: 4rem;
 }
 
+/* General button styling within the calendar container */
 .button-container-calendar button {
     cursor: pointer;
     background: #005eb8;
@@ -101,12 +115,14 @@
     height: 2rem;
 }
 
+/* Styling for the calendar table */
 .table-calendar {
     border-collapse: collapse;
     width: 100%;
     position: relative;
 }
 
+/* Styling for table cells and headers */
 .table-calendar td,
 .table-calendar th {
     border: 1px solid #e2e2e2;
@@ -117,6 +133,7 @@
     padding: 0;
 }
 
+/* Styling for selected date in the calendar */
 .date-picker.selected {
     background-color: #f2f2f2;
     font-weight: bold;
@@ -124,24 +141,26 @@
     outline: 1px dashed #005eb8;
 }
 
+/* Additional styling for selected date */
 .date-picker.selected span {
     border-bottom: 2px solid currentColor;
 }
 
-
+/* Hover effect for date picker */
 .date-picker:hover {
     background-color: #005EB8;
     color: white;
     cursor: pointer;
 }
 
+/* Styling for the month and year heading */
 #monthAndYear {
     position: relative;
     text-align: center;
     margin-top: 0;
 }
 
-
+/* Styling for the calendar button container */
 .button-container-calendar {
     position: relative;
     margin-bottom: 0.5em;
@@ -149,21 +168,24 @@
     clear: both;
 }
 
+/* Styling for the previous button */
 #previous {
     float: left;
 }
 
+/* Styling for the next button */
 #next {
     float: right;
 }
 
-
+/* Footer container styling */
 .footer-container-calendar {
     text-align: center;
     padding: 10px 0;
     position: relative;
 }
 
+/* Styling for the select dropdown in the footer */
 .footer-container-calendar select {
     cursor: pointer;
     background: #ffffff;
@@ -172,6 +194,8 @@
     border-radius: 3px;
     padding: 5px;
 }
+
+/* Calendar container header styling */
 .calendar-container header {
     display: flex;
     align-items: center;
@@ -179,10 +203,12 @@
     justify-content: space-between;
 }
 
+/* Navigation buttons styling within the calendar header */
 header .calendar-navigation {
     display: flex;
 }
 
+/* Individual navigation button styling */
 header .calendar-navigation span {
     height: 38px;
     width: 38px;
@@ -196,23 +222,28 @@ header .calendar-navigation span {
     font-size: 1.9rem;
 }
 
+/* Adjust the right margin for the last navigation button */
 .calendar-navigation span:last-child {
     margin-right: -10px;
 }
 
+/* Hover effect for navigation buttons */
 header .calendar-navigation span:hover {
     background: #f2f2f2;
 }
 
+/* Current date styling in the calendar header */
 header .calendar-current-date {
     font-weight: 500;
     font-size: 1.45rem;
 }
 
+/* Calendar body styling */
 .calendar-body {
     padding: 20px;
 }
 
+/* Styling for unordered lists in the calendar body */
 .calendar-body ul {
     list-style: none;
     flex-wrap: wrap;
@@ -220,21 +251,25 @@ header .calendar-current-date {
     text-align: center;
 }
 
+/* Styling for the calendar dates section */
 .calendar-body .calendar-dates {
     margin-bottom: 20px;
 }
 
+/* General list item styling in the calendar body */
 .calendar-body li {
     width: calc(100% / 7);
     font-size: 1.07rem;
     color: #414141;
 }
 
+/* Styling for weekdays in the calendar */
 .calendar-body .calendar-weekdays li {
     cursor: default;
     font-weight: 500;
 }
 
+/* Styling for individual date items in the calendar */
 .calendar-body .calendar-dates li {
     margin-top: 30px;
     position: relative;
@@ -242,14 +277,17 @@ header .calendar-current-date {
     cursor: pointer;
 }
 
+/* Styling for inactive (non-clickable) dates */
 .calendar-dates li.inactive {
     color: #aaa;
 }
 
+/* Styling for active (selected) dates */
 .calendar-dates li.active {
     color: #fff;
 }
 
+/* Common styling for all date items in the calendar */
 .calendar-dates li::before {
     position: absolute;
     content: "";
@@ -262,15 +300,12 @@ header .calendar-current-date {
     transform: translate(-50%, -50%);
 }
 
+/* Background color for active (selected) dates */
 .calendar-dates li.active::before {
     background: #6332c5;
 }
 
+/* Hover effect for non-active dates */
 .calendar-dates li:not(.active):hover::before {
     background: #e4e1e1;
 }
-
-
-
-
-
