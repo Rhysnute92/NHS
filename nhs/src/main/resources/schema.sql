@@ -216,10 +216,9 @@ CREATE TABLE Task (
 );
 CREATE TABLE UserTask (
     UserTaskID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID BIGINT,
-    TaskIsCompleted BOOLEAN,
-    TaskDuedate DATETIME,
     TaskID BIGINT,
+    UserID BIGINT,
+    Bitmask INT,
     FOREIGN KEY (TaskID) REFERENCES Task(TaskID),
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );

@@ -20,7 +20,7 @@ public class UserTaskLog {
     private Long id;
 
     @Column(name = "UserID", nullable = false)
-    private Long userId;
+    private Long userID;
 
     @ManyToOne
     @JoinColumn(name = "UserTaskID", nullable = false)
@@ -53,14 +53,14 @@ public class UserTaskLog {
      * @return the userId
      */
     public Long getUserId() {
-        return userId;
+        return userID;
     }
 
     /**
      * @param userId the userId to set
      */
     public void setUserId(Long userId) {
-        this.userId = userId;
+        this.userID = userId;
     }
 
     /**
