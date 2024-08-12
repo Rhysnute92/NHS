@@ -74,7 +74,7 @@ export class TaskManager {
    * @return {HTMLElement} - The container element where tasks will be rendered.
    */
   getTasksContainer() {
-    return document.querySelector(".my-health-tasks .collapsible-content");
+    return document.querySelector(".my-health-tasks .tasks-container");
   }
 
   /**
