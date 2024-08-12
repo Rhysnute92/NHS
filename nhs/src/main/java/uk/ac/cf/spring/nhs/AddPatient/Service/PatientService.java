@@ -83,6 +83,7 @@ public class PatientService {
             patient.setNhsNumber(request.getNhsNumber());
             patient.setPatientDOB(request.getPatientDOB());
             patient.setPatientTitle(request.getPatientTitle());
+            patient.setPatientClinic(request.getPatientClinic());
             patient.setEncryptionKey(Base64.getEncoder().encodeToString(secretKey.getEncoded()));
             patientRepository.save(patient);
 

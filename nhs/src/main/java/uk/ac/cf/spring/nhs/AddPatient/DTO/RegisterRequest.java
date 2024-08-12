@@ -8,6 +8,7 @@ public class RegisterRequest {
     private String nhsNumber;
     private String patientDOB;
     private String patientTitle;
+    private String patientClinic;
 
     // Getters and Setters
     public String getPatientName() {
@@ -63,6 +64,16 @@ public class RegisterRequest {
     }
 
     public void setPatientTitle(String patientTitle) {
+
         this.patientTitle = patientTitle;
+    }
+
+    public String getPatientClinic() {
+        return patientClinic;
+    }
+
+    public void setPatientClinic(String patientClinic) {
+
+        this.patientClinic = patientClinic;
     }
 }

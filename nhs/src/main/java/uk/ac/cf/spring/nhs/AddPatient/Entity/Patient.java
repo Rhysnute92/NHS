@@ -26,6 +26,8 @@ public class Patient {
     private String patientLastName;
     @Column(name = "PatientTitle")
     private String patientTitle;
+    @Column(name = "PatientClinic")
+    private String patientClinic;
     @ManyToOne
     @JoinColumn(name = "UserID", insertable = false, updatable = false)
     private UserCredentials userCredentials;
@@ -81,6 +83,12 @@ public class Patient {
     }
     public void setPatientTitle(String patientTitle) {
         this.patientTitle = patientTitle;
+    }
+    public String getPatientClinic() {
+        return patientClinic;
+    }
+    public void setPatientClinic(String patientClinic) {
+        this.patientClinic = patientClinic;
     }
     public UserCredentials getUserCredentials() {
         return userCredentials;

@@ -40,6 +40,7 @@ CREATE TABLE Patients (
     PatientName VARCHAR(255),
     PatientLastName VARCHAR(255),
     PatientTitle VARCHAR(100),
+    PatientClinic VARCHAR(255),
     UserID BIGINT,
     EncryptionKey VARCHAR(255),
     FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID),
