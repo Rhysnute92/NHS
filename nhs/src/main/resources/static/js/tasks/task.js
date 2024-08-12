@@ -1,7 +1,4 @@
-import {
-  createCheckCircle,
-  toggleCheckCircle,
-} from "../common/utils/circleCheckmark.js";
+import { formatStringTitleCase } from "../common/utils/stringUtility.js";
 export class Task {
   /**
    * Creates an instance of Task.
@@ -28,29 +25,17 @@ export class Task {
     return isBitSet ? "Complete" : "Incomplete";
   }
 
-  /*   createTaskFooter() {
-    const taskFooter = document.createElement("div");
-    taskFooter.classList.add("task-footer");
-
-    const taskCompleteLabel = document.createElement("span");
-    taskCompleteLabel.textContent = "Complete:";
-
-    const checkCircleWrapper = createCheckCircle();
-
-    checkCircleWrapper.addEventListener("click", () => {
-      toggleCheckCircle(checkCircleWrapper);
-      this.status = this.calculateStatus();
-    });
-
-    taskFooter.append(taskCompleteLabel, checkCircleWrapper);
-
-    return taskFooter;
-  } */
+  /**
+   * Formats the periodicity to be title case.
+   * @return {string} - The formatted periodicity.
+   */
+  formatPeriodicity() {
+    return formatStringTitleCase(this.periodicity);
+  }
 
   /**
-   * Renders a task item as an HTML element with the task's name, description, and status.
-   *
-   * @return {HTMLElement} The task item element.
+   * Renders the task card as an HTML element.
+   * @return {HTMLElement} - The task card element.
    */
   renderTaskCard() {
     const taskCard = document.createElement("div");
@@ -59,67 +44,24 @@ export class Task {
     const table = document.createElement("table");
     table.classList.add("task-table");
 
-    // Header row (Title, Schedule, Status, Complete)
-    const headerRow = document.createElement("tr");
-
-    const taskNameHeader = document.createElement("td");
-    taskNameHeader.classList.add("task-name-header");
-    taskNameHeader.textContent = this.name;
-
-    const scheduleHeader = document.createElement("td");
-    scheduleHeader.classList.add("meta-title");
-    scheduleHeader.textContent = "Schedule";
-
-    const statusHeader = document.createElement("td");
-    statusHeader.classList.add("meta-title");
-    statusHeader.textContent = "Status";
-
-    const completeHeader = document.createElement("td");
-    completeHeader.classList.add("meta-title");
-    completeHeader.textContent = "Complete";
-
-    headerRow.append(
-      taskNameHeader,
-      scheduleHeader,
-      statusHeader,
-      completeHeader
-    );
+    // Header row
+    const headerRow = this.createTableRow([
+      this.createTableCell(this.name, "task-name-header"),
+      this.createTableCell("Schedule", "meta-title"),
+      this.createTableCell("Status", "meta-title"),
+      this.createTableCell("Complete", "meta-title"),
+    ]);
 
     // Divider row
-    const dividerRow = document.createElement("tr");
-    const dividerCell = document.createElement("td");
-    dividerCell.colSpan = 4;
-    const divider = document.createElement("hr");
-    divider.classList.add("task-divider");
-    dividerCell.appendChild(divider);
-    dividerRow.appendChild(dividerCell);
+    const dividerRow = this.createDividerRow();
 
-    // Data row (Description, Periodicity, Status, Check Circle)
-    const dataRow = document.createElement("tr");
-
-    const taskDescCell = document.createElement("td");
-    taskDescCell.classList.add("task-desc");
-    taskDescCell.textContent = this.description;
-
-    const periodicityCell = document.createElement("td");
-    periodicityCell.classList.add("task-periodicity");
-    periodicityCell.textContent =
-      this.periodicity.charAt(0).toUpperCase() +
-      this.periodicity.slice(1).toLowerCase(); // Title case
-
-    const statusCell = document.createElement("td");
-    statusCell.classList.add("task-status");
-    statusCell.textContent = this.status;
-
-    const checkCircleCell = document.createElement("td");
-    const checkCircleWrapper = createCheckCircle();
-    checkCircleWrapper.addEventListener("click", () => {
-      toggleCheckCircle(checkCircleWrapper);
-      this.status = this.calculateStatus();
-    });
-    checkCircleCell.appendChild(checkCircleWrapper);
-
-    dataRow.append(taskDescCell, periodicityCell, statusCell, checkCircleCell);
+    // Data row
+    const dataRow = this.createTableRow([
+      this.createTableCell(this.description, "task-desc"),
+      this.createTableCell(this.formatPeriodicity(), "task-periodicity"),
+      this.createTableCell(this.status, "task-status"),
+      this.createCheckCircleCell(),
+    ]);
 
     // Append rows to table
     table.append(headerRow, dividerRow, dataRow);

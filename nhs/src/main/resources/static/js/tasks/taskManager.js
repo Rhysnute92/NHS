@@ -1,9 +1,11 @@
 import { Task } from "./task.js";
+import { TaskRenderer } from "./taskRenderer.js";
 
 export class TaskManager {
   constructor(userId) {
     this.userId = userId;
     this.tasks = [];
+    this.taskRenderer = new TaskRenderer();
   }
 
   /**
@@ -47,7 +49,7 @@ export class TaskManager {
     this.clearContainer(tasksContainer);
 
     this.tasks.forEach((task) => {
-      tasksContainer.appendChild(task.renderTaskCard());
+      tasksContainer.appendChild(this.taskRenderer.renderTaskCard(task));
     });
   }
 
