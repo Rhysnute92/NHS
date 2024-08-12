@@ -6,6 +6,6 @@ variable "network" { default = "default" }
 variable "keypair" { default = "nhs_proj_keypair" }
 
 variable "pool" { default = "cscloud_private_floating" }
-variable "server_script" { default = ".nhs_dev.sh" }
+variable "server_script" { default = "nhs_dev.sh" }
 variable "security_description" { default = "NHS dev server security" }
 variable "security_name" { default = "nhs_dev_security" }
