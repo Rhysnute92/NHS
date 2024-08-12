@@ -129,6 +129,26 @@ public class UserTaskService {
         userTask.setBitmask(BitmaskUtility.resetBitmask());
         userTaskRepository.save(userTask);
     }
+    
+    /**
+     * Counts the number of completed tasks for a specific day for a given user.
+     *
+     * @param  userId  the ID of the user
+     * @param  day     the day of the month (0-indexed)
+     * @return          the number of completed tasks for the specified day
+     */
+    @Transactional(readOnly = true)
+    public int countCompletedTasksForday(Long userId, int day) {
+        List<UserTask> userTasks = userTaskRepository.findByUserID(userId);
+        int count = 0;
+        for (UserTask userTask : userTasks) {
+            if (BitmaskUtility.isBitSet(userTask.getBitmask(), day)) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
     // CRUD functions
 
     /**
