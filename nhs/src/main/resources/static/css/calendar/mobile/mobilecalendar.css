@@ -16,7 +16,6 @@
 
     #mobileMonth {
         position: relative;
-        top: 2rem;
         height: 75vh;
         width: 100vw;
     }
@@ -39,6 +38,11 @@
         color: black;
         font-size: 18px;
         margin: 0;
+    }
+
+    p {
+        padding-left: 1rem;
+        padding-top: 1rem;
     }
 
     #appointments input[type="time"],

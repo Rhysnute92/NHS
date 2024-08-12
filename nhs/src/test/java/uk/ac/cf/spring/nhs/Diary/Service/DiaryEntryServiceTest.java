@@ -38,7 +38,7 @@ public class DiaryEntryServiceTest {
     private FileStorageService fileStorageService;
 
     @InjectMocks
-    private DiaryEntSerryvice diaryEntryService;
+    private DiaryEntService diaryEntryService;
 
     @BeforeEach
     public void setUp() {
