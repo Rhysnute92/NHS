@@ -3,24 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
-    <link rel="stylesheet" th:href="@{/css/guest/guest.css}" />
-    <style>
-
-    </style>
-    <title>Add A Patient</title>
+    <link rel="stylesheet" th:href="@{/css/admin/addPatient.css}" />
 </head>
 <body>
-<header th:replace="~{common/fragments/header}"></header>
-<div class="header">
-    <h2>Add a New Patient</h2>
+<div class="container">
+    <header th:replace="~{common/fragments/header}"></header>
+    <h1>Patient Registration</h1>
+    <form action="/api/register" id="register" method="post">
+        <label for="patientName">Patient Name:</label>
+        <input type="text" id="patientName" name="patientName" required>
+
+        <label for="patientLastName">Patient Last Name:</label>
+        <input type="text" id="patientLastName" name="patientLastName" required>
+
+        <label for="patientEmail">Patient Email:</label>
+        <input type="email" id="patientEmail" name="patientEmail" required>
+
+        <label for="patientMobile">Patient Mobile:</label>
+        <input type="text" id="patientMobile" name="patientMobile" required>
+
+        <label for="nhsNumber">NHS Number:</label>
+        <input type="text" id="nhsNumber" name="nhsNumber" required>
+
+        <label for="patientDOB">Date of Birth:</label>
+        <input type="date" id="patientDOB" name="patientDOB" required>
+
+        <label for="patientTitle">Patient Title:</label>
+        <input type="text" id="patientTitle" name="patientTitle" required>
+
+        <label for="patientClinic">Patient Clinic:</label>
+        <input type="text" id="patientClinic" name="patientClinic" required>
+
+        <button type="submit">Register Patient</button>
+    </form>
 </div>
-<div class="back-btn">
-    <img
-            src="/images/back-button.svg"
-            alt="Back Button Icon"
-            class="icon"
-            onclick="location. href='/guest'"
-    />
+<div class="back-btn" onclick="location.href='/account'">
+    Back
 </div>
 </body>
 </html>
