@@ -1,46 +1,74 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Appointment</title>
+    <!-- Meta tag for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Link to the mobile-specific CSS file for calendar styles -->
     <link rel="stylesheet" th:href="@{/css/calendar/mobile/mobilecalendar.css}"/>
+    <!-- Link to the common CSS styles used throughout the application -->
     <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
 </head>
 <body>
+<!-- Include header fragment using Thymeleaf -->
 <div th:replace="~{common/fragments/header}"></div>
+
+<!-- Include navbar fragment using Thymeleaf -->
 <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+
+<!-- Include navigation menu fragment with dynamic content passed to it using Thymeleaf -->
 <div th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
-<p>You do not have to add lymphoedema appointments these will be done by your physician</p>
+
+<!-- Informational paragraph for the user -->
+<p>Lymphoedema appointments are input by your healthcare provider</p>
+
+<!-- Container for the appointment form -->
 <div class="container-calendar">
+    <!-- Appointment form fields -->
     <div id="appointments">
+        <!-- Date input field -->
         <label>Date of Appointment:<br>
             <input type="date" id="appointmentDate"><br>
         </label>
+
+        <!-- Time input field -->
         <label>Time of Appointment:<br>
             <input type="time" id="appointmentTime"><br>
         </label>
+
+        <!-- Location input field -->
         <label>Location of Appointment:<br>
             <input type="text" id="appointmentLocation" placeholder="Please enter the location of your appointment"><br>
         </label>
+
+        <!-- Appointment type input field -->
         <label>Appointment Type:<br>
             <input type="text" id="appointmentType" placeholder="Please enter what your appointment is for"><br>
         </label>
+
+        <!-- Healthcare provider's name input field (optional) -->
         <label>Healthcare Provider's Name (optional):<br>
             <input type="text" id="dr" placeholder="Please enter the name of your healthcare provider"><br>
         </label>
+
+        <!-- Additional information textarea -->
         <label>Information about your Appointment:<br>
             <textarea id="comments" placeholder="Info about your appointment"></textarea><br>
         </label>
+
+        <!-- Button to add the appointment -->
         <button id="addEvent" onclick="addEvent()">
             Add
         </button>
+
+        <!-- Button to clear the form fields -->
         <button id="deleteAppointment" onclick="deleteEvent()">
             Clear
         </button>
     </div>
 </div>
+
+<!-- Include JavaScript files -->
 <script th:src="@{/js/calendar/calendar.js}"></script>
-<script th:src="@{/js/calendar/appointment.js}"></script>
-<script th:src="@{/js/calendar/addAppointments.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>
