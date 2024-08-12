@@ -1,4 +1,5 @@
 -- Drop all tables for testing purposes
+Drop TABLE IF EXISTS UserTaskLog;
 DROP TABLE IF EXISTS UserTask;
 DROP TABLE IF EXISTS Task;
 DROP TABLE IF EXISTS InfoAssets;
@@ -222,7 +223,16 @@ CREATE TABLE UserTask (
     FOREIGN KEY (TaskID) REFERENCES Task(TaskID),
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
-
+CREATE TABLE UserTaskLog (
+    UserTaskLogID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID BIGINT,
+    UserTaskID INT,
+    Bitmask INT,
+    MonthYear VARCHAR(255),
+    CreatedAt DATETIME,
+    FOREIGN KEY (UserTaskID) REFERENCES UserTask(UserTaskID),
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+);
 --Not implemented yet--
 --CREATE TABLE Reminders ()
 --CREATE TABLE Clinic ()
