@@ -23,18 +23,23 @@ export function createCheckCircle() {
  * @param {HTMLElement} checkCircleElement The element containing the check circle SVG.
  */
 export function toggleCheckCircle(checkCircleElement) {
-  const checkmark = element.querySelector(".checkmark");
-  const circle = element.querySelector(".checkmark__circle");
-  const check = element.querySelector(".checkmark__check");
+  const checkmark = checkCircleElement.querySelector(".checkmark");
+  const circle = checkCircleElement.querySelector(".checkmark__circle");
+  const check = checkCircleElement.querySelector(".checkmark__check");
 
   if (checkmark && circle && check) {
-    element.classList.toggle("checked");
-    circle.style.strokeDashoffset = element.classList.contains("checked")
+    checkCircleElement.classList.toggle("checked");
+    circle.style.strokeDashoffset = checkCircleElement.classList.contains(
+      "checked"
+    )
       ? "0"
       : "166";
-    check.style.strokeDashoffset = element.classList.contains("checked")
+    check.style.strokeDashoffset = checkCircleElement.classList.contains(
+      "checked"
+    )
       ? "0"
       : "48";
+      
   } else {
     console.error("Required elements not found.");
   }
