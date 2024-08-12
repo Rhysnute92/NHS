@@ -1,8 +1,11 @@
 package uk.ac.cf.spring.nhs.Diary.Entity;
 
 import jakarta.persistence.*;
+import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
+import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
+import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
+
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity

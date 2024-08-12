@@ -122,7 +122,28 @@ CREATE TABLE DiaryEntries (
   EntryMood TINYINT,
   EntryNotes TEXT,
   UserID BIGINT NOT NULL,
-  CONSTRAINT fk_user FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+  FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+);
+
+CREATE TABLE DiaryPhotos (
+  EntryID BIGINT,
+  PhotoID BIGINT,
+  FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
+  FOREIGN KEY (PhotoID) REFERENCES Photos(PhotoID)
+);
+
+CREATE TABLE DiaryMeasurements (
+  EntryID BIGINT,
+  MeasurementID BIGINT,
+  FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
+  FOREIGN KEY (MeasurementID) REFERENCES Measurements(MeasurementID)
+);
+
+CREATE TABLE DiarySymptoms (
+  EntryID BIGINT,
+  SymptomID BIGINT,
+  CONSTRAINT fk_entry FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
+  CONSTRAINT fk_symptom FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
 );
 
 

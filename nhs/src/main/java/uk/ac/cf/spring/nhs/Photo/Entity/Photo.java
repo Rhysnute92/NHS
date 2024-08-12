@@ -1,6 +1,8 @@
-package uk.ac.cf.spring.nhs.Diary.Entity;
+package uk.ac.cf.spring.nhs.Photo.Entity;
 
 import jakarta.persistence.*;
+import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+
 import java.util.Date;
 import java.util.Set;
 

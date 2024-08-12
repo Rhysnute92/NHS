@@ -1,10 +1,10 @@
-package uk.ac.cf.spring.nhs.Diary.Service;
+package uk.ac.cf.spring.nhs.Symptom.Service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import uk.ac.cf.spring.nhs.Diary.DTO.SymptomDTO;
-import uk.ac.cf.spring.nhs.Diary.Entity.Symptom;
-import uk.ac.cf.spring.nhs.Diary.Repository.SymptomRepository;
+import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
+import uk.ac.cf.spring.nhs.Symptom.Repository.SymptomRepository;
 
 @Service
 public class SymptomService {

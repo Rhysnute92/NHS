@@ -1,10 +1,10 @@
-package uk.ac.cf.spring.nhs.Diary.Service;
+package uk.ac.cf.spring.nhs.Measurement.Service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import uk.ac.cf.spring.nhs.Diary.DTO.MeasurementDTO;
-import uk.ac.cf.spring.nhs.Diary.Entity.Measurement;
-import uk.ac.cf.spring.nhs.Diary.Repository.MeasurementRepository;
+import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
+import uk.ac.cf.spring.nhs.Measurement.Repository.MeasurementRepository;
 
 @Service
 public class MeasurementService {

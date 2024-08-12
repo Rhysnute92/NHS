@@ -11,13 +11,12 @@ import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinFormDTO;
 import uk.ac.cf.spring.nhs.Diary.DTO.PhotoDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
-import uk.ac.cf.spring.nhs.Diary.Entity.Photo;
+import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
-import uk.ac.cf.spring.nhs.Diary.Service.PhotoService;
+import uk.ac.cf.spring.nhs.Photo.Service.PhotoService;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 
-import java.nio.file.attribute.UserPrincipal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

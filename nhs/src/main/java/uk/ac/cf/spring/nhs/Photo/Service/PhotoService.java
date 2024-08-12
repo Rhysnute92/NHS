@@ -1,17 +1,15 @@
-package uk.ac.cf.spring.nhs.Diary.Service;
+package uk.ac.cf.spring.nhs.Photo.Service;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 import uk.ac.cf.spring.nhs.Diary.DTO.PhotoDTO;
-import uk.ac.cf.spring.nhs.Diary.Entity.Photo;
-import uk.ac.cf.spring.nhs.Diary.Repository.PhotoRepository;
 import uk.ac.cf.spring.nhs.Files.Service.FileStorageService;
+import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
+import uk.ac.cf.spring.nhs.Photo.Repository.PhotoRepository;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PhotoService {
@@ -30,8 +28,9 @@ public class PhotoService {
         return photoRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"));
     }
 
-    public Photo savePhoto(PhotoDTO file, long userId) {
-        String photoUrl = fileStorageService.storeFile(file.getFile());
+    public Photo savePhoto(PhotoDTO photoDTO, long userId) {
+        String photoUrl = fileStorageService.storeFile(photoDTO.getFile());
+        System.out.println("Photo URL: " + photoUrl);
         Photo photo = new Photo(photoUrl, new Date(), "", userId);
         return photoRepository.save(photo);
     }

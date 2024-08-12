@@ -1,9 +1,8 @@
-package uk.ac.cf.spring.nhs.Diary.Repository;
+package uk.ac.cf.spring.nhs.Photo.Repository;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
-import uk.ac.cf.spring.nhs.Diary.Entity.Photo;
+import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
 
 import java.util.List;
 

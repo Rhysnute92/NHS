@@ -14,6 +14,12 @@ import uk.ac.cf.spring.nhs.Diary.DTO.PhotoDTO;
 import uk.ac.cf.spring.nhs.Diary.DTO.SymptomDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.*;
 import uk.ac.cf.spring.nhs.Diary.Repository.*;
+import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
+import uk.ac.cf.spring.nhs.Measurement.Service.MeasurementService;
+import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
+import uk.ac.cf.spring.nhs.Photo.Service.PhotoService;
+import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
+import uk.ac.cf.spring.nhs.Symptom.Service.SymptomService;
 
 import java.util.*;
 
