@@ -86,4 +86,19 @@ public class UserTaskController {
         return ResponseEntity.noContent().build();
     }
 
+    /**
+     * Gets the count of tasks completed by a user on a specific day.
+     *
+     * @param userId The ID of the user.
+     * @param day    The day of the month (1-based index).
+     * @return The number of tasks completed by the user on the given day.
+     */
+    @GetMapping("/{userId}/completed-tasks/{day}")
+    public ResponseEntity<Integer> countCompletedTasksForDay(
+            @PathVariable Long userId,
+            @PathVariable int day) {
+        int completedTasks = userTaskService.countCompletedTasksForday(userId, day);
+        return ResponseEntity.ok(completedTasks);
+    }
+
 }
