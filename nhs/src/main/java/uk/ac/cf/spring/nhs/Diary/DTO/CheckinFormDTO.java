@@ -1,5 +1,9 @@
 package uk.ac.cf.spring.nhs.Diary.DTO;
 
+import uk.ac.cf.spring.nhs.Measurement.DTO.MeasurementDTO;
+import uk.ac.cf.spring.nhs.Photo.DTO.PhotoDTO;
+import uk.ac.cf.spring.nhs.Symptom.DTO.SymptomDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 

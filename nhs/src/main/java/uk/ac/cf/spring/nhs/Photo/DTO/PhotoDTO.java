@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Diary.DTO;
+package uk.ac.cf.spring.nhs.Photo.DTO;
 
 import org.springframework.web.multipart.MultipartFile;
 

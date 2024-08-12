@@ -3,7 +3,7 @@ package uk.ac.cf.spring.nhs.Photo.Service;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import uk.ac.cf.spring.nhs.Diary.DTO.PhotoDTO;
+import uk.ac.cf.spring.nhs.Photo.DTO.PhotoDTO;
 import uk.ac.cf.spring.nhs.Files.Service.FileStorageService;
 import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
 import uk.ac.cf.spring.nhs.Photo.Repository.PhotoRepository;

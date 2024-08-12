@@ -2,7 +2,7 @@ package uk.ac.cf.spring.nhs.Symptom.Service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import uk.ac.cf.spring.nhs.Diary.DTO.SymptomDTO;
+import uk.ac.cf.spring.nhs.Symptom.DTO.SymptomDTO;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 import uk.ac.cf.spring.nhs.Symptom.Repository.SymptomRepository;
 
