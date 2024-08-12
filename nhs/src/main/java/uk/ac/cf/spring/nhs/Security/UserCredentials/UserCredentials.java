@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 public class UserCredentials {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserID")
     private Long userId;
     @Column(name = "UserName")
