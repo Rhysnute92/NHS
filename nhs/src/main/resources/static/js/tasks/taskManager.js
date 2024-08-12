@@ -47,7 +47,7 @@ export class TaskManager {
     this.clearContainer(tasksContainer);
 
     this.tasks.forEach((task) => {
-      tasksContainer.appendChild(this.renderTaskCard(task));
+      tasksContainer.appendChild(task.renderTaskCard());
     });
   }
 
@@ -64,36 +64,6 @@ export class TaskManager {
     errorMessage.classList.add("error-message");
     errorMessage.textContent = "Unable to load tasks. Please try again later.";
     tasksContainer.appendChild(errorMessage);
-  }
-
-  /**
-   * Renders a task as a card element.
-   *
-   * @param {Task} task - The task object to render.
-   * @return {HTMLElement} - The rendered task card.
-   */
-  renderTaskCard(task) {
-    const taskCard = document.createElement("div");
-    taskCard.classList.add("task-card");
-
-    const taskName = document.createElement("h3");
-    taskName.classList.add("task-name");
-    taskName.textContent = task.name;
-
-    const taskDesc = document.createElement("p");
-    taskDesc.classList.add("task-desc");
-    taskDesc.textContent = task.description;
-
-    const taskStatus = document.createElement("p");
-    taskStatus.classList.add("task-status");
-    taskStatus.textContent = `Status: ${task.status}`;
-
-    const taskPeriodicity = document.createElement("p");
-    taskPeriodicity.classList.add("task-periodicity");
-    taskPeriodicity.textContent = `Periodicity: ${task.periodicity}`;
-
-    taskCard.append(taskName, taskDesc, taskStatus, taskPeriodicity);
-    return taskCard;
   }
 
   /**

@@ -1,3 +1,7 @@
+import {
+  createCheckCircle,
+  toggleCheckCircle,
+} from "../common/utils/circleCheckmark.js";
 export class Task {
   /**
    * Creates an instance of Task.
@@ -24,50 +28,105 @@ export class Task {
     return isBitSet ? "Complete" : "Incomplete";
   }
 
-  createCheckCircle() {
-    const checkCircleWrapper = document.createElement("div");
-    checkCircleWrapper.classList.add("check-circle-wrapper");
+  /*   createTaskFooter() {
+    const taskFooter = document.createElement("div");
+    taskFooter.classList.add("task-footer");
 
-    const checkmarkSVG = `
-      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-      </svg>
-    `;
+    const taskCompleteLabel = document.createElement("span");
+    taskCompleteLabel.textContent = "Complete:";
 
-    checkCircleWrapper.innerHTML = checkmarkSVG;
-  }
+    const checkCircleWrapper = createCheckCircle();
+
+    checkCircleWrapper.addEventListener("click", () => {
+      toggleCheckCircle(checkCircleWrapper);
+      this.status = this.calculateStatus();
+    });
+
+    taskFooter.append(taskCompleteLabel, checkCircleWrapper);
+
+    return taskFooter;
+  } */
 
   /**
    * Renders a task item as an HTML element with the task's name, description, and status.
    *
    * @return {HTMLElement} The task item element.
    */
-  renderTaskItem() {
+  renderTaskCard() {
     const taskCard = document.createElement("div");
-    taskItem.classList.add("task-card");
+    taskCard.classList.add("task-card");
 
-    const taskName = document.createElement("h3");
-    taskName.classList.add("task-name");
-    taskName.textContent = this.name;
+    const table = document.createElement("table");
+    table.classList.add("task-table");
 
-    const taskDesc = document.createElement("p");
-    taskDesc.classList.add("task-desc");
-    taskDesc.textContent = this.description;
+    // Header row (Title, Schedule, Status, Complete)
+    const headerRow = document.createElement("tr");
 
-    const taskMeta = document.createElement("div");
-    taskStatus.classList.add("task-status");
-    taskStatus.textContent = `Status: ${this.status}`;
+    const taskNameHeader = document.createElement("td");
+    taskNameHeader.classList.add("task-name-header");
+    taskNameHeader.textContent = this.name;
 
-    const taskPeriodicity = document.createElement("span");
-    taskPeriodicity.classList.add("task-periodicity");
-    taskPeriodicity.textContent = `Periodicity: ${this.periodicity}`;
+    const scheduleHeader = document.createElement("td");
+    scheduleHeader.classList.add("meta-title");
+    scheduleHeader.textContent = "Schedule";
 
-    taskItem.appendChild(taskName);
-    taskItem.appendChild(taskDesc);
-    taskItem.appendChild(taskStatus);
-    taskItem.appendChild(taskPeriodicity);
+    const statusHeader = document.createElement("td");
+    statusHeader.classList.add("meta-title");
+    statusHeader.textContent = "Status";
 
-    return taskItem;
+    const completeHeader = document.createElement("td");
+    completeHeader.classList.add("meta-title");
+    completeHeader.textContent = "Complete";
+
+    headerRow.append(
+      taskNameHeader,
+      scheduleHeader,
+      statusHeader,
+      completeHeader
+    );
+
+    // Divider row
+    const dividerRow = document.createElement("tr");
+    const dividerCell = document.createElement("td");
+    dividerCell.colSpan = 4;
+    const divider = document.createElement("hr");
+    divider.classList.add("task-divider");
+    dividerCell.appendChild(divider);
+    dividerRow.appendChild(dividerCell);
+
+    // Data row (Description, Periodicity, Status, Check Circle)
+    const dataRow = document.createElement("tr");
+
+    const taskDescCell = document.createElement("td");
+    taskDescCell.classList.add("task-desc");
+    taskDescCell.textContent = this.description;
+
+    const periodicityCell = document.createElement("td");
+    periodicityCell.classList.add("task-periodicity");
+    periodicityCell.textContent =
+      this.periodicity.charAt(0).toUpperCase() +
+      this.periodicity.slice(1).toLowerCase(); // Title case
+
+    const statusCell = document.createElement("td");
+    statusCell.classList.add("task-status");
+    statusCell.textContent = this.status;
+
+    const checkCircleCell = document.createElement("td");
+    const checkCircleWrapper = createCheckCircle();
+    checkCircleWrapper.addEventListener("click", () => {
+      toggleCheckCircle(checkCircleWrapper);
+      this.status = this.calculateStatus();
+    });
+    checkCircleCell.appendChild(checkCircleWrapper);
+
+    dataRow.append(taskDescCell, periodicityCell, statusCell, checkCircleCell);
+
+    // Append rows to table
+    table.append(headerRow, dividerRow, dataRow);
+
+    // Append table to task card
+    taskCard.appendChild(table);
+
+    return taskCard;
   }
 }
