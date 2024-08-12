@@ -29,10 +29,20 @@ public class FileStorageService {
     }
 
     public String storeFile(MultipartFile file) {
-        // Generate a unique filename so files with the same name don't overwrite each other
         String originalFilename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-        String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+
+        // If the file is a blob (e.g. it's an image with no extension), save it as a jpg
+        String extension;
+        if (originalFilename.equals("blob")) {
+            extension = ".jpg";
+        } else {
+            // Get the file extension
+            extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+        }
+
+        // Generate a unique filename so files with the same name don't overwrite each other
         String uniqueFilename = UUID.randomUUID().toString() + extension;
+        System.out.println("Unique Filename: " + uniqueFilename);
 
         try {
             if (uniqueFilename.contains("..")) {
