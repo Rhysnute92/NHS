@@ -44,6 +44,10 @@ export class TaskRenderer {
     const checkCircleCell = document.createElement("td");
     const checkCircleWrapper = createCheckCircle();
 
+    if (task.status === "Complete") {
+      checkCircleWrapper.classList.add("checked");
+    }
+
     addEventListener(checkCircleWrapper, "click", () => {
       toggleCheckCircle(checkCircleWrapper);
 
