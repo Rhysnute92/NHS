@@ -1,26 +1,19 @@
-import { Task } from "./task.js";
-import { TaskRenderer } from "./taskRenderer.js";
+import { Task } from "./task.js"; // Import the Task class
+import { TaskRenderer } from "./taskRenderer.js"; // Import the TaskRenderer class
+import { fetchData } from "../common/utils/apiUtility.js"; // Utility for API calls
 
 export class TaskManager {
-  constructor(userId) {
+  constructor(userId, eventQueue) {
     this.userId = userId;
     this.tasks = [];
-    this.taskRenderer = new TaskRenderer();
+    this.taskRenderer = new TaskRenderer(eventQueue, userId);
+    this.eventQueue = eventQueue;
   }
 
-  /**
-   * Fetches tasks from the API and updates the internal tasks array.
-   *
-   * @return {Promise<void>} A Promise that resolves when the tasks are fetched and displayed.
-   * @throws {Error} If there is an error fetching the tasks.
-   */
   async fetchTasks() {
     try {
-      const response = await fetch(`/usertask/user/${this.userId}`);
-      if (!response.ok) {
-        throw new Error("Failed to fetch tasks");
-      }
-      const taskData = await response.json();
+      console.debug(`Fetching tasks for user ID: ${this.userId}`);
+      const taskData = await fetchData(`/usertask/user/${this.userId}`);
       this.tasks = taskData.map(
         (userTask) =>
           new Task(
@@ -31,7 +24,7 @@ export class TaskManager {
             userTask.task.periodicity
           )
       );
-
+      console.debug("Fetched tasks: ", this.tasks);
       this.renderTasks();
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -39,25 +32,15 @@ export class TaskManager {
     }
   }
 
-  /**
-   * Renders the tasks in the tasks container.
-   *
-   * @return {void} This function does not return anything.
-   */
   renderTasks() {
     const tasksContainer = this.getTasksContainer();
     this.clearContainer(tasksContainer);
-
+    console.debug("Rendering tasks...");
     this.tasks.forEach((task) => {
       tasksContainer.appendChild(this.taskRenderer.renderTaskCard(task));
     });
   }
 
-  /**
-   * Displays an error message in the tasks container.
-   *
-   * @return {void} No return value.
-   */
   displayTaskErrorMessage() {
     const tasksContainer = this.getTasksContainer();
     this.clearContainer(tasksContainer);
@@ -66,24 +49,15 @@ export class TaskManager {
     errorMessage.classList.add("error-message");
     errorMessage.textContent = "Unable to load tasks. Please try again later.";
     tasksContainer.appendChild(errorMessage);
+    console.debug("Displayed task error message.");
   }
 
-  /**
-   * Gets the container element for the tasks.
-   *
-   * @return {HTMLElement} - The container element where tasks will be rendered.
-   */
   getTasksContainer() {
     return document.querySelector(".my-health-tasks .tasks-container");
   }
 
-  /**
-   * Clears all child elements from a container.
-   *
-   * @param {HTMLElement} container - The container to clear.
-   * @return {void} No return value.
-   */
   clearContainer(container) {
     container.innerHTML = "";
+    console.debug("Cleared tasks container.");
   }
 }

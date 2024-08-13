@@ -75,6 +75,19 @@ public class UserTaskController {
     }
 
     /**
+     * Marks a task as completed for the current day.
+     *
+     * @param userTaskID the ID of the task to mark as completed
+     * @return ResponseEntity with the updated UserTask
+     */
+    @PutMapping("/task-complete/{userTaskID}")
+    public ResponseEntity<UserTask> markTaskCompleted(@PathVariable("userTaskID") Long userTaskID) {
+        UserTask userTask = userTaskService.getUserTaskById(userTaskID);
+        userTaskService.markTaskCompleted(userTask);
+        return ResponseEntity.ok(userTask);
+    }
+
+    /**
      * Deletes a user task from the database.
      *
      * @param userTaskID the ID of the user task to delete

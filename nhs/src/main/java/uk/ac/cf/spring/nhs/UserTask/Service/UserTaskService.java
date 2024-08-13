@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,8 @@ import uk.ac.cf.spring.nhs.UserTaskLog.Service.UserTaskLogService;
 
 @Service
 public class UserTaskService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserTaskService.class);
 
     @Autowired
     private JpaUserTaskRepository userTaskRepository;
@@ -69,6 +73,8 @@ public class UserTaskService {
         int updatedBitmask = BitmaskUtility.setBit(userTask.getBitmask(), currentDay);
         userTask.setBitmask(updatedBitmask);
         userTaskRepository.save(userTask);
+        logger.debug("Marked task as completed. UserTask ID: {}, Updated Bitmask: {}", userTask.getId(),
+                Integer.toBinaryString(updatedBitmask));
     }
 
     @Transactional(readOnly = true)
@@ -129,13 +135,13 @@ public class UserTaskService {
         userTask.setBitmask(BitmaskUtility.resetBitmask());
         userTaskRepository.save(userTask);
     }
-    
+
     /**
      * Counts the number of completed tasks for a specific day for a given user.
      *
-     * @param  userId  the ID of the user
-     * @param  day     the day of the month (0-indexed)
-     * @return          the number of completed tasks for the specified day
+     * @param userId the ID of the user
+     * @param day    the day of the month (0-indexed)
+     * @return the number of completed tasks for the specified day
      */
     @Transactional(readOnly = true)
     public int countCompletedTasksForday(Long userId, int day) {
@@ -148,7 +154,7 @@ public class UserTaskService {
         }
         return count;
     }
-    
+
     // CRUD functions
 
     /**
@@ -199,6 +205,14 @@ public class UserTaskService {
         userTask.setUserID(userTaskDetails.getUserID());
         userTask.setBitmask(userTaskDetails.getBitmask());
         return userTaskRepository.save(userTask); // TODO: should this return anything?
+    }
+
+    @Transactional
+    public List<UserTask> updateUserTasksBatch(List<UserTask> userTasks) {
+        for (UserTask userTask : userTasks) {
+            userTaskRepository.save(userTask);
+        }
+        return userTasks;
     }
 
     /**
