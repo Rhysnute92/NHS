@@ -10,6 +10,7 @@ import uk.ac.cf.spring.nhs.Photo.Repository.PhotoRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PhotoService {
@@ -33,5 +34,16 @@ public class PhotoService {
         System.out.println("Photo URL: " + photoUrl);
         Photo photo = new Photo(photoUrl, new Date(), "", userId);
         return photoRepository.save(photo);
+    }
+
+    public boolean deletePhotoById(long photoId) {
+        Optional<Photo> optionalPhoto = photoRepository.findById(photoId);
+
+        if (optionalPhoto.isPresent()) {
+            photoRepository.deleteById(photoId);
+            return true;
+        }
+
+        return false;
     }
 }

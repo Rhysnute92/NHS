@@ -70,44 +70,12 @@ public class DiaryController {
         }
     }
 
-
-    @GetMapping("/photos")
-    public String photos(Model model,
-                         @AuthenticationPrincipal CustomUserDetails userDetails) {
-        Long userId = userDetails.getUserId();
-        List<Photo> photos = photoService.getPhotosByUserId(userId);
-        model.addAttribute("photos", photos);
-        return "diary/photos";
-    }
-
-
-    @PostMapping("/photos")
-    public ResponseEntity<?> uploadPhoto(@ModelAttribute PhotoDTO photo,
-                                         @AuthenticationPrincipal CustomUserDetails userDetails) {
-        try {
-            Long userId = userDetails.getUserId();
-
-            if (photo != null && photo.getFile() != null) {
-                Photo savedPhoto = photoService.savePhoto(photo, userId);
-                return ResponseEntity.ok(savedPhoto);
-            } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("Uploaded photo is empty");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An error occurred: " + e.getMessage());
-        }
-    }
-
-
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {
         return List.of(
-            new NavMenuItem("Diary", "/diary", "fa-solid fa-book"),
-            new NavMenuItem("Check-in", "/diary/checkin", "fa-solid fa-user-check"),
-            new NavMenuItem("Photos", "/diary/photos", "fa-solid fa-camera")
+                new NavMenuItem("Diary", "/diary", "fa-solid fa-book"),
+                new NavMenuItem("Check-in", "/diary/checkin", "fa-solid fa-user-check"),
+                new NavMenuItem("Photos", "/diary/photos", "fa-solid fa-camera")
         );
     }
 }
