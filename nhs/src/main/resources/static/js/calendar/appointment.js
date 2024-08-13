@@ -5,16 +5,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const closeBtn = document.querySelector('.popup-close');
     const modelContent = document.getElementById('modelContent');
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const modelContent = document.getElementById('modelContent');
-        if (modelContent) {
-            // Continue with your logic
-            modelContent.innerHTML = 'Your content here';
-        } else {
-            console.error('modelContent element not found.');
-        }
-    });
-
     // Function to open the model and load content
     openaddappt.addEventListener('click', () => {
         model.style.display = 'block';
