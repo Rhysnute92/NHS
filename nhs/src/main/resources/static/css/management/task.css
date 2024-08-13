@@ -6,6 +6,15 @@
   margin-bottom: 1em;
 }
 
+.task-card.completed {
+  background-color: rgba(
+    232,
+    237,
+    238,
+    0.1
+  ); /*  --nhs-pale-grey in rgba with 50% opacity */
+}
+
 .task-table {
   width: 100%;
   border-collapse: collapse;
@@ -27,13 +36,14 @@
 
 .task-desc {
   text-align: left;
-  padding: 0.5em 0;
+  padding: 0.25em;
+  padding-right: 2em;
   vertical-align: top;
   overflow: hidden;
-  text-overflow: ellipsis; /* Truncates text with ellipsis if necessary */
-  white-space: normal; /* Allows text to wrap */
-  max-height: 3em; /* Limits the height of the description box */
-  max-width: 20em;
+  text-overflow: ellipsis;
+  white-space: normal;
+  max-height: 3em;
+  width: 30em;
   height: auto;
 }
 
@@ -41,10 +51,20 @@
 .task-status,
 .check-circle-wrapper {
   text-align: left;
-  padding: 0.5em 0;
+  padding: 0.25em;
   vertical-align: top;
   max-width: 20em;
+  min-width: 7em;
   height: auto;
+}
+
+.task-card.completed .task-desc,
+.task-card.completed .meta-title,
+.task-card.completed .task-name-header,
+.task-card.completed .task-periodicity,
+.task-card.completed .task-status {
+  color: rgba(0, 0, 0, 0.5); /* Setting text color to black with 50% opacity */
+  text-decoration: line-through; /* Striking through the text */
 }
 
 .task-divider {

@@ -48,15 +48,37 @@ export class TaskRenderer {
    * @param {Task} task - The task object.
    * @return {HTMLElement} - The cell with the check circle.
    */
-  createCheckCircleCell(task) {
+  createCheckCircleCell(task, taskCard) {
     const checkCircleCell = document.createElement("td");
     const checkCircleWrapper = createCheckCircle();
     checkCircleWrapper.addEventListener("click", () => {
       toggleCheckCircle(checkCircleWrapper);
-      task.status = task.calculateStatus();
+      task.status = task.status === "Complete" ? "Incomplete" : "Complete"; // Toggle status (only of js task object; db record updated later)
+      this.updateTaskCompletionUI(task, taskCard); // Update the UI to reflect the status
     });
     checkCircleCell.appendChild(checkCircleWrapper);
     return checkCircleCell;
+  }
+
+  /**
+   * Updates the UI to reflect the completion status of the task.
+   * @param {Task} task - The task object.
+   * @param {HTMLElement} taskCard - The task card element.
+   */
+  updateTaskCompletionUI(task, taskCard) {
+    if (task.status === "Complete") {
+      taskCard.classList.add("completed");
+      const descElement = taskCard.querySelector(".task-desc");
+      const statusElement = taskCard.querySelector(".task-status");
+      if (descElement) descElement.classList.add("completed");
+      if (statusElement) statusElement.textContent = "Complete";
+    } else {
+      taskCard.classList.remove("completed");
+      const descElement = taskCard.querySelector(".task-desc");
+      const statusElement = taskCard.querySelector(".task-status");
+      if (descElement) descElement.classList.remove("completed");
+      if (statusElement) statusElement.textContent = "Incomplete";
+    }
   }
 
   /**
@@ -87,7 +109,7 @@ export class TaskRenderer {
       this.createTableCell(task.description, "task-desc"),
       this.createTableCell(task.formatPeriodicity(), "task-periodicity"),
       this.createTableCell(task.status, "task-status"),
-      this.createCheckCircleCell(task),
+      this.createCheckCircleCell(task, taskCard),
     ]);
 
     // Append rows to table
@@ -95,6 +117,9 @@ export class TaskRenderer {
 
     // Append table to task card
     taskCard.appendChild(table);
+
+    // Update the UI to reflect the status
+    this.updateTaskCompletionUI(task, taskCard);
 
     return taskCard;
   }
