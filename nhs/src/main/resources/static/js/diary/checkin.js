@@ -101,31 +101,3 @@ function updateMeasurementNames() {
     });
 }
 
-document.querySelector('.checkin-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-
-    // Append each captured photo to the form data
-    capturedPhotos.forEach((blob, index) => {
-        formData.append(`photos[${index}].file`, blob);
-        formData.append(`photos[${index}].bodyPart`, `Photo ${index + 1}`);
-    });
-
-    // Send the form data to the server
-    fetch('/diary/checkin', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
-            window.location.href = '/diary';
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            alert('An error occurred while submitting the form. Please try again.');
-        });
-});

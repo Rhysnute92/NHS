@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <div th:fragment="photoCapture">
   <div class="photo-capture-container">
-    <button type="button" class="open-camera">
+    <button type="button" class="open-photos-modal">
       <i class="fa-solid fa-camera photo-icon"></i>
-      Take a photo
+      Add a photo
     </button>
-    <div class="photos-container"></div>
+  </div>
+  <div class="photos-modal">
+    <div class="photos-modal-content">
+      <div class="photos-modal-header">
+        <h3>Photos</h3>
+        <button type="button" class="close-photos-modal">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      <button type="button" class="open-camera">
+        <i class="fa-solid fa-camera photo-icon"></i>
+        Take a photo
+      </button>
+      <input type="file" class="photo-input" accept="image/*" multiple>
+      <div class="photos-preview-container"></div>
+      <button type="button" class="add-photos">Confirm</button>
+    </div>
   </div>
   <div class="camera-container" style="display: none;">
     <video class="video" autoplay playsinline></video>

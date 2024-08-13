@@ -29,7 +29,7 @@
     color: var(--nhs-dark-grey);
 }
 
-.photos-container {
+.photos-container, .photos-preview-container {
     background-color: var(--nhs-white);
     padding: 1rem;
     display: grid;
@@ -40,14 +40,6 @@
 .no-photos {
     text-align: center;
     margin-top: 2rem;
-}
-
-.captured-photo {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 1 / 1;
 }
 
 .camera-container {
@@ -118,7 +110,7 @@
 }
 
 
-.open-camera {
+.open-camera, .open-photos-modal {
     font-size: 1.15rem;
     display: flex;
     justify-content: center;
@@ -134,8 +126,33 @@
     opacity: 80%;
 }
 
+.photos-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+}
+
+.photos-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--nhs-white);
+    padding: 1rem;
+    border-radius: 5px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+}
+
 @media (max-width: 768px) {
     .photos-container {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+

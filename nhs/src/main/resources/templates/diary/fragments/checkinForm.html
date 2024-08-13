@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<form th:fragment="checkinForm" class="checkin-form" id="checkin-form" action="/diary/checkin" method="post" enctype="multipart/form-data">
+<form th:fragment="checkinForm" class="checkin-form" id="checkin-form" action="/diary/checkin" method="post" data-redirect="/diary" enctype="multipart/form-data">
   <div class="checkin-section">
     <div class="checkin-section-title">
       <h3>Mood</h3>
@@ -108,7 +108,7 @@
     </div>
     <div class="checkin-section-content checkin-photos hidden">
       <div th:replace="~{diary/fragments/photoCapture}"></div>
-      <div class="checkin-photos-preview"></div>
+      <div class="photos-container"></div>
     </div>
   </div>
   <div class="checkin-section">
