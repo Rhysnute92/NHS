@@ -29,7 +29,6 @@
     font-size: 0.9em;
     color: var(--nhs-black);
     position: absolute;
-    right: 0; /* Adjust this as necessary */
     top: 50%;
     transform: translateY(-50%);
     transition: transform 0.3s ease;
