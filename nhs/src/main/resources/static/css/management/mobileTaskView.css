@@ -18,20 +18,25 @@
 
   .expand-icon {
     cursor: pointer;
-    padding-right: 5em;
     padding-left: 1em;
     flex-shrink: 0;
+    position: relative;
+    transition: transform 0.3s ease;
   }
 
   .expand-icon::after {
     content: "▼"; /* Down arrow */
     font-size: 0.9em;
-    color: var(--nhs-blue);
+    color: var(--nhs-black);
+    position: absolute;
+    right: 0; /* Adjust this as necessary */
+    top: 50%;
+    transform: translateY(-50%);
     transition: transform 0.3s ease;
   }
 
   .task-card.expanded .expand-icon::after {
-    transform: rotate(-180deg);
+    transform: translateY(-50%) rotate(180deg); /* Rotate the arrow when expanded */
   }
 
   .task-name-header {
@@ -101,8 +106,17 @@
   .expand-icon {
     font-size: 0.7em; /* Smaller icon size */
     padding-left: 0.3em;
-    padding-right: 0.3em; /* Balance padding on both sides */
     flex-shrink: 0;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .expand-icon::after {
+    transition: transform 0.3s ease;
+  }
+
+  .task-card.expanded .expand-icon::after {
+    transform: translateY(-50%) rotate(180deg); /* Rotate the arrow when expanded */
   }
 
   .check-circle-wrapper {
