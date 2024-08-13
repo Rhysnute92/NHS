@@ -25,10 +25,12 @@
 <div class="container-calendar">
   <!-- Modal container -->
   <div id="myModel" class="model">
+    <!-- Close button for the modal -->
+    <span class="popup-close">&times;</span>
     <!-- Modal content box -->
     <div class="modelContent">
-      <!-- Close button for the modal -->
-      <span class="popup-close">&times;</span>
+      <div th:replace="~{calendar/fragments/appointmentForm}"></div>
+
     </div>
   </div>
   <!-- Button to open the modal -->
