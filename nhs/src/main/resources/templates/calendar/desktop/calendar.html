@@ -23,6 +23,18 @@
 
 <!-- Main container for the calendar and appointment list -->
 <div class="container-calendar">
+  <!-- Modal container -->
+  <div id="myModel" class="model">
+    <!-- Modal content box -->
+    <div class="modelContent">
+      <!-- Close button for the modal -->
+      <span class="popup-close">&times;</span>
+      <!-- Iframe to display external or dynamic content within the modal -->
+      <iframe id="modelFrame" src="" style="width: 100%; height: 400px;"></iframe>
+    </div>
+  </div>
+  <!-- Button to open the modal -->
+  <button id="openaddappt">Add Appointment</button>
   <!-- Left section for displaying the appointment schedule -->
   <div id="left">
     <h3>Appointment Schedule</h3>
@@ -33,24 +45,20 @@
       </li>
     </ul>
   </div>
-
   <!-- Center section for displaying the calendar -->
   <div id="center">
     <!-- Display the current month and year -->
     <h3 id="monthAndYear"></h3>
-
     <!-- Navigation buttons for previous and next months -->
     <div class="button-container-calendar">
       <button id="previous" onclick="previous()"> &lt; </button>
       <button id="next" onclick="next()"> &gt; </button>
     </div>
-
     <!-- Table structure for the calendar -->
     <table class="table-calendar" id="calendar" data-lang="en">
       <thead id="thead-month"></thead> <!-- Table header for days of the week -->
       <tbody id="calendar-body"></tbody> <!-- Table body for the dates -->
     </table>
-
     <!-- Footer section with dropdowns for jumping to a specific month or year -->
     <div class="footer-container-calendar">
       <label for="month">Jump To: </label>
@@ -74,9 +82,10 @@
     </div>
   </div>
 </div>
-
 <!-- Include JavaScript files for calendar functionality -->
 <script th:src="@{/js/calendar/calendar.js}"></script>
+<script th:src="@{js/calendar/addAppointment.js}"></script>
+<script th:src="@{js/calendar/appointment.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>

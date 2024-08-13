@@ -153,6 +153,8 @@
     cursor: pointer;
 }
 
+
+
 /* Styling for the month and year heading */
 #monthAndYear {
     position: relative;
@@ -166,6 +168,15 @@
     margin-bottom: 0.5em;
     overflow: hidden;
     clear: both;
+}
+
+/* Styling for add appointment button */
+#openaddappt {
+    width: 8rem;
+    height: 2rem;
+    margin-left: 1rem;
+    color: white;
+    background-color: #005EB8;
 }
 
 /* Styling for the previous button */
@@ -309,3 +320,39 @@ header .calendar-current-date {
 .calendar-dates li:not(.active):hover::before {
     background: #e4e1e1;
 }
+
+/* The modal container, hidden by default */
+.model {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+}
+
+/* Modal content/box */
+.modelContent {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The close button */
+.popup-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.popup-close:hover,
+.popup-close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
