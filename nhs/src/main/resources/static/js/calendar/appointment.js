@@ -1,25 +1,32 @@
-// Get modal elements
-const modal = document.getElementById("myModel");
-const openBtn = document.getElementById("openaddappt");
-const closeBtn = document.querySelector(".popup-close");
-const iframe = document.getElementById("modelFrame");
+// Wait until the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', (event) => {
 
-// When the user clicks the button, open the modal
-openBtn.addEventListener("click", function() {
-    iframe.src = "/addappointment"; // Set the iframe src to the form URL
-    modal.style.display = "block";
-});
+    // Get the model, open button, and close button elements
+    const model = document.getElementById('myModel');
+    const openaddappt = document.getElementById('openaddappt');
+    const closeBtn = document.querySelector('.popup-close');
 
-// When the user clicks on the close button (x), close the modal
-closeBtn.addEventListener("click", function() {
-    modal.style.display = "none";
-    iframe.src = ""; // Clear the iframe src to stop any loaded content
-});
+    // Function to open the model
+    openaddappt.addEventListener('click', () => {
+        model.style.display = 'block';
+        // Set the iframe src here if needed
+        document.getElementById('modelFrame').src = 'http://localhost:8080/addappointment';
+    });
 
-// When the user clicks anywhere outside of the modal content, close it
-window.addEventListener("click", function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-        iframe.src = ""; // Clear the iframe src to stop any loaded content
-    }
+    // Function to close the model
+    closeBtn.addEventListener('click', () => {
+        model.style.display = 'none';
+        // Optional: Clear the iframe content when closing
+        document.getElementById('modelFrame').src = '';
+    });
+
+    // Close the model when clicking outside the model content
+    window.addEventListener('click', (event) => {
+        if (event.target == model) {
+            model.style.display = 'none';
+            // Optional: Clear the iframe content when closing
+            document.getElementById('modelFrame').src = '';
+        }
+    });
+
 });
