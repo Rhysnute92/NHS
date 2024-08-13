@@ -35,14 +35,17 @@ CREATE TABLE UserCredentials (
 --Patient information--
 CREATE TABLE Patients (
     PatientEmail VARCHAR(255),
-    PatientMobile INT,
+    PatientMobile VARCHAR(255),
     NHSNumber INT,
     PatientDOB DATE,
     PatientName VARCHAR(255),
     PatientLastName VARCHAR(255),
     PatientTitle VARCHAR(100),
+    PatientClinic VARCHAR(255),
     UserID BIGINT,
-    FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID)
+    EncryptionKey VARCHAR(255),
+    FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID),
+    PRIMARY KEY (UserID)
 );
 CREATE TABLE PatientDiagnosis (
     UserID BIGINT,
@@ -78,9 +81,10 @@ CREATE TABLE UserWidgets (
 --Calendar--
 CREATE TABLE Appointments (
     ApptID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    ApptTime DATETIME,
+    ApptDateTime DATETIME NOT NULL,
     ApptType VARCHAR(255),
     ApptProvider VARCHAR(255),
+    ApptLocation VARCHAR(255),
     ApptInfo TEXT,
     UserID BIGINT,
     FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID)

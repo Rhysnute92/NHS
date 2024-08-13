@@ -1,12 +1,7 @@
 #!/usr/bin/bash
-echo "update logging configuration..."
-sudo sh -c "echo '*.info;mail.none;authpriv.none;cron.none /dev/ttyS0' >> /etc/rsyslog.conf"
-sudo systemctl restart rsyslog
+whoami
 
-echo logged in as $USER.
-echo in directory $PWD
 echo "installing MariaDB..."
-# sudo yum install mysql -y
 sudo dnf install mariadb-server -y
 sudo systemctl start mariadb
 sudo systemctl status mariadb
@@ -31,20 +26,15 @@ Y
 echo "running mysql_secure_installation..."
 sudo mysql_secure_installation < mysql_secure_installation.txt
 
+mysql -uroot -pcomsc -e "CREATE DATABASE IF NOT EXISTS nhs;CREATE USER 'BSE'@'localhost' IDENTIFIED BY 'comsc';GRANT ALL PRIVILEGES ON nhs.* TO 'BSE'@'localhost';FLUSH PRIVILEGES;"
 
-sudo yum install git -y
+echo "setting up git..."
+sudo dnf install git -y
 
+echo "setting up java..."
+sudo yum install java-17-openjdk -y
 
-echo "needs to be in root account"
-cd root
-
-touch .ssh/known_hosts
-ssh-keyscan git.cardiff.ac.uk >> .ssh/known_hosts
-chmod 644 .ssh/known_hosts
-
-echo "now needs to be in rocky user directory"
-cd /home/rocky
-
+echo "creating project deployment key file..."
 cat << `EOF` >> nhs_keypair.key
 -----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
@@ -85,22 +75,36 @@ sb3pnEahQLyT2ym7xGP9d7UFBBBifdkFwLITWRBHhQ470K+XeRbkl4w6Qwcoidw1iOrPk/
 7E2BhWXViU490AAAAbSUQrYzE4MTAxMjZARFNBMTBGNjBBOEY1NDVE
 -----END OPENSSH PRIVATE KEY-----
 
+
 `EOF`
+
+echo "installing the deployment key..."
 chmod 400 nhs_keypair.key
+
+echo "connecting to gitlab..."
+touch ~/.ssh/known_hosts
+ssh-keyscan git.cardiff.ac.uk >> ~/.ssh/known_hosts
+chmod 644 ~/.ssh/known_hosts
+
+echo "cloning project from git..."
 ssh-agent bash -c 'ssh-add nhs_keypair.key; git clone git@git.cardiff.ac.uk:c23102007/dissertation-nhs-lymphoedema.git'
-cd dissertation-nhs-lymphoedema
 
 
-sudo yum install java-17-openjdk -y
-sudo yum install wget -y
-wget https://services.gradle.org/distributions/gradle-8.8-bin.zip
-sudo yum install unzip -y
+echo "setting up gradle..."
+sudo dnf install unzip -y
+sudo dnf install wget -y
+sudo wget https://services.gradle.org/distributions/gradle-8.8-bin.zip
 sudo mkdir /opt/gradle
 sudo unzip -d /opt/gradle gradle-8.8-bin.zip
 
+echo "setting up gradle path..."
 export PATH=$PATH:/opt/gradle/gradle-8.8/bin
+gradle -v
 
+echo "running application..."
+cd dissertation-nhs-lymphoedema
+git checkout main
+cd nhs
 
-gradle init
 gradle build
 gradle bootrun
