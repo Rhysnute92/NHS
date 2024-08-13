@@ -1,32 +1,42 @@
-// Wait until the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', (event) => {
-
     // Get the model, open button, and close button elements
     const model = document.getElementById('myModel');
     const openaddappt = document.getElementById('openaddappt');
     const closeBtn = document.querySelector('.popup-close');
+    const modelContent = document.getElementById('modelContent');
 
-    // Function to open the model
+    document.addEventListener('DOMContentLoaded', () => {
+        const modelContent = document.getElementById('modelContent');
+        if (modelContent) {
+            // Continue with your logic
+            modelContent.innerHTML = 'Your content here';
+        } else {
+            console.error('modelContent element not found.');
+        }
+    });
+
+    // Function to open the model and load content
     openaddappt.addEventListener('click', () => {
         model.style.display = 'block';
-        // Set the iframe src here if needed
-        document.getElementById('modelFrame').src = 'http://localhost:8080/addappointment';
+        fetch('/addappointment') // Fetch the HTML fragment
+            .then(response => response.text())
+            .then(data => {
+                modelContent.innerHTML = data; // Insert the fragment into the model content
+            })
+            .catch(error => console.error('Error loading content:', error));
     });
 
     // Function to close the model
     closeBtn.addEventListener('click', () => {
         model.style.display = 'none';
-        // Optional: Clear the iframe content when closing
-        document.getElementById('modelFrame').src = '';
+        modelContent.innerHTML = ''; // Clear content when closing
     });
 
     // Close the model when clicking outside the model content
     window.addEventListener('click', (event) => {
         if (event.target == model) {
             model.style.display = 'none';
-            // Optional: Clear the iframe content when closing
-            document.getElementById('modelFrame').src = '';
+            modelContent.innerHTML = ''; // Clear content when closing
         }
     });
-
 });
