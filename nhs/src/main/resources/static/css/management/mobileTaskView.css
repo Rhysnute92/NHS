@@ -1,0 +1,96 @@
+@media (max-width: 768px) {
+  .task-card {
+    background-color: var(--nhs-pale-grey);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.5em;
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: height 0.3s ease;
+  }
+
+  .task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .expand-icon {
+    cursor: pointer;
+    padding-right: 5em;
+    padding-left: 1em;
+    flex-shrink: 0;
+  }
+
+  .expand-icon::after {
+    content: "▼"; /* Down arrow */
+    font-size: 0.9em;
+    color: var(--nhs-blue);
+    transition: transform 0.3s ease;
+  }
+
+  .task-card.expanded .expand-icon::after {
+    transform: rotate(-180deg); /* Rotate the arrow when expanded */
+  }
+
+  .task-name-header {
+    text-align: center;
+    font-size: 1em; /* Adjusted for readability on smaller screens */
+    flex-grow: 1;
+    margin: 0 0.5em; /* Space out the title from the expand icon and check circle */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .check-circle-wrapper {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: flex-end;
+    width: auto;
+    margin-right: 0.5em;
+  }
+
+  .task-desc {
+    display: none;
+    font-size: 0.9em;
+    color: var(--nhs-dark-grey);
+    margin-top: 0.5em;
+    padding: 0.5em;
+  }
+
+  .task-card.expanded .task-desc {
+    display: block;
+  }
+
+  .task-card.expanded {
+    height: auto; /* Ensure the card expands to fit the content */
+  }
+}
+
+@media (max-width: 480px) {
+  .task-card {
+    padding: 0.4em;
+  }
+
+  .task-header {
+    padding: 0.4em;
+  }
+
+  .task-name-header {
+    font-size: 0.9em;
+    margin: 0 0.4em;
+  }
+
+  .expand-icon {
+    padding-left: 0.4em;
+  }
+
+  .check-circle-wrapper {
+    margin-right: 0.4em;
+  }
+}

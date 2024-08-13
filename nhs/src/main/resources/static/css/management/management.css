@@ -2,6 +2,7 @@
 @import url("questionnaires.css");
 @import url("task.css");
 @import url("checkCircle.css");
+@import url("mobileTaskView.css");
 
 body {
   background-color: var(--nhs-pale-grey);

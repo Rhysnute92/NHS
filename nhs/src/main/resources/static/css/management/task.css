@@ -1,6 +1,5 @@
 .task-card {
   background-color: var(--nhs-pale-grey);
-  border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1em;
   margin-bottom: 1em;
@@ -12,7 +11,7 @@
     237,
     238,
     0.1
-  ); /*  --nhs-pale-grey in rgba with 50% opacity */
+  ); /*  --nhs-pale-grey in rgba with 10% opacity */
 }
 
 .task-table {

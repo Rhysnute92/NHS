@@ -2,8 +2,12 @@ import {
   createCheckCircle,
   toggleCheckCircle,
 } from "../common/utils/circleCheckmark.js";
+import { detectMobileView } from "../common/utils/deviceUtils.js";
 
 export class TaskRenderer {
+  constructor() {
+    this.isMobileView = detectMobileView();
+  }
   /**
    * Creates and returns a table row element with the provided cells.
    * @param {Array<HTMLElement>} cells - The cells to be included in the row.
@@ -82,11 +86,26 @@ export class TaskRenderer {
   }
 
   /**
-   * Renders the task card as an HTML element.
+   * Renders the task card as an HTML element based on screen size.
    * @param {Task} task - The task object to render.
    * @return {HTMLElement} - The task card element.
    */
   renderTaskCard(task) {
+    if (this.isMobileView) {
+      console.log("Rendering mobile task card...");
+      return this.renderMobileTaskCard(task);
+    } else {
+      console.log("Rendering desktop task card...");
+      return this.renderDesktopTaskCard(task);
+    }
+  }
+
+  /**
+   * Renders the task card for desktop view.
+   * @param {Task} task - The task object to render.
+   * @return {HTMLElement} - The task card element.
+   */
+  renderDesktopTaskCard(task) {
     const taskCard = document.createElement("div");
     taskCard.classList.add("task-card");
 
@@ -117,6 +136,59 @@ export class TaskRenderer {
 
     // Append table to task card
     taskCard.appendChild(table);
+
+    // Update the UI to reflect the status
+    this.updateTaskCompletionUI(task, taskCard);
+
+    return taskCard;
+  }
+
+  /**
+   * Renders the task card for mobile view.
+   * @param {Task} task - The task object to render.
+   * @return {HTMLElement} - The task card element.
+   */
+  renderMobileTaskCard(task) {
+    const taskCard = document.createElement("div");
+    taskCard.classList.add("task-card");
+
+    // Mobile header with expand icon, title, and checkmark
+    const header = document.createElement("div");
+    header.classList.add("task-header");
+
+    // Expand icon
+    const expandIcon = document.createElement("div");
+    expandIcon.classList.add("expand-icon");
+    expandIcon.addEventListener("click", () => {
+      taskCard.classList.toggle("expanded");
+      const description = taskCard.querySelector(".task-desc");
+      description.style.display = taskCard.classList.contains("expanded")
+        ? "block"
+        : "none";
+    });
+
+    // Title in the center
+    const title = document.createElement("div");
+    title.classList.add("task-name-header");
+    title.textContent = task.name;
+
+    // Check circle on the right
+    const checkCircle = this.createCheckCircleCell(task, taskCard);
+    checkCircle.classList.add("check-circle-mobile");
+
+    // Append expand icon, title, and checkCircle to header
+    header.appendChild(expandIcon);
+    header.appendChild(title);
+    header.appendChild(checkCircle);
+
+    // Mobile description (hidden by default)
+    const description = document.createElement("div");
+    description.classList.add("task-desc");
+    description.textContent = task.description;
+
+    // Append header and description to task card
+    taskCard.appendChild(header);
+    taskCard.appendChild(description);
 
     // Update the UI to reflect the status
     this.updateTaskCompletionUI(task, taskCard);
