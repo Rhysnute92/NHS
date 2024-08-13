@@ -12,7 +12,7 @@
 
 /* Header styling */
 #header h1 {
-    font-size: 3em;
+    font-size: 2em;
 }
 
 /* Appointments section styling */
@@ -123,14 +123,22 @@
 }
 
 /* Styling for table cells and headers */
-.table-calendar td,
-.table-calendar th {
+.table-calendar td {
     border: 1px solid #e2e2e2;
     text-align: center;
     vertical-align: top;
     width: 3rem;
     height: 3rem;
     padding: 0;
+}
+
+.table-calendar th {
+    border: 1px solid #e2e2e2;
+    text-align: center;
+    vertical-align: top;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 1rem;
 }
 
 /* Styling for selected date in the calendar */
@@ -182,11 +190,13 @@
 /* Styling for the previous button */
 #previous {
     float: left;
+    margin-left: 3rem;
 }
 
 /* Styling for the next button */
 #next {
     float: right;
+    margin-right: 3rem;
 }
 
 /* Footer container styling */
