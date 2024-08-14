@@ -142,6 +142,7 @@ public class UserTaskLogServiceUnitTests {
     }
 
     // Edge cases
+    @SuppressWarnings("null")
     @Test
     public void testCreateUserTaskLog_NullLog() {
         when(userTaskLogRepository.save(null)).thenThrow(new IllegalArgumentException("UserTaskLog cannot be null"));

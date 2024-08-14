@@ -8,6 +8,26 @@ console.log("Worker:", worker);
 const eventQueue = new EventQueue();
 const apiUrl = "/usertask/task-update/batch";
 
+// Store pending tasks in localStorage before unloading the page
+window.addEventListener("beforeunload", () => {
+  if (eventQueue.getSize() > 0) {
+    localStorage.setItem(
+      "pendingTasks",
+      JSON.stringify(eventQueue.getEvents())
+    );
+  }
+});
+
+// Load pending tasks from localStorage when the page loads
+window.addEventListener("load", () => {
+  const pendingTasks = JSON.parse(localStorage.getItem("pendingTasks"));
+  if (pendingTasks) {
+    eventQueue.queue = pendingTasks;
+    worker.postMessage({ queue: pendingTasks });
+    localStorage.removeItem("pendingTasks");
+  }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   initializeCollapsible();
   const taskManager = new TaskManager(getUserId(), eventQueue);

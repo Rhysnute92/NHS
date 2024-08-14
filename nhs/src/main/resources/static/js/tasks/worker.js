@@ -12,7 +12,7 @@ self.addEventListener("message", async function (event) {
         if (!taskId) {
           throw new Error("taskId is undefined or null");
         }
-        
+
         const response = await fetch(`/usertask/task-toggle/${taskId}`, {
           method: "PUT",
           headers: {
@@ -20,12 +20,20 @@ self.addEventListener("message", async function (event) {
           },
         });
 
-        if (!response.ok) {
+        // Handle empty responses
+        const textResponse = await response.text();
+        if (!textResponse) {
+          console.warn(`Empty response for task ${taskId}`);
+          return { taskId, status: "no-content" };
+        }
+
+        try {
+          return JSON.parse(textResponse);
+        } catch (error) {
           throw new Error(
-            `Failed to toggle task ${taskId} completion: ${response.statusText}`
+            `Failed to parse JSON response for task ${taskId}: ${error.message}`
           );
         }
-        return response.json();
       })
     );
 
