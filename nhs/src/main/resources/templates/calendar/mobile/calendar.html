@@ -17,14 +17,6 @@
 <!-- Include navigation menu with dynamic content -->
 <div th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
 
-<!-- Button to add a new appointment, redirects to add appointment page -->
-<div id="moblist">
-    <button onclick="location.href='/addappointment'" class="add-apt-btn">Add Appointment</button>
-</div>
-
-<!-- Overview text for appointments -->
-<p>Overview of appointments</p>
-
 <!-- Main container for the calendar and schedule -->
 <div class="container-calendar">
     <!-- Calendar section -->
@@ -63,16 +55,21 @@
             <select id="year" onchange="jump()"></select>
         </div>
     </div>
-    <!-- Appointment schedule section -->
-    <div id="mobileSchedule">
-        <h3>Appointment Schedule</h3>
-        <ul id="apptList">
-            <!-- Placeholder list item if no appointments are scheduled -->
-            <li data-event-id="1">
-                <p>No appointments scheduled for today</p>
-            </li>
-        </ul>
+    <!-- Button to add a new appointment, redirects to add appointment page -->
+    <div class="moblist">
+        <button onclick="location.href='/addappointment'" id="add-apt-btn" class="add-apt-btn">Add Appointment</button>
+        <button onclick="location.href='/schedule'" id="schedule" class="schedule">View Schedule</button>
     </div>
+<!--    &lt;!&ndash; Appointment schedule section &ndash;&gt;-->
+<!--    <div id="mobileSchedule">-->
+<!--        <h3>Appointment Schedule</h3>-->
+<!--        <ul id="apptList">-->
+<!--            &lt;!&ndash; Placeholder list item if no appointments are scheduled &ndash;&gt;-->
+<!--            <li data-event-id="1">-->
+<!--                <p>No appointments scheduled for today</p>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
 </div>
 
 <!-- Include JavaScript files for calendar functionality -->

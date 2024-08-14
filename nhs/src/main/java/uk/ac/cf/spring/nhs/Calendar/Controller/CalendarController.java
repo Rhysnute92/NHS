@@ -45,10 +45,26 @@ public class CalendarController {
         return modelAndView;
     }
 
+    /**
+     * get to the schedule part for the mobile site
+      * @param request
+     * @return
+     */
+    @GetMapping("/schedule")
+    public ModelAndView getSchedule(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (DeviceDetector.isMobile(request)) {
+            modelAndView.setViewName("calendar/mobile/schedule");
+        }
+        return modelAndView;
+    }
+
+
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {
         return List.of(
-                new NavMenuItem("Schedule", "/calendar", "fa-regular fa-calendar-days"),
+                new NavMenuItem("Calendar", "/calendar", "fa-regular fa-calendar-days"),
+                new NavMenuItem("Schedule", "/schedule", "fa-regular fa-calendar-days"),
                 new NavMenuItem("Add Appointment", "/addappointment", "fa-solid fa-calendar-check")
         );
     }

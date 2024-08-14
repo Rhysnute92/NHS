@@ -44,6 +44,11 @@ public class AppointmentService {
         appointmentRepository.deleteById(id);
     }
 
+
+    /**
+     * Saves the appointment for that
+     * particular user on there user id
+     */
     public Appointment saveAppointment(AppointmentDTO appointmentDTO) {
         // Combine date and time into a single LocalDateTime object
         LocalDate date = LocalDate.parse(appointmentDTO.getDate());
@@ -60,10 +65,6 @@ public class AppointmentService {
 
         return appointmentRepository.save(appointment);
 
-        /**
-         * Saves the appointment for that
-         * particular user on there user id
-         */
     }
 
 }

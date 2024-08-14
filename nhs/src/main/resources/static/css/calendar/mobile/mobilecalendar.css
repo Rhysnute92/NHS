@@ -11,6 +11,15 @@
     justify-content: space-between;
 }
 
+/* Main container for the calendar */
+.container-add-calendar {
+    margin-left: 1em;
+    margin-right: 1em;
+    overflow: auto;
+    display: grid;
+    grid-auto-rows: 2fr 1fr;
+}
+
 /* Button styling specific to mobile list button */
 .container-calendar button #moblist {
     background-color: #005EB8;
@@ -20,9 +29,9 @@
 /* Mobile month container styling */
 #mobileMonth {
     position: relative;
-    height: 44vh;
     width: 95vw;
     grid-row: 1;
+    padding-top: 2em;
 }
 
 /* Header styling within the mobile month container */
@@ -39,7 +48,10 @@
     top: 5%;
     right: 124px;
 }
-
+.moblist {
+    grid-row: 2;
+    margin-top: 1em;
+}
 /* Heading styling for appointments section */
 #appointments h3 {
     position: relative;
@@ -51,7 +63,6 @@
 /* Paragraph padding */
 p {
     padding-left: 1rem;
-    padding-top: 1rem;
 }
 
 /* Styling for input fields in the appointments section */
@@ -70,12 +81,22 @@ p {
 }
 
 /* Styling for mobile list button */
-#moblist button {
+#add-apt-btn {
+    float: left;
     background: #005EB8;
     color: white;
     position: relative;
-    left: 9rem;
-    top: 1.5rem;
+    margin-left: 2rem;
+    width: 8rem;
+    height: 2rem;
+}
+
+#schedule {
+    float: right;
+    background: #005EB8;
+    color: white;
+    position: relative;
+    margin-right: 2rem;
     width: 8rem;
     height: 2rem;
 }
@@ -170,6 +191,7 @@ p {
     top: 50%;
     text-align: center;
     margin-top: 0;
+    font-size: 2em;
 }
 
 /* Styling for the calendar button container */

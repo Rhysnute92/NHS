@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             .catch(error => console.error('Error loading content:', error));
     });
 
+
     // Function to close the model
     closeBtn.addEventListener('click', () => {
         model.style.display = 'none';

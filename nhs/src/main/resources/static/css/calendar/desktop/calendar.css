@@ -30,6 +30,10 @@
     margin-left: 1rem;
 }
 
+#header p {
+    font-size: 1.5em;
+}
+
 /* Styling for headings within the appointments section */
 #apptForm h3 {
     color: black;
@@ -65,10 +69,17 @@
     grid-column: 2;
     padding-right: 4rem;
     padding-left: 4rem;
+    padding-top: 1rem;
 }
 
 /* Header styling for the center section */
 #center h3 {
+    color: black;
+    font-size: 2em;
+    position: relative;
+}
+
+#left h3 {
     color: black;
     font-size: 2em;
     position: relative;
@@ -83,12 +94,12 @@
 
 /* Styling for list items within the appointment list */
 #apptList li {
-    margin-top: 2rem;
+    text-decoration: underline;
 }
 
 /* Left section styling in the grid */
 #left {
-    margin: 1rem;
+    margin-left: 1rem;
     grid-column: 1;
 }
 
@@ -182,7 +193,6 @@
 #openaddappt {
     width: 8rem;
     height: 2rem;
-    margin-left: 1rem;
     color: white;
     background-color: #005EB8;
 }

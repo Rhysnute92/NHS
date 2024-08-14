@@ -3,23 +3,33 @@ package uk.ac.cf.spring.nhs.Appointment.Controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
+import uk.ac.cf.spring.nhs.Appointments.Controller.AppointmentController;
 import uk.ac.cf.spring.nhs.Appointments.DTO.AppointmentDTO;
+import uk.ac.cf.spring.nhs.Appointments.Model.Appointment;
+import uk.ac.cf.spring.nhs.Appointments.Service.AppointmentService;
 
+import java.time.LocalDateTime;
+
+import static org.codehaus.groovy.runtime.DefaultGroovyMethods.any;
+import static org.mariadb.jdbc.client.tls.HostnameVerifier.verify;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 import static org.springframework.http.RequestEntity.post;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @SpringBootTest
@@ -31,6 +41,12 @@ public class AppointmentControllerTest {
 
     @Autowired
     private WebApplicationContext context;
+
+    @MockBean
+    private AppointmentService appointmentService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     /**
      * Set up security before each test
@@ -44,6 +60,7 @@ public class AppointmentControllerTest {
 
     /**
      * Test to see if getAllAppointments can be achieved
+     *
      * @throws Exception
      */
     @Test
@@ -55,7 +72,8 @@ public class AppointmentControllerTest {
     }
 
     /**
-     * Test to see if getAllAppointments can be achieved byr a certain appointmentId
+     * Test to see if getAllAppointments can be achieved by a certain appointmentId
+     *
      * @throws Exception
      */
     @Test
