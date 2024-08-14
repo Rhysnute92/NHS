@@ -110,22 +110,27 @@ html, body, .main-container {height: 100%;}
 }
 
 @media screen and (max-device-width: 768px){
+    .container{
+        margin: 0;
+    }
+    .container h2 {
+        margin-left: 2vw;
+    }
     .title{
         margin: 1vh;
         padding-top: 1vh;
     }
-    .collapsible_button{
+    .collapsible_button, .collapsible_button.active{
         font-size: 5vw;
         width: 100%;
         margin-left: 0;
     }
     .collapsible{
         margin-left: 0;
+        border: none;
     }
     .collapsible iframe{
         width: 100%;
-    }
-    .collapsible_video iframe{
-        width: 100%;
+        margin: 0;
     }
 }

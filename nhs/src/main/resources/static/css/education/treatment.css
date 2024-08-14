@@ -26,6 +26,7 @@
 }
 
 .gallery{
+    white-space: nowrap;
     overflow-x: scroll;
 }
 
@@ -33,7 +34,7 @@
     display: inline-block;
 }
 .gallery_item img{
-    height: 20vh;
+    height: 35vh;
     width: auto;
 }
 
@@ -45,5 +46,11 @@
 }
 .excercise img{
     height: 30vh;
+}
+
+@media screen and (max-device-width: 768px){
+    .section{
+        width: 100%;
+    }
 }
 
