@@ -23,6 +23,12 @@ public class AppointmentController {
         return appointmentService.getAppointmentsByUserId(1);
     }
 
+    /**
+     * Retrieves a list of appointments for a given specific user.
+     *
+     * @return a ResponseEntity containing a list of appointments by ID
+     */
+
     @GetMapping("/{id}")
     public Appointment getAppointmentById(@PathVariable Integer id) {
         return appointmentService.getAppointmentById(id);

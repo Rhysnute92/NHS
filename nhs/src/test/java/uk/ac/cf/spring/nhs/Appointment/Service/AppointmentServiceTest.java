@@ -32,6 +32,15 @@ public class AppointmentServiceTest {
     private Appointment appointment1;
     private Appointment appointment2;
 
+    /**
+     * Initializes the test environment before each test case.
+     *
+     * This method is annotated with `@BeforeEach` which means it will be
+     * executed before each test case. It initializes the test environment by
+     * calling `MockitoAnnotations.openMocks(this)`.
+     *
+     * @return void
+     */
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -55,6 +64,14 @@ public class AppointmentServiceTest {
         appointment2.setUserID(1L);
     }
 
+    /**
+     * Test case for the getAllAppointments method when the appointment ID is valid.
+     *
+     * This test verifies that when the getAllAppointments method is called with a valid
+     * appointment ID,
+     * the correct list of user appointments is returned.
+     * @return void
+     */
     @Test
     public void testGetAllAppointments() {
         List<Appointment> appointments = Arrays.asList(appointment1, appointment2);
@@ -67,6 +84,14 @@ public class AppointmentServiceTest {
         assertThat(result).contains(appointment1, appointment2);
     }
 
+    /**
+     * Test case for the getAppointmentById method when the appointment ID is valid.
+     *
+     * This test verifies that when the getAppointmentById method is called with a valid
+     * appointment ID,
+     * the correct list of user appointments is returned.
+     * @return void
+     */
     @Test
     public void testGetAppointmentById() {
         when(appointmentRepository.findById(1)).thenReturn(Optional.of(appointment1));
@@ -78,6 +103,14 @@ public class AppointmentServiceTest {
         assertThat(result.getApptType()).isEqualTo("Consultation");
     }
 
+    /**
+     * Test case for the getAppointmentsByUserId method when the user ID is valid.
+     *
+     * This test verifies that when the getAppointmentById method is called with a valid
+     * user ID,
+     * the correct list of user appointments is returned.
+     * @return void
+     */
     @Test
     public void testGetAppointmentsByUserId() {
         List<Appointment> appointments = Arrays.asList(appointment1, appointment2);
@@ -90,6 +123,9 @@ public class AppointmentServiceTest {
         assertThat(result).contains(appointment1, appointment2);
     }
 
+    /**
+     * This is to make sure that the appointment saves correctly
+     */
     @Test
     public void testSaveAppointment() {
         when(appointmentRepository.save(any(Appointment.class))).thenReturn(appointment1);
@@ -102,6 +138,10 @@ public class AppointmentServiceTest {
         verify(appointmentRepository, times(1)).save(appointment1);
     }
 
+    /**
+     * This is to test that the correct appointment
+     * will be deleted when asked to delete that appointment
+     */
     @Test
     public void testDeleteAppointment() {
         doNothing().when(appointmentRepository).deleteById(1);

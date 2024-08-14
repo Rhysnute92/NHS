@@ -32,12 +32,20 @@ public class AppointmentControllerTest {
     @Autowired
     private WebApplicationContext context;
 
+    /**
+     * Set up security before each test
+     */
     @Before
     public void setup() {
         this.mockMvc = webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
     }
+
+    /**
+     * Test to see if getAllAppointments can be achieved
+     * @throws Exception
+     */
     @Test
     @WithMockUser(username = "admin", roles = {"PATIENT", "ADMIN"})
     public void testGetAllAppointments() throws Exception {
@@ -46,6 +54,10 @@ public class AppointmentControllerTest {
                 .andExpect(status().isOk());
     }
 
+    /**
+     * Test to see if getAllAppointments can be achieved byr a certain appointmentId
+     * @throws Exception
+     */
     @Test
     @WithMockUser(username = "admin", roles = {"PATIENT", "ADMIN"})
     public void testGetAppointmentById() throws Exception {

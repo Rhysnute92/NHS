@@ -18,6 +18,12 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
+    /**
+     * Retrieves a list of appointments for a given specific user.
+     *
+     * @return a ResponseEntity containing a list of appointments by ID
+     */
+
     public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
     }
@@ -53,6 +59,11 @@ public class AppointmentService {
         appointment.setUserID(1L); // Hardcoded for now
 
         return appointmentRepository.save(appointment);
+
+        /**
+         * Saves the appointment for that
+         * particular user on there user id
+         */
     }
 
 }

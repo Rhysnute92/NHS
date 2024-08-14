@@ -12,6 +12,11 @@ import java.util.List;
 
 @Controller
 public class CalendarController {
+    /**
+     * Get to the calendar part of the application
+     * @param request
+     * @return
+     */
     @GetMapping("/calendar")
     public ModelAndView Calendar(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
@@ -24,6 +29,11 @@ public class CalendarController {
         return modelAndView;
     }
 
+    /**
+     * get to the add appointment part of the website
+     * @param request
+     * @return
+     */
     @GetMapping("/addappointment")
     public ModelAndView getMobileAddAppt(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();

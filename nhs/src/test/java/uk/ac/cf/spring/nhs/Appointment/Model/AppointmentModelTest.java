@@ -8,6 +8,12 @@ import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppointmentModelTest {
+
+    /**
+     * Test the appointment model with some dummy data
+     * Test all the getters
+     * Test all the setters
+     */
     @Test
     public void testAppointmentModel() {
         Appointment appointment = new Appointment();
