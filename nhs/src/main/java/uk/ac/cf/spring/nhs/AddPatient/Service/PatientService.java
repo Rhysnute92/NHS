@@ -9,6 +9,7 @@ import uk.ac.cf.spring.nhs.Account.PatientProfileDTO;
 import uk.ac.cf.spring.nhs.AddPatient.DTO.RegisterRequest;
 import uk.ac.cf.spring.nhs.AddPatient.Entity.Patient;
 import uk.ac.cf.spring.nhs.AddPatient.Repository.PatientRepository;
+import uk.ac.cf.spring.nhs.Common.util.PatientDataUtility;
 import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentials;
 import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentialsRepository;
 
@@ -34,6 +35,9 @@ public class PatientService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private PatientDataUtility utility;
 
     // Generating a key for the patient
     public SecretKey generatePatientKey() throws Exception {
@@ -111,21 +115,16 @@ public class PatientService {
         return password.toString();
     }
 
+    public Patient findPatientbyId(long userId){
+        Patient user = patientRepository.findById(userId);
+        return user;
+    }
+
     public String getFullname(Patient patient){
         String fullName = patient.getPatientTitle() + patient.getPatientName() + patient.getPatientLastName();
         return fullName;
     }
 
-    private int calculateAge(LocalDate dob){
-        LocalDate now = LocalDate.now();
-        Period period = Period.between(dob, now); 
-        return period.getYears();
-    }
-
-    public Patient findPatientbyId(long userId){
-        Patient user = patientRepository.findById(userId);
-        return user;
-    }
 
     public PatientProfileDTO profile(long userId){
         Patient user = findPatientbyId(userId);
@@ -134,7 +133,7 @@ public class PatientService {
         String mobile = user.getPatientMobile();
         String nhs = user.getNhsNumber();
         LocalDate dob = user.getPatientDOB();
-        int age = calculateAge(dob);
+        int age = utility.calculateAge(dob);
         String clinic = user.getPatientClinic();
         PatientProfileDTO profile = new PatientProfileDTO(fullname, email, mobile, nhs, dob,age,clinic);
         return profile;
