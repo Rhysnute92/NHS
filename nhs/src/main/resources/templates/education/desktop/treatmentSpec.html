@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
   <head>
     <title>Education</title>
-    <link rel="stylesheet" th:href="@{/css/education/treatment.css}"/>
     <link rel="stylesheet" th:href="@{/css/education/information.css}"/>
+    <link rel="stylesheet" th:href="@{/css/education/treatment.css}"/>
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
@@ -13,7 +13,8 @@
     <div th:replace="~{education/fragments/desktop/infomenu :: infomenu}"></div>
     <div class="container">
       <h2>Treatments for lymphedema of the legs</h2>
-    <div>
+    <div class="section_container">
+    <div class="section">
       <button type="button" class="collapsible_button">Skincare</button>
       <div class="collapsible">
         <ul>
@@ -23,7 +24,8 @@
           <li>Always dry between toes thoroughly after washing to prevent fungal infection.</li>
           <li>Try to wear correct fitting shoes which are well supporting. Avoid high heeled and low cut shoes.</li>
           </ul>
-      </div>
+      </div></div>
+      <div class="section">
       <button type="button" class="collapsible_button">Wraps</button>
       <div class="collapsible">
           <p>You have been given wraps to reduce or manage your swollen leg. There are different makes of Velcro wraps. Basically, they are very much the same.</p>
@@ -74,17 +76,15 @@
             <iframe src="https://www.youtube.com/embed/U7tDpdQsTeI"></iframe>
           </div>
           <p>A good tip is to always remember to turn the velcro straps back on themselves once, then twice, to prevent the velcro sticking to everything and getting in a tangle! If you do this as and when you take off the wraps, it will make it much easier to put them on the next time.</p>
-        </div><br>
+        </div></div>
+        <div class="section">
         <button type="button" class="collapsible_button">Excercises</button>
         <div class="collapsible">
           <p>Repeat 10 times both sides. You can increase the number of repetitions as you get stronger</p>
-          <button type="button" class="reminder">Set Reminder</button>
           <div class="excercise">
           <h3>Excercise 1:</h3>
           <img src="/images/info/excercises/ex1l.png">
-          <p>Stand holding on to a firm surface (e.g. table).
-            Lift one foor off the floor as high as you can.
-            Slowly lower back down.
+          <p>Stand holding on to a firm surface (e.g. table). Lift one foor off the floor as high as you can. Slowly lower back down.
           </p> </div>
           <div class="excercise">
           <h3>Excercise 2:</h3>
@@ -98,8 +98,7 @@
           <div class="excercise">
             <h3>Excercise 4:</h3>
             <img src="/images/info/excercises/ex4l.png">
-            <p>Roll your foot in a circle.
-              Repeat in the opposite direction.
+            <p>Roll your foot in a circle. Repeat in the opposite direction.
             </p>
           </div>
           <div class="excercise">
@@ -112,17 +111,16 @@
           <div class="excercise">
             <h3>Excercise 6:</h3>
             <img src="/images/info/excercises/ex6l.png">
-            <p>Sit with your feet down.
-              Straighten and bend your knee.
+            <p>Sit with your feet down. Straighten and bend your knee.
             </p>
           </div>
-      </div><br>
+      </div></div>
+      <div class="section">
         <button type="button" class="collapsible_button">Lymphatic drainage</button>
         <div class="collapsible">
           <p>Manual and simple lymphatic drainage is a gentle massage where the skin is stretched along the lymphatic pathway. Regular simple Lymphatic Drainage can help move extra fluid from swollen areas damaged by cancer treatments to areas where the lymphatic system is working well. To be effective Simple Lymphatic drainage needs to be carried out daily and may be a long-term requirement to support the Lymphatic system.</p>
-          <button type="button" class="reminder">Set Reminder</button>
           <iframe src="https://www.youtube.com/embed/XGspjYNAfeE"></iframe>
-        </div>
+        </div></div>
     </div>
     <div class="section_nav">
         <a th:href="@{/treatment}" class="section_link">&larr; Back to full list</a>
