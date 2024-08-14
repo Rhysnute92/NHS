@@ -14,6 +14,20 @@
     <!-- Alternative method to call authentication from thymeleaf -->
     <!-- <h1>Hello, <span th:text="${#authentication.name}">username</span></h1> -->
     <h1>Hello,  <span id="userFullname"></span></h1>
+    <div class="personal_info">
+        <h2>My Details</h2>
+        <div>Full name:</div>
+        <div>NHS number:</div>
+        <div>Email: </div>
+        <div>Phone number:</div>
+        <div>Date of Birth (Age):</div>
+        <div>Clinic: </div>
+    </div>
+    <div class="account_info">
+        <h2>My Account</h2>
+        <div>Email: <span  id="username"></span></div>
+        <button type="button">Change password</button>
+    </div>
     <form th:action="@{/logout}" method="post">
         <input type="submit" class="logout-button" value="LOG OUT"/>
     </form>

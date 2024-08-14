@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import uk.ac.cf.spring.nhs.Account.PatientProfileDTO;
 import uk.ac.cf.spring.nhs.AddPatient.DTO.RegisterRequest;
 import uk.ac.cf.spring.nhs.AddPatient.Entity.Patient;
 import uk.ac.cf.spring.nhs.AddPatient.Repository.PatientRepository;
@@ -13,7 +15,11 @@ import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentialsRepository;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Base64;
+import java.util.Date;
 import java.util.Random;
 
 @Service
@@ -104,4 +110,35 @@ public class PatientService {
         }
         return password.toString();
     }
+
+    public String getFullname(Patient patient){
+        String fullName = patient.getPatientTitle() + patient.getPatientName() + patient.getPatientLastName();
+        return fullName;
+    }
+
+    private int calculateAge(LocalDate dob){
+        LocalDate now = LocalDate.now();
+        Period period = Period.between(dob, now); 
+        return period.getYears();
+    }
+
+    public Patient findPatientbyId(long userId){
+        Patient user = patientRepository.findById(userId);
+        return user;
+    }
+
+    public PatientProfileDTO profile(long userId){
+        Patient user = findPatientbyId(userId);
+        String fullname = getFullname(user);
+        String email = user.getPatientEmail();
+        String mobile = user.getPatientMobile();
+        String nhs = user.getNhsNumber();
+        LocalDate dob = user.getPatientDOB();
+        int age = calculateAge(dob);
+        String clinic = user.getPatientClinic();
+        PatientProfileDTO profile = new PatientProfileDTO(fullname, email, mobile, nhs, dob,age,clinic);
+        return profile;
+    }
+
+
 }

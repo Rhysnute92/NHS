@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-        fetch('/userFullName').then(response => response.text())
+        fetch('/username').then(response => response.text())
         .then(data => {
         console.log("Fetched user name:", data);
-        var span = document.getElementById('userFullname');
+        var span = document.getElementById('username');
         if ('textContent' in span) {
             span.textContent = data;
         } else {
