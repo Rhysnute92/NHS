@@ -13,7 +13,7 @@ self.addEventListener("message", async function (event) {
           throw new Error("taskId is undefined or null");
         }
         
-        const response = await fetch(`/usertask/task-complete/${taskId}`, {
+        const response = await fetch(`/usertask/task-toggle/${taskId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -22,7 +22,7 @@ self.addEventListener("message", async function (event) {
 
         if (!response.ok) {
           throw new Error(
-            `Failed to mark task ${taskId} as completed: ${response.statusText}`
+            `Failed to toggle task ${taskId} completion: ${response.statusText}`
           );
         }
         return response.json();

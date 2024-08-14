@@ -74,17 +74,11 @@ public class UserTaskController {
         return ResponseEntity.ok(updatedUserTask);
     }
 
-    /**
-     * Marks a task as completed for the current day.
-     *
-     * @param userTaskID the ID of the task to mark as completed
-     * @return ResponseEntity with the updated UserTask
-     */
-    @PutMapping("/task-complete/{userTaskID}")
-    public ResponseEntity<UserTask> markTaskCompleted(@PathVariable("userTaskID") Long userTaskID) {
+    @PutMapping("/task-toggle/{userTaskID}")
+    public ResponseEntity<Void> toggleTaskCompletion(@PathVariable("userTaskID") Long userTaskID) {
         UserTask userTask = userTaskService.getUserTaskById(userTaskID);
-        userTaskService.markTaskCompleted(userTask);
-        return ResponseEntity.ok(userTask);
+        userTaskService.toggleTaskCompletion(userTask);
+        return ResponseEntity.noContent().build();
     }
 
     /**
