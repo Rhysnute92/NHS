@@ -1,116 +1,89 @@
 package uk.ac.cf.spring.nhs.UserTask.Model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.time.LocalDateTime;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import uk.ac.cf.spring.nhs.Task.Model.Task;
 
 public class UserTaskUnitTests {
 
-    /**
-     * Tests the creation of a UserTask object.
-     * 
-     */
+    private UserTask userTask;
+    private Task task;
+
+    @BeforeEach
+    public void setUp() {
+        userTask = new UserTask();
+        task = new Task();
+        task.setId(1L);
+    }
+
     @Test
-    public void testUserTaskCreation() {
-        UserTask userTask = new UserTask();
+    public void testSetAndGetId() {
         userTask.setId(1L);
-        userTask.setUserID(1L);
-        userTask.setTaskIsCompleted(false);
-        userTask.setTaskDuedate(LocalDateTime.of(2024, 8, 9, 0, 0));
+        assertThat(userTask.getId()).isEqualTo(1L);
+    }
 
-        Task task = new Task();
-        task.setId(1L);
-        task.setName("Test Task");
+    @Test
+    public void testSetAndGetTask() {
         userTask.setTask(task);
-
-        assertEquals(1L, userTask.getId());
-        assertEquals(1L, userTask.getUserID());
-        assertEquals(false, userTask.getTaskIsCompleted());
-        assertEquals(LocalDateTime.of(2024, 8, 9, 0, 0), userTask.getTaskDuedate());
-        assertEquals(task, userTask.getTask());
+        assertThat(userTask.getTask()).isEqualTo(task);
     }
 
-    /**
-     * Tests the equality of two UserTask objects.
-     *
-     * This test creates two UserTask objects with the same ID, user,
-     * taskIsCompleted, and taskDuedate.
-     * It also creates a Task object with the same ID and name.
-     * The two UserTask objects are then set with the same Task object.
-     * Finally, the test asserts that the two UserTask objects are equal and have
-     * the same hash code.
-     *
-     * @throws AssertionError if the two UserTask objects are not equal or have
-     *                        different hash codes
-     */
     @Test
-    public void testUserTaskEquality() {
-        Task task = new Task();
-        task.setId(1L);
-        task.setName("Test Task");
-
-        UserTask userTask1 = new UserTask();
-        userTask1.setId(1L);
-        userTask1.setUserID(1L);
-        userTask1.setTaskIsCompleted(false);
-        userTask1.setTaskDuedate(LocalDateTime.of(2024, 8, 9, 0, 0));
-        userTask1.setTask(task);
-
-        UserTask userTask2 = new UserTask();
-        userTask2.setId(1L);
-        userTask2.setUserID(1L);
-        userTask2.setTaskIsCompleted(false);
-        userTask2.setTaskDuedate(LocalDateTime.of(2024, 8, 9, 0, 0));
-        userTask2.setTask(task);
-
-        assertEquals(userTask1, userTask2);
-        assertEquals(userTask1.hashCode(), userTask2.hashCode());
+    public void testSetAndGetUserID() {
+        userTask.setUserID(100L);
+        assertThat(userTask.getUserID()).isEqualTo(100L);
     }
 
-    /**
-     * Tests the inequality of two UserTask objects.
-     *
-     * This test creates two UserTask objects with different tasks.
-     * The tasks are set with different IDs and names.
-     * The two UserTask objects are then set with the same ID, user,
-     * taskIsCompleted, and taskDuedate.
-     * Finally, the test asserts that the two UserTask objects are not equal and
-     * have different hash codes.
-     *
-     * @throws AssertionError if the two UserTask objects are equal or have the same
-     *                        hash code
-     */
     @Test
-    public void testUserTaskInequality() {
-        Task task = new Task();
-        task.setId(1L);
-        task.setName("Test Task 1");
-
-        Task task2 = new Task();
-        task2.setId(2L);
-        task2.setName("Test Task 2");
-
-        UserTask userTask1 = new UserTask();
-        userTask1.setId(1L);
-        userTask1.setUserID(1L);
-        userTask1.setTaskIsCompleted(false);
-        userTask1.setTaskDuedate(LocalDateTime.of(2024, 8, 9, 0, 0));
-        userTask1.setTask(task);
-
-        UserTask userTask2 = new UserTask();
-        userTask2.setId(1L);
-        userTask2.setUserID(1L);
-        userTask2.setTaskIsCompleted(false);
-        userTask2.setTaskDuedate(LocalDateTime.of(2024, 8, 9, 0, 0));
-        userTask2.setTask(task2);
-
-        assertNotEquals(userTask1, userTask2);
-        assertNotEquals(userTask1.hashCode(), userTask2.hashCode());
+    public void testSetAndGetBitmask() {
+        userTask.setBitmask(15);
+        assertThat(userTask.getBitmask()).isEqualTo(15);
     }
 
+    @Test
+    public void testEqualsAndHashCode_sameObject() {
+        userTask.setId(1L);
+        userTask.setTask(task);
+        userTask.setUserID(100L);
+        userTask.setBitmask(15);
+
+        UserTask other = new UserTask();
+        other.setId(1L);
+        other.setTask(task);
+        other.setUserID(100L);
+        other.setBitmask(15);
+
+        assertThat(userTask).isEqualTo(other);
+        assertThat(userTask.hashCode()).isEqualTo(other.hashCode());
+    }
+
+    @Test
+    public void testEqualsAndHashCode_differentObject() {
+        userTask.setId(1L);
+        userTask.setTask(task);
+        userTask.setUserID(100L);
+        userTask.setBitmask(15);
+
+        UserTask other = new UserTask();
+        other.setId(2L); // Different ID
+        other.setTask(task);
+        other.setUserID(100L);
+        other.setBitmask(15);
+
+        assertThat(userTask).isNotEqualTo(other);
+        assertThat(userTask.hashCode()).isNotEqualTo(other.hashCode());
+    }
+
+    @Test
+    public void testEquals_differentClass() {
+        assertThat(userTask).isNotEqualTo(new Object());
+    }
+
+    @Test
+    public void testEquals_nullObject() {
+        assertThat(userTask).isNotEqualTo(null);
+    }
 }

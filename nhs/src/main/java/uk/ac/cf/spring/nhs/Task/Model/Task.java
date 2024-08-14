@@ -23,6 +23,9 @@ public class Task {
     @Column(name = "TaskDesc")
     private String description;
 
+    @Column(name = "TaskType", nullable = false)
+    private String type;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "TaskRepeatPeriod", nullable = false)
     private Periodicity periodicity;
@@ -82,5 +85,21 @@ public class Task {
     public void setPeriodicity(Periodicity periodicity) {
         this.periodicity = periodicity;
     }
+
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    
 
 }
