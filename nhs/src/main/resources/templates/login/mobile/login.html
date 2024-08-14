@@ -13,16 +13,12 @@
         <input type="text" name="username" placeholder="Username" required />
         <input type="password" name="password" placeholder="Password" required />
         <br>
-        <button type="submit" class="log-in-btn">Login</button>
+        <input type="submit" value="Login" class="log-in-btn"/>
     </form>
+    <div th:if="${param.error}" class="login_error">Invalid username and password.</div>
 </div>
-<div class="back-btn">
-<img
-        src="/images/back-button.svg"
-        alt="Back Button Icon"
-        class="icon"
-        onclick="location. href='/guest'"
-/>
+<div class="back-btn" onclick="location.href='/guest'">
+    Back
 </div>
 <script th:src="@{/js/common/header.js}"></script>
 </body>

@@ -19,7 +19,7 @@ public class DiaryMeasurement {
     @JoinColumn(name = "MeasurementID", nullable = false)
     private Measurement measurement;
 
-    protected DiaryMeasurement() {}
+    public DiaryMeasurement() {}
 
     public DiaryMeasurement(DiaryEntry diaryEntry, Measurement measurement) {
         this.diaryEntry = diaryEntry;

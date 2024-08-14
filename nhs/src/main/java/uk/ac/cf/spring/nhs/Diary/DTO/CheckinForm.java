@@ -2,27 +2,31 @@ package uk.ac.cf.spring.nhs.Diary.DTO;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CheckinForm {
     private String mood;
-    private Integer troubleSleepingSeverity;
-    private Integer painSeverity;
-    private Integer numbnessSeverity;
+    private List<SymptomDTO> symptoms;
+    private List<MeasurementDTO> measurements;
     private String notes;
-    private List<MultipartFile> photos;
+    private List<MultipartFile> photos; // Add photos field
 
     public CheckinForm() {
+        this.symptoms = new ArrayList<>();
+        this.measurements = new ArrayList<>();
+        this.photos = new ArrayList<>();
     }
 
-    public CheckinForm(String mood, Integer troubleSleepingSeverity, Integer painSeverity, Integer numbnessSeverity, String notes, List<MultipartFile> photos) {
+    public CheckinForm(String mood, List<SymptomDTO> symptoms, List<MeasurementDTO> measurements, String notes, List<MultipartFile> photos) {
         this.mood = mood;
-        this.troubleSleepingSeverity = troubleSleepingSeverity;
-        this.painSeverity = painSeverity;
-        this.numbnessSeverity = numbnessSeverity;
+        this.symptoms = symptoms != null ? symptoms : new ArrayList<>();
+        this.measurements = measurements != null ? measurements : new ArrayList<>();
         this.notes = notes;
-        this.photos = photos;
+        this.photos = photos != null ? photos : new ArrayList<>();
     }
+
+    // Getters and setters...
 
     public String getMood() {
         return mood;
@@ -32,28 +36,20 @@ public class CheckinForm {
         this.mood = mood;
     }
 
-    public Integer getTroubleSleepingSeverity() {
-        return troubleSleepingSeverity;
+    public List<SymptomDTO> getSymptoms() {
+        return symptoms;
     }
 
-    public void setTroubleSleepingSeverity(Integer troubleSleepingSeverity) {
-        this.troubleSleepingSeverity = troubleSleepingSeverity;
+    public void setSymptoms(List<SymptomDTO> symptoms) {
+        this.symptoms = symptoms;
     }
 
-    public Integer getPainSeverity() {
-        return painSeverity;
+    public List<MeasurementDTO> getMeasurements() {
+        return measurements;
     }
 
-    public void setPainSeverity(Integer painSeverity) {
-        this.painSeverity = painSeverity;
-    }
-
-    public Integer getNumbnessSeverity() {
-        return numbnessSeverity;
-    }
-
-    public void setNumbnessSeverity(Integer numbnessSeverity) {
-        this.numbnessSeverity = numbnessSeverity;
+    public void setMeasurements(List<MeasurementDTO> measurements) {
+        this.measurements = measurements;
     }
 
     public String getNotes() {
@@ -72,4 +68,14 @@ public class CheckinForm {
         this.photos = photos;
     }
 
+    @Override
+    public String toString() {
+        return "CheckinForm{" +
+                "mood='" + mood + '\'' +
+                ", symptoms=" + symptoms +
+                ", measurements=" + measurements +
+                ", notes='" + notes + '\'' +
+                ", photos=" + photos +
+                '}';
+    }
 }

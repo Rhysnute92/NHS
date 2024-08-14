@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/dashboard/dashboard.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <header th:replace="~{common/fragments/header}"></header>
+    <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+    <div class="dashboard-container">
+      <div class="welcome-container">
+        <h1 id="welcome-message">Welcome, </h1>
+        <h1 id="patient-name"></h1>
+      </div>
+      <h2 class="dashboard-subtitle">
+        Last logged in: <span id="last-logged-in">July 31, 2024</span>
+      </h2>
+      <div id="widget-container"></div>
+      <div class="button-container">
+        <button class="add-widget-button">+ Add Widget</button>
+      </div>
+    </div>
+    <script th:src="@{/js/common/header.js}"></script>
+    <script type="module" th:src="@{/js/Widget/widget.js}"></script>
+    <script type="module" src="/js/dashboard/dashboard.js"></script>
+  </body>
+</html>

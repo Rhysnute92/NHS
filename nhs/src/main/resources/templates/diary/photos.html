@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="en">
+<head>
+  <title>Photos</title>
+  <link rel="stylesheet" th:href="@{/css/diary/photos.css}" />
+</head>
+<body>
+<main layout:fragment="content">
+  <h1 class="page-title">Photos</h1>
+  <div class="container">
+    <form class="photo-form" id="photo-form" action="/diary/photos" method="post" enctype="multipart/form-data">
+      <div th:replace="~{diary/fragments/photoUpload :: photoUpload}"></div>
+    </form>
+    <h2 th:if="${photos.empty}" class="no-photos">No photos uploaded yet</h2>
+    <div th:unless="${photos.empty}" class="photo-container">
+      <th:block th:each="photo : ${photos}">
+        <img th:src="@{/files/{filename}(filename=${photo.url})}" class="photo" />
+      </th:block>
+    </div>
+  </div>
+</main>
+<script layout:fragment="scripts" th:src="@{/js/diary/photos.js}"></script>
+</body>
+</html>

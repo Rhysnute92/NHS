@@ -1,148 +1,155 @@
+let appointments = [];
 
-let events = [];
+const apptDateInput = document.getElementById("apptDate");
+const apptTimeInput = document.getElementById("apptTime");
+const apptTypeInput = document.getElementById("apptType");
+const apptProviderInput = document.getElementById("apptProvider");
+const apptInfoInput = document.getElementById("apptInfo");
+const apptList = document.getElementById("apptList");
 
-let eventDateInput = document.getElementById("appointmentDate");
-let eventTimeInput = document.getElementById("appointmentTime");
-let eventAppointmentTypeInput = document.getElementById("appointmentType");
-let eventDrInput = document.getElementById("dr");
-let eventCommentInput = document.getElementById("comments");
-let apptList = document.getElementById("apptList");
+const apptForm = document.getElementById("apptForm");
 
-let eventIdCounter = 1;
+if (apptForm) {
+    apptForm.addEventListener("submit", function (evt) {
+        evt.preventDefault();
+        addAppointment();
+    });
+}
 
-function addEvent() {
-    let date = eventDateInput.value;
-    let time = eventTimeInput.value;
-    let appointmentType = eventAppointmentTypeInput.value;
-    let dr = eventDrInput.value;
-    let description = eventCommentInput.value;
+async function addAppointment() {
+    const appointment = {
+        date: apptDateInput.value,
+        time: apptTimeInput.value,
+        appointmentType: apptTypeInput.value,
+        provider: apptProviderInput.value,
+        description: apptInfoInput.value
+    };
 
-    if (date && title) {
-        let eventId = eventIdCounter++;
-
-        events.push(
-            {
-                id: eventId, date: date, time: time, appointmentType: appointmentType, dr: dr, description: description
+    const url = "/appointments";
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(appointment)
+        });
+        if (response.status === 201) {
+            if (window.location.href.includes("appt")) {
+                window.location.href = "/calendar";
             }
-        );
-        showCalendar(currentMonth, currentYear);
-        eventDateInput.value = "";
-        eventTimeInput.value = "";
-        eventAppointmentTypeInput.value = "";
-        eventDrInput.value = "";
-        eventCommentInput.value = "";
-        apptSchedule();
+            const newAppointment = await response.json();
+            appointments.push(newAppointment);
+            clearForm();
+            showCalendar(currentMonth, currentYear);
+            displayAppointments();
+        }
+    } catch (error) {
+        console.error("Error:", error);
     }
 }
 
-function deleteAppointment(eventId) {
-    let eventIndex =
-        events.findIndex((event) =>
-            event.id === eventId);
+function clearForm() {
+    apptDateInput.value = "";
+    apptTimeInput.value = "";
+    apptTypeInput.value = "";
+    apptProviderInput.value = "";
+    apptInfoInput.value = "";
+}
 
-    if (eventIndex !== -1) {
-        events.splice(eventIndex, 1);
+function deleteAppointment(appointmentID) {
+    let appointmentIndex = appointments.findIndex((appointment) => appointment.id === appointmentID);
+
+    if (appointmentIndex !== -1) {
+        appointments.splice(appointmentIndex, 1);
+
         showCalendar(currentMonth, currentYear);
-        displayReminders();
+        displayAppointments();
     }
 }
 
-function apptSchedule() {
+function displayAppointments() {
     apptList.innerHTML = "";
-    for (let i = 0; i < events.length; i++) {
-        let event = events[i];
-        let eventDate = new Date(event.date);
-        if (eventDate.getMonth() ===
-            currentMonth &&
-            eventDate.getFullYear() ===
-            currentYear) {
+    for (let appointment of appointments) {
+        let apptDate = new Date(appointment.apptDateTime);
+        if (apptDate.getMonth() === currentMonth && apptDate.getFullYear() === currentYear) {
             let listItem = document.createElement("li");
-            listItem.innerHTML =
-                `<strong>${event.title}</strong> - 
-			${event.description} on 
-			${eventDate.toLocaleDateString()}`;
+            listItem.innerHTML = `<strong>${appointment.apptType}</strong> - ${appointment.apptInfo} on ${apptDate.toLocaleDateString()} at ${apptDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+            listItem.className = "appt-item";
 
-            let deleteButton =
-                document.createElement("button");
+            let deleteButton = document.createElement("button");
             deleteButton.className = "delete-appt";
             deleteButton.textContent = "Delete";
             deleteButton.onclick = function () {
-                deleteAppt(event.id);
+                deleteAppointment(appointment.id);
             };
 
             listItem.appendChild(deleteButton);
-            reminderList.appendChild(listItem);
+            apptList.appendChild(listItem);
         }
     }
 }
 
-function generate_year_range(start, end) {
+function generateYearRange(start, end) {
     let years = "";
     for (let year = start; year <= end; year++) {
-        years += "<option value='" +
-            year + "'>" + year + "</option>";
+        years += `<option value='${year}'>${year}</option>`;
     }
     return years;
 }
 
-today = new Date();
-currentMonth = today.getMonth();
-currentYear = today.getFullYear();
-selectYear = document.getElementById("year");
-selectMonth = document.getElementById("month");
+let today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+const selectYear = document.getElementById("year");
+const selectMonth = document.getElementById("month");
 
-createYear = generate_year_range(1970, 2050);
-
+const createYear = generateYearRange(1970, 2050);
 document.getElementById("year").innerHTML = createYear;
 
-let calendar = document.getElementById("calendar");
+const calendar = document.getElementById("calendar");
 
-let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-];
-let days = [
-    "Sun", "Mon", "Tue", "Wed",
-    "Thu", "Fri", "Sat"];
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-$dataHead = "<tr>";
-for (dhead in days) {
-    $dataHead += "<th data-days='" +
-        days[dhead] + "'>" +
-        days[dhead] + "</th>";
+let dataHead = "<tr>";
+for (let day of days) {
+    dataHead += `<th data-days='${day}'>${day}</th>`;
 }
-$dataHead += "</tr>";
+dataHead += "</tr>";
+document.getElementById("thead-month").innerHTML = dataHead;
 
-document.getElementById("thead-month").innerHTML = $dataHead;
+const monthAndYear = document.getElementById("monthAndYear");
 
-monthAndYear =
-    document.getElementById("monthAndYear");
-showCalendar(currentMonth, currentYear);
+document.addEventListener("DOMContentLoaded", function () {
+    showCalendar(currentMonth, currentYear);
+    fetchAppointments();
+});
 
-// Function to navigate to the next month
+async function fetchAppointments() {
+    try {
+        const response = await fetch('/appointments');
+        if (response.ok) {
+            appointments = await response.json();
+            showCalendar(currentMonth, currentYear);
+            displayAppointments();
+        } else {
+            console.error("Failed to fetch appointments");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
 function next() {
-    currentYear = currentMonth === 11 ?
-        currentYear + 1 : currentYear;
+    currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
     currentMonth = (currentMonth + 1) % 12;
     showCalendar(currentMonth, currentYear);
 }
 
-// Function to navigate to the previous month
 function previous() {
-    currentYear = currentMonth === 0 ?
-        currentYear - 1 : currentYear;
-    currentMonth = currentMonth === 0 ?
-        11 : currentMonth - 1;
+    currentYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+    currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
     showCalendar(currentMonth, currentYear);
 }
 
@@ -154,92 +161,73 @@ function jump() {
 
 function showCalendar(month, year) {
     let firstDay = new Date(year, month, 1).getDay();
-    tbl = document.getElementById("calendar-body");
+    const tbl = document.getElementById("calendar-body");
     tbl.innerHTML = "";
-    monthAndYear.innerHTML = months[month] + " " + year;
+    monthAndYear.innerHTML = `${months[month]} ${year}`;
     selectYear.value = year;
     selectMonth.value = month;
 
     let date = 1;
+    const fragment = document.createDocumentFragment();
+
     for (let i = 0; i < 6; i++) {
         let row = document.createElement("tr");
         for (let j = 0; j < 7; j++) {
+            let cell = document.createElement("td");
+
             if (i === 0 && j < firstDay) {
-                cell = document.createElement("td");
-                cellText = document.createTextNode("");
-                cell.appendChild(cellText);
-                row.appendChild(cell);
+                cell.appendChild(document.createTextNode(""));
             } else if (date > daysInMonth(month, year)) {
                 break;
             } else {
-                cell = document.createElement("td");
                 cell.setAttribute("data-date", date);
                 cell.setAttribute("data-month", month + 1);
                 cell.setAttribute("data-year", year);
                 cell.setAttribute("data-month_name", months[month]);
                 cell.className = "date-picker";
-                cell.innerHTML = "<span>" + date + "</span";
+                cell.innerHTML = `<span>${date}</span>`;
 
-                if (
-                    date === today.getDate() &&
-                    year === today.getFullYear() &&
-                    month === today.getMonth()
-                ) {
+                if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
                     cell.className = "date-picker selected";
                 }
 
-                // Check if there are events on this date
-                if (hasEventOnDate(date, month, year)) {
-                    cell.classList.add("event-marker");
-                    cell.appendChild(
-                        createEventTooltip(date, month, year)
-                    );
+                if (hasAppointmentOnDate(date, month, year)) {
+                    cell.classList.add("appt-marker");
+                    cell.appendChild(createAppointmentTooltips(date, month, year));
                 }
 
-                row.appendChild(cell);
                 date++;
             }
+            row.appendChild(cell);
         }
-        tbl.appendChild(row);
+        fragment.appendChild(row);
     }
-
-    displayReminders();
+    tbl.appendChild(fragment);
 }
 
-function createEventTooltip(date, month, year) {
-    let tooltip = document.createElement("div");
-    tooltip.className = "event-tooltip";
-    let eventsOnDate = getEventsOnDate(date, month, year);
-    for (let i = 0; i < eventsOnDate.length; i++) {
-        let event = eventsOnDate[i];
-        let eventDate = new Date(event.date);
-        let eventText = `<strong>${event.title}</strong> - 
-			${event.description} on 
-			${eventDate.toLocaleDateString()}`;
-        let eventElement = document.createElement("p");
-        eventElement.innerHTML = eventText;
-        tooltip.appendChild(eventElement);
+function createAppointmentTooltips(date, month, year) {
+    const tooltips = document.createElement('div');
+    const appointmentsOnDate = getAppointmentsOnDate(date, month, year);
+    for (let appointment of appointmentsOnDate) {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'appt-tooltip';
+        tooltip.innerHTML = `${appointment.apptType}`;
+        tooltips.appendChild(tooltip);
     }
-    return tooltip;
+    return tooltips;
 }
 
-function getEventsOnDate(date, month, year) {
-    return events.filter(function (event) {
-        let eventDate = new Date(event.date);
-        return (
-            eventDate.getDate() === date &&
-            eventDate.getMonth() === month &&
-            eventDate.getFullYear() === year
-        );
+function getAppointmentsOnDate(date, month, year) {
+    return appointments.filter(appointment => {
+        let apptDate = new Date(appointment.apptDateTime);
+        return apptDate.getDate() === date && apptDate.getMonth() === month && apptDate.getFullYear() === year;
     });
 }
 
-function hasEventOnDate(date, month, year) {
-    return getEventsOnDate(date, month, year).length > 0;
+function hasAppointmentOnDate(date, month, year) {
+    return getAppointmentsOnDate(date, month, year).length > 0;
 }
 
-function daysInMonth(iMonth, iYear) {
-    return 32 - new Date(iYear, iMonth, 32).getDate();
+function daysInMonth(month, year) {
+    return 32 - new Date(year, month, 32).getDate();
 }
-
-showCalendar(currentMonth, currentYear);

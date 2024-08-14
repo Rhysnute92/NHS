@@ -3,16 +3,14 @@
       layout:decorate="~{layout/default}">
 <head>
     <title>Diary</title>
-    <link layout:fragment="css" rel="stylesheet" th:href="@{/css/diary/diary.css}" />
-    <link layout:fragment="css" rel="stylesheet" th:href="@{/css/diary/diaryEntry.css}" />
+    <link rel="stylesheet" th:href="@{/css/diary/diary.css}" />
+    <link rel="stylesheet" th:href="@{/css/diary/diaryEntry.css}" />
 </head>
 <body>
 <main layout:fragment="content">
     <h1 class="page-title">Diary</h1>
     <div class="container">
-        <div th:if="${diaryEntries.empty}">
-            <h2>No diary entries yet</h2>
-        </div>
+        <h2 th:if="${diaryEntries.empty}" class="no-entries">No diary entries yet</h2>
         <th:block th:each="diaryEntry : ${diaryEntries}">
             <div th:replace="~{diary/fragments/diaryEntry :: diaryEntry(diaryEntry=${diaryEntry})}">
             </div>

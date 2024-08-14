@@ -2,20 +2,25 @@ package uk.ac.cf.spring.nhs.Diary.Service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.multipart.MultipartFile;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinForm;
+import uk.ac.cf.spring.nhs.Diary.DTO.MeasurementDTO;
+import uk.ac.cf.spring.nhs.Diary.DTO.SymptomDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.*;
 import uk.ac.cf.spring.nhs.Diary.Repository.*;
-import uk.ac.cf.spring.nhs.Common.util.FileStorageService;
+import uk.ac.cf.spring.nhs.Files.Service.FileStorageService;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class DiaryEntryServiceTest {
+public class DiaryEntryServiceTest {
 
     @Mock
     private DiaryEntryRepository diaryEntryRepository;
@@ -27,96 +32,115 @@ class DiaryEntryServiceTest {
     private SymptomRepository symptomRepository;
 
     @Mock
+    private MeasurementRepository measurementRepository;
+
+    @Mock
     private FileStorageService fileStorageService;
 
     @InjectMocks
     private DiaryEntryService diaryEntryService;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void createAndSaveDiaryEntrySavesDiaryEntry() throws Exception {
-        CheckinForm checkinForm = new CheckinForm();
-        checkinForm.setMood("GOOD");
-        checkinForm.setNotes("Feeling good");
-        checkinForm.setTroubleSleepingSeverity(2);
-        checkinForm.setPainSeverity(3);
-        checkinForm.setNumbnessSeverity(1);
+    public void testSaveDiaryEntry() {
+        DiaryEntry diaryEntry = new DiaryEntry(1, new Date());
+        when(diaryEntryRepository.save(diaryEntry)).thenReturn(diaryEntry);
 
-        MultipartFile multipartFile = mock(MultipartFile.class);
-        List<MultipartFile> photos = List.of(multipartFile);
+        DiaryEntry savedEntry = diaryEntryService.saveDiaryEntry(diaryEntry);
 
-        when(fileStorageService.storeFile(any(MultipartFile.class))).thenReturn("photo-url");
-        when(photoRepository.save(any(Photo.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        when(symptomRepository.save(any(Symptom.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        when(diaryEntryRepository.save(any(DiaryEntry.class))).thenAnswer(invocation -> invocation.getArgument(0));
-
-        diaryEntryService.createAndSaveDiaryEntry(checkinForm, photos);
-
-        ArgumentCaptor<DiaryEntry> diaryEntryCaptor = ArgumentCaptor.forClass(DiaryEntry.class);
-        verify(diaryEntryRepository).save(diaryEntryCaptor.capture());
-        DiaryEntry savedDiaryEntry = diaryEntryCaptor.getValue();
-
-        assertEquals("GOOD", savedDiaryEntry.getMood().name());
-        assertEquals("Feeling good", savedDiaryEntry.getNotes());
-        assertNotNull(savedDiaryEntry.getPhotos());
-        assertNotNull(savedDiaryEntry.getSymptoms());
-        assertEquals(3, savedDiaryEntry.getSymptoms().size());
+        assertNotNull(savedEntry);
+        assertEquals(diaryEntry, savedEntry);
+        verify(diaryEntryRepository, times(1)).save(diaryEntry);
     }
 
     @Test
-    void createAndSaveDiaryEntryHandlesNullMoodAndNotes() throws Exception {
-        CheckinForm checkinForm = new CheckinForm();
-        checkinForm.setTroubleSleepingSeverity(2);
-        checkinForm.setPainSeverity(3);
-        checkinForm.setNumbnessSeverity(1);
+    public void testGetAllDiaryEntries() {
+        List<DiaryEntry> diaryEntries = new ArrayList<>();
+        when(diaryEntryRepository.findAll()).thenReturn(diaryEntries);
 
-        MultipartFile multipartFile = mock(MultipartFile.class);
-        List<MultipartFile> photos = List.of(multipartFile);
+        List<DiaryEntry> result = diaryEntryService.getAllDiaryEntries();
 
-        when(fileStorageService.storeFile(any(MultipartFile.class))).thenReturn("photo-url");
-        when(photoRepository.save(any(Photo.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        when(symptomRepository.save(any(Symptom.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        when(diaryEntryRepository.save(any(DiaryEntry.class))).thenAnswer(invocation -> invocation.getArgument(0));
-
-        diaryEntryService.createAndSaveDiaryEntry(checkinForm, photos);
-
-        ArgumentCaptor<DiaryEntry> diaryEntryCaptor = ArgumentCaptor.forClass(DiaryEntry.class);
-        verify(diaryEntryRepository).save(diaryEntryCaptor.capture());
-        DiaryEntry savedDiaryEntry = diaryEntryCaptor.getValue();
-
-        assertNull(savedDiaryEntry.getMood());
-        assertNull(savedDiaryEntry.getNotes());
-        assertNotNull(savedDiaryEntry.getPhotos());
-        assertNotNull(savedDiaryEntry.getSymptoms());
-        assertEquals(3, savedDiaryEntry.getSymptoms().size());
+        assertNotNull(result);
+        assertEquals(diaryEntries, result);
+        verify(diaryEntryRepository, times(1)).findAll();
     }
 
     @Test
-    void createAndSaveDiaryEntryHandlesNoPhotos() throws Exception {
+    public void testGetDiaryEntryById() {
+        int id = 1;
+        DiaryEntry diaryEntry = new DiaryEntry(1, new Date());
+        when(diaryEntryRepository.findById(id)).thenReturn(Optional.of(diaryEntry));
+
+        Optional<DiaryEntry> result = diaryEntryService.getDiaryEntryById(id);
+
+        assertTrue(result.isPresent());
+        assertEquals(diaryEntry, result.get());
+        verify(diaryEntryRepository, times(1)).findById(id);
+    }
+
+    @Test
+    public void testGetDiaryEntriesByUserId() {
+        int userId = 1;
+        List<DiaryEntry> diaryEntries = new ArrayList<>();
+        when(diaryEntryRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"))).thenReturn(diaryEntries);
+
+        List<DiaryEntry> result = diaryEntryService.getDiaryEntriesByUserId(userId);
+
+        assertNotNull(result);
+        assertEquals(diaryEntries, result);
+        verify(diaryEntryRepository, times(1)).findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"));
+    }
+
+    @Test
+    public void testDeleteDiaryEntryById() {
+        int id = 1;
+        doNothing().when(diaryEntryRepository).deleteById(id);
+
+        diaryEntryService.deleteDiaryEntryById(id);
+
+        verify(diaryEntryRepository, times(1)).deleteById(id);
+    }
+
+    @Test
+    public void testCreateAndSaveDiaryEntry() throws Exception {
         CheckinForm checkinForm = new CheckinForm();
         checkinForm.setMood("GOOD");
-        checkinForm.setNotes("Feeling good");
-        checkinForm.setTroubleSleepingSeverity(2);
-        checkinForm.setPainSeverity(3);
-        checkinForm.setNumbnessSeverity(1);
+        checkinForm.setNotes("Feeling good today");
 
-        when(symptomRepository.save(any(Symptom.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        when(diaryEntryRepository.save(any(DiaryEntry.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        MultipartFile mockFile = mock(MultipartFile.class);
+        when(mockFile.isEmpty()).thenReturn(false);
+        when(fileStorageService.storeFile(mockFile)).thenReturn("photoUrl");
+        checkinForm.setPhotos(Collections.singletonList(mockFile));
 
-        diaryEntryService.createAndSaveDiaryEntry(checkinForm, Collections.emptyList());
+        SymptomDTO symptomDTO = new SymptomDTO();
+        symptomDTO.setName("Pain");
+        symptomDTO.setSeverity(2);
+        checkinForm.setSymptoms(Collections.singletonList(symptomDTO));
+
+        MeasurementDTO measurementDTO = new MeasurementDTO();
+        measurementDTO.setType("Weight");
+        measurementDTO.setValue(60F);
+        measurementDTO.setUnit("KG");
+        checkinForm.setMeasurements(Collections.singletonList(measurementDTO));
+
+        DiaryEntry diaryEntry = new DiaryEntry(1, new Date());
+
+        when(diaryEntryRepository.save(any(DiaryEntry.class))).thenReturn(diaryEntry);
+
+        diaryEntryService.createAndSaveDiaryEntry(checkinForm);
 
         ArgumentCaptor<DiaryEntry> diaryEntryCaptor = ArgumentCaptor.forClass(DiaryEntry.class);
-        verify(diaryEntryRepository).save(diaryEntryCaptor.capture());
-        DiaryEntry savedDiaryEntry = diaryEntryCaptor.getValue();
+        verify(diaryEntryRepository, times(1)).save(diaryEntryCaptor.capture());
+        DiaryEntry capturedEntry = diaryEntryCaptor.getValue();
 
-        assertEquals("GOOD", savedDiaryEntry.getMood().name());
-        assertEquals("Feeling good", savedDiaryEntry.getNotes());
-        assertTrue(savedDiaryEntry.getPhotos().isEmpty());
-        assertNotNull(savedDiaryEntry.getSymptoms());
-        assertEquals(3, savedDiaryEntry.getSymptoms().size());
+        assertEquals("GOOD", capturedEntry.getMood().name());
+        assertEquals("Feeling good today", capturedEntry.getNotes());
+        assertEquals(1, capturedEntry.getPhotos().size());
+        assertEquals(1, capturedEntry.getSymptoms().size());
+        assertEquals(1, capturedEntry.getMeasurements().size());
     }
 }

@@ -9,3 +9,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
         element.textContent = formattedDate;
     });
 });
+
+const diaryEntries = document.querySelectorAll('.diary-entry');
+diaryEntries.forEach(entry => {
+    entry.addEventListener('click', (event) => {
+        const preview = entry.querySelector('.diary-entry-preview');
+        const full = entry.querySelector('.diary-entry-full');
+        preview.classList.toggle('hidden');
+        full.classList.toggle('hidden');
+    });
+
+});
+
+let measurementTypes = document.querySelectorAll('.measurement-type');
+measurementTypes.forEach((type) => {
+    let text = type.textContent;
+    text = text.toLowerCase();
+    text = text.charAt(0).toUpperCase() + text.slice(1);
+    type.textContent = text;
+});
