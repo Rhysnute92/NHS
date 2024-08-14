@@ -12,18 +12,17 @@
   <h1 class="page-title">Photos</h1>
   <div class="container">
     <form class="photos-form" action="/diary/photos" enctype="multipart/form-data">
-      <div th:replace="~{diary/fragments/photoCapture}"></div>
+<!--      <div th:replace="~{diary/fragments/photoCapture}"></div>-->
+      <camera-component></camera-component>
     </form>
-    <button type="button" class="delete-photo" data-id="">
-      <i class="fa-solid fa-trash"></i>
-    </button>
     <div class="photos-container">
       <photo-component th:each="photo: ${photos}" th:url="'files/' + ${photo.url}" th:id="${photo.id}"></photo-component>
     </div>
   </div>
 </main>
 <th:block layout:fragment="scripts">
-  <script th:src="@{/js/diary/photoComponent.js}"></script>
+  <script th:src="@{/js/diary/components/cameraComponent.js}"></script>
+  <script th:src="@{/js/diary/components/photoComponent.js}"></script>
   <script th:src="@{/js/diary/photos.js}"></script>
 </th:block>
 </body>
