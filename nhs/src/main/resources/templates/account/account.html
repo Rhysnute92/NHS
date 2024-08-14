@@ -13,15 +13,15 @@
     <div class="account-container">
     <!-- Alternative method to call authentication from thymeleaf -->
     <!-- <h1>Hello, <span th:text="${#authentication.name}">username</span></h1> -->
-    <h1>Hello,  <span id="userFullname"></span></h1>
+    <h1>Hello,  <span id="username"></span></h1>
     <div class="personal_info">
         <h2>My Details</h2>
-        <div>Full name:</div>
-        <div>NHS number:</div>
-        <div>Email: </div>
-        <div>Phone number:</div>
-        <div>Date of Birth (Age):</div>
-        <div>Clinic: </div>
+        <div>Full name: <span id="userFullname"></span></div>
+        <div>NHS number: <span id="userNHS"></span></div>
+        <div>Email: <span id="userEmail"></span></div>
+        <div>Phone number: <span id="userPhone"></span></div>
+        <div>Date of Birth (Age): <span id="userDOB"></span><span id="userAge"></span></div>
+        <div>Clinic: <span id="userClinic"></span></div>
     </div>
     <div class="account_info">
         <h2>My Account</h2>

@@ -124,8 +124,7 @@ public class PatientService {
         String fullName = patient.getPatientTitle() + patient.getPatientName() + patient.getPatientLastName();
         return fullName;
     }
-
-
+    
     public PatientProfileDTO profile(long userId){
         Patient user = findPatientbyId(userId);
         String fullname = getFullname(user);
