@@ -1,16 +1,20 @@
 package uk.ac.cf.spring.nhs.UserTaskLog.Controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import uk.ac.cf.spring.nhs.UserTaskLog.Model.UserTaskLog;
@@ -22,6 +26,19 @@ public class UserTaskLogController {
 
     @Autowired
     private UserTaskLogService userTaskLogService;
+
+    /**
+     * Handles the NoSuchElementException by returning a ResponseEntity with a
+     * NOT_FOUND status and the exception message.
+     *
+     * @param ex The NoSuchElementException to be handled.
+     * @return A ResponseEntity with a NOT_FOUND status and the exception message.
+     */
+    @ExceptionHandler(NoSuchElementException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
 
     /**
      * Creates a new {@link UserTaskLog} entry.
