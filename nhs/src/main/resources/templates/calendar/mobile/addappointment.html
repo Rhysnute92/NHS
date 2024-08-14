@@ -56,19 +56,18 @@
         </label>
 
         <!-- Button to add the appointment -->
-        <button id="addEvent" onclick="addEvent()">
-            Add
-        </button>
+        <button id="addEvent" type="submit">Add</button>
 
         <!-- Button to clear the form fields -->
-        <button id="deleteAppointment" onclick="deleteEvent()">
-            Clear
-        </button>
+        <button id="deleteAppointment" type="reset">Clear</button>
     </div>
 </div>
 
 <!-- Include JavaScript files -->
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
+<script th:src="@{/js/calendar/addAppointment.js}"></script>
+<script th:src="@{/js/calendar/appointment.js}"></script>
+<script th:src="@{/js/calendar/addCalendar.js}"></script>
 </body>
 </html>

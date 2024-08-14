@@ -60,20 +60,13 @@
         <button onclick="location.href='/addappointment'" id="add-apt-btn" class="add-apt-btn">Add Appointment</button>
         <button onclick="location.href='/schedule'" id="schedule" class="schedule">View Schedule</button>
     </div>
-<!--    &lt;!&ndash; Appointment schedule section &ndash;&gt;-->
-<!--    <div id="mobileSchedule">-->
-<!--        <h3>Appointment Schedule</h3>-->
-<!--        <ul id="apptList">-->
-<!--            &lt;!&ndash; Placeholder list item if no appointments are scheduled &ndash;&gt;-->
-<!--            <li data-event-id="1">-->
-<!--                <p>No appointments scheduled for today</p>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
 </div>
 
 <!-- Include JavaScript files for calendar functionality -->
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
+<script th:src="@{/js/calendar/addAppointment.js}"></script>
+<script th:src="@{/js/calendar/appointment.js}"></script>
+<script th:src="@{/js/calendar/addCalendar.js}"></script>
 </body>
 </html>
