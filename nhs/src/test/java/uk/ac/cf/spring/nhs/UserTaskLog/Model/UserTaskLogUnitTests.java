@@ -43,6 +43,11 @@ public class UserTaskLogUnitTests {
         log2.setUserTask(userTask);
     }
 
+    /**
+     * Tests the equals method of the UserTaskLog class by comparing two objects and verifying that they are equal when all fields are identical, and not equal when any field is different.
+     *
+     * @return         	void
+     */
     @Test
     public void testEquals() {
         assertThat(log1).isEqualTo(log2);
@@ -71,6 +76,14 @@ public class UserTaskLogUnitTests {
         assertThat(log1).isNotEqualTo(log2);
     }
 
+    /**
+     * Tests the hashCode method of the UserTaskLog class.
+     *
+     * This test case checks that the hashCode of two UserTaskLog objects is equal
+     * when all their fields are equal, and not equal when any of their fields are different.
+     *
+     * @return         	void
+     */
     @Test
     public void testHashCode() {
         assertThat(log1.hashCode()).isEqualTo(log2.hashCode());
@@ -99,6 +112,13 @@ public class UserTaskLogUnitTests {
         assertThat(log1.hashCode()).isNotEqualTo(log2.hashCode());
     }
 
+    /**
+     * Tests the setters and getters of the UserTaskLog class.
+     *
+     * Verifies that the setters correctly update the object's state and the getters return the expected values.
+     *
+     * @return none
+     */
     @Test
     public void testSettersAndGetters() {
         log1.setId(2L);
@@ -124,6 +144,11 @@ public class UserTaskLogUnitTests {
         assertThat(log1.getUserTask()).isEqualTo(newUserTask);
     }
 
+    /**
+     * Tests the toString method of the UserTaskLog class by comparing the string representation of a UserTaskLog object with an expected string.
+     *
+     * @return         	void
+     */
     @Test
     public void testToString() {
         UserTask userTask = new UserTask();
@@ -147,11 +172,14 @@ public class UserTaskLogUnitTests {
                 ", createdAt=" + createdAt +
                 '}';
         String actualString = log1.toString();
-        System.out.println("Expected: " + expectedString);
-        System.out.println("Actual: " + actualString);
         assertThat(actualString).isEqualTo(expectedString);
     }
 
+    /**
+     * Tests the edge cases of the UserTaskLog class by comparing two objects and verifying that they are equal when certain fields are null or empty.
+     *
+     * @return         	void
+     */
     @Test
     public void testEdgeCases() {
         // Test null UserTask
