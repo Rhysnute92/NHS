@@ -18,9 +18,11 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    @GetMapping
+
+    //TODO: also url paths here should be changed to avoid conflicts 
+    @GetMapping // change to something like @GetMapping("/user/{userId}") then put userId in the pathvariable like in getAppointmentById
     public List<Appointment> getAllAppointments() {
-        return appointmentService.getAppointmentsByUserId(1);
+        return appointmentService.getAppointmentsByUserId(1); //TODO: userID is 2 now
     }
 
     /**
