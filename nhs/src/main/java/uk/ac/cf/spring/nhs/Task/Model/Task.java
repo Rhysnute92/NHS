@@ -100,6 +100,4 @@ public class Task {
         this.type = type;
     }
 
-    
-
 }
