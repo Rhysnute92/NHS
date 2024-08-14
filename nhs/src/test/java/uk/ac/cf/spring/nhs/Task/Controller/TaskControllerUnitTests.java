@@ -1,8 +1,7 @@
-/* package uk.ac.cf.spring.nhs.Task.Controller;
+package uk.ac.cf.spring.nhs.Task.Controller;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,25 +12,24 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import uk.ac.cf.spring.nhs.Task.Model.Task;
+import uk.ac.cf.spring.nhs.Task.Model.Enum.Periodicity;
 import uk.ac.cf.spring.nhs.Task.Service.TaskService;
 
-@ExtendWith(MockitoExtension.class)
 public class TaskControllerUnitTests {
-
-    private MockMvc mockMvc;
 
     @Mock
     private TaskService taskService;
@@ -39,84 +37,105 @@ public class TaskControllerUnitTests {
     @InjectMocks
     private TaskController taskController;
 
-    private Task task1;
-    private Task task2;
+    private MockMvc mockMvc;
 
     @BeforeEach
-    public void setUp() {
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(taskController).build();
-
-        task1 = new Task();
-        task1.setId(1L);
-        task1.setName("Test Task 1");
-        task1.setDescription("Test Description 1");
-        task1.setPeriodicity("Test Periodicity 1");
-
-        task2 = new Task();
-        task2.setId(2L);
-        task2.setName("Test Task 2");
-        task2.setDescription("Test Description 2");
-        task2.setPeriodicity("Test Periodicity 2");
     }
 
     @Test
-    public void testGetTasks() throws Exception {
-        when(taskService.getAllTasks()).thenReturn(Arrays.asList(task1, task2));
+    public void testGetAllTasks() throws Exception {
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(new Task());
+        when(taskService.getAllTasks()).thenReturn(tasks);
 
         mockMvc.perform(get("/tasks"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].name").value("Test Task 1"))
-                .andExpect(jsonPath("$[1].name").value("Test Task 2"));
-
-        verify(taskService, times(1)).getAllTasks();
+                .andExpect(jsonPath("$.length()").value(1));
     }
 
     @Test
-    public void testGetTaskById() throws Exception {
-        when(taskService.getTaskById(1L)).thenReturn(java.util.Optional.of(task1));
+    public void testGetTaskById_Found() throws Exception {
+        Task task = new Task();
+        task.setId(1L);
+        task.setName("Test Task");
+        when(taskService.getTaskById(1L)).thenReturn(Optional.of(task));
 
-        mockMvc.perform(get("/tasks/{id}", 1L))
+        mockMvc.perform(get("/tasks/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Test Task 1"));
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.name").value("Test Task"));
+    }
 
-        verify(taskService, times(1)).getTaskById(1L);
+    @Test
+    public void testGetTaskById_NotFound() throws Exception {
+        when(taskService.getTaskById(1L)).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/tasks/1"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
     public void testCreateTask() throws Exception {
-        when(taskService.createTask(any(Task.class))).thenReturn(task1);
+        Task task = new Task();
+        task.setName("New Task");
+        task.setDescription("Task Description");
+        task.setType("Type");
+        task.setPeriodicity(Periodicity.DAILY);
+
+        when(taskService.createTask(any(Task.class))).thenReturn(task);
 
         mockMvc.perform(post("/tasks")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\": \"Test Task 1\", \"description\": \"Test Description 1\"}"))
+                .content(
+                        "{\"name\": \"New Task\", \"description\": \"Task Description\", \"type\": \"Type\", \"periodicity\": \"DAILY\"}"))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.name").value("Test Task 1"));
-
-        verify(taskService, times(1)).createTask(any(Task.class));
+                .andExpect(jsonPath("$.name").value("New Task"))
+                .andExpect(jsonPath("$.description").value("Task Description"))
+                .andExpect(jsonPath("$.type").value("Type"))
+                .andExpect(jsonPath("$.periodicity").value("DAILY"));
     }
 
     @Test
-    public void testUpdateTask() throws Exception {
-        when(taskService.updateTask(anyLong(), any(Task.class))).thenReturn(task1);
+    public void testUpdateTask_Found() throws Exception {
+        Task updatedTask = new Task();
+        updatedTask.setId(1L);
+        updatedTask.setName("Updated Task");
+        updatedTask.setDescription("Updated Description");
+        updatedTask.setType("Updated Type");
+        updatedTask.setPeriodicity(Periodicity.WEEKLY);
 
-        mockMvc.perform(put("/tasks/{id}", task1.getId())
+        when(taskService.updateTask(eq(1L), any(Task.class))).thenReturn(updatedTask);
+
+        mockMvc.perform(put("/tasks/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\": \"Test Task 1\", \"description\": \"Test Description 1\"}"))
+                .content(
+                        "{\"name\": \"Updated Task\", \"description\": \"Updated Description\", \"type\": \"Updated Type\", \"periodicity\": \"WEEKLY\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Test Task 1"));
+                .andExpect(jsonPath("$.name").value("Updated Task"))
+                .andExpect(jsonPath("$.description").value("Updated Description"))
+                .andExpect(jsonPath("$.type").value("Updated Type"))
+                .andExpect(jsonPath("$.periodicity").value("WEEKLY"));
+    }
 
-        verify(taskService, times(1)).updateTask(anyLong(), any(Task.class));
+    @Test
+    public void testUpdateTask_NotFound() throws Exception {
+        when(taskService.updateTask(eq(1L), any(Task.class))).thenReturn(null);
+
+        mockMvc.perform(put("/tasks/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                        "{\"name\": \"Updated Task\", \"description\": \"Updated Description\", \"type\": \"Updated Type\", \"periodicity\": \"WEEKLY\"}"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
     public void testDeleteTask() throws Exception {
-        doNothing().when(taskService).deleteTask(task1.getId());
-
-        mockMvc.perform(delete("/tasks/{id}", task1.getId()))
+        mockMvc.perform(delete("/tasks/1"))
                 .andExpect(status().isNoContent());
 
-        verify(taskService, times(1)).deleteTask(task1.getId());
+        verify(taskService, times(1)).deleteTask(1L);
     }
-
 }
- */
