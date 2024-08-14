@@ -10,7 +10,7 @@
     <header th:replace="~{common/fragments/header}"></header>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <div th:replace="~{education/fragments/desktop/infomenu :: infomenu}"></div>
-    <div class="container">
+    <div class="container_d">
       <h2 class="title">Cellulitis</h2>
       <p>Cellulitis is an infection of the skin or tissues under the skin caused by bacteria (germs). 
         People with oedema/swelling are prone to cellulitis because their lymphatic system does 
@@ -21,7 +21,7 @@
           through a drip). There is a risk that cellulitis can damage the lymphatic system and make 
           swelling worse. Occasionally, cellulitis infections can be life-threatening.</p>
       <div class="important_info">
-      <span class="imortant_info_header">!</span>
+      <div class="important_info_header">!</div>
       <h2 class="title">What to do if I think I have cellulitis?</h3>
       <ul class="important_info_list">
         <li>Contact your doctor immediately. If it is "out of hours", contact an out of hours medical service. The doctor may find it helpful to see a photograph of what your swelling looks like normally.</li>
@@ -54,8 +54,8 @@
         taking antibiotics for a possible cellulitis.</p>
     </div>
     <div class="section_nav">
-        <a th:href="@{/information}" class="section_link">&larr; What is Lymphoedema?</a>
-        <a th:href="@{/treatment}" class="section_link">Treatments &rarr;</a>
+        <a th:href="@{/information}" class="section_link_l">&larr; What is Lymphoedema?</a>
+        <a th:href="@{/treatment}" class="section_link_r">Treatments &rarr;</a>
     </div>
     <script th:src="@{/js/common/header.js}"></script>
   </body>

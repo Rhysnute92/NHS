@@ -4,15 +4,55 @@ html, body, .main-container {height: 100%;}
     margin-left: 2vw;
 }
 
-.reminder{
-    background-color: #007f3b;
+.container_m p{
+    margin-left: 2vw;
+}
+
+.container_d{
+    margin: auto;
+    width: 80%;
+}
+
+.spacer{
+    height: 15vh;
+}
+
+.important_info{
+    border: red solid;
+    border-radius: 2vh;
+    margin: 2vh;
+}
+
+.important_info_header{
+    background: red;
+    border-radius: 1vh;
     color: white;
-    border: none;
+    text-align: center;
+    padding: 2vh;
+    font-size: larger;
+}
+
+.important_info p{
+    padding: 0 2vw;
+}
+
+.important_info h2{
+    text-align: center;
+}
+
+.accent{
+    text-decoration: underline;
 }
 
 .section_nav{
-    padding: 5vh;
-    text-align: center;
+    padding: 5vh 0;
+    width: 100%;
+}
+.section_link_r{
+    float: right;
+}
+.section_link_l{
+    float: left;
 }
 
 .t_types ul li{
@@ -28,6 +68,7 @@ html, body, .main-container {height: 100%;}
     text-align: left;
     outline: none;
     width: 100%;
+    margin-top: 1vh;
 }
 
 .collapsible_button:after{

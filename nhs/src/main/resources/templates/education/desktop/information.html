@@ -10,7 +10,7 @@
     <header th:replace="~{common/fragments/header}"></header>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <div th:replace="~{education/fragments/desktop/infomenu :: infomenu}"></div>
-    <div class="container">
+    <div class="container_d">
       <h2 class="title">What is Lymphoedema?</h2>
       <p>Lymphoedema is a term used to describe tissue swelling due to an accumulation of fluid. It 
         mainly affects arms or legs but can also occur in the face and trunk.</p>
@@ -33,7 +33,7 @@
         of tightness or heaviness in the limb. You may sometimes experience a deep ache in the 
         muscles of the limb.</p>
       <div class="important_info">
-        <span class="imortant_info_header">Attention</span>
+        <div class="important_info_header">Attention</div>
         <p>The following are not usually caused by a swollen limb:</p>
         <ul class="important_info_list">
           <li>Numbness or tingling in the limb</li>
@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="section_nav">
-      <a th:href="@{/cellulitis}" class="section_link">Cellulitis &rarr;</a>
+      <a th:href="@{/cellulitis}" class="section_link_r">Cellulitis &rarr;</a>
     </div>
     <script th:src="@{/js/common/header.js}"></script>
   </body>

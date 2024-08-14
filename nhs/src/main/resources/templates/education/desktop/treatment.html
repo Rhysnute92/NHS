@@ -10,7 +10,7 @@
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <div th:replace="~{education/fragments/desktop/infomenu :: infomenu}"></div>
-    <div class="container">
+    <div class="container_d">
       <h2 class="title">Treatments for lympohedema</h2>
       <p>There are many options for managing the symptoms of lymphoedema, including skincare, compression garments, excercise, manual lymphatic drainage and general lifestyle changes.
         An individual treatment regime will be planned for you. You will be seen regularly in the Lymphoedema Clinic to assess the effectiveness of the regime. 
@@ -27,7 +27,6 @@
       </div>
       <button type="button" class="collapsible_button">Skincare</button>
       <div class="collapsible">
-        <button type="button" class="reminder">Set Reminder</button>
       <div class="infosection">
       <p>The skin of a swollen limb is fragile and susceptible to damage and infection. The fluid in the limb is rich in protein, which is an ideal growth medium for bacteria. Lymphoedematous skin tends to be very dry, and small cracks may appear, causing  leakage of clear fluid (lymphorrhoea).</p>
       <p>It is important to moisturise the skin daily to keep it soft and supple. Do not use perfumed creams as they can irritate the skin. Use non-perfumed pure creams such as Aqueous Cream, Diprobase or a lotion as suggested by your therapist.</p>
@@ -44,7 +43,7 @@
       </ul>
       </div>
       <div class="important_info">
-        <span class="imortant_info_header">If you do have a cut, scratch or bite:</span>
+        <div class="important_info_header">If you do have a cut, scratch or bite:</div>
         <ul class="important_info_list">
           <li>Wash the area immediately</li>
           <li>Apply antiseptic cream</li>
@@ -98,8 +97,8 @@
       </nav>
     </div>
     <div class="section_nav">
-        <a th:href="@{/cellulitis}" class="section_link">&larr; Cellulitis</a>
-        <a th:href="@{/resources}" class="section_link">Helpful resources &rarr;</a>
+        <a th:href="@{/cellulitis}" class="section_link_l">&larr; Cellulitis</a>
+        <a th:href="@{/resources}" class="section_link_r">Helpful resources &rarr;</a>
     </div>
     <script th:src="@{/js/education/treatmentSpec.js}"></script>
     <script th:src="@{/js/common/header.js}"></script>
