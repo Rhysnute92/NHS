@@ -42,7 +42,6 @@ public class EducationController {
         }
     }
 
-    //Controllers for temporary pages
     @GetMapping("/cellulitis")
     public String cellulitis(Model model, HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
@@ -61,12 +60,29 @@ public class EducationController {
         }
     }
 
-    @GetMapping("/treatmentSpec")
+    @GetMapping("/treatmentLeg")
+    public String leg(Model model, HttpServletRequest request) {
+        if (DeviceDetector.isMobile(request)) {
+            return "education/mobile/treatmentLeg";
+        } else {
+            return "education/desktop/treatmentLeg";
+        }
+    }
+
+    @GetMapping("/treatmentArm")
+    public String arm(Model model, HttpServletRequest request) {
+        if (DeviceDetector.isMobile(request)) {
+            return "education/mobile/treatmentArm";
+        } else {
+            return "education/desktop/treatmentArm";
+        }
+    }
+    @GetMapping("/treatmentHead")
     public String spec(Model model, HttpServletRequest request) {
         if (DeviceDetector.isMobile(request)) {
-            return "education/mobile/treatmentSpec";
+            return "education/mobile/treatmentHead";
         } else {
-            return "education/desktop/treatmentSpec";
+            return "education/desktop/treatmentHead";
         }
     }
 
