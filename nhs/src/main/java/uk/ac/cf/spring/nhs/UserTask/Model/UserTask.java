@@ -34,7 +34,7 @@ public class UserTask {
     /**
      * Retrieves the unique identifier of the UserTask object.
      *
-     * @return  the unique identifier of the UserTask object
+     * @return the unique identifier of the UserTask object
      */
     public Long getId() {
         return id;
@@ -97,7 +97,7 @@ public class UserTask {
     /**
      * Sets the bitmask for this object.
      *
-     * @param  bitmask  the new bitmask value
+     * @param bitmask the new bitmask value
      */
     public void setBitmask(int bitmask) {
         this.bitmask = bitmask;
@@ -130,5 +130,14 @@ public class UserTask {
     @Override
     public int hashCode() {
         return Objects.hash(id, task, userID, bitmask);
+    }
+
+    @Override
+    public String toString() {
+        return "UserTask{id=" + id +
+                ", task=" + (task != null ? task.getName() : "null") +
+                ", userID=" + userID +
+                ", bitmask=" + bitmask +
+                '}';
     }
 }

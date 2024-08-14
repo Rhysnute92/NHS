@@ -1,6 +1,7 @@
 package uk.ac.cf.spring.nhs.UserTaskLog.Model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,6 +37,37 @@ public class UserTaskLog {
     private LocalDateTime createdAt;
 
     /**
+     * Checks if the current UserTaskLog object is equal to the provided object.
+     *
+     * @param o the object to compare with the current UserTaskLog object
+     * @return true if the objects are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        UserTaskLog that = (UserTaskLog) o;
+        return bitmask == that.bitmask &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(userID, that.userID) &&
+                Objects.equals(userTask, that.userTask) &&
+                Objects.equals(monthYear, that.monthYear) &&
+                Objects.equals(createdAt, that.createdAt);
+    }
+
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return a hash code value for the object
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userID, userTask, bitmask, monthYear, createdAt);
+    }
+
+    /**
      * @return the id
      */
     public Long getId() {
@@ -50,17 +82,17 @@ public class UserTaskLog {
     }
 
     /**
-     * @return the userId
+     * @return the userID
      */
-    public Long getUserId() {
+    public Long getUserID() {
         return userID;
     }
 
     /**
-     * @param userId the userId to set
+     * @param userID the userID to set
      */
-    public void setUserId(Long userId) {
-        this.userID = userId;
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     /**
@@ -119,4 +151,15 @@ public class UserTaskLog {
         this.createdAt = createdAt;
     }
 
+    @Override
+    public String toString() {
+        return "UserTaskLog{" +
+                "id=" + id +
+                ", userID=" + userID +
+                ", userTask=" + (userTask != null ? userTask.toString() : "null") +
+                ", bitmask=" + bitmask +
+                ", monthYear='" + monthYear + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

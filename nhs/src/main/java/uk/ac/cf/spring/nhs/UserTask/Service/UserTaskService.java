@@ -99,7 +99,7 @@ public class UserTaskService {
     public void archiveAndResetMonthlyBitmask(UserTask userTask) {
         String monthYear = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
         UserTaskLog log = new UserTaskLog();
-        log.setUserId(userTask.getUserID());
+        log.setUserID(userTask.getUserID());
         log.setUserTask(userTask);
         log.setBitmask(userTask.getBitmask());
         log.setMonthYear(monthYear);
