@@ -12,14 +12,14 @@ for (var i = 0; i < coll.length; i++) {
 }
 
 var coll_vid = document.getElementsByClassName("collapsible_video_button");
-for (var i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
+for (var i = 0; i < coll_vid.length; i++) {
+  coll_vid[i].addEventListener("click", function() {
     this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
+    var content_vid = this.nextElementSibling;
+    if (content_vid.style.display === "block") {
+      content_vid.style.display = "none";
     } else {
-      content.style.display = "block";
+      content_vid.style.display = "block";
     }
   });
 }

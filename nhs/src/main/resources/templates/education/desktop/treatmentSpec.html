@@ -13,7 +13,6 @@
     <div th:replace="~{education/fragments/desktop/infomenu :: infomenu}"></div>
     <div class="container">
       <h2>Treatments for lymphedema of the legs</h2>
-    </div>
     <div>
       <button type="button" class="collapsible_button">Skincare</button>
       <div class="collapsible">
@@ -98,7 +97,7 @@
           <p>The following excercises can also be preformed when in bed or on the chair: </p>
           <div class="excercise">
             <h3>Excercise 4:</h3>
-            <img src=/images/info/excercises/ex4l.png">
+            <img src="/images/info/excercises/ex4l.png">
             <p>Roll your foot in a circle.
               Repeat in the opposite direction.
             </p>
@@ -128,6 +127,7 @@
     <div class="section_nav">
         <a th:href="@{/treatment}" class="section_link">&larr; Back to full list</a>
     </div>
+  </div>
     <script th:src="@{/js/education/treatmentSpec.js}"></script>
     <script th:src="@{/js/common/header.js}"></script>
   </body>
