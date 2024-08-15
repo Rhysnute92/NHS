@@ -26,6 +26,7 @@ export class QuestionnaireManager {
         throw new Error("Network response was not ok");
       }
       const questionnaires = await response.json();
+      console.log("Received questionnaires:", questionnaires); // Log the response
       this.displayQuestionnaires(questionnaires);
     } catch (error) {
       console.error(
@@ -35,19 +36,27 @@ export class QuestionnaireManager {
     }
   }
   displayQuestionnaires(questionnaires) {
-    this.container.innerHTML = ""; // Clear the container
+    this.container.innerHTML = ""; 
 
     if (questionnaires.length === 0) {
-      this.noAssignmentElement.style.display = "block"; // Show no assignment message
+      this.noAssignmentElement.style.display = "block";
     } else {
-      this.noAssignmentElement.style.display = "none"; // Hide no assignment message
+      this.noAssignmentElement.style.display = "none";
       questionnaires.forEach((q) => {
-        const card = document.createElement("div");
-        card.className = "questionnaire-item";
-        card.innerHTML = `
-            <p>You have an incomplete questionnaire. Click <a th:href="@{/questionnaire/${q.id}}">here</a> to complete it.</p>
-          `;
-        this.container.appendChild(card);
+        const questionnaireId = q.questionnaire.id; // Access the ID from the nested object
+        console.log("Questionnaire ID:", questionnaireId); 
+
+        if (questionnaireId) {
+          // Ensure ID is not undefined
+          const card = document.createElement("div");
+          card.className = "questionnaire-item";
+          card.innerHTML = `
+                    <p>You have an incomplete questionnaire. Click <a href="/questionnaire/${questionnaireId}">here</a> to complete it.</p>
+                `;
+          this.container.appendChild(card);
+        } else {
+          console.error("Questionnaire ID is undefined or invalid", q);
+        }
       });
     }
   }

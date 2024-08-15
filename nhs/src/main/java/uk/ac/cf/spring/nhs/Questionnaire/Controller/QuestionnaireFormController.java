@@ -28,11 +28,12 @@ public class QuestionnaireFormController {
     private UserQuestionnaireService userQuestionnaireService;
 
     /**
-     * Handles HTTP GET requests to retrieve a questionnaire page by its unique identifier.
+     * Handles HTTP GET requests to retrieve a questionnaire page by its unique
+     * identifier.
      *
      * @param id    the unique identifier of the questionnaire
      * @param model the Spring MVC model object to store the questionnaire data
-     * @return      the name of the view to render, either "questionnaire" or "error/404"
+     * @return the name of the view to render, either "questionnaire" or "error/404"
      */
     @GetMapping("/questionnaire/{id}")
     public String getQuestionnairePage(@PathVariable Long id, Model model) {
@@ -49,12 +50,12 @@ public class QuestionnaireFormController {
                 UserQuestionnaire userQuestionnaire = userQuestionnaireOpt.get();
                 userQuestionnaire.setQuestionnaireInProgress(true);
                 userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
-                return "questionnaire"; 
+                return "questionnaire/questionnaire";
             } else {
-                return "error/404"; 
+                return "error/404";
             }
         } else {
-            return "error/404"; 
+            return "error/404";
         }
     }
 

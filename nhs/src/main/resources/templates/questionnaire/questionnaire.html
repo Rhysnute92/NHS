@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Questionnaire</title>
-    <link rel="stylesheet" href="/css/questionnaire.css"> 
-</head>
-<body>
+    <link rel="stylesheet" th:href="@{/css/questionnaire/questionnaire.css}" />
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+  </head>
+  <body>
+    <div th:replace="~{common/fragments/header}"></div>
+    <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <div class="questionnaire-container">
-        <h1 id="questionnaire-title">Questionnaire Title</h1>
-        <p id="questionnaire-description">Description of the questionnaire.</p>
+      <h1 id="questionnaire-title">Questionnaire Title</h1>
+      <p id="questionnaire-description">Description of the questionnaire.</p>
 
-        <form id="questionnaire-form">
-            <!-- Questions will be dynamically loaded here -->
-        </form>
-
+      <form id="questionnaire-form">
+        <div id="questions-container"></div>
+        <!-- Questions will be dynamically loaded here -->
         <button type="submit" id="submit-questionnaire">Submit</button>
+      </form>
     </div>
-
-    <script type="module" src="/js/questionnaire.js"></script> <!-- Link to your JS file -->
-</body>
+    <script th:src="@{/js/common/header.js}"></script>
+    <script
+      type="module"
+      th:src="@{/js/questionnaire/questionnaire.js}"
+    ></script>
+  </body>
 </html>
