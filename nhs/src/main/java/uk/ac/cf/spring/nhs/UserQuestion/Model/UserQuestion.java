@@ -16,7 +16,7 @@ import uk.ac.cf.spring.nhs.Question.Model.Question;
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Model.UserQuestionnaire;
 
 @Entity
-@Table(name = "UserQuestions")
+@Table(name = "UserQuestion")
 public class UserQuestion {
 
     @Id

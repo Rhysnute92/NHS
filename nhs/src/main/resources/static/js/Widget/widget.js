@@ -2,10 +2,11 @@
 
 import { WidgetService } from "./widgetService.js";
 import { WidgetManager } from "./widgetManager.js";
+import {  fetchUserID } from "../common/utils/accountUtility.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
   try {
-    const userId = getUserId();
+    const userId = await fetchUserID();
     console.log("User ID:", userId);
 
     const userWidgets = await WidgetService.fetchUserWidgets(userId);
@@ -17,9 +18,3 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.error("Error occurred:", error);
   }
 });
-
-//TODO: Replace the getUserId function with actual implementation
-function getUserId() {
-  console.log("Getting user ID");
-  return "1";
-}

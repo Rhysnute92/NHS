@@ -11,32 +11,29 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "questionnaire")
+@Table(name = "Questionnaires")
 public class Questionnaire {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "QuestionnaireID")
     private Long id;
 
-    @Column(name = "title", nullable = false, length = 255)
+    @Column(name = "QuestionnaireName", nullable = false, length = 255)
     private String title;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "QuestionnaireDesc", columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "QuestionnaireType")
     private String type;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "QuestionnaireCreated", nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
-    @Column(name = "is_active", nullable = false)
-    private Boolean isActive;
 
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
-        this.isActive = true;
     }
 
     // Getters and Setters
@@ -105,20 +102,6 @@ public class Questionnaire {
      */
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    /**
-     * @return the isActive
-     */
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    /**
-     * @param isActive the isActive to set
-     */
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
     }
 
 }
