@@ -5,8 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
+import uk.ac.cf.spring.nhs.Appointments.Model.Appointment;
+import uk.ac.cf.spring.nhs.Appointments.Service.AppointmentService;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
+import uk.ac.cf.spring.nhs.Calendar.Controller.CalendarController;
 
 import java.util.List;
 
@@ -44,7 +47,6 @@ public class CalendarController {
         }
         return modelAndView;
     }
-
     /**
      * get to the schedule part for the mobile site
       * @param request
@@ -58,7 +60,6 @@ public class CalendarController {
         }
         return modelAndView;
     }
-
 
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.spring.nhs.Appointments.DTO.AppointmentDTO;
 import uk.ac.cf.spring.nhs.Appointments.Model.Appointment;
 import uk.ac.cf.spring.nhs.Appointments.Service.AppointmentService;
@@ -36,6 +37,13 @@ public class AppointmentController {
         return appointmentService.getAppointmentById(id);
     }
 
+    @GetMapping("/appointments")
+    public ModelAndView getAppointments(){
+        List<Appointment> appointments = appointmentService.getAllAppointments();
+        ModelAndView modelAndView = new ModelAndView("appointments");
+        modelAndView.addObject("appointments", appointments);
+        return modelAndView;
+    }
     @PostMapping
     public ResponseEntity<Appointment> createAppointment(@RequestBody AppointmentDTO appointmentDTO) {
         Appointment savedAppointment = appointmentService.saveAppointment(appointmentDTO);
