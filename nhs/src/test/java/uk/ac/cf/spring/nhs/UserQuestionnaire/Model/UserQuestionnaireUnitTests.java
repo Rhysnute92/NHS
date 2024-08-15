@@ -1,24 +1,17 @@
 package uk.ac.cf.spring.nhs.UserQuestionnaire.Model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
 
 import java.time.LocalDateTime;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
-import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentials;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserQuestionnaireUnitTests {
 
     private UserQuestionnaire userQuestionnaire;
     private Questionnaire questionnaire;
-    private UserCredentials user;
 
     @BeforeEach
     void setUp() {
@@ -26,10 +19,6 @@ class UserQuestionnaireUnitTests {
         questionnaire = new Questionnaire();
         questionnaire.setId(1L);
         questionnaire.setTitle("Test Questionnaire");
-
-        user = new UserCredentials();
-/*         user.setId(1L);
-        user.setUsername("testuser"); */
     }
 
     @Test
@@ -45,9 +34,10 @@ class UserQuestionnaireUnitTests {
     }
 
     @Test
-    void testSetAndGetUser() {
-        userQuestionnaire.setUser(user);
-        assertEquals(user, userQuestionnaire.getUser());
+    void testSetAndGetUserID() {
+        String userID = "user123";
+        userQuestionnaire.setUserID(userID);
+        assertEquals(userID, userQuestionnaire.getUserID());
     }
 
     @Test
@@ -85,11 +75,11 @@ class UserQuestionnaireUnitTests {
     }
 
     @Test
-    void testSetUserToNull() {
+    void testSetUserIDToNull() {
         Exception exception = assertThrows(NullPointerException.class, () -> {
-            userQuestionnaire.setUser(null);
+            userQuestionnaire.setUserID(null);
         });
-        assertEquals("User cannot be null", exception.getMessage());
+        assertEquals("User ID cannot be null", exception.getMessage());
     }
 
     @Test

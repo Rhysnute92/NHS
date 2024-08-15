@@ -11,7 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
-import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentials;
 
 @Entity
 @Table(name = "UserQuestionnaires")
@@ -28,7 +27,7 @@ public class UserQuestionnaire {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserCredentials user;
+    private String userID;
 
     @Column(name = "questionnaire_start_date", nullable = false)
     private LocalDateTime questionnaireStartDate;
@@ -42,87 +41,120 @@ public class UserQuestionnaire {
     // Getters and Setters
 
     /**
-     * @return the userQuestionnaireId
+     * Retrieves the unique identifier of the user questionnaire.
+     *
+     * @return the unique identifier of the user questionnaire
      */
     public Long getUserQuestionnaireId() {
         return userQuestionnaireId;
     }
 
     /**
-     * @param userQuestionnaireId the userQuestionnaireId to set
+     * Sets the unique identifier of the user questionnaire.
+     *
+     * @param userQuestionnaireId the unique identifier of the user questionnaire
      */
     public void setUserQuestionnaireId(Long userQuestionnaireId) {
         this.userQuestionnaireId = userQuestionnaireId;
     }
 
     /**
-     * @return the questionnaire
+     * Retrieves the questionnaire associated with this user questionnaire.
+     *
+     * @return the questionnaire associated with this user questionnaire
      */
     public Questionnaire getQuestionnaire() {
         return questionnaire;
     }
 
     /**
-     * @param questionnaire the questionnaire to set
+     * Sets the questionnaire associated with this user questionnaire.
+     *
+     * @param questionnaire the questionnaire to be set
      */
     public void setQuestionnaire(Questionnaire questionnaire) {
+        if (questionnaire == null) {
+            throw new NullPointerException("Questionnaire cannot be null");
+        }
         this.questionnaire = questionnaire;
     }
 
     /**
-     * @return the user
+     * Retrieves the unique identifier of the user associated with the
+     * questionnaire.
+     *
+     * @return the unique identifier of the user
      */
-    public UserCredentials getUser() {
-        return user;
+    public String getUserID() {
+        return userID;
     }
 
     /**
-     * @param user the user to set
+     * Sets the user ID associated with the questionnaire.
+     *
+     * @param userID the unique identifier of the user
      */
-    public void setUser(UserCredentials user) {
-        this.user = user;
+    public void setUserID(String userID) {
+        if (userID == null) {
+            throw new NullPointerException("User ID cannot be null");
+        }
+        this.userID = userID;
     }
 
     /**
-     * @return the questionnaireStartDate
+     * Retrieves the start date of the questionnaire.
+     *
+     * @return the start date of the questionnaire
      */
     public LocalDateTime getQuestionnaireStartDate() {
         return questionnaireStartDate;
     }
 
     /**
-     * @param questionnaireStartDate the questionnaireStartDate to set
+     * Sets the start date of the questionnaire.
+     *
+     * @param questionnaireStartDate the start date of the questionnaire
      */
     public void setQuestionnaireStartDate(LocalDateTime questionnaireStartDate) {
+        if (questionnaireStartDate == null) {
+            throw new NullPointerException("Questionnaire start date cannot be null");
+        }
         this.questionnaireStartDate = questionnaireStartDate;
     }
 
     /**
-     * @return the questionnaireIsCompleted
+     * Retrieves the completion status of the questionnaire.
+     *
+     * @return true if the questionnaire is completed, false otherwise
      */
     public Boolean getQuestionnaireIsCompleted() {
         return questionnaireIsCompleted;
     }
 
     /**
-     * @param questionnaireIsCompleted the questionnaireIsCompleted to set
+     * Sets the completion status of the questionnaire.
+     *
+     * @param questionnaireIsCompleted whether the questionnaire is completed
      */
     public void setQuestionnaireIsCompleted(Boolean questionnaireIsCompleted) {
         this.questionnaireIsCompleted = questionnaireIsCompleted;
     }
 
     /**
-     * @return the questionnaireCompletionDate
+     * Retrieves the completion date of the questionnaire.
+     *
+     * @return the completion date of the questionnaire
      */
     public LocalDateTime getQuestionnaireCompletionDate() {
         return questionnaireCompletionDate;
     }
 
     /**
-     * @param questionnaireCompletionDate the questionnaireCompletionDate to set
+     * Sets the completion date of the questionnaire.
+     *
+     * @param questionnaireCompletionDate the date the questionnaire was completed
      */
     public void setQuestionnaireCompletionDate(LocalDateTime questionnaireCompletionDate) {
         this.questionnaireCompletionDate = questionnaireCompletionDate;
     }
-
 }
