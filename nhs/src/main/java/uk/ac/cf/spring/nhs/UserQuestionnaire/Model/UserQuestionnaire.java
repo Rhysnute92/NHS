@@ -25,8 +25,7 @@ public class UserQuestionnaire {
     @JoinColumn(name = "questionnaire_id", nullable = false)
     private Questionnaire questionnaire;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private String userID;
 
     @Column(name = "questionnaire_start_date", nullable = false)

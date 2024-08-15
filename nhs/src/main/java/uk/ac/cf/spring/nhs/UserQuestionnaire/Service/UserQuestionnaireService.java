@@ -53,7 +53,7 @@ public class UserQuestionnaireService {
      * @return an optional user questionnaire
      */
     public Optional<UserQuestionnaire> getUserQuestionnaire(String userID, Long questionnaireId) {
-        return userQuestionnaireRepository.findByUserIDAndQuestionnaire_QuestionnaireId(userID, questionnaireId);
+        return userQuestionnaireRepository.findByUserIDAndQuestionnaire_Id(userID, questionnaireId);
     }
 
     /**

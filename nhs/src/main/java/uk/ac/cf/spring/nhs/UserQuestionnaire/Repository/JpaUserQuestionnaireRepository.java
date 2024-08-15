@@ -20,5 +20,6 @@ public interface JpaUserQuestionnaireRepository extends JpaRepository<UserQuesti
     List<UserQuestionnaire> findByUserIDAndQuestionnaireIsCompletedFalse(String userID);
 
     // Find a specific UserQuestionnaire by userID and questionnaireID
-    Optional<UserQuestionnaire> findByUserIDAndQuestionnaire_QuestionnaireId(String userID, Long questionnaireId);
+    Optional<UserQuestionnaire> findByUserIDAndQuestionnaire_Id(String userID, Long id);
+
 }

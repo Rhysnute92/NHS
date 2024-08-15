@@ -175,13 +175,13 @@ class UserQuestionnaireServiceUnitTests {
         String userID = "user123";
         Long questionnaireId = 1L;
 
-        when(userQuestionnaireRepository.findByUserIDAndQuestionnaire_QuestionnaireId(userID, questionnaireId))
+        when(userQuestionnaireRepository.findByUserIDAndQuestionnaire_Id(userID, questionnaireId))
                 .thenReturn(Optional.empty());
 
         Optional<UserQuestionnaire> result = userQuestionnaireService.getUserQuestionnaire(userID, questionnaireId);
 
         assertFalse(result.isPresent(), "The result should be an empty Optional");
-        verify(userQuestionnaireRepository, times(1)).findByUserIDAndQuestionnaire_QuestionnaireId(userID,
+        verify(userQuestionnaireRepository, times(1)).findByUserIDAndQuestionnaire_Id(userID,
                 questionnaireId);
     }
 
@@ -198,14 +198,14 @@ class UserQuestionnaireServiceUnitTests {
         String userID = "user123";
         Long questionnaireId = 1L;
 
-        when(userQuestionnaireRepository.findByUserIDAndQuestionnaire_QuestionnaireId(userID, questionnaireId))
+        when(userQuestionnaireRepository.findByUserIDAndQuestionnaire_Id(userID, questionnaireId))
                 .thenReturn(Optional.of(userQuestionnaire));
 
         Optional<UserQuestionnaire> result = userQuestionnaireService.getUserQuestionnaire(userID, questionnaireId);
 
         assertTrue(result.isPresent(), "The result should contain a UserQuestionnaire");
         assertEquals(userQuestionnaire, result.get());
-        verify(userQuestionnaireRepository, times(1)).findByUserIDAndQuestionnaire_QuestionnaireId(userID,
+        verify(userQuestionnaireRepository, times(1)).findByUserIDAndQuestionnaire_Id(userID,
                 questionnaireId);
     }
 

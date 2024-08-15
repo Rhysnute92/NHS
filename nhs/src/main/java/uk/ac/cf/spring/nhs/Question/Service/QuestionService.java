@@ -3,10 +3,12 @@ package uk.ac.cf.spring.nhs.Question.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import uk.ac.cf.spring.nhs.Question.Model.Question;
 import uk.ac.cf.spring.nhs.Question.Repository.JpaQuestionRepo;
 
+@Service
 public class QuestionService {
     @Autowired
     private JpaQuestionRepo questionRepository;
