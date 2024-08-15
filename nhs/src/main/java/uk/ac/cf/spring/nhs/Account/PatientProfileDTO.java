@@ -1,14 +1,13 @@
 package uk.ac.cf.spring.nhs.Account;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class PatientProfileDTO {
     private String fullName;
     private String email;
     private String mobile;
     private String nhsNumber;
-    private LocalDate DOB;
+    private LocalDate dateOB;
     private int age;
     private String clinic;
 
@@ -17,7 +16,7 @@ public class PatientProfileDTO {
         this.email = emailAddress;
         this.mobile = mob;
         this.nhsNumber = nhs;
-        this.DOB = dob;
+        this.dateOB = dob;
         this.age = patientAge;
         this.clinic = patientClininc;
     }
@@ -46,11 +45,11 @@ public class PatientProfileDTO {
     public void setNhsNumber(String nhsNumber) {
         this.nhsNumber = nhsNumber;
     }
-    public LocalDate getDOB() {
-        return DOB;
+    public LocalDate getDateOB() {
+        return dateOB;
     }
-    public void setDOB(LocalDate dOB) {
-        DOB = dOB;
+    public void setDateOB(LocalDate dOB) {
+        dateOB = dOB;
     }
     public int getAge() {
         return age;

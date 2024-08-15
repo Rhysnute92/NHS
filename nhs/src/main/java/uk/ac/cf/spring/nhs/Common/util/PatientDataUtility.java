@@ -5,7 +5,7 @@ import java.time.Period;
 
 public class PatientDataUtility {
     
-    public int calculateAge(LocalDate dob){
+    public static int calculateAge(LocalDate dob){
         LocalDate now = LocalDate.now();
         Period period = Period.between(dob, now); 
         return period.getYears();

@@ -32,8 +32,8 @@ public class AccountController {
         //Principal contains the UserDetails object for the current user
         Object principal = authenticationFacade.getAuthentication().getPrincipal();
         //Specify principle as CustomUserDetails and extract data using class functions
-        String userId = ((CustomUserDetails)principal).getUsername();
-        return userId;
+        String username = ((CustomUserDetails)principal).getUsername();
+        return username;
     }
 
     
@@ -41,7 +41,7 @@ public class AccountController {
     @ResponseBody
     public PatientProfileDTO patientProfile(){
         Object principal = authenticationFacade.getAuthentication().getPrincipal();
-        Long userId = Long.parseLong(((CustomUserDetails)principal).getUsername());
+        Long userId = ((CustomUserDetails)principal).getUserId();
         PatientProfileDTO profile = patientService.profile(userId);
         return profile;
     }

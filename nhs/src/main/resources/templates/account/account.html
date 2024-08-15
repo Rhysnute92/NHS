@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Login</title>
+    <title>My Profile</title>
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
     <link rel="stylesheet" th:href="@{/css/account/account.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,19 +13,19 @@
     <div class="account-container">
     <!-- Alternative method to call authentication from thymeleaf -->
     <!-- <h1>Hello, <span th:text="${#authentication.name}">username</span></h1> -->
-    <h1>Hello,  <span id="username"></span></h1>
+    <h1> Welcome to your profile!</h1>
     <div class="personal_info">
         <h2>My Details</h2>
         <div>Full name: <span id="userFullname"></span></div>
         <div>NHS number: <span id="userNHS"></span></div>
         <div>Email: <span id="userEmail"></span></div>
         <div>Phone number: <span id="userPhone"></span></div>
-        <div>Date of Birth (Age): <span id="userDOB"></span><span id="userAge"></span></div>
+        <div>Date of Birth (Age): <span id="userDOB"></span> (<span id="userAge"></span>)</div>
         <div>Clinic: <span id="userClinic"></span></div>
     </div>
     <div class="account_info">
         <h2>My Account</h2>
-        <div>Email: <span  id="username"></span></div>
+        <div>Username: <span id="username"></span></div>
         <button type="button">Change password</button>
     </div>
     <form th:action="@{/logout}" method="post">

@@ -7,3 +7,9 @@ VALUES
 
 INSERT INTO UserWidgets (UserID, WidgetName, Position)
 VALUES (1, 'task-completion', 1);
+
+INSERT INTO Patients (PatientEmail, PatientMobile, NHSNumber, PatientDOB, 
+PatientName, PatientLastName, PatientTitle, PatientClinic, UserID, EncryptionKey)
+VALUES
+('test@test.com', '7777 4444', '12345678', '2000-08-15', 'Test', 
+'McTesterson', 'Lord', 'The best one', '2', 'tempkey')

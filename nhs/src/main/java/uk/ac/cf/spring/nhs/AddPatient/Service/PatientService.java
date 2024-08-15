@@ -9,18 +9,15 @@ import uk.ac.cf.spring.nhs.Account.PatientProfileDTO;
 import uk.ac.cf.spring.nhs.AddPatient.DTO.RegisterRequest;
 import uk.ac.cf.spring.nhs.AddPatient.Entity.Patient;
 import uk.ac.cf.spring.nhs.AddPatient.Repository.PatientRepository;
-import uk.ac.cf.spring.nhs.Common.util.PatientDataUtility;
 import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentials;
 import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentialsRepository;
-
+import uk.ac.cf.spring.nhs.Common.util.PatientDataUtility;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.Base64;
-import java.util.Date;
 import java.util.Random;
 
 @Service
@@ -36,8 +33,6 @@ public class PatientService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private PatientDataUtility utility;
 
     // Generating a key for the patient
     public SecretKey generatePatientKey() throws Exception {
@@ -121,7 +116,7 @@ public class PatientService {
     }
 
     public String getFullname(Patient patient){
-        String fullName = patient.getPatientTitle() + patient.getPatientName() + patient.getPatientLastName();
+        String fullName = patient.getPatientTitle() + " " + patient.getPatientName() + " " + patient.getPatientLastName();
         return fullName;
     }
     
@@ -132,7 +127,7 @@ public class PatientService {
         String mobile = user.getPatientMobile();
         String nhs = user.getNhsNumber();
         LocalDate dob = user.getPatientDOB();
-        int age = utility.calculateAge(dob);
+        int age = PatientDataUtility.calculateAge(dob);
         String clinic = user.getPatientClinic();
         PatientProfileDTO profile = new PatientProfileDTO(fullname, email, mobile, nhs, dob,age,clinic);
         return profile;
