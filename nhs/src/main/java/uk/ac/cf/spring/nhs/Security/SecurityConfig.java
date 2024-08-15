@@ -66,7 +66,7 @@ public class SecurityConfig{
     public static final String[] PATIENT_ACCESS = { "/dashboard", "/diary/**", 
     "/information","/treatment","/cellulitis", "/resources","/treatmentSpec", 
     "/calendar", "/mobileaddappt", "/managment" };
-    public static final String[] PROVIDER_ACCESS = { "/addpatient" };
+    public static final String[] PROVIDER_ACCESS = { "/addpatient", "/provider/**", "/patientprofile/**" };
     public static final String[] AUTH_ACCESS = { "/account" };
 
 
