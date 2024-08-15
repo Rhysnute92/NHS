@@ -29,13 +29,7 @@
     color: var(--nhs-dark-grey);
 }
 
-.photos-container, .photos-preview-container {
-    background-color: var(--nhs-white);
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.5rem;
-}
+
 
 .no-photos {
     text-align: center;
@@ -126,33 +120,4 @@
     opacity: 80%;
 }
 
-.photos-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 9999;
-}
-
-.photos-modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--nhs-white);
-    padding: 1rem;
-    border-radius: 5px;
-    max-width: 90%;
-    max-height: 90%;
-    overflow: auto;
-}
-
-@media (max-width: 768px) {
-    .photos-container {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
 

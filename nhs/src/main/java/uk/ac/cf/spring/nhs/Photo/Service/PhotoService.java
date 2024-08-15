@@ -31,7 +31,6 @@ public class PhotoService {
 
     public Photo savePhoto(PhotoDTO photoDTO, long userId) {
         String photoUrl = fileStorageService.storeFile(photoDTO.getFile());
-        System.out.println("Photo URL: " + photoUrl);
         Photo photo = new Photo(photoUrl, new Date(), "", userId);
         return photoRepository.save(photo);
     }

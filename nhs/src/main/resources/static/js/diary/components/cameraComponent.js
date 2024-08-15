@@ -6,159 +6,7 @@ class CameraComponent extends HTMLElement {
 
         const template = document.createElement('template');
         template.innerHTML = `
-          <style>
-            .photo-form {
-                margin-bottom: 1rem;
-            }
-            
-            .photo-label {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 0.5rem;
-                transition: opacity 0.5s;
-                font-size: 1.2rem;
-            }
-            
-            .photo-label:hover {
-                cursor: pointer;
-                opacity: 80%;
-            }
-            
-            .photo-upload {
-                opacity: 0;
-                position: absolute;
-                z-index: -1;
-                width: 0;
-                height: 0;
-            }
-            
-            .photo-icon {
-                font-size: 2rem;
-                color: var(--nhs-dark-grey);
-            }
-            
-            .photos-container, .photos-preview-container {
-                background-color: var(--nhs-white);
-                padding: 1rem;
-                display: grid;
-                grid-template-columns: repeat(5, 1fr);
-                gap: 0.5rem;
-            }
-            
-            .no-photos {
-                text-align: center;
-                margin-top: 2rem;
-            }
-            
-            .camera-container {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                display: none;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                background: rgba(0, 0, 0, 0.8);
-                z-index: 9999;
-            }
-            
-            .video {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-            
-            .mirror {
-                transform: scaleX(-1); /* flip the image when using the front-facing camera */
-            }
-            
-            .horizontal-line {
-                position: absolute;
-                top: 50%;
-                left: 0;
-                width: 100%;
-                height: 2px;
-                background-color: #00ff00;
-            }
-            
-            .vertical-line {
-                position: absolute;
-                top: 0;
-                left: 50%;
-                width: 2px;
-                height: 100%;
-                background-color: #00ff00;
-            }
-            
-            .capture-button, .flip-camera-button, .close-camera-button {
-                position: absolute;
-                bottom: 20px;
-                padding: 10px 20px;
-                font-size: 16px;
-                background-color: #00ff00;
-                border: none;
-                cursor: pointer;
-            }
-            
-            .flip-camera-button {
-                bottom: 60px;
-            }
-            
-            .close-camera-button {
-                bottom: 100px;
-            }
-            
-            .canvas {
-                display: none;
-            }
-            
-            .open-camera, .open-photos-modal {
-                font-size: 1.15rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 0.5rem;
-                border: none;
-                background-color: transparent;
-                transition: opacity 0.5s;
-            }
-            
-            .open-camera:hover {
-                cursor: pointer;
-                opacity: 80%;
-            }
-            
-            .photos-modal {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.8);
-                z-index: 9999;
-            }
-            
-            .photos-modal-content {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background-color: var(--nhs-white);
-                padding: 1rem;
-                border-radius: 5px;
-                max-width: 90%;
-                max-height: 90%;
-                overflow: auto;
-            }
-
-          </style>
+          <link rel="stylesheet" href="/css/diary/cameraComponent.css">
           <div class="photo-capture-container">
             <button type="button" class="open-photos-modal">
               <i class="fa-solid fa-camera photo-icon"></i>
@@ -170,15 +18,20 @@ class CameraComponent extends HTMLElement {
               <div class="photos-modal-header">
                 <h3>Photos</h3>
                 <button type="button" class="close-photos-modal">
-                  <i class="fa-solid fa-times"></i>
+                  &times;
                 </button>
               </div>
-              <button type="button" class="open-camera">
-                <i class="fa-solid fa-camera photo-icon"></i>
-                Take a photo
-              </button>
-              <input type="file" class="photo-input" accept="image/*" multiple>
-              <div class="photos-preview-container"></div>
+              <div class="photos-inputs">
+                  <button type="button" class="open-camera">
+                    <i class="fa-solid fa-camera photo-icon"></i>
+                    Take photo
+                  </button>
+                  <input type="file" id="photo-input" class="photo-input" accept="image/*" multiple>
+                  <label for="photo-input" class="photo-label">
+                    <span class="photo-text">From gallery</span>
+                  </label> 
+              </div>
+              <photo-container></photo-container>
               <button type="button" class="add-photos">Confirm</button>
             </div>
           </div>
@@ -186,9 +39,12 @@ class CameraComponent extends HTMLElement {
             <video class="video" autoplay playsinline></video>
             <div class="horizontal-line"></div>
             <div class="vertical-line"></div>
-            <button type="button" class="capture-button">Take Photo</button>
-            <button type="button" class="flip-camera-button">Flip Camera</button>
-            <button type="button" class="close-camera-button">Close Camera</button>
+            <button type="button" class="close-camera-button">&times;</button>
+            <div class="camera-controls">
+                <button type="button" class="flip-camera-button">Flip Camera</button>
+                <button type="button" class="capture-button"></button>
+                <div class="spacer"></div> <!-- Spacer to center the buttons -->
+            </div>
             <canvas class="canvas"></canvas>
           </div>
         `;
@@ -219,12 +75,14 @@ class CameraComponent extends HTMLElement {
         closeCameraButton.addEventListener('click', this.closeCamera.bind(this));
         addPhotosButton.addEventListener('click', this.confirmPhotos.bind(this));
         photoInput.addEventListener('change', this.handlePhotoInput.bind(this));
+        document.addEventListener('mousedown', this.handleClickOutside.bind(this));
     }
 
     async openCamera() {
         const cameraContainer = this.shadowRoot.querySelector('.camera-container');
         const video = this.shadowRoot.querySelector('.video');
 
+        // Check if the browser supports accessing the camera
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             cameraContainer.style.display = 'flex';
             this.startCamera(video);
@@ -234,6 +92,7 @@ class CameraComponent extends HTMLElement {
     }
 
     async startCamera(video) {
+        // Stop the camera stream if it's already open
         if (this.currentStream) {
             this.currentStream.getTracks().forEach(track => track.stop());
         }
@@ -271,6 +130,7 @@ class CameraComponent extends HTMLElement {
     }
 
     closeCamera() {
+        // Hide the camera container
         const cameraContainer = this.shadowRoot.querySelector('.camera-container');
         this.stopCamera();
         cameraContainer.style.display = 'none';
@@ -286,12 +146,14 @@ class CameraComponent extends HTMLElement {
     }
 
     flipCamera() {
+        // Toggle the camera facing mode
         this.facingMode = (this.facingMode === 'environment') ? 'user' : 'environment';
         const video = this.shadowRoot.querySelector('.video');
         this.startCamera(video);
     }
 
     takePhoto() {
+        // Capture a photo from the video stream
         const video = this.shadowRoot.querySelector('.video');
         const canvas = this.shadowRoot.querySelector('.canvas');
         const context = canvas.getContext('2d');
@@ -303,13 +165,15 @@ class CameraComponent extends HTMLElement {
         canvas.height = height;
         context.drawImage(video, 0, 0, width, height);
 
+        // Convert the canvas to a blob
         canvas.toBlob((blob) => {
             if (blob) {
-                this.capturedPhotos.push(blob);
+                this.capturedPhotos.push({
+                    url: URL.createObjectURL(blob),
+                    id: null
+                });
 
-                // Display the photo preview
-                this.displayPhotoPreview(blob);
-
+                this.updatePhotoContainer();
                 this.closeCamera();
             } else {
                 alert('Failed to capture the photo. Please try again.');
@@ -321,15 +185,15 @@ class CameraComponent extends HTMLElement {
         const files = Array.from(event.target.files);
 
         files.forEach(file => {
-            // Convert each file to a Blob and store it in the capturedPhotos array
-            // Maybe keep the file format the same for uploaded files?
             const reader = new FileReader();
             reader.onload = (e) => {
                 const blob = new Blob([new Uint8Array(e.target.result)], { type: file.type });
-                this.capturedPhotos.push(blob);
+                this.capturedPhotos.push({
+                    url: URL.createObjectURL(blob),
+                    id: Date.now().toString() // Temporary ID
+                });
 
-                // Display a preview for each uploaded image
-                this.displayPhotoPreview(blob);
+                this.updatePhotoContainer();
             };
             reader.readAsArrayBuffer(file);
         });
@@ -338,11 +202,9 @@ class CameraComponent extends HTMLElement {
         event.target.value = '';
     }
 
-    displayPhotoPreview(blob) {
-        // Create a preview image for each photo
-        const photo = document.createElement('photo-component');
-        photo.setAttribute('url', URL.createObjectURL(blob));
-        this.shadowRoot.querySelector('.photos-preview-container').appendChild(photo);
+    updatePhotoContainer() {
+        const photoContainer = this.shadowRoot.querySelector('photo-container');
+        photoContainer.setAttribute('photos', JSON.stringify(this.capturedPhotos));
     }
 
     showPhotosModal() {
@@ -366,7 +228,7 @@ class CameraComponent extends HTMLElement {
             composed: true
         }));
 
-        this.shadowRoot.querySelector('.photos-preview-container').innerHTML = '';
+        this.shadowRoot.querySelector('photo-container').setAttribute('photos', '[]');
         this.capturedPhotos = [];
     }
 
@@ -381,6 +243,10 @@ class CameraComponent extends HTMLElement {
                 this.closeCamera();
             }
         }
+    }
+
+    handleClickOutside(event) {
+        // Handle clicks outside modal (optional, left for future implementation)
     }
 }
 

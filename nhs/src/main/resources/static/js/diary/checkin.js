@@ -30,8 +30,6 @@
         });
     });
 
-    const input = document.querySelector('.photo-upload');
-
     document.getElementById('add-measurement-button').addEventListener('click', addMeasurement);
 
     function addMeasurement() {
@@ -102,12 +100,11 @@
         });
     }
 
-
-// Store captured photos globally or within a scoped variable
     let capturedPhotos = [];
 
-// Listen for the 'photos-confirmed' event
     const photoCaptureElement = document.querySelector('camera-component');
+
+    // Listen for the 'photos-confirmed' event to get the captured photos
     photoCaptureElement.addEventListener('photos-confirmed', function (event) {
         // Access the captured photos from the event's detail
         capturedPhotos = event.detail;
@@ -116,22 +113,28 @@
         updatePhotosPreview(capturedPhotos);
     });
 
-// Function to update the photos preview in the UI
     function updatePhotosPreview(capturedPhotos) {
-        const photosContainer = document.querySelector('.photos-container');
+        const photosContainer = document.querySelector('photo-container');
 
         // Clear the container before adding new photos
         photosContainer.innerHTML = '';
 
         // Display each captured photo in the container using a custom element
         capturedPhotos.forEach(blob => {
-            const photo = document.createElement('photo-component');
-            photo.setAttribute('url', URL.createObjectURL(blob));
-            photosContainer.appendChild(photo);
+            let currentPhotos = JSON.parse(photosContainer.getAttribute('photos') || '[]');
+            const photo = {
+                url: URL.createObjectURL(blob),
+                id: null
+            };
+
+            // Add the new photo to the array
+            currentPhotos.push(photo);
+
+            // Update the photos attribute with the new array
+            photosContainer.setAttribute('photos', JSON.stringify(currentPhotos));
         });
     }
 
-// Modify the form submit event listener
     document.querySelector('.checkin-form').addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -144,7 +147,7 @@
             formData.append(`photos[${index}].bodyPart`, `Photo ${index + 1}`);
         });
 
-        // Submit the form data via Fetch API
+        // Submit the form data to the server
         fetch('/diary/checkin', {
             method: 'POST',
             body: formData

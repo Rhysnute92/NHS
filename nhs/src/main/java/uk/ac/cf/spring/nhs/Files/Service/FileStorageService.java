@@ -42,7 +42,6 @@ public class FileStorageService {
 
         // Generate a unique filename so files with the same name don't overwrite each other
         String uniqueFilename = UUID.randomUUID().toString() + extension;
-        System.out.println("Unique Filename: " + uniqueFilename);
 
         try {
             if (uniqueFilename.contains("..")) {

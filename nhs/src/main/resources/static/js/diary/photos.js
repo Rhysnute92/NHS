@@ -1,6 +1,6 @@
 (function () {
     const photoCaptureElement = document.querySelector('camera-component');
-    const photosContainer = document.querySelector('.photos-container');
+    const photosContainer = document.querySelector('photo-container');
 
     photoCaptureElement.addEventListener('photos-confirmed', function(event) {
         const form = document.querySelector('.photos-form');
@@ -24,10 +24,13 @@
             .then(photos => {
                 console.log(photos);
                 photos.forEach(photo => {
-                    const photoComponent = document.createElement('photo-component');
-                    photoComponent.setAttribute('url', `/files/${photo.url}`);
-                    photoComponent.setAttribute('photo-id', photo.id);
-                    photosContainer.appendChild(photoComponent);
+                    let currentPhotos = JSON.parse(photosContainer.getAttribute('photos') || '[]');
+
+                    // Add the new photo to the array
+                    currentPhotos.push(photo);
+
+                    // Update the photos attribute with the new array
+                    photosContainer.setAttribute('photos', JSON.stringify(currentPhotos));
                 });
             })
             .catch((error) => {
