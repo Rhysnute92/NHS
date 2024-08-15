@@ -9,6 +9,7 @@ import java.time.LocalDate;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "EventID")
     private Long id;
 
     @Column(name = "EventDate")
