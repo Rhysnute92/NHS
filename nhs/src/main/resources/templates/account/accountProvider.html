@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>My Profile</title>
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/account/account.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{common/fragments/header}"></div>
+    <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+    <div class="account-container">
+    <!-- Alternative method to call authentication from thymeleaf -->
+    <!-- <h1>Hello, <span th:text="${#authentication.name}">username</span></h1> -->
+    <h1> Welcome to your PROVIDER profile!</h1>
+    <div class="personal_info">
+        <h2>My Details</h2>
+    </div>
+    <div class="account_info">
+        <h2>My Account</h2>
+        <div>Username: <span id="username"></span></div>
+        <button type="button">Change password</button>
+    </div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" class="logout-button" value="LOG OUT"/>
+    </form>
+</div>
+</div>
+<script th:src="@{/js/common/header.js}"></script>
+<script th:src="@{/js/account/account.js}"></script>
+</body>
+</html>

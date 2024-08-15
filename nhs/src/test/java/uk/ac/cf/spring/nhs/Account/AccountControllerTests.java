@@ -61,21 +61,21 @@ public class AccountControllerTests {
 void patientAccountTest() throws Exception {
     mockMvc.perform(get("/account"))
             .andExpect(status().isOk())
-            .andExpect(view().name("account/account"));
+            .andExpect(view().name("account/accountPatient"));
 }
 @Test
 @WithMockUser(username="admin",roles={"ADMIN"})
 void adminAccountTest() throws Exception {
     mockMvc.perform(get("/account"))
             .andExpect(status().isOk())
-            .andExpect(view().name("account/account"));
+            .andExpect(view().name("account/accountProvider"));
 }
 @Test
 @WithMockUser(username="admin",roles={"PROVIDER"})
 void providerAccountTest() throws Exception {
     mockMvc.perform(get("/account"))
             .andExpect(status().isOk())
-            .andExpect(view().name("account/account"));
+            .andExpect(view().name("account/accountProvider"));
 }
 
 // @Test

@@ -6,7 +6,9 @@ import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Optional;
+import org.springframework.security.core.GrantedAuthority;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,13 @@ public class AccountController {
     private PatientService patientService;
 
     @GetMapping("/account")
-    public String account() {return "account/account";}
+    public String account() {
+        if(authenticationFacade.hasRole("ROLE_PATIENT")){
+            return "account/accountPatient";
+        } else {
+            return "account/accountProvider";
+        }
+    }
 
     @GetMapping("/username")
     @ResponseBody
