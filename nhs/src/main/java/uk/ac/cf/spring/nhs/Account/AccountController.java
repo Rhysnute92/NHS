@@ -31,8 +31,12 @@ public class AccountController {
     private PatientService patientService;
 
     @GetMapping("/account")
-    public String account() {
+    public String account(Model model) {
         if(authenticationFacade.hasRole("ROLE_PATIENT")){
+            Object principal = authenticationFacade.getAuthentication().getPrincipal();
+            Long userId = ((CustomUserDetails)principal).getUserId();
+            PatientProfileDTO profile = patientService.profile(userId);
+            model.addAttribute("patient", profile);
             return "account/accountPatient";
         } else {
             return "account/accountProvider";
@@ -48,15 +52,6 @@ public class AccountController {
         //Specify principle as CustomUserDetails and extract data using class functions
         String username = ((CustomUserDetails)principal).getUsername();
         return username;
-    }
-
-    @GetMapping("/patientProfile")
-    @ResponseBody
-    public PatientProfileDTO patientProfile(){
-        Object principal = authenticationFacade.getAuthentication().getPrincipal();
-        Long userId = ((CustomUserDetails)principal).getUserId();
-        PatientProfileDTO profile = patientService.profile(userId);
-        return profile;
     }
 
     @GetMapping("/update")
