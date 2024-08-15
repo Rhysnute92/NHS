@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="en">
+<head>
+  <title>Cellulitis Episodes</title>
+  <link rel="stylesheet" th:href="@{/css/diary/events.css}" />
+</head>
+<body>
+<main layout:fragment="content">
+  <div class="events-container">
+    <h2>Cellulitis Episodes</h2>
+    <button class="btn btn-primary" id="open-modal-btn">
+      Add New Event
+    </button>
+
+    <div th:replace="~{diary/fragments/eventModal :: eventModal}"></div>
+
+    <div class="event-list" id="eventList">
+       <div class="event-item" th:each="event : ${events}">
+        <h4 th:text="${#temporals.format(event.eventDate, 'yyyy-MM-dd')}"></h4>
+        <p th:text="${event.symptoms}"></p>
+        <p th:text="${event.severity}"></p>
+        <p th:text="${event.duration}"></p>
+        <p th:text="${event.treatment}"></p>
+      </div>
+    </div>
+  </div>
+</main>
+<script layout:fragment="scripts" src="/js/diary/events.js"></script>
+</body>
+</html>
