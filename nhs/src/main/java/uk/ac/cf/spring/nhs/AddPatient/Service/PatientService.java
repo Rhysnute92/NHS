@@ -15,6 +15,7 @@ import uk.ac.cf.spring.nhs.Common.util.PatientDataUtility;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 import java.time.LocalDate;
 import java.util.Base64;
@@ -39,6 +40,13 @@ public class PatientService {
         KeyGenerator keyGen = KeyGenerator.getInstance("AES");
         keyGen.init(256);
         return keyGen.generateKey();
+    }
+
+    //Key decoder function
+    private SecretKey decodeKey(String encodedKey) {
+        byte[] decodedKey = Base64.getDecoder().decode(encodedKey);
+        SecretKey key = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES"); 
+        return key;
     }
 
     // Encrypting Patient data
@@ -115,22 +123,33 @@ public class PatientService {
         return user;
     }
 
-    public String getFullname(Patient patient){
-        String fullName = patient.getPatientTitle() + " " + patient.getPatientName() + " " + patient.getPatientLastName();
-        return fullName;
+    public String getFullname(Patient patient, SecretKey key){
+        try{
+        String decryptedName = decrypt(patient.getPatientName(), key);
+        String decryptedLastname = decrypt(patient.getPatientLastName(), key);
+        String fullName = patient.getPatientTitle() + " " + decryptedName + " " + decryptedLastname;
+        return fullName;} catch (Exception e) {
+            e.printStackTrace();
+            return "Could not get patient name";
+        }
     }
     
     public PatientProfileDTO profile(long userId){
         Patient user = findPatientbyId(userId);
-        String fullname = getFullname(user);
-        String email = user.getPatientEmail();
-        String mobile = user.getPatientMobile();
+        SecretKey key = decodeKey(user.getEncryptionKey());
+        try{
+        String fullname = getFullname(user, key);
+        String email = decrypt(user.getPatientEmail(), key);
+        String mobile = decrypt(user.getPatientMobile(), key);
         String nhs = user.getNhsNumber();
         LocalDate dob = user.getPatientDOB();
         int age = PatientDataUtility.calculateAge(dob);
         String clinic = user.getPatientClinic();
         PatientProfileDTO profile = new PatientProfileDTO(fullname, email, mobile, nhs, dob,age,clinic);
-        return profile;
+        return profile;} catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 

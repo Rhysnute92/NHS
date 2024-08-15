@@ -11,5 +11,5 @@ VALUES (1, 'task-completion', 1);
 INSERT INTO Patients (PatientEmail, PatientMobile, NHSNumber, PatientDOB, 
 PatientName, PatientLastName, PatientTitle, PatientClinic, UserID, EncryptionKey)
 VALUES
-('test@test.com', '7777 4444', '12345678', '2000-08-15', 'Test', 
-'McTesterson', 'Lord', 'The best one', '2', 'tempkey')
+('tUR2SzL4c4rM5vYyYV+qsw==', 'RaAr3fuWzhPBFnKFxkkcew==', '12345678', '1969-06-09', '4xLXfYk4oPqqdLVhpNfkpQ==', 
+'/hnIldHqwWhUyQshrXH1bw==', 'Lord', 'Sherwood Forrest Hospitals', '2', 'xlHXWQORPy97Go4sJsrY+XNNEx59m/NaDZ7K7OOuEVY=')
