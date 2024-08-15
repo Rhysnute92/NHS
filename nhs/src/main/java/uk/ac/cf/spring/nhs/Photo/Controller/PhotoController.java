@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.Photo.Controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +27,14 @@ public class PhotoController {
     @Autowired
     PhotoService photoService;
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @GetMapping
     public String photos(Model model,
                          @AuthenticationPrincipal CustomUserDetails userDetails) {
         Long userId = userDetails.getUserId();
         List<Photo> photos = photoService.getPhotosByUserId(userId);
-        System.out.println(photos);
+        model.addAttribute("objectMapper", objectMapper);
         model.addAttribute("photos", photos);
         return "diary/photos";
     }

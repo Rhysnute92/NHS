@@ -11,15 +11,17 @@
 <main layout:fragment="content">
   <h1 class="page-title">Photos</h1>
   <div class="container">
+    <div th:replace="~{diary/fragments/photoGuidance}"></div>
     <form class="photos-form" action="/diary/photos" enctype="multipart/form-data">
       <camera-component></camera-component>
     </form>
     <!--  Convert the list of photo objects to a string so it can be parsed as JSON  -->
-    <photo-container th:attr="photos=${photos != null && !photos.isEmpty() ? #objectMapper.writeValueAsString(photos) : '[]'}">
+    <photo-container th:attr="photos=${photos != null && !photos.isEmpty() ? objectMapper.writeValueAsString(photos) : '[]'}">
     </photo-container>
   </div>
 </main>
 <th:block layout:fragment="scripts">
+  <script th:src="@{/js/common/customModal.js}"></script>
   <script th:src="@{/js/diary/components/photoContainer.js}"></script>
   <script th:src="@{/js/diary/components/cameraComponent.js}"></script>
   <script th:src="@{/js/diary/components/photoComponent.js}"></script>
