@@ -46,7 +46,7 @@ class CameraComponent extends HTMLElement {
             </div>
           </div>
           <div class="camera-container">
-            <div class="video-container">
+            <div class="camera-header">
               <select class="body-part-select">
                 <option value="none">Select body part</option>
                 <option value="head">Head</option>
@@ -55,10 +55,12 @@ class CameraComponent extends HTMLElement {
                 <option value="leg">Leg</option>
                 <option value="chest">Chest</option>
               </select>
+              <button type="button" class="close-camera-button">&times;</button>
+            </div>
+            <div class="video-container">
               <video class="video" autoplay playsinline></video>
               <img class="camera-overlay" src="">
             </div>
-            <button type="button" class="close-camera-button">&times;</button>
             <div class="camera-controls-container">
                 <div class="camera-controls">
                     <div>
