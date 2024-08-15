@@ -109,8 +109,15 @@ public class PatientService {
     private void sendPasswordSetupEmail(String email, String token) {
         String url = "http://localhost:8080/reset-password?token=" + token;
         String subject = "Set Your Password";
-        String text = "Dear Patient, Welcome to The University Hospitals of Derby and Burton NHS Foundation Trust Lymphoedema Services" +
-                "\n\nPlease set your new password via the link below:\n" + url + "\n\nThank you.";
+        String text = "Dear Patient, Welcome to The University Hospitals of Derby and Burton NHS Foundation Trust Lymphoedema Services"
+                + "\n\nYou are receiving this email because your Lymphoedema specialist would like to invite you to our patient management application.\n"
+                + "\nHere you will be able to track your symptoms, utilise a personal diary, access your management plans set by your provider, and see your upcoming appointments.\n"
+                + "\nPlease set your new password via the link below:\n"
+                + url + "\n\nAdvice on setting safe passwords can be found at this link:\n"
+                + "https://webarchive.nationalarchives.gov.uk/ukgwa/20231221190002/https:/digital.nhs.uk/about-nhs-digital/corporate-information-and-documents/password-policy-guide---example-guide"
+                + "\n\nHere can be found information on how your data may be used:\n"
+                + "https://www.stepintothenhs.nhs.uk/site-information#:~:text=Consent,cookies%20we%20need%20your%20permission"
+                + "\n\nThank you, and welcome to the application.";
 
         emailService.sendSimpleMessage(email, subject, text);
     }
