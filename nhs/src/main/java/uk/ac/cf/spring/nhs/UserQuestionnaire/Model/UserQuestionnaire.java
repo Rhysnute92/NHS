@@ -18,23 +18,23 @@ public class UserQuestionnaire {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_questionnaire_id")
+    @Column(name = "UserQuestionnaireID")
     private Long userQuestionnaireId;
 
     @ManyToOne
-    @JoinColumn(name = "questionnaire_id", nullable = false)
+    @JoinColumn(name = "QuestionnaireID ", nullable = false)
     private Questionnaire questionnaire;
 
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "UserID", nullable = false)
     private String userID;
 
-    @Column(name = "questionnaire_start_date", nullable = false)
+    @Column(name = "QuestionnaireStartDate", nullable = false)
     private LocalDateTime questionnaireStartDate;
 
-    @Column(name = "questionnaire_is_completed", nullable = false)
+    @Column(name = "QuestionnaireIsCompleted", nullable = false)
     private Boolean questionnaireIsCompleted = false;
 
-    @Column(name = "questionnaire_completion_date")
+    @Column(name = "QuestionnaireCompletionDate")
     private LocalDateTime questionnaireCompletionDate;
 
     // Getters and Setters

@@ -21,24 +21,24 @@ public class UserQuestion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_question_id")
+    @Column(name = "UserQuestionID")
     private Long userQuestionID;
 
     @ManyToOne
-    @JoinColumn(name = "user_questionnaire_id", nullable = false)
+    @JoinColumn(name = "UserQuestionnaireID", nullable = false)
     private UserQuestionnaire userQuestionnaire;
 
     @ManyToOne
-    @JoinColumn(name = "question_id", nullable = false)
+    @JoinColumn(name = "QuestionID", nullable = false)
     private Question question;
 
-    @Column(name = "user_response_text", columnDefinition = "TEXT")
+    @Column(name = "UserResponseText", columnDefinition = "TEXT")
     private String userResponseText;
 
-    @Column(name = "user_response_score")
+    @Column(name = "UserResponseScore")
     private Integer userResponseScore;
 
-    @Column(name = "response_date_time", nullable = false)
+    @Column(name = "ResponseDateTime", nullable = false)
     private LocalDateTime responseDateTime;
 
     @PrePersist

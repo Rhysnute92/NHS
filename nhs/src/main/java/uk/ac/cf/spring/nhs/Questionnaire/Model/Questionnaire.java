@@ -24,6 +24,9 @@ public class Questionnaire {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "QuestionnaireType")
+    private String type;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
@@ -62,27 +65,60 @@ public class Questionnaire {
         this.title = title;
     }
 
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @param description the description to set
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * @return the createdAt
+     */
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    /**
+     * @param createdAt the createdAt to set
+     */
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
+    /**
+     * @return the isActive
+     */
     public Boolean getIsActive() {
         return isActive;
     }
 
+    /**
+     * @param isActive the isActive to set
+     */
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
     }
+
 }

@@ -13,8 +13,8 @@
       <div class="management-title-container">
         <h1 class="management-desktop-title">My Lymphoedema Management Plan</h1>
         <p class="management-desktop-subtitle">
-          Find support, your tasks, and information for your lymphoedema management
-          plan.
+          Find support, your tasks, and information for your lymphoedema
+          management plan.
         </p>
       </div>
       <section class="collapsible urgent-care-plan">
@@ -48,15 +48,15 @@
           <div class="action-item">
             <div class="assigned-questionnaires">
               <h3>Assigned Questionnaires</h3>
-              <!-- If there is a questionnaire assigned -->
-              <div class="questionnaire-item">
-                <p>
-                  You have a new questionnaire assigned. Click
-                  <a href="#">here</a> to complete it.
-                </p>
+              <div id="questionnaire-container" class="questionnaire-container">
+                <!-- If there is a questionnaire assigned it'll be inserted here-->
               </div>
               <!-- If no questionnaire is assigned -->
-              <div class="questionnaire-item no-assignment">
+              <div
+                id="no-assignment"
+                class="questionnaire-item no-assignment"
+                style="display: none"
+              >
                 <p>No questionnaires assigned at the moment.</p>
               </div>
             </div>
@@ -68,6 +68,7 @@
           </div>
         </div>
       </section>
+
       <section class="collapsible your-treatment-plan">
         <h2 class="collapsible-header" onclick="toggleSection(event)">
           Your Treatment Plan
