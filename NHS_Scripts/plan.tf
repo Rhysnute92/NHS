@@ -22,20 +22,15 @@ required_version = ">= 0.14.0"
       cidr        = "0.0.0.0/0"
     }
     rule {
-    from_port   = 8080
-    to_port     = 8080
-    ip_protocol = "tcp"
-    cidr        = "0.0.0.0/0"
-  }
-  rule {
-      from_port   = 8084
-      to_port     = 8084
+      from_port   = 8080
+      to_port     = 8080
       ip_protocol = "tcp"
       cidr        = "0.0.0.0/0"
     }
+
   }
   resource "openstack_compute_instance_v2" "instance" {
-    name            = var.name1
+    name            = var.name
     image_name      = var.image
     flavor_name     = var.flavor
     security_groups = [openstack_compute_secgroup_v2.security_group.name]
@@ -45,7 +40,7 @@ required_version = ">= 0.14.0"
       name = var.network
     }
   }
-  resource "openstack_compute_floatingip_associate_v2" "floating_ip_1" {
+  resource "openstack_compute_floatingip_associate_v2" "floating_ip" {
     floating_ip = openstack_networking_floatingip_v2.floating_ip_1.address
     instance_id = openstack_compute_instance_v2.instance.id
   }

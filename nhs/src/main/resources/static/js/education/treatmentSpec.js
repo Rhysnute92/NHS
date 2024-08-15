@@ -11,6 +11,19 @@ for (var i = 0; i < coll.length; i++) {
   });
 }
 
+var coll_vid = document.getElementsByClassName("collapsible_video_button");
+for (var i = 0; i < coll_vid.length; i++) {
+  coll_vid[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content_vid = this.nextElementSibling;
+    if (content_vid.style.display === "block") {
+      content_vid.style.display = "none";
+    } else {
+      content_vid.style.display = "block";
+    }
+  });
+}
+
 let gallery = document.getElementById("display_item").getElementsByTagName("img");
 function backClick(){
   for (var i = 0; i < gallery.length; i++){
