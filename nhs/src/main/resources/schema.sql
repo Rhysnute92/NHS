@@ -160,6 +160,7 @@ CREATE TABLE Questionnaires (
     QuestionnaireType VARCHAR(255),
     QuestionnaireName VARCHAR(255),
     QuestionnaireDesc TEXT
+    QuestionnaireCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 );
 CREATE TABLE Questions (
     QuestionID BIGINT AUTO_INCREMENT PRIMARY KEY,
