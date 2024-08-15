@@ -7,5 +7,6 @@
 <body>
 <div class="container">
     <header th:replace="~{common/fragments/header}"></header>
+    <div th:if="${navMenuItems != null}" th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
 </body>
 </html>
