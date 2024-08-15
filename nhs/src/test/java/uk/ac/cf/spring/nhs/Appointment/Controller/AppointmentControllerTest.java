@@ -85,6 +85,16 @@ public class AppointmentControllerTest {
                 .andExpect(status().isOk());
     }
 
+    /**
+     * Test for the createAppointment method in the AppointmentController.
+     *
+     * This test verifies that when a valid AppointmentDTO is submitted via a POST request,
+     * the AppointmentService correctly processes the request and returns a saved Appointment object.
+     * The response is expected to have a status of 201 (Created) and contain the correct
+     * appointment details in JSON format.
+     *
+     * @throws Exception if the request or response processing fails.
+     */
     @Test
     public void testCreateAppointment() throws Exception {
         // Given
