@@ -26,10 +26,13 @@ public class UserQuestionnaire {
     private Questionnaire questionnaire;
 
     @Column(name = "UserID", nullable = false)
-    private String userID;
+    private Long userID;
 
     @Column(name = "QuestionnaireStartDate", nullable = false)
     private LocalDateTime questionnaireStartDate;
+
+    @Column(name = "QuestionnaireInProgress", nullable = false)
+    private Boolean questionnaireInProgress = false;
 
     @Column(name = "QuestionnaireIsCompleted", nullable = false)
     private Boolean questionnaireIsCompleted = false;
@@ -84,7 +87,7 @@ public class UserQuestionnaire {
      *
      * @return the unique identifier of the user
      */
-    public String getUserID() {
+    public Long getUserID() {
         return userID;
     }
 
@@ -93,7 +96,7 @@ public class UserQuestionnaire {
      *
      * @param userID the unique identifier of the user
      */
-    public void setUserID(String userID) {
+    public void setUserID(Long userID) {
         if (userID == null) {
             throw new NullPointerException("User ID cannot be null");
         }
@@ -119,6 +122,14 @@ public class UserQuestionnaire {
             throw new NullPointerException("Questionnaire start date cannot be null");
         }
         this.questionnaireStartDate = questionnaireStartDate;
+    }
+
+    public Boolean getQuestionnaireInProgress() {
+        return questionnaireInProgress;
+    }
+
+    public void setQuestionnaireInProgress(Boolean questionnaireInProgress) {
+        this.questionnaireInProgress = questionnaireInProgress;
     }
 
     /**

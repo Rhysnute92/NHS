@@ -23,7 +23,7 @@ public class UserQuestionnaireController {
      * @return a list of user questionnaires
      */
     @GetMapping("/user/{userID}")
-    public ResponseEntity<List<UserQuestionnaire>> getUserQuestionnaires(@PathVariable String userID) {
+    public ResponseEntity<List<UserQuestionnaire>> getUserQuestionnaires(@PathVariable Long userID) {
         List<UserQuestionnaire> userQuestionnaires = userQuestionnaireService.getUserQuestionnaires(userID);
         return ResponseEntity.ok(userQuestionnaires);
     }
@@ -35,7 +35,7 @@ public class UserQuestionnaireController {
      * @return a list of completed user questionnaires
      */
     @GetMapping("/user/{userID}/completed")
-    public ResponseEntity<List<UserQuestionnaire>> getCompletedUserQuestionnaires(@PathVariable String userID) {
+    public ResponseEntity<List<UserQuestionnaire>> getCompletedUserQuestionnaires(@PathVariable Long userID) {
         List<UserQuestionnaire> userQuestionnaires = userQuestionnaireService.getCompletedUserQuestionnaires(userID);
         return ResponseEntity.ok(userQuestionnaires);
     }
@@ -47,7 +47,7 @@ public class UserQuestionnaireController {
      * @return a ResponseEntity containing a list of incomplete user questionnaires
      */
     @GetMapping("/user/{userID}/incomplete")
-    public ResponseEntity<List<UserQuestionnaire>> getIncompleteUserQuestionnaires(@PathVariable String userID) {
+    public ResponseEntity<List<UserQuestionnaire>> getIncompleteUserQuestionnaires(@PathVariable Long userID) {
         List<UserQuestionnaire> userQuestionnaires = userQuestionnaireService.getIncompleteUserQuestionnaires(userID);
         return ResponseEntity.ok(userQuestionnaires);
     }
@@ -61,7 +61,7 @@ public class UserQuestionnaireController {
      *         if not found
      */
     @GetMapping("/user/{userID}/questionnaire/{questionnaireId}")
-    public ResponseEntity<UserQuestionnaire> getUserQuestionnaire(@PathVariable String userID,
+    public ResponseEntity<UserQuestionnaire> getUserQuestionnaire(@PathVariable Long userID,
             @PathVariable Long questionnaireId) {
         Optional<UserQuestionnaire> userQuestionnaire = userQuestionnaireService.getUserQuestionnaire(userID,
                 questionnaireId);

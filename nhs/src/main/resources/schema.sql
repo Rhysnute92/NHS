@@ -171,6 +171,7 @@ CREATE TABLE UserQuestionnaires (
     QuestionnaireID BIGINT NOT NULL,
     UserID BIGINT NOT NULL,
     QuestionnaireStartDate DATETIME NOT NULL,
+    QuestionnaireInProgress BOOLEAN DEFAULT FALSE,
     QuestionnaireIsCompleted BOOLEAN DEFAULT FALSE,
     QuestionnaireCompletionDate DATETIME,
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID),

@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Model.UserQuestionnaire;
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Service.UserQuestionnaireService;
+import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
 
 class UserQuestionnaireControllerUnitTests {
 
@@ -31,18 +32,26 @@ class UserQuestionnaireControllerUnitTests {
     private UserQuestionnaireController userQuestionnaireController;
 
     private UserQuestionnaire userQuestionnaire;
+    private Questionnaire questionnaire;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+
+        questionnaire = new Questionnaire();
+        questionnaire.setId(1L);
+        questionnaire.setTitle("Test Questionnaire");
+
         userQuestionnaire = new UserQuestionnaire();
-        userQuestionnaire.setUserID("user123");
+        userQuestionnaire.setUserID(123L);
+        userQuestionnaire.setQuestionnaire(questionnaire);
+        userQuestionnaire.setQuestionnaireIsCompleted(false);
+        userQuestionnaire.setQuestionnaireInProgress(false);
     }
 
-    @SuppressWarnings("null")
     @Test
     void testGetUserQuestionnaires() {
-        String userID = "user123";
+        Long userID = 123L;
         List<UserQuestionnaire> userQuestionnaires = new ArrayList<>();
         userQuestionnaires.add(userQuestionnaire);
         when(userQuestionnaireService.getUserQuestionnaires(userID)).thenReturn(userQuestionnaires);
@@ -55,10 +64,9 @@ class UserQuestionnaireControllerUnitTests {
         verify(userQuestionnaireService, times(1)).getUserQuestionnaires(userID);
     }
 
-    @SuppressWarnings("null")
     @Test
     void testGetCompletedUserQuestionnaires() {
-        String userID = "user123";
+        Long userID = 123L;
         List<UserQuestionnaire> userQuestionnaires = new ArrayList<>();
         userQuestionnaire.setQuestionnaireIsCompleted(true);
         userQuestionnaires.add(userQuestionnaire);
@@ -73,10 +81,9 @@ class UserQuestionnaireControllerUnitTests {
         verify(userQuestionnaireService, times(1)).getCompletedUserQuestionnaires(userID);
     }
 
-    @SuppressWarnings("null")
     @Test
     void testGetIncompleteUserQuestionnaires() {
-        String userID = "user123";
+        Long userID = 123L;
         List<UserQuestionnaire> userQuestionnaires = new ArrayList<>();
         userQuestionnaire.setQuestionnaireIsCompleted(false);
         userQuestionnaires.add(userQuestionnaire);
@@ -93,7 +100,7 @@ class UserQuestionnaireControllerUnitTests {
 
     @Test
     void testGetUserQuestionnaire() {
-        String userID = "user123";
+        Long userID = 123L;
         Long questionnaireId = 1L;
         when(userQuestionnaireService.getUserQuestionnaire(userID, questionnaireId))
                 .thenReturn(Optional.of(userQuestionnaire));
@@ -109,7 +116,7 @@ class UserQuestionnaireControllerUnitTests {
 
     @Test
     void testGetUserQuestionnaireNotFound() {
-        String userID = "user123";
+        Long userID = 123L;
         Long questionnaireId = 1L;
         when(userQuestionnaireService.getUserQuestionnaire(userID, questionnaireId)).thenReturn(Optional.empty());
 

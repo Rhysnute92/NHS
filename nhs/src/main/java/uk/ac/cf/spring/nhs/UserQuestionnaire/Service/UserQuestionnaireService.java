@@ -21,7 +21,7 @@ public class UserQuestionnaireService {
      * @param userID the ID of the user
      * @return a list of user questionnaires
      */
-    public List<UserQuestionnaire> getUserQuestionnaires(String userID) {
+    public List<UserQuestionnaire> getUserQuestionnaires(Long userID) {
         return userQuestionnaireRepository.findByUserID(userID);
     }
 
@@ -31,7 +31,7 @@ public class UserQuestionnaireService {
      * @param userID the unique identifier of the user
      * @return a list of completed user questionnaires
      */
-    public List<UserQuestionnaire> getCompletedUserQuestionnaires(String userID) {
+    public List<UserQuestionnaire> getCompletedUserQuestionnaires(Long userID) {
         return userQuestionnaireRepository.findByUserIDAndQuestionnaireIsCompletedTrue(userID);
     }
 
@@ -41,7 +41,7 @@ public class UserQuestionnaireService {
      * @param userID the ID of the user
      * @return a list of incomplete user questionnaires
      */
-    public List<UserQuestionnaire> getIncompleteUserQuestionnaires(String userID) {
+    public List<UserQuestionnaire> getIncompleteUserQuestionnaires(Long userID) {
         return userQuestionnaireRepository.findByUserIDAndQuestionnaireIsCompletedFalse(userID);
     }
 
@@ -52,7 +52,7 @@ public class UserQuestionnaireService {
      * @param questionnaireId the ID of the questionnaire
      * @return an optional user questionnaire
      */
-    public Optional<UserQuestionnaire> getUserQuestionnaire(String userID, Long questionnaireId) {
+    public Optional<UserQuestionnaire> getUserQuestionnaire(Long userID, Long questionnaireId) {
         return userQuestionnaireRepository.findByUserIDAndQuestionnaire_Id(userID, questionnaireId);
     }
 

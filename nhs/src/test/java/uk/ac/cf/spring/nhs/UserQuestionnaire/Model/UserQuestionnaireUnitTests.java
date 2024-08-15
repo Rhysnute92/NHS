@@ -35,7 +35,7 @@ class UserQuestionnaireUnitTests {
 
     @Test
     void testSetAndGetUserID() {
-        String userID = "user123";
+        Long userID = 123L;
         userQuestionnaire.setUserID(userID);
         assertEquals(userID, userQuestionnaire.getUserID());
     }
@@ -54,16 +54,28 @@ class UserQuestionnaireUnitTests {
     }
 
     @Test
-    void testSetAndGetQuestionnaireCompletionDate() {
-        LocalDateTime now = LocalDateTime.now();
-        userQuestionnaire.setQuestionnaireCompletionDate(now);
-        assertEquals(now, userQuestionnaire.getQuestionnaireCompletionDate());
+    void testSetAndGetQuestionnaireInProgress() {
+        userQuestionnaire.setQuestionnaireInProgress(true);
+        assertTrue(userQuestionnaire.getQuestionnaireInProgress());
     }
 
     @Test
     void testQuestionnaireIsCompletedDefaultsToFalse() {
         assertFalse(userQuestionnaire.getQuestionnaireIsCompleted(),
                 "QuestionnaireIsCompleted should default to false");
+    }
+
+    @Test
+    void testQuestionnaireInProgressDefaultsToFalse() {
+        assertFalse(userQuestionnaire.getQuestionnaireInProgress(),
+                "QuestionnaireInProgress should default to false");
+    }
+
+    @Test
+    void testSetAndGetQuestionnaireCompletionDate() {
+        LocalDateTime now = LocalDateTime.now();
+        userQuestionnaire.setQuestionnaireCompletionDate(now);
+        assertEquals(now, userQuestionnaire.getQuestionnaireCompletionDate());
     }
 
     @Test

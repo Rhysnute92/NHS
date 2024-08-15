@@ -34,7 +34,6 @@ export class QuestionnaireManager {
       );
     }
   }
-
   displayQuestionnaires(questionnaires) {
     this.container.innerHTML = ""; // Clear the container
 
@@ -46,7 +45,7 @@ export class QuestionnaireManager {
         const card = document.createElement("div");
         card.className = "questionnaire-item";
         card.innerHTML = `
-            <p>You have an incomplete questionnaire. Click <a href="/questionnaire/${q.id}">here</a> to complete it.</p>
+            <p>You have an incomplete questionnaire. Click <a th:href="@{/questionnaire/${q.id}}">here</a> to complete it.</p>
           `;
         this.container.appendChild(card);
       });
