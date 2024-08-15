@@ -162,14 +162,16 @@ CREATE TABLE Questionnaires (
     QuestionnaireDesc TEXT
     QuestionnaireCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 );
-CREATE TABLE Questions (
+
+CREATE TABLE Question (
     QuestionID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    Question TEXT,
+    QuestionText TEXT,
     QuestionCategory VARCHAR(255),
     QuestionResponseType VARCHAR(255),
     QuestionnaireID BIGINT,
     FOREIGN KEY (QuestionnaireID) REFERENCES Questionnaires(QuestionnaireID)
 );
+
 CREATE TABLE UserQuestionnaires (
     UserQuestionnaireID BIGINT AUTO_INCREMENT PRIMARY KEY,
     QuestionnaireID BIGINT,
