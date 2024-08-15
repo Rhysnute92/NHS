@@ -43,6 +43,7 @@ class QuestionnaireControllerUnitTests {
      * 
      * @return void
      */
+    @SuppressWarnings("null")
     @Test
     void testGetAllQuestionnairesReturnsEmptyList() {
         when(questionnaireService.getAllQuestionnaires()).thenReturn(new ArrayList<>());
@@ -60,6 +61,7 @@ class QuestionnaireControllerUnitTests {
      *
      * @return void
      */
+    @SuppressWarnings("null")
     @Test
     void testGetAllQuestionnairesReturnsPopulatedList() {
         List<Questionnaire> mockList = new ArrayList<>();
@@ -81,6 +83,7 @@ class QuestionnaireControllerUnitTests {
      *
      * @return void
      */
+    @SuppressWarnings("null")
     @Test
     void testGetQuestionnaireByIdFound() {
         Questionnaire mockQuestionnaire = new Questionnaire();
@@ -117,6 +120,7 @@ class QuestionnaireControllerUnitTests {
      *
      * @return void
      */
+    @SuppressWarnings("null")
     @Test
     void testSearchQuestionnairesByTitle() {
         Questionnaire questionnaire1 = new Questionnaire();
@@ -138,6 +142,7 @@ class QuestionnaireControllerUnitTests {
      *
      * @return void
      */
+    @SuppressWarnings("null")
     @Test
     void testCreateQuestionnaire() {
         Questionnaire questionnaire = new Questionnaire();
@@ -158,6 +163,7 @@ class QuestionnaireControllerUnitTests {
      *
      * @return void
      */
+    @SuppressWarnings("null")
     @Test
     void testUpdateQuestionnaireSuccess() {
         Questionnaire existingQuestionnaire = new Questionnaire();

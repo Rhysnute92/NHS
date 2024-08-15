@@ -172,13 +172,16 @@ CREATE TABLE UserQuestionnaires (
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID),
     FOREIGN KEY (QuestionnaireID) REFERENCES Questionnaires(QuestionnaireID)
 );
-CREATE TABLE UserResponses (
+CREATE TABLE UserQuestion (
     UserQuestionnaireID BIGINT,
     QuestionID BIGINT,
-    UserResponse TEXT,
+    UserResponseText TEXT,
+    UserResponseScore INT,
+    ResponseDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (QuestionID) REFERENCES Questions(QuestionID),
     FOREIGN KEY (UserQuestionnaireID) REFERENCES UserQuestionnaires(UserQuestionnaireID)
 );
+
 --Not implemented yet--
 --CREATE TABLE PatientPlan ()
 --CREATE TABLE PlanMedication ()
