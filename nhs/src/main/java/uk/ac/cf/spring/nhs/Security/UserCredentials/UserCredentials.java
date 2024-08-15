@@ -23,6 +23,11 @@ public class UserCredentials {
     public Long getUserId(){
         return userId;
     }
+
+    public void setUserId(Long id){
+        this.userId = id;
+    }
+    
     public String getUserName(){
         return userName;
     }
