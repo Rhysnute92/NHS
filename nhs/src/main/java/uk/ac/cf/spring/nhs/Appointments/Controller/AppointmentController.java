@@ -37,13 +37,13 @@ public class AppointmentController {
         return appointmentService.getAppointmentById(id);
     }
 
-    @GetMapping("/appointments")
-    public ModelAndView getAppointments(){
-        List<Appointment> appointments = appointmentService.getAllAppointments();
-        ModelAndView modelAndView = new ModelAndView("appointments");
-        modelAndView.addObject("appointments", appointments);
-        return modelAndView;
-    }
+//    @GetMapping
+//    public ModelAndView getAppointments(){
+//        List<Appointment> appointments = appointmentService.getAllAppointments();
+//        ModelAndView modelAndView = new ModelAndView("appointments");
+//        modelAndView.addObject("appointments", appointments);
+//        return modelAndView;
+//    }
     @PostMapping
     public ResponseEntity<Appointment> createAppointment(@RequestBody AppointmentDTO appointmentDTO) {
         Appointment savedAppointment = appointmentService.saveAppointment(appointmentDTO);

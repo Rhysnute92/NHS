@@ -372,4 +372,54 @@ header .calendar-current-date {
     text-decoration: none;
     cursor: pointer;
 }
+.toast {
+    visibility: hidden; /* Hidden by default */
+    min-width: 250px; /* Set a minimum width */
+    margin-left: -125px; /* Center the toast */
+    background-color: #333; /* Black background */
+    color: #fff; /* White text */
+    text-align: center; /* Center align text */
+    border-radius: 2px; /* Rounded corners */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 50%; /* Center horizontally */
+    bottom: 30px; /* 30px from the bottom */
+    font-size: 17px; /* Font size */
+    padding: 16px; /* Padding */
+}
+
+.toast-message {
+    margin: 0; /* Remove default margin */
+}
+
+/* Show the toast notification */
+.toast.show {
+    visibility: visible; /* Show the toast */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s; /* Fade in and out */
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Fade in animation */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Fade out animation */
+@-webkit-keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Fade in animation */
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Fade out animation */
+@keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
 

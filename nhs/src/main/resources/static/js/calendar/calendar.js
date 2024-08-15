@@ -138,5 +138,8 @@ function daysInMonth(month, year) {
 // Show the calendar when the DOM content is loaded
 document.addEventListener("DOMContentLoaded", function () {
     showCalendar(currentMonth, currentYear);
+
+
+
 });
 
