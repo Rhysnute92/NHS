@@ -1,4 +1,4 @@
-/* package uk.ac.cf.spring.nhs.Questionnaire.Controller;
+package uk.ac.cf.spring.nhs.Questionnaire.Controller;
 
 import java.util.Optional;
 
@@ -27,6 +27,13 @@ public class QuestionnaireFormController {
     @Autowired
     private UserQuestionnaireService userQuestionnaireService;
 
+    /**
+     * Handles HTTP GET requests to retrieve a questionnaire page by its unique identifier.
+     *
+     * @param id    the unique identifier of the questionnaire
+     * @param model the Spring MVC model object to store the questionnaire data
+     * @return      the name of the view to render, either "questionnaire" or "error/404"
+     */
     @GetMapping("/questionnaire/{id}")
     public String getQuestionnairePage(@PathVariable Long id, Model model) {
         Optional<Questionnaire> questionnaire = questionnaireService.getQuestionnaireById(id);
@@ -35,17 +42,20 @@ public class QuestionnaireFormController {
 
             Object principal = authenticationFacade.getAuthentication().getPrincipal();
             Long userId = ((CustomUserDetails) principal).getUserId();
-            UserQuestionnaire userQuestionnaire = userQuestionnaireService.getUserQuestionnaire(userId, id)
-                    .orElseThrow(() -> new ResourceNotFoundException("User Questionnaire not found"));
+            Optional<UserQuestionnaire> userQuestionnaireOpt = userQuestionnaireService.getUserQuestionnaire(userId,
+                    id);
 
-            // Mark the questionnaire as in progress
-            userQuestionnaire.setQuestionnaireInProgress(true);
-            userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
-
-            return "questionnaire"; // Thymeleaf template name
+            if (userQuestionnaireOpt.isPresent()) {
+                UserQuestionnaire userQuestionnaire = userQuestionnaireOpt.get();
+                userQuestionnaire.setQuestionnaireInProgress(true);
+                userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
+                return "questionnaire"; 
+            } else {
+                return "error/404"; 
+            }
         } else {
-            return "error/404"; // Handle not found
+            return "error/404"; 
         }
     }
+
 }
- */
