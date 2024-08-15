@@ -138,7 +138,8 @@ public class PatientService {
         }
     }
 
-    public String getFullname(Patient patient, SecretKey key){
+    public String getFullname(Patient patient){
+        SecretKey key = decodeKey(patient.getEncryptionKey());
         try{
         String decryptedName = decrypt(patient.getPatientName(), key);
         String decryptedLastname = decrypt(patient.getPatientLastName(), key);
