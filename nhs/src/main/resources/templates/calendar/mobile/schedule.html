@@ -23,7 +23,7 @@
   <!-- Appointment schedule section -->
   <div id="mobileSchedule">
     <ul id="apptList">
-      <!-- Placeholder list item if no appointments are scheduled -->
+      <p th:if="${appointments.empty}">No appointments scheduled yet</p>
       <li data-event-id="1">
       </li>
     </ul>

@@ -31,9 +31,9 @@ CREATE TABLE ProviderCredentials (
     ProviderPassword VARCHAR(255)
 );
 # --Not implemented yet--
-# --CREATE TABLE Admin ()
-# -----------------------
-# --Patient information--
+--CREATE TABLE Admin ()
+-----------------------
+--Patient information--
 CREATE TABLE Patients (
     PatientEmail VARCHAR(255),
     PatientMobile INT,
@@ -55,9 +55,9 @@ CREATE TABLE PatientDiagnosis (
     FOREIGN KEY (UserID) REFERENCES PatientCredentials(UserID)
 );
 # --Not implemented yet--
-# --CREATE TABLE PatientRecordsOld ()
-# --CREATE TABLE PatientRecordsOther ()
-# --CREATE TABLE UserMedication ()
+--CREATE TABLE PatientRecordsOld ()
+--CREATE TABLE PatientRecordsOther ()
+--CREATE TABLE UserMedication ()
 -----------------------
 --Provider information--
 CREATE TABLE Providers (
@@ -118,10 +118,10 @@ CREATE TABLE DiaryEntries (
     FOREIGN KEY (MeasurmentID) REFERENCES Measurments(MeasurmentID),
     FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
 );
-# --Not implemented yet--
-# --CREATE TABLE Event ()
-# --CREATE TABLE DiaryQuestions ()
-# -----------------------
+--Not implemented yet--
+--CREATE TABLE Event ()
+--CREATE TABLE DiaryQuestions ()
+-----------------------
 # --Managment plan--
 CREATE TABLE Questionnaires (
     QuestionnaireID INT AUTO_INCREMENT PRIMARY KEY,
@@ -155,10 +155,10 @@ CREATE TABLE UserResponses (
     FOREIGN KEY (UserQuestionnaireID) REFERENCES UserQuestionnaires(UserQuestionnaireID)
 );
 # --Not implemented yet--
-# --CREATE TABLE PatientPlan ()
-# --CREATE TABLE PlanMedication ()
-# --CREATE TABLE AppointmentRecord ()
-# -----------------------
+--CREATE TABLE PatientPlan ()
+--CREATE TABLE PlanMedication ()
+--CREATE TABLE AppointmentRecord ()
+-----------------------
 # --Education--
 CREATE TABLE Articles (
     ArticleID INT AUTO_INCREMENT PRIMARY KEY,
@@ -200,11 +200,11 @@ CREATE TABLE UserTasks (
     TaskID INT,
     FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
 );
-# --Not implemented yet--
-# --CREATE TABLE Reminders ()
-# --CREATE TABLE Clinic ()
-# --CREATE TABLE Log ()
-# --CREATE TABLE Changes ()
-# --CREATE TABLE LoginRecords ()
-# --CREATE TABLE Record ()
-# -----------------------
+--Not implemented yet--
+--CREATE TABLE Reminders ()
+--CREATE TABLE Clinic ()
+--CREATE TABLE Log ()
+--CREATE TABLE Changes ()
+--CREATE TABLE LoginRecords ()
+--CREATE TABLE Record ()
+-----------------------
