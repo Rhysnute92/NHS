@@ -1,29 +1,8 @@
 -- Drop all tables for testing purposes
-DROP TABLE IF EXISTS UserTasks;
-DROP TABLE IF EXISTS Tasks;
-DROP TABLE IF EXISTS InfoAssets;
-DROP TABLE IF EXISTS InfoSections;
-DROP TABLE IF EXISTS Articles;
-DROP TABLE IF EXISTS UserResponses;
-DROP TABLE IF EXISTS UserQuestionnaires;
-DROP TABLE IF EXISTS Questions;
-DROP TABLE IF EXISTS Questionnaires;
-DROP TABLE IF EXISTS DiarySymptoms;
-DROP TABLE IF EXISTS DiaryMeasurements;
-DROP TABLE IF EXISTS DiaryPhotos;
-DROP TABLE IF EXISTS DiaryEntries;
-DROP TABLE IF EXISTS Symptoms;
-DROP TABLE IF EXISTS Measurements;
-DROP TABLE IF EXISTS Photos;
-DROP TABLE IF EXISTS Appointments;
-DROP TABLE IF EXISTS UserWidgets;
-DROP TABLE IF EXISTS Providers;
-DROP TABLE IF EXISTS PatientDiagnosis;
-DROP TABLE IF EXISTS Patients;
-DROP TABLE IF EXISTS ProviderCredentials;
-DROP TABLE IF EXISTS PatientCredentials;
-DROP TABLE IF EXISTS Admin;
-DROP TABLE IF EXISTS UserCredentials;
+DROP DATABASE IF EXISTS nhs;
+CREATE DATABASE nhs;
+USE nhs;
+
 --Log in information and credentials--
 CREATE TABLE UserCredentials (
     UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -150,9 +129,18 @@ CREATE TABLE DiarySymptoms (
        FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
 );
 
+CREATE TABLE Events (
+    EventDate DATE NOT NULL,
+    EventSymptoms TEXT,
+    EventSeverity INT,
+    EventDuration INT,
+    EventTreatment TEXT,
+    UserID BIGINT,
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+);
+
 --Not implemented yet--
---CREATE TABLE Event ()
---CREATE TABLE DiaryQuestions ()
+--CREATE TABLE DiaryQuestions ()--
 -----------------------
 --Managment plan--
 CREATE TABLE Questionnaires (
