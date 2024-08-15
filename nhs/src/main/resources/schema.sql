@@ -2,31 +2,32 @@ DROP DATABASE IF EXISTS nhs;
 CREATE DATABASE nhs;
 USE nhs;
 -- Drop all tables for testing purposes
-# DROP TABLE IF EXISTS UserTasks;
-# DROP TABLE IF EXISTS Tasks;
-# DROP TABLE IF EXISTS InfoAssets;
-# DROP TABLE IF EXISTS InfoSections;
-# DROP TABLE IF EXISTS Articles;
-# DROP TABLE IF EXISTS UserResponses;
-# DROP TABLE IF EXISTS UserQuestionnaires;
-# DROP TABLE IF EXISTS Questions;
-# DROP TABLE IF EXISTS Questionnaires;
-# DROP TABLE IF EXISTS DiarySymptoms;
-# DROP TABLE IF EXISTS DiaryMeasurements;
-# DROP TABLE IF EXISTS DiaryPhotos;
-# DROP TABLE IF EXISTS DiaryEntries;
-# DROP TABLE IF EXISTS Symptoms;
-# DROP TABLE IF EXISTS Measurements;
-# DROP TABLE IF EXISTS Photos;
-# DROP TABLE IF EXISTS Appointments;
-# DROP TABLE IF EXISTS UserWidgets;
-# DROP TABLE IF EXISTS Providers;
-# DROP TABLE IF EXISTS PatientDiagnosis;
-# DROP TABLE IF EXISTS Patients;
-# DROP TABLE IF EXISTS ProviderCredentials;
-# DROP TABLE IF EXISTS PatientCredentials;
-# DROP TABLE IF EXISTS Admin;
-# DROP TABLE IF EXISTS UserCredentials;
+Drop TABLE IF EXISTS UserTaskLog;
+DROP TABLE IF EXISTS UserTask;
+DROP TABLE IF EXISTS Task;
+DROP TABLE IF EXISTS InfoAssets;
+DROP TABLE IF EXISTS InfoSections;
+DROP TABLE IF EXISTS Articles;
+DROP TABLE IF EXISTS UserResponses;
+DROP TABLE IF EXISTS UserQuestionnaires;
+DROP TABLE IF EXISTS Questions;
+DROP TABLE IF EXISTS Questionnaires;
+DROP TABLE IF EXISTS DiarySymptoms;
+DROP TABLE IF EXISTS DiaryMeasurements;
+DROP TABLE IF EXISTS DiaryPhotos;
+DROP TABLE IF EXISTS DiaryEntries;
+DROP TABLE IF EXISTS Symptoms;
+DROP TABLE IF EXISTS Measurements;
+DROP TABLE IF EXISTS Photos;
+DROP TABLE IF EXISTS Appointments;
+DROP TABLE IF EXISTS UserWidgets;
+DROP TABLE IF EXISTS Providers;
+DROP TABLE IF EXISTS PatientDiagnosis;
+DROP TABLE IF EXISTS Patients;
+DROP TABLE IF EXISTS ProviderCredentials;
+DROP TABLE IF EXISTS PatientCredentials;
+DROP TABLE IF EXISTS Admin;
+DROP TABLE IF EXISTS UserCredentials;
 --Log in information and credentials--
 CREATE TABLE UserCredentials (
                                  UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -108,7 +109,6 @@ CREATE TABLE Measurements (
                               UserID BIGINT,
                               FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
-
 CREATE TABLE Symptoms (
                           SymptomID INT AUTO_INCREMENT PRIMARY KEY,
                           SymptomName VARCHAR(255),
@@ -118,7 +118,6 @@ CREATE TABLE Symptoms (
                           UserID BIGINT,
                           FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
-
 CREATE TABLE DiaryEntries (
                               EntryID INT AUTO_INCREMENT PRIMARY KEY,
                               EntryDate DATE NOT NULL,
@@ -127,8 +126,6 @@ CREATE TABLE DiaryEntries (
                               UserID BIGINT NOT NULL,
                               CONSTRAINT fk_user FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
-
-
 CREATE TABLE DiaryPhotos (
                              DiaryPhotoID INT AUTO_INCREMENT PRIMARY KEY,
                              EntryID INT,
@@ -136,7 +133,6 @@ CREATE TABLE DiaryPhotos (
                              FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
                              FOREIGN KEY (PhotoID) REFERENCES Photos(PhotoID)
 );
-
 CREATE TABLE DiaryMeasurements (
                                    DiaryMeasurementID INT AUTO_INCREMENT PRIMARY KEY,
                                    EntryID INT,
@@ -144,7 +140,6 @@ CREATE TABLE DiaryMeasurements (
                                    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
                                    FOREIGN KEY (MeasurementID) REFERENCES Measurements(MeasurementID)
 );
-
 CREATE TABLE DiarySymptoms (
                                DiarySymptomID INT AUTO_INCREMENT PRIMARY KEY,
                                EntryID INT NOT NULL,
@@ -152,7 +147,6 @@ CREATE TABLE DiarySymptoms (
                                FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
                                FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
 );
-
 --Not implemented yet--
 --CREATE TABLE Event ()
     --CREATE TABLE DiaryQuestions ()
@@ -224,7 +218,8 @@ CREATE TABLE InfoAssets (
     TaskID BIGINT AUTO_INCREMENT PRIMARY KEY,
     TaskType VARCHAR(255),
     TaskName VARCHAR(255),
-    TaskDesc TEXT
+    TaskDesc TEXT,
+    TaskRepeatPeriod VARCHAR(100)
 );
 CREATE TABLE UserTasks (
                            UserTaskID BIGINT AUTO_INCREMENT PRIMARY KEY,
