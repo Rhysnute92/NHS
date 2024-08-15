@@ -21,6 +21,7 @@ import org.mockito.MockitoAnnotations;
 
 import uk.ac.cf.spring.nhs.Question.Model.Question;
 import uk.ac.cf.spring.nhs.Question.Repository.JpaQuestionRepo;
+import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
 
 public class QuestionServiceUnitTests {
     @Mock
@@ -34,6 +35,13 @@ public class QuestionServiceUnitTests {
         MockitoAnnotations.openMocks(this);
     }
 
+    /**
+     * Tests the getQuestionsByQuestionnaireId method of QuestionService
+     * to ensure it returns an empty list when no Questions are found for the given
+     * Questionnaire ID.
+     *
+     * @return void
+     */
     @Test
     void testGetQuestionsByQuestionnaireIdReturnsEmptyList() {
         Long questionnaireId = 1L;
@@ -46,6 +54,13 @@ public class QuestionServiceUnitTests {
         verify(questionRepository, times(1)).findByQuestionnaireId(questionnaireId);
     }
 
+    /**
+     * Tests the getQuestionsByQuestionnaireId method of QuestionService
+     * to ensure it returns a populated list when Questions are found for the given
+     * Questionnaire ID.
+     *
+     * @return void
+     */
     @Test
     void testGetQuestionsByQuestionnaireIdReturnsPopulatedList() {
         Long questionnaireId = 1L;
@@ -62,6 +77,13 @@ public class QuestionServiceUnitTests {
         verify(questionRepository, times(1)).findByQuestionnaireId(questionnaireId);
     }
 
+    /**
+     * Tests the getQuestionsByCategory method of QuestionService
+     * to ensure it returns an empty list when no Questions are found for the given
+     * category.
+     *
+     * @return void
+     */
     @Test
     void testGetQuestionsByCategoryReturnsEmptyList() {
         String category = "Function";
@@ -74,6 +96,13 @@ public class QuestionServiceUnitTests {
         verify(questionRepository, times(1)).findByQuestionCategory(category);
     }
 
+    /**
+     * Tests the getQuestionsByCategory method of QuestionService
+     * to ensure it returns a populated list when Questions are found for the given
+     * category.
+     *
+     * @return void
+     */
     @Test
     void testGetQuestionsByCategoryReturnsPopulatedList() {
         String category = "Function";
@@ -90,6 +119,13 @@ public class QuestionServiceUnitTests {
         verify(questionRepository, times(1)).findByQuestionCategory(category);
     }
 
+    /**
+     * Tests the getQuestionsByResponseType method of QuestionService
+     * to ensure it returns an empty list when no Questions are found for the given
+     * response type.
+     *
+     * @return void
+     */
     @Test
     void testGetQuestionsByResponseTypeReturnsEmptyList() {
         String responseType = "Multiple Choice";
@@ -102,6 +138,13 @@ public class QuestionServiceUnitTests {
         verify(questionRepository, times(1)).findByQuestionResponseType(responseType);
     }
 
+    /**
+     * Tests the getQuestionsByResponseType method of QuestionService
+     * to ensure it returns a populated list when Questions are found for the given
+     * response type.
+     *
+     * @return void
+     */
     @Test
     void testGetQuestionsByResponseTypeReturnsPopulatedList() {
         String responseType = "Multiple Choice";
@@ -118,17 +161,37 @@ public class QuestionServiceUnitTests {
         verify(questionRepository, times(1)).findByQuestionResponseType(responseType);
     }
 
+    /**
+     * Tests the saveQuestion method of QuestionService to ensure it correctly saves
+     * a Question.
+     *
+     * @return void
+     */
     @Test
     void testSaveQuestion() {
+        // Create a mock Questionnaire
+        Questionnaire questionnaire = new Questionnaire();
+        // Create a Question object and set the Questionnaire
         Question question = new Question();
+        question.setQuestionnaire(questionnaire);
+
+        // Mock the repository save method
         when(questionRepository.save(question)).thenReturn(question);
 
+        // Call the service method
         Question savedQuestion = questionService.saveQuestion(question);
 
+        // Verify the result
         assertNotNull(savedQuestion);
         verify(questionRepository, times(1)).save(question);
     }
 
+    /**
+     * Tests the saveQuestion method of QuestionService to ensure it throws a
+     * NullPointerException when a Question with a null questionnaire is passed.
+     *
+     * @return void
+     */
     @Test
     void testSaveQuestionWithNullQuestionnaire() {
         Question question = new Question();
@@ -141,6 +204,12 @@ public class QuestionServiceUnitTests {
         verify(questionRepository, times(0)).save(question);
     }
 
+    /**
+     * Tests the deleteQuestion method of QuestionService to ensure it correctly
+     * deletes a Question.
+     *
+     * @return void
+     */
     @Test
     void testDeleteQuestion() {
         Long questionId = 1L;
@@ -151,6 +220,12 @@ public class QuestionServiceUnitTests {
         verify(questionRepository, times(1)).deleteById(questionId);
     }
 
+    /**
+     * Tests the deleteQuestion method of QuestionService to ensure it throws an
+     * exception when a Question is not found.
+     *
+     * @return void
+     */
     @Test
     void testDeleteQuestionNotFound() {
         Long questionId = 1L;
