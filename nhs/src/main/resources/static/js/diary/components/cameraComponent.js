@@ -46,9 +46,18 @@ class CameraComponent extends HTMLElement {
             </div>
           </div>
           <div class="camera-container">
-            <video class="video" autoplay playsinline></video>
-            <div class="horizontal-line"></div>
-            <div class="vertical-line"></div>
+            <div class="video-container">
+              <select class="body-part-select">
+                <option value="none">Select body part</option>
+                <option value="head">Head</option>
+                <option value="neck">Neck</option>
+                <option value="arm">Arm</option>
+                <option value="leg">Leg</option>
+                <option value="chest">Chest</option>
+              </select>
+              <video class="video" autoplay playsinline></video>
+              <img class="camera-overlay" src="">
+            </div>
             <button type="button" class="close-camera-button">&times;</button>
             <div class="camera-controls-container">
                 <div class="camera-controls">
@@ -91,6 +100,7 @@ class CameraComponent extends HTMLElement {
         const closeCameraButton = this.shadowRoot.querySelector('.close-camera-button');
         const addPhotosButton = this.shadowRoot.querySelector('.add-photos');
         const photoInput = this.shadowRoot.querySelector('.photo-input');
+        const bodyPartSelect = this.shadowRoot.querySelector('.body-part-select');
 
         openCameraButton.addEventListener('click', this.openCamera.bind(this));
         openPhotosModalButton.addEventListener('click', this.showPhotosModal.bind(this));
@@ -100,6 +110,7 @@ class CameraComponent extends HTMLElement {
         closeCameraButton.addEventListener('click', this.closeCamera.bind(this));
         addPhotosButton.addEventListener('click', this.confirmPhotos.bind(this));
         photoInput.addEventListener('change', this.handlePhotoInput.bind(this));
+        bodyPartSelect.addEventListener('change', this.updateCameraOverlay.bind(this));
         document.addEventListener('mousedown', this.handleClickOutside.bind(this));
     }
 
@@ -196,6 +207,7 @@ class CameraComponent extends HTMLElement {
                 this.capturedPhotos.push({
                     blob: blob,
                     url: URL.createObjectURL(blob),
+                    bodyPart: this.shadowRoot.querySelector('.body-part-select').value,
                     id: null
                 });
 
@@ -217,6 +229,7 @@ class CameraComponent extends HTMLElement {
                 this.capturedPhotos.push({
                     blob: blob,
                     url: URL.createObjectURL(blob),
+                    bodyPart: null,
                     id: null
                 });
 
@@ -274,6 +287,12 @@ class CameraComponent extends HTMLElement {
 
     handleClickOutside(event) {
         // Handle clicks outside modal (optional, left for future implementation)
+    }
+
+    updateCameraOverlay() {
+        const bodyPart = this.shadowRoot.querySelector('.body-part-select').value;
+        const cameraOverlay = this.shadowRoot.querySelector('.camera-overlay');
+        cameraOverlay.src = `/images/guidelines/${bodyPart}.png`;
     }
 
     async setCss() {
