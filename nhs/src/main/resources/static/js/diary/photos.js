@@ -10,8 +10,8 @@
         const capturedPhotos = event.detail;
 
         // Append each captured photo to the form data
-        capturedPhotos.forEach((blob, index) => {
-            formData.append(`photos[${index}].file`, blob);
+        capturedPhotos.forEach((photo, index) => {
+            formData.append(`photos[${index}].file`, photo.blob);
             formData.append(`photos[${index}].bodyPart`, `Photo ${index + 1}`);
         });
 

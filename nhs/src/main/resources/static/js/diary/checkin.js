@@ -120,12 +120,8 @@
         photosContainer.innerHTML = '';
 
         // Display each captured photo in the container using a custom element
-        capturedPhotos.forEach(blob => {
+        capturedPhotos.forEach(photo => {
             let currentPhotos = JSON.parse(photosContainer.getAttribute('photos') || '[]');
-            const photo = {
-                url: URL.createObjectURL(blob),
-                id: null
-            };
 
             // Add the new photo to the array
             currentPhotos.push(photo);
@@ -142,8 +138,8 @@
         const formData = new FormData(form);
 
         // Append the captured photos to the form data
-        capturedPhotos.forEach((blob, index) => {
-            formData.append(`photos[${index}].file`, blob);
+        capturedPhotos.forEach((photo, index) => {
+            formData.append(`photos[${index}].file`, photo.blob);
             formData.append(`photos[${index}].bodyPart`, `Photo ${index + 1}`);
         });
 

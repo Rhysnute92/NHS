@@ -28,6 +28,7 @@ class CameraComponent extends HTMLElement {
                   </button>
                   <input type="file" id="photo-input" class="photo-input" accept="image/*" multiple>
                   <label for="photo-input" class="photo-label">
+                    <i class="fa-solid fa-image photo-icon"></i>
                     <span class="photo-text">From gallery</span>
                   </label> 
               </div>
@@ -189,6 +190,7 @@ class CameraComponent extends HTMLElement {
             reader.onload = (e) => {
                 const blob = new Blob([new Uint8Array(e.target.result)], { type: file.type });
                 this.capturedPhotos.push({
+                    blob: blob,
                     url: URL.createObjectURL(blob),
                     id: Date.now().toString() // Temporary ID
                 });
