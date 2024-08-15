@@ -13,7 +13,7 @@
     <div class="account-container">
         <h2 th:if="${param.success}">Successfully updated your data!</h2>
         <div th:unless="${param.success}">
-        <div th:replace="~{account/fragments/profileUpdate :: profileUpdate}"></div>
+        <div th:replace="~{account/fragments/profileUpdate}"></div>
     </div>
     </div>
     <div onclick="location.href='/account'">Back to profile</a>

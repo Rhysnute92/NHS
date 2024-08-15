@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import uk.ac.cf.spring.nhs.Account.PatientProfileDTO;
+import uk.ac.cf.spring.nhs.Account.UpdateRequest;
 import uk.ac.cf.spring.nhs.AddPatient.DTO.RegisterRequest;
 import uk.ac.cf.spring.nhs.AddPatient.Entity.Patient;
 import uk.ac.cf.spring.nhs.AddPatient.Repository.PatientRepository;
@@ -34,6 +35,10 @@ public class PatientService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public Patient findPatientbyId(long userId){
+        Patient user = patientRepository.findById(userId);
+        return user;
+    }
 
     // Generating a key for the patient
     public SecretKey generatePatientKey() throws Exception {
@@ -118,9 +123,19 @@ public class PatientService {
         return password.toString();
     }
 
-    public Patient findPatientbyId(long userId){
-        Patient user = patientRepository.findById(userId);
-        return user;
+    public void updatePatient(UpdateRequest request, Patient patient){
+        SecretKey key = decodeKey(patient.getEncryptionKey());
+        try{
+        String newTitle = request.getPatientTitle();
+        String newName = encrypt(request.getPatientName(), key);
+        String newLastName = encrypt(request.getPatientLastName(), key);
+        String newMobile = encrypt(request.getPatientMobile(), key);
+        String newEmail = encrypt(request.getPatientEmail(), key);
+        patientRepository.updatePatient(newTitle, newName, newLastName, newMobile, newEmail, patient.getUserId());
+    } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getFullname(Patient patient, SecretKey key){
