@@ -34,6 +34,6 @@ public class PatientProfileController {
     }
 
     @GetMapping("/info")
-    public String patientProfileAdmin() {return "patient/profileInfo";}
+    public String patientProfileAdmin() {return "patientprofile/profileInfo";}
     
 }
