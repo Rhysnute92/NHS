@@ -46,6 +46,10 @@ class PhotoComponent extends HTMLElement {
     }
 
     showEnlargedPhoto() {
+        // const windowWidth = window.innerWidth;
+        // const windowHeight = window.innerHeight;
+        // this.enlargedPhotoContainer.style.width = windowWidth + 'px';
+        // this.enlargedPhotoContainer.style.height = windowHeight + 'px';
         this.enlargedPhotoContainer.style.display = 'flex';
     }
 

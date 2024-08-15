@@ -20,17 +20,20 @@ class PhotoContainer extends HTMLElement {
         
         :host {
             height: 100%;
+            overflow-y: auto;
         }
    
         .photo-container {
-            background-color: var(--nhs-white);
             overflow-y: auto;
+            overflow-x: hidden;
             height: 100%;
             padding: 1rem 0;
         }
         
         .photo-grid {
+            background-color: var(--nhs-white);
             display: grid;
+            grid-auto-columns: 1fr;
             grid-template-columns: repeat(5, 1fr);
             gap: 0.5rem;
         }
@@ -59,6 +62,11 @@ class PhotoContainer extends HTMLElement {
       } catch (error) {
         console.error('Invalid JSON for photos:', error);
       }
+      if (newValue === '[]') {
+        this.photoGrid.style.display = 'none';
+      } else {
+        this.photoGrid.style.display = 'grid';
+      }
     }
   }
 
@@ -73,11 +81,18 @@ class PhotoContainer extends HTMLElement {
       } catch (error) {
         console.error('Invalid JSON for initial photos:', error);
       }
+    } else {
+        this.photoGrid.style.display = 'none';
     }
   }
 
   updatePhotos(photoObjects) {
     // Clear existing photos
+    this.photoGrid.childNodes.forEach((child) => {
+        if (!child.id) {
+          child.remove();
+        }
+      });
     this.photoGrid.innerHTML = '';
 
     // Create a photo-component for each photo object
