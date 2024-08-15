@@ -56,7 +56,7 @@ public class AccountController {
         if (success.isEmpty()){
         Object principal = authenticationFacade.getAuthentication().getPrincipal();
         Long userId = ((CustomUserDetails)principal).getUserId();
-        Patient patient = patientService.findPatientbyId(userId);
+        PatientProfileDTO patient = patientService.profile(userId);
         model.addAttribute("patient", patient);
         return "account/update";
     } else {

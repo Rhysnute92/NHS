@@ -153,14 +153,17 @@ public class PatientService {
         Patient user = findPatientbyId(userId);
         SecretKey key = decodeKey(user.getEncryptionKey());
         try{
-        String fullname = getFullname(user, key);
+        String title = user.getPatientTitle();
+        String name = decrypt(user.getPatientName(), key);
+        String lastname = decrypt(user.getPatientLastName(), key);
+        String fullname = title + " " + name + " " + lastname;
         String email = decrypt(user.getPatientEmail(), key);
         String mobile = decrypt(user.getPatientMobile(), key);
         String nhs = user.getNhsNumber();
         LocalDate dob = user.getPatientDOB();
         int age = PatientDataUtility.calculateAge(dob);
         String clinic = user.getPatientClinic();
-        PatientProfileDTO profile = new PatientProfileDTO(fullname, email, mobile, nhs, dob,age,clinic);
+        PatientProfileDTO profile = new PatientProfileDTO(fullname, title, name, lastname, email, mobile, nhs, dob,age,clinic);
         return profile;} catch (Exception e) {
             e.printStackTrace();
             return null;

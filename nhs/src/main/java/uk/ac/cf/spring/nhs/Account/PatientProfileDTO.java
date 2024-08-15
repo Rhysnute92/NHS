@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 public class PatientProfileDTO {
     private String fullName;
+    private String title;
+    private String name;
+    private String lastName;
     private String email;
     private String mobile;
     private String nhsNumber;
@@ -11,8 +14,11 @@ public class PatientProfileDTO {
     private int age;
     private String clinic;
 
-    public PatientProfileDTO(String fullname, String emailAddress, String mob, String nhs, LocalDate dob, int patientAge, String patientClininc){
+    public PatientProfileDTO(String fullname, String patientTitle, String firstname, String lastname ,String emailAddress, String mob, String nhs, LocalDate dob, int patientAge, String patientClininc){
         this.fullName = fullname;
+        this.title = patientTitle;
+        this.name = firstname;
+        this.lastName = lastname;
         this.email = emailAddress;
         this.mobile = mob;
         this.nhsNumber = nhs;
@@ -26,6 +32,24 @@ public class PatientProfileDTO {
     }
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
     public String getEmail() {
         return email;
