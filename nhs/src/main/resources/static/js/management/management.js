@@ -1,5 +1,5 @@
 import { initializeCollapsible } from "./collapsible.js";
-import { QuestionnaireManager } from "../Questionnaire/QuestionnaireManager.js";
+import { QuestionnaireManager } from "../questionnaire/QuestionnaireManager.js";
 import { fetchUserID } from "../common/utils/accountUtility.js";
 
 document.addEventListener("DOMContentLoaded", async function () {

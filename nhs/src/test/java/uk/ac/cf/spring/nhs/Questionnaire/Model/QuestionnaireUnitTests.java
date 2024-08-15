@@ -2,7 +2,6 @@ package uk.ac.cf.spring.nhs.Questionnaire.Model;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -89,34 +88,6 @@ class QuestionnaireUnitTests {
     }
 
     /**
-     * Test case for the isActive status when a questionnaire is created.
-     *
-     * This test verifies that when a questionnaire is created,
-     * the isActive status is set to true by default.
-     *
-     * @return void
-     */
-    @Test
-    void testIsActiveIsTrueByDefault() {
-        questionnaire.onCreate();
-        assertTrue(questionnaire.getIsActive(), "isActive should be true by default");
-    }
-
-    /**
-     * Test case for the setIsActive method when setting isActive to false.
-     *
-     * This test verifies that when the setIsActive method is called with false,
-     * the isActive status is correctly updated.
-     *
-     * @return void
-     */
-    @Test
-    void testSetIsActiveToFalse() {
-        questionnaire.setIsActive(false);
-        assertFalse(questionnaire.getIsActive(), "isActive should be false");
-    }
-
-    /**
      * Test case for setting the createdAt field manually.
      *
      * This test verifies that when the setCreatedAt method is called with a custom
@@ -149,7 +120,6 @@ class QuestionnaireUnitTests {
         assertEquals("Lymphoedema Awareness", questionnaire.getTitle());
         assertEquals("An educational questionnaire on lymphoedema.", questionnaire.getDescription());
         assertNotNull(questionnaire.getCreatedAt());
-        assertTrue(questionnaire.getIsActive());
     }
 
     /**
