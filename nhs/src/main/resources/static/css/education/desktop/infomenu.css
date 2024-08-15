@@ -2,14 +2,14 @@
       width: 50%;
     }
 .edmenu_list{
-      list-style-type: none;
-      background-color: #0072CE;
-      margin-left: 3vw;
-      padding: 1vh;
+      list-style-type: disclosure-closed;
+      margin-left: 10vw;
+      padding: 0 3vh 3vh;
     }
 .edmenu_item{
-      margin: 1vh;
+      margin: 3vh;
     }
 .edmenu_item a{
-    color: white;
+  font-size: large;
+    color: var(--nhs-blue);
 }
