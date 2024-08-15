@@ -15,6 +15,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.util.Base64;
 import java.util.Random;
+import java.util.UUID;
 
 @Service
 @EnableWebSecurity
@@ -28,6 +29,9 @@ public class PatientService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private EmailService emailService;
 
     // Generating a key for the patient
     public SecretKey generatePatientKey() throws Exception {
@@ -64,11 +68,15 @@ public class PatientService {
             String genericPassword = generateGenericPassword();
             String encodedPassword = passwordEncoder.encode(genericPassword);
 
+            // Generate a token for password setup
+            String passwordSetupToken = generatePasswordSetupToken();
+
             // Create UserCredentials
             UserCredentials userCredentials = new UserCredentials();
             userCredentials.setUserName(request.getPatientEmail());
             userCredentials.setUserPassword(encodedPassword);
             userCredentials.setUserRole("ROLE_PATIENT");
+            userCredentials.setPasswordSetupToken(passwordSetupToken);
             userCredentialsRepository.save(userCredentials);
 
             Long userId = userCredentials.getUserId();
@@ -87,11 +95,24 @@ public class PatientService {
             patient.setEncryptionKey(Base64.getEncoder().encodeToString(secretKey.getEncoded()));
             patientRepository.save(patient);
 
+            // Send password setup email with unencrypted email from form submission
+            sendPasswordSetupEmail(request.getPatientEmail(), passwordSetupToken);
+
             return "Patient registered successfully.";
         } catch (Exception e) {
             e.printStackTrace();
             return "An error occurred while registering the patient.";
         }
+    }
+
+    // Method to send the initial password setup email following account creation
+    private void sendPasswordSetupEmail(String email, String token) {
+        String url = "http://localhost:8080/reset-password?token=" + token;
+        String subject = "Set Your Password";
+        String text = "Dear Patient, Welcome to The University Hospitals of Derby and Burton NHS Foundation Trust Lymphoedema Services" +
+                "\n\nPlease set your new password via the link below:\n" + url + "\n\nThank you.";
+
+        emailService.sendSimpleMessage(email, subject, text);
     }
 
     // Simple generic password generator for now
@@ -103,5 +124,10 @@ public class PatientService {
             password.append(characters.charAt(random.nextInt(characters.length())));
         }
         return password.toString();
+    }
+
+    // Generate a unique token for password setup
+    private String generatePasswordSetupToken() {
+        return UUID.randomUUID().toString();
     }
 }
