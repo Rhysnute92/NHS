@@ -21,12 +21,14 @@ export class QuestionnaireRenderer {
       "Quality of Life": [],
     };
 
+    // Group questions by category
     questions.forEach((question) => {
       if (categories[question.questionCategory]) {
         categories[question.questionCategory].push(question);
       }
     });
 
+    // Render each category and its questions
     Object.keys(categories).forEach((category) => {
       if (categories[category].length > 0) {
         const categoryDiv = document.createElement("div");
@@ -45,7 +47,8 @@ export class QuestionnaireRenderer {
           questionLabel.setAttribute("for", `question_${question.questionID}`);
           questionDiv.appendChild(questionLabel);
 
-          if (question.questionResponseType === "scale") {
+          // Correctly handle "scale" type questions
+          if (question.questionResponseType.toLowerCase() === "scale") {
             const scaleContainer = document.createElement("div");
             scaleContainer.className = "scale-container";
 
@@ -78,6 +81,12 @@ export class QuestionnaireRenderer {
             scaleContainer.appendChild(rightSpan);
 
             questionDiv.appendChild(scaleContainer);
+          } else if (question.questionResponseType.toLowerCase() === "text") {
+            const textInput = document.createElement("input");
+            textInput.type = "text";
+            textInput.name = `question_${question.questionID}`;
+            textInput.id = `question_${question.questionID}`;
+            questionDiv.appendChild(textInput);
           }
 
           categoryDiv.appendChild(questionDiv);
