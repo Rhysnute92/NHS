@@ -1,63 +1,103 @@
+import { fetchData, postData } from "../common/utils/apiUtility.js";
+import { QuestionnaireRenderer } from "./QuestionnaireRenderer.js";
+
 export class QuestionnaireManager {
   constructor(containerId, noAssignmentId, userID) {
-    this.container = document.getElementById(containerId);
-    this.noAssignmentElement = document.getElementById(noAssignmentId);
+    this.containerId = containerId;
+    this.noAssignmentId = noAssignmentId;
     this.userID = userID;
-    this.apiBaseEndpoint = "/api/userQuestionnaires/user";
+    this.renderer = new QuestionnaireRenderer(
+      "questions-container",
+      "questionnaire-title",
+      "questionnaire-description"
+    );
 
-    if (!this.container) {
-      console.error(`Container element with ID "${containerId}" not found.`);
-      return;
-    }
-
-    if (!this.noAssignmentElement) {
-      console.error(
-        `No assignment element with ID "${noAssignmentId}" not found.`
-      );
-      return;
-    }
+    // Debugging information
+    console.log(`QuestionnaireManager initialized with userID: ${this.userID}`);
   }
 
   async loadAssignedQuestionnaires() {
-    const endpoint = `${this.apiBaseEndpoint}/${this.userID}/incomplete`;
+    const endpoint = `/api/userQuestionnaires/user/${this.userID}/incomplete`;
+    console.log(`Fetching assigned questionnaires from: ${endpoint}`);
+
     try {
-      const response = await fetch(endpoint);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      const questionnaires = await fetchData(endpoint);
+      console.log(`Received questionnaires: `, questionnaires);
+
+      if (!questionnaires || questionnaires.length === 0) {
+        console.warn("No assigned questionnaires found.");
       }
-      const questionnaires = await response.json();
-      console.log("Received questionnaires:", questionnaires); // Log the response
-      this.displayQuestionnaires(questionnaires);
-    } catch (error) {
-      console.error(
-        "There has been a problem with your fetch operation:",
-        error
+
+      this.renderer.renderAssignedQuestionnaires(
+        questionnaires,
+        this.containerId,
+        this.noAssignmentId
       );
+    } catch (error) {
+      console.error("Error loading assigned questionnaires:", error);
     }
   }
-  displayQuestionnaires(questionnaires) {
-    this.container.innerHTML = ""; 
 
-    if (questionnaires.length === 0) {
-      this.noAssignmentElement.style.display = "block";
-    } else {
-      this.noAssignmentElement.style.display = "none";
-      questionnaires.forEach((q) => {
-        const questionnaireId = q.questionnaire.id; // Access the ID from the nested object
-        console.log("Questionnaire ID:", questionnaireId); 
+  async loadQuestionnaire(questionnaireId) {
+    console.log(`Loading questionnaire with ID: ${questionnaireId}`);
 
-        if (questionnaireId) {
-          // Ensure ID is not undefined
-          const card = document.createElement("div");
-          card.className = "questionnaire-item";
-          card.innerHTML = `
-                    <p>You have an incomplete questionnaire. Click <a href="/questionnaire/${questionnaireId}">here</a> to complete it.</p>
-                `;
-          this.container.appendChild(card);
-        } else {
-          console.error("Questionnaire ID is undefined or invalid", q);
-        }
+    if (!questionnaireId || questionnaireId === "undefined") {
+      console.error("Invalid questionnaireId provided:", questionnaireId);
+      return;
+    }
+
+    try {
+      const questionnaire = await fetchData(
+        `/api/questionnaires/${questionnaireId}`
+      );
+      console.log("Fetched questionnaire details: ", questionnaire);
+
+      this.renderer.renderQuestionnaireDetails(questionnaire);
+
+      const questions = await fetchData(
+        `/api/questions/questionnaire/${questionnaireId}`
+      );
+      console.log("Fetched questionnaire questions: ", questions);
+
+      this.renderer.renderQuestions(questions);
+
+      await this.updateUserQuestionnaireProgress(questionnaireId);
+    } catch (error) {
+      console.error("Error loading questionnaire:", error);
+    }
+  }
+
+  async updateUserQuestionnaireProgress(questionnaireId) {
+    console.log(`Updating questionnaire progress for ID: ${questionnaireId}`);
+
+    try {
+      await postData(`/api/userQuestionnaires/${questionnaireId}`, {
+        questionnaireInProgress: true,
+        questionnaireStartDate: new Date().toISOString(),
       });
+      console.log("Questionnaire progress updated successfully.");
+    } catch (error) {
+      console.error("Error updating user questionnaire progress:", error);
+    }
+  }
+
+  async submitQuestionnaire(formData, questionnaireId) {
+    console.log(`Submitting questionnaire with ID: ${questionnaireId}`);
+
+    try {
+      const responses = {};
+      formData.forEach((value, key) => {
+        responses[key] = value;
+      });
+
+      console.log("Collected form data: ", responses);
+
+      await postData(`/api/userResponses/${questionnaireId}`, responses);
+
+      alert("Thank you for completing the questionnaire!");
+    } catch (error) {
+      console.error("Error submitting questionnaire:", error);
+      alert("An error occurred while submitting the questionnaire.");
     }
   }
 }
