@@ -23,43 +23,8 @@
 
 <!-- Container for the appointment form -->
 <div class="container-add-calendar">
-    <!-- Appointment form fields -->
     <div id="appointments">
-        <!-- Date input field -->
-        <label>Date of Appointment:<br>
-            <input type="date" id="appointmentDate"><br>
-        </label>
-
-        <!-- Time input field -->
-        <label>Time of Appointment:<br>
-            <input type="time" id="appointmentTime"><br>
-        </label>
-
-        <!-- Location input field -->
-        <label>Location of Appointment:<br>
-            <input type="text" id="appointmentLocation" placeholder="Please enter the location of your appointment"><br>
-        </label>
-
-        <!-- Appointment type input field -->
-        <label>Appointment Type:<br>
-            <input type="text" id="appointmentType" placeholder="Please enter what your appointment is for"><br>
-        </label>
-
-        <!-- Healthcare provider's name input field (optional) -->
-        <label>Healthcare Provider's Name (optional):<br>
-            <input type="text" id="dr" placeholder="Please enter the name of your healthcare provider"><br>
-        </label>
-
-        <!-- Additional information textarea -->
-        <label>Information about your Appointment:<br>
-            <textarea id="comments" placeholder="Info about your appointment"></textarea><br>
-        </label>
-
-        <!-- Button to add the appointment -->
-        <button id="addEvent" type="submit">Add</button>
-
-        <!-- Button to clear the form fields -->
-        <button id="deleteAppointment" type="reset">Clear</button>
+        <div th:replace="~{calendar/fragments/appointmentForm}"></div>
     </div>
 </div>
 
