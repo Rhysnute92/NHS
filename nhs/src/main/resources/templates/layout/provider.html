@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title layout:title-pattern="$CONTENT_TITLE"></title>
+
+  <!-- Common CSS -->
+  <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+  <link rel="stylesheet" th:href="@{/css/common/defaultLayout.css}" />
+
+  <!-- Page specific CSS -->
+  <th:block layout:fragment="css"></th:block>
+</head>
+<body>
+<div th:replace="~{common/fragments/header :: header}"></div>
+<nav th:replace="~{common/fragments/navbaradmin :: navbar}" class="nav"></nav>
+
+<div class="main-container">
+  <!-- NavMenu (if present) -->
+  <div th:if="${navMenuItems != null}" th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
+
+  <!-- Main content -->
+  <main layout:fragment="content" class="main-content">
+    <!-- Page content will be inserted here -->
+  </main>
+</div>
+
+<!-- Common JavaScript -->
+<script th:src="@{/js/common/header.js}"></script>
+
+<!-- Page specific JavaScript -->
+<th:block layout:fragment="scripts"></th:block>
+</body>
+</html>
