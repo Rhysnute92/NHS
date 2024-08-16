@@ -28,11 +28,11 @@ DROP TABLE IF EXISTS UserCredentials;
 
 --Log in information and credentials--
 CREATE TABLE UserCredentials (
-    UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    UserName VARCHAR(255),
-    UserPassword VARCHAR(255),
-    UserRole VARCHAR(255),
-    PasswordSetupToken VARCHAR(255)
+                                 UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                 UserName VARCHAR(255),
+                                 UserPassword VARCHAR(255),
+                                 UserRole VARCHAR(255),
+                                 PasswordSetupToken VARCHAR(255)
 );
 --Patient information--
 CREATE TABLE Patients (
@@ -213,21 +213,30 @@ CREATE TABLE InfoAssets (
                             FOREIGN KEY (SectionID) REFERENCES InfoSections(SectionID)
 );
 --General use--
-    CREATE TABLE Tasks (
+    CREATE TABLE Task (
     TaskID BIGINT AUTO_INCREMENT PRIMARY KEY,
     TaskType VARCHAR(255),
     TaskName VARCHAR(255),
     TaskDesc TEXT,
     TaskRepeatPeriod VARCHAR(100)
 );
-CREATE TABLE UserTasks (
-                           UserTaskID BIGINT AUTO_INCREMENT PRIMARY KEY,
-                           TaskIsCompleted BOOLEAN,
-                           TaskDuedate DATETIME,
-                           TaskIsRepeatable BOOLEAN,
-                           TaskRepeatPeriod TIMESTAMP,
-                           TaskID BIGINT,
-                           FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
+CREATE TABLE UserTask (
+                          UserTaskID INT AUTO_INCREMENT PRIMARY KEY,
+                          TaskID BIGINT,
+                          UserID BIGINT,
+                          Bitmask INT,
+                          FOREIGN KEY (TaskID) REFERENCES Task(TaskID),
+                          FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+);
+CREATE TABLE UserTaskLog (
+                             UserTaskLogID INT AUTO_INCREMENT PRIMARY KEY,
+                             UserID BIGINT,
+                             UserTaskID INT,
+                             Bitmask INT,
+                             MonthYear VARCHAR(255),
+                             CreatedAt DATETIME,
+                             FOREIGN KEY (UserTaskID) REFERENCES UserTask(UserTaskID),
+                             FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 --Not implemented yet--
 --CREATE TABLE Reminders ()

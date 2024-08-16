@@ -121,16 +121,16 @@ p {
 #apptList {
     list-style: none;
     padding: 0;
+    margin-left: 1em;
 }
 
 /* Styling for the delete event button */
-.delete-event {
+.delete-appt {
     background: rgb(237, 19, 19);
     color: white;
+    margin-left: 0.5em;
     border: none;
     cursor: pointer;
-    width: 4rem;
-    height: 2rem;
 }
 
 /* Styling for buttons in the calendar button container */

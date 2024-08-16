@@ -54,11 +54,17 @@
             <!-- Year selection dropdown -->
             <select id="year" onchange="jump()"></select>
         </div>
+        <!--    <p th:if="${appointments.empty}">No appointments scheduled yet</p>-->
+        <ul id="apptList">
+            <li data-event-id="1">
+                <p>No appointments scheduled for today</p>
+            </li>
+        </ul>
+    </div>
     </div>
     <!-- Button to add a new appointment, redirects to add appointment page -->
     <div class="moblist">
         <button onclick="location.href='/addappointment'" id="add-apt-btn" class="add-apt-btn">Add Appointment</button>
-        <button onclick="location.href='/schedule'" id="schedule" class="schedule">View Schedule</button>
     </div>
 </div>
 
