@@ -1,13 +1,24 @@
 package uk.ac.cf.spring.nhs.UserQuestionnaire.Controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import uk.ac.cf.spring.nhs.UserQuestionnaire.Model.UserQuestionnaire;
-import uk.ac.cf.spring.nhs.UserQuestionnaire.Service.UserQuestionnaireService;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
+import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
+import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
+import uk.ac.cf.spring.nhs.UserQuestionnaire.Model.UserQuestionnaire;
+import uk.ac.cf.spring.nhs.UserQuestionnaire.Service.UserQuestionnaireService;
 
 @RestController
 @RequestMapping("/api/userQuestionnaires")
@@ -15,6 +26,9 @@ public class UserQuestionnaireController {
 
     @Autowired
     private UserQuestionnaireService userQuestionnaireService;
+
+    @Autowired
+    private AuthenticationInterface authenticationFacade;
 
     /**
      * Retrieves a list of user questionnaires for a specific user.
@@ -91,14 +105,23 @@ public class UserQuestionnaireController {
     @PutMapping("/{id}")
     public ResponseEntity<UserQuestionnaire> updateUserQuestionnaire(@PathVariable Long id,
             @RequestBody UserQuestionnaire userQuestionnaire) {
+        System.out.println("Received update request for ID: " + id);
+        Object principal = authenticationFacade.getAuthentication().getPrincipal();
+        Long userID = ((CustomUserDetails) principal).getUserId();
+        System.out.println("User ID: " + userID); 
+        userQuestionnaire.setUserID(userID);
         Optional<UserQuestionnaire> existingUserQuestionnaire = userQuestionnaireService
-                .getUserQuestionnaire(userQuestionnaire.getUserID(), id);
+                .getUserQuestionnaire(userID, id);
+
         if (existingUserQuestionnaire.isPresent()) {
+            Questionnaire existingQuestionnaire = existingUserQuestionnaire.get().getQuestionnaire();
+            userQuestionnaire.setQuestionnaire(existingQuestionnaire);
             userQuestionnaire.setUserQuestionnaireId(id);
             UserQuestionnaire updatedUserQuestionnaire = userQuestionnaireService
                     .saveUserQuestionnaire(userQuestionnaire);
             return ResponseEntity.ok(updatedUserQuestionnaire);
         } else {
+            System.out.println("UserQuestionnaire not found for ID: " + id + " and user ID: " + userID);
             return ResponseEntity.notFound().build();
         }
     }

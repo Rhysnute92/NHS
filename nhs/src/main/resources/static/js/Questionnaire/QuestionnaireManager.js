@@ -1,4 +1,4 @@
-import { fetchData, postData } from "../common/utils/apiUtility.js";
+import { fetchData, postData, putData } from "../common/utils/apiUtility.js";
 import { QuestionnaireRenderer } from "./QuestionnaireRenderer.js";
 
 export class QuestionnaireManager {
@@ -71,11 +71,21 @@ export class QuestionnaireManager {
     console.log(`Updating questionnaire progress for ID: ${questionnaireId}`);
 
     try {
-      await postData(`/api/userQuestionnaires/${questionnaireId}`, {
-        questionnaireInProgress: true,
-        questionnaireStartDate: new Date().toISOString(),
-      });
-      console.log("Questionnaire progress updated successfully.");
+      const response = await putData(
+        `/api/userQuestionnaires/${questionnaireId}`,
+        {
+          questionnaireInProgress: true,
+          questionnaireStartDate: new Date().toISOString(),
+        }
+      );
+
+      if (!response) {
+        console.warn(
+          "Received empty response after updating questionnaire progress."
+        );
+      } else {
+        console.log("Questionnaire progress updated successfully.", response);
+      }
     } catch (error) {
       console.error("Error updating user questionnaire progress:", error);
     }
