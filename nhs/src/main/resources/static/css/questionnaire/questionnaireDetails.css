@@ -1,0 +1,28 @@
+/* Category Section Styling */
+.category-item {
+    margin-bottom: 2em;
+    margin-left: 1em;
+  }
+  
+  .category-item h2 {
+    font-family: var(--heading-font-family);
+    font-size: 1.75em;
+    color: var(--nhs-black);
+    border-bottom: 2px solid var(--nhs-mid-grey);
+    padding-bottom: 0.25em;
+    margin-bottom: 1em;
+  }
+  
+  canvas {
+    margin-top: 1em;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .category-item h2 {
+      font-size: 1.5em;
+    }
+  }
+  

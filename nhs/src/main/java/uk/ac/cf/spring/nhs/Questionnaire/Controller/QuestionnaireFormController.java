@@ -1,7 +1,10 @@
 package uk.ac.cf.spring.nhs.Questionnaire.Controller;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -72,11 +75,18 @@ public class QuestionnaireFormController {
         if (questionnaireOpt.isPresent()) {
             Questionnaire questionnaire = questionnaireOpt.get();
             List<UserQuestion> responses = userQuestionService.getUserQuestionsByUserQuestionnaireId(questionnaireId);
+
+            // Group responses by category
+            Map<String, List<UserQuestion>> groupedResponses = responses.stream()
+                    .collect(Collectors.groupingBy(r -> r.getQuestion().getQuestionCategory(),
+                            Collectors.collectingAndThen(Collectors.toList(),
+                                    list -> list.isEmpty() ? Collections.emptyList() : list)));
+
             model.addAttribute("questionnaire", questionnaire);
-            model.addAttribute("responses", responses);
+            model.addAttribute("groupedResponses", groupedResponses);
+            System.out.println(groupedResponses);
             return "questionnaire/questionnaireDetails";
         } else {
-            // Handle the case where the questionnaire is not found
             return "error/404";
         }
     }

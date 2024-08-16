@@ -14,33 +14,26 @@
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <div class="questionnaire-container">
-      <h1 id="questionnaire-title" th:text="${questionnaire.title} + ': Results">
+      <h1 id="questionnaire-title" th:text="${questionnaire.title}">
         Questionnaire Title
       </h1>
       <p id="questionnaire-description" th:text="${questionnaire.description}">
         Description of the questionnaire.
       </p>
 
-      <div class="submission-details">
-        <h2>Submission Details</h2>
+      <!-- Category Sections -->
+      <div th:each="category : ${groupedResponses}">
+        <h2 th:text="${category.key}">Category Name</h2>
         <ul>
-          <!-- Iterate over the user’s responses and display them -->
-          <li th:each="response : ${responses}">
+          <li th:each="response : ${category.value}">
             <strong th:text="${response.question.questionText}">
               Question Text
             </strong>
             :
             <span
-              th:if="${response.userResponseText}"
-              th:text="${response.userResponseText}"
+              th:text="${response.userResponseText != null ? response.userResponseText : response.userResponseScore}"
             >
-              User's text answer
-            </span>
-            <span
-              th:if="${response.userResponseScore != null}"
-              th:text="${response.userResponseScore}"
-            >
-              User's score
+              User's answer
             </span>
           </li>
         </ul>
