@@ -1,9 +1,9 @@
+// This class needs to be broken down into smaller chunks but it is what it is right now
 class CameraComponent extends HTMLElement {
     constructor() {
         super();
 
         this.attachShadow({ mode: 'open' });
-
 
         const template = document.createElement('template');
         template.innerHTML = `
