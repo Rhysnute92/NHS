@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>My Profile</title>
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/account/account.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+    <div th:replace="~{common/fragments/header}"></div>
+    <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+    <div class="account-container">
+    <h1 class="welcome"> Welcome to your profile!</h1>
+    <div class="personal_info">
+        <h2 class="section_title">My Details</h2>
+        <ul class="info_list">
+        <li th:inline="text">Full name: [[${patient.fullName}]]</li>
+        <li th:inline="text">NHS number: [[${patient.nhsNumber}]]</li>
+        <li th:inline="text">Email: [[${patient.email}]]</li>
+        <li th:inline="text">Phone number: [[${patient.mobile}]]</li>
+        <li th:inline="text">Date of Birth [Age]: [[${patient.dateOB}]] [ [[${patient.age}]] ]</li>
+        <li th:inline="text">Clinic: [[${patient.clinic}]]</li>
+    </ul>
+        <button type="button" class="edit_btn" onclick="location.href='/update'">Edit</button>
+    </div>
+    <div class="account_info">
+        <h2 class="section_title">Manage My Account</h2>
+        <div class="username">Username: <span th:text="${#authentication.name}">username</span></div>
+        <h3 th:if="${param.pwupdt}">Email sent to you with instructions!</h3>
+        <div th:unless="${param.pwupdt}">
+            <h3>To change password please provide email</h3>
+            <form action="/resetrequest" method="post">
+                <input type="text" name="email" th:value="${patient.email}" class="email"/>
+                <input type="submit" value="Change password" class="pass_btn"/>
+            </form>
+    </div>
+    </div>
+    <form th:action="@{/logout}" method="post" class="logout">
+        <input type="submit" class="logout-button" value="LOG OUT"/>
+    </form>
+</div>
+<script th:src="@{/js/common/header.js}"></script>
+</body>
+</html>

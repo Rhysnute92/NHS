@@ -1,18 +1,53 @@
-h1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.welcome {
+    flex: auto;
     text-align: center;
     margin: 2rem;
     color: #005EB8;
+    width:100%
 }
 .account-container {
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
 }
+.personal_info{
+    margin: auto;
+    width: 60%;
+}
+.account_info{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    background: var(--nhs-mid-grey);
+}
+.info_list{
+    list-style: none;
+    padding: 0 15%;
+    text-align: justify;
+}
+
+.email{
+    width: 80%;
+    margin: 1vh;
+    font-size: x-large;
+}
+
+.edit_btn{
+    font-size: large;
+}
+.pass_btn{
+    margin: 1vh;
+    font-size: large;
+}
+.logout{
+    flex: auto;
+}
+
 .logout-button {
     font-weight: 600;
     transition:all 300ms ease;
     padding: 1rem;
+    margin: 5vh;
     width: 8rem;
     border-radius: 1rem;
     background-color: #005EB8;
@@ -23,4 +58,17 @@ h1 {
 .logout-button:hover {
     background-color: #003087;
 
+}
+
+@media screen and (max-device-width: 768px){
+    .personal_info{
+        width: 100%;
+    }
+    .account_info{
+        width: 100%;
+        margin-top: 5vh;
+        margin-left: auto;
+        margin-right: auto;
+        background: var(--nhs-mid-grey);
+    }
 }

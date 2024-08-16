@@ -1,5 +1,8 @@
 package uk.ac.cf.spring.nhs.AddPatient.Entity;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import org.hibernate.annotations.DynamicUpdate;
 import jakarta.persistence.*;
 import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentials;
@@ -19,7 +22,7 @@ public class Patient {
     @Column(name = "NHSNumber", unique = true, nullable = false)
     private String nhsNumber;
     @Column(name = "PatientDOB")
-    private String patientDOB;
+    private LocalDate patientDOB;
     @Column(name = "PatientName")
     private String patientName;
     @Column(name = "PatientLastName")
@@ -60,10 +63,10 @@ public class Patient {
     public void setNhsNumber(String nhsNumber) {
         this.nhsNumber = nhsNumber;
     }
-    public String getPatientDOB() {
+    public LocalDate getPatientDOB() {
         return patientDOB;
     }
-    public void setPatientDOB(String patientDOB) {
+    public void setPatientDOB(LocalDate patientDOB) {
         this.patientDOB = patientDOB;
     }
     public String getPatientName() {
