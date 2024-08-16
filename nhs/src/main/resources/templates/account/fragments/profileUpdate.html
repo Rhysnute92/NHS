@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<form th:fragment="profileUpdate" action="/updatePatient" method="post">
+<form th:fragment="profileUpdate" action="/updatePatient" method="post" class="update_form">
+    <label for="patientTitle">Title:</label><br>
     <input type="text" name="patientTitle" th:value="${patient.title}"/>
+    <br><label for="patientName">First name:</label><br>
     <input type="text" name="patientName" th:value="${patient.name}"/>
+    <br><label for="patientLastName">Last name:</label><br>
     <input type="text" name="patientLastName" th:value="${patient.lastName}"/>
+    <br><label for="patientMobile">Mobile number:</label><br>
     <input type="text" name="patientMobile" th:value="${patient.mobile}"/>
+    <br><label for="patientEmail">Email:</label><br>
     <input type="text" name="patientEmail" th:value="${patient.email}"/>
     <br>
     <input type="submit" value="Update" class="update_button"/>

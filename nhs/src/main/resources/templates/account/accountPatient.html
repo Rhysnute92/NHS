@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-<div class="container">
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <div class="account-container">
@@ -31,7 +30,7 @@
         <div th:unless="${param.pwupdt}">
             <h3>To change password please provide email</h3>
             <form action="/resetrequest" method="post">
-                <input type="text" name="email" th:value="${patient.email}"/>
+                <input type="text" name="email" th:value="${patient.email}" class="email"/>
                 <input type="submit" value="Change password" class="pass_btn"/>
             </form>
     </div>
@@ -39,7 +38,6 @@
     <form th:action="@{/logout}" method="post" class="logout">
         <input type="submit" class="logout-button" value="LOG OUT"/>
     </form>
-</div>
 </div>
 <script th:src="@{/js/common/header.js}"></script>
 </body>

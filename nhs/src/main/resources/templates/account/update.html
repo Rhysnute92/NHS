@@ -3,11 +3,10 @@
 <head>
     <title>Update</title>
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
-    <link rel="stylesheet" th:href="@{/css/account/account.css}" />
+    <link rel="stylesheet" th:href="@{/css/account/update.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-<div class="container">
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <div class="account-container">
@@ -16,8 +15,7 @@
         <div th:replace="~{account/fragments/profileUpdate}"></div>
     </div>
     </div>
-    <div onclick="location.href='/account'">Back to profile</a>
-</div>
+    <div class="back" onclick="location.href='/account'">Back to profile</a>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>
