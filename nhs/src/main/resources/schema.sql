@@ -1,6 +1,3 @@
-DROP DATABASE IF EXISTS nhs;
-CREATE DATABASE nhs;
-USE nhs;
 -- Drop all tables for testing purposes
 Drop TABLE IF EXISTS UserTaskLog;
 DROP TABLE IF EXISTS UserTask;
