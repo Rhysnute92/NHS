@@ -10,6 +10,12 @@ import org.springframework.stereotype.Repository;
 public interface UserCredentialsRepository extends JpaRepository<UserCredentials, Long> {
     UserCredentials findByUserName(String name);
     UserCredentials findByPasswordSetupToken(String passwordSetupToken);
+
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
+    @Transactional
+    @Query("update UserCredentials u set u.passwordSetupToken = :token where u.userId = :id")
+    void addPasswordToken(@Param("token") String token, @Param("id") Long id);
+
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Transactional
     @Query("update UserCredentials u set u.userPassword = :pass, u.passwordSetupToken = :token where u.userId = :id")
