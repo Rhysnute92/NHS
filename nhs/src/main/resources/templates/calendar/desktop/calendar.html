@@ -1,34 +1,103 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Appointment Calendar</title>
+  <!-- Title of the webpage -->
+  <title>Calendar</title>
+  <!-- Link to the desktop calendar-specific CSS file -->
   <link rel="stylesheet" th:href="@{/css/calendar/desktop/calendar.css}"/>
+  <!-- Link to common CSS styles -->
   <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
+  <!-- Ensure responsive design with the viewport meta tag -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
+<!-- Include header fragment -->
 <div th:replace="~{common/fragments/header}"></div>
+<!-- Include navbar fragment -->
 <nav th:replace="~{common/fragments/navbar}"></nav>
+
+<!-- Main header section with title and subtitle -->
 <div id="header">
   <h1>Appointment Calendar</h1>
-  <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
+  <p>Overview of Lymphoedema and other hospital appointments</p>
 </div>
+
+<!-- Main container for the calendar and appointment list -->
 <div class="container-calendar">
-  <div id="left">
-    <div id="appointments">
-      <h3>Add Appointment</h3>
-      <form th:replace="~{calendar/fragments/appointmentForm}"></form>
+  <!-- Modal container -->
+  <div id="myModel" class="model">
+    <!-- Close button for the modal -->
+    <span class="popup-close">&times;</span>
+    <!-- Modal content box -->
+    <div class="modelContent">
+      <div th:replace="~{calendar/fragments/appointmentForm}"></div>
+
     </div>
   </div>
-
-  <div id="center">
+  <!-- Left section for displaying the appointment schedule -->
+  <div id="left">
     <h3>Appointment Schedule</h3>
+    <!-- Button to open the modal -->
+    <button id="openaddappt">Add Appointment</button>
     <ul id="apptList">
+      <li class="no-appointments">
+        <p th:if="${appointments.isEmpty()}">No appointments scheduled yet</p>
+      </li>
+      <li th:each="appointment: ${appointments}" class="appt-item">
+        <strong th:text="${appointment.apptType}"></strong> -
+        <span th:text="${appointment.apptInfo}"></span>
+        on
+        <span th:text="${#temporals.format(appointment.apptDateTime, 'MM/dd/yyyy')}"></span>
+        at
+        <span th:text="${#temporals.format(appointment.apptDateTime, 'hh:mm a')}"></span>
+        <button class="delete-appt" th:onclick="deleteAppointment([[${appointment.apptID}]])">Delete</button>
+      </li>
     </ul>
   </div>
-  <div id="right" th:insert="~{calendar/fragments/calendar}"></div>
+  <!-- Center section for displaying the calendar -->
+  <div id="center">
+    <!-- Display the current month and year -->
+    <h3 id="monthAndYear"></h3>
+    <!-- Navigation buttons for previous and next months -->
+    <div class="button-container-calendar">
+      <button id="previous" onclick="previous()"> &lt; </button>
+      <button id="next" onclick="next()"> &gt; </button>
+    </div>
+    <!-- Table structure for the calendar -->
+    <table class="table-calendar" id="calendar" data-lang="en">
+      <thead id="thead-month"></thead> <!-- Table header for days of the week -->
+      <tbody id="calendar-body"></tbody> <!-- Table body for the dates -->
+    </table>
+    <!-- Footer section with dropdowns for jumping to a specific month or year -->
+    <div class="footer-container-calendar">
+      <label for="month">Jump To: </label>
+      <select id="month" onchange="jump()">
+        <!-- Options for each month -->
+        <option value=0>Jan</option>
+        <option value=1>Feb</option>
+        <option value=2>Mar</option>
+        <option value=3>Apr</option>
+        <option value=4>May</option>
+        <option value=5>Jun</option>
+        <option value=6>Jul</option>
+        <option value=7>Aug</option>
+        <option value=8>Sep</option>
+        <option value=9>Oct</option>
+        <option value=10>Nov</option>
+        <option value=11>Dec</option>
+      </select>
+      <!-- Dropdown for selecting a year -->
+      <select id="year" onchange="jump()"></select>
+    </div>
+  </div>
+  <div id="toast" class="toast">
+    <div class="toast-message">Your appointment has been booked successfully!</div>
+  </div>
 </div>
+<!-- Include JavaScript files for calendar functionality -->
 <script th:src="@{/js/calendar/calendar.js}"></script>
+<script th:src="@{js/calendar/addAppointment.js}"></script>
+<script th:src="@{js/calendar/appointment.js}"></script>
+<script th:src="@{js/calendar/deleteAppointment.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>

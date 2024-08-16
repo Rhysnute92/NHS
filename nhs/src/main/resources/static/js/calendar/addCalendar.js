@@ -1,5 +1,3 @@
-// calendar.js
-
 // Initialize variables for the current date, month, and year
 let today = new Date();
 let currentMonth = today.getMonth();
@@ -12,6 +10,9 @@ const selectMonth = document.getElementById("month");
 // Array of month names and day names
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+// Appointments data
+let appointments = [];
 
 // Get references to the calendar and the month/year display
 const monthAndYear = document.getElementById("monthAndYear");
@@ -120,7 +121,7 @@ function createAppointmentTooltips(date, month, year) {
 // Function to get appointments on a specific date
 function getAppointmentsOnDate(date, month, year) {
     return appointments.filter(appointment => {
-        let apptDate = new Date(appointment.apptDateTime); // Convert the appointment date to a Date object
+        let apptDate = new Date(appointment.date); // Convert the appointment date to a Date object
         return apptDate.getDate() === date && apptDate.getMonth() === month && apptDate.getFullYear() === year; // Check if the date matches
     });
 }
@@ -135,11 +136,35 @@ function daysInMonth(month, year) {
     return 32 - new Date(year, month, 32).getDate(); // Return the number of days in the month
 }
 
+// Handle form submission
+document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get form values
+    const date = new Date(document.getElementById('apptDate').value);
+    const time = document.getElementById('apptTime').value;
+    const location = document.getElementById('apptLocation').value;
+    const type = document.getElementById('apptType').value;
+
+    // Create an appointment object
+    const appointment = {
+        date: date.toISOString().split('T')[0], // Format date as YYYY-MM-DD
+        time: time,
+        location: location,
+        apptType: type
+    };
+
+    // Add appointment to the appointments array
+    appointments.push(appointment);
+
+    // Update the calendar to show the new appointment
+    showCalendar(currentMonth, currentYear);
+
+    // Clear the form
+    document.getElementById('appointmentForm').reset();
+});
+
 // Show the calendar when the DOM content is loaded
 document.addEventListener("DOMContentLoaded", function () {
     showCalendar(currentMonth, currentYear);
-
-
-
 });
-

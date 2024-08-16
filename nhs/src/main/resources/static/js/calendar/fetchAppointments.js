@@ -11,6 +11,3 @@ async function fetchAppointments(calendarId) {
         console.error('There was a problem with the fetch operation:', error);
     }
 }
-
-// Example 
-fetchAppointments(1);
