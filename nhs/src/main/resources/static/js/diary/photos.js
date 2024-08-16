@@ -1,8 +1,41 @@
-const form = document.querySelector('.photo-form');
-const input = document.querySelector('.photo-upload');
+(function () {
+    const photoCaptureElement = document.querySelector('camera-component');
+    const photosContainer = document.querySelector('photo-container');
 
-input.addEventListener('change', updateImageDisplay);
+    photoCaptureElement.addEventListener('photos-confirmed', function(event) {
+        const form = document.querySelector('.photos-form');
 
-function updateImageDisplay() {
-    form.submit();
-}
+        const formData = new FormData(form);
+
+        const capturedPhotos = event.detail;
+
+        // Append each captured photo to the form data
+        capturedPhotos.forEach((photo, index) => {
+            formData.append(`photos[${index}].file`, photo.blob);
+            formData.append(`photos[${index}].bodyPart`, photo.bodyPart);
+        });
+
+        // Send the form data to the server
+        fetch('/diary/photos', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(photos => {
+                console.log(photos);
+                photos.forEach(photo => {
+                    let currentPhotos = JSON.parse(photosContainer.getAttribute('photos') || '[]');
+
+                    // Add the new photo to the array
+                    currentPhotos.push(photo);
+
+                    // Update the photos attribute with the new array
+                    photosContainer.setAttribute('photos', JSON.stringify(currentPhotos));
+                });
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('An error occurred while submitting the form. Please try again.');
+            });
+    });
+})();
