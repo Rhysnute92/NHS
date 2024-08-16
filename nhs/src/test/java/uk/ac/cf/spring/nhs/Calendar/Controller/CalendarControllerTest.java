@@ -29,34 +29,22 @@ public class CalendarControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    /**
-     * Setup security before each test
-     */
     @Before
     public void setup() {
         this.mockMvc = webAppContextSetup(context)
         .apply(springSecurity())
         .build();
     }
-
-    /**
-     * Test to check if calendar works on mobile devices
-     * @throws Exception
-     */
     @Test
     @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
     public void testCalendarForMobile() throws Exception {
-        mockMvc.perform(get("/addappointment")
+        mockMvc.perform(get("/calendar/mobileaddappt")
                         .header("User-Agent",
                                 "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("calendar/mobile/addappointment"));
     }
 
-    /**
-     * Test to check that the calendar works on desktop
-     * @throws Exception
-     */
     @Test
     @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
     public void testCalendarForDesktop() throws Exception {
