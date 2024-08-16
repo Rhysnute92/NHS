@@ -8,7 +8,7 @@
 <body>
 <div class="container">
     <header th:replace="~{common/fragments/header}"></header>
-    <h1>Patient Registration</h1>
+    <h1 id="registration">Patient Registration</h1>
     <form action="/api/register" id="register" method="post">
         <label for="patientName">Patient Name:</label>
         <input type="text" id="patientName" name="patientName" required>
