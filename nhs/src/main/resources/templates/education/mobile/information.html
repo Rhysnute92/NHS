@@ -9,22 +9,47 @@
   <body>
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-    <div th:replace="~{education/fragments/mobile/mobileinfomenu :: mobileinfomenu}"></div>
-      <div class="container">
-        <h2 class="title">What is Lymphedema?</h2>
-        <p>Here is a text about what this condition is.</p>
-        <h2 class="title">Causes of lymphedema</h2>
-        <h3 class="subtitle">Primary</h3>
-        <p>Here is a text about causes of primary lymphedema.</p>
-        <h3 class="subtitle">Secondary</h3>
-        <p>Here is a text about causes of secondary lymphedema.</p>
-        <h4 class="subsection">Cause A</h4>
-        <p>Here is a text about cause A.</p>
-        <div class="section_nav">
-          <a th:href="@{/cellulitis}" class="section_link">Cellulitis &rarr;</a>
-        </div>
+    <div th:if="${navMenuItems != null}" th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
+    <div class="container_m">
+      <h2 class="title">What is Lymphoedema?</h2>
+      <p>Lymphoedema is a term used to describe tissue swelling due to an accumulation of fluid. It 
+        mainly affects arms or legs but can also occur in the face and trunk.</p>
+      <h2 class="title">Causes of lymphoedema</h1>
+      <p>Small blood vessels in your skin constantly leak fluid into the tissues to nourish them. This 
+        fluid is collected by small lymph vessels which lie near the skin's surface. From here the 
+        fluid moves into deeper vessels through lymph nodes or glands, finally draining into the 
+        bloodstream at the neck, eventually being passed out of the body in urine.</p>
+      <p>If part of the lymphatic system becomes damaged or blocked, fluid cannot drain effectively 
+        and can build up, causing swelling.</p>
+      <p>The system can be damaged by infection, injury, surgery or radiotherapy. A blockage can 
+        be due to scarring or disease. Some people are also born without sufficient lymphatics, so the system cannot work effectively.</p>
+        <h2 class="title">Can it be cured?</h2>
+      <p>The lymphatic system cannot be repaired, so any damage to it will be permanent.</p>
+      <p>Though lymphoedema cannot be cured, it can be controlled. The aim of treatment is to 
+        improve fluid drainage, thereby reducing the swelling and keeping it under control.</p>
+      <p>You can find out more about various options for improving your symptoms in the Treatments section.</p>
+      <h2 class="title">Aches and Pains</h2>
+      <p>It is quite typical to experience some aches and pains with lymphoedema, such as a feeling 
+        of tightness or heaviness in the limb. You may sometimes experience a deep ache in the 
+        muscles of the limb.</p>
+      <div class="important_info">
+        <div class="important_info_header">Attention</div>
+        <p>The following are not usually caused by a swollen limb:</p>
+        <ul class="important_info_list">
+          <li>Numbness or tingling in the limb</li>
+          <li>Sharp shooting pains</li>
+          <li>Burning sensation</li>
+          <li>Extreme tenderness</li>
+          <li>Weakness or loss of grip</li>
+        </ul>
+        <p>If you experience any of these, it is advisable to consult your GP or hospital doctor.</p> 
+        <p>Also, if any part or all of your swollen limb becomes hot, red, painful and more swollen and you feel generally unwell as if you have Flu - contact your GP as this may indicate an infection.</p>
       </div>
-      <div class="spacer">&nbsp;</div>
+    </div>
+    <div class="section_nav">
+      <a th:href="@{/cellulitis}" class="section_link_r">Cellulitis &rarr;</a>
+    </div>
+    <div class="spacer">&nbsp;</div>
       <script th:src="@{/js/common/header.js}"></script>
       <script th:src="@{/js/education/mobile/mbinfomenu.js}"></script>
   </body>

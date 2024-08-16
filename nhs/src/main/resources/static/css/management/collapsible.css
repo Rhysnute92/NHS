@@ -23,7 +23,7 @@
 }
 
 .collapsible-content.expanded {
-  max-height: 1000px; /* Large value to allow for smooth expansion */
+  max-height: 1000vh; /* Large value to allow for smooth expansion */
 }
 
 .collapsible-header.expanded::after {
