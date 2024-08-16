@@ -3,6 +3,7 @@
     text-align: center;
     margin: 2rem;
     color: #005EB8;
+    width:100%
 }
 .account-container {
     text-align: center;
@@ -23,6 +24,9 @@
     list-style: none;
     padding: 0 15%;
     text-align: justify;
+}
+.pass_btn{
+    margin: 1vh;
 }
 .logout{
     flex: auto;

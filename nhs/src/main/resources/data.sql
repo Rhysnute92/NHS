@@ -10,6 +10,10 @@ VALUES
 ('tUR2SzL4c4rM5vYyYV+qsw==', 'RaAr3fuWzhPBFnKFxkkcew==', '12345678', '1969-06-09', '4xLXfYk4oPqqdLVhpNfkpQ==', 
 '/hnIldHqwWhUyQshrXH1bw==', 'Lord', 'Sherwood Forrest Hospitals', '2', 'xlHXWQORPy97Go4sJsrY+XNNEx59m/NaDZ7K7OOuEVY=');
 
+INSERT INTO Providers (ProviderFirstName, ProviderLastName, ProviderTitle, ProviderOccupation, UserID)
+VALUES
+('Jane', 'Doe', 'Mrs', 'Nurse', 3);
+
 INSERT INTO UserWidgets (UserID, WidgetName, Position)
 VALUES (2, 'task-completion', 1);
 
