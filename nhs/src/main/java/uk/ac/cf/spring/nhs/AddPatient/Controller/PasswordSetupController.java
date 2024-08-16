@@ -46,7 +46,7 @@ public class PasswordSetupController {
 
         if (userCredentials == null) {
             System.out.println("No user found with token: " + token);
-            model.addAttribute("error", "Invalid token.");
+            model.addAttribute("error", "Expired Link.");
             return "login/desktop/resetPassword";
         }
 
@@ -57,8 +57,7 @@ public class PasswordSetupController {
 
         // Basic debugging statements to make sure the password is reset and the associated userId
         System.out.println("Password reset for userId: " + userCredentials.getUserId());
-        model.addAttribute("message", "Password set successfully.");
-        return "admin/desktop/success";
+        return "login/desktop/login";
     }
 }
 
