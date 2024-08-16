@@ -102,6 +102,25 @@ export class QuestionnaireManager {
     }
   }
 
+  async saveQuestionnaire(formData, questionnaireId) {
+    console.log(`Saving form data for questionnaire ID: ${questionnaireId}`);
+
+    const responses = {};
+    formData.forEach((value, key) => {
+      responses[key.replace("question_", "")] = value;
+    });
+
+    try {
+      await postData(`/api/userQuestionnaires/save/${questionnaireId}`, responses);
+      alert(
+        "Your responses have been saved. You can return later to complete the questionnaire."
+      );
+    } catch (error) {
+      console.error("Error saving form data:", error);
+      alert("An error occurred while saving your responses.");
+    }
+  }
+
   async submitQuestionnaire(event) {
     event.preventDefault(); // Prevent the default form submission behavior
 

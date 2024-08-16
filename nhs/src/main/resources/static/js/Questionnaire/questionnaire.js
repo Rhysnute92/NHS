@@ -20,4 +20,13 @@ document.addEventListener("DOMContentLoaded", async function () {
       const formData = new FormData(event.target);
       await questionnaireManager.submitQuestionnaire(formData, questionnaireId);
     });
+    
+  document
+    .getElementById("save-questionnaire")
+    .addEventListener("click", async function () {
+      const formData = new FormData(
+        document.getElementById("questionnaire-form")
+      );
+      await questionnaireManager.saveQuestionnaire(formData, questionnaireId);
+    });
 });

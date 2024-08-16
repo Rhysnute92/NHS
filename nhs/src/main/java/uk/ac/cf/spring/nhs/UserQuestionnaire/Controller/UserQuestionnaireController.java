@@ -1,9 +1,11 @@
 package uk.ac.cf.spring.nhs.UserQuestionnaire.Controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
+import uk.ac.cf.spring.nhs.UserQuestion.Service.UserQuestionService;
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Model.UserQuestionnaire;
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Service.UserQuestionnaireService;
 
@@ -29,6 +32,9 @@ public class UserQuestionnaireController {
 
     @Autowired
     private AuthenticationInterface authenticationFacade;
+
+    @Autowired
+    private UserQuestionService userQuestionService;
 
     /**
      * Retrieves a list of user questionnaires for a specific user.
@@ -108,7 +114,7 @@ public class UserQuestionnaireController {
         System.out.println("Received update request for ID: " + id);
         Object principal = authenticationFacade.getAuthentication().getPrincipal();
         Long userID = ((CustomUserDetails) principal).getUserId();
-        System.out.println("User ID: " + userID); 
+        System.out.println("User ID: " + userID);
         userQuestionnaire.setUserID(userID);
         Optional<UserQuestionnaire> existingUserQuestionnaire = userQuestionnaireService
                 .getUserQuestionnaire(userID, id);
@@ -140,6 +146,26 @@ public class UserQuestionnaireController {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    /**
+     * Handles the saving of user responses for a specific questionnaire without
+     * marking it as complete.
+     *
+     * @param questionnaireId the ID of the questionnaire being saved
+     * @param responses       a map of question IDs to user responses
+     * @return a ResponseEntity indicating the result of the operation
+     */
+    @PostMapping("/save/{questionnaireId}")
+    public ResponseEntity<?> saveUserQuestions(
+            @PathVariable Long questionnaireId,
+            @RequestBody Map<String, String> responses) {
+        try {
+            userQuestionService.saveResponsesWithoutCompletion(questionnaireId, responses);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving responses");
         }
     }
 }

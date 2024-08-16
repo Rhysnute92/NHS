@@ -127,4 +127,46 @@ public class UserQuestionService {
         userQuestionnaire.setQuestionnaireCompletionDate(LocalDateTime.now());
         userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire); // Use the service to save
     }
+
+    /**
+     * Saves user responses for a given questionnaire without marking it as complete.
+     *
+     * @param userQuestionnaireId the ID of the user questionnaire being saved
+     * @param responses           a map of question IDs to user responses
+     */
+    public void saveResponsesWithoutCompletion(Long userQuestionnaireId, Map<String, String> responses) {
+        Object principal = authenticationFacade.getAuthentication().getPrincipal();
+        Long userId = ((CustomUserDetails) principal).getUserId();
+        Optional<UserQuestionnaire> userQuestionnaireOpt = userQuestionnaireService
+                .getUserQuestionnaire(userId, userQuestionnaireId);
+        if (!userQuestionnaireOpt.isPresent()) {
+            throw new IllegalArgumentException("Invalid user questionnaire ID");
+        }
+        UserQuestionnaire userQuestionnaire = userQuestionnaireOpt.get();
+
+        // Save each response
+        responses.forEach((questionIdStr, answer) -> {
+            Long questionId = Long.parseLong(questionIdStr);
+            UserQuestion userQuestion = new UserQuestion();
+            userQuestion.setUserQuestionnaire(userQuestionnaire);
+
+            Question question = new Question();
+            question.setQuestionID(questionId);
+            userQuestion.setQuestion(question);
+
+            // Determine if the answer is a text or a score response
+            try {
+                Integer score = Integer.parseInt(answer);
+                userQuestion.setUserResponseScore(score);
+            } catch (NumberFormatException e) {
+                userQuestion.setUserResponseText(answer);
+            }
+
+            userQuestion.setResponseDateTime(LocalDateTime.now());
+            userQuestionRepository.save(userQuestion);
+        });
+
+        // Do not mark the questionnaire as completed
+        userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
+    }
 }
