@@ -32,7 +32,8 @@ CREATE TABLE UserCredentials (
     UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
     UserName VARCHAR(255),
     UserPassword VARCHAR(255),
-    UserRole VARCHAR(255)
+    UserRole VARCHAR(255),
+    PasswordSetupToken VARCHAR(255)
 );
 --Patient information--
 CREATE TABLE Patients (
