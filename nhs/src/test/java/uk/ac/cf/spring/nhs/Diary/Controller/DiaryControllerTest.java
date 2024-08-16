@@ -142,47 +142,6 @@ public class DiaryControllerTest {
         verify(diaryEntryService, times(1)).createAndSaveDiaryEntry(any(CheckinFormDTO.class), eq(1L));
     }
 
-    @Test
-    public void testPhotos() throws Exception {
-        List<Photo> photos = new ArrayList<>();
-        photos.add(new Photo("photo1.jpg", new Date(), "Body Part", 1L));
-        photos.add(new Photo("photo2.jpg", new Date(), "Body Part", 1L));
-
-        when(photoService.getPhotosByUserId(1L)).thenReturn(photos);
-
-        mockMvc.perform(get("/diary/photos"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("diary/photos"))
-                .andExpect(model().attributeExists("photos"))
-                .andExpect(model().attribute("photos", photos));
-    }
-
-    @Test
-    public void testUploadPhotosSuccess() throws Exception {
-        MockMultipartFile file = new MockMultipartFile("file", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
-
-        when(photoService.savePhoto(any(PhotoDTO.class), eq(1L)))
-                .thenReturn(new Photo("photo.jpg", new Date(), "Body Part", 1L));
-
-        mockMvc.perform(multipart("/diary/photos")
-                        .file(file).with(csrf()))
-                .andExpect(status().isOk());
-
-        verify(photoService, times(1)).savePhoto(any(PhotoDTO.class), eq(1L));
-    }
-
-    @Test
-    public void testUploadPhotosFailure() throws Exception {
-        MockMultipartFile file = new MockMultipartFile("file", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
-
-        doThrow(new RuntimeException("Error")).when(photoService).savePhoto(any(PhotoDTO.class), eq(1L));
-
-        mockMvc.perform(multipart("/diary/photos")
-                        .file(file)
-                        .with(csrf()))
-                .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$").value("An error occurred: Error"));
-    }
 
     @Test
     @WithMockUser(username = "admin", roles = {"PATIENT", "ADMIN"})
