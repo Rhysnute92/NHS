@@ -1,0 +1,201 @@
+.questionnaire-container {
+  padding: 2em;
+  border-radius: 8px;
+  text-align: left;
+}
+
+#questionnaire-title {
+  /* font-family: var(--regular-font-family); */
+  font-size: 2em;
+  font-weight: bold;
+  /* color: var(--nhs-black); */
+  margin-bottom: 0.5em;
+  text-align: left;
+}
+
+#questionnaire-description {
+  /* font-family: var(--light-font-family); */
+  font-size: 1.25em;
+  color: var(--nhs-dark-grey);
+  margin-bottom: 1em;
+  text-align: left;
+  /* line-height: 1.5; */
+}
+
+/* Category Styling */
+.category-item {
+  margin-bottom: 2em;
+  margin-left: 1em;
+}
+
+.category-item h3 {
+  font-family: var(--heading-font-family);
+  font-size: 1.75em;
+  color: var(--nhs-black); /* Changed to black */
+  border-bottom: 2px solid var(--nhs-mid-grey); /* Changed to a more subtle grey */
+  padding-bottom: 0.25em;
+  margin-bottom: 1em;
+}
+
+/* Question Styling */
+.question-item {
+  margin-bottom: 1.5em;
+  padding: 1em 0;
+}
+
+.question-item label {
+  font-family: var(--regular-font-family);
+  font-size: 1.125em;
+  color: var(--nhs-black);
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+/* Scale Question Styling */
+.scale-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Spread out the radio buttons */
+  margin-bottom: 1.5em;
+  padding: 0 1em;
+}
+
+.radio-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.number-label {
+  font-family: var(--regular-font-family);
+  font-size: 0.9em;
+  color: var(--nhs-dark-grey);
+  margin-bottom: 0.5em;
+}
+
+.scale-container input[type="radio"] {
+  margin: 0;
+  width: 1.5em; /* Increase the size of the radio buttons */
+  height: 1.5em;
+  cursor: pointer;
+  border: 2px solid var(--nhs-mid-grey);
+  border-radius: 50%;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  appearance: none; /* Remove default radio appearance */
+  background-color: var(--nhs-white);
+}
+
+.scale-container input[type="radio"]:hover {
+  border-color: var(--nhs-dark-grey);
+}
+
+.scale-container input[type="radio"]:hover:nth-of-type(1) {
+  border-color: #d32f2f; /* Red */
+}
+
+.scale-container input[type="radio"]:hover:nth-of-type(2) {
+  border-color: #f57c00; /* Orange */
+}
+
+.scale-container input[type="radio"]:hover:nth-of-type(3) {
+  border-color: #fbc02d; /* Yellow */
+}
+
+.scale-container input[type="radio"]:hover:nth-of-type(4) {
+  border-color: #388e3c; /* Green */
+}
+
+.scale-container input[type="radio"]:checked {
+  background-color: var(--nhs-blue); /* Default selected background color */
+  border-color: var(--nhs-blue);
+}
+
+.scale-container input[type="radio"]:checked:nth-of-type(1) {
+  background-color: #d32f2f;
+  border-color: #d32f2f;
+}
+
+.scale-container input[type="radio"]:checked:nth-of-type(2) {
+  background-color: #f57c00;
+  border-color: #f57c00;
+}
+
+.scale-container input[type="radio"]:checked:nth-of-type(3) {
+  background-color: #fbc02d;
+  border-color: #fbc02d;
+}
+
+.scale-container input[type="radio"]:checked:nth-of-type(4) {
+  background-color: #388e3c;
+  border-color: #388e3c;
+}
+
+/* Additional hover effect */
+.scale-container input[type="radio"]:hover {
+  border-width: 3px;
+}
+
+/* Text Question Styling */
+.question-item input[type="text"] {
+  width: 100%;
+  padding: 0.75em;
+  font-size: 1em;
+  font-family: var(--regular-font-family);
+  color: var(--nhs-black);
+  border: 1px solid var(--nhs-mid-grey);
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.question-item input[type="text"]:focus {
+  border-color: var(--nhs-blue);
+  outline: none;
+}
+
+/* Submit Button Styling */
+#submit-questionnaire {
+  display: block;
+  width: 100%;
+  padding: 1em;
+  font-size: 1.25em;
+  font-family: var(--heading-font-family);
+  color: var(--nhs-white);
+  background-color: var(--nhs-blue);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  margin-top: 2em;
+}
+
+#submit-questionnaire:hover {
+  background-color: var(--nhs-dark-blue);
+}
+
+#submit-questionnaire:active {
+  background-color: var(--nhs-mid-grey);
+}
+
+@media (max-width: 768px) {
+  .questionnaire-container {
+    padding: 1.5em;
+  }
+
+  #questionnaire-title {
+    font-size: 2em;
+  }
+
+  #questionnaire-description {
+    font-size: 1.125em;
+  }
+
+  .category-item h3 {
+    font-size: 1.5em;
+  }
+
+  #submit-questionnaire {
+    font-size: 1.125em;
+  }
+}
