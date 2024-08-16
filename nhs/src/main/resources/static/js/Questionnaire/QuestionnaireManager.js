@@ -14,6 +14,14 @@ export class QuestionnaireManager {
 
     // Debugging information
     console.log(`QuestionnaireManager initialized with userID: ${this.userID}`);
+
+    // Bind the form submission event
+    const form = document.getElementById("questionnaire-form");
+    if (form) {
+      form.addEventListener("submit", (event) =>
+        this.submitQuestionnaire(event)
+      );
+    }
   }
 
   async loadAssignedQuestionnaires() {
@@ -51,6 +59,9 @@ export class QuestionnaireManager {
         `/api/questionnaires/${questionnaireId}`
       );
       console.log("Fetched questionnaire details: ", questionnaire);
+
+      const form = document.getElementById("questionnaire-form");
+      form.setAttribute("data-questionnaire-id", questionnaireId);
 
       this.renderer.renderQuestionnaireDetails(questionnaire);
 
@@ -91,22 +102,35 @@ export class QuestionnaireManager {
     }
   }
 
-  async submitQuestionnaire(formData, questionnaireId) {
-    console.log(`Submitting questionnaire with ID: ${questionnaireId}`);
+  async submitQuestionnaire(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    const formData = new FormData(event.target);
+    const questionnaireId = event.target.dataset.questionnaireId;
+
+    if (!questionnaireId) {
+      console.error("Questionnaire ID is missing in the form dataset.");
+      return;
+    }
+
+    console.log(`Submitting form for questionnaire ID: ${questionnaireId}`);
+
+    const responses = {};
+    formData.forEach((value, key) => {
+      responses[key.replace("question_", "")] = value;
+    });
 
     try {
-      const responses = {};
-      formData.forEach((value, key) => {
-        responses[key] = value;
-      });
+      const response = await postData(
+        `/api/userQuestions/submit/${questionnaireId}`, // Correct endpoint
+        responses
+      );
+      console.log("Form submitted successfully:", response);
 
-      console.log("Collected form data: ", responses);
-
-      await postData(`/api/userResponses/${questionnaireId}`, responses);
-
-      alert("Thank you for completing the questionnaire!");
+      // Redirect to the questionnaire details page
+      window.location.href = `/questionnaire/${questionnaireId}/details`;
     } catch (error) {
-      console.error("Error submitting questionnaire:", error);
+      console.error("Error submitting form:", error);
       alert("An error occurred while submitting the questionnaire.");
     }
   }

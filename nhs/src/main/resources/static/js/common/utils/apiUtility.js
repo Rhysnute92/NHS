@@ -11,17 +11,28 @@ export async function fetchData(url) {
   }
 }
 
-export async function postData(url, data) {
+export async function postData(url = "", data = {}) {
   try {
     const response = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(data),
     });
+
     if (!response.ok) {
       throw new Error(`Failed to post data to ${url}`);
     }
-    return await response.json();
+
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      return await response.json();
+    } else {
+      // Handle cases where no JSON is returned
+      console.warn("Response is not JSON, returning response object.");
+      return response;
+    }
   } catch (error) {
     console.error(`Error posting data: ${error.message}`);
     throw error;
