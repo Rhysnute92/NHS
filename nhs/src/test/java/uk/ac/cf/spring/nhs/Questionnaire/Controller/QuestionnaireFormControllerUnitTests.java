@@ -73,7 +73,7 @@ class QuestionnaireFormControllerUnitTests {
         String viewName = questionnaireFormController.getQuestionnairePage(1L, model);
 
         // Assert
-        assertEquals("questionnaire", viewName);
+        assertEquals("questionnaire/questionnaire", viewName);
         verify(model, times(1)).addAttribute("questionnaire", questionnaire);
         verify(userQuestionnaireService, times(1)).saveUserQuestionnaire(userQuestionnaire);
     }

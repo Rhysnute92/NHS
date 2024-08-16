@@ -1,3 +1,5 @@
+/* Basic Styling */
+
 .questionnaire-container {
   padding: 2em;
   border-radius: 8px;
@@ -5,21 +7,17 @@
 }
 
 #questionnaire-title {
-  /* font-family: var(--regular-font-family); */
   font-size: 2em;
   font-weight: bold;
-  /* color: var(--nhs-black); */
   margin-bottom: 0.5em;
   text-align: left;
 }
 
 #questionnaire-description {
-  /* font-family: var(--light-font-family); */
   font-size: 1.25em;
   color: var(--nhs-dark-grey);
   margin-bottom: 1em;
   text-align: left;
-  /* line-height: 1.5; */
 }
 
 /* Category Styling */
@@ -31,8 +29,8 @@
 .category-item h3 {
   font-family: var(--heading-font-family);
   font-size: 1.75em;
-  color: var(--nhs-black); /* Changed to black */
-  border-bottom: 2px solid var(--nhs-mid-grey); /* Changed to a more subtle grey */
+  color: var(--nhs-black);
+  border-bottom: 2px solid var(--nhs-mid-grey);
   padding-bottom: 0.25em;
   margin-bottom: 1em;
 }
@@ -55,7 +53,7 @@
 .scale-container {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Spread out the radio buttons */
+  justify-content: space-between;
   margin-bottom: 1.5em;
   padding: 0 1em;
 }
@@ -74,15 +72,22 @@
   margin-bottom: 0.5em;
 }
 
+.scale-container span {
+  font-family: var(--regular-font-family);
+  font-size: 1.2em; /* Increased font size for left and right labels */
+  color: var(--nhs-dark-grey);
+  margin: 0 1em;
+}
+
 .scale-container input[type="radio"] {
   margin: 0;
-  width: 1.5em; /* Increase the size of the radio buttons */
+  width: 1.5em;
   height: 1.5em;
   cursor: pointer;
   border: 2px solid var(--nhs-mid-grey);
   border-radius: 50%;
   transition: border-color 0.3s ease, background-color 0.3s ease;
-  appearance: none; /* Remove default radio appearance */
+  appearance: none;
   background-color: var(--nhs-white);
 }
 
@@ -90,55 +95,96 @@
   border-color: var(--nhs-dark-grey);
 }
 
-.scale-container input[type="radio"]:hover:nth-of-type(1) {
-  border-color: #d32f2f; /* Red */
-}
-
-.scale-container input[type="radio"]:hover:nth-of-type(2) {
-  border-color: #f57c00; /* Orange */
-}
-
-.scale-container input[type="radio"]:hover:nth-of-type(3) {
-  border-color: #fbc02d; /* Yellow */
-}
-
-.scale-container input[type="radio"]:hover:nth-of-type(4) {
-  border-color: #388e3c; /* Green */
-}
-
-.scale-container input[type="radio"]:checked {
-  background-color: var(--nhs-blue); /* Default selected background color */
-  border-color: var(--nhs-blue);
-}
-
-.scale-container input[type="radio"]:checked:nth-of-type(1) {
+/* Gradient Color for Quality of Life (QOL) */
+.scale-container input[type="radio"].qol-1:hover,
+.scale-container input[type="radio"].qol-1:checked {
   background-color: #d32f2f;
   border-color: #d32f2f;
 }
 
-.scale-container input[type="radio"]:checked:nth-of-type(2) {
+.scale-container input[type="radio"].qol-2:hover,
+.scale-container input[type="radio"].qol-2:checked {
+  background-color: #e57373;
+  border-color: #e57373;
+}
+
+.scale-container input[type="radio"].qol-3:hover,
+.scale-container input[type="radio"].qol-3:checked {
   background-color: #f57c00;
   border-color: #f57c00;
 }
 
-.scale-container input[type="radio"]:checked:nth-of-type(3) {
-  background-color: #fbc02d;
-  border-color: #fbc02d;
+.scale-container input[type="radio"].qol-4:hover,
+.scale-container input[type="radio"].qol-4:checked {
+  background-color: #ffb74d;
+  border-color: #ffb74d;
 }
 
-.scale-container input[type="radio"]:checked:nth-of-type(4) {
+.scale-container input[type="radio"].qol-5:hover,
+.scale-container input[type="radio"].qol-5:checked {
+  background-color: #fff176;
+  border-color: #fff176;
+}
+
+.scale-container input[type="radio"].qol-6:hover,
+.scale-container input[type="radio"].qol-6:checked {
+  background-color: #dce775;
+  border-color: #dce775;
+}
+
+.scale-container input[type="radio"].qol-7:hover,
+.scale-container input[type="radio"].qol-7:checked {
+  background-color: #aed581;
+  border-color: #aed581;
+}
+
+.scale-container input[type="radio"].qol-8:hover,
+.scale-container input[type="radio"].qol-8:checked {
+  background-color: #81c784;
+  border-color: #81c784;
+}
+
+.scale-container input[type="radio"].qol-9:hover,
+.scale-container input[type="radio"].qol-9:checked {
+  background-color: #66bb6a;
+  border-color: #66bb6a;
+}
+
+.scale-container input[type="radio"].qol-10:hover,
+.scale-container input[type="radio"].qol-10:checked {
   background-color: #388e3c;
   border-color: #388e3c;
 }
 
-/* Additional hover effect */
-.scale-container input[type="radio"]:hover {
-  border-width: 3px;
+/* Color for Non-QOL Radio Buttons */
+.scale-container input[type="radio"].non-qol-1:hover,
+.scale-container input[type="radio"].non-qol-1:checked {
+  background-color: #d32f2f;
+  border-color: #d32f2f;
+}
+
+.scale-container input[type="radio"].non-qol-2:hover,
+.scale-container input[type="radio"].non-qol-2:checked {
+  background-color: #f57c00;
+  border-color: #f57c00;
+}
+
+.scale-container input[type="radio"].non-qol-3:hover,
+.scale-container input[type="radio"].non-qol-3:checked {
+  background-color: #fbc02d;
+  border-color: #fbc02d;
+}
+
+.scale-container input[type="radio"].non-qol-4:hover,
+.scale-container input[type="radio"].non-qol-4:checked {
+  background-color: #388e3c;
+  border-color: #388e3c;
 }
 
 /* Text Question Styling */
 .question-item input[type="text"] {
-  width: 100%;
+  width: 80vw; /* 80% of the viewport width */
+  height: 3.5em; /* Height to show 3 lines of text */
   padding: 0.75em;
   font-size: 1em;
   font-family: var(--regular-font-family);
@@ -168,6 +214,36 @@
   transition: background-color 0.3s ease;
   text-align: center;
   margin-top: 2em;
+}
+
+#submit-questionnaire:hover {
+  background-color: var(--nhs-dark-blue);
+}
+
+#submit-questionnaire:active {
+  background-color: var(--nhs-mid-grey);
+}
+
+@media (max-width: 768px) {
+  .questionnaire-container {
+    padding: 1.5em;
+  }
+
+  #questionnaire-title {
+    font-size: 2em;
+  }
+
+  #questionnaire-description {
+    font-size: 1.125em;
+  }
+
+  .category-item h3 {
+    font-size: 1.5em;
+  }
+
+  #submit-questionnaire {
+    font-size: 1.125em;
+  }
 }
 
 #submit-questionnaire:hover {

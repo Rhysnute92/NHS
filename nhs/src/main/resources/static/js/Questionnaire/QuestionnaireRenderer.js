@@ -109,15 +109,17 @@ export class QuestionnaireRenderer {
     const scaleContainer = document.createElement("div");
     scaleContainer.className = "scale-container";
 
-    let leftLabel, rightLabel, numOfRadios;
+    let leftLabel, rightLabel, numOfRadios, qolClass;
     if (category === "Quality of Life") {
       leftLabel = "Poor";
       rightLabel = "Excellent";
       numOfRadios = 10;
+      qolClass = "qol"; // Class for Quality of Life
     } else {
       leftLabel = "Not at all";
       rightLabel = "A Lot";
       numOfRadios = 4;
+      qolClass = ""; // No specific class
     }
 
     const leftSpan = document.createElement("span");
@@ -133,7 +135,11 @@ export class QuestionnaireRenderer {
       numberLabel.textContent = i;
       wrapper.appendChild(numberLabel);
 
-      const radio = this.createRadioInput(question, i);
+      const radio = this.createRadioInput(
+        question,
+        i,
+        qolClass ? `${qolClass}-${i}` : `non-qol-${i}` // Differentiate between QOL and non-QOL
+      );
       wrapper.appendChild(radio);
 
       scaleContainer.appendChild(wrapper);
@@ -148,28 +154,17 @@ export class QuestionnaireRenderer {
     );
     return scaleContainer;
   }
-  
-  createNumbersContainer(numOfRadios) {
-    const numbersContainer = document.createElement("div");
-    numbersContainer.className = "numbers-container";
 
-    for (let i = 1; i <= numOfRadios; i++) {
-      const numberLabel = document.createElement("div");
-      numberLabel.className = "number-label";
-      numberLabel.textContent = i;
-      numbersContainer.appendChild(numberLabel);
-    }
-
-    console.log(`Created numbers container with ${numOfRadios} labels`);
-    return numbersContainer;
-  }
-
-  createRadioInput(question, index) {
+  createRadioInput(question, index, additionalClass = "") {
     const radio = document.createElement("input");
     radio.type = "radio";
     radio.name = `question_${question.questionID}`;
     radio.value = index;
     radio.id = `question_${question.questionID}_${index}`;
+
+    if (additionalClass) {
+      radio.classList.add(additionalClass);
+    }
 
     console.log(
       `Created radio input for question ID: ${question.questionID}, index: ${index}`
