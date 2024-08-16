@@ -1,0 +1,73 @@
+.task-card {
+  background-color: var(--nhs-pale-grey);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.task-card.completed {
+  background-color: rgba(
+    232,
+    237,
+    238,
+    0.1
+  ); /*  --nhs-pale-grey in rgba with 10% opacity */
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.task-name-header {
+  text-align: left;
+  font-size: 1.25em;
+  font-weight: bold;
+  padding-bottom: 0.125em;
+  vertical-align: middle;
+}
+
+.meta-title {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+.task-desc {
+  text-align: left;
+  padding: 0.25em;
+  padding-right: 2em;
+  vertical-align: top;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  max-height: 3em;
+  width: 30em;
+  height: auto;
+}
+
+.task-periodicity,
+.task-status,
+.check-circle-wrapper {
+  text-align: left;
+  padding: 0.25em;
+  vertical-align: top;
+  max-width: 20em;
+  min-width: 7em;
+  height: auto;
+}
+
+.task-card.completed .task-desc,
+.task-card.completed .meta-title,
+.task-card.completed .task-name-header,
+.task-card.completed .task-periodicity,
+.task-card.completed .task-status {
+  color: rgba(0, 0, 0, 0.5); /* Setting text color to black with 50% opacity */
+  text-decoration: line-through; /* Striking through the text */
+}
+
+.task-divider {
+  border: 0;
+  border-bottom: 1px solid var(--nhs-black);
+  margin: 0;
+}

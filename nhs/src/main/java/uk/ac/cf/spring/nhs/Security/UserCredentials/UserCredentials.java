@@ -18,11 +18,18 @@ public class UserCredentials {
     private String userPassword;
     @Column(name = "UserRole")
     private String userRole;
+    @Column(name = "PasswordSetupToken")
+    private String passwordSetupToken;
 
     //Getters and setters
     public Long getUserId(){
         return userId;
     }
+
+    public void setUserId(Long id){
+        this.userId = id;
+    }
+    
     public String getUserName(){
         return userName;
     }
@@ -41,4 +48,7 @@ public class UserCredentials {
     public void setUserRole(String roles){
         this.userRole = roles;
     }
+    public String getPasswordSetupToken() {return passwordSetupToken;}
+
+    public void setPasswordSetupToken(String passwordSetupToken) {this.passwordSetupToken = passwordSetupToken;}
 }
