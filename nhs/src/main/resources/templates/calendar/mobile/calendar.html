@@ -1,35 +1,78 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <!-- Set viewport for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Link to mobile calendar CSS file -->
     <link rel="stylesheet" th:href="@{/css/calendar/mobile/mobilecalendar.css}"/>
+    <!-- Link to common styles -->
     <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
+    <!-- Title of the webpage -->
     <title>Calendar</title>
 </head>
 <body>
+<!-- Include common header fragment -->
 <div th:replace="~{common/fragments/header}"></div>
+<!-- Include navigation bar fragment -->
 <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+<!-- Include navigation menu with dynamic content -->
 <div th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
-<div id="moblist">
-    <button onclick="location.href='/calendar/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
-</div>
+
+<!-- Main container for the calendar and schedule -->
 <div class="container-calendar">
+    <!-- Calendar section -->
     <div id="mobileMonth">
-        <div th:replace="~{calendar/fragments/calendar}"></div>
-        <div id="mobileSchedule">
-            <h3>Appointment Schedule</h3>
-            <ul id="apptList">
-            </ul>
+        <!-- Display current month and year -->
+        <h3 id="monthAndYear"></h3>
+        <!-- Navigation buttons for previous and next months -->
+        <div class="button-container-calendar">
+            <button id="previous" onclick="previous()"> &lt; </button>
+            <button id="next" onclick="next()"> &gt; </button>
         </div>
-        <div>
-            <button class="delete-event" onclick="deleteAppointment()">
-                Delete
-            </button>
+        <!-- Calendar table structure -->
+        <table class="table-calendar" id="calendar" data-lang="en">
+            <thead id="thead-month"></thead> <!-- Table header for days of the week -->
+            <tbody id="calendar-body"></tbody> <!-- Table body for the dates -->
+        </table>
+        <!-- Dropdowns for quickly jumping to a specific month or year -->
+        <div class="footer-container-calendar">
+            <label for="month">Jump To: </label>
+            <select id="month" onchange="jump()">
+                <!-- Options for each month -->
+                <option value=0>Jan</option>
+                <option value=1>Feb</option>
+                <option value=2>Mar</option>
+                <option value=3>Apr</option>
+                <option value=4>May</option>
+                <option value=5>Jun</option>
+                <option value=6>Jul</option>
+                <option value=7>Aug</option>
+                <option value=8>Sep</option>
+                <option value=9>Oct</option>
+                <option value=10>Nov</option>
+                <option value=11>Dec</option>
+            </select>
+            <!-- Year selection dropdown -->
+            <select id="year" onchange="jump()"></select>
         </div>
+        <!--    <p th:if="${appointments.empty}">No appointments scheduled yet</p>-->
+        <ul id="apptList">
+            <li data-event-id="1">
+                <p>No appointments scheduled for today</p>
+            </li>
+        </ul>
+    </div>
+    </div>
+    <!-- Button to add a new appointment, redirects to add appointment page -->
+    <div class="moblist">
+        <button onclick="location.href='/addappointment'" id="add-apt-btn" class="add-apt-btn">Add Appointment</button>
     </div>
 </div>
+
+<!-- Include JavaScript files for calendar functionality -->
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
+<script th:src="@{/js/calendar/addAppointment.js}"></script>
+<script th:src="@{/js/calendar/appointment.js}"></script>
+<script th:src="@{/js/calendar/addCalendar.js}"></script>
 </body>
 </html>
-
