@@ -29,7 +29,7 @@ public class PasswordSetupController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/resetrequest")
-    public String passwordResetRequest(String email){
+    public String passwordResetRequest(@RequestParam("email") String email){
         Object principal = authenticationFacade.getAuthentication().getPrincipal();
         Long userId = ((CustomUserDetails)principal).getUserId();
         patientService.passwordReset(email, userId);
