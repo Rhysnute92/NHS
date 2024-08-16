@@ -2,6 +2,8 @@ package uk.ac.cf.spring.nhs.Account;
 import uk.ac.cf.spring.nhs.AddPatient.Entity.Patient;
 import uk.ac.cf.spring.nhs.AddPatient.Service.PatientService;
 import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
+import uk.ac.cf.spring.nhs.Provider.Entity.Provider;
+import uk.ac.cf.spring.nhs.Provider.Service.ProviderService;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 
@@ -30,6 +32,9 @@ public class AccountController {
     @Autowired
     private PatientService patientService;
 
+    @Autowired
+    private ProviderService providerService;
+
     @GetMapping("/account")
     public String account(@RequestParam("pwupdt") Optional<Boolean> pwupdt, Model model) {
         if(authenticationFacade.hasRole("ROLE_PATIENT")){
@@ -39,6 +44,11 @@ public class AccountController {
             model.addAttribute("patient", profile);
             return "account/accountPatient";
         } else {
+            Object principal = authenticationFacade.getAuthentication().getPrincipal();
+            Long userId = ((CustomUserDetails)principal).getUserId();
+            Provider provider = providerService.getProviderById(userId);
+            model.addAttribute("fullname", providerService.getFullName(provider));
+            model.addAttribute("occupation", provider.getProviderOccupation());
             return "account/accountProvider";
         }
     }
