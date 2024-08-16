@@ -49,10 +49,9 @@
     padding: 1rem;
     margin: 5vh;
     width: 8rem;
-    border-radius: 1rem;
-    background-color: #005EB8;
-    color:white;
-    cursor:pointer;
+    border:none;
+    background-color: var(--nhs-blue);
+    color: var(--nhs-white);
 }
 
 .logout-button:hover {
