@@ -78,11 +78,14 @@ function deleteAppointment(appointmentID) {
 
 // Function to display all the appointments in the list
 function displayAppointments() {
-    apptList.innerHTML = ""; // Clear the current list of appointments
+    document.querySelector(".no-appointments").style.display = appointments.length > 0 ? "none" : "block"; // Show or hide the "No appointments" message based on the number of appointments
     for (let appointment of appointments) {
         let apptDate = new Date(appointment.apptDateTime); // Convert the appointment date to a Date object
         let listItem = document.createElement("li"); // Create a new list item
-        listItem.innerHTML = `<strong>${appointment.apptType}</strong> - ${appointment.apptInfo} on ${apptDate.toLocaleDateString()} at ${apptDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+        listItem.innerHTML = `<strong>${appointment.apptType}</strong> - 
+                              <span>${appointment.apptInfo}</span> on 
+                              <span>${apptDate.toLocaleDateString()}</span> at 
+                              <span>${apptDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
         listItem.className = "appt-item"; // Add a class to the list item for styling
 
         // Create a delete button for each appointment
@@ -135,7 +138,7 @@ document.getElementById('apptForm').addEventListener('submit', function(event){
   `;
 
     // Append the list item to the appointment list
-    document.getElementById('appointmentList').appendChild(listItem);
+    document.getElementById('apptList').appendChild(listItem);
 
     // Optionally, reset the form after submission
     event.target.reset();

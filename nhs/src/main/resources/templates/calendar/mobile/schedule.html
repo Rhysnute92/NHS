@@ -22,8 +22,10 @@
 
   <!-- Appointment schedule section -->
   <div id="mobileSchedule">
-    <p th:if="${appointments.isEmpty()}">No appointments scheduled yet</p>
     <ul id="apptList">
+      <li class="no-appointments">
+        <p th:if="${appointments.isEmpty()}">No appointments scheduled yet</p>
+      </li>
       <li th:each="appointment: ${appointments}" class="appt-item">
         <strong th:text="${appointment.apptType}"></strong> -
         <span th:text="${appointment.apptInfo}"></span>
@@ -31,6 +33,7 @@
         <span th:text="${#temporals.format(appointment.apptDateTime, 'MM/dd/yyyy')}"></span>
         at
         <span th:text="${#temporals.format(appointment.apptDateTime, 'hh:mm a')}"></span>
+        <button class="delete-appt" th:onclick="deleteAppointment([[${appointment.apptID}]])">Delete</button>
       </li>
     </ul>
   </div>
