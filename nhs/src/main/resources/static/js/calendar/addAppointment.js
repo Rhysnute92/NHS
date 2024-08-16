@@ -3,6 +3,7 @@
 // Initialize an empty array to hold the appointments
 let appointments = [];
 
+const apptModal = document.getElementById("myModel");
 // Get references to the form input elements
 const apptDateInput = document.getElementById("apptDate");
 const apptTimeInput = document.getElementById("apptTime");
@@ -61,6 +62,7 @@ function clearForm() {
     apptTypeInput.value = "";
     apptProviderInput.value = "";
     apptInfoInput.value = "";
+    apptModal.style.display = "none"; // Hide the modal after the form is submitted
 }
 
 // Function to delete an appointment
@@ -110,6 +112,3 @@ async function fetchAppointments() {
         console.error("Error:", error); // Log any errors that occur during the request
     }
 }
-
-// Fetch appointments when the DOM content is loaded
-document.addEventListener("DOMContentLoaded", fetchAppointments);

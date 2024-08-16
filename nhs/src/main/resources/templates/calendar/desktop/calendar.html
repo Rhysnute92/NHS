@@ -38,10 +38,15 @@
     <h3>Appointment Schedule</h3>
     <!-- Button to open the modal -->
     <button id="openaddappt">Add Appointment</button>
+    <p th:if="${appointments.isEmpty()}">No appointments scheduled yet</p>
     <ul id="apptList">
-<!--      <p th:if="${appointments.isEmpty()}">No appointments scheduled yet</p>-->
-      <li data-event-id="1">
-        <p>No appointments scheduled for today</p>
+      <li th:each="appointment: ${appointments}" class="appt-item">
+        <strong th:text="${appointment.apptType}"></strong> -
+        <span th:text="${appointment.apptInfo}"></span>
+        on
+        <span th:text="${#temporals.format(appointment.apptDateTime, 'MM/dd/yyyy')}"></span>
+        at
+        <span th:text="${#temporals.format(appointment.apptDateTime, 'hh:mm a')}"></span>
       </li>
     </ul>
   </div>
