@@ -11,16 +11,18 @@
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbaradmin}" class="nav"></nav>
     <div class="account-container">
-    <h1> Welcome to your PROVIDER profile!</h1>
+    <h1 class="welcome"> Welcome to your PROVIDER profile!</h1>
     <div class="personal_info">
-        <h2>My Details</h2>
+        <h2 class="section_title">My Details</h2>
+        <ul class="info_list"></ul>
+        <button type="button" class="edit_btn" onclick="location.href='/update'">Edit</button>
     </div>
     <div class="account_info">
-        <h2>My Account</h2>
-        <div>Username: <span th:text="${#authentication.name}">username</span></div>
-        <button type="button">Change password</button>
+        <h2 class="section_title">Manage My Account</h2>
+        <div class="username">Username: <span th:text="${#authentication.name}">username</span></div>
+        <button type="button" class="pass_btn">Change password</button>
     </div>
-    <form th:action="@{/logout}" method="post">
+    <form th:action="@{/logout}" method="post" class="logout">
         <input type="submit" class="logout-button" value="LOG OUT"/>
     </form>
 </div>

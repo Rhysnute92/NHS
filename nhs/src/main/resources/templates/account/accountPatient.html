@@ -11,24 +11,25 @@
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <div class="account-container">
-    <!-- <h1>Hello, <span th:text="${#authentication.name}">username</span></h1> -->
-    <h1> Welcome to your profile!</h1>
+    <h1 class="welcome"> Welcome to your profile!</h1>
     <div class="personal_info">
-        <h2>My Details</h2>
-        <div th:inline="text">Full name: [[${patient.fullName}]]</div>
-        <div th:inline="text">NHS number: [[${patient.nhsNumber}]]</div>
-        <div th:inline="text">Email: [[${patient.email}]]</div>
-        <div th:inline="text">Phone number: [[${patient.mobile}]]</div>
-        <div th:inline="text">Date of Birth [Age]: [[${patient.dateOB}]] [ [[${patient.age}]] ]</div>
-        <div th:inline="text">Clinic: [[${patient.clinic}]]</div>
-        <button type="button" onclick="location.href='/update'">Edit</button>
+        <h2 class="section_title">My Details</h2>
+        <ul class="info_list">
+        <li th:inline="text">Full name: [[${patient.fullName}]]</li>
+        <li th:inline="text">NHS number: [[${patient.nhsNumber}]]</li>
+        <li th:inline="text">Email: [[${patient.email}]]</li>
+        <li th:inline="text">Phone number: [[${patient.mobile}]]</li>
+        <li th:inline="text">Date of Birth [Age]: [[${patient.dateOB}]] [ [[${patient.age}]] ]</li>
+        <li th:inline="text">Clinic: [[${patient.clinic}]]</li>
+    </ul>
+        <button type="button" class="edit_btn" onclick="location.href='/update'">Edit</button>
     </div>
     <div class="account_info">
-        <h2>My Account</h2>
-        <div>Username: <span th:text="${#authentication.name}">username</span></div>
-        <button type="button">Change password</button>
+        <h2 class="section_title">Manage My Account</h2>
+        <div class="username">Username: <span th:text="${#authentication.name}">username</span></div>
+        <button type="button" class="pass_btn">Change password</button>
     </div>
-    <form th:action="@{/logout}" method="post">
+    <form th:action="@{/logout}" method="post" class="logout">
         <input type="submit" class="logout-button" value="LOG OUT"/>
     </form>
 </div>
