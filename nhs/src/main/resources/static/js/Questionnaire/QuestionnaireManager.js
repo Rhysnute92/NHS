@@ -128,6 +128,10 @@ export class QuestionnaireManager {
   async submitQuestionnaire(event) {
     event.preventDefault(); // Prevent the default form submission behavior
 
+    console.log("event.target:", event.target);
+    console.log("Is event.target an HTMLFormElement?", event.target instanceof HTMLFormElement);
+    console.log("event.target.dataset:", event.target.dataset);
+
     const formData = new FormData(event.target);
     const questionnaireId = event.target.dataset.questionnaireId;
 
