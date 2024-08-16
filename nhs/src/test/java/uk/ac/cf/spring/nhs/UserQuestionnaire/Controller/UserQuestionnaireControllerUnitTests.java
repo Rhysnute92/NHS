@@ -18,7 +18,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 
+import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
+import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Model.UserQuestionnaire;
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Service.UserQuestionnaireService;
 import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
@@ -27,6 +30,15 @@ class UserQuestionnaireControllerUnitTests {
 
     @Mock
     private UserQuestionnaireService userQuestionnaireService;
+
+    @Mock
+    private AuthenticationInterface authenticationFacade;
+
+    @Mock
+    private Authentication authentication;
+
+    @Mock
+    private CustomUserDetails customUserDetails;
 
     @InjectMocks
     private UserQuestionnaireController userQuestionnaireController;
@@ -47,6 +59,11 @@ class UserQuestionnaireControllerUnitTests {
         userQuestionnaire.setQuestionnaire(questionnaire);
         userQuestionnaire.setQuestionnaireIsCompleted(false);
         userQuestionnaire.setQuestionnaireInProgress(false);
+
+        // Set up authentication mocks
+        when(authenticationFacade.getAuthentication()).thenReturn(authentication);
+        when(authentication.getPrincipal()).thenReturn(customUserDetails);
+        when(customUserDetails.getUserId()).thenReturn(123L);
     }
 
     @Test
