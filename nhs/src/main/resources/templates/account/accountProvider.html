@@ -22,10 +22,10 @@
     <div class="account_info">
         <h2 class="section_title">Manage My Account</h2>
         <div class="username">Username: <span th:text="${#authentication.name}">username</span></div>
-        <h1 th:if="${param.pwupdt}">Email sent to you with instructions!</h1>
+        <h3 th:if="${param.pwupdt}">Email sent to you with instructions!</h3>
         <div th:unless="${param.pwupdt}">
             <form action="/resetrequest" method="post">
-                <h1>To change password please provide email</h1>
+                <h3>To change password please provide email</h3>
                 <input type="text" name="email" th:value="${patient.email}"/>
                 <input type="submit" value="Change password" class="pass_btn"/>
             </form>
