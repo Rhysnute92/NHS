@@ -12,4 +12,10 @@ public class AuthenticationFacade implements AuthenticationInterface {
     public Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
     }
+
+    @Override
+    public boolean hasRole(String role) {
+        return SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+        .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(role));
+    }
 }
