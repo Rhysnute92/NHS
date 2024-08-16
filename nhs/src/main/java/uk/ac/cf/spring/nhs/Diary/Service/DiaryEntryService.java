@@ -1,133 +1,90 @@
 package uk.ac.cf.spring.nhs.Diary.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-import uk.ac.cf.spring.nhs.Diary.DTO.CheckinForm;
-import uk.ac.cf.spring.nhs.Diary.DTO.SymptomDTO;
-import uk.ac.cf.spring.nhs.Diary.DTO.MeasurementDTO;
+import uk.ac.cf.spring.nhs.Diary.DTO.CheckinFormDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.*;
 import uk.ac.cf.spring.nhs.Diary.Repository.*;
-import uk.ac.cf.spring.nhs.Files.Service.FileStorageService;
+import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
+import uk.ac.cf.spring.nhs.Measurement.Service.MeasurementService;
+import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
+import uk.ac.cf.spring.nhs.Photo.Service.PhotoService;
+import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
+import uk.ac.cf.spring.nhs.Symptom.Service.SymptomService;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class DiaryEntryService {
 
     private final DiaryEntryRepository diaryEntryRepository;
-    private final PhotoRepository photoRepository;
-    private final SymptomRepository symptomRepository;
-    private final MeasurementRepository measurementRepository;
-    private final FileStorageService fileStorageService;
+    private final PhotoService photoService;
+    private final SymptomService symptomService;
+    private final MeasurementService measurementService;
 
-    @Autowired
     public DiaryEntryService(DiaryEntryRepository diaryEntryRepository,
-                             PhotoRepository photoRepository,
-                             SymptomRepository symptomRepository,
-                             MeasurementRepository measurementRepository,
-                             FileStorageService fileStorageService) {
+                             PhotoService photoService,
+                             SymptomService symptomService,
+                             MeasurementService measurementService) {
         this.diaryEntryRepository = diaryEntryRepository;
-        this.photoRepository = photoRepository;
-        this.symptomRepository = symptomRepository;
-        this.measurementRepository = measurementRepository;
-        this.fileStorageService = fileStorageService;
+        this.photoService = photoService;
+        this.symptomService = symptomService;
+        this.measurementService = measurementService;
     }
 
     @Transactional
-    public DiaryEntry saveDiaryEntry(DiaryEntry diaryEntry) {
-        return diaryEntryRepository.save(diaryEntry);
-    }
-
-    @Transactional(readOnly = true)
-    public List<DiaryEntry> getAllDiaryEntries() {
-        return diaryEntryRepository.findAll();
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<DiaryEntry> getDiaryEntryById(int id) {
-        return diaryEntryRepository.findById(id);
-    }
-
-    @Transactional(readOnly = true)
-    public List<DiaryEntry> getDiaryEntriesByUserId(int userId) {
-        return diaryEntryRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"));
-    }
-
-    @Transactional
-    public void deleteDiaryEntryById(int id) {
-        diaryEntryRepository.deleteById(id);
-    }
-
-    @Transactional
-    public void createAndSaveDiaryEntry(CheckinForm checkinForm) throws Exception {
-
-        int userId = 1;
-
+    public DiaryEntry createAndSaveDiaryEntry(CheckinFormDTO checkinForm, Long userId) throws Exception {
         DiaryEntry diaryEntry = new DiaryEntry(userId, new Date());
 
         // Mood
-        if (checkinForm.getMood() != null && !checkinForm.getMood().isEmpty()) {
-            diaryEntry.setMood(DiaryMood.valueOf(checkinForm.getMood()));
-        }
+        diaryEntry.setMood(checkinForm.getMood() != null ? Mood.valueOf(checkinForm.getMood()) : null);
 
         // Notes
-        if (checkinForm.getNotes() != null && !checkinForm.getNotes().isEmpty()) {
-            diaryEntry.setNotes(checkinForm.getNotes());
-        }
+        diaryEntry.setNotes(checkinForm.getNotes());
 
         // Photos
-        List<MultipartFile> photos = checkinForm.getPhotos();
-        if (photos != null && !photos.isEmpty()) {
-            Set<DiaryPhoto> diaryPhotos = new HashSet<>();
-            for (MultipartFile photo : photos) {
-                if (!photo.isEmpty()) {
-                    String photoUrl = fileStorageService.storeFile(photo);
-                    Photo photoEntity = new Photo(photoUrl, new Date(), "", userId);
-                    photoRepository.save(photoEntity);
-                    DiaryPhoto diaryPhoto = new DiaryPhoto();
-                    diaryPhoto.setPhoto(photoEntity);
-                    diaryPhoto.setDiaryEntry(diaryEntry);
-                    diaryPhotos.add(diaryPhoto);
-                }
-            }
-            diaryEntry.setPhotos(diaryPhotos);
+        if (checkinForm.getPhotos() != null && !checkinForm.getPhotos().isEmpty()) {
+            Set<Photo> photos = checkinForm.getPhotos().stream()
+                    .map(photoDTO -> photoService.savePhoto(photoDTO, userId))
+                    .collect(Collectors.toSet());
+            diaryEntry.setPhotos(photos);
         }
 
         // Symptoms
         if (checkinForm.getSymptoms() != null && !checkinForm.getSymptoms().isEmpty()) {
-            Set<DiarySymptom> diarySymptoms = new HashSet<>();
-            for (SymptomDTO symptomDTO : checkinForm.getSymptoms()) {
-                if (symptomDTO.getName() != null && symptomDTO.getSeverity() != null) { // Check if name and severity are not null
-                    Symptom symptom = new Symptom(symptomDTO.getName(), symptomDTO.getSeverity(), new Date(), true, userId);
-                    symptomRepository.save(symptom);
-                    DiarySymptom diarySymptom = new DiarySymptom();
-                    diarySymptom.setSymptom(symptom);
-                    diarySymptom.setDiaryEntry(diaryEntry);
-                    diarySymptoms.add(diarySymptom);
-                }
-            }
-            diaryEntry.setSymptoms(diarySymptoms);
+            Set<Symptom> symptoms = checkinForm.getSymptoms().stream()
+                    .filter(symptomDTO -> symptomDTO.getSeverity() != null)
+                    .map(symptomDTO -> symptomService.saveSymptom(symptomDTO, userId))
+                    .collect(Collectors.toSet());
+            diaryEntry.setSymptoms(symptoms);
         }
 
         // Measurements
         if (checkinForm.getMeasurements() != null && !checkinForm.getMeasurements().isEmpty()) {
-            Set<DiaryMeasurement> diaryMeasurements = new HashSet<>();
-            for (MeasurementDTO measurementDTO : checkinForm.getMeasurements()) {
-                if (measurementDTO.getType() != null && measurementDTO.getValue() != null && measurementDTO.getUnit() != null) { // Check if type, value, and unit are not null
-                    Measurement measurement = new Measurement(measurementDTO.getType(), measurementDTO.getValue(), measurementDTO.getUnit(), userId);
-                    measurementRepository.save(measurement);
-                    DiaryMeasurement diaryMeasurement = new DiaryMeasurement();
-                    diaryMeasurement.setMeasurement(measurement);
-                    diaryMeasurement.setDiaryEntry(diaryEntry);
-                    diaryMeasurements.add(diaryMeasurement);
-                }
-            }
-            diaryEntry.setMeasurements(diaryMeasurements);
+            Set<Measurement> measurements = checkinForm.getMeasurements().stream()
+                    .map(measurementDTO -> measurementService.saveMeasurement(measurementDTO, userId))
+                    .collect(Collectors.toSet());
+            diaryEntry.setMeasurements(measurements);
         }
 
-        diaryEntryRepository.save(diaryEntry);
+        return diaryEntryRepository.save(diaryEntry);
+    }
+
+    public void deleteDiaryEntryById(int id) {
+        diaryEntryRepository.deleteById(id);
+    }
+
+    public DiaryEntry getDiaryEntryById(int id) {
+        return diaryEntryRepository.findById(id).orElse(null);
+    }
+
+    public List<DiaryEntry> getAllDiaryEntries() {
+        return diaryEntryRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
+    }
+
+    public List<DiaryEntry> getDiaryEntriesByUserId(long userId) {
+        return diaryEntryRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"));
     }
 }

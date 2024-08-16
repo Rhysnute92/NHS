@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Diary.DTO;
+package uk.ac.cf.spring.nhs.Symptom.DTO;
 
 public class SymptomDTO {
     private String name;

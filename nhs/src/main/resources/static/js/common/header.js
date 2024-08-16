@@ -1,9 +1,11 @@
 // src/main/resources/static/js/header.js
 document.addEventListener("DOMContentLoaded", function () {
-  var pageTitle = document.querySelector("title").innerText;
-  var titleElement = document.getElementById("page-title");
-  if (titleElement) {
-    titleElement.innerText = pageTitle;
+  if (document.querySelector("title")) {
+    const pageTitle = document.querySelector("title").innerText;
+    const titleElement = document.getElementById("page-title");
+    if (titleElement) {
+      titleElement.innerText = pageTitle;
+    }
   }
 
   const navMenu = document.querySelector(".navmenu");
@@ -11,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!navMenu) {
     navmenuToggle.style.opacity = 0;
   }
+
+
 });
 
 

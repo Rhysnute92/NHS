@@ -1,6 +1,9 @@
-package uk.ac.cf.spring.nhs.Diary.Entity;
+package uk.ac.cf.spring.nhs.Measurement.Entity;
 
 import jakarta.persistence.*;
+import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "Measurements")
@@ -9,7 +12,10 @@ public class Measurement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MeasurementID")
-    private int id;
+    private long id;
+
+    @ManyToMany(mappedBy = "measurements")
+    private Set<DiaryEntry> diaryEntries;
 
     @Column(name = "MeasurementType")
     private String type;
@@ -21,22 +27,22 @@ public class Measurement {
     private String unit;
 
     @Column(name = "UserID")
-    private int userId;
+    private long userId;
 
-    protected Measurement() {}
+    public Measurement() {}
 
-    public Measurement(String type, float value, String unit, int userId) {
+    public Measurement(String type, float value, String unit, long userId) {
         this.type = type;
         this.value = value;
         this.unit = unit;
         this.userId = userId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -62,5 +68,13 @@ public class Measurement {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }
