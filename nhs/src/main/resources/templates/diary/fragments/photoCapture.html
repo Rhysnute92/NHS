@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<div th:fragment="photoCapture">
+  <div class="photo-capture-container">
+    <button type="button" class="open-photos-modal">
+      <i class="fa-solid fa-camera photo-icon"></i>
+      Add a photo
+    </button>
+  </div>
+  <div class="photos-modal">
+    <div class="photos-modal-content">
+      <div class="photos-modal-header">
+        <h3>Photos</h3>
+        <button type="button" class="close-photos-modal">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      <button type="button" class="open-camera">
+        <i class="fa-solid fa-camera photo-icon"></i>
+        Take a photo
+      </button>
+      <input type="file" class="photo-input" accept="image/*" multiple>
+      <div class="photos-preview-container"></div>
+      <button type="button" class="add-photos">Confirm</button>
+    </div>
+  </div>
+  <div class="camera-container" style="display: none;">
+    <video class="video" autoplay playsinline></video>
+    <div class="horizontal-line"></div>
+    <div class="vertical-line"></div>
+    <button type="button" class="capture-button">Take Photo</button>
+    <button type="button" class="flip-camera-button">Flip Camera</button>
+    <button type="button" class="close-camera-button">Close Camera</button>
+    <canvas class="canvas" style="display: none;"></canvas>
+  </div>
+  <script th:src="@{/js/diary/photoCapture.js}"></script>
+</div>

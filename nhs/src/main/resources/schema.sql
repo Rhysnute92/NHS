@@ -8,7 +8,8 @@ CREATE TABLE UserCredentials (
     UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
     UserName VARCHAR(255),
     UserPassword VARCHAR(255),
-    UserRole VARCHAR(255)
+    UserRole VARCHAR(255),
+    PasswordSetupToken VARCHAR(255)
 );
 --Patient information--
 CREATE TABLE Patients (
@@ -69,7 +70,7 @@ CREATE TABLE Appointments (
 );
 --Diary--
 CREATE TABLE Photos (
-    PhotoID INT AUTO_INCREMENT PRIMARY KEY,
+    PhotoID BIGINT AUTO_INCREMENT PRIMARY KEY,
     PhotoURL TEXT,
     PhotoDate DATETIME,
     PhotoBodypart VARCHAR(255),
@@ -77,7 +78,7 @@ CREATE TABLE Photos (
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 CREATE TABLE Measurements (
-  MeasurementID INT AUTO_INCREMENT PRIMARY KEY,
+  MeasurementID BIGINT AUTO_INCREMENT PRIMARY KEY,
   MeasurementType VARCHAR(255),
   MeasurementValue FLOAT,
   MeasurementUnit VARCHAR(100),
@@ -86,7 +87,7 @@ CREATE TABLE Measurements (
 );
 
 CREATE TABLE Symptoms (
-      SymptomID INT AUTO_INCREMENT PRIMARY KEY,
+      SymptomID BIGINT AUTO_INCREMENT PRIMARY KEY,
       SymptomName VARCHAR(255),
       SymptomSeverity INT,
       SymptomStartDate DATETIME,
@@ -96,38 +97,38 @@ CREATE TABLE Symptoms (
 );
 
 CREATE TABLE DiaryEntries (
-  EntryID INT AUTO_INCREMENT PRIMARY KEY,
+  EntryID BIGINT AUTO_INCREMENT PRIMARY KEY,
   EntryDate DATE NOT NULL,
-  EntryMood VARCHAR(255),
+  EntryMood TINYINT,
   EntryNotes TEXT,
   UserID BIGINT NOT NULL,
-  CONSTRAINT fk_user FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+  FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 
-
 CREATE TABLE DiaryPhotos (
-    DiaryPhotoID INT AUTO_INCREMENT PRIMARY KEY,
-    EntryID INT,
-    PhotoID INT,
-    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-    FOREIGN KEY (PhotoID) REFERENCES Photos(PhotoID)
+  DiaryPhotoID BIGINT AUTO_INCREMENT PRIMARY KEY,
+  EntryID BIGINT,
+  PhotoID BIGINT,
+  FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
+  FOREIGN KEY (PhotoID) REFERENCES Photos(PhotoID)
 );
 
 CREATE TABLE DiaryMeasurements (
-    DiaryMeasurementID INT AUTO_INCREMENT PRIMARY KEY,
-    EntryID INT,
-    MeasurementID INT,
+    DiaryMeasurementID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    EntryID BIGINT,
+    MeasurementID BIGINT,
     FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
     FOREIGN KEY (MeasurementID) REFERENCES Measurements(MeasurementID)
 );
 
 CREATE TABLE DiarySymptoms (
-       DiarySymptomID INT AUTO_INCREMENT PRIMARY KEY,
-       EntryID INT NOT NULL,
-       SymptomID INT NOT NULL,
+       DiarySymptomID BIGINT AUTO_INCREMENT PRIMARY KEY,
+       EntryID BIGINT NOT NULL,
+       SymptomID BIGINT NOT NULL,
        FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
        FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
 );
+
 
 CREATE TABLE Events (
     EventDate DATE NOT NULL,
@@ -140,7 +141,7 @@ CREATE TABLE Events (
 );
 
 --Not implemented yet--
---CREATE TABLE DiaryQuestions ()--
+--CREATE TABLE DiaryQuestions ()
 -----------------------
 --Managment plan--
 CREATE TABLE Questionnaires (
@@ -205,20 +206,30 @@ CREATE TABLE InfoAssets (
     FOREIGN KEY (SectionID) REFERENCES InfoSections(SectionID)
 );
 --General use--
-CREATE TABLE Tasks (
+CREATE TABLE Task (
     TaskID BIGINT AUTO_INCREMENT PRIMARY KEY,
     TaskType VARCHAR(255),
     TaskName VARCHAR(255),
-    TaskDesc TEXT
+    TaskDesc TEXT,
+    TaskRepeatPeriod VARCHAR(100)
 );
-CREATE TABLE UserTasks (
-    UserTaskID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    TaskIsCompleted BOOLEAN,
-    TaskDuedate DATETIME,
-    TaskIsRepeatable BOOLEAN,
-    TaskRepeatPeriod TIMESTAMP,
+CREATE TABLE UserTask (
+    UserTaskID INT AUTO_INCREMENT PRIMARY KEY,
     TaskID BIGINT,
-    FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
+    UserID BIGINT,
+    Bitmask INT,
+    FOREIGN KEY (TaskID) REFERENCES Task(TaskID),
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+);
+CREATE TABLE UserTaskLog (
+    UserTaskLogID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID BIGINT,
+    UserTaskID INT,
+    Bitmask INT,
+    MonthYear VARCHAR(255),
+    CreatedAt DATETIME,
+    FOREIGN KEY (UserTaskID) REFERENCES UserTask(UserTaskID),
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 --Not implemented yet--
 --CREATE TABLE Reminders ()

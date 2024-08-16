@@ -7,4 +7,6 @@ import org.springframework.security.core.Authentication;
 //Example use can be seen in AccountController 
 public interface AuthenticationInterface {
     Authentication getAuthentication();
+    boolean hasRole(String role);
 }
+

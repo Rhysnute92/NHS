@@ -2,6 +2,7 @@
 
 import { WidgetService } from "./widgetService.js";
 import { WidgetManager } from "./widgetManager.js";
+import { getUserId } from "../common/utils/userUtility.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
   try {
@@ -17,9 +18,3 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.error("Error occurred:", error);
   }
 });
-
-//TODO: Replace the getUserId function with actual implementation
-function getUserId() {
-  console.log("Getting user ID");
-  return "1";
-}

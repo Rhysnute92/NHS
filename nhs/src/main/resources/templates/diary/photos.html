@@ -1,26 +1,31 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default}"
       lang="en">
 <head>
   <title>Photos</title>
-  <link rel="stylesheet" th:href="@{/css/diary/photos.css}" />
+  <link rel="stylesheet" th:href="@{/css/diary/photoCapture.css}" />
 </head>
 <body>
 <main layout:fragment="content">
   <h1 class="page-title">Photos</h1>
   <div class="container">
-    <form class="photo-form" id="photo-form" action="/diary/photos" method="post" enctype="multipart/form-data">
-      <div th:replace="~{diary/fragments/photoUpload :: photoUpload}"></div>
+    <div th:replace="~{diary/fragments/photoGuidance}"></div>
+    <form class="photos-form" action="/diary/photos" enctype="multipart/form-data">
+      <camera-component></camera-component>
     </form>
-    <h2 th:if="${photos.empty}" class="no-photos">No photos uploaded yet</h2>
-    <div th:unless="${photos.empty}" class="photo-container">
-      <th:block th:each="photo : ${photos}">
-        <img th:src="@{/files/{filename}(filename=${photo.url})}" class="photo" />
-      </th:block>
-    </div>
+    <!--  Convert the list of photo objects to a string so it can be parsed as JSON  -->
+    <photo-container th:attr="photos=${photos != null && !photos.isEmpty() ? objectMapper.writeValueAsString(photos) : '[]'}">
+    </photo-container>
   </div>
 </main>
-<script layout:fragment="scripts" th:src="@{/js/diary/photos.js}"></script>
+<th:block layout:fragment="scripts">
+  <script th:src="@{/js/common/customModal.js}"></script>
+  <script th:src="@{/js/diary/components/photoContainer.js}"></script>
+  <script th:src="@{/js/diary/components/cameraComponent.js}"></script>
+  <script th:src="@{/js/diary/components/photoComponent.js}"></script>
+  <script th:src="@{/js/diary/photos.js}"></script>
+</th:block>
 </body>
 </html>

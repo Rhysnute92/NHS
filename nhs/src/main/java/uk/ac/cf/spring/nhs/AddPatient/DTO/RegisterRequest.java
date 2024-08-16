@@ -1,12 +1,14 @@
 package uk.ac.cf.spring.nhs.AddPatient.DTO;
 
+import java.time.LocalDate;
+
 public class RegisterRequest {
     private String patientName;
     private String patientLastName;
     private String patientEmail;
     private String patientMobile;
     private String nhsNumber;
-    private String patientDOB;
+    private LocalDate patientDOB;
     private String patientTitle;
     private String patientClinic;
 
@@ -51,11 +53,11 @@ public class RegisterRequest {
         this.nhsNumber = nhsNumber;
     }
 
-    public String getPatientDOB() {
+    public LocalDate getPatientDOB() {
         return patientDOB;
     }
 
-    public void setPatientDOB(String patientDOB) {
+    public void setPatientDOB(LocalDate patientDOB) {
         this.patientDOB = patientDOB;
     }
 
