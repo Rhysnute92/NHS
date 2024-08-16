@@ -112,3 +112,32 @@ async function fetchAppointments() {
         console.error("Error:", error); // Log any errors that occur during the request
     }
 }
+
+document.getElementById('apptForm').addEventListener('submit', function(event){
+    event.preventDefault(); // Prevent the form from submitting
+
+    // Capture form data
+    const formData = new FormData(event.target);
+    const apptDate = formData.get('apptDate');
+    const apptTime = formData.get('apptTime');
+    const appointmentLocation = formData.get('appointmentLocation');
+    const apptType = formData.get('apptType');
+
+    // Combine date and time
+    const apptDateTime = `${apptDate} ${apptTime}`;
+
+    // Create a list item for the appointment
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `
+    <strong>Appointment:</strong> ${apptType}<br>
+    <strong>Date & Time:</strong> ${apptDateTime}<br>
+    <strong>Location:</strong> ${appointmentLocation}<br>
+  `;
+
+    // Append the list item to the appointment list
+    document.getElementById('appointmentList').appendChild(listItem);
+
+    // Optionally, reset the form after submission
+    event.target.reset();
+});
+

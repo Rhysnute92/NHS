@@ -11,8 +11,8 @@
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <div class="dashboard-container">
       <div class="welcome-container">
-        <h1 id="welcome-message">Welcome, </h1>
-        <h1 id="patient-name"></h1>
+        <h1 id="welcome-message" th:inline="text"> Welcome, [[${patientName}]]!</h1>
+        <!-- <h1 id="patient-name"></h1> -->
       </div>
       <h2 class="dashboard-subtitle">
         Last logged in: <span id="last-logged-in">July 31, 2024</span>
