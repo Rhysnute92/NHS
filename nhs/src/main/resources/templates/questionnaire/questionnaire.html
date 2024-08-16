@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Questionnaire</title>
-    <link rel="stylesheet" th:href="@{/css/questionnaire/questionnaireForm.css}" />
+    <link
+      rel="stylesheet"
+      th:href="@{/css/questionnaire/questionnaireForm.css}"
+    />
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
   </head>
   <body>
@@ -17,8 +20,12 @@
       <form id="questionnaire-form">
         <div id="questions-container"></div>
         <!-- Questions will be dynamically loaded here -->
-        <button type="button" id="save-questionnaire">Save and Come Back</button>
-        <button type="submit" id="submit-questionnaire">Submit</button>
+        <div class="form-buttons">
+          <button type="button" id="save-questionnaire" class="button-green">
+            Save and Come Back
+          </button>
+          <button type="submit" id="submit-questionnaire">Submit</button>
+        </div>
       </form>
     </div>
     <script th:src="@{/js/common/header.js}"></script>

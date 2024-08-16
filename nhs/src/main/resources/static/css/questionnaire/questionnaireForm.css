@@ -20,6 +20,12 @@
   text-align: left;
 }
 
+/* Error Styling */
+.question-item.error {
+  border-left: 4px solid red;
+  padding-left: 10px;
+}
+
 /* Category Styling */
 .category-item {
   margin-bottom: 2em;
@@ -157,28 +163,32 @@
 }
 
 /* Color for Non-QOL Radio Buttons */
+/* Start with green */
 .scale-container input[type="radio"].non-qol-1:hover,
 .scale-container input[type="radio"].non-qol-1:checked {
-  background-color: #d32f2f;
-  border-color: #d32f2f;
+  background-color: #388e3c;
+  border-color: #388e3c;
 }
 
+/* Then yellow */
 .scale-container input[type="radio"].non-qol-2:hover,
 .scale-container input[type="radio"].non-qol-2:checked {
-  background-color: #f57c00;
-  border-color: #f57c00;
-}
-
-.scale-container input[type="radio"].non-qol-3:hover,
-.scale-container input[type="radio"].non-qol-3:checked {
   background-color: #fbc02d;
   border-color: #fbc02d;
 }
 
+/* Then orange */
+.scale-container input[type="radio"].non-qol-3:hover,
+.scale-container input[type="radio"].non-qol-3:checked {
+  background-color: #f57c00;
+  border-color: #f57c00;
+}
+
+/* Finally red */
 .scale-container input[type="radio"].non-qol-4:hover,
 .scale-container input[type="radio"].non-qol-4:checked {
-  background-color: #388e3c;
-  border-color: #388e3c;
+  background-color: #d32f2f;
+  border-color: #d32f2f;
 }
 
 /* Text Question Styling */
@@ -199,7 +209,40 @@
   outline: none;
 }
 
-/* Submit Button Styling */
+/*Button Styling */
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between; /* Ensure buttons are spaced out */
+  align-items: center;
+  margin-top: 2em;
+}
+
+#save-questionnaire {
+  background-color: var(--nhs-green);
+  color: var(--nhs-white);
+  padding: 1em;
+  font-size: 1.25em;
+  font-family: var(--heading-font-family);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  margin-top: 2em;
+  margin-right: 2em;
+  margin-left: 4em;
+  width: 33%;
+}
+
+#save-questionnaire:hover {
+  background-color: var(--nhs-dark-green); /* Darker NHS Green on hover */
+}
+
+#save-questionnaire:active {
+  background-color: #004c23; /* Even darker on active */
+}
+
 #submit-questionnaire {
   display: block;
   width: 100%;
@@ -214,6 +257,9 @@
   transition: background-color 0.3s ease;
   text-align: center;
   margin-top: 2em;
+  margin-left: 2em;
+  width: 33%;
+  margin-right: 4em;
 }
 
 #submit-questionnaire:hover {

@@ -1,4 +1,16 @@
 /* Category Section Styling */
+h1,
+h2,
+h3 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.questionnaire-container {
+  padding: 2em;
+  border-radius: 8px;
+  text-align: left;
+}
+
 .category-item {
     margin-bottom: 2em;
     margin-left: 1em;
@@ -13,16 +25,16 @@
     margin-bottom: 1em;
   }
   
-  canvas {
+/*   canvas {
     margin-top: 1em;
     max-width: 100%;
     height: auto;
   }
   
-  /* Responsive Adjustments */
+
   @media (max-width: 768px) {
     .category-item h2 {
       font-size: 1.5em;
     }
   }
-  
+   */

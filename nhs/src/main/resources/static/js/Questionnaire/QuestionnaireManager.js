@@ -136,6 +136,13 @@ export class QuestionnaireManager {
       return;
     }
 
+    // Validation: Check if all required questions are answered
+    const isValid = this.validateForm(event.target);
+    if (!isValid) {
+      alert("Please answer all questions before submitting the questionnaire.");
+      return;
+    }
+
     console.log(`Submitting form for questionnaire ID: ${questionnaireId}`);
 
     const responses = {};
@@ -156,5 +163,49 @@ export class QuestionnaireManager {
       console.error("Error submitting form:", error);
       alert("An error occurred while submitting the questionnaire.");
     }
+  }
+
+  validateForm(form) {
+    let isValid = true;
+
+    // Validate all text inputs
+    const textInputs = form.querySelectorAll('input[type="text"]');
+    textInputs.forEach((input) => {
+      if (input.value.trim() === "") {
+        isValid = false;
+        input.closest(".question-item").classList.add("error");
+      } else {
+        input.closest(".question-item").classList.remove("error");
+      }
+    });
+
+    // Validate radio button groups
+    const radioGroups = {};
+    const radioButtons = form.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach((radio) => {
+      if (!radioGroups[radio.name]) {
+        radioGroups[radio.name] = false;
+      }
+      if (radio.checked) {
+        radioGroups[radio.name] = true;
+      }
+    });
+
+    for (let groupName in radioGroups) {
+      if (!radioGroups[groupName]) {
+        isValid = false;
+        const radios = form.querySelectorAll(`input[name="${groupName}"]`);
+        radios.forEach((radio) => {
+          radio.closest(".question-item").classList.add("error");
+        });
+      } else {
+        const radios = form.querySelectorAll(`input[name="${groupName}"]`);
+        radios.forEach((radio) => {
+          radio.closest(".question-item").classList.remove("error");
+        });
+      }
+    }
+
+    return isValid;
   }
 }
