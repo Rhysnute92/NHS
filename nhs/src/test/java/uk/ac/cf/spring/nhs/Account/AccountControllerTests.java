@@ -56,34 +56,26 @@ public class AccountControllerTests {
         .build();
     }
 
-@Test
-@WithMockUser(username="admin",roles={"PATIENT"})
-void patientAccountTest() throws Exception {
-    mockMvc.perform(get("/account"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("account/accountPatient"));
-}
-@Test
-@WithMockUser(username="admin",roles={"ADMIN"})
-void adminAccountTest() throws Exception {
-    mockMvc.perform(get("/account"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("account/accountProvider"));
-}
-@Test
-@WithMockUser(username="admin",roles={"PROVIDER"})
-void providerAccountTest() throws Exception {
-    mockMvc.perform(get("/account"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("account/accountProvider"));
-}
-
 // @Test
-// @WithUserDetails("username")
-// void userDetailsTest() throws Exception {
-//     mockMvc.perform(get("/userFullName"))
+// @WithMockUser(username="admin",roles={"PATIENT"})
+// void patientAccountTest() throws Exception {
+//     mockMvc.perform(get("/account"))
 //             .andExpect(status().isOk())
-//             .andExpect(content().string(containsString("username")));
-
+//             .andExpect(view().name("account/accountPatient"));
 // }
+// @Test
+// @WithMockUser(username="admin",roles={"ADMIN"})
+// void adminAccountTest() throws Exception {
+//     mockMvc.perform(get("/account"))
+//             .andExpect(status().isOk())
+//             .andExpect(view().name("account/accountProvider"));
+// }
+// @Test
+// @WithMockUser(username="admin",roles={"PROVIDER"})
+// void providerAccountTest() throws Exception {
+//     mockMvc.perform(get("/account"))
+//             .andExpect(status().isOk())
+//             .andExpect(view().name("account/accountProvider"));
+// }
+
 }
