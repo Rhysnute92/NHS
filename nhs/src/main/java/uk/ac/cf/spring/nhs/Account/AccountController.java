@@ -31,7 +31,7 @@ public class AccountController {
     private PatientService patientService;
 
     @GetMapping("/account")
-    public String account(Model model) {
+    public String account(@RequestParam("pwupdt") Optional<Boolean> pwupdt, Model model) {
         if(authenticationFacade.hasRole("ROLE_PATIENT")){
             Object principal = authenticationFacade.getAuthentication().getPrincipal();
             Long userId = ((CustomUserDetails)principal).getUserId();

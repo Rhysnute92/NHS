@@ -140,6 +140,30 @@ public class PatientService {
         emailService.sendSimpleMessage(email, subject, text);
     }
 
+        // Method to send the password reset email
+        private void sendPasswordResetEmail(String email, String token) {
+            String url = "http://localhost:8080/reset-password?token=" + token;
+            String subject = "Password Reset";
+            String text = "From the University Hospitals of Derby and Burton NHS Foundation Trust Lymphoedema Services"
+                    + "\n\nYou are receiving this email because you have requested to reset your password on the Lymphoedema managment service.\n"
+                    + "\nPlease set your new password via the link below:\n"
+                    + url + "\n\nAdvice on setting safe passwords can be found at this link:\n"
+                    + "https://webarchive.nationalarchives.gov.uk/ukgwa/20231221190002/https:/digital.nhs.uk/about-nhs-digital/corporate-information-and-documents/password-policy-guide---example-guide"
+                    + "\n\nThank you, and welcome to the application.";
+    
+            emailService.sendSimpleMessage(email, subject, text);
+        }
+
+        //Function for resetting the password procedure for current users
+        public void passwordReset(String email, Long userId){
+            String token = userCredentialsRepository.getReferenceById(userId).getPasswordSetupToken();
+            if (token == null){
+                token = generatePasswordSetupToken();
+                userCredentialsRepository.addPasswordToken(token, userId);
+            }
+            sendPasswordResetEmail(email, token);
+        }
+
     // Simple generic password generator for now
     private String generateGenericPassword() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -156,6 +180,7 @@ public class PatientService {
         return UUID.randomUUID().toString();
     }
 
+    //Updating patient personal information
     public void updatePatient(UpdateRequest request, Patient patient){
         SecretKey key = decodeKey(patient.getEncryptionKey());
         try{
@@ -171,6 +196,7 @@ public class PatientService {
         }
     }
 
+    //Utility function for getting a full name of a patient, including title
     public String getFullname(Patient patient){
         SecretKey key = decodeKey(patient.getEncryptionKey());
         try{
@@ -183,6 +209,7 @@ public class PatientService {
         }
     }
     
+    //Filling the DTO for all patient personal data
     public PatientProfileDTO profile(long userId){
         Patient user = findPatientbyId(userId);
         SecretKey key = decodeKey(user.getEncryptionKey());

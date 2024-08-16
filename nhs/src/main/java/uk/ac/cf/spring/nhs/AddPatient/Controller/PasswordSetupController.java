@@ -5,18 +5,36 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import uk.ac.cf.spring.nhs.AddPatient.Service.PatientService;
+import uk.ac.cf.spring.nhs.Security.AuthenticationFacade;
 import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentials;
 import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentialsRepository;
+import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 
 
 @Controller
 public class PasswordSetupController {
 
     @Autowired
+    private AuthenticationFacade authenticationFacade;
+
+    @Autowired
     private UserCredentialsRepository userCredentialsRepository;
 
     @Autowired
+    private PatientService patientService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @PostMapping("/resetrequest")
+    public String passwordResetRequest(String email){
+        Object principal = authenticationFacade.getAuthentication().getPrincipal();
+        Long userId = ((CustomUserDetails)principal).getUserId();
+        patientService.passwordReset(email, userId);
+        return "redirect:/account?pwupdt";
+    }
 
     @GetMapping("/reset-password")
     public String showPasswordSetupForm(@RequestParam("token") String token, Model model) {
