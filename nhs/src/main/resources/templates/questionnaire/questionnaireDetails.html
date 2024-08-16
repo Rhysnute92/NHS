@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questionnaire Submission Details</title>
+    <link
+      rel="stylesheet"
+      th:href="@{/css/questionnaire/questionnaireDetails.css}"
+    />
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+  </head>
+  <body>
+    <div th:replace="~{common/fragments/header}"></div>
+    <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+    <div class="questionnaire-container">
+      <h1 id="questionnaire-title" th:text="${questionnaire.title} + ': Results">
+        Questionnaire Title
+      </h1>
+      <p id="questionnaire-description" th:text="${questionnaire.description}">
+        Description of the questionnaire.
+      </p>
+
+      <div class="submission-details">
+        <h2>Submission Details</h2>
+        <ul>
+          <!-- Iterate over the user’s responses and display them -->
+          <li th:each="response : ${responses}">
+            <strong th:text="${response.question.questionText}">
+              Question Text
+            </strong>
+            :
+            <span
+              th:if="${response.userResponseText}"
+              th:text="${response.userResponseText}"
+            >
+              User's text answer
+            </span>
+            <span
+              th:if="${response.userResponseScore != null}"
+              th:text="${response.userResponseScore}"
+            >
+              User's score
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="actions">
+        <a th:href="@{/questionnaires}" class="button">
+          Back to Questionnaires
+        </a>
+      </div>
+    </div>
+    <script th:src="@{/js/common/header.js}"></script>
+  </body>
+</html>

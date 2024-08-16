@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.Questionnaire.Controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
 import uk.ac.cf.spring.nhs.Questionnaire.Service.QuestionnaireService;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
+import uk.ac.cf.spring.nhs.UserQuestion.Model.UserQuestion;
+import uk.ac.cf.spring.nhs.UserQuestion.Service.UserQuestionService;
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Model.UserQuestionnaire;
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Service.UserQuestionnaireService;
 
@@ -26,6 +29,9 @@ public class QuestionnaireFormController {
 
     @Autowired
     private UserQuestionnaireService userQuestionnaireService;
+
+    @Autowired
+    private UserQuestionService userQuestionService;
 
     /**
      * Handles HTTP GET requests to retrieve a questionnaire page by its unique
@@ -55,6 +61,22 @@ public class QuestionnaireFormController {
                 return "error/404";
             }
         } else {
+            return "error/404";
+        }
+    }
+
+    @GetMapping("/questionnaire/{questionnaireId}/details")
+    public String showQuestionnaireDetails(@PathVariable Long questionnaireId, Model model) {
+        Optional<Questionnaire> questionnaireOpt = questionnaireService.getQuestionnaireById(questionnaireId);
+
+        if (questionnaireOpt.isPresent()) {
+            Questionnaire questionnaire = questionnaireOpt.get();
+            List<UserQuestion> responses = userQuestionService.getUserQuestionsByUserQuestionnaireId(questionnaireId);
+            model.addAttribute("questionnaire", questionnaire);
+            model.addAttribute("responses", responses);
+            return "questionnaire/questionnaireDetails";
+        } else {
+            // Handle the case where the questionnaire is not found
             return "error/404";
         }
     }
