@@ -70,4 +70,15 @@ public class Photo {
     public void setBodyPart(String bodyPart) {
         this.bodyPart = bodyPart;
     }
+
+    @Override
+    public String toString() {
+        return "Photo{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                ", date=" + date +
+                ", bodyPart='" + bodyPart + '\'' +
+                ", userId=" + userId +
+                '}';
+    }
 }

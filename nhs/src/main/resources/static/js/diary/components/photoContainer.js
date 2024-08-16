@@ -31,7 +31,6 @@ class PhotoContainer extends HTMLElement {
         }
         
         .photo-grid {
-            background-color: var(--nhs-white);
             display: grid;
             grid-auto-columns: 1fr;
             grid-template-columns: repeat(5, 1fr);
@@ -49,7 +48,6 @@ class PhotoContainer extends HTMLElement {
       </div>
     `;
 
-    this.photoContainer = this.shadowRoot.querySelector('.photo-container');
     this.photoGrid = this.shadowRoot.querySelector('.photo-grid');
   }
 
@@ -62,6 +60,7 @@ class PhotoContainer extends HTMLElement {
       } catch (error) {
         console.error('Invalid JSON for photos:', error);
       }
+      // Hide the photo grid if there are no photos
       if (newValue === '[]') {
         this.photoGrid.style.display = 'none';
       } else {
@@ -81,6 +80,7 @@ class PhotoContainer extends HTMLElement {
       } catch (error) {
         console.error('Invalid JSON for initial photos:', error);
       }
+      // Hide the photo grid if there are no photos
     } else {
         this.photoGrid.style.display = 'none';
     }

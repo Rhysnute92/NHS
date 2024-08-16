@@ -140,7 +140,7 @@
         // Append the captured photos to the form data
         capturedPhotos.forEach((photo, index) => {
             formData.append(`photos[${index}].file`, photo.blob);
-            formData.append(`photos[${index}].bodyPart`, `Photo ${index + 1}`);
+            formData.append(`photos[${index}].bodyPart`, photo.bodyPart);
         });
 
         // Submit the form data to the server

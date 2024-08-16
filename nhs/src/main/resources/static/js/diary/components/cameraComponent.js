@@ -231,7 +231,7 @@ class CameraComponent extends HTMLElement {
                 this.capturedPhotos.push({
                     blob: blob,
                     url: URL.createObjectURL(blob),
-                    bodyPart: null,
+                    bodyPart: "",
                     id: null
                 });
 

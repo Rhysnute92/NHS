@@ -55,7 +55,7 @@ public class PhotoController {
 
 
     @PostMapping
-    public ResponseEntity<?> uploadPhoto(@ModelAttribute PhotoListDTO photos,
+    public ResponseEntity<?> uploadPhotos(@ModelAttribute PhotoListDTO photos,
                                          @AuthenticationPrincipal CustomUserDetails userDetails) {
 
         List<Object> results = new ArrayList<>();
