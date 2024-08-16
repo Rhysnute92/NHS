@@ -1,6 +1,8 @@
-package uk.ac.cf.spring.nhs.Diary.Entity;
+package uk.ac.cf.spring.nhs.Symptom.Entity;
 
 import jakarta.persistence.*;
+import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +14,7 @@ public class Symptom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SymptomID")
-    private int id;
+    private long id;
 
     @Column(name = "SymptomName", nullable = false)
     private String name;
@@ -20,33 +22,31 @@ public class Symptom {
     @Column(name = "SymptomSeverity", nullable = false)
     private int severity;
 
-    @Column(name = "SymptomStartDate", nullable = false)
+    @Column(name = "SymptomStartDate")
     private Date startDate;
 
-    @Column(name = "SymptomIsActive", nullable = false)
+    @Column(name = "SymptomIsActive")
     private Boolean isActive;
 
-    @OneToMany(mappedBy = "symptom", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DiarySymptom> diarySymptoms = new HashSet<>();
-
     @Column(name = "UserID")
-    private int userId;
+    private long userId;
+
+    @ManyToMany(mappedBy = "symptoms")
+    private Set<DiaryEntry> diaryEntries;
 
     public Symptom() {}
 
-    public Symptom(String name, int severity, Date startDate, Boolean isActive, int userId) {
+    public Symptom(String name, int severity, long userId) {
         this.name = name;
         this.severity = severity;
-        this.startDate = startDate;
-        this.isActive = isActive;
         this.userId = userId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -82,11 +82,11 @@ public class Symptom {
         this.isActive = isActive;
     }
 
-    public Set<DiarySymptom> getDiarySymptoms() {
-        return diarySymptoms;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setDiarySymptoms(Set<DiarySymptom> diarySymptoms) {
-        this.diarySymptoms = diarySymptoms;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

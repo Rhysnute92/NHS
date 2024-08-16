@@ -1,0 +1,280 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--regular-font-family);
+}
+
+:host {
+    width: 100%;
+    margin: 1rem !important;
+}
+
+.photo-upload {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+    width: 0;
+    height: 0;
+}
+
+.no-photos {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.camera-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    display: none;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    flex-direction: column;
+}
+
+.camera-header {
+    width: 100%;
+    background-color: var(--nhs-black);
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    flex: 0 0 10%;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex: 1 1 60%;
+    justify-content: center;
+    align-items: center;
+}
+
+.video {
+    top: 0;
+    left: 0;
+    object-fit: scale-down;
+    width: 100%;
+    height: 100%;
+}
+
+.mirror {
+    transform: scaleX(-1); /* flip the image when using the front-facing camera */
+}
+
+.capture-button, .flip-camera-button, .close-camera-button, .spacer {
+    border: none;
+    cursor: pointer;
+}
+
+.close-camera-button {
+    width: 2rem;
+    height: 2rem;
+    background: none;
+    color: var(--nhs-white);
+    font-size: 2rem;
+}
+
+.capture-button-inner {
+    border-radius: 50%;
+    background-color: inherit;
+    width: 4.5rem;
+    height: 4.5rem;
+    border: 0.5rem solid var(--nhs-black);
+}
+
+.canvas {
+    display: none;
+}
+
+.photo-button {
+    border: none;
+    background-color: var(--nhs-light-green);
+    border-radius: 5px;
+    padding: 0.5rem;
+    color: var(--nhs-white);
+    width: 50%;
+    font-size: 1rem;
+    font-family: var(--regular-font-family);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    gap: 0.5rem;
+    text-align: left;
+    transition: opacity 0.5s;
+}
+
+.photo-button:hover {
+    cursor: pointer;
+    opacity: 80%;
+}
+
+.add-photos {
+    align-self: center;
+    margin-top: 1rem;
+}
+
+.photos-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+}
+
+.photos-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--nhs-white);
+    padding: 1rem;
+    border-radius: 5px;
+    width: 50%;
+    height: 50%;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+svg {
+    width: 2rem;
+    height: 2rem;
+}
+
+svg path {
+    fill: currentColor;
+}
+
+.photos-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.close-photos-modal {
+    background: none;
+    border: none;
+    color: var(--nhs-dark-grey);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.photos-inputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+    width: 0;
+    height: 0;
+}
+
+.camera-controls-container {
+    padding: 1rem;
+    width: 100%;
+    background-color: var(--nhs-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 20%;
+}
+
+.camera-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 500px;
+}
+
+.flip-camera-button, .capture-button {
+    transition: 0.5s;
+}
+
+.camera-controls svg {
+    width: 90%;
+    height: 90%;
+}
+
+.camera-controls svg path {
+    stroke: currentColor;
+    fill: none;
+}
+
+.capture-button {
+    border-radius: 50%;
+    border: 0.2rem solid var(--nhs-pale-grey);
+    background-color: var(--nhs-pale-grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.capture-button:hover {
+    background-color: var(--nhs-mid-grey);
+    border: 0.2rem solid var(--nhs-mid-grey);
+}
+
+.camera-controls > div {
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flip-camera-button {
+    background-color: transparent;
+    color: var(--nhs-white);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 0.2rem solid var(--nhs-pale-grey);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flip-camera-button:hover {
+    color: var(--nhs-mid-grey);
+    border: 0.2rem solid var(--nhs-mid-grey);
+}
+
+.camera-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    object-fit: contain;
+}
+
+.body-part-select {
+    height: 50%;
+}
+
+@media (max-width: 768px) {
+    .photos-modal-content {
+        width: 90%;
+        height: 90%;
+        box-sizing: border-box;
+    }
+}

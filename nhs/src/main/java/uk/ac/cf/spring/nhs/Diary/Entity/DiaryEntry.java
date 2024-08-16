@@ -1,8 +1,11 @@
 package uk.ac.cf.spring.nhs.Diary.Entity;
 
 import jakarta.persistence.*;
+import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
+import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
+import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
+
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -12,49 +15,66 @@ public class DiaryEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EntryID")
-    private int id;
+    private long id;
 
     @Column(name = "EntryDate", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     @Column(name = "EntryMood")
-    private DiaryMood mood;
+    private Mood mood;
 
-    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DiaryPhoto> photos = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "DiaryMeasurements",
+            joinColumns = @JoinColumn(name = "EntryId"),
+            inverseJoinColumns = @JoinColumn(name = "MeasurementId")
+    )
+    private Set<Measurement> measurements;
 
-    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DiaryMeasurement> measurements = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "DiarySymptoms",
+            joinColumns = @JoinColumn(name = "EntryId"),
+            inverseJoinColumns = @JoinColumn(name = "SymptomId")
+    )
+    private Set<Symptom> symptoms;
 
-    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DiarySymptom> symptoms = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "DiaryPhotos",
+            joinColumns = @JoinColumn(name = "EntryId"),
+            inverseJoinColumns = @JoinColumn(name = "PhotoId")
+    )
+    private Set<Photo> photos;
+
 
     @Column(name = "EntryNotes")
     private String notes;
 
     @Column(name = "UserID", nullable = false)
-    private int userId;
+    private long userId;
 
     public DiaryEntry() {}
 
-    public DiaryEntry(int userId, Date date) {
+    public DiaryEntry(long userId, Date date) {
         this.userId = userId;
         this.date = date;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
@@ -66,36 +86,36 @@ public class DiaryEntry {
         this.date = date;
     }
 
-    public DiaryMood getMood() {
+    public Mood getMood() {
         return mood;
     }
 
-    public void setMood(DiaryMood mood) {
+    public void setMood(Mood mood) {
         this.mood = mood;
     }
 
-    public Set<DiaryPhoto> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(Set<DiaryPhoto> photos) {
-        this.photos = photos;
-    }
-
-    public Set<DiaryMeasurement> getMeasurements() {
-        return measurements;
-    }
-
-    public void setMeasurements(Set<DiaryMeasurement> measurements) {
-        this.measurements = measurements;
-    }
-
-    public Set<DiarySymptom> getSymptoms() {
+    public Set<Symptom> getSymptoms() {
         return symptoms;
     }
 
-    public void setSymptoms(Set<DiarySymptom> symptoms) {
+    public void setSymptoms(Set<Symptom> symptoms) {
         this.symptoms = symptoms;
+    }
+
+    public Set<Measurement> getMeasurements() {
+        return measurements;
+    }
+
+    public void setMeasurements(Set<Measurement> measurements) {
+        this.measurements = measurements;
+    }
+
+    public Set<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(Set<Photo> photos) {
+        this.photos = photos;
     }
 
     public String getNotes() {

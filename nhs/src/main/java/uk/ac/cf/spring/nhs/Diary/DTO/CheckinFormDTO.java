@@ -1,32 +1,33 @@
 package uk.ac.cf.spring.nhs.Diary.DTO;
 
-import org.springframework.web.multipart.MultipartFile;
+import uk.ac.cf.spring.nhs.Measurement.DTO.MeasurementDTO;
+import uk.ac.cf.spring.nhs.Photo.DTO.PhotoDTO;
+import uk.ac.cf.spring.nhs.Symptom.DTO.SymptomDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckinForm {
+public class CheckinFormDTO {
     private String mood;
     private List<SymptomDTO> symptoms;
     private List<MeasurementDTO> measurements;
     private String notes;
-    private List<MultipartFile> photos; // Add photos field
+    private List<PhotoDTO> photos;
 
-    public CheckinForm() {
+    public CheckinFormDTO() {
         this.symptoms = new ArrayList<>();
         this.measurements = new ArrayList<>();
         this.photos = new ArrayList<>();
     }
 
-    public CheckinForm(String mood, List<SymptomDTO> symptoms, List<MeasurementDTO> measurements, String notes, List<MultipartFile> photos) {
+    public CheckinFormDTO(String mood, List<SymptomDTO> symptoms, List<MeasurementDTO> measurements, String notes, List<PhotoDTO> photos) {
         this.mood = mood;
         this.symptoms = symptoms != null ? symptoms : new ArrayList<>();
         this.measurements = measurements != null ? measurements : new ArrayList<>();
         this.notes = notes;
+        System.out.println("photos: " + photos);
         this.photos = photos != null ? photos : new ArrayList<>();
     }
-
-    // Getters and setters...
 
     public String getMood() {
         return mood;
@@ -60,17 +61,17 @@ public class CheckinForm {
         this.notes = notes;
     }
 
-    public List<MultipartFile> getPhotos() {
+    public List<PhotoDTO> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<MultipartFile> photos) {
+    public void setPhotos(List<PhotoDTO> photos) {
         this.photos = photos;
     }
 
     @Override
     public String toString() {
-        return "CheckinForm{" +
+        return "CheckinFormDTO{" +
                 "mood='" + mood + '\'' +
                 ", symptoms=" + symptoms +
                 ", measurements=" + measurements +
