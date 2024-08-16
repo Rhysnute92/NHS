@@ -111,10 +111,14 @@ export class QuestionnaireManager {
     });
 
     try {
-      await postData(`/api/userQuestionnaires/save/${questionnaireId}`, responses);
+      await postData(
+        `/api/userQuestionnaires/save/${questionnaireId}`,
+        responses
+      );
       alert(
         "Your responses have been saved. You can return later to complete the questionnaire."
       );
+      window.location.href = "/management";
     } catch (error) {
       console.error("Error saving form data:", error);
       alert("An error occurred while saving your responses.");
