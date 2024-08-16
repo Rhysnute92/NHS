@@ -36,73 +36,83 @@ public class UserQuestionnaireController {
     @Autowired
     private UserQuestionService userQuestionService;
 
+    // Helper method to get the current user's ID
+    private Long getCurrentUserId() {
+        Object principal = authenticationFacade.getAuthentication().getPrincipal();
+        return ((CustomUserDetails) principal).getUserId();
+    }
+
     /**
-     * Retrieves a list of user questionnaires for a specific user.
+     * Retrieves a list of user questionnaires for the authenticated user.
      *
-     * @param userID the ID of the user
      * @return a list of user questionnaires
      */
-    @GetMapping("/user/{userID}")
-    public ResponseEntity<List<UserQuestionnaire>> getUserQuestionnaires(@PathVariable Long userID) {
+    @GetMapping("/user")
+    public ResponseEntity<List<UserQuestionnaire>> getUserQuestionnaires() {
+        Long userID = getCurrentUserId();
         List<UserQuestionnaire> userQuestionnaires = userQuestionnaireService.getUserQuestionnaires(userID);
         return ResponseEntity.ok(userQuestionnaires);
     }
 
     /**
-     * Retrieves a list of completed user questionnaires for a specific user.
+     * Retrieves a list of completed user questionnaires for the authenticated user.
      *
-     * @param userID the ID of the user
      * @return a list of completed user questionnaires
      */
-    @GetMapping("/user/{userID}/completed")
-    public ResponseEntity<List<UserQuestionnaire>> getCompletedUserQuestionnaires(@PathVariable Long userID) {
+    @GetMapping("/user/completed")
+    public ResponseEntity<List<UserQuestionnaire>> getCompletedUserQuestionnaires() {
+        Long userID = getCurrentUserId();
         List<UserQuestionnaire> userQuestionnaires = userQuestionnaireService.getCompletedUserQuestionnaires(userID);
         return ResponseEntity.ok(userQuestionnaires);
     }
 
     /**
-     * Retrieves a list of incomplete user questionnaires for a specific user.
+     * Retrieves a list of incomplete user questionnaires for the authenticated
+     * user.
      *
-     * @param userID the ID of the user
      * @return a ResponseEntity containing a list of incomplete user questionnaires
      */
-    @GetMapping("/user/{userID}/incomplete")
-    public ResponseEntity<List<UserQuestionnaire>> getIncompleteUserQuestionnaires(@PathVariable Long userID) {
+    @GetMapping("/user/incomplete")
+    public ResponseEntity<List<UserQuestionnaire>> getIncompleteUserQuestionnaires() {
+        Long userID = getCurrentUserId();
         List<UserQuestionnaire> userQuestionnaires = userQuestionnaireService.getIncompleteUserQuestionnaires(userID);
         return ResponseEntity.ok(userQuestionnaires);
     }
 
     /**
-     * Retrieves a user questionnaire for a specific user and questionnaire ID.
+     * Retrieves a user questionnaire for the authenticated user and questionnaire
+     * ID.
      *
-     * @param userID          the ID of the user
      * @param questionnaireId the ID of the questionnaire
      * @return a ResponseEntity containing the user questionnaire, or a 404 response
      *         if not found
      */
-    @GetMapping("/user/{userID}/questionnaire/{questionnaireId}")
-    public ResponseEntity<UserQuestionnaire> getUserQuestionnaire(@PathVariable Long userID,
-            @PathVariable Long questionnaireId) {
+    @GetMapping("/user/questionnaire/{questionnaireId}")
+    public ResponseEntity<UserQuestionnaire> getUserQuestionnaire(@PathVariable Long questionnaireId) {
+        Long userID = getCurrentUserId();
         Optional<UserQuestionnaire> userQuestionnaire = userQuestionnaireService.getUserQuestionnaire(userID,
                 questionnaireId);
+
         return userQuestionnaire.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     /**
-     * Creates a new user questionnaire.
+     * Creates a new user questionnaire for the authenticated user.
      *
      * @param userQuestionnaire the user questionnaire to be created
      * @return the created user questionnaire
      */
     @PostMapping
     public ResponseEntity<UserQuestionnaire> createUserQuestionnaire(@RequestBody UserQuestionnaire userQuestionnaire) {
+        Long userID = getCurrentUserId();
+        userQuestionnaire.setUserID(userID);
         UserQuestionnaire savedUserQuestionnaire = userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
         return ResponseEntity.ok(savedUserQuestionnaire);
     }
 
     /**
-     * Updates an existing user questionnaire.
+     * Updates an existing user questionnaire for the authenticated user.
      *
      * @param id                the ID of the user questionnaire to update
      * @param userQuestionnaire the updated user questionnaire
@@ -111,36 +121,34 @@ public class UserQuestionnaireController {
     @PutMapping("/{id}")
     public ResponseEntity<UserQuestionnaire> updateUserQuestionnaire(@PathVariable Long id,
             @RequestBody UserQuestionnaire userQuestionnaire) {
-        System.out.println("Received update request for ID: " + id);
-        Object principal = authenticationFacade.getAuthentication().getPrincipal();
-        Long userID = ((CustomUserDetails) principal).getUserId();
-        System.out.println("User ID: " + userID);
-        userQuestionnaire.setUserID(userID);
-        Optional<UserQuestionnaire> existingUserQuestionnaire = userQuestionnaireService
-                .getUserQuestionnaire(userID, id);
+        Long userID = getCurrentUserId();
+        Optional<UserQuestionnaire> existingUserQuestionnaire = userQuestionnaireService.getUserQuestionnaire(userID,
+                id);
 
         if (existingUserQuestionnaire.isPresent()) {
             Questionnaire existingQuestionnaire = existingUserQuestionnaire.get().getQuestionnaire();
             userQuestionnaire.setQuestionnaire(existingQuestionnaire);
             userQuestionnaire.setUserQuestionnaireId(id);
+            userQuestionnaire.setUserID(userID); // Ensure the user ID is set correctly
             UserQuestionnaire updatedUserQuestionnaire = userQuestionnaireService
                     .saveUserQuestionnaire(userQuestionnaire);
             return ResponseEntity.ok(updatedUserQuestionnaire);
         } else {
-            System.out.println("UserQuestionnaire not found for ID: " + id + " and user ID: " + userID);
             return ResponseEntity.notFound().build();
         }
     }
 
     /**
-     * Deletes a user questionnaire by its ID.
+     * Deletes a user questionnaire by its ID for the authenticated user.
      *
      * @param id the ID of the user questionnaire to delete
      * @return a ResponseEntity indicating the result of the deletion
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUserQuestionnaire(@PathVariable Long id) {
-        Optional<UserQuestionnaire> existingUserQuestionnaire = userQuestionnaireService.getUserQuestionnaire(null, id);
+        Long userID = getCurrentUserId();
+        Optional<UserQuestionnaire> existingUserQuestionnaire = userQuestionnaireService.getUserQuestionnaire(userID,
+                id);
         if (existingUserQuestionnaire.isPresent()) {
             userQuestionnaireService.deleteUserQuestionnaire(id);
             return ResponseEntity.noContent().build();

@@ -20,11 +20,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 
+import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Model.UserQuestionnaire;
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Service.UserQuestionnaireService;
-import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
 
 class UserQuestionnaireControllerUnitTests {
 
@@ -68,80 +68,72 @@ class UserQuestionnaireControllerUnitTests {
 
     @Test
     void testGetUserQuestionnaires() {
-        Long userID = 123L;
         List<UserQuestionnaire> userQuestionnaires = new ArrayList<>();
         userQuestionnaires.add(userQuestionnaire);
-        when(userQuestionnaireService.getUserQuestionnaires(userID)).thenReturn(userQuestionnaires);
+        when(userQuestionnaireService.getUserQuestionnaires(123L)).thenReturn(userQuestionnaires);
 
-        ResponseEntity<List<UserQuestionnaire>> response = userQuestionnaireController.getUserQuestionnaires(userID);
+        ResponseEntity<List<UserQuestionnaire>> response = userQuestionnaireController.getUserQuestionnaires();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(1, response.getBody().size());
-        verify(userQuestionnaireService, times(1)).getUserQuestionnaires(userID);
+        verify(userQuestionnaireService, times(1)).getUserQuestionnaires(123L);
     }
 
     @Test
     void testGetCompletedUserQuestionnaires() {
-        Long userID = 123L;
-        List<UserQuestionnaire> userQuestionnaires = new ArrayList<>();
         userQuestionnaire.setQuestionnaireIsCompleted(true);
+        List<UserQuestionnaire> userQuestionnaires = new ArrayList<>();
         userQuestionnaires.add(userQuestionnaire);
-        when(userQuestionnaireService.getCompletedUserQuestionnaires(userID)).thenReturn(userQuestionnaires);
+        when(userQuestionnaireService.getCompletedUserQuestionnaires(123L)).thenReturn(userQuestionnaires);
 
-        ResponseEntity<List<UserQuestionnaire>> response = userQuestionnaireController
-                .getCompletedUserQuestionnaires(userID);
+        ResponseEntity<List<UserQuestionnaire>> response = userQuestionnaireController.getCompletedUserQuestionnaires();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(1, response.getBody().size());
-        verify(userQuestionnaireService, times(1)).getCompletedUserQuestionnaires(userID);
+        verify(userQuestionnaireService, times(1)).getCompletedUserQuestionnaires(123L);
     }
 
     @Test
     void testGetIncompleteUserQuestionnaires() {
-        Long userID = 123L;
-        List<UserQuestionnaire> userQuestionnaires = new ArrayList<>();
         userQuestionnaire.setQuestionnaireIsCompleted(false);
+        List<UserQuestionnaire> userQuestionnaires = new ArrayList<>();
         userQuestionnaires.add(userQuestionnaire);
-        when(userQuestionnaireService.getIncompleteUserQuestionnaires(userID)).thenReturn(userQuestionnaires);
+        when(userQuestionnaireService.getIncompleteUserQuestionnaires(123L)).thenReturn(userQuestionnaires);
 
         ResponseEntity<List<UserQuestionnaire>> response = userQuestionnaireController
-                .getIncompleteUserQuestionnaires(userID);
+                .getIncompleteUserQuestionnaires();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(1, response.getBody().size());
-        verify(userQuestionnaireService, times(1)).getIncompleteUserQuestionnaires(userID);
+        verify(userQuestionnaireService, times(1)).getIncompleteUserQuestionnaires(123L);
     }
 
     @Test
     void testGetUserQuestionnaire() {
-        Long userID = 123L;
         Long questionnaireId = 1L;
-        when(userQuestionnaireService.getUserQuestionnaire(userID, questionnaireId))
+        when(userQuestionnaireService.getUserQuestionnaire(123L, questionnaireId))
                 .thenReturn(Optional.of(userQuestionnaire));
 
-        ResponseEntity<UserQuestionnaire> response = userQuestionnaireController.getUserQuestionnaire(userID,
-                questionnaireId);
+        ResponseEntity<UserQuestionnaire> response = userQuestionnaireController.getUserQuestionnaire(questionnaireId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(userQuestionnaire, response.getBody());
-        verify(userQuestionnaireService, times(1)).getUserQuestionnaire(userID, questionnaireId);
+        verify(userQuestionnaireService, times(1)).getUserQuestionnaire(123L, questionnaireId);
     }
 
     @Test
     void testGetUserQuestionnaireNotFound() {
-        Long userID = 123L;
         Long questionnaireId = 1L;
-        when(userQuestionnaireService.getUserQuestionnaire(userID, questionnaireId)).thenReturn(Optional.empty());
+        when(userQuestionnaireService.getUserQuestionnaire(123L, questionnaireId)).thenReturn(Optional.empty());
 
-        ResponseEntity<UserQuestionnaire> response = userQuestionnaireController.getUserQuestionnaire(userID,
-                questionnaireId);
+        ResponseEntity<UserQuestionnaire> response = userQuestionnaireController.getUserQuestionnaire(questionnaireId);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        verify(userQuestionnaireService, times(1)).getUserQuestionnaire(userID, questionnaireId);
+        verify(userQuestionnaireService, times(1)).getUserQuestionnaire(123L, questionnaireId);
     }
 
     @Test
@@ -160,7 +152,7 @@ class UserQuestionnaireControllerUnitTests {
     @Test
     void testUpdateUserQuestionnaire() {
         Long questionnaireId = 1L;
-        when(userQuestionnaireService.getUserQuestionnaire(userQuestionnaire.getUserID(), questionnaireId))
+        when(userQuestionnaireService.getUserQuestionnaire(123L, questionnaireId))
                 .thenReturn(Optional.of(userQuestionnaire));
         when(userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire)).thenReturn(userQuestionnaire);
 
@@ -176,20 +168,19 @@ class UserQuestionnaireControllerUnitTests {
     @Test
     void testUpdateUserQuestionnaireNotFound() {
         Long questionnaireId = 1L;
-        when(userQuestionnaireService.getUserQuestionnaire(userQuestionnaire.getUserID(), questionnaireId))
-                .thenReturn(Optional.empty());
+        when(userQuestionnaireService.getUserQuestionnaire(123L, questionnaireId)).thenReturn(Optional.empty());
 
         ResponseEntity<UserQuestionnaire> response = userQuestionnaireController
                 .updateUserQuestionnaire(questionnaireId, userQuestionnaire);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        verify(userQuestionnaireService, times(1)).getUserQuestionnaire(userQuestionnaire.getUserID(), questionnaireId);
+        verify(userQuestionnaireService, times(1)).getUserQuestionnaire(123L, questionnaireId);
     }
 
     @Test
     void testDeleteUserQuestionnaire() {
         Long questionnaireId = 1L;
-        when(userQuestionnaireService.getUserQuestionnaire(null, questionnaireId))
+        when(userQuestionnaireService.getUserQuestionnaire(123L, questionnaireId))
                 .thenReturn(Optional.of(userQuestionnaire));
         doNothing().when(userQuestionnaireService).deleteUserQuestionnaire(questionnaireId);
 
@@ -202,11 +193,11 @@ class UserQuestionnaireControllerUnitTests {
     @Test
     void testDeleteUserQuestionnaireNotFound() {
         Long questionnaireId = 1L;
-        when(userQuestionnaireService.getUserQuestionnaire(null, questionnaireId)).thenReturn(Optional.empty());
+        when(userQuestionnaireService.getUserQuestionnaire(123L, questionnaireId)).thenReturn(Optional.empty());
 
         ResponseEntity<Void> response = userQuestionnaireController.deleteUserQuestionnaire(questionnaireId);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        verify(userQuestionnaireService, times(1)).getUserQuestionnaire(null, questionnaireId);
+        verify(userQuestionnaireService, times(1)).getUserQuestionnaire(123L, questionnaireId);
     }
 }

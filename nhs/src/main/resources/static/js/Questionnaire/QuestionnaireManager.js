@@ -25,7 +25,7 @@ export class QuestionnaireManager {
   }
 
   async loadAssignedQuestionnaires() {
-    const endpoint = `/api/userQuestionnaires/user/${this.userID}/incomplete`;
+    const endpoint = `/api/userQuestionnaires/user/incomplete`;
     console.log(`Fetching assigned questionnaires from: ${endpoint}`);
 
     try {
