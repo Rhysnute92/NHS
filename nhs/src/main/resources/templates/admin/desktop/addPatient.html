@@ -8,6 +8,7 @@
 <body>
 <div class="container">
     <header th:replace="~{common/fragments/header}"></header>
+    <nav th:replace="~{common/fragments/navbaradmin}" class="nav"></nav>
     <h1 id="registration">Patient Registration</h1>
     <form action="/api/register" id="register" method="post">
         <label for="patientName">Patient Name:</label>

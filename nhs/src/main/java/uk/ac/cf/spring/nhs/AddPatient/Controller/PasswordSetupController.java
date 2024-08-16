@@ -40,8 +40,6 @@ public class PasswordSetupController {
             return "login/desktop/resetPassword";
         }
 
-        //TODO Add validation following this for if passwords do not match - popups
-
         UserCredentials userCredentials = userCredentialsRepository.findByPasswordSetupToken(token);
 
         if (userCredentials == null) {
@@ -49,8 +47,6 @@ public class PasswordSetupController {
             model.addAttribute("error", "Expired Link.");
             return "login/desktop/resetPassword";
         }
-
-        //TODO Add error page / popup for invalid token / invalid link
 
         String encodedPassword = passwordEncoder.encode(newPassword);
         userCredentialsRepository.updateUserPasswordAndToken(encodedPassword, null, userCredentials.getUserId());
