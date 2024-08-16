@@ -4,18 +4,102 @@
       layout:decorate="~{layout/default}"
       lang="en">
 <head>
-  <title>Cellulitis Episodes</title>
+  <title>Events</title>
   <link rel="stylesheet" th:href="@{/css/diary/events.css}" />
 </head>
 <body>
 <main layout:fragment="content">
   <div class="events-container">
     <h2>Cellulitis Episodes</h2>
-    <button class="btn btn-primary" id="open-modal-btn">
-      Add New Event
-    </button>
 
-    <div th:replace="~{diary/fragments/eventModal :: eventModal}"></div>
+    <custom-modal class="event-modal">
+      <button slot="open-btn">Add Cellulitis Episode</button>
+      <span slot="title">Add Cellulitis Episode</span>
+      <div slot="content">
+        <form id="eventForm" th:action="@{/diary/events}" method="post">
+          <div class="modal-section">
+            <h3>When did the episode occur?</h3>
+            <label for="eventDate" class="form-label">Date of Event</label>
+            <input type="date" class="form-control" id="eventDate" name="eventDate" required>
+          </div>
+          <div class="modal-section">
+            <h3>What symptoms did you have?</h3>
+            <div>
+              <input type="checkbox" id="redness" name="symptoms" value="redness">
+              <label for="redness">Redness</label>
+            </div>
+            <div>
+              <input type="checkbox" id="swelling" name="symptoms" value="swelling">
+              <label for="swelling">Swelling</label>
+            </div>
+            <div>
+              <input type="checkbox" id="blisteredSkin" name="symptoms" value="blistered skin">
+              <label for="blisteredSkin">Blistered Skin</label>
+            </div>
+            <div>
+              <input type="checkbox" id="pain" name="symptoms" value="pain">
+              <label for="pain">Pain</label>
+            </div>
+            <div>
+              <input type="checkbox" id="warmth" name="symptoms" value="warmth">
+              <label for="warmth">Warmth</label>
+            </div>
+            <div>
+              <input type="checkbox" id="fever" name="symptoms" value="fever">
+              <label for="fever">Fever</label>
+            </div>
+          </div>
+<!--          <div class="modal-section">-->
+<!--            <label for="severity" class="form-label">Severity</label>-->
+<!--            <select class="form-control" id="severity" name="severity" required>-->
+<!--              <option value="">Select Severity</option>-->
+<!--              <option value="mild">Mild</option>-->
+<!--              <option value="moderate">Moderate</option>-->
+<!--              <option value="severe">Severe</option>-->
+<!--            </select>-->
+<!--          </div>-->
+          <div class="modal-section">
+            <h3>How long did the episode last?</h3>
+            <label for="duration" class="form-label">Duration in days:</label>
+            <input type="number" class="form-control" id="duration" name="duration" required>
+          </div>
+          <div class="modal-section">
+            <h3>What treatment did you receive?</h3>
+            <div>
+              <input type="checkbox" id="treatment" name="treatment" value="treatment">
+              <label for="treatment">I did not receive treatment for this episode of cellulitis.</label>
+            </div>
+            <h3>Tick all that apply:</h3>
+            <div class="treatment-details">
+              <div>
+                <input type="checkbox" id="antibiotics" name="antibiotics" value="antibiotics">
+                <label for="antibiotics">I was prescribed oral antibiotics.</label>
+              </div>
+              <div class="antibiotics-details">
+                <label for="antibioticsName">Name of antibiotics you were prescribed (optional):</label>
+                <input type="text" class="form-control" id="antibioticsName" name="antibioticsName">
+              </div>
+              <div>
+                <input type="checkbox" id="antibioticsIV" name="antibioticsIV" value="antibioticsIV">
+                <label for="antibioticsIV">I received IV antibiotics.</label>
+              </div>
+              <div>
+                <input type="checkbox" id="painkillers" name="painkillers" value="painkillers">
+                <label for="painkillers">I was prescribed painkillers.</label>
+              </div>
+              <div>
+                <input type="checkbox" id="hospital" name="hospital" value="hospital">
+                <label for="hospital">I was admitted to hospital.</label>
+              </div>
+            </div>
+          </div>
+          <div class="modal-section">
+
+          </div>
+          <button type="submit" form="eventForm" class="btn btn-primary">Save Event</button>
+        </form>
+      </div>
+    </custom-modal>
 
     <div class="event-list" id="eventList">
        <div class="event-item" th:each="event : ${events}">
@@ -28,6 +112,9 @@
     </div>
   </div>
 </main>
-<script layout:fragment="scripts" src="/js/diary/events.js"></script>
+<th:block layout:fragment="scripts">
+  <script src="/js/common/customModal.js"></script>
+  <script src="/js/diary/events.js"></script>
+</th:block>
 </body>
 </html>

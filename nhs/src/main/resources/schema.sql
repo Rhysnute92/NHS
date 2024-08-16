@@ -131,6 +131,7 @@ CREATE TABLE DiarySymptoms (
 
 
 CREATE TABLE Events (
+    EventID BIGINT AUTO_INCREMENT PRIMARY KEY,
     EventDate DATE NOT NULL,
     EventSymptoms TEXT,
     EventSeverity INT,

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="eventModal">
+  <div class="modal" id="eventModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="eventModalLabel">Add Cellulitis Event</h2>
+        <button type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="eventForm" th:action="@{/diary/events}" method="post">
+          <div class="modal-section">
+            <h3>When did the episode occur?</h3>
+            <label for="eventDate" class="form-label">Date of Event</label>
+            <input type="date" class="form-control" id="eventDate" name="eventDate" required>
+          </div>
+          <div class="modal-section">
+            <h3>What symptoms did you have?</h3>
+            <input type="checkbox" id="redness" name="symptoms" value="redness">
+            <label for="redness">Redness</label>
+            <input type="checkbox" id="swelling" name="symptoms" value="swelling">
+            <label for="swelling">Swelling</label>
+            <input type="checkbox" id="pain" name="symptoms" value="pain">
+            <label for="pain">Pain</label>
+            <input type="checkbox" id="warmth" name="symptoms" value="warmth">
+            <label for="warmth">Warmth</label>
+            <input type="checkbox" id="fever" name="symptoms" value="fever">
+            <label for="fever">Fever</label>
+          </div>
+          <div class="modal-section">
+            <label for="severity" class="form-label">Severity</label>
+            <select class="form-control" id="severity" name="severity" required>
+              <option value="">Select Severity</option>
+              <option value="mild">Mild</option>
+              <option value="moderate">Moderate</option>
+              <option value="severe">Severe</option>
+            </select>
+          </div>
+          <div class="modal-section">
+            <h3>How long did the episode last?</h3>
+            <label for="duration" class="form-label">Duration</label>
+            <input type="number" class="form-control" id="duration" name="duration" required>
+          </div>
+          <div class="modal-section">
+            <label for="treatment" class="form-label">Treatment</label>
+            <textarea class="form-control" id="treatment" name="treatment"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" aria-label="Close">Close</button>
+        <button type="submit" form="eventForm" class="btn btn-primary">Save Event</button>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
