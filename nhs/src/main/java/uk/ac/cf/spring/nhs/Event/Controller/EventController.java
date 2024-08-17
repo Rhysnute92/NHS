@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.nhs.Event;
+package uk.ac.cf.spring.nhs.Event.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,8 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
-import uk.ac.cf.spring.nhs.Diary.Entity.Event;
-import uk.ac.cf.spring.nhs.Diary.Service.EventService;
+import uk.ac.cf.spring.nhs.Event.Service.EventService;
+import uk.ac.cf.spring.nhs.Event.DTO.EventDTO;
+import uk.ac.cf.spring.nhs.Event.Entity.Event;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 
 import java.util.HashMap;
@@ -35,12 +36,11 @@ public class EventController {
     @PostMapping("/events")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> createEvent(
-            @ModelAttribute Event event,
+            @ModelAttribute EventDTO eventDTO,
             @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         long userId = userDetails.getUserId();
-        event.setUserId(userId);
-        Event savedEvent = eventService.saveEvent(event);
+        Event savedEvent = eventService.saveEvent(eventDTO, userId);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Event created successfully");
         response.put("event", savedEvent);

@@ -14,7 +14,7 @@ import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
 import uk.ac.cf.spring.nhs.Photo.Service.PhotoService;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
-import uk.ac.cf.spring.nhs.Diary.Service.EventService;
+import uk.ac.cf.spring.nhs.Event.Service.EventService;
 
 import java.util.HashMap;
 import java.util.List;

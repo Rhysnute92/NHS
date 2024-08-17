@@ -133,12 +133,33 @@ CREATE TABLE DiarySymptoms (
 CREATE TABLE Events (
     EventID BIGINT AUTO_INCREMENT PRIMARY KEY,
     EventDate DATE NOT NULL,
-    EventSymptoms TEXT,
-    EventSeverity INT,
     EventDuration INT,
-    EventTreatment TEXT,
     UserID BIGINT,
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+);
+
+CREATE TABLE Treatments (
+    TreatmentID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    TreatmentType VARCHAR(255),
+    TreatmentDetails TEXT,
+    UserID BIGINT,
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+);
+
+CREATE TABLE EventTreatments (
+    EventTreatmentID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    EventID BIGINT,
+    TreatmentID BIGINT,
+    FOREIGN KEY (EventID) REFERENCES Events(EventID),
+    FOREIGN KEY (TreatmentID) REFERENCES Treatments(TreatmentID)
+);
+
+CREATE TABLE EventSymptoms (
+    EventSymptomID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    EventID BIGINT,
+    SymptomID BIGINT,
+    FOREIGN KEY (EventID) REFERENCES Events(EventID),
+    FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
 );
 
 --Not implemented yet--
