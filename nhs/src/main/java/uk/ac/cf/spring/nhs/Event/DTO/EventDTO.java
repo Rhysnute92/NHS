@@ -10,16 +10,14 @@ public class EventDTO {
 
     private LocalDate date;
     private Integer duration;
-    private Long userId;
-    private List<SymptomDTO> symptoms; // List of SymptomDTO objects
-    private List<TreatmentDTO> treatments; // List of TreatmentDTO objects
+    private List<SymptomDTO> symptoms;
+    private List<TreatmentDTO> treatments;
 
     public EventDTO() {}
 
-    public EventDTO(LocalDate date, Integer duration, Long userId, List<SymptomDTO> symptoms, List<TreatmentDTO> treatments) {
+    public EventDTO(LocalDate date, Integer duration, List<SymptomDTO> symptoms, List<TreatmentDTO> treatments) {
         this.date = date;
         this.duration = duration;
-        this.userId = userId;
         this.symptoms = symptoms;
         this.treatments = treatments;
     }
@@ -41,14 +39,6 @@ public class EventDTO {
         this.duration = duration;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public List<SymptomDTO> getSymptoms() {
         return symptoms;
     }
@@ -63,5 +53,15 @@ public class EventDTO {
 
     public void setTreatments(List<TreatmentDTO> treatments) {
         this.treatments = treatments;
+    }
+
+    @Override
+    public String toString() {
+        return "EventDTO{" +
+                "date=" + date +
+                ", duration=" + duration +
+                ", symptoms=" + symptoms +
+                ", treatments=" + treatments +
+                '}';
     }
 }

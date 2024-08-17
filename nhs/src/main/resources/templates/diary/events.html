@@ -16,79 +16,68 @@
       <button slot="open-btn">Add Cellulitis Episode</button>
       <span slot="title">Add Cellulitis Episode</span>
       <div slot="content">
-        <form id="eventForm" th:action="@{/diary/events}" method="post">
+        <form id="event-form" th:action="@{/diary/events}" method="post">
           <div class="modal-section">
             <h3>When did the episode occur?</h3>
-            <label for="eventDate" class="form-label">Date of Event</label>
-            <input type="date" class="form-control" id="eventDate" name="eventDate" required>
+            <label for="date" class="form-label">Date of Event</label>
+            <input type="date" class="form-control" id="date" name="date" required>
           </div>
-          <div class="modal-section">
-            <h3>What symptoms did you have?</h3>
-            <div>
-              <input type="checkbox" id="redness" name="symptoms" value="redness">
-              <label for="redness">Redness</label>
+            <div class="modal-section">
+              <h3>What symptoms did you have?</h3>
+
+              <!-- Redness -->
+              <div>
+                <input type="checkbox" id="redness" name="redness" value="Redness" aria-controls="redness-severity">
+                <label for="redness">Redness</label>
+              </div>
+              <div id="redness-severity" class="checkin-symptom-selection">
+                <th:block th:replace="diary/fragments/symptomSeverity :: symptomSeverity('redness')"></th:block>
+              </div>
+
+              <!-- Swelling -->
+              <div>
+                <input type="checkbox" id="swelling" name="swelling" value="Swelling" aria-controls="swelling-severity">
+                <label for="swelling">Swelling</label>
+              </div>
+              <div id="swelling-severity" class="checkin-symptom-selection">
+                <th:block th:replace="diary/fragments/symptomSeverity :: symptomSeverity('swelling')"></th:block>
+              </div>
             </div>
-            <div>
-              <input type="checkbox" id="swelling" name="symptoms" value="swelling">
-              <label for="swelling">Swelling</label>
-            </div>
-            <div>
-              <input type="checkbox" id="blisteredSkin" name="symptoms" value="blistered skin">
-              <label for="blisteredSkin">Blistered Skin</label>
-            </div>
-            <div>
-              <input type="checkbox" id="pain" name="symptoms" value="pain">
-              <label for="pain">Pain</label>
-            </div>
-            <div>
-              <input type="checkbox" id="warmth" name="symptoms" value="warmth">
-              <label for="warmth">Warmth</label>
-            </div>
-            <div>
-              <input type="checkbox" id="fever" name="symptoms" value="fever">
-              <label for="fever">Fever</label>
-            </div>
-          </div>
-<!--          <div class="modal-section">-->
-<!--            <label for="severity" class="form-label">Severity</label>-->
-<!--            <select class="form-control" id="severity" name="severity" required>-->
-<!--              <option value="">Select Severity</option>-->
-<!--              <option value="mild">Mild</option>-->
-<!--              <option value="moderate">Moderate</option>-->
-<!--              <option value="severe">Severe</option>-->
-<!--            </select>-->
-<!--          </div>-->
+
+          <!-- Duration -->
           <div class="modal-section">
             <h3>How long did the episode last?</h3>
             <label for="duration" class="form-label">Duration in days:</label>
             <input type="number" class="form-control" id="duration" name="duration" required>
           </div>
+
+          <!-- Treatment -->
           <div class="modal-section">
             <h3>What treatment did you receive?</h3>
             <div>
-              <input type="checkbox" id="treatment" name="treatment" value="treatment">
-              <label for="treatment">I did not receive treatment for this episode of cellulitis.</label>
+              <input type="checkbox" id="receivedTreatment" aria-controls="treatment-details">
+              <label for="receivedTreatment">I did not receive treatment for this episode of cellulitis.</label>
             </div>
-            <h3>Tick all that apply:</h3>
-            <div class="treatment-details">
+            <div class="treatment-details conditional-hidden" id="treatment-details">
+              <h3>Tick all that apply:</h3>
               <div>
-                <input type="checkbox" id="antibiotics" name="antibiotics" value="antibiotics">
+                <input type="checkbox" id="antibiotics" name="treatments[0].type" value="antibiotics" aria-controls="antibiotics-details">
                 <label for="antibiotics">I was prescribed oral antibiotics.</label>
               </div>
-              <div class="antibiotics-details">
+              <div class="antibiotics-details" id="antibiotics-details">
                 <label for="antibioticsName">Name of antibiotics you were prescribed (optional):</label>
-                <input type="text" class="form-control" id="antibioticsName" name="antibioticsName">
+                <input type="text" class="form-control" id="antibioticsName" name="treatments[0].details">
               </div>
               <div>
-                <input type="checkbox" id="antibioticsIV" name="antibioticsIV" value="antibioticsIV">
+                <input type="checkbox" id="antibioticsIV" name="treatments[1].type" value="IV antibiotics">
                 <label for="antibioticsIV">I received IV antibiotics.</label>
               </div>
               <div>
-                <input type="checkbox" id="painkillers" name="painkillers" value="painkillers">
+                <input type="checkbox" id="painkillers" name="treatments[2].type" value="painkillers">
                 <label for="painkillers">I was prescribed painkillers.</label>
               </div>
               <div>
-                <input type="checkbox" id="hospital" name="hospital" value="hospital">
+                <input type="checkbox" id="hospital" name="treatments[3].type" value="hospital">
                 <label for="hospital">I was admitted to hospital.</label>
               </div>
             </div>
@@ -96,25 +85,25 @@
           <div class="modal-section">
 
           </div>
-          <button type="submit" form="eventForm" class="btn btn-primary">Save Event</button>
+          <button type="submit" form="event-form" class="btn btn-primary">Save Event</button>
         </form>
       </div>
     </custom-modal>
 
     <div class="event-list" id="eventList">
-       <div class="event-item" th:each="event : ${events}">
-        <h4 th:text="${#temporals.format(event.eventDate, 'yyyy-MM-dd')}"></h4>
-        <p th:text="${event.symptoms}"></p>
-        <p th:text="${event.severity}"></p>
-        <p th:text="${event.duration}"></p>
-        <p th:text="${event.treatment}"></p>
-      </div>
+<!--       <div class="event-item" th:each="event : ${events}">-->
+<!--        <h4 th:text="${#temporals.format(event.date, 'yyyy-MM-dd')}"></h4>-->
+<!--        <p th:text="${event.symptoms}"></p>-->
+<!--        <p th:text="${event.severity}"></p>-->
+<!--        <p th:text="${event.duration}"></p>-->
+<!--        <p th:text="${event.treatment}"></p>-->
+<!--      </div>-->
     </div>
   </div>
 </main>
 <th:block layout:fragment="scripts">
   <script src="/js/common/customModal.js"></script>
-  <script src="/js/diary/events.js"></script>
+  <script src="/js/diary/events.js" type="module"></script>
 </th:block>
 </body>
 </html>
