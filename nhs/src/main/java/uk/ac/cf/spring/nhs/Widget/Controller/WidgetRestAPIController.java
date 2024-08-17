@@ -35,13 +35,18 @@ public class WidgetRestAPIController {
         Object principal = authenticationFacade.getAuthentication().getPrincipal();
         Long userId = ((CustomUserDetails) principal).getUserId();
 
-        // If no day is provided, use the current day
         if (day == null) {
-            day = LocalDate.now().getDayOfWeek().getValue();
+            day = LocalDate.now().getDayOfMonth();
+            System.out.println("Defaulted to current day: " + day);
+        } else {
+            System.out.println("Requested day: " + day);
         }
 
         int totalTasks = userTaskService.getTasksForUser(userId).size();
         int completedTasks = userTaskService.countCompletedTasksForday(userId, day);
+
+        System.out.println("Total tasks for user " + userId + ": " + totalTasks);
+        System.out.println("Completed tasks for user " + userId + " on day " + day + ": " + completedTasks);
 
         return new UserTaskDTO(totalTasks, completedTasks);
     }

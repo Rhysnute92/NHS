@@ -10,7 +10,6 @@ export class TaskWidget {
   }
 
   async updateWidgetData() {
-    // Prevent function from running if the widget element is not found
     if (!this.widgetElement) return;
 
     try {
@@ -28,7 +27,6 @@ export class TaskWidget {
   }
 
   updateProgressCircle(completedTasks, totalTasks) {
-    // Double-check that the widget element is still available
     if (!this.widgetElement) {
       console.error("Task widget element not found during update.");
       return;
@@ -36,7 +34,6 @@ export class TaskWidget {
 
     console.log("Updating progress circle with", completedTasks, totalTasks);
 
-    // Safeguards to ensure the elements are found before interacting with them
     const progressCircle = this.widgetElement.querySelector(
       ".progress-circle .progress-circle"
     );
