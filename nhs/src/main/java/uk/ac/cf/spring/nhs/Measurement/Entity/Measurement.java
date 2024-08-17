@@ -29,7 +29,7 @@ public class Measurement {
     @Column(name = "UserID")
     private long userId;
 
-    public Measurement() {}
+    protected Measurement() {}
 
     public Measurement(String type, float value, String unit, long userId) {
         this.type = type;

@@ -16,11 +16,12 @@ public class SymptomService {
 
     @Transactional
     public Symptom saveSymptom(SymptomDTO symptomDTO, long userId) {
-        Symptom symptom = new Symptom();
-        symptom.setName(symptomDTO.getName());
-        symptom.setSeverity(symptomDTO.getSeverity());
+        Symptom symptom = new Symptom(
+                symptomDTO.getName(),
+                symptomDTO.getSeverity(),
+                userId
+        );
 
-        symptom.setUserId(userId);
         return symptomRepository.save(symptom);
     }
 }

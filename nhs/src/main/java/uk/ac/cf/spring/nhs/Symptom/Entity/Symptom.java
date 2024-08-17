@@ -2,6 +2,7 @@ package uk.ac.cf.spring.nhs.Symptom.Entity;
 
 import jakarta.persistence.*;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,7 +35,10 @@ public class Symptom {
     @ManyToMany(mappedBy = "symptoms")
     private Set<DiaryEntry> diaryEntries;
 
-    public Symptom() {}
+    @ManyToMany(mappedBy = "symptoms")
+    private Set<Event> events;
+
+    protected Symptom() {}
 
     public Symptom(String name, int severity, long userId) {
         this.name = name;

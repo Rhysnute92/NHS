@@ -30,7 +30,7 @@ public class Photo {
     @ManyToMany(mappedBy = "photos")
     private Set<DiaryEntry> diaryEntries;
 
-    public Photo() {}
+    protected Photo() {}
 
     public Photo(String url, Date date, String bodyPart, long userId) {
         this.url = url;

@@ -16,11 +16,12 @@ public class MeasurementService {
 
     @Transactional
     public Measurement saveMeasurement(MeasurementDTO measurementDTO, long userId) {
-        Measurement measurement = new Measurement();
-        measurement.setUserId(userId);
-        measurement.setType(measurementDTO.getType());
-        measurement.setValue(measurementDTO.getValue());
-        measurement.setUnit(measurementDTO.getUnit());
+        Measurement measurement = new Measurement(
+                measurementDTO.getType(),
+                measurementDTO.getValue(),
+                measurementDTO.getUnit(),
+                userId
+        );
 
         return measurementRepository.save(measurement);
     }
