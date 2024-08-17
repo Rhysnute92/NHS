@@ -45,8 +45,6 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 @AutoConfigureMockMvc
 public class DiaryControllerTest {
 
-    @InjectMocks
-    private DiaryController diaryController;
 
     @Autowired
     private WebApplicationContext context;
@@ -56,9 +54,6 @@ public class DiaryControllerTest {
 
     @MockBean
     private DiaryEntryService diaryEntryService;
-
-    @MockBean
-    private PhotoService photoService;
 
     @MockBean
     private AuthenticationInterface authenticationFacade;
