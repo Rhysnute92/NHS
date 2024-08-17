@@ -90,18 +90,13 @@
       </div>
     </custom-modal>
 
-    <div class="event-list" id="eventList">
-<!--       <div class="event-item" th:each="event : ${events}">-->
-<!--        <h4 th:text="${#temporals.format(event.date, 'yyyy-MM-dd')}"></h4>-->
-<!--        <p th:text="${event.symptoms}"></p>-->
-<!--        <p th:text="${event.severity}"></p>-->
-<!--        <p th:text="${event.duration}"></p>-->
-<!--        <p th:text="${event.treatment}"></p>-->
-<!--      </div>-->
+    <div class="event-list" id="event-list">
+      <event-card th:each="event : ${events}" th:attr="event-data=${objectMapper.writeValueAsString(event)}"></event-card>
     </div>
   </div>
 </main>
 <th:block layout:fragment="scripts">
+  <script src="/js/diary/components/EventCard.js"></script>
   <script src="/js/common/customModal.js"></script>
   <script src="/js/diary/events.js" type="module"></script>
 </th:block>

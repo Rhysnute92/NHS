@@ -1,5 +1,8 @@
 package uk.ac.cf.spring.nhs.Event.Controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +33,11 @@ public class EventController {
         long userId = userDetails.getUserId();
         List<Event> events = eventService.getEventsByUserId(userId);
         model.addAttribute("events", events);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        model.addAttribute("objectMapper", objectMapper);
+
         return "diary/events";
     }
 
