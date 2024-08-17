@@ -11,8 +11,8 @@ public class TaskCompletionWidget implements Widget {
         return "fragments/widgets/taskCompletion";
     }
 
-    @Override
+/*     @Override
     public String getScript() {
-        return "taskCompletion";
-    }
+        return "taskCompletionWidget";
+    } */
 }

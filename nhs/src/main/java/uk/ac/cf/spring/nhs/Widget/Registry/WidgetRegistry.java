@@ -46,7 +46,7 @@ public class WidgetRegistry {
         if (widget != null) {
             String script = widget.getScript();
             if (script != null) {
-                return script;
+                return "/js/widgets/" + script + ".js"; // Full path to the static resource
             }
         }
         return null;

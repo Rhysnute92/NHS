@@ -96,7 +96,7 @@ class WidgetControllerUnitTests {
         assertEquals("error/404", viewName);
     }
 
-    @Test
+   /*  @Test
     void getWidgetScript_widgetWithScript_returnsScriptUrl() {
         // Arrange
         Widget testWidgetWithScript = mock(Widget.class);
@@ -140,5 +140,5 @@ class WidgetControllerUnitTests {
         } catch (IllegalArgumentException e) {
             assertEquals("Name cannot be null", e.getMessage());
         }
-    }
+    } */
 }

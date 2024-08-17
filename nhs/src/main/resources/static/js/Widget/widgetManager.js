@@ -1,6 +1,5 @@
-// widgetManager.js
-
 import { WidgetService } from "./widgetService.js";
+import { TaskWidget } from "../widgets/taskCompletionWidget.js";
 
 export class WidgetManager {
   constructor(userWidgets) {
@@ -14,16 +13,11 @@ export class WidgetManager {
       console.log("Widget name:", widgetName);
 
       if (!this.addedWidgets.has(widgetName)) {
-        const fragmentContent = await WidgetService.fetchWidgetFragment(
-          widgetName
-        );
+        const fragmentContent = await WidgetService.fetchWidgetFragment(widgetName);
         this.appendWidgetToDOM(widgetName, fragmentContent);
         this.addedWidgets.add(widgetName);
 
-        const scriptUrl = await WidgetService.fetchWidgetScript(widgetName);
-        if (scriptUrl) {
-          this.loadWidgetScript(scriptUrl);
-        }
+        this.initializeWidget(widgetName); // Initialize the widget after adding it to DOM
       } else {
         console.log(`Widget ${widgetName} already added. Skipping.`);
       }
@@ -38,9 +32,19 @@ export class WidgetManager {
     document.getElementById("widget-container").appendChild(fragment);
   }
 
-  loadWidgetScript(scriptUrl) {
-    const script = document.createElement("script");
-    script.src = scriptUrl;
-    document.body.appendChild(script);
+  initializeWidget(widgetName) {
+    // Dynamically initialize the widget based on its name
+    switch (widgetName) {
+      case "task-completion":
+        const taskWidget = new TaskWidget();
+        taskWidget.updateWidgetData(); // Update widget data immediately
+        break;
+
+      // Add initialization for more widgets here if needed
+
+      default:
+        console.log(`No specific initialization for widget ${widgetName}`);
+        break;
+    }
   }
 }

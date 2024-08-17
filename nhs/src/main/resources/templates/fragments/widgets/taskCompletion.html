@@ -10,15 +10,14 @@
         cx="50"
         cy="50"
         r="45"
-        style="stroke-dasharray: 282.6; stroke-dashoffset: 141.3"
+        style="stroke-dasharray: 282.6; stroke-dashoffset: 282.6"
       ></circle>
     </svg>
     <div class="progress-text">
-      <p><span th:text="${completedTasks}">0</span>/10</p>
+      <p><span id="completedTasks">0</span>/<span id="totalTasks">10</span></p>
     </div>
   </div>
   <div class="task-widget-footer">
     <button class="complete-task-button">Complete Task</button>
   </div>
-  <script th:src="${widget.script}"></script>
 </div>
