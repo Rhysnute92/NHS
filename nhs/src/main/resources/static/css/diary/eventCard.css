@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:host {
+    width: 100%;
+}
+
+::slotted(ul) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 1rem !important; /* Override default padding */
+}
+
+.event {
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    background-color: var(--nhs-white);
+}
+
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.event-header h3 {
+    margin: 0;
+}
+
+.delete-event {
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.event-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.event-symptoms, .event-treatments {
+    flex: 1;
+    margin-right: 1rem;
+}
+
+.event-symptoms h4, .event-treatments h4 {
+    margin-top: 0;
+}

@@ -35,56 +35,7 @@ class EventCard extends HTMLElement {
         const treatments = Array.isArray(event.treatments) ? event.treatments : [];
 
         this.shadowRoot.innerHTML = `
-            <style>
-                * {
-                    box-sizing: border-box;
-                    padding: 0;
-                    margin: 0;
-                }
-                
-                :host {
-                    width: 100%;
-                }
-                
-                .event {
-                    border-radius: 8px;
-                    padding: 1rem;
-                    margin: 1rem 0;
-                    background-color: var(--nhs-white);
-                }
-                
-                .event-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 12px;
-                }
-                
-                .event-header h3 {
-                    margin: 0;
-                }
-                
-                .delete-event {
-                    background: transparent;
-                    border: none;
-                    font-size: 2rem;
-                    cursor: pointer;
-                }
-                
-                .event-body {
-                    display: flex;
-                    justify-content: space-between;
-                }
-                
-                .event-symptoms, .event-treatments {
-                    flex: 1;
-                    margin-right: 1rem;
-                }
-                
-                .event-symptoms h4, .event-treatments h4 {
-                    margin-top: 0;
-                }
-            </style>
+            <link rel="stylesheet" href="/css/diary/eventCard.css">
             <div class="event">
                 <div class="event-header">
                     <h3>${date}</h3>
