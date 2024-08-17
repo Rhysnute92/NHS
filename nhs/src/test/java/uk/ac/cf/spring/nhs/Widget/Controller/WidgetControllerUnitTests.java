@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.Widget.Controller;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -93,5 +94,51 @@ class WidgetControllerUnitTests {
 
         // Assert
         assertEquals("error/404", viewName);
+    }
+
+    @Test
+    void getWidgetScript_widgetWithScript_returnsScriptUrl() {
+        // Arrange
+        Widget testWidgetWithScript = mock(Widget.class);
+        when(testWidgetWithScript.getScript()).thenReturn("/static/js/widgets/testWidget.js");
+
+        // Manually add the widget to the registry using reflection
+        Map<String, Widget> mockWidgets = new HashMap<>();
+        mockWidgets.put("testWidgetWithScript", testWidgetWithScript);
+        ReflectionTestUtils.setField(WidgetRegistry.class, "widgets", mockWidgets);
+
+        // Act
+        String scriptUrl = widgetController.getWidgetScript("testWidgetWithScript");
+
+        // Assert
+        assertEquals("/static/js/widgets/testWidget.js", scriptUrl);
+    }
+
+    @Test
+    void getWidgetScript_widgetWithoutScript_returnsNull() {
+        // Act
+        String scriptUrl = widgetController.getWidgetScript("testWidgetWithoutScript");
+
+        // Assert
+        assertNull(scriptUrl);
+    }
+
+    @Test
+    void getWidgetScript_widgetDoesNotExist_returnsNull() {
+        // Act
+        String scriptUrl = widgetController.getWidgetScript("nonExistentWidget");
+
+        // Assert
+        assertNull(scriptUrl);
+    }
+
+    @Test
+    void getWidgetScript_nullWidgetName_throwsIllegalArgumentException() {
+        // Act and Assert
+        try {
+            widgetController.getWidgetScript(null);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Name cannot be null", e.getMessage());
+        }
     }
 }

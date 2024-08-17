@@ -3,11 +3,10 @@ package uk.ac.cf.spring.nhs.Widget.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import uk.ac.cf.spring.nhs.Widget.Model.Widget;
 import uk.ac.cf.spring.nhs.Widget.Registry.WidgetRegistry;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * WidgetController handles HTTP requests for widget content.
