@@ -1,6 +1,9 @@
-const eventForm = document.getElementById('eventForm');
-const eventModal = document.getElementById('eventModal');
-eventForm.addEventListener('submit', async (event) => {
+import { toggleConditionalInput } from "../common/utils/formUtility.js";
+
+const eventForm = document.querySelector('#event-form');
+const eventModal = document.querySelector('.event-modal');
+
+eventForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const formData = new FormData(eventForm);
@@ -33,14 +36,11 @@ eventForm.addEventListener('submit', async (event) => {
 });
 
 
-document.getElementById('treatment').addEventListener('change', () => {
-    document.querySelector('.treatment-details').style.display = !document.getElementById('treatment').checked ? 'block' : 'none';
+document.addEventListener('DOMContentLoaded', async () => {
+    // Show/hide conditional inputs for checkboxes based on checked state
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {
+        toggleConditionalInput(checkbox, 'conditional-hidden');
+        checkbox.addEventListener('change', () => toggleConditionalInput(checkbox, 'conditional-hidden'));
+    })
 });
-
-document.querySelector('.treatment-details').style.display = !document.getElementById('treatment').checked   ? 'block' : 'none';
-
-document.getElementById('antibiotics').addEventListener('change', () => {
-    document.querySelector('.antibiotics-details').style.display = document.getElementById('antibiotics').checked ? 'block' : 'none';
-});
-
-document.querySelector('.antibiotics-details').style.display = document.getElementById('antibiotics').checked ? 'block' : 'none';
