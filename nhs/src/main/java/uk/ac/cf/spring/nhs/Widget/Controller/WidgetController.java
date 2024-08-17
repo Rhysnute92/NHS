@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import uk.ac.cf.spring.nhs.Widget.Model.Widget;
 import uk.ac.cf.spring.nhs.Widget.Registry.WidgetRegistry;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * WidgetController handles HTTP requests for widget content.
@@ -36,5 +38,15 @@ public class WidgetController {
         // If the widget is not found or the render method returns null, return a 404
         // error view
         return "error/404";
+    }
+
+    @GetMapping("/api/widgets/{widgetName}/script")
+    @ResponseBody
+    public String getWidgetScript(@PathVariable String widgetName) {
+        Widget widget = WidgetRegistry.getWidget(widgetName);
+        if (widget != null && widget.getScript() != null) {
+            return widget.getScript();
+        }
+        return null;
     }
 }

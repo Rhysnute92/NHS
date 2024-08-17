@@ -18,4 +18,13 @@ export class WidgetService {
     }
     return response.text();
   }
+
+  static async fetchWidgetScript(widgetName) {
+    const response = await fetch(`/api/widgets/${widgetName}/script`);
+    console.log(`Fetched widget (${widgetName}) script response:`, response);
+    if (response.ok) {
+      return response.text();
+    }
+    return null;
+  }
 }

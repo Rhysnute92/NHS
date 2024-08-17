@@ -19,6 +19,11 @@ export class WidgetManager {
         );
         this.appendWidgetToDOM(widgetName, fragmentContent);
         this.addedWidgets.add(widgetName);
+
+        const scriptUrl = await WidgetService.fetchWidgetScript(widgetName);
+        if (scriptUrl) {
+          this.loadWidgetScript(scriptUrl);
+        }
       } else {
         console.log(`Widget ${widgetName} already added. Skipping.`);
       }
@@ -31,5 +36,11 @@ export class WidgetManager {
     fragment.innerHTML = fragmentContent;
     fragment.classList.add(`widget-${widgetName}`); // Add a unique class
     document.getElementById("widget-container").appendChild(fragment);
+  }
+
+  loadWidgetScript(scriptUrl) {
+    const script = document.createElement("script");
+    script.src = scriptUrl;
+    document.body.appendChild(script);
   }
 }
