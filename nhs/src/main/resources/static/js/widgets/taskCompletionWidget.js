@@ -1,6 +1,5 @@
 export class TaskWidget {
   constructor() {
-    // Ensure the correct widget element is selected
     this.widgetElement = document.querySelector(".widget-task-completion");
     if (!this.widgetElement) {
       console.error("Task widget element not found.");
@@ -45,11 +44,19 @@ export class TaskWidget {
       return;
     }
 
-    const dashArray = 282.6;
-    const dashOffset = dashArray - dashArray * (completedTasks / totalTasks);
+    const radius = 90;
+    const circumference = 2 * Math.PI * radius;
+    const dashOffset =
+      circumference - (circumference * completedTasks) / totalTasks;
 
-    console.log("Setting dashOffset to", dashOffset);
+    // Apply the stroke color (NHS aqua green)
+    progressCircle.style.stroke = "var(--nhs-aqua-green)";
+
+    // Apply the styles
+    progressCircle.style.strokeDasharray = circumference;
     progressCircle.style.strokeDashoffset = dashOffset;
+
+    // Update the text content
     progressText.textContent = completedTasks;
     totalText.textContent = totalTasks;
   }
