@@ -6,33 +6,46 @@ const eventModal = document.querySelector('.event-modal');
 eventForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const formData = new FormData(eventForm);
-    const response = await fetch('/diary/events', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(Object.fromEntries(formData)),
+    const symptomCheckboxes = eventForm.querySelectorAll('input[type="checkbox"]');
+    let index = 0;
+
+    let formData = new FormData(eventForm);
+
+    // Iterate through symptom checkboxes to find checked symptoms
+    symptomCheckboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            const symptomName = checkbox.name;
+
+            // Find the severity radio buttons corresponding to this symptom and get the selected value
+            const severityRadios = eventForm.querySelectorAll(`input[name="${symptomName}-severity"]`);
+            severityRadios.forEach(radio => {
+                if (radio.checked) {
+                    // Add the symptom to the form data
+                    formData.set(`symptoms[${index}].name`, symptomName);
+                    formData.set(`symptoms[${index}].severity`, radio.value);
+                }
+            });
+
+            // Increment the index for the next symptom
+            index++;
+        }
     });
 
-    const data = await response.json();
+    // Submit the form data to the server
+    fetch('/diary/events', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            const event = data.event;
+            eventModal.hide();
 
-    if (response.ok) {
-        const eventItem = document.createElement('div');
-        eventItem.classList.add('event-item');
-        eventItem.innerHTML = `
-        <h4>${data.event.eventDate}</h4>
-        <p>${data.event.symptoms}</p>
-        <p>${data.event.severity}</p>
-        <p>${data.event.duration}</p>
-        <p>${data.event.treatment}</p>
-      `;
-        document.getElementById('eventList').appendChild(eventItem);
-        eventModal.style.display = 'none';
-        eventForm.reset();
-    } else {
-        alert(data.message);
-    }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 });
 
 
