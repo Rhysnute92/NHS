@@ -193,10 +193,40 @@ export class QuestionnaireRenderer {
       noAssignmentElement.style.display = "none"; // Hide no assignment message
       questionnaires.forEach((q) => {
         const card = document.createElement("div");
-        card.className = "questionnaire-item";
-        card.innerHTML = `
-          <p>You have an incomplete questionnaire. Click <a href="/questionnaire/${q.questionnaire.id}">here</a> to complete it.</p>
+        card.className = "questionnaire-card"; // Updated class name
+
+        // Create the title element
+        const title = document.createElement("h3");
+        title.textContent = q.questionnaire.title;
+        title.className = "questionnaire-card-title"; // Updated class name
+
+        // Create the document icon element
+        const icon = document.createElement("span");
+        icon.className = "questionnaire-document-icon"; // Updated class name
+        icon.innerHTML = "&#128196;"; // Unicode for document icon
+
+        // Create the start action link
+        const actionLinkDiv = document.createElement("div");
+        actionLinkDiv.className = "nhsuk-action-link";
+        actionLinkDiv.innerHTML = `
+          <a class="nhsuk-action-link__link" href="/questionnaire/${q.questionnaire.id}">
+            <svg class="nhsuk-icon nhsuk-icon__arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" width="36" height="36" fill="#007f3b">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"></path>
+            </svg>
+            <span class="nhsuk-action-link__text">Start Questionnaire</span>
+          </a>
         `;
+
+        // Append elements to the card
+        card.appendChild(title);
+        const contentDiv = document.createElement("div");
+        contentDiv.className = "questionnaire-card-content"; // Updated class name
+        contentDiv.appendChild(icon);
+        contentDiv.appendChild(actionLinkDiv);
+        card.appendChild(contentDiv);
+
+        // Append the card to the container
         container.appendChild(card);
       });
     }

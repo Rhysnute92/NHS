@@ -21,7 +21,7 @@ INSERT INTO Questionnaires (
     )
 VALUES (
         'QOL-ARM',
-        'Lymphoedema Quality of Life - ARM',
+        'Lymphoedema Quality of Life Questionnaire - Arm',
         'This questionnaire measures the quality of life score for patients with chronic oedema/lymphoedema of one or both arms.'
     );
 INSERT INTO Question (QuestionText, QuestionCategory, QuestionResponseType, QuestionnaireID)
