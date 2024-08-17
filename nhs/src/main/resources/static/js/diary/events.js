@@ -42,6 +42,12 @@ eventForm.addEventListener('submit', (event) => {
             const event = data.event;
             eventModal.hide();
 
+            const eventElement = document.createElement('event-card');
+            console.log(event)
+            eventElement.setAttribute('event-data', JSON.stringify(event));
+
+            document.querySelector('.event-list').appendChild(eventElement);
+
         })
         .catch((error) => {
             console.error('Error:', error);

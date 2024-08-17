@@ -16,6 +16,7 @@ public class Event {
     private Long id;
 
     @Column(name = "EventDate")
+    @Temporal(TemporalType.DATE)
     private LocalDate date;
 
     @Column(name = "EventDuration")
