@@ -56,10 +56,10 @@ class WidgetRestAPIControllerUnitTests {
     void getTaskCompletionData_validRequest_returnsCorrectData() {
         // Arrange
         Long userId = 1L;
-        int dayOfWeek = LocalDate.now().getDayOfWeek().getValue();
+        int dayOfMonth = LocalDate.now().getDayOfMonth();
         when(customUserDetails.getUserId()).thenReturn(userId);
         when(userTaskService.getTasksForUser(userId)).thenReturn(mockTaskList(5));
-        when(userTaskService.countCompletedTasksForday(userId, dayOfWeek)).thenReturn(3);
+        when(userTaskService.countCompletedTasksForday(userId, dayOfMonth)).thenReturn(3);
 
         // Act
         UserTaskDTO result = widgetRestAPIController.getTaskCompletionData(null);
