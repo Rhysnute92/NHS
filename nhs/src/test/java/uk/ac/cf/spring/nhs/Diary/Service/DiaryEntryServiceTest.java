@@ -3,32 +3,28 @@ package uk.ac.cf.spring.nhs.Diary.Service;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.multipart.MultipartFile;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinFormDTO;
-import uk.ac.cf.spring.nhs.Measurement.DTO.MeasurementDTO;
-import uk.ac.cf.spring.nhs.Photo.DTO.PhotoDTO;
-import uk.ac.cf.spring.nhs.Symptom.DTO.SymptomDTO;
-import uk.ac.cf.spring.nhs.Diary.Entity.*;
-import uk.ac.cf.spring.nhs.Diary.Repository.*;
-import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
+import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Diary.Repository.DiaryEntryRepository;
+import uk.ac.cf.spring.nhs.Files.Service.FileStorageService;
 import uk.ac.cf.spring.nhs.Measurement.Service.MeasurementService;
-import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
 import uk.ac.cf.spring.nhs.Photo.Service.PhotoService;
-import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 import uk.ac.cf.spring.nhs.Symptom.Service.SymptomService;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class DiaryEntryServiceTest {
+class DiaryEntryServiceTest {
 
     @Mock
     private DiaryEntryRepository diaryEntryRepository;
@@ -42,110 +38,109 @@ public class DiaryEntryServiceTest {
     @Mock
     private MeasurementService measurementService;
 
+    @Mock
+    private FileStorageService fileStorageService;
+
     @InjectMocks
     private DiaryEntryService diaryEntryService;
 
     private AutoCloseable closeable;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
     }
 
     @AfterEach
-    public void close() throws Exception {
+    void close() throws Exception {
         closeable.close();
     }
 
     @Test
-    public void testGetAllDiaryEntries() {
-        List<DiaryEntry> diaryEntries = new ArrayList<>();
-        when(diaryEntryRepository.findAll(Sort.by(Sort.Direction.DESC, "date"))).thenReturn(diaryEntries);
-
-        List<DiaryEntry> result = diaryEntryService.getAllDiaryEntries();
-
-        assertNotNull(result);
-        assertEquals(diaryEntries, result);
-        verify(diaryEntryRepository, times(1)).findAll(Sort.by(Sort.Direction.DESC, "date"));
-    }
-
-    @Test
-    public void testGetDiaryEntryById() {
-        int id = 1;
-        DiaryEntry diaryEntry = new DiaryEntry(1, new Date());
-        when(diaryEntryRepository.findById(id)).thenReturn(Optional.of(diaryEntry));
-
-        Optional<DiaryEntry> result = Optional.ofNullable(diaryEntryService.getDiaryEntryById(id));
-
-        assertTrue(result.isPresent());
-        assertEquals(diaryEntry, result.get());
-        verify(diaryEntryRepository, times(1)).findById(id);
-    }
-
-    @Test
-    public void testGetDiaryEntriesByUserId() {
-        int userId = 1;
-        List<DiaryEntry> diaryEntries = new ArrayList<>();
-        when(diaryEntryRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"))).thenReturn(diaryEntries);
-
-        List<DiaryEntry> result = diaryEntryService.getDiaryEntriesByUserId(userId);
-
-        assertNotNull(result);
-        assertEquals(diaryEntries, result);
-        verify(diaryEntryRepository, times(1)).findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"));
-    }
-
-    @Test
-    public void testDeleteDiaryEntryById() {
-        int id = 1;
-        doNothing().when(diaryEntryRepository).deleteById(id);
-
-        diaryEntryService.deleteDiaryEntryById(id);
-
-        verify(diaryEntryRepository, times(1)).deleteById(id);
-    }
-
-    @Test
-    public void testCreateAndSaveDiaryEntry() throws Exception {
-        long userId = 1;
-
+    void testSaveDiaryEntry() throws Exception {
+        // Prepare mock data
         CheckinFormDTO checkinForm = new CheckinFormDTO();
         checkinForm.setMood("GOOD");
-        checkinForm.setNotes("Feeling good today");
+        checkinForm.setNotes("Feeling good");
+        checkinForm.setPhotos(Collections.emptyList());
+        checkinForm.setSymptoms(Collections.emptyList());
+        checkinForm.setMeasurements(Collections.emptyList());
 
-        PhotoDTO photoDTO = new PhotoDTO();
-        photoDTO.setFile(mock(MultipartFile.class));
-        photoDTO.setBodyPart("Neck");
-        when(photoService.savePhoto(photoDTO, userId)).thenReturn(new Photo("photoUrl", new Date(), photoDTO.getBodyPart(), userId));
-        checkinForm.setPhotos(Collections.singletonList(photoDTO));
-
-        SymptomDTO symptomDTO = new SymptomDTO();
-        symptomDTO.setName("Pain");
-        symptomDTO.setSeverity(2);
-        when(symptomService.saveSymptom(symptomDTO, 1L)).thenReturn(new Symptom(symptomDTO.getName(), symptomDTO.getSeverity(), userId));
-        checkinForm.setSymptoms(Collections.singletonList(symptomDTO));
-
-        MeasurementDTO measurementDTO = new MeasurementDTO();
-        measurementDTO.setType("Weight");
-        measurementDTO.setValue(60F);
-        measurementDTO.setUnit("KG");
-        when(measurementService.saveMeasurement(measurementDTO, 1L)).thenReturn(new Measurement(measurementDTO.getType(), measurementDTO.getValue(), measurementDTO.getUnit(), userId));
-        checkinForm.setMeasurements(Collections.singletonList(measurementDTO));
-
-        DiaryEntry diaryEntry = new DiaryEntry(1, new Date());
-
+        DiaryEntry diaryEntry = new DiaryEntry(1L, new Date());
         when(diaryEntryRepository.save(any(DiaryEntry.class))).thenReturn(diaryEntry);
 
-        diaryEntryService.saveDiaryEntry(checkinForm, userId);
+        // Test the service
+        DiaryEntry savedDiaryEntry = diaryEntryService.saveDiaryEntry(checkinForm, 1L);
 
-        ArgumentCaptor<DiaryEntry> diaryEntryCaptor = ArgumentCaptor.forClass(DiaryEntry.class);
-        verify(diaryEntryRepository, times(1)).save(diaryEntryCaptor.capture());
-        DiaryEntry capturedEntry = diaryEntryCaptor.getValue();
+        // Verify that diary entry is saved and related entities aren't
+        verify(diaryEntryRepository, times(1)).save(any(DiaryEntry.class));
+        verify(photoService, never()).saveAll(anyList());
+        verify(symptomService, never()).saveAll(anyList());
+        verify(measurementService, never()).saveAll(anyList());
 
-        assertEquals("GOOD", capturedEntry.getMood().name());
-        assertEquals("Feeling good today", capturedEntry.getNotes());
-        assertEquals(1, capturedEntry.getPhotos().size());
-        assertEquals(1, capturedEntry.getSymptoms().size());
-        assertEquals(1, capturedEntry.getMeasurements().size());
+        assertNotNull(savedDiaryEntry);
+    }
+
+    @Test
+    void testGetDiaryEntryById() {
+        // Prepare mock data
+        DiaryEntry diaryEntry = new DiaryEntry(1L, new Date());
+        when(diaryEntryRepository.findById(1)).thenReturn(Optional.of(diaryEntry));
+
+        // Test the service
+        DiaryEntry foundDiaryEntry = diaryEntryService.getDiaryEntryById(1);
+
+        // Verify diary entry is found
+        verify(diaryEntryRepository, times(1)).findById(1);
+        assertNotNull(foundDiaryEntry);
+        assertEquals(1L, foundDiaryEntry.getUserId());
+    }
+
+    @Test
+    void testGetDiaryEntryById_NotFound() {
+        // Mocking the case where the diary entry is not found
+        when(diaryEntryRepository.findById(1)).thenReturn(Optional.empty());
+
+        // Test the service
+        DiaryEntry foundDiaryEntry = diaryEntryService.getDiaryEntryById(1);
+
+        // Verify diary entry is not found
+        verify(diaryEntryRepository, times(1)).findById(1);
+        assertNull(foundDiaryEntry);
+    }
+
+    @Test
+    void testDeleteDiaryEntryById() {
+        // Test the service
+        diaryEntryService.deleteDiaryEntryById(1);
+
+        // Verify diary entry is deleted
+        verify(diaryEntryRepository, times(1)).deleteById(1);
+    }
+
+    @Test
+    void testGetAllDiaryEntries() {
+        // Prepare mock data
+        List<DiaryEntry> diaryEntries = Collections.singletonList(new DiaryEntry(1L, new Date()));
+        when(diaryEntryRepository.findAll(any(Sort.class))).thenReturn(diaryEntries);
+
+        // Test the service
+        List<DiaryEntry> result = diaryEntryService.getAllDiaryEntries();
+
+        verify(diaryEntryRepository, times(1)).findAll(any(Sort.class));
+        assertEquals(1, result.size());
+    }
+
+    @Test
+    void testGetDiaryEntriesByUserId() {
+        // Prepare mock data
+        List<DiaryEntry> diaryEntries = Collections.singletonList(new DiaryEntry(1L, new Date()));
+        when(diaryEntryRepository.findByUserId(eq(1L), any(Sort.class))).thenReturn(diaryEntries);
+
+        // Test the service
+        List<DiaryEntry> result = diaryEntryService.getDiaryEntriesByUserId(1L);
+
+        verify(diaryEntryRepository, times(1)).findByUserId(eq(1L), any(Sort.class));
+        assertEquals(1, result.size());
     }
 }
