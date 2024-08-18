@@ -10,13 +10,13 @@ public class Treatment {
     @Column(name = "TreatmentID")
     private Long id;
 
-    @Column(name = "TreatmentType")
+    @Column(name = "TreatmentType", nullable = false)
     private String type;
 
     @Column(name = "TreatmentDetails")
     private String details;
 
-    @Column(name = "UserID")
+    @Column(name = "UserID", nullable = false)
     private long userId;
 
 
@@ -36,19 +36,19 @@ public class Treatment {
         this.id = id;
     }
 
-    public String getTreatmentType() {
+    public String getType() {
         return type;
     }
 
-    public void setTreatmentType(String type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public String getTreatmentDetails() {
+    public String getDetails() {
         return details;
     }
 
-    public void setTreatmentDetails(String details) {
+    public void setDetails(String details) {
         this.details = details;
     }
 }
