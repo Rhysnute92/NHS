@@ -21,7 +21,7 @@
         </svg>
     </div>
     <div class="appointment-widget-footer">
-        <button class="add-appointment-button">Add Appointment</button>
+        <button class="add-appointment-button" onclick="openAppointmentForm()">Add Appointment</button>
     </div>
 </div>
 
@@ -34,6 +34,6 @@
     <input type="time" id="appointment-time">
     <label for="appointment-description">Description:</label>
     <textarea id="appointment-description"></textarea>
-    <button type="submit">Save</button>
+    <button onclick="saveAppointment()">Save</button>
     <button onclick="closeAppointmentForm()">Cancel</button>
 </div>
