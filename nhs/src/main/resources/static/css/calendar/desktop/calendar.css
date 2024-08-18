@@ -339,7 +339,7 @@ header .calendar-current-date {
 }
 
 /* The modal container, hidden by default */
-.model {
+.modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -350,7 +350,7 @@ header .calendar-current-date {
 }
 
 /* Modal content/box */
-.modelContent {
+.modalContent {
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;

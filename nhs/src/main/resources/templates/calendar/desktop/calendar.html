@@ -15,18 +15,21 @@
 </div>
 <div class="container-calendar">
   <div id="left">
-    <div id="appointments">
-      <h3>Add Appointment</h3>
-      <form th:replace="~{calendar/fragments/appointmentForm}"></form>
-    </div>
-  </div>
-
-  <div id="center">
     <h3>Appointment Schedule</h3>
+    <button id="openaddappt" class="open-add-appt">Add Appointment</button>
+
+    <div id="myModal" class="modal">
+      <div id="modalContent" class="modal-content">
+        <div th:replace="~{calendar/fragments/appointmentForm}"></div>
+      </div>
+    </div>
     <ul id="apptList">
     </ul>
   </div>
-  <div id="right" th:insert="~{calendar/fragments/calendar}"></div>
+
+  <div id="center">
+    <div th:insert="~{calendar/fragments/calendar}"></div>
+  </div>
 </div>
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
