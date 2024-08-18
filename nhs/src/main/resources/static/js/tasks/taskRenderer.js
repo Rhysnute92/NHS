@@ -40,11 +40,12 @@ export class TaskRenderer {
   }
 
   createCheckCircleCell(task, taskCard) {
-    const checkCircleCell = document.createElement("td");
+    const checkCircleCell = document.createElement("div");
     const checkCircleWrapper = createCheckCircle();
 
     if (task.status === "Complete") {
       checkCircleWrapper.classList.add("checked");
+      taskCard.classList.add("completed");
     }
 
     addEventListener(checkCircleWrapper, "click", () => {
@@ -60,7 +61,7 @@ export class TaskRenderer {
       this.updateTaskCompletionUI(task, taskCard);
 
       // Add the updated UserTask to the event queue
-      const userTask = task.toUserTask(this.userId);
+      const userTask = task.toUserTask();
       this.eventQueue.addEvent(userTask.id, userTask);
       console.log("Added task to event queue:", userTask);
     });
