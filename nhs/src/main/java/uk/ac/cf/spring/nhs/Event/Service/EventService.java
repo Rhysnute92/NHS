@@ -44,6 +44,7 @@ public class EventService {
         // Treatments
         if (!eventDTO.getTreatments().isEmpty()) {
             Set<Treatment> treatments = eventDTO.getTreatments().stream()
+                    .filter(treatmentDTO -> treatmentDTO.getType() != null)
                     .map(treatmentDTO -> treatmentService.saveTreatment(treatmentDTO, userId))
                     .collect(Collectors.toSet());
             event.setTreatments(treatments);
