@@ -1,17 +1,15 @@
 -- Drop all tables for testing purposes
+SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS UserTaskLog;
 DROP TABLE IF EXISTS UserTask;
 DROP TABLE IF EXISTS Task;
-
 DROP TABLE IF EXISTS InfoAssets;
 DROP TABLE IF EXISTS InfoSections;
 DROP TABLE IF EXISTS Articles;
-
 DROP TABLE IF EXISTS UserQuestion;
 DROP TABLE IF EXISTS UserQuestionnaires;
 DROP TABLE IF EXISTS Question;
 DROP TABLE IF EXISTS Questionnaires;
-
 DROP TABLE IF EXISTS DiarySymptoms;
 DROP TABLE IF EXISTS DiaryMeasurements;
 DROP TABLE IF EXISTS DiaryPhotos;
@@ -19,22 +17,19 @@ DROP TABLE IF EXISTS DiaryEntries;
 DROP TABLE IF EXISTS Symptoms;
 DROP TABLE IF EXISTS Measurements;
 DROP TABLE IF EXISTS Photos;
-
 DROP TABLE IF EXISTS Appointments;
 DROP TABLE IF EXISTS UserWidgets;
-
 DROP TABLE IF EXISTS Providers;
 DROP TABLE IF EXISTS PatientDiagnosis;
 DROP TABLE IF EXISTS Patients;
-
 DROP TABLE IF EXISTS ProviderCredentials;
 DROP TABLE IF EXISTS PatientCredentials;
-
 DROP TABLE IF EXISTS Admin;
 DROP TABLE IF EXISTS UserCredentials;
+SET FOREIGN_KEY_CHECKS = 1;
 /* DROP DATABASE IF EXISTS nhs;
-CREATE DATABASE nhs;
-USE nhs; */
+ CREATE DATABASE nhs;
+ USE nhs; */
 --Log in information and credentials--
 CREATE TABLE UserCredentials (
     UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
