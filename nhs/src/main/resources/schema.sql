@@ -1,14 +1,14 @@
 -- Drop all tables for testing purposes
 SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE IF EXISTS UserTaskLog;
+Drop TABLE IF EXISTS UserTaskLog;
 DROP TABLE IF EXISTS UserTask;
 DROP TABLE IF EXISTS Task;
 DROP TABLE IF EXISTS InfoAssets;
 DROP TABLE IF EXISTS InfoSections;
 DROP TABLE IF EXISTS Articles;
-DROP TABLE IF EXISTS UserQuestion;
+DROP TABLE IF EXISTS UserResponses;
 DROP TABLE IF EXISTS UserQuestionnaires;
-DROP TABLE IF EXISTS Question;
+DROP TABLE IF EXISTS Questions;
 DROP TABLE IF EXISTS Questionnaires;
 DROP TABLE IF EXISTS DiarySymptoms;
 DROP TABLE IF EXISTS DiaryMeasurements;
