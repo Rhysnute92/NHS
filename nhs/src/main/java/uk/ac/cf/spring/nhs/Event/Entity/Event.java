@@ -5,6 +5,7 @@ import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 import uk.ac.cf.spring.nhs.Treatment.Entity.Treatment;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -31,7 +32,7 @@ public class Event {
             joinColumns = @JoinColumn(name = "EventID"),
             inverseJoinColumns = @JoinColumn(name = "SymptomID")
     )
-    private Set<Symptom> symptoms;
+    private Set<Symptom> symptoms = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
@@ -39,7 +40,7 @@ public class Event {
             joinColumns = @JoinColumn(name = "EventID"),
             inverseJoinColumns = @JoinColumn(name = "TreatmentID")
     )
-    private Set<Treatment> treatments;
+    private Set<Treatment> treatments = new HashSet<>();
 
     protected Event() {}
 
