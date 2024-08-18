@@ -423,3 +423,16 @@ header .calendar-current-date {
     to { opacity: 0; }
 }
 
+/*css for showing on calendar*/
+.appt-tooltip {
+    background-color: var(--nhs-light-green);
+    border-radius: 5px;
+    padding: 0.2rem;
+    font-size: 0.7rem;
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+    max-width: 100%;
+    margin-bottom: 0.2rem;
+}
+

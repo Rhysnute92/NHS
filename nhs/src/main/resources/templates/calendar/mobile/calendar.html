@@ -54,12 +54,26 @@
             <!-- Year selection dropdown -->
             <select id="year" onchange="jump()"></select>
         </div>
-        <!--    <p th:if="${appointments.empty}">No appointments scheduled yet</p>-->
         <ul id="apptList">
-            <li data-event-id="1">
-                <p>No appointments scheduled for today</p>
+            <li class="no-appointments">
+                <p th:if="${appointments.isEmpty()}">No appointments scheduled yet</p>
+            </li>
+            <li th:each="appointment: ${appointments}" class="appt-item">
+                <strong th:text="${appointment.apptType}"></strong> -
+                <span th:text="${appointment.apptInfo}"></span>
+                on
+                <span th:text="${#temporals.format(appointment.apptDateTime, 'MM/dd/yyyy')}"></span>
+                at
+                <span th:text="${#temporals.format(appointment.apptDateTime, 'hh:mm a')}"></span>
+                <button class="delete-appt" th:onclick="deleteAppointment([[${appointment.apptID}]])">Delete</button>
             </li>
         </ul>
+        <!--    <p th:if="${appointments.empty}">No appointments scheduled yet</p>-->
+<!--        <ul id="apptList">-->
+<!--            <li data-event-id="1">-->
+<!--                <p>No appointments scheduled for today</p>-->
+<!--            </li>-->
+<!--        </ul>-->
     </div>
     </div>
     <!-- Button to add a new appointment, redirects to add appointment page -->
