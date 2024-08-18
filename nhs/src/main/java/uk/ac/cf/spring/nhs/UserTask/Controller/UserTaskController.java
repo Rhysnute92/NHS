@@ -49,7 +49,8 @@ public class UserTaskController {
 
     @PostMapping
     public ResponseEntity<UserTask> assignTaskToUser(@RequestBody UserTask userTask) {
-        userTask.setUserID(getCurrentUserId()); // Set the current user ID to the task
+        userTask.setUserID(getCurrentUserId()); // Set the current user ID to the task userID //TODO: will need to make
+                                                // sure this is changed for provider assigned userTask
         UserTask createdUserTask = userTaskService.assignTaskToUser(userTask);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUserTask);
     }
