@@ -1,21 +1,40 @@
+/* Import utility styles */
+@import url('/static/css/utility/variables.css');
+
+/* Main container for the calendar */
 .container-calendar {
     padding: 0.5rem;
     margin: 0 auto;
     overflow: auto;
-    display: flex;
+    display: grid;
+    grid-auto-rows: 2fr 1fr;
     justify-content: space-between;
 }
 
+/* Main container for the calendar */
+.container-add-calendar {
+    margin-left: 1em;
+    margin-right: 1em;
+    overflow: auto;
+    display: grid;
+    grid-auto-rows: 2fr 1fr;
+}
+
+/* Button styling specific to mobile list button */
 .container-calendar button #moblist {
     background-color: #005EB8;
     display: flex;
 }
 
+/* Mobile month container styling */
 #mobileMonth {
     position: relative;
-    width: 100%;
+    width: 95vw;
+    grid-row: 1;
+    padding-top: 2em;
 }
 
+/* Header styling within the mobile month container */
 .container-calendar #mobileMonth h1 {
     color: #000000;
     text-align: center;
@@ -23,12 +42,17 @@
     padding: 10px 0;
 }
 
+/* Positioning for the add appointment button in mobile view */
 .container-calendar #mobileAdd {
     position: relative;
     top: 5%;
     right: 124px;
 }
-
+.moblist {
+    grid-row: 2;
+    margin-top: 1em;
+}
+/* Heading styling for appointments section */
 #appointments h3 {
     position: relative;
     color: black;
@@ -36,112 +60,141 @@
     margin: 0;
 }
 
+/* Paragraph padding */
+p {
+    padding-left: 1rem;
+}
+
+/* Styling for input fields in the appointments section */
 #appointments input[type="time"],
 #appointments input[type="date"],
 #appointments input[type="text"],
 #appointments textarea {
     margin: 10px 0;
-    width: 80%;
+    width: 100%;
+    font-family: 'Frutiger', sans-serif;
 }
 
+/* Full width styling for the appointments section */
 #appointments {
-    position: absolute;
-    width: 90%;
+    width: 100%;
 }
 
-#moblist button {
+/* Styling for mobile list button */
+#add-apt-btn {
+    float: left;
     background: #005EB8;
     color: white;
     position: relative;
-    left: 8rem;
-    top: 0.1rem;
-    width: 10rem;
+    margin-left: 2rem;
+    width: 8rem;
     height: 2rem;
-    border-radius: 5px;
 }
 
+#schedule {
+    float: right;
+    background: #005EB8;
+    color: white;
+    position: relative;
+    margin-right: 2rem;
+    width: 8rem;
+    height: 2rem;
+}
+
+/* Styling for buttons in the appointments section */
 #appointments button {
     background: #005EB8;
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
     width: 3rem;
     height: 2rem;
 }
 
+/* Styling for mobile schedule section */
 #mobileSchedule {
     position: relative;
+    grid-row: 2;
 }
 
+/* Styling for the appointment list */
 #apptList {
     list-style: none;
     padding: 0;
+    margin-left: 1em;
 }
 
-#apptList li {
-    display: inline-block;
-}
-
-.delete-event {
+/* Styling for the delete event button */
+.delete-appt {
     background: rgb(237, 19, 19);
     color: white;
+    margin-left: 0.5em;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-    width: 4rem;
-    height: 2rem;
 }
 
+/* Styling for buttons in the calendar button container */
 .button-container-calendar button {
     cursor: pointer;
     background: #005eb8;
     color: #fff;
     border: 1px solid #005eb8;
-    border-radius: 4px;
     padding: 5px 10px;
 }
 
+/* Styling for the calendar table */
 .table-calendar {
     border-collapse: collapse;
     width: 100%;
 }
 
-.table-calendar td,
-.table-calendar th {
-    padding: 5px;
+/* Styling for table cells and headers */
+.table-calendar td {
     border: 1px solid #e2e2e2;
-    vertical-align: top;
-    width: 14.28%;
-    max-width: 14vw;
-    height: 3rem;
     text-align: center;
+    vertical-align: top;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 0;
 }
 
+.table-calendar th {
+    border: 1px solid #e2e2e2;
+    text-align: center;
+    vertical-align: top;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 1rem;
+}
+
+/* Styling for selected date in the calendar */
 .date-picker.selected {
     background-color: #f2f2f2;
     font-weight: bold;
     outline: 1px dashed #005eb8;
 }
 
+/* Additional styling for selected date */
 .date-picker.selected span {
     border-bottom: 2px solid currentColor;
 }
 
-
+/* Hover effect for date picker */
 .date-picker:hover {
     background-color: #005EB8;
     color: white;
     cursor: pointer;
 }
 
+/* Styling for the month and year heading */
 #monthAndYear {
     top: 50%;
     text-align: center;
     margin-top: 0;
+    font-size: 2em;
 }
 
-
+/* Styling for the calendar button container */
 .button-container-calendar {
     position: relative;
     margin-bottom: 1em;
@@ -149,40 +202,41 @@
     clear: both;
 }
 
+/* Styling for the previous button */
 #previous {
     float: left;
+    margin-left: 2rem;
 }
 
+/* Styling for the next button */
 #next {
     float: right;
+    margin-right: 2rem;
 }
 
-
+/* Footer container styling */
 .footer-container-calendar {
     padding: 10px 0;
     text-align: center;
 }
 
+/* Styling for the select dropdown in the footer */
 .footer-container-calendar select {
     cursor: pointer;
     background: #ffffff;
     color: #585858;
     border: 1px solid #bfc5c5;
     border-radius: 3px;
-    padding: 5px;
 }
 
-.appt-item button {
-    margin: 0.5rem;
-}
-
+/*css for showing on calendar*/
 .appt-tooltip {
     background-color: var(--nhs-light-green);
     border-radius: 5px;
     padding: 0.2rem;
     font-size: 0.7rem;
     overflow: hidden;
-    text-align: left;
+    text-align: center;
     white-space: nowrap;
     max-width: 100%;
     margin-bottom: 0.2rem;
