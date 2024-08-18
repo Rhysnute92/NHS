@@ -23,11 +23,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import uk.ac.cf.spring.nhs.Security.AuthenticationFacade;
+import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 import uk.ac.cf.spring.nhs.UserTask.Model.UserTask;
 import uk.ac.cf.spring.nhs.UserTask.Service.UserTaskService;
 
@@ -37,6 +40,15 @@ public class UserTaskControllerUnitTests {
 
     @Mock
     private UserTaskService userTaskService;
+
+    @Mock
+    private AuthenticationFacade authenticationFacade;
+
+    @Mock
+    private Authentication authentication;
+
+    @Mock
+    private CustomUserDetails customUserDetails;
 
     @InjectMocks
     private UserTaskController userTaskController;
@@ -52,14 +64,22 @@ public class UserTaskControllerUnitTests {
         userTask.setId(1L);
         userTask.setUserID(123L);
         userTask.setBitmask(31);
+
+        // Setup the mock authentication
+        when(authenticationFacade.getAuthentication()).thenReturn(authentication);
+        when(authentication.getPrincipal()).thenReturn(customUserDetails);
+        when(customUserDetails.getUserId()).thenReturn(123L);
     }
 
     /**
      * Test case for the `testToggleTaskCompletion` method.
      *
-     * This test case verifies that the `toggleTaskCompletion` method of the `UserTaskService`
-     * is called correctly when the `getUserTaskById` method returns a non-null `UserTask` object.
-     * It also checks that the response status is `OK` and the JSON response contains the expected value.
+     * This test case verifies that the `toggleTaskCompletion` method of the
+     * `UserTaskService`
+     * is called correctly when the `getUserTaskById` method returns a non-null
+     * `UserTask` object.
+     * It also checks that the response status is `OK` and the JSON response
+     * contains the expected value.
      *
      * @throws Exception if an error occurs during the test execution
      */
@@ -277,8 +297,8 @@ public class UserTaskControllerUnitTests {
     /**
      * Converts an object to a JSON string.
      *
-     * @param  obj the object to be converted
-     * @return      the JSON string representation of the object
+     * @param obj the object to be converted
+     * @return the JSON string representation of the object
      * @throws RuntimeException if an error occurs during the conversion
      */
     private static String asJsonString(final Object obj) {
