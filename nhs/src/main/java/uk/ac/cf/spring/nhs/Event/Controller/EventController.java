@@ -57,6 +57,16 @@ public class EventController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/events/{eventId}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> deleteEvent(
+            @PathVariable long eventId
+    ) {
+        eventService.deleteEvent(eventId);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Event deleted successfully");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {

@@ -45,7 +45,7 @@ class EventCard extends HTMLElement {
                 <div class="event-body">
                     <div class="event-duration">
                         <h4>Duration</h4>
-                          <p>${event.duration || 'N/A'} days</p>
+                        <p>${event.duration || 'N/A'} days</p>
                     </div>
                     <div class="event-symptoms">
                         <h4>Symptoms</h4>
@@ -70,20 +70,44 @@ class EventCard extends HTMLElement {
         `;
 
         // Add delete event listener
-        this.shadowRoot.querySelector('.delete-event').addEventListener('click', () => this.removeEvent());
+        this.shadowRoot.querySelector('.delete-event').addEventListener('click', () => this.confirmDelete());
     }
 
-    removeEvent() {
-        // Trigger an event to inform the parent that the event should be removed (for example, to remove it from the backend)
-        const eventRemove = new CustomEvent('removeEvent', {
-            detail: { eventId: this.event.id }, // Pass the event ID to identify which event to delete
-            bubbles: true,
-            composed: true
-        });
-        this.dispatchEvent(eventRemove);
+    confirmDelete() {
+        // Show a confirmation dialog to the user
+        const confirmed = window.confirm('Are you sure you want to delete this event?');
 
-        // Remove the element from the DOM
-        this.remove();
+        if (confirmed) {
+            // If user confirms, remove the event
+            this.removeEvent();
+        } else {
+            console.log('Event deletion canceled.');
+        }
+    }
+
+    async removeEvent() {
+        const eventId = this.event.id;
+
+        // Make a delete request to the server
+        try {
+            const response = await fetch(`/diary/events/${eventId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                // If the request was successful, remove the element from the DOM
+                console.log(`Event with ID ${eventId} successfully deleted.`);
+                this.remove();
+
+            } else {
+                console.error(`Failed to delete event: ${eventId}.`);
+            }
+        } catch (error) {
+            console.error('Error occurred while deleting the event:', error);
+        }
     }
 }
 
