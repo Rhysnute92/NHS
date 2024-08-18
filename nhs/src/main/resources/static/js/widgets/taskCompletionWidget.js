@@ -120,7 +120,7 @@ export class TaskWidget {
   async fetchAndRenderTasks(taskListContainer) {
     try {
       await this.taskManager.fetchTasks();
-      this.taskManager.renderTasks(taskListContainer); // Pass the specific container for rendering
+      this.taskRenderer.renderTaskPopup(this.taskManager.tasks, taskListContainer); // Pass the specific container for rendering
     } catch (error) {
       console.error("Error fetching and rendering tasks:", error);
       this.taskManager.displayTaskErrorMessage(taskListContainer);

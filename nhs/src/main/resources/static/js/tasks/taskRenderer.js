@@ -175,7 +175,10 @@ export class TaskRenderer {
       row.appendChild(nameCell);
 
       // Task status cell
-      const statusCell = this.createTableCell(task.status, "task-widget-status");
+      const statusCell = this.createTableCell(
+        task.status,
+        "task-widget-status"
+      );
       row.appendChild(statusCell);
 
       // Completion toggle cell
@@ -194,6 +197,31 @@ export class TaskRenderer {
 
       // Append the row to the container
       taskListContainer.appendChild(row);
+    });
+  }
+
+  renderPopupTaskCard(task) {
+    const taskCard = document.createElement("div");
+    taskCard.classList.add("popup-task-card");
+
+    const title = document.createElement("span");
+    title.textContent = task.name;
+    title.classList.add("popup-task-title"); 
+    taskCard.appendChild(title);
+
+    const checkCircle = this.createCheckCircleCell(task, taskCard);
+    checkCircle.classList.add("popup-check-circle"); 
+    taskCard.appendChild(checkCircle);
+
+    return taskCard;
+  }
+
+  renderTaskPopup(tasks, taskListContainer) {
+    taskListContainer.innerHTML = ""; // Clear existing tasks
+
+    tasks.forEach((task) => {
+      const taskCard = this.renderPopupTaskCard(task);
+      taskListContainer.appendChild(taskCard);
     });
   }
 }

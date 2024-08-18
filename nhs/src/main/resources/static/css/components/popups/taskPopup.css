@@ -5,16 +5,16 @@
   transform: translate(-50%, -50%);
   width: 80%;
   max-width: 500px;
-  background-color: white;
-  border-radius: 8px;
+  background-color: var(--nhs-pale-grey);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   z-index: 1001;
   padding: 20px;
   display: none; /* Hidden by default */
 }
 
-.task-popup .popup-content {
-  padding: 20px;
+.task-popup-title {
+  text-align: left;
+  border-bottom: 1px solid var(--nhs-mid-grey);
 }
 
 .task-popup-overlay {
@@ -35,4 +35,29 @@
   cursor: pointer;
   font-size: 24px;
   font-weight: bold;
+}
+
+.popup-task-card {
+  display: flex;
+  justify-content: space-between;
+  padding: .25em;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  background-color: #fff; /* white background */
+}
+
+.popup-task-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+ul#taskListContainer {
+  margin: 0;
+  padding: 0;
+}
+
+span.popup-task-title {
+  text-align: left;
+  width: 80%;
 }
