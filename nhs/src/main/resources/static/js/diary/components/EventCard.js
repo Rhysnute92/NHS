@@ -43,22 +43,26 @@ class EventCard extends HTMLElement {
                     <button class="delete-event">&times;</button>
                 </div>
                 <div class="event-body">
+                    <div class="event-duration">
+                        <h4>Duration</h4>
+                          <p>${event.duration || 'N/A'} days</p>
+                    </div>
                     <div class="event-symptoms">
                         <h4>Symptoms</h4>
                         <ul>
                             ${symptoms.length > 0
-            ? symptoms.map(symptom => `<li>${symptomNameText[symptom.name] || 'N/A'} - ${symptomSeverityText[symptom.severity] || 'N/A'}</li>`).join('')
-            : '<li>No symptoms reported</li>'
-        }
+                                ? symptoms.map(symptom => `<li>${symptomNameText[symptom.name] || 'N/A'} - ${symptomSeverityText[symptom.severity] || 'N/A'}</li>`).join('')
+                                : '<li>No symptoms reported</li>'
+                            }
                         </ul>
                     </div>
                     <div class="event-treatments">
                         <h4>Treatments</h4>
                         <ul>
                             ${treatments.length > 0
-            ? treatments.map(treatment => `<li>${treatmentText[treatment.type] || 'N/A'}</li>`).join('')
-            : '<li>No treatments reported</li>'
-        }
+                                ? treatments.map(treatment => `<li>${treatmentText[treatment.type] || 'N/A'}</li>`).join('')
+                                : '<li>No treatments reported</li>'
+                            }
                         </ul>
                     </div>
                 </div>
