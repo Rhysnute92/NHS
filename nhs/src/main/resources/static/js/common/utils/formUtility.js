@@ -14,12 +14,18 @@ export const toggleConditionalInput = (input, className) => {
         // Get the conditional element from the input data-aria-controls attribute
         const conditionalElement = document.getElementById(conditionalId);
         if (conditionalElement) {
-            if (input.checked) {
+            // Check if the logic should be inverted, e.g. show the conditional element when the input is not checked
+            const invertLogic = input.getAttribute('data-invert') === 'true';
+
+            const shouldShow = invertLogic ? !input.checked : input.checked;
+
+            // Toggle the class on the conditional element
+            if (shouldShow) {
                 conditionalElement.classList.remove(className);
-                input.setAttribute('aria-expanded', "true");
+                input.setAttribute('aria-expanded', 'true');
             } else {
-                conditionalElement.classList.add(className)
-                input.setAttribute('aria-expanded', "false");
+                conditionalElement.classList.add(className);
+                input.setAttribute('aria-expanded', 'false');
             }
         }
     }

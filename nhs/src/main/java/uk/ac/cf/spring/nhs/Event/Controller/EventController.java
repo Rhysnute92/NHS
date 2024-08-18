@@ -33,6 +33,8 @@ public class EventController {
         long userId = userDetails.getUserId();
         List<Event> events = eventService.getEventsByUserId(userId);
         model.addAttribute("events", events);
+
+        // Add ObjectMapper to model so Thymeleaf can use it to convert to JSON
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);

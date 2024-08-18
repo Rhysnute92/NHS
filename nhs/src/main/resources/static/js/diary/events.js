@@ -1,6 +1,6 @@
 import { toggleConditionalInput } from "../common/utils/formUtility.js";
 
-const eventForm = document.querySelector('#event-form');
+const eventForm = document.querySelector('#eventForm');
 const eventModal = document.querySelector('.event-modal');
 
 eventForm.addEventListener('submit', (event) => {
@@ -59,6 +59,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Show/hide conditional inputs for checkboxes based on checked state
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach((checkbox) => {
+        if (checkbox.id === 'receivedTreatment') {
+            checkbox.addEventListener('change', () => toggleConditionalInput(checkbox, 'conditional-hidden', 'other-symptom-input'));
+        }
         toggleConditionalInput(checkbox, 'conditional-hidden');
         checkbox.addEventListener('change', () => toggleConditionalInput(checkbox, 'conditional-hidden'));
     })
