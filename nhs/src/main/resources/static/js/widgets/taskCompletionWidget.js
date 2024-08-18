@@ -22,7 +22,10 @@ export class TaskWidget {
     // Periodically send the event queue to the Web Worker for processing
     setInterval(() => {
       if (this.eventQueue.getSize() > 0) {
-        console.log("Sending event queue to worker:", this.eventQueue.getEvents());
+        console.log(
+          "Sending event queue to worker:",
+          this.eventQueue.getEvents()
+        );
         this.worker.postMessage({
           queue: this.eventQueue.getEvents(),
           apiUrl: "/usertask/task-update/batch",
@@ -88,9 +91,6 @@ export class TaskWidget {
     const dashOffset =
       circumference - (circumference * completedTasks) / totalTasks;
 
-    // Apply the stroke color 
-    progressCircle.style.stroke = "var(--nhs-aqua-green)";
-
     // Apply the styles
     progressCircle.style.strokeDasharray = circumference;
     progressCircle.style.strokeDashoffset = dashOffset;
@@ -107,13 +107,13 @@ export class TaskWidget {
     const taskPopup = this.widgetElement.querySelector("#taskPopup");
     const taskPopupOverlay =
       this.widgetElement.querySelector("#taskPopupOverlay");
-    const closePopupButton = taskPopup.querySelector("#closePopupButton");
+    const donePopupButton = taskPopup.querySelector("#DonePopupButton");
     const taskListContainer = taskPopup.querySelector("#taskListContainer");
 
     if (
       !completeTaskButton ||
       !taskPopup ||
-      !closePopupButton ||
+      !donePopupButton ||
       !taskListContainer
     ) {
       console.error("Popup elements not found.");
@@ -137,20 +137,25 @@ export class TaskWidget {
     });
 
     // Hide the popup and overlay when the close button or overlay is clicked
-    const closePopup = () => {
+    const closePopup = async () => {
       console.log("Close popup triggered");
       taskPopupOverlay.style.display = "none"; // Hide overlay
       taskPopup.style.display = "none"; // Hide popup
+
+      await this.updateWidgetData();
     };
 
-    closePopupButton.addEventListener("click", closePopup);
+    donePopupButton.addEventListener("click", closePopup);
     taskPopupOverlay.addEventListener("click", closePopup);
   }
 
   async fetchAndRenderTasks(taskListContainer) {
     try {
       await this.taskManager.fetchTasks();
-      this.taskRenderer.renderTaskPopup(this.taskManager.tasks, taskListContainer); // Pass the specific container for rendering
+      this.taskRenderer.renderTaskPopup(
+        this.taskManager.tasks,
+        taskListContainer
+      ); // Pass the specific container for rendering
     } catch (error) {
       console.error("Error fetching and rendering tasks:", error);
       this.taskManager.displayTaskErrorMessage(taskListContainer);
