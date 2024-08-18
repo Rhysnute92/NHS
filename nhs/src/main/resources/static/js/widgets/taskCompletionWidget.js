@@ -88,7 +88,7 @@ export class TaskWidget {
     const dashOffset =
       circumference - (circumference * completedTasks) / totalTasks;
 
-    // Apply the stroke color (NHS aqua green)
+    // Apply the stroke color 
     progressCircle.style.stroke = "var(--nhs-aqua-green)";
 
     // Apply the styles

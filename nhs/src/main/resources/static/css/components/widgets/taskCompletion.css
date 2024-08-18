@@ -1,4 +1,3 @@
-
 @import url("../popups/taskPopup.css");
 
 .task-widget {
@@ -37,7 +36,7 @@
   stroke-dashoffset: 0;
   fill: none;
   stroke-width: 20;
-  stroke: var(--nhs-aqua-green);
+  stroke: var(--nhs-light-green);
   transition: stroke-dashoffset 0.3s ease, stroke 0.3s ease;
 }
 
@@ -55,7 +54,7 @@
   margin-bottom: 0;
   padding: 0;
   width: 90%;
-  padding-left: .25em;
+  padding-left: 0.25em;
 }
 
 .progress-text p {
@@ -73,10 +72,11 @@
   background-color: #4f46e5;
   color: #ffffff;
   border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
+  border-radius: 3px;
+  padding: 0.8em 1.8em;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.8em;
+  font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
@@ -100,15 +100,5 @@
   .progress-circle {
     width: 10em;
     height: 10em;
-  }
-
-  .progress-text h3 {
-    font-size: 1.5em;
-  }
-
-  .progress-text p {
-    font-size: 1.5em;
-    padding: 0;
-    margin-top: 0.5em;
   }
 }

@@ -19,6 +19,7 @@
   border-bottom: 2px solid var(--nhs-mid-grey);
   border-left: .5em solid var(--nhs-dark-green);
   padding-left: .35em;
+  padding-bottom: .2em;
 }
 
 .task-popup-overlay {
