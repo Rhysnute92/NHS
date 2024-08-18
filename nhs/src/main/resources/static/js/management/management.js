@@ -1,4 +1,8 @@
 import { initializeCollapsible } from "./collapsible.js";
+import { initializeQuestionnaireManager } from "../questionnaire/QuestionaireInitializer.js";
+import { initializeTaskManager } from "../tasks/TaskInitializer.js";
+import { WorkerManager } from "../tasks/WorkerManager.js";
+import { fetchUserID } from "../common/utils/accountUtility.js";
 import { TaskManager } from "../tasks/taskManager.js";
 import { EventQueue } from "../tasks/eventQueue.js";
 
@@ -27,11 +31,19 @@ window.addEventListener("load", () => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   initializeCollapsible();
   const taskManager = new TaskManager(eventQueue);
   const mainPageTaskContainer = document.querySelector(
     ".my-health-tasks .tasks-container"
+  );
+
+  const questionnaireContainerId = "questionnaire-container";
+  const noAssignmentContainerId = "no-assignment";
+
+  await initializeQuestionnaireManager(
+    questionnaireContainerId,
+    noAssignmentContainerId
   );
 
   taskManager

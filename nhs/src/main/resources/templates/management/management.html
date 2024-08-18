@@ -15,6 +15,8 @@
         <p class="management-desktop-subtitle">
           Find support, your tasks, and information for your lymphoedema
           management plan.
+          Find support, your tasks, and information for your lymphoedema
+          management plan.
         </p>
       </div>
       <section class="collapsible urgent-care-plan">
@@ -44,15 +46,16 @@
           <div class="action-item">
             <h3>Your Questionnaires</h3>
             <div class="assigned-questionnaires">
-              <!-- If there is a questionnaire assigned -->
-              <div class="questionnaire-item">
-                <p>
-                  You have a new questionnaire assigned. Click
-                  <a href="#">here</a> to complete it.
-                </p>
+              <h3>Assigned Questionnaires</h3>
+              <div id="questionnaire-container" class="questionnaire-container">
+                <!-- If there is a questionnaire assigned it'll be inserted here-->
               </div>
               <!-- If no questionnaire is assigned -->
-              <div class="questionnaire-item no-assignment">
+              <div
+                id="no-assignment"
+                class="questionnaire-item no-assignment"
+                style="display: none"
+              >
                 <p>No questionnaires assigned at the moment.</p>
               </div>
             </div>
@@ -65,6 +68,7 @@
           </div>
         </div>
       </section>
+
       <section class="collapsible your-treatment-plan">
         <h2 class="collapsible-header">Your Treatment Plan</h2>
         <div class="collapsible-content">

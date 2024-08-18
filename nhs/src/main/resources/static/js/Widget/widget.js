@@ -3,7 +3,6 @@ import { WidgetManager } from "./widgetManager.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
   try {
-
     const userWidgets = await WidgetService.fetchUserWidgets();
     console.log("User widgets:", userWidgets);
 
