@@ -13,7 +13,6 @@ export class TaskRenderer {
   constructor(eventQueue, userId) {
     this.isMobileView = detectMobileView();
     this.eventQueue = eventQueue;
-    this.userId = userId;
   }
 
   createTableRow(cells) {
@@ -161,5 +160,40 @@ export class TaskRenderer {
     this.updateTaskCompletionUI(task, taskCard);
 
     return taskCard;
+  }
+
+  renderTaskWidgetTasks(tasks, taskListContainer) {
+    // Clear any existing tasks
+    taskListContainer.innerHTML = "";
+
+    // Render each task as a simple row in the table
+    tasks.forEach((task) => {
+      const row = document.createElement("tr");
+
+      // Task name cell
+      const nameCell = this.createTableCell(task.name, "task-widget-name");
+      row.appendChild(nameCell);
+
+      // Task status cell
+      const statusCell = this.createTableCell(task.status, "task-widget-status");
+      row.appendChild(statusCell);
+
+      // Completion toggle cell
+      const toggleCell = document.createElement("td");
+      const toggleButton = document.createElement("button");
+      toggleButton.textContent = task.status === "Complete" ? "✔️" : "❌";
+
+      toggleButton.addEventListener("click", () => {
+        task.toggleTaskCompletion();
+        toggleButton.textContent = task.status === "Complete" ? "✔️" : "❌";
+        this.updateTaskCompletionUI(task, row);
+      });
+
+      toggleCell.appendChild(toggleButton);
+      row.appendChild(toggleCell);
+
+      // Append the row to the container
+      taskListContainer.appendChild(row);
+    });
   }
 }

@@ -16,6 +16,20 @@
     </div>
   </div>
   <div class="task-widget-footer">
-    <button class="complete-task-button">Complete Task</button>
+    <button class="complete-task-button" id="openPopupButton">
+      Complete Task
+    </button>
+  </div>
+  <!-- Background overlay -->
+  <div class="task-popup-overlay" id="taskPopupOverlay"></div>
+  <!-- Task Popup -->
+  <div class="task-popup" id="taskPopup">
+    <div class="popup-content">
+      <span class="close-popup-button" id="closePopupButton">&times;</span>
+      <h2>Your Tasks</h2>
+      <ul id="taskListContainer">
+        <!-- Task items will be dynamically inserted here -->
+      </ul>
+    </div>
   </div>
 </div>

@@ -1,6 +1,5 @@
 import { initializeCollapsible } from "./collapsible.js";
 import { TaskManager } from "../tasks/taskManager.js";
-import { getUserId } from "../common/utils/userUtility.js";
 import { EventQueue } from "../tasks/eventQueue.js";
 
 const worker = new Worker("/js/tasks/worker.js");
@@ -30,7 +29,7 @@ window.addEventListener("load", () => {
 
 document.addEventListener("DOMContentLoaded", function () {
   initializeCollapsible();
-  const taskManager = new TaskManager(getUserId(), eventQueue);
+  const taskManager = new TaskManager(eventQueue);
   taskManager.fetchTasks();
 
   // Periodically send the event queue to the Web Worker for processing

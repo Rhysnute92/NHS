@@ -1,8 +1,8 @@
 //widgetService.js
 
 export class WidgetService {
-  static async fetchUserWidgets(userId) {
-    const response = await fetch(`/api/user-widgets/${userId}`);
+  static async fetchUserWidgets() {
+    const response = await fetch(`/api/user-widgets`);
     console.log("Fetched user widgets response:", response);
     if (!response.ok) {
       throw new Error("Failed to fetch user widgets");

@@ -4,7 +4,6 @@ import { fetchData } from "../common/utils/apiUtility.js"; // Utility for API ca
 
 export class TaskManager {
   constructor(userId, eventQueue) {
-    this.userId = userId;
     this.tasks = [];
     this.taskRenderer = new TaskRenderer(eventQueue, userId);
     this.eventQueue = eventQueue;

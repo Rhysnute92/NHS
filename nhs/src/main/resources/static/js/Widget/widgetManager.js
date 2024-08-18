@@ -25,7 +25,6 @@ export class WidgetManager {
   }
 
   appendWidgetToDOM(widgetName, fragmentContent) {
-    console.log("Fragment content:", fragmentContent);
     const fragment = document.createElement("div");
     fragment.innerHTML = fragmentContent;
     fragment.classList.add(`widget-${widgetName}`); // Add a unique class
