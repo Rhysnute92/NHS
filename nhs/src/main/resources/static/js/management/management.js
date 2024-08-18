@@ -30,7 +30,18 @@ window.addEventListener("load", () => {
 document.addEventListener("DOMContentLoaded", function () {
   initializeCollapsible();
   const taskManager = new TaskManager(eventQueue);
-  taskManager.fetchTasks();
+  const mainPageTaskContainer = document.querySelector(
+    ".my-health-tasks .tasks-container"
+  );
+
+  taskManager
+    .fetchTasks()
+    .then(() => {
+      taskManager.renderTasks(mainPageTaskContainer); // Pass the container
+    })
+    .catch((error) => {
+      taskManager.displayTaskErrorMessage(mainPageTaskContainer); // Pass the container to display error
+    });
 
   // Periodically send the event queue to the Web Worker for processing
   setInterval(() => {
@@ -44,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Clear the queue after sending it to the worker
       eventQueue.clearQueue();
     }
-  }, 5000);
+  }, 1000);
 
   // Handle messages from the Web Worker
   worker.addEventListener(
