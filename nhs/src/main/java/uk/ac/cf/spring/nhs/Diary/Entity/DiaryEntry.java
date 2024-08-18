@@ -6,6 +6,7 @@ import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,7 +31,7 @@ public class DiaryEntry {
             joinColumns = @JoinColumn(name = "EntryId"),
             inverseJoinColumns = @JoinColumn(name = "MeasurementId")
     )
-    private Set<Measurement> measurements;
+    private Set<Measurement> measurements = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
@@ -38,7 +39,7 @@ public class DiaryEntry {
             joinColumns = @JoinColumn(name = "EntryId"),
             inverseJoinColumns = @JoinColumn(name = "SymptomId")
     )
-    private Set<Symptom> symptoms;
+    private Set<Symptom> symptoms = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
@@ -46,7 +47,7 @@ public class DiaryEntry {
             joinColumns = @JoinColumn(name = "EntryId"),
             inverseJoinColumns = @JoinColumn(name = "PhotoId")
     )
-    private Set<Photo> photos;
+    private Set<Photo> photos = new HashSet<>();
 
 
     @Column(name = "EntryNotes")

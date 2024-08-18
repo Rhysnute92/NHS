@@ -33,7 +33,7 @@ public class EventService {
         );
 
         // Symptoms
-        if (eventDTO.getSymptoms() != null && !eventDTO.getSymptoms().isEmpty()) {
+        if (!eventDTO.getSymptoms().isEmpty()) {
             Set<Symptom> symptoms = eventDTO.getSymptoms().stream()
                     .filter(symptomDTO -> symptomDTO.getSeverity() != null)
                     .map(symptomDTO -> symptomService.saveSymptom(symptomDTO, userId))
@@ -42,7 +42,7 @@ public class EventService {
         }
 
         // Treatments
-        if (eventDTO.getTreatments() != null && !eventDTO.getTreatments().isEmpty()) {
+        if (!eventDTO.getTreatments().isEmpty()) {
             Set<Treatment> treatments = eventDTO.getTreatments().stream()
                     .map(treatmentDTO -> treatmentService.saveTreatment(treatmentDTO, userId))
                     .collect(Collectors.toSet());

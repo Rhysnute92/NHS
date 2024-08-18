@@ -4,14 +4,15 @@ import uk.ac.cf.spring.nhs.Symptom.DTO.SymptomDTO;
 import uk.ac.cf.spring.nhs.Treatment.DTO.TreatmentDTO;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventDTO {
 
     private LocalDate date;
     private Integer duration;
-    private List<SymptomDTO> symptoms;
-    private List<TreatmentDTO> treatments;
+    private List<SymptomDTO> symptoms = new ArrayList<>();
+    private List<TreatmentDTO> treatments = new ArrayList<>();
 
     public EventDTO() {}
 

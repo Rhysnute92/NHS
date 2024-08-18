@@ -9,9 +9,9 @@ import java.util.List;
 
 public class CheckinFormDTO {
     private String mood;
+    private String notes;
     private List<SymptomDTO> symptoms;
     private List<MeasurementDTO> measurements;
-    private String notes;
     private List<PhotoDTO> photos;
 
     public CheckinFormDTO() {

@@ -45,7 +45,7 @@ public class DiaryEntryService {
         diaryEntry.setNotes(checkinForm.getNotes());
 
         // Photos
-        if (checkinForm.getPhotos() != null && !checkinForm.getPhotos().isEmpty()) {
+        if (!checkinForm.getPhotos().isEmpty()) {
             Set<Photo> photos = checkinForm.getPhotos().stream()
                     .map(photoDTO -> photoService.savePhoto(photoDTO, userId))
                     .collect(Collectors.toSet());
@@ -53,7 +53,7 @@ public class DiaryEntryService {
         }
 
         // Symptoms
-        if (checkinForm.getSymptoms() != null && !checkinForm.getSymptoms().isEmpty()) {
+        if (!checkinForm.getSymptoms().isEmpty()) {
             Set<Symptom> symptoms = checkinForm.getSymptoms().stream()
                     .filter(symptomDTO -> symptomDTO.getSeverity() != null)
                     .map(symptomDTO -> symptomService.saveSymptom(symptomDTO, userId))
