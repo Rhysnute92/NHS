@@ -46,7 +46,7 @@ public class DiaryController {
     ) {
         try {
             Long userId = userDetails.getUserId();
-            DiaryEntry savedEntry = diaryEntryService.createAndSaveDiaryEntry(checkinForm, userId);
+            DiaryEntry savedEntry = diaryEntryService.saveDiaryEntry(checkinForm, userId);
 
             // Create a response object
             Map<String, Object> response = new HashMap<>();

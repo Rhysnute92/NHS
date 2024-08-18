@@ -19,6 +19,11 @@ public class Treatment {
     @Column(name = "UserID", nullable = false)
     private long userId;
 
+    @Column(name = "related_entity_type")
+    private String relatedEntityType;
+
+    @Column(name = "related_entity_id")
+    private Long relatedEntityId;
 
     protected Treatment() {}
 
@@ -26,6 +31,14 @@ public class Treatment {
         this.type = type;
         this.details = details;
         this.userId = userId;
+    }
+
+    public Treatment(String type, String details, long userId, Long relatedEntityId, String relatedEntityType) {
+        this.type = type;
+        this.details = details;
+        this.userId = userId;
+        this.relatedEntityId = relatedEntityId;
+        this.relatedEntityType = relatedEntityType;
     }
 
     public Long getId() {
@@ -50,5 +63,29 @@ public class Treatment {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public String getRelatedEntityType() {
+        return relatedEntityType;
+    }
+
+    public void setRelatedEntityType(String relatedEntityType) {
+        this.relatedEntityType = relatedEntityType;
+    }
+
+    public Long getRelatedEntityId() {
+        return relatedEntityId;
+    }
+
+    public void setRelatedEntityId(Long relatedEntityId) {
+        this.relatedEntityId = relatedEntityId;
     }
 }

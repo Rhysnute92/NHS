@@ -36,6 +36,13 @@ public class PhotoService {
         return photoRepository.save(photo);
     }
 
+    public Photo savePhoto(PhotoDTO photoDTO, long userId, Long relatedEntityId, String relatedEntityType) {
+        String photoUrl = fileStorageService.storeFile(photoDTO.getFile());
+        String bodyPart = photoDTO.getBodyPart();
+        Photo photo = new Photo(photoUrl, new Date(), bodyPart, userId, relatedEntityId, relatedEntityType);
+        return photoRepository.save(photo);
+    }
+
     public boolean deletePhotoById(long photoId) {
         Optional<Photo> optionalPhoto = photoRepository.findById(photoId);
 

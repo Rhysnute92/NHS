@@ -1,15 +1,12 @@
 package uk.ac.cf.spring.nhs.Symptom.Entity;
 
 import jakarta.persistence.*;
-import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
-import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "Symptoms")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Symptom {
 
     @Id
@@ -32,20 +29,31 @@ public class Symptom {
     @Column(name = "UserID")
     private long userId;
 
-    @ManyToMany(mappedBy = "symptoms")
-    private Set<DiaryEntry> diaryEntries;
+    @Column(name = "related_entity_id")
+    private Long relatedEntityId;
 
-    @ManyToMany(mappedBy = "symptoms")
-    private Set<Event> events;
+    @Column(name = "related_entity_type")
+    private String relatedEntityType;
 
     protected Symptom() {}
 
+    // Constructor for standalone symptom
     public Symptom(String name, int severity, long userId) {
         this.name = name;
         this.severity = severity;
         this.userId = userId;
     }
 
+    // Constructor for linked symptom
+    public Symptom(String name, int severity, long userId, Long relatedEntityId, String relatedEntityType) {
+        this.name = name;
+        this.severity = severity;
+        this.userId = userId;
+        this.relatedEntityId = relatedEntityId;
+        this.relatedEntityType = relatedEntityType;
+    }
+
+    // Getters and Setters
     public long getId() {
         return id;
     }
@@ -92,5 +100,21 @@ public class Symptom {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public Long getRelatedEntityId() {
+        return relatedEntityId;
+    }
+
+    public void setRelatedEntityId(Long relatedEntityId) {
+        this.relatedEntityId = relatedEntityId;
+    }
+
+    public String getRelatedEntityType() {
+        return relatedEntityType;
+    }
+
+    public void setRelatedEntityType(String relatedEntityType) {
+        this.relatedEntityType = relatedEntityType;
     }
 }

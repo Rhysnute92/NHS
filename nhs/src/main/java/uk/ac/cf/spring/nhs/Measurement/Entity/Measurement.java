@@ -1,9 +1,7 @@
 package uk.ac.cf.spring.nhs.Measurement.Entity;
 
 import jakarta.persistence.*;
-import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
-
-import java.util.Set;
+import org.hibernate.annotations.Filter;
 
 @Entity
 @Table(name = "Measurements")
@@ -13,9 +11,6 @@ public class Measurement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MeasurementID")
     private long id;
-
-    @ManyToMany(mappedBy = "measurements")
-    private Set<DiaryEntry> diaryEntries;
 
     @Column(name = "MeasurementType")
     private String type;
@@ -29,13 +24,30 @@ public class Measurement {
     @Column(name = "UserID")
     private long userId;
 
+    @Column(name = "related_entity_type")
+    private String relatedEntityType;
+
+    @Column(name = "related_entity_id")
+    private Long relatedEntityId;
+
     protected Measurement() {}
 
+    // Constructor for standalone measurement
     public Measurement(String type, float value, String unit, long userId) {
         this.type = type;
         this.value = value;
         this.unit = unit;
         this.userId = userId;
+    }
+
+    // Constructor for linked measurement
+    public Measurement(String type, float value, String unit, long userId, Long relatedEntityId, String relatedEntityType) {
+        this.type = type;
+        this.value = value;
+        this.unit = unit;
+        this.userId = userId;
+        this.relatedEntityId = relatedEntityId;
+        this.relatedEntityType = relatedEntityType;
     }
 
     public long getId() {
@@ -76,5 +88,21 @@ public class Measurement {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public String getRelatedEntityType() {
+        return relatedEntityType;
+    }
+
+    public void setRelatedEntityType(String relatedEntityType) {
+        this.relatedEntityType = relatedEntityType;
+    }
+
+    public Long getRelatedEntityId() {
+        return relatedEntityId;
+    }
+
+    public void setRelatedEntityId(Long relatedEntityId) {
+        this.relatedEntityId = relatedEntityId;
     }
 }

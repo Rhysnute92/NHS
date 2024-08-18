@@ -1,6 +1,9 @@
 package uk.ac.cf.spring.nhs.Event.Entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 import uk.ac.cf.spring.nhs.Treatment.Entity.Treatment;
 
@@ -11,13 +14,13 @@ import java.util.Set;
 @Entity
 @Table(name = "Events")
 public class Event {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EventID")
     private Long id;
 
-    @Column(name = "EventDate")
-    @Temporal(TemporalType.DATE)
+    @Column(name = "EventDate", nullable = false)
     private LocalDate date;
 
     @Column(name = "EventDuration")
@@ -26,21 +29,13 @@ public class Event {
     @Column(name = "UserID")
     private long userId;
 
-    @ManyToMany
-    @JoinTable(
-            name = "EventSymptoms",
-            joinColumns = @JoinColumn(name = "EventID"),
-            inverseJoinColumns = @JoinColumn(name = "SymptomID")
-    )
-    private Set<Symptom> symptoms = new HashSet<>();
+    @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Filter(name = "relatedEntityTypeFilter", condition = "related_entity_type = 'Event'")
+    private Set<Symptom> symptoms;
 
-    @ManyToMany
-    @JoinTable(
-            name = "EventTreatments",
-            joinColumns = @JoinColumn(name = "EventID"),
-            inverseJoinColumns = @JoinColumn(name = "TreatmentID")
-    )
-    private Set<Treatment> treatments = new HashSet<>();
+    @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Filter(name = "relatedEntityTypeFilter", condition = "related_entity_type = 'Event'")
+    private Set<Treatment> treatments;
 
     protected Event() {}
 

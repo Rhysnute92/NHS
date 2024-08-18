@@ -1,6 +1,9 @@
 package uk.ac.cf.spring.nhs.Diary.Entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
@@ -11,6 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "DiaryEntries")
+@FilterDef(name = "relatedEntityTypeFilter", parameters = @ParamDef(name = "relatedEntityType", type = String.class))
 public class DiaryEntry {
 
     @Id
@@ -25,30 +29,18 @@ public class DiaryEntry {
     @Column(name = "EntryMood")
     private Mood mood;
 
-    @ManyToMany
-    @JoinTable(
-            name = "DiaryMeasurements",
-            joinColumns = @JoinColumn(name = "EntryId"),
-            inverseJoinColumns = @JoinColumn(name = "MeasurementId")
-    )
-    private Set<Measurement> measurements = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "DiarySymptoms",
-            joinColumns = @JoinColumn(name = "EntryId"),
-            inverseJoinColumns = @JoinColumn(name = "SymptomId")
-    )
-    private Set<Symptom> symptoms = new HashSet<>();
+    @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Filter(name = "relatedEntityTypeFilter", condition = "related_entity_type = 'DiaryEntry'")
+    private Set<Measurement> measurements;
 
-    @ManyToMany
-    @JoinTable(
-            name = "DiaryPhotos",
-            joinColumns = @JoinColumn(name = "EntryId"),
-            inverseJoinColumns = @JoinColumn(name = "PhotoId")
-    )
-    private Set<Photo> photos = new HashSet<>();
+    @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Filter(name = "relatedEntityTypeFilter", condition = "related_entity_type = 'Event'")
+    private Set<Symptom> symptoms;
 
+    @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Filter(name = "relatedEntityTypeFilter", condition = "related_entity_type = 'DiaryEntry'")
+    private Set<Photo> photos;
 
     @Column(name = "EntryNotes")
     private String notes;
@@ -126,7 +118,6 @@ public class DiaryEntry {
     public void setNotes(String notes) {
         this.notes = notes;
     }
-
 
     @Override
     public String toString() {

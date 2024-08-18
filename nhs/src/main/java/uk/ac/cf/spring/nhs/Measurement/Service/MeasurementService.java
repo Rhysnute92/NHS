@@ -25,4 +25,18 @@ public class MeasurementService {
 
         return measurementRepository.save(measurement);
     }
+
+    @Transactional
+    public Measurement saveMeasurement(MeasurementDTO measurementDTO, long userId, Long relatedEntityId, String relatedEntityType) {
+        Measurement measurement = new Measurement(
+                measurementDTO.getType(),
+                measurementDTO.getValue(),
+                measurementDTO.getUnit(),
+                userId,
+                relatedEntityId,
+                relatedEntityType
+        );
+
+        return measurementRepository.save(measurement);
+    }
 }

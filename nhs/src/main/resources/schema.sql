@@ -93,33 +93,6 @@ CREATE TABLE Appointments (
     FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID)
 );
 --Diary--
-CREATE TABLE Photos (
-    PhotoID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    PhotoURL TEXT,
-    PhotoDate DATETIME,
-    PhotoBodypart VARCHAR(255),
-    UserID BIGINT,
-    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
-);
-CREATE TABLE Measurements (
-  MeasurementID BIGINT AUTO_INCREMENT PRIMARY KEY,
-  MeasurementType VARCHAR(255),
-  MeasurementValue FLOAT,
-  MeasurementUnit VARCHAR(100),
-  UserID BIGINT,
-  FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
-);
-
-CREATE TABLE Symptoms (
-      SymptomID BIGINT AUTO_INCREMENT PRIMARY KEY,
-      SymptomName VARCHAR(255),
-      SymptomSeverity INT,
-      SymptomStartDate DATETIME,
-      SymptomIsActive BOOLEAN,
-      UserID BIGINT,
-      FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
-);
-
 CREATE TABLE DiaryEntries (
   EntryID BIGINT AUTO_INCREMENT PRIMARY KEY,
   EntryDate DATE NOT NULL,
@@ -129,30 +102,39 @@ CREATE TABLE DiaryEntries (
   FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 
-CREATE TABLE DiaryPhotos (
-  DiaryPhotoID BIGINT AUTO_INCREMENT PRIMARY KEY,
-  EntryID BIGINT,
-  PhotoID BIGINT,
-  FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-  FOREIGN KEY (PhotoID) REFERENCES Photos(PhotoID)
+CREATE TABLE Photos (
+    PhotoID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    PhotoURL TEXT,
+    PhotoDate DATETIME,
+    PhotoBodypart VARCHAR(255),
+    UserID BIGINT,
+    related_entity_type VARCHAR(50) NULL,
+    related_entity_id BIGINT NULL,
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 
-CREATE TABLE DiaryMeasurements (
-    DiaryMeasurementID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    EntryID BIGINT,
-    MeasurementID BIGINT,
-    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-    FOREIGN KEY (MeasurementID) REFERENCES Measurements(MeasurementID)
+CREATE TABLE Measurements (
+  MeasurementID BIGINT AUTO_INCREMENT PRIMARY KEY,
+  MeasurementType VARCHAR(255),
+  MeasurementValue FLOAT,
+  MeasurementUnit VARCHAR(100),
+  UserID BIGINT,
+  related_entity_type VARCHAR(50) NULL,
+  related_entity_id BIGINT NULL,
+  FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 
-CREATE TABLE DiarySymptoms (
-       DiarySymptomID BIGINT AUTO_INCREMENT PRIMARY KEY,
-       EntryID BIGINT NOT NULL,
-       SymptomID BIGINT NOT NULL,
-       FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-       FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
+CREATE TABLE Symptoms (
+  SymptomID BIGINT AUTO_INCREMENT PRIMARY KEY,
+  SymptomName VARCHAR(255),
+  SymptomSeverity INT,
+  SymptomStartDate DATETIME,
+  SymptomIsActive BOOLEAN,
+  UserID BIGINT,
+  related_entity_type VARCHAR(50) NULL,
+  related_entity_id BIGINT NULL,
+  FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
-
 
 CREATE TABLE Events (
     EventID BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -167,23 +149,9 @@ CREATE TABLE Treatments (
     TreatmentType VARCHAR(255),
     TreatmentDetails TEXT,
     UserID BIGINT,
+    related_entity_type VARCHAR(50) NULL,
+    related_entity_id BIGINT NULL,
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
-);
-
-CREATE TABLE EventTreatments (
-    EventTreatmentID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    EventID BIGINT,
-    TreatmentID BIGINT,
-    FOREIGN KEY (EventID) REFERENCES Events(EventID),
-    FOREIGN KEY (TreatmentID) REFERENCES Treatments(TreatmentID)
-);
-
-CREATE TABLE EventSymptoms (
-    EventSymptomID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    EventID BIGINT,
-    SymptomID BIGINT,
-    FOREIGN KEY (EventID) REFERENCES Events(EventID),
-    FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
 );
 
 --Not implemented yet--

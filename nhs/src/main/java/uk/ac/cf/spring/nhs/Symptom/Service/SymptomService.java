@@ -21,7 +21,18 @@ public class SymptomService {
                 symptomDTO.getSeverity(),
                 userId
         );
+        return symptomRepository.save(symptom);
+    }
 
+    @Transactional
+    public Symptom saveSymptom(SymptomDTO symptomDTO, long userId, Long relatedEntityId, String relatedEntityType) {
+        Symptom symptom = new Symptom(
+                symptomDTO.getName(),
+                symptomDTO.getSeverity(),
+                userId,
+                relatedEntityId,
+                relatedEntityType
+        );
         return symptomRepository.save(symptom);
     }
 }

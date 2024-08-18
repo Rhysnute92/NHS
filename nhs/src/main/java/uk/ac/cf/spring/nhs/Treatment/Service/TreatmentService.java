@@ -24,4 +24,17 @@ public class TreatmentService {
 
         return treatmentRepository.save(treatment);
     }
+
+    @Transactional
+    public Treatment saveTreatment(TreatmentDTO treatmentDTO, long userId, Long relatedEntityId, String relatedEntityType) {
+        Treatment treatment = new Treatment(
+                treatmentDTO.getType(),
+                treatmentDTO.getDetails(),
+                userId,
+                relatedEntityId,
+                relatedEntityType
+        );
+
+        return treatmentRepository.save(treatment);
+    }
 }
