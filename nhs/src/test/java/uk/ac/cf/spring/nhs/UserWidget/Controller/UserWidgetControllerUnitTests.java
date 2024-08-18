@@ -82,6 +82,7 @@ class UserWidgetControllerUnitTests {
         assertEquals(userWidgets, response.getBody());
     }
 
+    @SuppressWarnings("null")
     @Test
     @WithMockUser(username = "testuser", roles = { "USER" })
     void getUserWidgets_withValidUserId_returnsEmptyListWhenNoWidgets() {

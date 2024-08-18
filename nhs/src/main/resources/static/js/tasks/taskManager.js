@@ -3,16 +3,15 @@ import { TaskRenderer } from "./taskRenderer.js"; // Import the TaskRenderer cla
 import { fetchData } from "../common/utils/apiUtility.js"; // Utility for API calls
 
 export class TaskManager {
-  constructor(userId, eventQueue) {
+  constructor(eventQueue) {
     this.tasks = [];
-    this.taskRenderer = new TaskRenderer(eventQueue, userId);
+    this.taskRenderer = new TaskRenderer(eventQueue);
     this.eventQueue = eventQueue;
   }
 
   async fetchTasks() {
-    try {
-      console.debug(`Fetching tasks for user ID: ${this.userId}`);
-      const taskData = await fetchData(`/usertask/user/${this.userId}`);
+    try {;
+      const taskData = await fetchData(`/usertask/user`);
       this.tasks = taskData.map(
         (userTask) =>
           new Task(
