@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import uk.ac.cf.spring.nhs.Appointments.DTO.AppointmentDTO;
 import uk.ac.cf.spring.nhs.Appointments.Model.Appointment;
 import uk.ac.cf.spring.nhs.Appointments.Service.AppointmentService;
 import uk.ac.cf.spring.nhs.Appointments.Repository.AppointmentRepository;
@@ -114,9 +113,9 @@ public class AppointmentServiceTest {
     @Test
     public void testGetAppointmentsByUserId() {
         List<Appointment> appointments = Arrays.asList(appointment1, appointment2);
-        when(appointmentRepository.findByUserID(1)).thenReturn(appointments);
+        when(appointmentRepository.findByUserID(1L)).thenReturn(appointments);
 
-        List<Appointment> result = appointmentService.getAppointmentsByUserId(1);
+        List<Appointment> result = appointmentService.getAppointmentsByUserId(1L);
 
         assertThat(result).isNotNull();
         assertThat(result.size()).isEqualTo(2);
@@ -153,20 +152,30 @@ public class AppointmentServiceTest {
 
     @Test
     public void testSaveAppointmentWithDTO() {
-        AppointmentDTO appointmentDTO = new AppointmentDTO();
-        appointmentDTO.setDate("2024-08-13");
-        appointmentDTO.setTime("10:00");
-        appointmentDTO.setAppointmentType("Consultation");
-        appointmentDTO.setProvider("Dr. Smith");
-        appointmentDTO.setDescription("Discuss test results");
+        // Create and initialize the AppointmentDTO
+        Appointment appointmentDTO = new Appointment();
+        appointmentDTO.setApptType("Consultation");
+        appointmentDTO.setApptProvider("Dr. Smith");
+        appointmentDTO.setApptInfo("Discuss test results");
 
+        // Create a mock Appointment entity
+        Appointment appointment1 = new Appointment();
+        appointment1.setApptID(1);
+        appointment1.setApptType("Consultation");
+        // Initialize other fields if necessary
+
+        // Mock the save method
         when(appointmentRepository.save(any(Appointment.class))).thenReturn(appointment1);
 
+        // Call the service method
         Appointment result = appointmentService.saveAppointment(appointmentDTO);
 
+        // Assertions to verify the outcome
         assertThat(result).isNotNull();
         assertThat(result.getApptID()).isEqualTo(1);
         assertThat(result.getApptType()).isEqualTo("Consultation");
+
+        // Verify that the save method was called once
         verify(appointmentRepository, times(1)).save(any(Appointment.class));
     }
 }

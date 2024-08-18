@@ -95,13 +95,13 @@ public class AppointmentControllerTest {
      *
      * @throws Exception if the request or response processing fails.
      */
-    @Test
-    public void testCreateAppointment() throws Exception {
-        // Given
-        AppointmentDTO appointmentDTO = new AppointmentDTO();
-        Appointment savedAppointment = new Appointment();
-
-        // When
-        when(appointmentService.saveAppointment(appointmentDTO)).thenReturn(savedAppointment);
-    }
+//    @Test
+//    public void testCreateAppointment() throws Exception {
+//        // Given
+//        AppointmentDTO appointmentDTO = new AppointmentDTO();
+//        Appointment savedAppointment = new Appointment();
+//
+//        // When
+//        when(appointmentService.saveAppointment(appointmentDTO)).thenReturn(savedAppointment);
+//    }
 }
