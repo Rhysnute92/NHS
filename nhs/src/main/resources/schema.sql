@@ -3,24 +3,38 @@ DROP TABLE IF EXISTS UserTaskLog;
 DROP TABLE IF EXISTS UserTask;
 DROP TABLE IF EXISTS Task;
 
+DROP TABLE IF EXISTS InfoAssets;
+DROP TABLE IF EXISTS InfoSections;
+DROP TABLE IF EXISTS Articles;
+
+DROP TABLE IF EXISTS UserQuestion;
+
 DROP TABLE IF EXISTS UserResponses;
 DROP TABLE IF EXISTS UserQuestionnaires;
-DROP TABLE IF EXISTS Questions;
+DROP TABLE IF EXISTS Question;
 DROP TABLE IF EXISTS Questionnaires;
+
+DROP TABLE IF EXISTS DiarySymptoms;
+DROP TABLE IF EXISTS DiaryMeasurements;
+DROP TABLE IF EXISTS DiaryPhotos;
+DROP TABLE IF EXISTS DiaryEntries;
+DROP TABLE IF EXISTS Symptoms;
 
 
 
 DROP TABLE IF EXISTS Treatments;
 DROP TABLE IF EXISTS Measurements;
-DROP TABLE IF EXISTS Symptoms;
 DROP TABLE IF EXISTS Photos;
 
 DROP TABLE IF EXISTS Events;
 DROP TABLE IF EXISTS DiaryEntries;
 
+
 DROP TABLE IF EXISTS Appointments;
 DROP TABLE IF EXISTS UserWidgets;
 
+
+DROP TABLE IF EXISTS Providers;
 DROP TABLE IF EXISTS PatientDiagnosis;
 DROP TABLE IF EXISTS Patients;
 
@@ -33,12 +47,15 @@ DROP TABLE IF EXISTS Articles;
 DROP TABLE IF EXISTS UserCredentials;
 
 
+
 DROP TABLE IF EXISTS ProviderCredentials;
 DROP TABLE IF EXISTS PatientCredentials;
 
 DROP TABLE IF EXISTS Admin;
 DROP TABLE IF EXISTS UserCredentials;
-
+/* DROP Database IF EXISTS nhs;
+ CREATE Database nhs;
+ USE nhs; */
 --Log in information and credentials--
 CREATE TABLE UserCredentials (
     UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -182,11 +199,12 @@ CREATE TABLE Questionnaires (
     QuestionnaireID BIGINT AUTO_INCREMENT PRIMARY KEY,
     QuestionnaireType VARCHAR(255),
     QuestionnaireName VARCHAR(255),
-    QuestionnaireDesc TEXT
+    QuestionnaireDesc TEXT,
+    QuestionnaireCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-CREATE TABLE Questions (
+CREATE TABLE Question (
     QuestionID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    Question TEXT,
+    QuestionText TEXT,
     QuestionCategory VARCHAR(255),
     QuestionResponseType VARCHAR(255),
     QuestionnaireID BIGINT,
@@ -194,19 +212,23 @@ CREATE TABLE Questions (
 );
 CREATE TABLE UserQuestionnaires (
     UserQuestionnaireID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    QuestionnaireID BIGINT,
-    UserID BIGINT,
-    QUestionnaireStartDate DATETIME,
-    QuestionnaireIsCompleted BOOLEAN,
+    QuestionnaireID BIGINT NOT NULL,
+    UserID BIGINT NOT NULL,
+    QuestionnaireStartDate DATETIME NOT NULL,
+    QuestionnaireInProgress BOOLEAN DEFAULT FALSE,
+    QuestionnaireIsCompleted BOOLEAN DEFAULT FALSE,
     QuestionnaireCompletionDate DATETIME,
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID),
     FOREIGN KEY (QuestionnaireID) REFERENCES Questionnaires(QuestionnaireID)
 );
-CREATE TABLE UserResponses (
-    UserQuestionnaireID BIGINT,
+CREATE TABLE UserQuestion (
+    UserQuestionID BIGINT AUTO_INCREMENT PRIMARY KEY,
     QuestionID BIGINT,
-    UserResponse TEXT,
-    FOREIGN KEY (QuestionID) REFERENCES Questions(QuestionID),
+    UserQuestionnaireID BIGINT,
+    UserResponseText TEXT,
+    UserResponseScore INT,
+    ResponseDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (QuestionID) REFERENCES Question(QuestionID),
     FOREIGN KEY (UserQuestionnaireID) REFERENCES UserQuestionnaires(UserQuestionnaireID)
 );
 --Not implemented yet--
