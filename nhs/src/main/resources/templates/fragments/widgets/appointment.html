@@ -5,13 +5,18 @@
     <div class="appointment-widget-body">
         <svg class="appointmentList" width="100" height="100">
             <!-- List of upcoming appointments -->
-            <ul class="appointment-list">
-                <li th:each="appointment : ${appointments}">
-                    <span th:text="${appointment.date}">Date</span>
-                    <span th:text="${appointment.time}">Time</span>
-                    <span th:text="${appointment.description}">Description</span>
+            <ul id="apptList">
+                <li class="no-appointments">
+                    <p th:if="${appointments.isEmpty()}">No appointments scheduled yet</p>
                 </li>
-                <li th:if="${#lists.isEmpty(appointments)}">No upcoming appointments</li>
+                <li th:each="appointment: ${appointments}" class="appt-item">
+                    <strong th:text="${appointment.apptType}"></strong> -
+                    <span th:text="${appointment.apptInfo}"></span>
+                    on
+                    <span th:text="${#temporals.format(appointment.apptDateTime, 'MM/dd/yyyy')}"></span>
+                    at
+                    <span th:text="${#temporals.format(appointment.apptDateTime, 'hh:mm a')}"></span>
+                </li>
             </ul>
         </svg>
     </div>

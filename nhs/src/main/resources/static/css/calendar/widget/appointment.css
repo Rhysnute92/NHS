@@ -29,6 +29,16 @@
     display: inline-block;
 }
 
+.appointment-list {
+    list-style: none;
+    padding: 0;
+}
+
+.appointment-list li {
+    border-bottom: 1px solid #ddd;
+    padding: 8px 0;
+}
+
 .add-appointment-button {
     background-color: #4f46e5; /* Your primary color */
     color: #ffffff;
