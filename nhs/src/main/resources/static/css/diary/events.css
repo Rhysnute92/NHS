@@ -3,6 +3,10 @@
     height: 70vh;
 }
 
+.modal-section {
+    margin-bottom: 1rem;
+}
+
 button {
     border: none;
     background-color: var(--nhs-light-green);
@@ -15,11 +19,9 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: auto;
     gap: 0.5rem;
-    /*text-align: left;*/
     transition: opacity 0.5s;
-    margin-top: 2rem;
+    margin: 2rem auto auto;
 }
 
 .event-list {
@@ -31,4 +33,12 @@ button {
 
 .conditional-hidden {
     display: none;
+}
+
+.checkin-symptom-selection, .treatment-details {
+    padding-left: 1rem;
+}
+
+input[type="date"] {
+    font-family: var(--regular-font-family);
 }

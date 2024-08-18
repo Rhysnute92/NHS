@@ -15,8 +15,6 @@
         <div>
           <input type="checkbox" id="redness" name="redness" value="Redness" aria-controls="redness-severity">
           <label for="redness">Redness</label>
-        </div>
-        <div id="redness-severity" class="checkin-symptom-selection">
           <th:block th:replace="~{diary/fragments/symptomSeverity :: symptomSeverity('redness')}"></th:block>
         </div>
 
@@ -24,9 +22,28 @@
         <div>
           <input type="checkbox" id="swelling" name="swelling" value="Swelling" aria-controls="swelling-severity">
           <label for="swelling">Swelling</label>
-        </div>
-        <div id="swelling-severity" class="checkin-symptom-selection">
           <th:block th:replace="~{diary/fragments/symptomSeverity :: symptomSeverity('swelling')}"></th:block>
+        </div>
+
+        <!-- Pain -->
+        <div>
+          <input type="checkbox" id="pain" name="pain" value="Pain" aria-controls="pain-severity">
+          <label for="pain">Pain</label>
+          <th:block th:replace="~{diary/fragments/symptomSeverity :: symptomSeverity('pain')}"></th:block>
+        </div>
+
+        <!-- Blistered skin -->
+        <div>
+          <input type="checkbox" id="blisteredSkin" name="blisteredSkin" value="Blistered skin" aria-controls="blisteredSkin-severity">
+          <label for="blisteredSkin">Blistered skin</label>
+          <th:block th:replace="~{diary/fragments/symptomSeverity :: symptomSeverity('blisteredSkin')}"></th:block>
+        </div>
+
+        <!-- Fever -->
+        <div>
+          <input type="checkbox" id="fever" name="fever" value="Fever" aria-controls="fever-severity">
+          <label for="fever">Fever</label>
+          <th:block th:replace="~{diary/fragments/symptomSeverity :: symptomSeverity('fever')}"></th:block>
         </div>
       </div>
 
@@ -41,18 +58,18 @@
       <div class="modal-section">
         <h3>What treatment did you receive?</h3>
         <div>
-          <input type="checkbox" id="receivedTreatment" aria-controls="treatment-details" data-invert="true">
+          <input type="checkbox" id="receivedTreatment" aria-controls="treatment-section" data-invert="true">
           <label for="receivedTreatment">I did not receive treatment for this episode of cellulitis.</label>
         </div>
-        <div class="treatment-details" id="treatment-details">
+        <div class="treatment-section" id="treatment-section">
           <h3>Tick all that apply:</h3>
           <div>
             <input type="checkbox" id="antibiotics" name="treatments[0].type" value="antibiotics" aria-controls="antibiotics-details">
             <label for="antibiotics">I was prescribed oral antibiotics.</label>
-          </div>
-          <div class="antibiotics-details" id="antibiotics-details">
-            <label for="antibioticsName">Name of antibiotics you were prescribed (optional):</label>
-            <input type="text" class="form-control" id="antibioticsName" name="treatments[0].details">
+            <div class="antibiotics-details treatment-details" id="antibiotics-details">
+              <label for="antibioticsName">Name of antibiotics you were prescribed (optional):</label>
+              <input type="text" class="form-control" id="antibioticsName" name="treatments[0].details">
+            </div>
           </div>
           <div>
             <input type="checkbox" id="antibioticsIV" name="treatments[1].type" value="IV antibiotics">
