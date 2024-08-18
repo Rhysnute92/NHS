@@ -60,7 +60,12 @@ class EventCard extends HTMLElement {
                         <h4>Treatments</h4>
                         <ul>
                             ${treatments.length > 0
-                                ? treatments.map(treatment => `<li>${treatmentText[treatment.type] || 'N/A'}</li>`).join('')
+                                ? treatments.map(treatment =>
+                                    `<li>
+                                    ${treatmentText[treatment.type] || 'N/A'}
+                                    ${treatment.details && treatment.details.trim() !== '' ? ` (${treatment.details})` : ''}
+                                </li>`
+                                ).join('')
                                 : '<li>No treatments reported</li>'
                             }
                         </ul>
@@ -99,7 +104,6 @@ class EventCard extends HTMLElement {
 
             if (response.ok) {
                 // If the request was successful, remove the element from the DOM
-                console.log(`Event with ID ${eventId} successfully deleted.`);
                 this.remove();
 
             } else {

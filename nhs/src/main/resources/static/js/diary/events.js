@@ -38,12 +38,10 @@ eventForm.addEventListener('submit', (event) => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
             const event = data.event;
             eventModal.hide();
 
             const eventElement = document.createElement('event-card');
-            console.log(event)
             eventElement.setAttribute('event-data', JSON.stringify(event));
 
             document.querySelector('.event-list').appendChild(eventElement);
@@ -59,9 +57,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Show/hide conditional inputs for checkboxes based on checked state
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach((checkbox) => {
-        if (checkbox.id === 'receivedTreatment') {
-            checkbox.addEventListener('change', () => toggleConditionalInput(checkbox, 'conditional-hidden', 'other-symptom-input'));
-        }
         toggleConditionalInput(checkbox, 'conditional-hidden');
         checkbox.addEventListener('change', () => toggleConditionalInput(checkbox, 'conditional-hidden'));
     })
