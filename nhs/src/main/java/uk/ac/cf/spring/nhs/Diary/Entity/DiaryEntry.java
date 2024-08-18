@@ -10,9 +10,9 @@ import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -36,15 +36,15 @@ public class DiaryEntry {
 
     @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
     @Filter(name = "relatedEntityTypeFilter", condition = "RelatedEntityType = 'DiaryEntry'")
-    private Set<Measurement> measurements;
+    private List<Measurement> measurements = new ArrayList<>();
 
     @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
     @Filter(name = "relatedEntityTypeFilter", condition = "RelatedEntityType = 'Event'")
-    private Set<Symptom> symptoms;
+    private List<Symptom> symptoms = new ArrayList<>();
 
     @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
     @Filter(name = "relatedEntityTypeFilter", condition = "RelatedEntityType = 'DiaryEntry'")
-    private Set<Photo> photos;
+    private List<Photo> photos = new ArrayList<>();
 
     @Column(name = "EntryNotes")
     private String notes;

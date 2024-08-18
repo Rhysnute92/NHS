@@ -6,6 +6,7 @@ import uk.ac.cf.spring.nhs.Treatment.Entity.Treatment;
 import uk.ac.cf.spring.nhs.Treatment.DTO.TreatmentDTO;
 import uk.ac.cf.spring.nhs.Treatment.Repository.TreatmentRepository;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -27,7 +28,8 @@ public class TreatmentService {
         return treatmentRepository.save(treatment);
     }
 
-    public void saveTreatments(Set<Treatment> treatments) {
+    public void saveAll(List<Treatment> treatments) {
         treatmentRepository.saveAll(treatments);
     }
+
 }

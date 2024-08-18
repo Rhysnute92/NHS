@@ -36,9 +36,7 @@ public class PhotoService {
         return photoRepository.save(photo);
     }
 
-
-
-    public void savePhotos(Set<Photo> photos) {
+    public void saveAll(List<Photo> photos) {
         photoRepository.saveAll(photos);
     }
 

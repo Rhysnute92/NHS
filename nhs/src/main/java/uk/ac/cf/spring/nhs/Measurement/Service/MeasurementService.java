@@ -6,6 +6,7 @@ import uk.ac.cf.spring.nhs.Measurement.DTO.MeasurementDTO;
 import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Measurement.Repository.MeasurementRepository;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -28,7 +29,7 @@ public class MeasurementService {
         return measurementRepository.save(measurement);
     }
 
-    public void saveMeasurements(Set<Measurement> measurements) {
+    public void saveAll(List<Measurement> measurements) {
         measurementRepository.saveAll(measurements);
     }
 }

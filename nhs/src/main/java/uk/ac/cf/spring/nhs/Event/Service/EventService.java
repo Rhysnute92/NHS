@@ -11,9 +11,7 @@ import uk.ac.cf.spring.nhs.Symptom.Service.SymptomService;
 import uk.ac.cf.spring.nhs.Treatment.Entity.Treatment;
 import uk.ac.cf.spring.nhs.Treatment.Service.TreatmentService;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,48 +34,50 @@ public class EventService {
         // Create the event
         Event event = new Event(eventDTO.getDate(), eventDTO.getDuration(), userId);
 
-        // Save the event first to generate the ID
-        event = eventRepository.save(event);
-        long eventId = event.getId();
+        List<Symptom> symptoms = eventDTO.getSymptoms().stream()
+                .filter(symptomDTO -> symptomDTO.getSeverity() != null)
+                .map(symptomDTO -> new Symptom(
+                        symptomDTO.getName(),
+                        symptomDTO.getSeverity(),
+                        userId,
+                        null,
+                        "Event"))
+                .collect(Collectors.toList());
 
-        // Symptoms
-        if (!eventDTO.getSymptoms().isEmpty()) {
-            Set<Symptom> symptoms = eventDTO.getSymptoms().stream()
-                    .filter(symptomDTO -> symptomDTO.getSeverity() != null)
-                    .map(symptomDTO -> new Symptom(
-                            symptomDTO.getName(),
-                            symptomDTO.getSeverity(),
-                            userId,
-                            eventId,
-                            "Event"))
-                    .collect(Collectors.toSet());
+        List<Treatment> treatments = eventDTO.getTreatments().stream()
+                .filter(treatmentDTO -> treatmentDTO.getType() != null)
+                .map(treatmentDTO -> new Treatment(
+                        treatmentDTO.getType(),
+                        treatmentDTO.getDetails(),
+                        userId,
+                        null,
+                        "Event"))
+                .collect(Collectors.toList());
 
+        // Set symptoms and treatments in the event
+        if (!symptoms.isEmpty()) {
             event.setSymptoms(symptoms);
-
-            // Save symptoms in batch
-            symptomService.saveSymptoms(symptoms);
         }
-
-        // Treatments
-        if (!eventDTO.getTreatments().isEmpty()) {
-            Set<Treatment> treatments = eventDTO.getTreatments().stream()
-                    .filter(treatmentDTO -> treatmentDTO.getType() != null)
-                    .map(treatmentDTO -> new Treatment(
-                            treatmentDTO.getType(),
-                            treatmentDTO.getDetails(),
-                            userId,
-                            eventId,
-                            "Event"))
-                    .collect(Collectors.toSet());
-
+        if (!treatments.isEmpty()) {
             event.setTreatments(treatments);
-
-            // Save treatments in batch
-            treatmentService.saveTreatments(treatments);
         }
 
-        // Save the event again to ensure relationships are persisted
-        return eventRepository.save(event);
+        // Save the event to generate the ID
+        Event savedEvent = eventRepository.save(event);
+        long eventId = savedEvent.getId();
+
+        // Update related entity IDs and save
+        if (!symptoms.isEmpty()) {
+            symptoms.forEach(symptom -> symptom.setRelatedEntityId(eventId));
+            symptomService.saveAll(symptoms);
+        }
+
+        if (!treatments.isEmpty()) {
+            treatments.forEach(treatment -> treatment.setRelatedEntityId(eventId));
+            treatmentService.saveAll(treatments);
+        }
+
+        return savedEvent;
     }
 
     public void deleteEventById(Long eventId) {

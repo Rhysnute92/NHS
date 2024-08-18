@@ -4,14 +4,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.ParamDef;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 import uk.ac.cf.spring.nhs.Treatment.Entity.Treatment;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,11 +33,11 @@ public class Event {
 
     @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
     @Filter(name = "relatedEntityTypeFilter", condition = "RelatedEntityType = 'Event'")
-    private Set<Symptom> symptoms;
+    private List<Symptom> symptoms = new ArrayList<>();
 
     @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
     @Filter(name = "relatedEntityTypeFilter", condition = "RelatedEntityType = 'Event'")
-    private Set<Treatment> treatments;
+    private List<Treatment> treatments = new ArrayList<>();
 
     protected Event() {}
 
