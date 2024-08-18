@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Sort;
 import uk.ac.cf.spring.nhs.Event.DTO.EventDTO;
 import uk.ac.cf.spring.nhs.Event.Entity.Event;
 import uk.ac.cf.spring.nhs.Event.Repository.EventRepository;
@@ -104,13 +105,13 @@ class EventServiceTest {
         Event event1 = new Event(LocalDate.now(), 60, 1L);
         Event event2 = new Event(LocalDate.now(), 90, 1L);
 
-        when(eventRepository.findByUserId(1L)).thenReturn(List.of(event1, event2));
+        when(eventRepository.findByUserId(1L, Sort.by(Sort.Direction.DESC, "date"))).thenReturn(List.of(event1, event2));
 
         List<Event> events = eventService.getEventsByUserId(1L);
 
         assertNotNull(events);
         assertEquals(2, events.size());
-        verify(eventRepository, times(1)).findByUserId(1L);
+        verify(eventRepository, times(1)).findByUserId(1L, Sort.by(Sort.Direction.DESC, "date"));
     }
 
     @Test

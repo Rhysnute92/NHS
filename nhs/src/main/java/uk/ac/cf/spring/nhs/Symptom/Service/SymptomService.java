@@ -6,6 +6,8 @@ import uk.ac.cf.spring.nhs.Symptom.DTO.SymptomDTO;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 import uk.ac.cf.spring.nhs.Symptom.Repository.SymptomRepository;
 
+import java.util.Set;
+
 @Service
 public class SymptomService {
     private final SymptomRepository symptomRepository;
@@ -24,15 +26,7 @@ public class SymptomService {
         return symptomRepository.save(symptom);
     }
 
-    @Transactional
-    public Symptom saveSymptom(SymptomDTO symptomDTO, long userId, Long relatedEntityId, String relatedEntityType) {
-        Symptom symptom = new Symptom(
-                symptomDTO.getName(),
-                symptomDTO.getSeverity(),
-                userId,
-                relatedEntityId,
-                relatedEntityType
-        );
-        return symptomRepository.save(symptom);
+    public void saveSymptoms(Set<Symptom> symptoms) {
+        symptomRepository.saveAll(symptoms);
     }
 }

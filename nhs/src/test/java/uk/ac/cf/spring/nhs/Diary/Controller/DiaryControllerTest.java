@@ -101,7 +101,7 @@ public class DiaryControllerTest {
         CheckinFormDTO checkinForm = new CheckinFormDTO();
         DiaryEntry dummyDiaryEntry = new DiaryEntry(1L, new Date());
 
-        when(diaryEntryService.createAndSaveDiaryEntry(any(CheckinFormDTO.class), eq(1L))).thenReturn(dummyDiaryEntry);
+        when(diaryEntryService.saveDiaryEntry(any(CheckinFormDTO.class), eq(1L))).thenReturn(dummyDiaryEntry);
 
         mockMvc.perform(multipart("/diary/checkin")
                         .flashAttr("checkinForm", checkinForm)
@@ -111,7 +111,7 @@ public class DiaryControllerTest {
 
         ArgumentCaptor<CheckinFormDTO> formCaptor = ArgumentCaptor.forClass(CheckinFormDTO.class);
         ArgumentCaptor<Long> userIdCaptor = ArgumentCaptor.forClass(Long.class);
-        verify(diaryEntryService).createAndSaveDiaryEntry(formCaptor.capture(), userIdCaptor.capture());
+        verify(diaryEntryService).saveDiaryEntry(formCaptor.capture(), userIdCaptor.capture());
 
         assertEquals(1L, userIdCaptor.getValue());
     }
@@ -120,7 +120,7 @@ public class DiaryControllerTest {
     public void testCheckinFailure() throws Exception {
         CheckinFormDTO checkinForm = new CheckinFormDTO();
 
-        doThrow(new RuntimeException("Error")).when(diaryEntryService).createAndSaveDiaryEntry(any(CheckinFormDTO.class), eq(1L));
+        doThrow(new RuntimeException("Error")).when(diaryEntryService).saveDiaryEntry(any(CheckinFormDTO.class), eq(1L));
 
         mockMvc.perform(multipart("/diary/checkin")
                         .flashAttr("checkinForm", checkinForm)
@@ -128,7 +128,7 @@ public class DiaryControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.error").value("Error"));
 
-        verify(diaryEntryService, times(1)).createAndSaveDiaryEntry(any(CheckinFormDTO.class), eq(1L));
+        verify(diaryEntryService, times(1)).saveDiaryEntry(any(CheckinFormDTO.class), eq(1L));
     }
 
 

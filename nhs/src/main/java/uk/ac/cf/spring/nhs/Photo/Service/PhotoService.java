@@ -11,6 +11,7 @@ import uk.ac.cf.spring.nhs.Photo.Repository.PhotoRepository;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PhotoService {
@@ -31,16 +32,14 @@ public class PhotoService {
 
     public Photo savePhoto(PhotoDTO photoDTO, long userId) {
         String photoUrl = fileStorageService.storeFile(photoDTO.getFile());
-        String bodyPart = photoDTO.getBodyPart();
-        Photo photo = new Photo(photoUrl, new Date(), bodyPart, userId);
+        Photo photo = new Photo(photoUrl, new Date(), photoDTO.getBodyPart(), userId);
         return photoRepository.save(photo);
     }
 
-    public Photo savePhoto(PhotoDTO photoDTO, long userId, Long relatedEntityId, String relatedEntityType) {
-        String photoUrl = fileStorageService.storeFile(photoDTO.getFile());
-        String bodyPart = photoDTO.getBodyPart();
-        Photo photo = new Photo(photoUrl, new Date(), bodyPart, userId, relatedEntityId, relatedEntityType);
-        return photoRepository.save(photo);
+
+
+    public void savePhotos(Set<Photo> photos) {
+        photoRepository.saveAll(photos);
     }
 
     public boolean deletePhotoById(long photoId) {

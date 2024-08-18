@@ -7,6 +7,7 @@ import uk.ac.cf.spring.nhs.Diary.DTO.CheckinFormDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Diary.Entity.Mood;
 import uk.ac.cf.spring.nhs.Diary.Repository.DiaryEntryRepository;
+import uk.ac.cf.spring.nhs.Files.Service.FileStorageService;
 import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Measurement.Service.MeasurementService;
 import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
@@ -26,15 +27,18 @@ public class DiaryEntryService {
     private final PhotoService photoService;
     private final SymptomService symptomService;
     private final MeasurementService measurementService;
+    private final FileStorageService fileStorageService;
 
     public DiaryEntryService(DiaryEntryRepository diaryEntryRepository,
                              PhotoService photoService,
                              SymptomService symptomService,
-                             MeasurementService measurementService) {
+                             MeasurementService measurementService,
+                             FileStorageService fileStorageService) {
         this.diaryEntryRepository = diaryEntryRepository;
         this.photoService = photoService;
         this.symptomService = symptomService;
         this.measurementService = measurementService;
+        this.fileStorageService = fileStorageService;
     }
 
     @Transactional
@@ -53,33 +57,67 @@ public class DiaryEntryService {
         // Photos
         if (!checkinForm.getPhotos().isEmpty()) {
             Set<Photo> photos = checkinForm.getPhotos().stream()
-                    .map(photoDTO -> photoService.savePhoto(photoDTO, userId, diaryEntryId, "DiaryEntry"))
+                    .map(photoDTO -> {
+                        // Store the photo file to get the URL
+                        String photoUrl = fileStorageService.storeFile(photoDTO.getFile());
+                        String bodyPart = photoDTO.getBodyPart();
+
+                        // Create the Photo entity in memory
+                        return new Photo(
+                                photoUrl,
+                                new Date(),
+                                bodyPart,
+                                userId,
+                                diaryEntryId,
+                                "DiaryEntry");
+                    })
                     .collect(Collectors.toSet());
+
             diaryEntry.setPhotos(photos);
+
+            // Save photos in batch
+            photoService.savePhotos(photos);
         }
 
         // Symptoms
         if (!checkinForm.getSymptoms().isEmpty()) {
             Set<Symptom> symptoms = checkinForm.getSymptoms().stream()
                     .filter(symptomDTO -> symptomDTO.getSeverity() != null)
-                    .map(symptomDTO -> symptomService.saveSymptom(symptomDTO, userId, diaryEntryId, "DiaryEntry"))
+                    .map(symptomDTO -> new Symptom(
+                            symptomDTO.getName(),
+                            symptomDTO.getSeverity(),
+                            userId,
+                            diaryEntryId,
+                            "DiaryEntry"))
                     .collect(Collectors.toSet());
+
             diaryEntry.setSymptoms(symptoms);
+
+            // Save symptoms in batch
+            symptomService.saveSymptoms(symptoms);
         }
 
         // Measurements
         if (checkinForm.getMeasurements() != null && !checkinForm.getMeasurements().isEmpty()) {
             Set<Measurement> measurements = checkinForm.getMeasurements().stream()
-                    .map(measurementDTO -> measurementService.saveMeasurement(measurementDTO, userId, diaryEntryId, "DiaryEntry"))
+                    .map(measurementDTO -> new Measurement(
+                            measurementDTO.getType(),
+                            measurementDTO.getValue(),
+                            measurementDTO.getUnit(),
+                            userId,
+                            diaryEntryId,
+                            "DiaryEntry"))
                     .collect(Collectors.toSet());
+
             diaryEntry.setMeasurements(measurements);
+
+            // Save measurements in batch
+            measurementService.saveMeasurements(measurements);
         }
 
         // Save the diary entry again with related entities attached
         return diaryEntryRepository.save(diaryEntry);
     }
-
-
 
 
     public void deleteDiaryEntryById(int id) {

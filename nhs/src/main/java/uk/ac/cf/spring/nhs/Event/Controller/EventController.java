@@ -62,7 +62,7 @@ public class EventController {
     public ResponseEntity<Map<String, Object>> deleteEvent(
             @PathVariable long eventId
     ) {
-        eventService.deleteEvent(eventId);
+        eventService.deleteEventById(eventId);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Event deleted successfully");
         return new ResponseEntity<>(response, HttpStatus.OK);

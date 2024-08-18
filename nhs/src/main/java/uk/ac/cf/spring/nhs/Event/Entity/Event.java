@@ -1,6 +1,8 @@
 package uk.ac.cf.spring.nhs.Event.Entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
@@ -11,6 +13,8 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Events")
 public class Event {
@@ -30,11 +34,11 @@ public class Event {
     private long userId;
 
     @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Filter(name = "relatedEntityTypeFilter", condition = "related_entity_type = 'Event'")
+    @Filter(name = "relatedEntityTypeFilter", condition = "RelatedEntityType = 'Event'")
     private Set<Symptom> symptoms;
 
     @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Filter(name = "relatedEntityTypeFilter", condition = "related_entity_type = 'Event'")
+    @Filter(name = "relatedEntityTypeFilter", condition = "RelatedEntityType = 'Event'")
     private Set<Treatment> treatments;
 
     protected Event() {}
@@ -43,53 +47,5 @@ public class Event {
         this.date = date;
         this.duration = duration;
         this.userId = userId;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public Set<Symptom> getSymptoms() {
-        return symptoms;
-    }
-
-    public void setSymptoms(Set<Symptom> symptoms) {
-        this.symptoms = symptoms;
-    }
-
-    public Set<Treatment> getTreatments() {
-        return treatments;
-    }
-
-    public void setTreatments(Set<Treatment> treatments) {
-        this.treatments = treatments;
     }
 }

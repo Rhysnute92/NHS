@@ -108,8 +108,8 @@ CREATE TABLE Photos (
     PhotoDate DATETIME,
     PhotoBodypart VARCHAR(255),
     UserID BIGINT,
-    related_entity_type VARCHAR(50) NULL,
-    related_entity_id BIGINT NULL,
+    RelatedEntityType VARCHAR(255),
+    RelatedEntityId BIGINT,
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 
@@ -119,8 +119,8 @@ CREATE TABLE Measurements (
   MeasurementValue FLOAT,
   MeasurementUnit VARCHAR(100),
   UserID BIGINT,
-  related_entity_type VARCHAR(50) NULL,
-  related_entity_id BIGINT NULL,
+  RelatedEntityType VARCHAR(255),
+  RelatedEntityId BIGINT,
   FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 
@@ -131,8 +131,8 @@ CREATE TABLE Symptoms (
   SymptomStartDate DATETIME,
   SymptomIsActive BOOLEAN,
   UserID BIGINT,
-  related_entity_type VARCHAR(50) NULL,
-  related_entity_id BIGINT NULL,
+  RelatedEntityType VARCHAR(255),
+  RelatedEntityId BIGINT,
   FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 
@@ -149,8 +149,8 @@ CREATE TABLE Treatments (
     TreatmentType VARCHAR(255),
     TreatmentDetails TEXT,
     UserID BIGINT,
-    related_entity_type VARCHAR(50) NULL,
-    related_entity_id BIGINT NULL,
+    RelatedEntityType VARCHAR(255),
+    RelatedEntityId BIGINT,
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 

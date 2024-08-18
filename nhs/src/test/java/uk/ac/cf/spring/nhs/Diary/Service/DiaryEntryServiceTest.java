@@ -136,7 +136,7 @@ public class DiaryEntryServiceTest {
 
         when(diaryEntryRepository.save(any(DiaryEntry.class))).thenReturn(diaryEntry);
 
-        diaryEntryService.createAndSaveDiaryEntry(checkinForm, userId);
+        diaryEntryService.saveDiaryEntry(checkinForm, userId);
 
         ArgumentCaptor<DiaryEntry> diaryEntryCaptor = ArgumentCaptor.forClass(DiaryEntry.class);
         verify(diaryEntryRepository, times(1)).save(diaryEntryCaptor.capture());

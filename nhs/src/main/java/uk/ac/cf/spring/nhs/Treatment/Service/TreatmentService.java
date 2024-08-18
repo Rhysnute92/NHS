@@ -6,6 +6,8 @@ import uk.ac.cf.spring.nhs.Treatment.Entity.Treatment;
 import uk.ac.cf.spring.nhs.Treatment.DTO.TreatmentDTO;
 import uk.ac.cf.spring.nhs.Treatment.Repository.TreatmentRepository;
 
+import java.util.Set;
+
 @Service
 public class TreatmentService {
     private final TreatmentRepository treatmentRepository;
@@ -25,16 +27,7 @@ public class TreatmentService {
         return treatmentRepository.save(treatment);
     }
 
-    @Transactional
-    public Treatment saveTreatment(TreatmentDTO treatmentDTO, long userId, Long relatedEntityId, String relatedEntityType) {
-        Treatment treatment = new Treatment(
-                treatmentDTO.getType(),
-                treatmentDTO.getDetails(),
-                userId,
-                relatedEntityId,
-                relatedEntityType
-        );
-
-        return treatmentRepository.save(treatment);
+    public void saveTreatments(Set<Treatment> treatments) {
+        treatmentRepository.saveAll(treatments);
     }
 }

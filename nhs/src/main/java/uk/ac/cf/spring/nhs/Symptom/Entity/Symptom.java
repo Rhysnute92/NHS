@@ -1,16 +1,19 @@
 package uk.ac.cf.spring.nhs.Symptom.Entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Symptoms")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Symptom {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "SymptomID")
     private long id;
 
@@ -29,11 +32,11 @@ public class Symptom {
     @Column(name = "UserID")
     private long userId;
 
-    @Column(name = "related_entity_id")
-    private Long relatedEntityId;
-
-    @Column(name = "related_entity_type")
+    @Column(name = "RelatedEntityType")
     private String relatedEntityType;
+
+    @Column(name = "RelatedEntityId")
+    private Long relatedEntityId;
 
     protected Symptom() {}
 
@@ -50,71 +53,6 @@ public class Symptom {
         this.severity = severity;
         this.userId = userId;
         this.relatedEntityId = relatedEntityId;
-        this.relatedEntityType = relatedEntityType;
-    }
-
-    // Getters and Setters
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getSeverity() {
-        return severity;
-    }
-
-    public void setSeverity(int severity) {
-        this.severity = severity;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public Long getRelatedEntityId() {
-        return relatedEntityId;
-    }
-
-    public void setRelatedEntityId(Long relatedEntityId) {
-        this.relatedEntityId = relatedEntityId;
-    }
-
-    public String getRelatedEntityType() {
-        return relatedEntityType;
-    }
-
-    public void setRelatedEntityType(String relatedEntityType) {
         this.relatedEntityType = relatedEntityType;
     }
 }
