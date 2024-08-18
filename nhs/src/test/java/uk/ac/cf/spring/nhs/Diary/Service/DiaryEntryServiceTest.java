@@ -1,11 +1,13 @@
 package uk.ac.cf.spring.nhs.Diary.Service;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.multipart.MultipartFile;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinFormDTO;
@@ -43,9 +45,16 @@ public class DiaryEntryServiceTest {
     @InjectMocks
     private DiaryEntryService diaryEntryService;
 
+    private AutoCloseable closeable;
+
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        closeable = MockitoAnnotations.openMocks(this);
+    }
+
+    @AfterEach
+    public void close() throws Exception {
+        closeable.close();
     }
 
     @Test

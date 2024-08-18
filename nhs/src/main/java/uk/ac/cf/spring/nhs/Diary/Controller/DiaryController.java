@@ -11,10 +11,8 @@ import uk.ac.cf.spring.nhs.Diary.DTO.CheckinFormDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
-import uk.ac.cf.spring.nhs.Photo.Service.PhotoService;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
-import uk.ac.cf.spring.nhs.Event.Service.EventService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,15 +23,7 @@ import java.util.Map;
 public class DiaryController {
 
     @Autowired
-    private AuthenticationInterface authenticationFacade;
-    @Autowired
     DiaryEntryService diaryEntryService;
-
-    @Autowired
-    PhotoService photoService;
-
-    @Autowired
-    EventService eventService;
 
     @GetMapping("")
     public String diary(Model model,

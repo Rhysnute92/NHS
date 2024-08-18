@@ -25,7 +25,6 @@ public class CheckinFormDTO {
         this.symptoms = symptoms != null ? symptoms : new ArrayList<>();
         this.measurements = measurements != null ? measurements : new ArrayList<>();
         this.notes = notes;
-        System.out.println("photos: " + photos);
         this.photos = photos != null ? photos : new ArrayList<>();
     }
 
