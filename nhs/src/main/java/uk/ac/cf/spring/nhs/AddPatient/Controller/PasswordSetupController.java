@@ -58,25 +58,20 @@ public class PasswordSetupController {
             return "login/desktop/resetPassword";
         }
 
-        //TODO Add validation following this for if passwords do not match - popups
-
         UserCredentials userCredentials = userCredentialsRepository.findByPasswordSetupToken(token);
 
         if (userCredentials == null) {
             System.out.println("No user found with token: " + token);
-            model.addAttribute("error", "Invalid token.");
+            model.addAttribute("error", "Expired Link.");
             return "login/desktop/resetPassword";
         }
-
-        //TODO Add error page / popup for invalid token / invalid link
 
         String encodedPassword = passwordEncoder.encode(newPassword);
         userCredentialsRepository.updateUserPasswordAndToken(encodedPassword, null, userCredentials.getUserId());
 
         // Basic debugging statements to make sure the password is reset and the associated userId
         System.out.println("Password reset for userId: " + userCredentials.getUserId());
-        model.addAttribute("message", "Password set successfully.");
-        return "admin/desktop/success";
+        return "login/desktop/login";
     }
 }
 

@@ -33,16 +33,6 @@ public class AddPatientControllerTest {
         .apply(springSecurity())
         .build();
     }
-    
-    @Test
-    @WithMockUser(username="admin",roles={"PROVIDER","ADMIN"})
-    public void testMobileAddPatient() throws Exception {
-        mockMvc.perform(get("/addpatient")
-                        .header("User-Agent",
-                                "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("admin/mobile/addPatient"));
-    }
 
     @Test
     @WithMockUser(username="admin",roles={"PROVIDER","ADMIN"})

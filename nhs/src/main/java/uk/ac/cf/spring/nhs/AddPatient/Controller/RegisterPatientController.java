@@ -21,13 +21,6 @@ public class RegisterPatientController {
     @PostMapping("/register")
     public String registerPatient(@ModelAttribute RegisterRequest request, RedirectAttributes redirectAttributes) {
         patientService.registerPatient(request);
-        redirectAttributes.addFlashAttribute("successMessage", "Patient has been successfully added!");
-        return "admin/desktop/success";
-    }
-
-    @GetMapping("/success")
-    public String successPage(@ModelAttribute("successMessage") String successMessage, Model model) {
-        model.addAttribute("successMessage", successMessage);
-        return "admin/desktop/success";
+        return "redirect:/patientprofile/info";
     }
 }
