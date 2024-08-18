@@ -1,8 +1,11 @@
 package uk.ac.cf.spring.nhs.Treatment.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
 @Getter
 @Setter
@@ -23,11 +26,10 @@ public class Treatment {
     @Column(name = "UserID", nullable = false)
     private long userId;
 
-    @Column(name = "RelatedEntityType")
-    private String relatedEntityType;
-
-    @Column(name = "RelatedEntityId")
-    private Long relatedEntityId;
+    @ManyToOne
+    @JoinColumn(name = "EventID", nullable = true)
+    @JsonIgnore
+    private Event event;
 
     protected Treatment() {}
 
@@ -35,13 +37,5 @@ public class Treatment {
         this.type = type;
         this.details = details;
         this.userId = userId;
-    }
-
-    public Treatment(String type, String details, long userId, Long relatedEntityId, String relatedEntityType) {
-        this.type = type;
-        this.details = details;
-        this.userId = userId;
-        this.relatedEntityId = relatedEntityId;
-        this.relatedEntityType = relatedEntityType;
     }
 }

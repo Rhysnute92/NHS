@@ -39,9 +39,7 @@ public class EventService {
                 .map(symptomDTO -> new Symptom(
                         symptomDTO.getName(),
                         symptomDTO.getSeverity(),
-                        userId,
-                        null,
-                        "Event"))
+                        userId))
                 .collect(Collectors.toList());
 
         List<Treatment> treatments = eventDTO.getTreatments().stream()
@@ -49,9 +47,7 @@ public class EventService {
                 .map(treatmentDTO -> new Treatment(
                         treatmentDTO.getType(),
                         treatmentDTO.getDetails(),
-                        userId,
-                        null,
-                        "Event"))
+                        userId))
                 .collect(Collectors.toList());
 
         // Set symptoms and treatments in the event
@@ -62,18 +58,16 @@ public class EventService {
             event.setTreatments(treatments);
         }
 
-        // Save the event to generate the ID
         Event savedEvent = eventRepository.save(event);
         long eventId = savedEvent.getId();
 
-        // Update related entity IDs and save
         if (!symptoms.isEmpty()) {
-            symptoms.forEach(symptom -> symptom.setRelatedEntityId(eventId));
+            symptoms.forEach(symptom -> symptom.setEvent(savedEvent));
             symptomService.saveAll(symptoms);
         }
 
         if (!treatments.isEmpty()) {
-            treatments.forEach(treatment -> treatment.setRelatedEntityId(eventId));
+            treatments.forEach(treatment -> treatment.setEvent(savedEvent));
             treatmentService.saveAll(treatments);
         }
 

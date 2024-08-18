@@ -1,8 +1,11 @@
 package uk.ac.cf.spring.nhs.Symptom.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
 import java.util.Date;
 
@@ -32,11 +35,15 @@ public class Symptom {
     @Column(name = "UserID")
     private long userId;
 
-    @Column(name = "RelatedEntityType")
-    private String relatedEntityType;
+    @ManyToOne
+    @JoinColumn(name = "EventID", nullable = true)
+    @JsonIgnore
+    private Event event;
 
-    @Column(name = "RelatedEntityId")
-    private Long relatedEntityId;
+    @ManyToOne
+    @JoinColumn(name = "EntryID", nullable = true)
+    @JsonIgnore
+    private DiaryEntry diaryEntry;
 
     protected Symptom() {}
 
@@ -45,14 +52,5 @@ public class Symptom {
         this.name = name;
         this.severity = severity;
         this.userId = userId;
-    }
-
-    // Constructor for linked symptom
-    public Symptom(String name, int severity, long userId, Long relatedEntityId, String relatedEntityType) {
-        this.name = name;
-        this.severity = severity;
-        this.userId = userId;
-        this.relatedEntityId = relatedEntityId;
-        this.relatedEntityType = relatedEntityType;
     }
 }

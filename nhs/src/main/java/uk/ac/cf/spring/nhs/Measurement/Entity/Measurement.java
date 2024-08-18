@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Filter;
+import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
 @Getter
 @Setter
@@ -28,11 +30,13 @@ public class Measurement {
     @Column(name = "UserID")
     private long userId;
 
-    @Column(name = "RelatedEntityType")
-    private String relatedEntityType;
+    @ManyToOne
+    @JoinColumn(name = "EventID", nullable = true)
+    private Event event;
 
-    @Column(name = "RelatedEntityId")
-    private Long relatedEntityId;
+    @ManyToOne
+    @JoinColumn(name = "EntryID", nullable = true)
+    private DiaryEntry diaryEntry;
 
     protected Measurement() {}
 
@@ -42,15 +46,5 @@ public class Measurement {
         this.value = value;
         this.unit = unit;
         this.userId = userId;
-    }
-
-    // Constructor for linked measurement
-    public Measurement(String type, float value, String unit, long userId, Long relatedEntityId, String relatedEntityType) {
-        this.type = type;
-        this.value = value;
-        this.unit = unit;
-        this.userId = userId;
-        this.relatedEntityId = relatedEntityId;
-        this.relatedEntityType = relatedEntityType;
     }
 }

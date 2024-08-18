@@ -8,13 +8,15 @@ DROP TABLE IF EXISTS UserQuestionnaires;
 DROP TABLE IF EXISTS Questions;
 DROP TABLE IF EXISTS Questionnaires;
 
-DROP TABLE IF EXISTS Events;
-DROP TABLE IF EXISTS DiaryEntries;
+
 
 DROP TABLE IF EXISTS Treatments;
 DROP TABLE IF EXISTS Measurements;
 DROP TABLE IF EXISTS Symptoms;
 DROP TABLE IF EXISTS Photos;
+
+DROP TABLE IF EXISTS Events;
+DROP TABLE IF EXISTS DiaryEntries;
 
 DROP TABLE IF EXISTS Appointments;
 DROP TABLE IF EXISTS UserWidgets;
@@ -102,6 +104,15 @@ CREATE TABLE Appointments (
     UserID BIGINT,
     FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID)
 );
+
+--Events--
+CREATE TABLE Events (
+    EventID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    EventDate DATE NOT NULL,
+    EventDuration INT,
+    UserID BIGINT,
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+);
 --Diary--
 CREATE TABLE DiaryEntries (
   EntryID BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -118,8 +129,10 @@ CREATE TABLE Photos (
     PhotoDate DATETIME,
     PhotoBodypart VARCHAR(255),
     UserID BIGINT,
-    RelatedEntityType VARCHAR(255),
-    RelatedEntityId BIGINT,
+    EventID BIGINT,
+    EntryID BIGINT,
+    FOREIGN KEY (EventID) REFERENCES Events(EventID),
+    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 
@@ -129,8 +142,10 @@ CREATE TABLE Measurements (
   MeasurementValue FLOAT,
   MeasurementUnit VARCHAR(100),
   UserID BIGINT,
-  RelatedEntityType VARCHAR(255),
-  RelatedEntityId BIGINT,
+  EventID BIGINT,
+  EntryID BIGINT,
+  FOREIGN KEY (EventID) REFERENCES Events(EventID),
+  FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
   FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 
@@ -141,17 +156,11 @@ CREATE TABLE Symptoms (
   SymptomStartDate DATETIME,
   SymptomIsActive BOOLEAN,
   UserID BIGINT,
-  RelatedEntityType VARCHAR(255),
-  RelatedEntityId BIGINT,
+  EventID BIGINT,
+  EntryID BIGINT,
+  FOREIGN KEY (EventID) REFERENCES Events(EventID),
+  FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
   FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
-);
-
-CREATE TABLE Events (
-    EventID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    EventDate DATE NOT NULL,
-    EventDuration INT,
-    UserID BIGINT,
-    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 
 CREATE TABLE Treatments (
@@ -159,8 +168,8 @@ CREATE TABLE Treatments (
     TreatmentType VARCHAR(255),
     TreatmentDetails TEXT,
     UserID BIGINT,
-    RelatedEntityType VARCHAR(255),
-    RelatedEntityId BIGINT,
+    EventID BIGINT,
+    FOREIGN KEY (EventID) REFERENCES Events(EventID),
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 

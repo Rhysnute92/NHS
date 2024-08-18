@@ -1,8 +1,11 @@
 package uk.ac.cf.spring.nhs.Photo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
 import java.util.Date;
 
@@ -29,11 +32,15 @@ public class Photo {
     @Column(name = "UserID")
     private long userId;
 
-    @Column(name = "RelatedEntityType")
-    private String relatedEntityType;
+    @ManyToOne
+    @JoinColumn(name = "EventID", nullable = true)
+    @JsonIgnore
+    private Event event;
 
-    @Column(name = "RelatedEntityId")
-    private Long relatedEntityId;
+    @ManyToOne
+    @JoinColumn(name = "EntryID", nullable = true)
+    @JsonIgnore
+    private DiaryEntry diaryEntry;
 
     protected Photo() {}
 
@@ -43,26 +50,5 @@ public class Photo {
         this.date = date;
         this.bodyPart = bodyPart;
         this.userId = userId;
-    }
-
-    // Constructor for linked photo
-    public Photo(String url, Date date, String bodyPart, long userId, Long relatedEntityId, String relatedEntityType) {
-        this.url = url;
-        this.date = date;
-        this.bodyPart = bodyPart;
-        this.userId = userId;
-        this.relatedEntityId = relatedEntityId;
-        this.relatedEntityType = relatedEntityType;
-    }
-
-    @Override
-    public String toString() {
-        return "Photo{" +
-                "id=" + id +
-                ", url='" + url + '\'' +
-                ", date=" + date +
-                ", bodyPart='" + bodyPart + '\'' +
-                ", userId=" + userId +
-                '}';
     }
 }

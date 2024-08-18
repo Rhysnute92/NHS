@@ -48,14 +48,12 @@ public class DiaryEntryService {
     public DiaryEntry saveDiaryEntry(CheckinFormDTO checkinForm, Long userId) throws Exception {
         // Create the diary entry
         DiaryEntry diaryEntry = createDiaryEntry(userId, checkinForm.getMood(), checkinForm.getNotes());
-
-        // Save the diary entry to obtain its ID
         DiaryEntry savedDiaryEntry = diaryEntryRepository.save(diaryEntry);
 
         // Associate related entities with the saved diary entry
-        List<Photo> photos = processPhotos(checkinForm.getPhotos(), userId, savedDiaryEntry.getId());
-        List<Symptom> symptoms = processSymptoms(checkinForm.getSymptoms(), userId, savedDiaryEntry.getId());
-        List<Measurement> measurements = processMeasurements(checkinForm.getMeasurements(), userId, savedDiaryEntry.getId());
+        List<Photo> photos = processPhotos(checkinForm.getPhotos(), userId, savedDiaryEntry);
+        List<Symptom> symptoms = processSymptoms(checkinForm.getSymptoms(), userId, savedDiaryEntry);
+        List<Measurement> measurements = processMeasurements(checkinForm.getMeasurements(), userId, savedDiaryEntry);
 
         // Batch save the related entities
         if (!photos.isEmpty()) {
@@ -80,26 +78,36 @@ public class DiaryEntryService {
         return diaryEntry;
     }
 
-    private List<Photo> processPhotos(List<PhotoDTO> photoDTOs, Long userId, Long diaryEntryId) {
+    private List<Photo> processPhotos(List<PhotoDTO> photoDTOs, Long userId, DiaryEntry diaryEntry) {
         return photoDTOs.stream()
                 .map(photoDTO -> {
                     String photoUrl = fileStorageService.storeFile(photoDTO.getFile());
                     String bodyPart = photoDTO.getBodyPart();
-                    return new Photo(photoUrl, new Date(), bodyPart, userId, diaryEntryId, "DiaryEntry");
+                    Photo photo = new Photo(photoUrl, new Date(), bodyPart, userId);
+                    photo.setDiaryEntry(diaryEntry);
+                    return photo;
                 })
                 .collect(Collectors.toList());
     }
 
-    private List<Symptom> processSymptoms(List<SymptomDTO> symptomDTOs, Long userId, Long diaryEntryId) {
+    private List<Symptom> processSymptoms(List<SymptomDTO> symptomDTOs, Long userId, DiaryEntry diaryEntry) {
         return symptomDTOs.stream()
                 .filter(symptomDTO -> symptomDTO.getSeverity() != null)
-                .map(symptomDTO -> new Symptom(symptomDTO.getName(), symptomDTO.getSeverity(), userId, diaryEntryId, "DiaryEntry"))
+                .map(symptomDTO -> {
+                    Symptom symptom = new Symptom(symptomDTO.getName(), symptomDTO.getSeverity(), userId);
+                    symptom.setDiaryEntry(diaryEntry);
+                    return symptom;
+                })
                 .collect(Collectors.toList());
     }
 
-    private List<Measurement> processMeasurements(List<MeasurementDTO> measurementDTOs, Long userId, Long diaryEntryId) {
+    private List<Measurement> processMeasurements(List<MeasurementDTO> measurementDTOs, Long userId, DiaryEntry diaryEntry) {
         return measurementDTOs.stream()
-                .map(measurementDTO -> new Measurement(measurementDTO.getType(), measurementDTO.getValue(), measurementDTO.getUnit(), userId, diaryEntryId, "DiaryEntry"))
+                .map(measurementDTO -> {
+                    Measurement measurement = new Measurement(measurementDTO.getType(), measurementDTO.getValue(), measurementDTO.getUnit(), userId);
+                    measurement.setDiaryEntry(diaryEntry);
+                    return measurement;
+                })
                 .collect(Collectors.toList());
     }
 

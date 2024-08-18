@@ -33,17 +33,13 @@ public class DiaryEntry {
     @Column(name = "EntryMood")
     private Mood mood;
 
-
-    @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Filter(name = "relatedEntityTypeFilter", condition = "RelatedEntityType = 'DiaryEntry'")
+    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Measurement> measurements = new ArrayList<>();
 
-    @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Filter(name = "relatedEntityTypeFilter", condition = "RelatedEntityType = 'Event'")
+    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Symptom> symptoms = new ArrayList<>();
 
-    @OneToMany(mappedBy = "relatedEntityId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Filter(name = "relatedEntityTypeFilter", condition = "RelatedEntityType = 'DiaryEntry'")
+    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Photo> photos = new ArrayList<>();
 
     @Column(name = "EntryNotes")
