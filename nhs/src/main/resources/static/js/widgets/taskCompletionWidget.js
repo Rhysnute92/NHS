@@ -1,5 +1,6 @@
 import { TaskRenderer } from "../tasks/taskRenderer.js";
 import { TaskManager } from "../tasks/taskManager.js";
+import { EventQueue } from "../tasks/eventQueue.js";
 
 export class TaskWidget {
   constructor() {
@@ -10,11 +11,40 @@ export class TaskWidget {
     }
     console.log("Widget Element:", this.widgetElement);
 
-    // Initialize TaskManager with a TaskRenderer
-    this.taskRenderer = new TaskRenderer(null, null);
-    this.taskManager = new TaskManager(null, this.taskRenderer);
+    // Initialize EventQueue and TaskManager with a TaskRenderer
+    this.eventQueue = new EventQueue();
+    this.taskRenderer = new TaskRenderer(this.eventQueue, null);
+    this.taskManager = new TaskManager(this.eventQueue, this.taskRenderer);
 
+    this.worker = new Worker("/js/tasks/worker.js"); // Web Worker for async task updates
     this.initializePopup();
+
+    // Periodically send the event queue to the Web Worker for processing
+    setInterval(() => {
+      if (this.eventQueue.getSize() > 0) {
+        console.log("Sending event queue to worker:", this.eventQueue.getEvents());
+        this.worker.postMessage({
+          queue: this.eventQueue.getEvents(),
+          apiUrl: "/usertask/task-update/batch",
+        });
+
+        // Clear the queue after sending it to the worker
+        this.eventQueue.clearQueue();
+      }
+    }, 1000);
+
+    // Handle messages from the Web Worker
+    this.worker.addEventListener(
+      "message",
+      function (event) {
+        if (event.data.status === "success") {
+          console.log("Events synced successfully:", event.data.data);
+        } else if (event.data.status === "error") {
+          console.error("Failed to sync events:", event.data.error);
+        }
+      },
+      false
+    );
   }
 
   async updateWidgetData() {

@@ -16,8 +16,9 @@
 
 .task-popup-title {
   text-align: left;
-  border-bottom: 1px solid var(--nhs-mid-grey);
-  border-left: 10px solid var(--nhs-dark-green);
+  border-bottom: 2px solid var(--nhs-mid-grey);
+  border-left: .5em solid var(--nhs-dark-green);
+  padding-left: .35em;
 }
 
 .task-popup-overlay {
