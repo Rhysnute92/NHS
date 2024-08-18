@@ -27,4 +27,12 @@ public class TreatmentDTO {
     public void setDetails(String details) {
         this.details = details;
     }
+
+    @Override
+    public String toString() {
+        return "TreatmentDTO{" +
+                "type='" + type + '\'' +
+                ", details='" + details + '\'' +
+                '}';
+    }
 }

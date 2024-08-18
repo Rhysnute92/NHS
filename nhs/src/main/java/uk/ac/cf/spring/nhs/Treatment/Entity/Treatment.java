@@ -20,7 +20,6 @@ public class Treatment {
     private long userId;
 
 
-
     protected Treatment() {}
 
     public Treatment(String type, String details, long userId) {
@@ -43,5 +42,13 @@ public class Treatment {
 
     public void setTreatmentType(String type) {
         this.type = type;
+    }
+
+    public String getTreatmentDetails() {
+        return details;
+    }
+
+    public void setTreatmentDetails(String details) {
+        this.details = details;
     }
 }
