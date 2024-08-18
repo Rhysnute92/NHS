@@ -28,3 +28,22 @@
     position: relative;
     display: inline-block;
 }
+
+.add-appointment-button {
+    background-color: #4f46e5; /* Your primary color */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.appointment-widget-footer {
+    margin-top: 20px;
+}
+
+.add-appointment-button:hover {
+    background-color: #4338ca; /* Darker shade of your primary color */
+}
