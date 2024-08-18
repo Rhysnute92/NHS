@@ -16,6 +16,7 @@ VALUES
 
 INSERT INTO UserWidgets (UserID, WidgetName, Position)
 VALUES (2, 'task-completion', 1);
+VALUES (2, 'appointment-list', 2);
 
 INSERT INTO Task (TaskType, TaskName, TaskDesc, TaskRepeatPeriod) VALUES 
 ('Home Monitoring', 'Arm Swelling Measurements', 'Measure and record the swelling in the affected arm(s).', 'DAILY'),
