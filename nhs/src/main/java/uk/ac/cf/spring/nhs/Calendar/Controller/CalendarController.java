@@ -31,7 +31,7 @@ public class CalendarController {
         ModelAndView modelAndView = new ModelAndView();
 
         Long userId = userDetails.getUserId();
-        List<Appointment> appointments = appointmentService.getAppointmentsByUserId(userId);
+        List<Appointment> appointments = appointmentService.getAppointmentsByUserId(Math.toIntExact(userId));
         modelAndView.addObject("appointments", appointments);
 
         if (DeviceDetector.isMobile(request)) {

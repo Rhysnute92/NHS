@@ -113,9 +113,9 @@ public class AppointmentServiceTest {
     @Test
     public void testGetAppointmentsByUserId() {
         List<Appointment> appointments = Arrays.asList(appointment1, appointment2);
-        when(appointmentRepository.findByUserID(1L)).thenReturn(appointments);
+        when(appointmentRepository.findByUserID(1)).thenReturn(appointments);
 
-        List<Appointment> result = appointmentService.getAppointmentsByUserId(1L);
+        List<Appointment> result = appointmentService.getAppointmentsByUserId(1);
 
         assertThat(result).isNotNull();
         assertThat(result.size()).isEqualTo(2);
