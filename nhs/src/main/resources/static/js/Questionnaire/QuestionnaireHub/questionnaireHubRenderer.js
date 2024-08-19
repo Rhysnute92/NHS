@@ -61,4 +61,19 @@ export class QuestionnaireHubRendererProviderView {
       });
     }
   }
+
+  renderQuestionnaireOptions(questionnaires, selectElementId) {
+    const selectElement = document.getElementById(selectElementId);
+    selectElement.innerHTML = ""; // Clear existing options
+
+    questionnaires.forEach((questionnaire) => {
+      const option = document.createElement("option");
+      option.value = questionnaire.id;
+      option.textContent = questionnaire.title;
+      selectElement.appendChild(option);
+    });
+
+    // Apply any necessary styling here
+    selectElement.style.color = "#000"; // Ensure the text color is black
+  }
 }

@@ -182,6 +182,10 @@ select#questionnaireSelect {
   width: 40vw;
 }
 
+select#questionnaireSelect option {
+  color: black;
+}
+
 h3#assignQuestionnairePopupLabel {
   padding-left: 0.5rem;
   padding-bottom: 0.25rem;

@@ -30,6 +30,24 @@ export class QuestionnaireHubManager {
     }
   }
 
+  async loadAvailableQuestionnaires() {
+    const endpoint = `/api/questionnaires`; // Endpoint to get all questionnaires
+    console.log(`Fetching available questionnaires from: ${endpoint}`);
+
+    try {
+      const questionnaires = await fetchData(endpoint);
+      console.log(`Received available questionnaires: `, questionnaires);
+
+      // Use the renderer to populate the select element
+      this.renderer.renderQuestionnaireOptions(
+        questionnaires,
+        "questionnaireSelect"
+      );
+    } catch (error) {
+      console.error("Error loading available questionnaires:", error);
+    }
+  }
+
   async assignQuestionnaire(patientId, questionnaireId, dueDate) {
     const endpoint = `/api/userQuestionnaires/provider/${patientId}/assign-questionnaire`;
     const data = { questionnaireId, dueDate };

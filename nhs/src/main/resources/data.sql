@@ -23,6 +23,16 @@ VALUES (
         'QOL-ARM',
         'Lymphoedema Quality of Life Questionnaire - Arm',
         'This questionnaire measures the quality of life score for patients with chronic oedema/lymphoedema of one or both arms.'
+    ),
+    (
+        'QOL-Breast',
+        'Lymphoedema Quality of Life Questionnaire - Breast',
+        'This questionnaire measures the quality of life for patients with chronic oedema/lymphoedema of the breast or chest.'
+    ),
+    (
+        'QOL-LEG',
+        'Lymphoedema Quality of Life Questionnaire - Leg',
+        'This questionnaire measures the quality of life score for patients with chronic oedema/lymphoedema of one or both legs.'
     );
 INSERT INTO Question (
         QuestionText,
@@ -203,6 +213,317 @@ VALUES -- Function (Daily Activities)
         'Quality of Life',
         'Scale',
         1
+    ),
+    -- Function (Daily Activities)
+    (
+        'How much does your swollen breast or chest affect the following daily activities? a) occupation',
+        'Function',
+        'Scale',
+        2
+    ),
+    (
+        'How much does your swollen breast or chest affect the following daily activities? b) housework',
+        'Function',
+        'Scale',
+        2
+    ),
+    (
+        'How much does your swollen breast or chest affect the following daily activities? c) dressing',
+        'Function',
+        'Scale',
+        2
+    ),
+    (
+        'How much does your swollen breast or chest affect the following daily activities? d) washing',
+        'Function',
+        'Scale',
+        2
+    ),
+    (
+        'How much does it affect your leisure activities/social life?',
+        'Function',
+        'Scale',
+        2
+    ),
+    (
+        'Please give examples of how it affects your leisure activities/social life.',
+        'Function',
+        'Text',
+        2
+    ),
+    (
+        'How much do you have to depend on other people?',
+        'Function',
+        'Scale',
+        2
+    ),
+    -- Appearance
+    (
+        'How much do you feel the swelling affects your appearance?',
+        'Appearance',
+        'Scale',
+        2
+    ),
+    (
+        'How much difficulty do you have finding clothes including bras to fit?',
+        'Appearance',
+        'Scale',
+        2
+    ),
+    (
+        'How much difficulty do you have finding clothes including bras you would like to wear?',
+        'Appearance',
+        'Scale',
+        2
+    ),
+    (
+        'Does the swelling affect how you feel about yourself?',
+        'Appearance',
+        'Scale',
+        2
+    ),
+    (
+        'Does it affect your relationships with other people?',
+        'Appearance',
+        'Scale',
+        2
+    ),
+    -- Symptoms
+    (
+        'Does your swollen breast or chest cause you pain?',
+        'Symptoms',
+        'Scale',
+        2
+    ),
+    (
+        'Do you have any numbness in your swollen breast or chest?',
+        'Symptoms',
+        'Scale',
+        2
+    ),
+    (
+        'Do you have any feelings of "pins & needles" or tingling in your swollen breast or chest?',
+        'Symptoms',
+        'Scale',
+        2
+    ),
+    (
+        'Do you have any feeling of tightness in your swollen breast or chest?',
+        'Symptoms',
+        'Scale',
+        2
+    ),
+    (
+        'Does your swollen breast feel heavy?',
+        'Symptoms',
+        'Scale',
+        2
+    ),
+    -- Emotion
+    (
+        'In the past week, have you had trouble sleeping?',
+        'Emotion',
+        'Scale',
+        2
+    ),
+    (
+        'In the past week, have you had difficulty concentrating on things like reading?',
+        'Emotion',
+        'Scale',
+        2
+    ),
+    (
+        'In the past week, have you felt worried?',
+        'Emotion',
+        'Scale',
+        2
+    ),
+    (
+        'In the past week, have you felt irritable?',
+        'Emotion',
+        'Scale',
+        2
+    ),
+    (
+        'In the past week, have you felt depressed?',
+        'Emotion',
+        'Scale',
+        2
+    ),
+    -- Overall Quality of Life
+    (
+        'Overall, how would you rate your quality of life at present?',
+        'Quality of Life',
+        'Scale',
+        2
+    ),
+    (
+        'How much does your swollen leg affect your walking?',
+        'Function',
+        'Scale',
+        3
+    ),
+    (
+        'How much does your swollen leg affect your ability to bend, e.g., to tie shoelaces or cut toenails?',
+        'Function',
+        'Scale',
+        3
+    ),
+    (
+        'How much does your swollen leg affect your ability to stand?',
+        'Function',
+        'Scale',
+        3
+    ),
+    (
+        'How much does your swollen leg affect your ability to get up from a chair?',
+        'Function',
+        'Scale',
+        3
+    ),
+    (
+        'How much does your swollen leg affect your occupation?',
+        'Function',
+        'Scale',
+        3
+    ),
+    (
+        'How much does your swollen leg affect your ability to do housework?',
+        'Function',
+        'Scale',
+        3
+    ),
+    (
+        'Does the swelling affect your leisure activities/social life?',
+        'Function',
+        'Scale',
+        3
+    ),
+    (
+        'Please give examples of how your swollen leg affects your leisure activities/social life.',
+        'Function',
+        'Text',
+        3
+    ),
+    (
+        'How much do you have to depend on other people?',
+        'Function',
+        'Scale',
+        3
+    ),
+    (
+        'How much do you feel the swelling affects your appearance?',
+        'Appearance',
+        'Scale',
+        3
+    ),
+    (
+        'How much difficulty do you have finding clothes to fit?',
+        'Appearance',
+        'Scale',
+        3
+    ),
+    (
+        'How much difficulty do you have finding clothes you would like to wear?',
+        'Appearance',
+        'Scale',
+        3
+    ),
+    (
+        'Do you have difficulty finding shoes to fit?',
+        'Appearance',
+        'Scale',
+        3
+    ),
+    (
+        'Do you have difficulty finding socks/tights/stockings to fit?',
+        'Appearance',
+        'Scale',
+        3
+    ),
+    (
+        'Does the swelling affect how you feel about yourself?',
+        'Appearance',
+        'Scale',
+        3
+    ),
+    (
+        'Does it affect your relationships with other people?',
+        'Appearance',
+        'Scale',
+        3
+    ),
+    (
+        'Does your lymphoedema cause you pain?',
+        'Symptoms',
+        'Scale',
+        3
+    ),
+    (
+        'Do you have any numbness in your swollen leg(s)?',
+        'Symptoms',
+        'Scale',
+        3
+    ),
+    (
+        'Do you have any feelings of "pins & needles" or tingling in your swollen leg(s)?',
+        'Symptoms',
+        'Scale',
+        3
+    ),
+    (
+        'Do your swollen leg(s) feel weak?',
+        'Symptoms',
+        'Scale',
+        3
+    ),
+    (
+        'Do your swollen leg(s) feel heavy?',
+        'Symptoms',
+        'Scale',
+        3
+    ),
+    (
+        'In the past week, have you had trouble sleeping?',
+        'Emotion',
+        'Scale',
+        3
+    ),
+    (
+        'In the past week, have you had difficulty concentrating on things, e.g., reading?',
+        'Emotion',
+        'Scale',
+        3
+    ),
+    (
+        'In the past week, have you felt tense?',
+        'Emotion',
+        'Scale',
+        3
+    ),
+    (
+        'In the past week, have you felt worried?',
+        'Emotion',
+        'Scale',
+        3
+    ),
+    (
+        'In the past week, have you felt irritable?',
+        'Emotion',
+        'Scale',
+        3
+    ),
+    (
+        'In the past week, have you felt depressed?',
+        'Emotion',
+        'Scale',
+        3
+    ),
+    (
+        'Overall, how would you rate your quality of life at present?',
+        'Quality of Life',
+        'Scale',
+        3
     );
 /* INSERT INTO UserQuestionnaires (
  QuestionnaireID,
