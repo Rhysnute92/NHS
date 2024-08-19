@@ -13,10 +13,11 @@ header {
     align-items: center;
     padding: clamp(15px, 4vh, 4vh);
     background-color: var(--nhs-blue);
-    justify-content: space-between;
+    justify-content: flex-start;
     box-sizing: content-box;
     border-bottom: 1px solid var(--nhs-pale-grey);
     color: var(--nhs-white);
+    position: relative;
 }
 
 .header-logo {
@@ -45,14 +46,25 @@ header {
 }
 
 .header-icon {
+    color: var(--nhs-white);
     font-size: 3.5vh;
+}
+
+.navmenu-toggle-icon {
+    position: absolute;
+    left: 1rem;
+}
+
+.profile-icon {
+    position: absolute;
+    right: 1rem;
 }
 
 @media (max-width: 480px) {
     .header {
-        background-color: var(--nhs-blue);
         height: 4vh;
         padding: clamp(15px, 2vh, 2vh);
+        justify-content: center;
     }
 
     .header-title {
@@ -66,7 +78,7 @@ header {
 }
 
 @media (min-width: 481px) {
-    .header .navmenu-toggle {
+    .header .navmenu-toggle-icon {
         display: none;
     }
 }

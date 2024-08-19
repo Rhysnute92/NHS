@@ -62,7 +62,7 @@ body.navmenu-open::before {
         transition: left 0.5s;
     }
 
-    .navmenu-toggle {
+    .navmenu-icon {
         display: block;
     }
 
