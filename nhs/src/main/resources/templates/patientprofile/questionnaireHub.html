@@ -5,15 +5,19 @@
   layout:decorate="~{layout/provider}"
 >
   <head>
-    <title>Patient Profile</title>
+    <title>Questionnaire Hub</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
     <link rel="stylesheet" th:href="@{/css/common/defaultLayout.css}" />
   </head>
   <body>
     <main layout:fragment="content" class="main-content">
-      <h1 class="page-title">Patient info</h1>
-      <div class="container"></div>
+      <h1 class="page-title">Questionnaire Hub</h1>
+      <div class="container">
+        <p th:text="'Patient ID: ' + ${patientId}">Patient ID: 2</p>
+
+        <!-- more content here -->
+      </div>
     </main>
   </body>
 </html>
