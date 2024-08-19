@@ -8,9 +8,6 @@
 /* Import desktop-specific component styles */
 @import url("/css/education/desktop/infomenu.css");
 
-/* Import mobile-specific component styles */
-@import url("/css/education/mobile/mobileinfomenu.css");
-
 /* Import widget component styles */
 @import url("/css/components/widgets/taskCompletion.css");
 
@@ -23,8 +20,21 @@ body {
   background-color: #e8edee;
   margin: 0;
   padding: 0;
+  line-height: 1.5;
+  font-size: 1rem;
 }
 
-.profile-icon {
-  opacity: 0;
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
 }
+
+main {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  box-sizing: content-box;
+  flex: 1;
+  padding: 2rem;
+}
+

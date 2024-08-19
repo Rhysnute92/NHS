@@ -1,11 +1,14 @@
 .navmenu {
-    width: 15vw;
     color: var(--nhs-white);
     background-color: var(--nhs-blue);
-    border-top: 1px solid var(--nhs-pale-grey);
+    border-top: 1px solid rgb(255, 255, 255, 0.3);
     min-height: 100vh;
-    min-width: 150px;
-    max-width: 250px;
+    width: clamp(150px, 20vw, 250px);
+}
+
+.navmenu-spacer {
+    min-height: 100vh;
+    width: clamp(150px, 20vw, 250px);
 }
 
 .navmenu-links {
