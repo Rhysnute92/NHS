@@ -80,6 +80,21 @@ public class UserQuestionnaireController {
     }
 
     /**
+     * Retrieves incomplete user questionnaires for a specific patient by their ID.
+     *
+     * @param patientId the ID of the patient
+     * @return a ResponseEntity containing a list of incomplete user questionnaires
+     *         for the patient
+     */
+    @GetMapping("/provider/incomplete/{patientId}")
+    public ResponseEntity<List<UserQuestionnaire>> getIncompleteUserQuestionnairesForPatient(
+            @PathVariable Long patientId) {
+        List<UserQuestionnaire> userQuestionnaires = userQuestionnaireService
+                .getIncompleteUserQuestionnaires(patientId);
+        return ResponseEntity.ok(userQuestionnaires);
+    }
+
+    /**
      * Retrieves a user questionnaire for the authenticated user and questionnaire
      * ID.
      *

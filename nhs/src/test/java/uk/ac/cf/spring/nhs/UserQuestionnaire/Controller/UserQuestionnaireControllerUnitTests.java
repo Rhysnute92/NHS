@@ -80,6 +80,7 @@ class UserQuestionnaireControllerUnitTests {
         verify(userQuestionnaireService, times(1)).getUserQuestionnaires(123L);
     }
 
+    @SuppressWarnings("null")
     @Test
     void testGetCompletedUserQuestionnaires() {
         userQuestionnaire.setQuestionnaireIsCompleted(true);
@@ -95,6 +96,7 @@ class UserQuestionnaireControllerUnitTests {
         verify(userQuestionnaireService, times(1)).getCompletedUserQuestionnaires(123L);
     }
 
+    @SuppressWarnings("null")
     @Test
     void testGetIncompleteUserQuestionnaires() {
         userQuestionnaire.setQuestionnaireIsCompleted(false);
@@ -199,5 +201,22 @@ class UserQuestionnaireControllerUnitTests {
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         verify(userQuestionnaireService, times(1)).getUserQuestionnaire(123L, questionnaireId);
+    }
+
+    @SuppressWarnings("null")
+    @Test
+    void testGetIncompleteUserQuestionnairesForPatient() {
+        Long patientId = 456L;
+        List<UserQuestionnaire> userQuestionnaires = new ArrayList<>();
+        userQuestionnaires.add(userQuestionnaire);
+        when(userQuestionnaireService.getIncompleteUserQuestionnaires(patientId)).thenReturn(userQuestionnaires);
+
+        ResponseEntity<List<UserQuestionnaire>> response = userQuestionnaireController
+                .getIncompleteUserQuestionnairesForPatient(patientId);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(1, response.getBody().size());
+        verify(userQuestionnaireService, times(1)).getIncompleteUserQuestionnaires(patientId);
     }
 }

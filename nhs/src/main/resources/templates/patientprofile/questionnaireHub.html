@@ -5,18 +5,134 @@
   layout:decorate="~{layout/provider}"
 >
   <head>
-    <title>Questionnaire Hub</title>
     <meta charset="UTF-8" />
+    <title>Questionnaire Hub</title>
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
     <link rel="stylesheet" th:href="@{/css/common/defaultLayout.css}" />
+    <link
+      rel="stylesheet"
+      th:href="@{/css/questionnaireHub/questionnaireHub.css}"
+    />
   </head>
   <body>
     <main layout:fragment="content" class="main-content">
-      <h1 class="page-title">Questionnaire Hub</h1>
       <div class="container">
-        <p th:text="'Patient ID: ' + ${patientId}">Patient ID: 2</p>
+        <h1 class="management-desktop-title">Questionnaire Hub</h1>
+        <p class="management-desktop-subtitle">
+          Here you can assign new questionnaires to patients and view the
+          results of previous questionnaires
+        </p>
+        <!-- Section 1: Assign Questionnaires -->
+        <section class="assign-section">
+          <div class="assigned-questionnaires">
+            <h3 class="assigned-questionnaire-title">
+              Assigned Questionnaires
+            </h3>
+            <div id="questionnaire-container" class="questionnaire-container">
+              <!-- If there is a questionnaire assigned, it'll be inserted here -->
+            </div>
+            <!-- If no questionnaire is assigned -->
+            <div
+              id="no-assignment"
+              class="questionnaire-item no-assignment"
+              style="display: none"
+            >
+              <p>No questionnaires assigned at the moment.</p>
+            </div>
+          </div>
 
-        <!-- more content here -->
+          <!-- Action Link to Assign New Questionnaire -->
+          <div class="action-link-container">
+            <a class="action-link" href="#">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                width="36"
+                height="36"
+              >
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"
+                ></path>
+              </svg>
+              <span class="action-link__text">Assign a new questionnaire</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- Section 2: View Previous Results -->
+        <div class="view-results-section mt-5">
+          <h2>View Previous Results</h2>
+          <div class="results-list">
+            <!-- List or table of previous questionnaire results -->
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Questionnaire</th>
+                  <th>Date Completed</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Questionnaire 1</td>
+                  <td>01/01/2024</td>
+                  <td>
+                    <button class="btn btn-secondary">View Results</button>
+                  </td>
+                </tr>
+                <!-- More rows as needed -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Popup for Assigning New Questionnaires -->
+      <div
+        class="modal fade"
+        id="assignQuestionnaireModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="assignQuestionnaireModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="assignQuestionnaireModalLabel">
+                Assign New Questionnaire
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- Form to select and assign a questionnaire -->
+              <form>
+                <div class="form-group">
+                  <label for="questionnaireSelect">Select Questionnaire</label>
+                  <select class="form-control" id="questionnaireSelect">
+                    <option>Questionnaire 1</option>
+                    <option>Questionnaire 2</option>
+                    <!-- More options as needed -->
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="dueDate">Due Date</label>
+                  <input type="date" class="form-control" id="dueDate" />
+                </div>
+                <button type="submit" class="btn btn-primary">Assign</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </body>
