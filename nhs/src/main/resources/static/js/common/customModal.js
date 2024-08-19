@@ -7,7 +7,7 @@ class CustomModal extends HTMLElement {
 
         const template = document.createElement('template');
         template.innerHTML = `
-          <link rel="stylesheet" href="/css/diary/customModal.css">
+          <link rel="stylesheet" href="/css/common/customModal.css">
           <span class="open-btn">
             <slot name="open-btn"></slot>
           </span>
