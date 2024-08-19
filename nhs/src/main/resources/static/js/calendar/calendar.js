@@ -96,6 +96,7 @@ function showCalendar(month, year) {
                 cell.className = "date-picker";
                 cell.innerHTML = `<span>${date}</span>`;
 
+                const today = new Date();
                 // Highlight today's date
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
                     cell.className = "date-picker selected";
@@ -145,4 +146,11 @@ function hasAppointmentOnDate(date, month, year) {
 // Function to get the number of days in a month
 function daysInMonth(month, year) {
     return 32 - new Date(year, month, 32).getDate();
+}
+
+
+const apptModal = document.querySelector('.appt-modal');
+
+apptModal.addEventListener('close', () => {
+
 }
