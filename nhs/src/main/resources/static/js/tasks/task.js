@@ -61,7 +61,7 @@ export class Task {
     return formatStringTitleCase(this.periodicity);
   }
 
-  toUserTask(userId) {
+  toUserTask() {
     const userTask = {
       id: this.id,
       task: {
@@ -69,7 +69,6 @@ export class Task {
         description: this.description,
         periodicity: this.periodicity,
       },
-      userID: userId,
       bitmask: this.bitmask,
     };
 
