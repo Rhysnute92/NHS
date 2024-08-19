@@ -3,11 +3,11 @@
   <div th:fragment="header" class="header">
     <i class="fa-solid fa-bars navmenu-toggle header-icon"></i>
     <img
-      th:src="@{/images/NHS_logos/mobile/nhs-logo.jpg}"
+      th:src="@{/images/NHS_logos/nhs-logo.jpg}"
       alt="NHS Logo"
       class="header-logo"
     />
-    <a th:href="@{/account}" class="account-link"><i class="fa-solid fa-user header-icon"></i></a>
+    <a th:if="${isLoggedIn}" th:href="@{/account}" class="account-link"><i class="fa-solid fa-user header-icon"></i></a>
   </div>
   <div class="header-title">
     <span id="page-title"></span>
