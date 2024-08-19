@@ -150,9 +150,9 @@ h3.questionnaire-card-title {
 .no-assignment {
   margin-top: 0.5em;
   padding: 1rem;
-  padding-bottom: 0;
+  /*   padding-bottom: 0; */
   background-color: #e6e6e6;
   border: 1px solid #ccc;
-  /* border-radius: 5px; */
+  border-radius: 6px;
   color: #333;
 }

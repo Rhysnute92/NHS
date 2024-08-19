@@ -6,8 +6,10 @@ export class QuestionnaireHubRendererProviderView {
 
     if (questionnaires.length === 0) {
       noAssignmentElement.style.display = "block"; // Show no assignment message
+      container.style.display = "none"; // Hide the questionnaire container
     } else {
       noAssignmentElement.style.display = "none"; // Hide no assignment message
+      container.style.display = "block"; // Show the questionnaire container
       questionnaires.forEach((q) => {
         const card = document.createElement("div");
         card.className = "questionnaire-card";
@@ -45,7 +47,7 @@ export class QuestionnaireHubRendererProviderView {
           statusText = "Complete";
         } else if (q.questionnaireStartDate) {
           statusText = "In Progress";
-          statusClass = "status-in-progress"; // Class for italicizing
+          statusClass = "status-in-progress";
         }
         status.innerHTML = `<strong>Status:</strong> <span class="${statusClass}">${statusText}</span>`;
         status.className = "questionnaire-detail-item";
