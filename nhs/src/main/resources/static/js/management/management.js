@@ -1,6 +1,9 @@
 import { initializeCollapsible } from "./collapsible.js";
+import { initializeQuestionnaireManager } from "../questionnaire/QuestionaireInitializer.js";
+import { initializeTaskManager } from "../tasks/TaskInitializer.js";
+import { WorkerManager } from "../tasks/WorkerManager.js";
+import { fetchUserID } from "../common/utils/accountUtility.js";
 import { TaskManager } from "../tasks/taskManager.js";
-import { getUserId } from "../common/utils/userUtility.js";
 import { EventQueue } from "../tasks/eventQueue.js";
 
 const worker = new Worker("/js/tasks/worker.js");
@@ -28,10 +31,29 @@ window.addEventListener("load", () => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   initializeCollapsible();
-  const taskManager = new TaskManager(getUserId(), eventQueue);
-  taskManager.fetchTasks();
+  const taskManager = new TaskManager(eventQueue);
+  const mainPageTaskContainer = document.querySelector(
+    ".my-health-tasks .tasks-container"
+  );
+
+  const questionnaireContainerId = "questionnaire-container";
+  const noAssignmentContainerId = "no-assignment";
+
+  await initializeQuestionnaireManager(
+    questionnaireContainerId,
+    noAssignmentContainerId
+  );
+
+  taskManager
+    .fetchTasks()
+    .then(() => {
+      taskManager.renderTasks(mainPageTaskContainer); // Pass the container
+    })
+    .catch((error) => {
+      taskManager.displayTaskErrorMessage(mainPageTaskContainer); // Pass the container to display error
+    });
 
   // Periodically send the event queue to the Web Worker for processing
   setInterval(() => {
@@ -45,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Clear the queue after sending it to the worker
       eventQueue.clearQueue();
     }
-  }, 5000);
+  }, 1000);
 
   // Handle messages from the Web Worker
   worker.addEventListener(

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import uk.ac.cf.spring.nhs.Diary.Controller.DiaryController;
+import uk.ac.cf.spring.nhs.Photo.Controller.PhotoController;
 import uk.ac.cf.spring.nhs.Photo.DTO.PhotoDTO;
 import uk.ac.cf.spring.nhs.Photo.DTO.PhotoListDTO;
 import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
@@ -39,8 +41,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest(PhotoController.class)
+@AutoConfigureMockMvc(addFilters = false)
 public class PhotoControllerTest {
 
     @MockBean
@@ -75,6 +77,7 @@ public class PhotoControllerTest {
     @AfterEach
     public void tearDown() throws Exception {
         closeable.close();
+
     }
 
     @Test
