@@ -74,7 +74,7 @@ export class AppointmentWidget {
         }
 
         console.log("Updating appointment list with", completedAppointments, totalAppointments);
-        
+
         const progressText = this.widgetElement.querySelector("#completedAppointments");
         const totalText = this.widgetElement.querySelector("#totalAppointments");
 
