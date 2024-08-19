@@ -94,24 +94,97 @@
         <div class="popup-content">
           <span class="close-popup">&times;</span>
           <h3 class="popup-title" id="assignQuestionnairePopupLabel">
-            Assign New Questionnaire
+            <strong>Assign New Questionnaire</strong>
           </h3>
           <div class="popup-body">
             <!-- Form to select and assign a questionnaire -->
-            <form>
-              <div class="form-group">
-                <label for="questionnaireSelect">Select Questionnaire</label>
-                <select class="form-control" id="questionnaireSelect">
-                  <option>Questionnaire 1</option>
-                  <option>Questionnaire 2</option>
-                  <!-- More options as needed -->
+            <form id="assignQuestionnaireForm">
+              <div class="nhsuk-form-group">
+                <label
+                  class="nhsuk-label nhsuk-label--m"
+                  for="questionnaireSelect"
+                  id="questionnaireSelectLabel"
+                >
+                  <strong id="questionnaire-select-label"
+                    >Select Questionnaire</strong
+                  >
+                </label>
+                <select class="nhsuk-select" id="questionnaireSelect">
+                  <option value="1">Questionnaire 1</option>
+                  <option value="2">Questionnaire 2</option>
+                  <!-- Add more options as needed -->
                 </select>
               </div>
-              <div class="form-group">
-                <label for="dueDate">Due Date</label>
-                <input type="date" class="form-control" id="dueDate" />
-              </div>
-              <button type="submit" class="btn btn-primary">Assign</button>
+
+              <fieldset
+                class="nhsuk-fieldset"
+                role="group"
+                aria-labelledby="due-date"
+              >
+                <legend
+                  class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l"
+                >
+                  <strong id="due-date-label">Set Due Date</strong>
+                </legend>
+                <p class="nhsuk-hint due-date-example">
+                  For example, 15 March 2025
+                </p>
+                <div class="nhsuk-date-input">
+                  <div class="nhsuk-date-input__item">
+                    <div class="nhsuk-form-group">
+                      <label
+                        class="nhsuk-label nhsuk-date-input__label"
+                        for="dueDay"
+                        >Day</label
+                      >
+                      <input
+                        class="nhsuk-input nhsuk-date-input__input"
+                        id="dueDay"
+                        name="dueDay"
+                        type="text"
+                        pattern="[0-9]*"
+                        inputmode="numeric"
+                      />
+                    </div>
+                  </div>
+                  <div class="nhsuk-date-input__item">
+                    <div class="nhsuk-form-group">
+                      <label
+                        class="nhsuk-label nhsuk-date-input__label"
+                        for="dueMonth"
+                        >Month</label
+                      >
+                      <input
+                        class="nhsuk-input nhsuk-date-input__input"
+                        id="dueMonth"
+                        name="dueMonth"
+                        type="text"
+                        pattern="[0-9]*"
+                        inputmode="numeric"
+                      />
+                    </div>
+                  </div>
+                  <div class="nhsuk-date-input__item">
+                    <div class="nhsuk-form-group">
+                      <label
+                        class="nhsuk-label nhsuk-date-input__label"
+                        for="dueYear"
+                        >Year</label
+                      >
+                      <input
+                        class="nhsuk-input nhsuk-date-input__input"
+                        id="dueYear"
+                        name="dueYear"
+                        type="text"
+                        pattern="[0-9]*"
+                        inputmode="numeric"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <button type="submit" class="nhsuk-button">Assign</button>
             </form>
           </div>
         </div>
