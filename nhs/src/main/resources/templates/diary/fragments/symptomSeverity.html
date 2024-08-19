@@ -1,0 +1,18 @@
+<div th:fragment="symptomSeverity(symptomName)" th:id="|${symptomName}-severity|" class="checkin-symptom-selection">
+  <div>
+    <input type="radio" th:id="|${symptomName}-1|" th:name="|${symptomName}-severity|" value="1" class="checkin-symptom" />
+    <label th:for="|${symptomName}-1|">Not at all</label>
+  </div>
+  <div>
+    <input type="radio" th:id="|${symptomName}-2|" th:name="|${symptomName}-severity|" value="2" class="checkin-symptom" />
+    <label th:for="|${symptomName}-2|">A little</label>
+  </div>
+  <div>
+    <input type="radio" th:id="|${symptomName}-3|" th:name="|${symptomName}-severity|" value="3" class="checkin-symptom" />
+    <label th:for="|${symptomName}-3|">Quite a bit</label>
+  </div>
+  <div>
+    <input type="radio" th:id="|${symptomName}-4|" th:name="|${symptomName}-severity|" value="4" class="checkin-symptom" />
+    <label th:for="|${symptomName}-4|">A lot</label>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="en">
+<head>
+  <title>Events</title>
+  <link rel="stylesheet" th:href="@{/css/diary/events.css}" />
+</head>
+<body>
+<main layout:fragment="content">
+  <div class="events-container">
+    <h1 class="page-title">Events</h1>
+
+    <div th:replace="~{diary/fragments/eventModal :: eventModal}"></div>
+
+    <div class="event-list" id="event-list">
+      <event-card th:each="event : ${events}" th:attr="event-data=${objectMapper.writeValueAsString(event)}"></event-card>
+    </div>
+  </div>
+</main>
+<th:block layout:fragment="scripts">
+  <script src="/js/diary/components/EventCard.js" type="module"></script>
+  <script src="/js/common/customModal.js"></script>
+  <script src="/js/diary/events.js" type="module"></script>
+</th:block>
+</body>
+</html>
