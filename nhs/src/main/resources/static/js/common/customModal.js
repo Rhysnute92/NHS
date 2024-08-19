@@ -1,3 +1,27 @@
+/**
+ *
+ * A modal component that can be opened and closed by clicking a button.
+ * The modal content, title and button element are customizable using slots.
+ *
+ * Usage Example:
+ * ```html
+ * <custom-modal>
+ *   <button slot="open-btn">Open Modal</button>
+ *   <span slot="title">Modal Title</span>
+ *   <p slot="content">This is the modal content.</p>
+ * </custom-modal>
+ * ```
+ *
+ * HTML Structure:
+ * - `slot="open-btn"`: Button to trigger the modal to open.
+ * - `slot="title"`: Slot for modal title.
+ * - `slot="content"`: Slot for modal content.
+ *
+ *
+ * Methods:
+ * - `show()`: Opens the modal.
+ * - `hide()`: Closes the modal.
+ */
 class CustomModal extends HTMLElement {
     constructor() {
         super();
