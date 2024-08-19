@@ -44,6 +44,11 @@ class CustomModal extends HTMLElement {
                 this.hide();
             }
         });
+
+        this.closeEvent = new CustomEvent('close', {
+            bubbles: true,
+            composed: true
+        });
     }
 
     show() {
@@ -51,6 +56,7 @@ class CustomModal extends HTMLElement {
     }
 
     hide() {
+        this.dispatchEvent(this.closeEvent);
         this.modal.style.display = 'none';
     }
 }
