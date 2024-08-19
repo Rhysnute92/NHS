@@ -147,10 +147,3 @@ function hasAppointmentOnDate(date, month, year) {
 function daysInMonth(month, year) {
     return 32 - new Date(year, month, 32).getDate();
 }
-
-
-const apptModal = document.querySelector('.appt-modal');
-
-apptModal.addEventListener('close', () => {
-
-}

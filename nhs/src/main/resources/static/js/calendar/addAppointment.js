@@ -1,6 +1,7 @@
 // Array to store appointment data
 let appointments = [];
 
+const apptModal = document.querySelector('.appt-modal');
 // DOM elements for appointment form fields
 const apptDateInput = document.getElementById("apptDate");
 const apptTimeInput = document.getElementById("apptTime");
@@ -51,7 +52,7 @@ async function addAppointment() {
 
             const newAppointment = await response.json();
             appointments.push(newAppointment);
-            clearForm();
+            apptForm.reset();
 
             // Update calendar and display appointments
             if (typeof showCalendar === "function") {
@@ -62,15 +63,6 @@ async function addAppointment() {
     } catch (error) {
         console.error("Error:", error);
     }
-}
-
-// Function to clear the form fields
-function clearForm() {
-    apptDateInput.value = "";
-    apptTimeInput.value = "";
-    apptTypeInput.value = "";
-    apptProviderInput.value = "";
-    apptInfoInput.value = "";
 }
 
 // Function to delete an appointment
@@ -111,3 +103,7 @@ function displayAppointments() {
         }
     }
 }
+
+apptModal.addEventListener('close', () => {
+    apptForm.reset();
+});
