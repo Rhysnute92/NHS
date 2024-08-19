@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <head>
+    <title>Provider Calendar</title>
+    <link rel="stylesheet" th:href="@{/css/calendar/desktop/calendar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.4/fullcalendar.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+<body>
+<div th:replace="~{common/fragments/header}"></div>
+<nav th:replace="~{common/fragments/navbar}"></nav>
+<div id="tabs">
+  <button onclick="showList()">View List</button>
+  <button onclick="showCalendarpro()">View Calendar</button>
+</div>
+<div id="appointment-list" class="active">
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Type</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr th:each="appointment : ${appointments}">
+      <td th:text="${appointment.date}">Date</td>
+      <td th:text="${appointment.time}">Time</td>
+      <td th:text="${appointment.type}">Type</td>
+      <td th:text="${appointment.location}">Location</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="calendar"></div>
+
+<script th:src="@{/js/calendar/providerCalendar.js}"></script>
+<script th:src="@{/js/common/header.js}"></script>
+</body>
+</html>
