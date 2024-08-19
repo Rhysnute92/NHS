@@ -25,6 +25,11 @@ body {
   padding: 0;
 }
 
+.subtitle {
+  font-size: 1.5em;
+  color: var(--nhs-dark-grey);
+}
+
 .profile-icon {
   opacity: 0;
 }

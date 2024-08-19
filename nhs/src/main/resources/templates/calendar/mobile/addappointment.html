@@ -4,18 +4,19 @@
     <title>Add Appointment</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/calendar/mobile/mobilecalendar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/calendar/addAppointment.css}"/>
     <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
 </head>
 <body>
 <div th:replace="~{common/fragments/header}"></div>
 <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
 <div th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
-<p>You do not have to add lymphoedema appointments these will be done by your physician</p>
 <div class="container-calendar">
     <div id="appointments">
         <form th:replace="~{calendar/fragments/appointmentForm}"></form>
     </div>
 </div>
+<script th:src="@{/js/calendar/addAppointment.js}"></script>
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
