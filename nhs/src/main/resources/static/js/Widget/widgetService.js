@@ -1,8 +1,8 @@
 //widgetService.js
 
 export class WidgetService {
-  static async fetchUserWidgets(userId) {
-    const response = await fetch(`/api/user-widgets/${userId}`);
+  static async fetchUserWidgets() {
+    const response = await fetch(`/api/user-widgets`);
     console.log("Fetched user widgets response:", response);
     if (!response.ok) {
       throw new Error("Failed to fetch user widgets");
@@ -18,4 +18,16 @@ export class WidgetService {
     }
     return response.text();
   }
+
+/*   static async fetchWidgetScript(widgetName) {
+    const response = await fetch(`/api/widgets/${widgetName}/script`);
+    console.log(`Fetched widget (${widgetName}) script response:`, response);
+    if (response.ok) {
+      const scriptName = await response.text();
+      if (scriptName) {
+        return `/js/widgets/${scriptName}.js`; // Construct the URL directly
+      }
+    }
+    return null;
+  } */
 }
