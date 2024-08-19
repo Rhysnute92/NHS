@@ -15,17 +15,46 @@ export class QuestionnaireHubRendererProviderView {
         const title = document.createElement("h3");
         title.textContent = q.questionnaire.title; // Use the title from the questionnaire
         title.className = "questionnaire-card-title";
-
-        const icon = document.createElement("span");
-        icon.className = "questionnaire-document-icon";
-        icon.innerHTML = "&#128196;"; // Unicode for document icon
-
         card.appendChild(title);
-        const contentDiv = document.createElement("div");
-        contentDiv.className = "questionnaire-card-content";
-        contentDiv.appendChild(icon);
-        card.appendChild(contentDiv);
 
+        // Create a container for the details
+        const detailsContainer = document.createElement("div");
+        detailsContainer.className = "questionnaire-card-details";
+
+        // Create and add the Created Date
+        const createdDate = document.createElement("span");
+        createdDate.innerHTML = `<strong>Created:</strong> ${new Date(
+          q.questionnaireCreatedDate
+        ).toLocaleDateString()}`;
+        createdDate.className = "questionnaire-detail-item";
+        detailsContainer.appendChild(createdDate);
+
+        // Create and add the Due Date
+        const dueDate = document.createElement("span");
+        dueDate.innerHTML = `<strong>Due:</strong> ${new Date(
+          q.questionnaireDueDate
+        ).toLocaleDateString()}`;
+        dueDate.className = "questionnaire-detail-item";
+        detailsContainer.appendChild(dueDate);
+
+        // Determine and add the Status
+        const status = document.createElement("span");
+        let statusText = "Not Started";
+        let statusClass = "";
+        if (q.questionnaireIsCompleted) {
+          statusText = "Complete";
+        } else if (q.questionnaireStartDate) {
+          statusText = "In Progress";
+          statusClass = "status-in-progress"; // Class for italicizing
+        }
+        status.innerHTML = `<strong>Status:</strong> <span class="${statusClass}">${statusText}</span>`;
+        status.className = "questionnaire-detail-item";
+        detailsContainer.appendChild(status);
+
+        // Append the details container to the card
+        card.appendChild(detailsContainer);
+
+        // Append the card to the container
         container.appendChild(card);
       });
     }

@@ -28,8 +28,14 @@ public class UserQuestionnaire {
     @Column(name = "UserID", nullable = false)
     private Long userID;
 
-    @Column(name = "QuestionnaireStartDate", nullable = false)
+    @Column(name = "QuestionnaireStartDate", nullable = true)
     private LocalDateTime questionnaireStartDate;
+
+    @Column(name = "QuestionnaireCreatedDate", nullable = false)
+    private LocalDateTime questionnaireCreatedDate;
+
+    @Column(name = "QuestionnaireDueDate", nullable = false)
+    private LocalDateTime questionnaireDueDate;
 
     @Column(name = "QuestionnaireInProgress", nullable = false)
     private Boolean questionnaireInProgress = false;
@@ -167,4 +173,33 @@ public class UserQuestionnaire {
     public void setQuestionnaireCompletionDate(LocalDateTime questionnaireCompletionDate) {
         this.questionnaireCompletionDate = questionnaireCompletionDate;
     }
+
+    /**
+     * @return the questionnaireCreatedDate
+     */
+    public LocalDateTime getQuestionnaireCreatedDate() {
+        return questionnaireCreatedDate;
+    }
+
+    /**
+     * @param questionnaireCreatedDate the questionnaireCreatedDate to set
+     */
+    public void setQuestionnaireCreatedDate(LocalDateTime questionnaireCreatedDate) {
+        this.questionnaireCreatedDate = questionnaireCreatedDate;
+    }
+
+    /**
+     * @return the questionnaireDueDate
+     */
+    public LocalDateTime getQuestionnaireDueDate() {
+        return questionnaireDueDate;
+    }
+
+    /**
+     * @param questionnaireDueDate the questionnaireDueDate to set
+     */
+    public void setQuestionnaireDueDate(LocalDateTime questionnaireDueDate) {
+        this.questionnaireDueDate = questionnaireDueDate;
+    }
+
 }

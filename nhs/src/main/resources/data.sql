@@ -204,8 +204,13 @@ VALUES -- Function (Daily Activities)
         'Scale',
         1
     );
-/* INSERT INTO UserQuestionnaires (QuestionnaireID, UserID, QuestionnaireStartDate)
- VALUES (1, 2, NOW()); */
+INSERT INTO UserQuestionnaires (
+        QuestionnaireID,
+        UserID,
+        QuestionnaireCreatedDate,
+        QuestionnaireDueDate
+    )
+VALUES (1, 2, NOW(), '2024-12-31');
 INSERT INTO Patients (
         PatientEmail,
         PatientMobile,

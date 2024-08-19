@@ -27,6 +27,14 @@
 .assigned-questionnaire-title {
   font-size: 1.25em;
   font-weight: bold;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid var(--nhs-mid-grey);
+  padding-bottom: 0.25em;
+}
+
+div#questionnaire-container {
+  background-color: var(--nhs-pale-grey);
+  padding: 1em;
 }
 
 /* Action link styling */
@@ -45,6 +53,7 @@ span.action-link__text {
   display: flex;
   flex-direction: row;
   justify-content: end;
+  margin-bottom: 0.5em;
 }
 
 .nhsuk-action-link__link {
@@ -66,6 +75,38 @@ span.action-link__text {
 
 svg {
   fill: var(--nhs-green);
+}
+
+/* Questionnaire Card Styling */
+.questionnaire-card {
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+h3.questionnaire-card-title {
+  margin-bottom: 1em;
+}
+
+.questionnaire-card-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px; /* Space between title and details */
+}
+
+.questionnaire-detail-item {
+  flex: 1;
+  text-align: center;
+  padding: 0 8px;
+  font-weight: normal; /* Default font weight */
+}
+
+.questionnaire-detail-item strong {
+  font-weight: bold; /* Bold effect for field titles */
+}
+
+.status-in-progress {
+  font-style: italic; /* Italicize "In Progress" text */
 }
 
 /* View Results Section */
