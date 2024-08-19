@@ -92,7 +92,6 @@
       <!-- Popup for Assigning New Questionnaires -->
       <div id="assignQuestionnairePopup" class="popup">
         <div class="popup-content">
-          <span class="close-popup">&times;</span>
           <h3 class="popup-title" id="assignQuestionnairePopupLabel">
             <strong>Assign New Questionnaire</strong>
           </h3>
@@ -112,7 +111,6 @@
                 <select class="nhsuk-select" id="questionnaireSelect">
                   <option value="1">Questionnaire 1</option>
                   <option value="2">Questionnaire 2</option>
-                  <!-- Add more options as needed -->
                 </select>
               </div>
 
@@ -183,8 +181,22 @@
                   </div>
                 </div>
               </fieldset>
-
-              <button type="submit" class="nhsuk-button">Assign</button>
+              <div class="button-group">
+                <button
+                  type="button"
+                  class="nhsuk-button nhsuk-button--secondary"
+                  id="cancelButton"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  class="nhsuk-button nhsuk-button--primary"
+                  id="assignButton"
+                >
+                  Assign
+                </button>
+              </div>
             </form>
           </div>
         </div>

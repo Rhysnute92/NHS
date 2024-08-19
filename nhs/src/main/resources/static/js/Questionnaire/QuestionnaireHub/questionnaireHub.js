@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Handle popup functionality
 const popup = document.getElementById("assignQuestionnairePopup");
 const openPopupLink = document.querySelector(".action-link");
-const closePopupButton = popup.querySelector(".close-popup");
+const cancelButton = document.getElementById("cancelButton");
 const assignForm = document.getElementById("assignQuestionnaireForm");
 
 // Open the popup when the link is clicked
@@ -22,8 +22,8 @@ openPopupLink.addEventListener("click", function (event) {
   popup.style.display = "block"; // Show the popup
 });
 
-// Close the popup when the "close" button is clicked
-closePopupButton.addEventListener("click", function () {
+// Close the popup when the "Cancel" button is clicked
+cancelButton.addEventListener("click", function () {
   popup.style.display = "none"; // Hide the popup
 });
 
