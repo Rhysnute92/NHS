@@ -169,6 +169,18 @@ h3.questionnaire-card-title {
   /* overflow: auto;  */
   background-color: rgba(0, 0, 0, 0.4);
 }
+label#questionnaireSelectLabel {
+  margin-bottom: 0.5em;
+}
+
+strong#questionnaire-select-label {
+  font-size: 1.1em;
+}
+
+select#questionnaireSelect {
+  height: 4vh;
+  width: 40vw;
+}
 
 h3#assignQuestionnairePopupLabel {
   padding-left: 0.5rem;
