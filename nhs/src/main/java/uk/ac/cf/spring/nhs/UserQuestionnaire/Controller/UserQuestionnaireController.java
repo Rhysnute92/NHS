@@ -95,6 +95,22 @@ public class UserQuestionnaireController {
     }
 
     /**
+     * Retrieves a list of completed user questionnaires for a specific patient by
+     * their ID.
+     *
+     * @param patientId the ID of the patient
+     * @return a ResponseEntity containing a list of completed user questionnaires
+     *         for the patient
+     */
+    @GetMapping("/provider/completed/{patientId}")
+    public ResponseEntity<List<UserQuestionnaire>> getCompletedUserQuestionnairesForPatient(
+            @PathVariable Long patientId) {
+        List<UserQuestionnaire> userQuestionnaires = userQuestionnaireService
+                .getCompletedUserQuestionnaires(patientId);
+        return ResponseEntity.ok(userQuestionnaires);
+    }
+
+    /**
      * Retrieves a user questionnaire for the authenticated user and questionnaire
      * ID.
      *

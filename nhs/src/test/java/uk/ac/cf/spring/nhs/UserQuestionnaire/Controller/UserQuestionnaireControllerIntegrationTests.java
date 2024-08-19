@@ -33,155 +33,205 @@ import uk.ac.cf.spring.nhs.UserQuestionnaire.Service.UserQuestionnaireService;
 @ActiveProfiles("test")
 class UserQuestionnaireControllerIntegrationTests {
 
-    @Autowired
-    private MockMvc mockMvc;
+        @Autowired
+        private MockMvc mockMvc;
 
-    @MockBean
-    private AuthenticationInterface authenticationFacade;
+        @MockBean
+        private AuthenticationInterface authenticationFacade;
 
-    @MockBean
-    private UserQuestionnaireService userQuestionnaireService;
+        @MockBean
+        private UserQuestionnaireService userQuestionnaireService;
 
-    @MockBean
-    private UserQuestionService userQuestionService;
+        @MockBean
+        private UserQuestionService userQuestionService;
 
-    @BeforeEach
-    void setUp(WebApplicationContext webApplicationContext) {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-                .apply(SecurityMockMvcConfigurers.springSecurity())
-                .build();
-    }
+        @BeforeEach
+        void setUp(WebApplicationContext webApplicationContext) {
+                this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+                                .apply(SecurityMockMvcConfigurers.springSecurity())
+                                .build();
+        }
 
-    @Test
-    @WithMockUser(username = "testuser", roles = { "USER" })
-    void testGetUserQuestionnaires() throws Exception {
-        // Arrange
-        Long userId = 1L;
-        CustomUserDetails customUserDetails = new CustomUserDetails(
-                userId,
-                "testuser",
-                "password",
-                List.of());
+        @Test
+        @WithMockUser(username = "testuser", roles = { "USER" })
+        void testGetUserQuestionnaires() throws Exception {
+                // Arrange
+                Long userId = 1L;
+                CustomUserDetails customUserDetails = new CustomUserDetails(
+                                userId,
+                                "testuser",
+                                "password",
+                                List.of());
 
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-                customUserDetails, null, customUserDetails.getAuthorities());
+                Authentication auth = new UsernamePasswordAuthenticationToken(
+                                customUserDetails, null, customUserDetails.getAuthorities());
 
-        // Mock the behavior of the authenticationFacade to return the mocked
-        // Authentication object
-        when(authenticationFacade.getAuthentication()).thenReturn(auth);
+                // Mock the behavior of the authenticationFacade to return the mocked
+                // Authentication object
+                when(authenticationFacade.getAuthentication()).thenReturn(auth);
 
-        // Mock the service to return some user questionnaires
-        List<UserQuestionnaire> userQuestionnaires = List.of(new UserQuestionnaire());
-        when(userQuestionnaireService.getUserQuestionnaires(userId)).thenReturn(userQuestionnaires);
+                // Mock the service to return some user questionnaires
+                List<UserQuestionnaire> userQuestionnaires = List.of(new UserQuestionnaire());
+                when(userQuestionnaireService.getUserQuestionnaires(userId)).thenReturn(userQuestionnaires);
 
-        mockMvc.perform(get("/api/userQuestionnaires/user"))
-                .andExpect(status().isOk())
-                .andExpect(result -> {
-                    String jsonResponse = result.getResponse().getContentAsString();
-                    assertThat(jsonResponse).contains("\"questionnaireIsCompleted\":false");
-                });
-    }
+                mockMvc.perform(get("/api/userQuestionnaires/user"))
+                                .andExpect(status().isOk())
+                                .andExpect(result -> {
+                                        String jsonResponse = result.getResponse().getContentAsString();
+                                        assertThat(jsonResponse).contains("\"questionnaireIsCompleted\":false");
+                                });
+        }
 
-    @Test
-    @WithMockUser(username = "testuser", roles = { "USER" })
-    void testGetCompletedUserQuestionnaires() throws Exception {
-        // Arrange
-        Long userId = 1L;
-        CustomUserDetails customUserDetails = new CustomUserDetails(
-                userId,
-                "testuser",
-                "password",
-                List.of());
+        @Test
+        @WithMockUser(username = "testuser", roles = { "USER" })
+        void testGetCompletedUserQuestionnaires() throws Exception {
+                // Arrange
+                Long userId = 1L;
+                CustomUserDetails customUserDetails = new CustomUserDetails(
+                                userId,
+                                "testuser",
+                                "password",
+                                List.of());
 
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-                customUserDetails, null, customUserDetails.getAuthorities());
+                Authentication auth = new UsernamePasswordAuthenticationToken(
+                                customUserDetails, null, customUserDetails.getAuthorities());
 
-        // Mock the behavior of the authenticationFacade to return the mocked
-        // Authentication object
-        when(authenticationFacade.getAuthentication()).thenReturn(auth);
+                // Mock the behavior of the authenticationFacade to return the mocked
+                // Authentication object
+                when(authenticationFacade.getAuthentication()).thenReturn(auth);
 
-        // Mock the service to return some completed user questionnaires
-        UserQuestionnaire completedQuestionnaire = new UserQuestionnaire();
-        completedQuestionnaire.setQuestionnaireIsCompleted(true); // Ensure this is set to true
-        completedQuestionnaire.setUserID(userId);
-        completedQuestionnaire.setQuestionnaire(new Questionnaire()); // Assuming a non-null Questionnaire object is
-                                                                      // needed
+                // Mock the service to return some completed user questionnaires
+                UserQuestionnaire completedQuestionnaire = new UserQuestionnaire();
+                completedQuestionnaire.setQuestionnaireIsCompleted(true); // Ensure this is set to true
+                completedQuestionnaire.setUserID(userId);
+                completedQuestionnaire.setQuestionnaire(new Questionnaire()); // Assuming a non-null Questionnaire
+                                                                              // object is
+                                                                              // needed
 
-        List<UserQuestionnaire> userQuestionnaires = List.of(completedQuestionnaire);
-        when(userQuestionnaireService.getCompletedUserQuestionnaires(userId)).thenReturn(userQuestionnaires);
+                List<UserQuestionnaire> userQuestionnaires = List.of(completedQuestionnaire);
+                when(userQuestionnaireService.getCompletedUserQuestionnaires(userId)).thenReturn(userQuestionnaires);
 
-        mockMvc.perform(get("/api/userQuestionnaires/user/completed"))
-                .andExpect(status().isOk())
-                .andExpect(result -> {
-                    String jsonResponse = result.getResponse().getContentAsString();
-                    assertThat(jsonResponse).contains("\"questionnaireIsCompleted\":true");
-                });
-    }
+                mockMvc.perform(get("/api/userQuestionnaires/user/completed"))
+                                .andExpect(status().isOk())
+                                .andExpect(result -> {
+                                        String jsonResponse = result.getResponse().getContentAsString();
+                                        assertThat(jsonResponse).contains("\"questionnaireIsCompleted\":true");
+                                });
+        }
 
-    @Test
-    @WithMockUser(username = "testuser", roles = { "USER" })
-    void testGetIncompleteUserQuestionnaires() throws Exception {
+        @Test
+        @WithMockUser(username = "testuser", roles = { "USER" })
+        void testGetIncompleteUserQuestionnaires() throws Exception {
 
-        Long userId = 1L;
-        CustomUserDetails customUserDetails = new CustomUserDetails(
-                userId,
-                "testuser",
-                "password",
-                List.of());
+                Long userId = 1L;
+                CustomUserDetails customUserDetails = new CustomUserDetails(
+                                userId,
+                                "testuser",
+                                "password",
+                                List.of());
 
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-                customUserDetails, null, customUserDetails.getAuthorities());
+                Authentication auth = new UsernamePasswordAuthenticationToken(
+                                customUserDetails, null, customUserDetails.getAuthorities());
 
-        // Mock the behavior of the authenticationFacade to return the mocked
-        // Authentication object
-        when(authenticationFacade.getAuthentication()).thenReturn(auth);
+                // Mock the behavior of the authenticationFacade to return the mocked
+                // Authentication object
+                when(authenticationFacade.getAuthentication()).thenReturn(auth);
 
-        // Mock the service to return some incomplete user questionnaires
-        List<UserQuestionnaire> userQuestionnaires = List.of(new UserQuestionnaire());
-        when(userQuestionnaireService.getIncompleteUserQuestionnaires(userId)).thenReturn(userQuestionnaires);
+                // Mock the service to return some incomplete user questionnaires
+                List<UserQuestionnaire> userQuestionnaires = List.of(new UserQuestionnaire());
+                when(userQuestionnaireService.getIncompleteUserQuestionnaires(userId)).thenReturn(userQuestionnaires);
 
-        mockMvc.perform(get("/api/userQuestionnaires/user/incomplete"))
-                .andExpect(status().isOk())
-                .andExpect(result -> {
-                    String jsonResponse = result.getResponse().getContentAsString();
-                    assertThat(jsonResponse).contains("\"questionnaireIsCompleted\":false");
-                });
-    }
+                mockMvc.perform(get("/api/userQuestionnaires/user/incomplete"))
+                                .andExpect(status().isOk())
+                                .andExpect(result -> {
+                                        String jsonResponse = result.getResponse().getContentAsString();
+                                        assertThat(jsonResponse).contains("\"questionnaireIsCompleted\":false");
+                                });
+        }
 
-    @Test
-    @WithMockUser(username = "testuser", roles = { "USER" })
-    void testGetUserQuestionnaireById() throws Exception {
+        @Test
+        @WithMockUser(username = "testuser", roles = { "USER" })
+        void testGetUserQuestionnaireById() throws Exception {
 
-        Long userId = 1L;
-        Long questionnaireId = 1L;
-        CustomUserDetails customUserDetails = new CustomUserDetails(
-                userId,
-                "testuser",
-                "password",
-                List.of());
+                Long userId = 1L;
+                Long questionnaireId = 1L;
+                CustomUserDetails customUserDetails = new CustomUserDetails(
+                                userId,
+                                "testuser",
+                                "password",
+                                List.of());
 
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-                customUserDetails, null, customUserDetails.getAuthorities());
+                Authentication auth = new UsernamePasswordAuthenticationToken(
+                                customUserDetails, null, customUserDetails.getAuthorities());
 
-        // Mock the behavior of the authenticationFacade to return the mocked
-        // Authentication object
-        when(authenticationFacade.getAuthentication()).thenReturn(auth);
+                // Mock the behavior of the authenticationFacade to return the mocked
+                // Authentication object
+                when(authenticationFacade.getAuthentication()).thenReturn(auth);
 
-        // Create and set up the UserQuestionnaire object
-        UserQuestionnaire userQuestionnaire = new UserQuestionnaire();
-        userQuestionnaire.setUserID(userId);
-        userQuestionnaire.setQuestionnaire(new Questionnaire());
+                // Create and set up the UserQuestionnaire object
+                UserQuestionnaire userQuestionnaire = new UserQuestionnaire();
+                userQuestionnaire.setUserID(userId);
+                userQuestionnaire.setQuestionnaire(new Questionnaire());
 
-        // Mock the service to return the user questionnaire
-        when(userQuestionnaireService.getUserQuestionnaire(userId, questionnaireId))
-                .thenReturn(Optional.of(userQuestionnaire));
+                // Mock the service to return the user questionnaire
+                when(userQuestionnaireService.getUserQuestionnaire(userId, questionnaireId))
+                                .thenReturn(Optional.of(userQuestionnaire));
 
-        mockMvc.perform(get("/api/userQuestionnaires/user/questionnaire/{questionnaireId}", questionnaireId))
-                .andExpect(status().isOk())
-                .andExpect(result -> {
-                    String jsonResponse = result.getResponse().getContentAsString();
-                    assertThat(jsonResponse).contains("\"userID\":1");
-                });
-    }
+                mockMvc.perform(get("/api/userQuestionnaires/user/questionnaire/{questionnaireId}", questionnaireId))
+                                .andExpect(status().isOk())
+                                .andExpect(result -> {
+                                        String jsonResponse = result.getResponse().getContentAsString();
+                                        assertThat(jsonResponse).contains("\"userID\":1");
+                                });
+        }
+
+        @Test
+        @WithMockUser(username = "providerUser", roles = { "PROVIDER" })
+        void testProviderAccessToIncompleteUserQuestionnairesForPatient() throws Exception {
+                // Arrange
+                Long patientId = 2L;
+
+                // Mock the behavior of the service to return some incomplete questionnaires
+                UserQuestionnaire questionnaire = new UserQuestionnaire();
+                questionnaire.setUserID(patientId);
+                questionnaire.setQuestionnaireIsCompleted(false);
+                questionnaire.setQuestionnaire(new Questionnaire());
+                List<UserQuestionnaire> userQuestionnaires = List.of(questionnaire);
+
+                when(userQuestionnaireService.getIncompleteUserQuestionnaires(patientId))
+                                .thenReturn(userQuestionnaires);
+
+                // Act & Assert
+                mockMvc.perform(get("/api/userQuestionnaires/provider/incomplete/{patientId}", patientId))
+                                .andExpect(status().isOk())
+                                .andExpect(result -> {
+                                        String jsonResponse = result.getResponse().getContentAsString();
+                                        assertThat(jsonResponse).contains("\"questionnaireIsCompleted\":false");
+                                });
+        }
+
+        @Test
+        @WithMockUser(username = "providerUser", roles = { "PROVIDER" })
+        void testProviderAccessToCompletedUserQuestionnairesForPatient() throws Exception {
+
+                Long patientId = 2L;
+
+                // Mock the behavior of the service to return some completed questionnaires
+                UserQuestionnaire completedQuestionnaire = new UserQuestionnaire();
+                completedQuestionnaire.setUserID(patientId);
+                completedQuestionnaire.setQuestionnaireIsCompleted(true);
+                completedQuestionnaire.setQuestionnaire(new Questionnaire());
+                List<UserQuestionnaire> userQuestionnaires = List.of(completedQuestionnaire);
+
+                when(userQuestionnaireService.getCompletedUserQuestionnaires(patientId))
+                                .thenReturn(userQuestionnaires);
+
+                mockMvc.perform(get("/api/userQuestionnaires/provider/completed/{patientId}", patientId))
+                                .andExpect(status().isOk())
+                                .andExpect(result -> {
+                                        String jsonResponse = result.getResponse().getContentAsString();
+                                        assertThat(jsonResponse).contains("\"questionnaireIsCompleted\":true");
+                                });
+        }
 
 }

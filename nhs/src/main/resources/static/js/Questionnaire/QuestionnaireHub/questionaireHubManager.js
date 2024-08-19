@@ -1,15 +1,15 @@
 import { fetchData, postData } from "../common/utils/apiUtility.js";
-import { QuestionnaireHubRenderer } from "./QuestionnaireHubRenderer.js";
+import { QuestionnaireHubRendererProviderView } from "./questionnaireHubRenderer.js";
 
 export class QuestionnaireHubManager {
   constructor(containerId, noAssignmentId) {
     this.containerId = containerId;
     this.noAssignmentId = noAssignmentId;
-    this.renderer = new QuestionnaireHubRenderer();
+    this.renderer = new QuestionnaireHubRendererProviderView();
   }
 
   async loadAssignedQuestionnaires(patientId) {
-    const endpoint = `/api/provider/${patientId}/assigned-questionnaires`;
+    const endpoint = `/api/provider/incomplete/${patientId}`; // Updated endpoint
     console.log(`Fetching assigned questionnaires from: ${endpoint}`);
 
     try {
