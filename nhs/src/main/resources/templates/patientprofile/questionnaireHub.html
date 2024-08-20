@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/provider}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Questionnaire Hub</title>
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/common/defaultLayout.css}" />
+    <link
+      rel="stylesheet"
+      th:href="@{/css/questionnaireHub/questionnaireHub.css}"
+    />
+  </head>
+  <body>
+    <main layout:fragment="content" class="main-content">
+      <div class="container">
+        <h1 class="management-desktop-title">Questionnaire Hub</h1>
+        <p class="management-desktop-subtitle">
+          Here you can assign new questionnaires to patients and view the
+          results of previous questionnaires
+        </p>
+        <!-- Section 1: Assign Questionnaires -->
+        <section class="assign-section">
+          <div class="assigned-questionnaires">
+            <h3 class="assigned-questionnaire-title">
+              Assigned Questionnaires
+            </h3>
+            <div id="questionnaire-container" class="questionnaire-container">
+              <!-- If there is a questionnaire assigned, it'll be inserted here -->
+            </div>
+            <!-- If no questionnaire is assigned -->
+            <div
+              id="no-assignment"
+              class="questionnaire-item no-assignment"
+              style="display: none"
+            >
+              <p>No questionnaires assigned at the moment.</p>
+            </div>
+          </div>
+
+          <!-- Action Link to Assign New Questionnaire -->
+          <div class="action-link-container">
+            <a class="action-link" href="#">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                width="36"
+                height="36"
+              >
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"
+                ></path>
+              </svg>
+              <span class="action-link__text">Assign a new questionnaire</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- Section 2: View Previous Results -->
+        <div class="view-results-section mt-5">
+          <h2>View Previous Results</h2>
+          <div class="results-list">
+            <!-- List or table of previous questionnaire results -->
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Questionnaire</th>
+                  <th>Date Completed</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Questionnaire 1</td>
+                  <td>01/01/2024</td>
+                  <td>
+                    <button class="btn btn-secondary">View Results</button>
+                  </td>
+                </tr>
+                <!-- More rows as needed -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Popup for Assigning New Questionnaires -->
+      <div id="assignQuestionnairePopup" class="popup">
+        <div class="popup-content">
+          <h3 class="popup-title" id="assignQuestionnairePopupLabel">
+            <strong>Assign New Questionnaire</strong>
+          </h3>
+          <div class="popup-body">
+            <!-- Form to select and assign a questionnaire -->
+            <form id="assignQuestionnaireForm">
+              <div class="nhsuk-form-group">
+                <label
+                  class="nhsuk-label nhsuk-label--m"
+                  for="questionnaireSelect"
+                  id="questionnaireSelectLabel"
+                >
+                  <strong id="questionnaire-select-label"
+                    >Select Questionnaire</strong
+                  >
+                </label>
+                <select class="nhsuk-select" id="questionnaireSelect">
+                  <option value="1">Questionnaire 1</option>
+                  <option value="2">Questionnaire 2</option>
+                </select>
+              </div>
+
+              <fieldset
+                class="nhsuk-fieldset"
+                role="group"
+                aria-labelledby="due-date"
+              >
+                <legend
+                  class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l"
+                >
+                  <strong id="due-date-label">Set Due Date</strong>
+                </legend>
+                <p class="nhsuk-hint due-date-example">
+                  For example, 15 March 2025
+                </p>
+                <div class="nhsuk-date-input">
+                  <div class="nhsuk-date-input__item">
+                    <div class="nhsuk-form-group">
+                      <label
+                        class="nhsuk-label nhsuk-date-input__label"
+                        for="dueDay"
+                        >Day</label
+                      >
+                      <input
+                        class="nhsuk-input nhsuk-date-input__input"
+                        id="dueDay"
+                        name="dueDay"
+                        type="text"
+                        pattern="[0-9]*"
+                        inputmode="numeric"
+                      />
+                    </div>
+                  </div>
+                  <div class="nhsuk-date-input__item">
+                    <div class="nhsuk-form-group">
+                      <label
+                        class="nhsuk-label nhsuk-date-input__label"
+                        for="dueMonth"
+                        >Month</label
+                      >
+                      <input
+                        class="nhsuk-input nhsuk-date-input__input"
+                        id="dueMonth"
+                        name="dueMonth"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="nhsuk-date-input__item">
+                    <div class="nhsuk-form-group">
+                      <label
+                        class="nhsuk-label nhsuk-date-input__label"
+                        for="dueYear"
+                        >Year</label
+                      >
+                      <input
+                        class="nhsuk-input nhsuk-date-input__input"
+                        id="dueYear"
+                        name="dueYear"
+                        type="text"
+                        pattern="[0-9]*"
+                        inputmode="numeric"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="button-group">
+                <button
+                  type="button"
+                  class="nhsuk-button nhsuk-button--secondary"
+                  id="cancelButton"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  class="nhsuk-button nhsuk-button--primary"
+                  id="assignButton"
+                >
+                  Assign
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <th:block layout:fragment="scripts">
+      <script
+        type="module"
+        th:src="@{/js/Questionnaire/QuestionnaireHub/questionnaireHub.js}"
+      ></script>
+    </th:block>
+  </body>
+</html>
