@@ -10,14 +10,15 @@
     <nav th:replace="~{common/fragments/navbaradmin}" class="nav"></nav>
 <div class="container">
     <h2>Search patient page!</h2>
-    <form action="/provider/search/patientsearch" method="post">
-        <!-- <label for="patientNhsNumber">Patient NHS number:</label>
-        <input type="text" id="patientNhsNumber" name="patientNhsNumber"> -->
-        <label for="patientName">Patient First Name:</label>
-        <input type="text" id="patientName" name="patientName">
-        <label for="patientLastName">Patient Last Name:</label>
-        <input type="text" id="patientLastName" name="patientLastName">
-        <input type="submit" value="Search" class="update_button"/>
+    <label for="searchType">Search by: </label>
+    <select id="searchType">
+        <option value="NHS number">NHS number</option>
+        <option value="Patient data">Patient data</option>
+    </select>
+    <form action="/provider/search/patientsearch" id="searchForm" method="post">
+        <label for="patientNhsNumber">Patient NHS number:</label>
+        <input type="text" id="patientNhsNumber" name="patientNhsNumber">
+        <input type="submit" value="Search" class="search_button"/>
     </form>
     <table th:if="${results != null}">
         <thead>
@@ -39,5 +40,6 @@
     </table>
 </div>
 <script th:src="@{/js/common/header.js}"></script>
+<script th:src="@{/js/admin/search.js}"></script>
 </body>
 </html>
