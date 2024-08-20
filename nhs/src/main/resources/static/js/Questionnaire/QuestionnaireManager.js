@@ -1,11 +1,13 @@
 import { fetchData, postData, putData } from "../common/utils/apiUtility.js";
 import { QuestionnaireRenderer } from "./QuestionnaireRenderer.js";
+import { ChartRenderer } from "./ChartRenderer.js";
 
 export class QuestionnaireManager {
   constructor(containerId, noAssignmentId, userID) {
     this.containerId = containerId;
     this.noAssignmentId = noAssignmentId;
     this.userID = userID;
+    this.chartRenderer = new ChartRenderer("resultsChart");
     this.renderer = new QuestionnaireRenderer(
       "questions-container",
       "questionnaire-title",
@@ -44,6 +46,56 @@ export class QuestionnaireManager {
     } catch (error) {
       console.error("Error loading assigned questionnaires:", error);
     }
+  }
+
+  async loadAndRenderTrendData() {
+    try {
+      const userQuestionnaires = await fetchData(
+        `/api/userQuestionnaires/user/completed`
+      );
+      console.log("Fetched completed user questionnaires:", userQuestionnaires);
+
+      const trendDataPromises = userQuestionnaires.map(async (uq) => {
+        const responses = await fetchData(
+          `/api/userQuestions/userQuestionnaire/${uq.userQuestionnaireId}`
+        );
+        console.log(
+          `Fetched responses for questionnaire ${uq.userQuestionnaireId}:`,
+          responses
+        );
+
+        return {
+          date: uq.questionnaireCompletionDate,
+          ...this.processResponsesForTrend(responses),
+        };
+      });
+
+      const trendData = await Promise.all(trendDataPromises);
+      console.log("Final trend data to be rendered:", trendData);
+
+      this.chartRenderer.processAndRenderData(trendData);
+    } catch (error) {
+      console.error("Error loading trend data:", error);
+    }
+  }
+
+  processResponsesForTrend(responses) {
+    const trendCategories = {
+      Function: 0,
+      Appearance: 0,
+      Symptoms: 0,
+      Emotion: 0,
+      QualityOfLife: 0,
+    };
+
+    responses.forEach((response) => {
+      const category = response.question.questionCategory;
+      if (trendCategories.hasOwnProperty(category)) {
+        trendCategories[category] += response.userResponseScore || 0;
+      }
+    });
+
+    return trendCategories;
   }
 
   async loadQuestionnaire(questionnaireId) {

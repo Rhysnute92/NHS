@@ -1,3 +1,4 @@
+import { ChartRenderer } from "../Questionnaire/ChartRenderer.js";
 import { initializeCollapsible } from "./collapsible.js";
 import { initializeQuestionnaireManager } from "../questionnaire/QuestionaireInitializer.js";
 import { initializeTaskManager } from "../tasks/TaskInitializer.js";
@@ -41,10 +42,16 @@ document.addEventListener("DOMContentLoaded", async function () {
   const questionnaireContainerId = "questionnaire-container";
   const noAssignmentContainerId = "no-assignment";
 
-  await initializeQuestionnaireManager(
+  // Initialize the questionnaireManager
+  const questionnaireManager = await initializeQuestionnaireManager(
     questionnaireContainerId,
     noAssignmentContainerId
   );
+
+  if (questionnaireManager) {
+    await questionnaireManager.loadAssignedQuestionnaires();
+    await questionnaireManager.loadAndRenderTrendData();
+  }
 
   taskManager
     .fetchTasks()
