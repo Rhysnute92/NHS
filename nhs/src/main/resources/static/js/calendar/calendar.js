@@ -26,26 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     currentYear = today.getFullYear();
 
     showCalendar(currentMonth, currentYear);
-    fetchAppointments(); // Fetch and display appointments
 });
-
-// Function to fetch appointments from the server
-async function fetchAppointments() {
-    try {
-        const response = await fetch('/appointments');
-        if (response.ok) {
-            appointments = await response.json();
-            showCalendar(currentMonth, currentYear);
-            for (let appointment of appointments) {
-                displayAppointment(appointment);
-            }
-        } else {
-            console.error("Failed to fetch appointments");
-        }
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
 
 // Function to go to the next month
 function next() {

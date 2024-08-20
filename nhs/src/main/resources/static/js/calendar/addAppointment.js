@@ -9,6 +9,7 @@ const apptTypeInput = document.getElementById("apptType");
 const apptProviderInput = document.getElementById("apptProvider");
 const apptInfoInput = document.getElementById("apptInfo");
 const apptList = document.getElementById("apptList");
+const noApptMessage = document.querySelector(".no-appointments");
 
 // DOM element for appointment form
 const apptForm = document.getElementById("apptForm");
@@ -74,6 +75,12 @@ function deleteAppointment(appointmentID) {
     if (appointmentIndex !== -1) {
         document.querySelector(`[data-id="${appointmentID}"]`).remove();
 
+        if (apptList.children.length > 0) {
+            noApptMessage.style.display = "none";
+        } else {
+            noApptMessage.style.display = "block";
+        }
+
         // Update calendar and display appointments
         if (typeof showCalendar === "function") {
             showCalendar(currentMonth, currentYear);
@@ -106,6 +113,12 @@ function displayAppointment(appointment) {
 
             listItem.appendChild(deleteButton);
             apptList.appendChild(listItem);
+
+            if (apptList.children.length > 0) {
+                noApptMessage.style.display = "none";
+            } else {
+                noApptMessage.style.display = "block";
+            }
     }
 }
 
