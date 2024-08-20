@@ -167,6 +167,7 @@ public class UserQuestionnaireController {
         return ResponseEntity.ok(savedUserQuestionnaire);
     }
 
+    @PutMapping("/{id}")
     /**
      * Updates an existing user questionnaire for the authenticated user.
      *
@@ -174,20 +175,26 @@ public class UserQuestionnaireController {
      * @param userQuestionnaire the updated user questionnaire
      * @return the updated user questionnaire, or a 404 response if not found
      */
-    @PutMapping("/{id}")
     public ResponseEntity<UserQuestionnaire> updateUserQuestionnaire(@PathVariable Long id,
             @RequestBody UserQuestionnaire userQuestionnaire) {
         Long userID = getCurrentUserId();
-        Optional<UserQuestionnaire> existingUserQuestionnaire = userQuestionnaireService.getUserQuestionnaire(userID,
+        Optional<UserQuestionnaire> existingUserQuestionnaireOpt = userQuestionnaireService.getUserQuestionnaire(userID,
                 id);
 
-        if (existingUserQuestionnaire.isPresent()) {
-            Questionnaire existingQuestionnaire = existingUserQuestionnaire.get().getQuestionnaire();
-            userQuestionnaire.setQuestionnaire(existingQuestionnaire);
-            userQuestionnaire.setUserQuestionnaireId(id);
-            userQuestionnaire.setUserID(userID); // Ensure the user ID is set correctly
+        if (existingUserQuestionnaireOpt.isPresent()) {
+            UserQuestionnaire existingUserQuestionnaire = existingUserQuestionnaireOpt.get();
+
+            // Update only the fields that are supposed to be modified
+            existingUserQuestionnaire.setQuestionnaireStartDate(userQuestionnaire.getQuestionnaireStartDate());
+            existingUserQuestionnaire.setQuestionnaireInProgress(userQuestionnaire.getQuestionnaireInProgress());
+
+            // Preserve the existing values for fields that should not change
+            existingUserQuestionnaire.setUserQuestionnaireId(id);
+            existingUserQuestionnaire.setUserID(userID);
+
+            // Save the updated UserQuestionnaire
             UserQuestionnaire updatedUserQuestionnaire = userQuestionnaireService
-                    .saveUserQuestionnaire(userQuestionnaire);
+                    .saveUserQuestionnaire(existingUserQuestionnaire);
             return ResponseEntity.ok(updatedUserQuestionnaire);
         } else {
             return ResponseEntity.notFound().build();
