@@ -17,6 +17,8 @@ export class QuestionnaireManager {
     // Debugging information
     console.log(`QuestionnaireManager initialized with userID: ${this.userID}`);
 
+    this.initializeTabs();
+
     // Bind the form submission event
     const form = document.getElementById("questionnaire-form");
     if (form) {
@@ -46,6 +48,38 @@ export class QuestionnaireManager {
     } catch (error) {
       console.error("Error loading assigned questionnaires:", error);
     }
+  }
+
+  initializeTabs() {
+    // Handle tab switching
+    $('a[data-toggle="tab"]').on("shown.bs.tab", (e) => {
+      const target = $(e.target).attr("href");
+
+      if (target === "#table-results") {
+        if (!$.fn.DataTable.isDataTable("#resultsTable")) {
+          this.initializeResultsTable(); // Initialize DataTable when the tab is active
+        }
+      }
+    });
+
+    // Show the first tab by default
+    $(".nav-tabs a:first").tab("show");
+  }
+
+  initializeResultsTable() {
+    $("#resultsTable").DataTable({
+      paging: true,
+      searching: true,
+      ordering: true,
+      pageLength: 10, // Number of rows per page
+      lengthChange: false, // Hide the page length change option
+      language: {
+        paginate: {
+          previous: "Prev",
+          next: "Next",
+        },
+      },
+    });
   }
 
   async loadAndRenderTrendData() {
