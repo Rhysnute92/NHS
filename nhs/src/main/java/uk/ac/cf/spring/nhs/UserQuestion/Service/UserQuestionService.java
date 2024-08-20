@@ -83,18 +83,10 @@ public class UserQuestionService {
         userQuestionRepository.deleteById(userQuestionId);
     }
 
-    /**
-     * Saves user responses for a given questionnaire.
-     *
-     * @param userQuestionnaireId the ID of the user questionnaire being completed
-     * @param responses           a map of question IDs to user responses
-     */
     public void saveResponses(Long userQuestionnaireId, Map<String, String> responses) {
-        // Fetch the UserQuestionnaire using the service
-        Object principal = authenticationFacade.getAuthentication().getPrincipal();
-        Long userId = ((CustomUserDetails) principal).getUserId();
+        // Fetch the UserQuestionnaire by its ID
         Optional<UserQuestionnaire> userQuestionnaireOpt = userQuestionnaireService
-                .getUserQuestionnaire(userId, userQuestionnaireId);
+                .getUserQuestionnaireById(userQuestionnaireId);
         if (!userQuestionnaireOpt.isPresent()) {
             throw new IllegalArgumentException("Invalid user questionnaire ID");
         }
@@ -114,8 +106,10 @@ public class UserQuestionService {
             try {
                 Integer score = Integer.parseInt(answer);
                 userQuestion.setUserResponseScore(score);
+                userQuestion.setUserResponseText(null); // Ensure text is null for scores
             } catch (NumberFormatException e) {
                 userQuestion.setUserResponseText(answer);
+                userQuestion.setUserResponseScore(null); // Ensure score is null for text responses
             }
 
             userQuestion.setResponseDateTime(LocalDateTime.now());
@@ -125,7 +119,9 @@ public class UserQuestionService {
         // Mark the questionnaire as completed
         userQuestionnaire.setQuestionnaireIsCompleted(true);
         userQuestionnaire.setQuestionnaireCompletionDate(LocalDateTime.now());
-        userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire); // Use the service to save
+
+        // Use the service to save the completed questionnaire
+        userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
     }
 
     public void saveResponsesWithoutCompletion(Long userQuestionnaireId, Map<String, String> responses) {
