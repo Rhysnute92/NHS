@@ -31,7 +31,7 @@ public class PatientProfileController {
                 new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
                 new NavMenuItem("Set plan", "", "fa-solid fa-book"),
                 new NavMenuItem("Appointments", " ", "fa-solid fa-user-check"),
-                new NavMenuItem("Questionnaires", "/questionnairehub",
+                new NavMenuItem("Questionnaires", "/patientprofile/questionnairehub",
                         "fa-solid fa-book"),
                 new NavMenuItem("Patient trends", " ", "fa-solid fa-user-check"),
                 new NavMenuItem("Event log", " ", "fa-solid fa-book"),
@@ -55,6 +55,11 @@ public class PatientProfileController {
     @GetMapping("/info")
     public String patientProfileAdmin() {
         return "patientprofile/profileInfo";
+    }
+
+    @GetMapping("/questionnairehub")
+    public String showQuestionnaireHub(Model model) {
+        return "patientprofile/questionnaireHub";
     }
 
 }
