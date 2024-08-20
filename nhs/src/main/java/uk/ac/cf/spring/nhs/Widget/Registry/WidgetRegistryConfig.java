@@ -18,7 +18,7 @@ public class WidgetRegistryConfig {
     public WidgetRegistry widgetRegistry() {
         WidgetRegistry registry = new WidgetRegistry();
         WidgetRegistry.registerWidget("task-completion", new TaskCompletionWidget());
-        WidgetRegistry.registerWidget("Appointments-tracker", new AppointmentsTrackerWidget());
+        WidgetRegistry.registerWidget("appointments-tracker", new AppointmentsTrackerWidget());
         return registry;
     }
 

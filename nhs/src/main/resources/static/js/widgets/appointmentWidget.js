@@ -1,4 +1,5 @@
 // widget.js
+
 document.addEventListener('DOMContentLoaded', function () {
     const widgetContainer = document.getElementById('widget-container');
 

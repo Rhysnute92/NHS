@@ -567,7 +567,7 @@ VALUES ('Jane', 'Doe', 'Mrs', 'Nurse', 3);
 INSERT INTO UserWidgets (UserID, WidgetName, Position)
 VALUES (2, 'task-completion', 1);
 INSERT INTO UserWidgets (UserID, WidgetName, Position)
-VALUES (2, 'appointment-list', 2);
+VALUES (2, 'appointment-tracker', 2);
 INSERT INTO Task (TaskType, TaskName, TaskDesc, TaskRepeatPeriod)
 VALUES (
         'Home Monitoring',
