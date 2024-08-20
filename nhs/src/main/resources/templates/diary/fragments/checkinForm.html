@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<form th:fragment="checkinForm" class="checkin-form" id="checkin-form" action="/diary/checkin" method="post" enctype="multipart/form-data">
+<form th:fragment="checkinForm" class="checkin-form" id="checkin-form" action="/diary/checkin" method="post" data-redirect="/diary" enctype="multipart/form-data">
   <div class="checkin-section">
     <div class="checkin-section-title">
       <h3>Mood</h3>
@@ -40,7 +40,7 @@
     </div>
     <div class="checkin-section-content checkin-symptoms hidden">
       <h4>Trouble sleeping</h4>
-      <input type="hidden" name="symptoms[0].name" value="troubleSleeping">
+      <input type="hidden" name="symptoms[0].name" value="Trouble sleeping">
       <div class="checkin-symptom-selection">
         <div>
           <input type="radio" id="trouble-sleeping-1" name="symptoms[0].severity" value="1" class="checkin-symptom" />
@@ -60,7 +60,7 @@
         </div>
       </div>
       <h4>Pain</h4>
-      <input type="hidden" name="symptoms[1].name" value="pain">
+      <input type="hidden" name="symptoms[1].name" value="Pain">
       <div class="checkin-symptom-selection">
         <div>
           <input type="radio" id="pain-1" name="symptoms[1].severity" value="1" class="checkin-symptom" />
@@ -80,7 +80,7 @@
         </div>
       </div>
       <h4>Numbness</h4>
-      <input type="hidden" name="symptoms[2].name" value="numbness">
+      <input type="hidden" name="symptoms[2].name" value="Numbness">
       <div class="checkin-symptom-selection">
         <div>
           <input type="radio" id="numbness-1" name="symptoms[2].severity" value="1" class="checkin-symptom" />
@@ -107,8 +107,9 @@
       <i class="fa-solid fa-check checkin-icon"></i>
     </div>
     <div class="checkin-section-content checkin-photos hidden">
-      <div th:replace="~{diary/fragments/photoUpload :: photoUpload}"></div>
-      <div class="checkin-photos-preview"></div>
+      <div th:replace="~{diary/fragments/photoGuidance}"></div>
+      <camera-component></camera-component>
+      <photo-container></photo-container>
     </div>
   </div>
   <div class="checkin-section">

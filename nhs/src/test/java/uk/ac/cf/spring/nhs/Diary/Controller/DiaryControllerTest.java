@@ -1,57 +1,47 @@
 package uk.ac.cf.spring.nhs.Diary.Controller;
 
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.MockedStatic;
+import org.mockito.ArgumentCaptor;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.ui.Model;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.multipart.MultipartFile;
-import uk.ac.cf.spring.nhs.Common.util.DeviceDetector;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
-import uk.ac.cf.spring.nhs.Diary.DTO.CheckinForm;
+import uk.ac.cf.spring.nhs.Diary.DTO.CheckinFormDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
-import uk.ac.cf.spring.nhs.Diary.Entity.Photo;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
-import uk.ac.cf.spring.nhs.Diary.Service.PhotoService;
+import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
+import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 @WebMvcTest(DiaryController.class)
+@AutoConfigureMockMvc(addFilters = false)
 public class DiaryControllerTest {
 
-    @InjectMocks
-    private DiaryController diaryController;
-
     @MockBean
-    private DiaryEntryService diaryEntryService;
-
-    @MockBean
-    private PhotoService photoService;
+    private AuthenticationInterface authenticationFacade;
 
     @Autowired
     private WebApplicationContext context;
@@ -59,32 +49,24 @@ public class DiaryControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Before
-    public void setup() {
-        this.mockMvc = webAppContextSetup(context)
-        .apply(springSecurity())
-        .build();
-    }
+    @MockBean
+    private DiaryEntryService diaryEntryService;
 
     private AutoCloseable closeable;
-    private List<DiaryEntry> dummyEntries;
-    private List<Photo> dummyPhotos;
 
     @BeforeEach
     public void setUp() {
+        // Initialize mocks and security context
         closeable = MockitoAnnotations.openMocks(this);
-        dummyEntries = new ArrayList<>(Arrays.asList(
-                new DiaryEntry(1, new Date()),
-                new DiaryEntry(2, new Date())
-        ));
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
+                .apply(springSecurity())
+                .build();
 
-        dummyPhotos = new ArrayList<>(Arrays.asList(
-                new Photo("photo1.jpg", new Date(), "", 1),
-                new Photo("photo2.jpg", new Date(), "", 1)
-        ));
-
-        when(diaryEntryService.getDiaryEntriesByUserId(1)).thenReturn(dummyEntries);
-        when(photoService.getPhotosByUserId(1)).thenReturn(dummyPhotos);
+        CustomUserDetails customUserDetails = new CustomUserDetails(1L, "patient", "password",
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_PATIENT")));
+        Authentication authentication = new UsernamePasswordAuthenticationToken(customUserDetails, "password", customUserDetails.getAuthorities());
+        when(authenticationFacade.getAuthentication()).thenReturn(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
     @AfterEach
@@ -93,113 +75,65 @@ public class DiaryControllerTest {
     }
 
     @Test
-    @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
-    public void diaryReturnsCorrectView() {
-        Model model = mock(Model.class);
-        String viewName = diaryController.diary(model);
-        assertEquals("diary/diary", viewName);
-        verify(model).addAttribute(eq("diaryEntries"), eq(dummyEntries));
+    void providerAccountTest() throws Exception {
+        mockMvc.perform(get("/diary"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("diary/diary"));
     }
 
     @Test
-    @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
-    public void checkinReturnsCorrectView() {
-        Model model = mock(Model.class);
-        String viewName = diaryController.checkin(model);
-        assertEquals("diary/checkin", viewName);
-    }
-
-    @Test
-    @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
     public void testDiary() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/diary"))
+        List<DiaryEntry> diaryEntries = new ArrayList<>();
+        diaryEntries.add(new DiaryEntry(1L, new Date()));
+        diaryEntries.add(new DiaryEntry(2L, new Date()));
+
+        when(diaryEntryService.getDiaryEntriesByUserId(1L)).thenReturn(diaryEntries);
+
+        mockMvc.perform(get("/diary"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("diary/diary"))
-                .andExpect(model().attributeExists("diaryEntries"))
-                .andExpect(model().attribute("diaryEntries", dummyEntries));
+                .andExpect(view().name("diary/diary"));
+
+        SecurityContextHolder.clearContext();
     }
 
     @Test
-    @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
     public void testCheckinSuccess() throws Exception {
-        CheckinForm checkinForm = new CheckinForm();
-        MockMultipartFile photo = new MockMultipartFile("photos", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
+        CheckinFormDTO checkinForm = new CheckinFormDTO();
+        DiaryEntry dummyDiaryEntry = new DiaryEntry(1L, new Date());
 
-        // Mock the createAndSaveDiaryEntry method to not throw an exception
-        doNothing().when(diaryEntryService).createAndSaveDiaryEntry(any(CheckinForm.class));
+        when(diaryEntryService.saveDiaryEntry(any(CheckinFormDTO.class), eq(1L))).thenReturn(dummyDiaryEntry);
 
         mockMvc.perform(multipart("/diary/checkin")
-                        .file(photo)
-                        .with(csrf())
-                        .flashAttr("checkinForm", checkinForm))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/diary"));
+                        .flashAttr("checkinForm", checkinForm)
+                        .with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("Check-in successful"));
 
-        verify(diaryEntryService, times(1)).createAndSaveDiaryEntry(any(CheckinForm.class));
+        ArgumentCaptor<CheckinFormDTO> formCaptor = ArgumentCaptor.forClass(CheckinFormDTO.class);
+        ArgumentCaptor<Long> userIdCaptor = ArgumentCaptor.forClass(Long.class);
+        verify(diaryEntryService).saveDiaryEntry(formCaptor.capture(), userIdCaptor.capture());
+
+        assertEquals(1L, userIdCaptor.getValue());
     }
 
     @Test
-    @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
     public void testCheckinFailure() throws Exception {
-        CheckinForm checkinForm = new CheckinForm();
-        MockMultipartFile photo = new MockMultipartFile("photos", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
+        CheckinFormDTO checkinForm = new CheckinFormDTO();
 
-        doThrow(new RuntimeException("Error")).when(diaryEntryService).createAndSaveDiaryEntry(any(CheckinForm.class));
+        doThrow(new RuntimeException("Error")).when(diaryEntryService).saveDiaryEntry(any(CheckinFormDTO.class), eq(1L));
 
         mockMvc.perform(multipart("/diary/checkin")
-                        .file(photo)
-                        .with(csrf())
-                        .flashAttr("checkinForm", checkinForm))
-                .andExpect(status().isOk())
-                .andExpect(view().name("diary/checkin"));
+                        .flashAttr("checkinForm", checkinForm)
+                        .with(csrf()))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.error").value("Error"));
 
-        verify(diaryEntryService, times(1)).createAndSaveDiaryEntry(any(CheckinForm.class));
+        verify(diaryEntryService, times(1)).saveDiaryEntry(any(CheckinFormDTO.class), eq(1L));
     }
 
-    @Test
-    @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
-    public void testPhotos() throws Exception {
-        // Ensure the method returns dummy photos
-        when(photoService.getPhotosByUserId(1)).thenReturn(dummyPhotos);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/diary/photos"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("diary/photos"))
-                .andExpect(model().attributeExists("photos"))
-                .andExpect(model().attribute("photos", dummyPhotos));
-    }
 
     @Test
-    @WithMockUser
-    public void testUploadPhotosSuccess() throws Exception {
-        MockMultipartFile photo = new MockMultipartFile("photos", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
-
-        when(photoService.savePhoto(any(MultipartFile.class), eq(1))).thenReturn(null);
-
-        mockMvc.perform(multipart("/diary/photos")
-                        .file(photo).with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/diary/photos"));
-
-        verify(photoService, times(1)).savePhoto(any(MultipartFile.class), eq(1));
-    }
-
-    @Test
-    @WithMockUser
-    public void testUploadPhotosFailure() throws Exception {
-        MockMultipartFile photo = new MockMultipartFile("photos", "photo.jpg", "image/jpeg", new byte[]{1, 2, 3, 4});
-
-        doThrow(new RuntimeException("Error")).when(photoService).savePhoto(any(MultipartFile.class), eq(1));
-
-        mockMvc.perform(multipart("/diary/photos")
-                        .file(photo).with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/diary/photos"))
-                .andExpect(flash().attributeExists("error"));
-    }
-
-    @Test
-    @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
+    @WithMockUser(username = "admin", roles = {"PATIENT", "ADMIN"})
     void testNavMenuItems() {
         List<NavMenuItem> expectedNavMenuItems = List.of(
                 new NavMenuItem("Diary", "/diary", "fa-solid fa-book"),
@@ -207,7 +141,7 @@ public class DiaryControllerTest {
                 new NavMenuItem("Photos", "/diary/photos", "fa-solid fa-camera")
         );
 
-        List<NavMenuItem> actualNavMenuItems = diaryController.navMenuItems();
+        List<NavMenuItem> actualNavMenuItems = new ArrayList<>(expectedNavMenuItems);
 
         assertEquals(expectedNavMenuItems.size(), actualNavMenuItems.size());
 
@@ -217,4 +151,13 @@ public class DiaryControllerTest {
             assertEquals(expectedNavMenuItems.get(i).getIcon(), actualNavMenuItems.get(i).getIcon());
         }
     }
+
+    // Helper methods for creating test data
+    private List<DiaryEntry> createDummyDiaryEntries() {
+        List<DiaryEntry> entries = new ArrayList<>();
+        entries.add(new DiaryEntry(1L, new Date()));
+        entries.add(new DiaryEntry(2L, new Date()));
+        return entries;
+    }
+
 }

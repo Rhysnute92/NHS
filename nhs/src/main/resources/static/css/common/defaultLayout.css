@@ -12,13 +12,12 @@
 
 .main-content {
     flex-grow: 1;
-    padding: 1rem;
+    padding: 2rem;
 }
 
 .container {
     /*background-color: var(--nhs-white);*/
     border-radius: 0.4rem;
-    padding: 1rem;
     min-height: 100vh;
 }
 
@@ -32,7 +31,7 @@
 
 @media (max-width: 480px) {
     .main-content {
-        padding: 0;
+        padding: 0.5rem;
     }
 
     .main-content .page-title {

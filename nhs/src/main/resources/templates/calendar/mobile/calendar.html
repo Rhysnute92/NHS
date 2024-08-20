@@ -1,35 +1,43 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <!-- Set viewport for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Link to mobile calendar CSS file -->
     <link rel="stylesheet" th:href="@{/css/calendar/mobile/mobilecalendar.css}"/>
+    <!-- Link to common styles -->
     <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
+    <!-- Title of the webpage -->
     <title>Calendar</title>
 </head>
 <body>
+<!-- Include common header fragment -->
 <div th:replace="~{common/fragments/header}"></div>
+<!-- Include navigation bar fragment -->
 <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+<!-- Include navigation menu with dynamic content -->
 <div th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
-<div id="moblist">
-    <button onclick="location.href='/calendar/mobileaddappt'" class="add-apt-btn">Add New Appointment</button>
-</div>
+
+<!-- Main container for the calendar and schedule -->
 <div class="container-calendar">
-    <div id="mobileMonth">
-        <div th:replace="~{calendar/fragments/calendar}"></div>
-        <div id="mobileSchedule">
-            <h3>Appointment Schedule</h3>
-            <ul id="apptList">
-            </ul>
+    <!-- Calendar section -->
+    <div id="mobileMonth" th:replace="~{calendar/fragments/calendar}"></div>
+    <div id="appointments">
+        <h2>Appointment Schedule</h2>
+        <div class="no-appointments">
+            <p>No appointments scheduled yet</p>
         </div>
-        <div>
-            <button class="delete-event" onclick="deleteAppointment()">
-                Delete
-            </button>
-        </div>
+        <ul id="apptList">
+        </ul>
+        <!-- Button to add a new appointment, redirects to add appointment page -->
+        <button onclick="location.href='/addappointment'" id="add-appt-btn" class="add-appt-btn">Add Appointment</button>
     </div>
 </div>
+
+<!-- Include JavaScript files for calendar functionality -->
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
+<script th:src="@{/js/calendar/addAppointment.js}"></script>
+<script th:src="@{/js/calendar/appointment.js}"></script>
+<script th:src="@{/js/calendar/addCalendar.js}"></script>
 </body>
 </html>
-

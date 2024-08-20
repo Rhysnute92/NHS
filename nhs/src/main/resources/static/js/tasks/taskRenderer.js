@@ -13,7 +13,6 @@ export class TaskRenderer {
   constructor(eventQueue, userId) {
     this.isMobileView = detectMobileView();
     this.eventQueue = eventQueue;
-    this.userId = userId;
   }
 
   createTableRow(cells) {
@@ -41,11 +40,12 @@ export class TaskRenderer {
   }
 
   createCheckCircleCell(task, taskCard) {
-    const checkCircleCell = document.createElement("td");
+    const checkCircleCell = document.createElement("div");
     const checkCircleWrapper = createCheckCircle();
 
     if (task.status === "Complete") {
       checkCircleWrapper.classList.add("checked");
+      taskCard.classList.add("completed");
     }
 
     addEventListener(checkCircleWrapper, "click", () => {
@@ -61,7 +61,7 @@ export class TaskRenderer {
       this.updateTaskCompletionUI(task, taskCard);
 
       // Add the updated UserTask to the event queue
-      const userTask = task.toUserTask(this.userId);
+      const userTask = task.toUserTask();
       this.eventQueue.addEvent(userTask.id, userTask);
       console.log("Added task to event queue:", userTask);
     });
@@ -161,5 +161,68 @@ export class TaskRenderer {
     this.updateTaskCompletionUI(task, taskCard);
 
     return taskCard;
+  }
+
+  renderTaskWidgetTasks(tasks, taskListContainer) {
+    // Clear any existing tasks
+    taskListContainer.innerHTML = "";
+
+    // Render each task as a simple row in the table
+    tasks.forEach((task) => {
+      const row = document.createElement("tr");
+
+      // Task name cell
+      const nameCell = this.createTableCell(task.name, "task-widget-name");
+      row.appendChild(nameCell);
+
+      // Task status cell
+      const statusCell = this.createTableCell(
+        task.status,
+        "task-widget-status"
+      );
+      row.appendChild(statusCell);
+
+      // Completion toggle cell
+      const toggleCell = document.createElement("td");
+      const toggleButton = document.createElement("button");
+      toggleButton.textContent = task.status === "Complete" ? "✔️" : "❌";
+
+      toggleButton.addEventListener("click", () => {
+        task.toggleTaskCompletion();
+        toggleButton.textContent = task.status === "Complete" ? "✔️" : "❌";
+        this.updateTaskCompletionUI(task, row);
+      });
+
+      toggleCell.appendChild(toggleButton);
+      row.appendChild(toggleCell);
+
+      // Append the row to the container
+      taskListContainer.appendChild(row);
+    });
+  }
+
+  renderPopupTaskCard(task) {
+    const taskCard = document.createElement("div");
+    taskCard.classList.add("popup-task-card");
+
+    const title = document.createElement("span");
+    title.textContent = task.name;
+    title.classList.add("popup-task-title"); 
+    taskCard.appendChild(title);
+
+    const checkCircle = this.createCheckCircleCell(task, taskCard);
+    checkCircle.classList.add("popup-check-circle"); 
+    taskCard.appendChild(checkCircle);
+
+    return taskCard;
+  }
+
+  renderTaskPopup(tasks, taskListContainer) {
+    taskListContainer.innerHTML = ""; // Clear existing tasks
+
+    tasks.forEach((task) => {
+      const taskCard = this.renderPopupTaskCard(task);
+      taskListContainer.appendChild(taskCard);
+    });
   }
 }

@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface DiaryEntryRepository extends JpaRepository<DiaryEntry, Integer> {
-    List<DiaryEntry> findByUserId(int userId, Sort sort);
+    List<DiaryEntry> findByUserId(long userId, Sort sort);
+
 }

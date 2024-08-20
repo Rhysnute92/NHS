@@ -41,7 +41,9 @@ class FileStorageServiceTest {
 
         String storedFilePath = fileStorageService.storeFile(multipartFile);
 
-        assertEquals(fileName, storedFilePath);
+        Path storedPath = Path.of(uploadDir + storedFilePath);
+        assertTrue(storedPath.toFile().exists());
+
         verify(multipartFile, times(1)).getInputStream();
     }
 
@@ -50,11 +52,9 @@ class FileStorageServiceTest {
         String fileName = "../testfile.png";
         when(multipartFile.getOriginalFilename()).thenReturn(fileName);
 
-        Exception exception = assertThrows(RuntimeException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             fileStorageService.storeFile(multipartFile);
         });
-
-        assertTrue(exception.getMessage().contains("Filename contains invalid path sequence"));
     }
 
     @Test

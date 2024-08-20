@@ -38,23 +38,22 @@ public class PatientPagesControllerTest {
     @Before
     public void setup() {
         this.mockMvc = webAppContextSetup(context)
-        .apply(springSecurity())
-        .build();
+                .apply(springSecurity())
+                .build();
     }
 
     @Test
-    @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
+    @WithMockUser(username = "admin", roles = { "PATIENT", "ADMIN" })
     void testNavMenuItems() {
         List<NavMenuItem> expectedNavMenuItems = List.of(
-            new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
-            new NavMenuItem("Set plan", "", "fa-solid fa-book"),
-            new NavMenuItem("Appointments", " ", "fa-solid fa-user-check"),
-            new NavMenuItem("Questionnaires", " ", "fa-solid fa-book"),
-            new NavMenuItem("Patient trends", " ", "fa-solid fa-user-check"),
-            new NavMenuItem("Event log", " ", "fa-solid fa-book"),
-            new NavMenuItem("Photos", " ", "fa-solid fa-camera"),
-            new NavMenuItem("Email history", " ", "fa-solid fa-book")
-        );
+                new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
+                new NavMenuItem("Set plan", "", "fa-solid fa-book"),
+                new NavMenuItem("Appointments", " ", "fa-solid fa-user-check"),
+                new NavMenuItem("Questionnaires", "/questionnairehub", "fa-solid fa-book"),
+                new NavMenuItem("Patient trends", " ", "fa-solid fa-user-check"),
+                new NavMenuItem("Event log", " ", "fa-solid fa-book"),
+                new NavMenuItem("Photos", " ", "fa-solid fa-camera"),
+                new NavMenuItem("Email history", " ", "fa-solid fa-book"));
 
         List<NavMenuItem> actualNavMenuItems = profileController.navMenuItems();
 
@@ -67,26 +66,27 @@ public class PatientPagesControllerTest {
         }
     }
 
-@Test
-@WithMockUser(username="admin",roles={"PATIENT"})
-void patientPatientInfoTest() throws Exception {
-    mockMvc.perform(get("/patientprofile/info"))
-            .andExpect(status().is4xxClientError());
-}
-@Test
-@WithMockUser(username="admin",roles={"ADMIN"})
-void adminPatientInfoTest() throws Exception {
-    mockMvc.perform(get("/patientprofile/info"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("patientprofile/profileInfo"));
-}
-@Test
-@WithMockUser(username="admin",roles={"PROVIDER"})
-void providerPatientInfoTest() throws Exception {
-    mockMvc.perform(get("/patientprofile/info"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("patientprofile/profileInfo"));
-}
+    @Test
+    @WithMockUser(username = "admin", roles = { "PATIENT" })
+    void patientPatientInfoTest() throws Exception {
+        mockMvc.perform(get("/patientprofile/info"))
+                .andExpect(status().is4xxClientError());
+    }
 
-    
+    @Test
+    @WithMockUser(username = "admin", roles = { "ADMIN" })
+    void adminPatientInfoTest() throws Exception {
+        mockMvc.perform(get("/patientprofile/info"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("patientprofile/profileInfo"));
+    }
+
+    @Test
+    @WithMockUser(username = "admin", roles = { "PROVIDER" })
+    void providerPatientInfoTest() throws Exception {
+        mockMvc.perform(get("/patientprofile/info"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("patientprofile/profileInfo"));
+    }
+
 }

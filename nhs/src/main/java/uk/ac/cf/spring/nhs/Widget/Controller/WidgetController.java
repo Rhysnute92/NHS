@@ -1,6 +1,7 @@
 package uk.ac.cf.spring.nhs.Widget.Controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -22,19 +23,19 @@ public class WidgetController {
      * @return the view name to be rendered
      */
     @GetMapping("/api/widgets/{widgetName}")
-    public String getWidgetContent(@PathVariable String widgetName) {
+    public String getWidgetContent(@PathVariable String widgetName, Model model) {
         // Fetch the widget from the WidgetRegistry using the provided widget name
         Widget widget = WidgetRegistry.getWidget(widgetName);
-        // Check if the widget exists and render it
+
+        // Check if the widget exists
         if (widget != null) {
             String content = widget.render();
-            // If the render method returns null, treat it as an error
             if (content != null) {
+                model.addAttribute("widget", widget);
+                /* model.addAttribute("script", widgetScriptUrl); */
                 return content;
             }
         }
-        // If the widget is not found or the render method returns null, return a 404
-        // error view
-        return "error/404";
+        return "error/404"; // Return a 404 error view if the widget is not found or render is null
     }
 }
