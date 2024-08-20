@@ -17,8 +17,6 @@ export class QuestionnaireManager {
     // Debugging information
     console.log(`QuestionnaireManager initialized with userID: ${this.userID}`);
 
-    this.initializeTabs();
-
     // Bind the form submission event
     const form = document.getElementById("questionnaire-form");
     if (form) {
@@ -50,86 +48,24 @@ export class QuestionnaireManager {
     }
   }
 
-  initializeTabs() {
-    // Handle tab switching
-    $('a[data-toggle="tab"]').on("shown.bs.tab", (e) => {
-      const target = $(e.target).attr("href");
+  async loadCompletedQuestionnaires() {
+    const endpoint = `/api/userQuestionnaires/user/completed`;
+    console.log(
+      `Fetching completed questionnaires for user ${this.userID} from: ${endpoint}`
+    );
 
-      if (target === "#table-results") {
-        if (!$.fn.DataTable.isDataTable("#resultsTable")) {
-          this.initializeResultsTable(); // Initialize DataTable when the tab is active
-        }
-      }
-    });
-
-    // Show the first tab by default
-    $(".nav-tabs a:first").tab("show");
-  }
-
-  initializeResultsTable() {
-    $("#resultsTable").DataTable({
-      paging: true,
-      searching: true,
-      ordering: true,
-      pageLength: 10, // Number of rows per page
-      lengthChange: false, // Hide the page length change option
-      language: {
-        paginate: {
-          previous: "Prev",
-          next: "Next",
-        },
-      },
-    });
-  }
-
-  async loadAndRenderTrendData() {
     try {
-      const userQuestionnaires = await fetchData(
-        `/api/userQuestionnaires/user/completed`
+      const completedQuestionnaires = await fetchData(endpoint);
+      console.log(
+        `Received completed questionnaires: `,
+        completedQuestionnaires
       );
-      console.log("Fetched completed user questionnaires:", userQuestionnaires);
 
-      const trendDataPromises = userQuestionnaires.map(async (uq) => {
-        const responses = await fetchData(
-          `/api/userQuestions/userQuestionnaire/${uq.userQuestionnaireId}`
-        );
-        console.log(
-          `Fetched responses for questionnaire ${uq.userQuestionnaireId}:`,
-          responses
-        );
-
-        return {
-          date: uq.questionnaireCompletionDate,
-          ...this.processResponsesForTrend(responses),
-        };
-      });
-
-      const trendData = await Promise.all(trendDataPromises);
-      console.log("Final trend data to be rendered:", trendData);
-
-      this.chartRenderer.processAndRenderData(trendData);
+      return completedQuestionnaires; // Return the data for further processing
     } catch (error) {
-      console.error("Error loading trend data:", error);
+      console.error("Error loading completed questionnaires:", error);
+      return null;
     }
-  }
-
-  processResponsesForTrend(responses) {
-    const trendCategories = {
-      Function: 0,
-      Appearance: 0,
-      Symptoms: 0,
-      Emotion: 0,
-      QualityOfLife: 0,
-    };
-
-    responses.forEach((response) => {
-      const category = response.question.questionCategory;
-      if (trendCategories.hasOwnProperty(category)) {
-        trendCategories[category] += response.userResponseScore || 0;
-      }
-    });
-
-    return trendCategories;
   }
 
   async loadQuestionnaire(questionnaireId) {

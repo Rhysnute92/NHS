@@ -1,9 +1,9 @@
-.container {
+/*  .container {
   background-color: var(--nhs-mid-grey);
   padding: 20px;
   border-radius: 8px;
   margin: 20px auto;
-  max-width: 1200px; /* Adjust as needed */
+  max-width: 1200px; 
 }
 
 .table-container {
@@ -11,7 +11,7 @@
 }
 
 .table-container h3 {
-  color: white; /* Ensure the title contrasts with the grey background */
+  color: white; 
   margin-bottom: 10px;
 }
 
@@ -19,10 +19,10 @@
   background-color: white;
   padding: 10px;
   border-radius: 8px;
-}
+} */
 
 /* Override DataTables styling */
-#resultsTable_wrapper {
+/* #resultsTable_wrapper {
   background-color: var(--nhs-mid-grey);
   color: #ffffff;
 }
@@ -86,4 +86,4 @@
 .nav-tabs .nav-link:hover {
   background-color: var(--nhs-light-grey);
   color: white;
-}
+} */

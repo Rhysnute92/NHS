@@ -6,6 +6,7 @@ import { WorkerManager } from "../tasks/WorkerManager.js";
 import { fetchUserID } from "../common/utils/accountUtility.js";
 import { TaskManager } from "../tasks/taskManager.js";
 import { EventQueue } from "../tasks/eventQueue.js";
+import { QuestionnaireResultsRenderer } from "../Questionnaire/QuestionnaireResultsRenderer.js";
 
 const worker = new Worker("/js/tasks/worker.js");
 console.log("Worker:", worker);
@@ -50,8 +51,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   if (questionnaireManager) {
     await questionnaireManager.loadAssignedQuestionnaires();
-    await questionnaireManager.loadAndRenderTrendData();
   }
+
+  const resultsRenderer = new QuestionnaireResultsRenderer();
 
   taskManager
     .fetchTasks()
