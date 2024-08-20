@@ -8,23 +8,14 @@ html, body, .main-container {height: 100%;}
     margin-left: 2vw;
 }
 
-.container_d{
-    margin: auto;
-    width: 80%;
-}
-
 .spacer{
     height: 15vh;
 }
 
-.pagename{
-    margin: 5vh;
-}
-
 .important_info{
     background: white;
-    border: gray solid 1px;
-    margin: 2vh;
+    border: var(--nhs-pale-grey) solid 1px;
+    margin-bottom: 1rem;
 }
 
 .important_info_header{
@@ -32,15 +23,24 @@ html, body, .main-container {height: 100%;}
     color: white;
     text-align: center;
     padding: 2vh;
-    font-size: larger;
 }
 
-.important_info_list{
-    padding: 0 5vh;
+.important_info_content {
+    padding: 1rem;
 }
 
-.important_info_list li{
-    padding: 1vh;
+ul {
+    margin: 1rem;
+    padding-left: 1rem;
+}
+
+.edmenu_list, .t_types ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 0.5rem;
 }
 
 .important_info p{
@@ -74,9 +74,9 @@ html, body, .main-container {height: 100%;}
 
 .collapsible_button, .collapsible_button.active{
     background-color: var(--nhs-blue);
-    font-size: medium;
+    font-size: 1.5rem;
     color: white;
-    padding: 18px;
+    padding: 1rem;
     border: none;
     text-align: left;
     outline: none;
@@ -98,7 +98,7 @@ html, body, .main-container {height: 100%;}
     text-align: justify;
     background-color: #f0f4f5;
     overflow: hidden;
-    margin-bottom: 5vh;
+    padding: 1rem;
     border: var(--nhs-blue) solid;
 }
 .collapsible p{
@@ -130,8 +130,8 @@ html, body, .main-container {height: 100%;}
     font-size: medium;
     background-color: var(--nhs-bright-blue);
     color: white;
-    margin-bottom: 1vh;
-    padding: 18px;
+    margin-bottom: 1rem;
+    padding: 1rem;
     border: none;
     text-align: left;
     outline: none;
@@ -163,6 +163,16 @@ html, body, .main-container {height: 100%;}
     margin: 0;
 }
 
+
+.subtitle, .title {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+p {
+    margin-bottom: 1.5rem;
+}
+
 @media screen and (max-device-width: 768px){
     .container{
         margin: 0;
@@ -175,7 +185,7 @@ html, body, .main-container {height: 100%;}
         padding-top: 1vh;
     }
     .collapsible_button, .collapsible_button.active{
-        font-size: 5vw;
+        font-size: 1rem;
         width: 100%;
         margin-left: 0;
     }
