@@ -39,9 +39,14 @@ public class PatientService {
     @Autowired
     private EmailService emailService;
 
+    //Repository search functions
     public Patient findPatientbyId(long userId){
         Patient user = patientRepository.findById(userId);
         return user;
+    }
+    public Patient findPatientbyNHSNumber(String nhsNumber){
+        Patient result = patientRepository.findByNHSNumber(nhsNumber);
+        return result;
     }
 
     // Generating a key for the patient
