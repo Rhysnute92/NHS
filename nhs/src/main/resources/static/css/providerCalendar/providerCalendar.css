@@ -1,0 +1,349 @@
+#tabs {
+    display: flex;
+    margin-bottom: 10px;
+}
+#tabs button {
+    padding: 10px 20px;
+    margin-right: 5px;
+    cursor: pointer;
+    background-color: #00A499;
+    color: white;
+}
+#appointment-list, #calendar {
+    display: none;
+}
+#appointment-list.active, #calendar.active {
+    display: block;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+/* Title and subtitle styling */
+.management-desktop-title {
+    margin-bottom: 1rem;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.management-desktop-subtitle {
+    font-size: 1.25em;
+    padding-bottom: 1em;
+    color: var(--nhs-dark-grey);
+}
+
+/* Assign Questionnaires Section */
+.assign-section {
+    background-color: #f9f9f9;
+    padding: 1em;
+    margin-bottom: 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.assigned-questionnaires {
+    margin-bottom: 1em;
+}
+
+.assigned-questionnaire-title {
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid var(--nhs-mid-grey);
+    padding-bottom: 0.25em;
+}
+
+div#questionnaire-container {
+    background-color: var(--nhs-pale-grey);
+    padding: 1em;
+}
+
+/* Action link styling */
+
+a.action-link {
+    display: flex;
+    align-items: center;
+}
+
+span.action-link__text {
+    text-align: center;
+    margin-left: 0.25em;
+}
+
+.action-link-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-bottom: 0.5em;
+}
+
+.nhsuk-action-link__link {
+    display: flex;
+    align-items: center;
+    color: var(--nhs-blue);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nhsuk-action-link__link:hover {
+    text-decoration: underline;
+}
+
+.nhsuk-icon__arrow-right-circle {
+    margin-right: 8px;
+    fill: var(--nhs-green);
+}
+
+svg {
+    fill: var(--nhs-green);
+}
+
+/* Questionnaire Card Styling */
+.questionnaire-card {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+h3.questionnaire-card-title {
+    margin-bottom: 1em;
+}
+
+.questionnaire-card-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px; /* Space between title and details */
+}
+
+.questionnaire-detail-item {
+    flex: 1;
+    text-align: center;
+    padding: 0 8px;
+    font-weight: normal; /* Default font weight */
+}
+
+.questionnaire-detail-item strong {
+    font-weight: bold; /* Bold effect for field titles */
+}
+
+.status-in-progress {
+    font-style: italic; /* Italicize "In Progress" text */
+}
+
+/* View Results Section */
+.view-results-section {
+    background-color: #ffffff;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-striped {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-striped th,
+.table-striped td {
+    padding: 0.75em;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table-striped tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.btn-secondary {
+    background-color: var(--nhs-blue);
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: var(--nhs-dark-blue);
+}
+
+/* No Appointment Message */
+.no-appointments {
+    margin-top: 0.5em;
+    padding: 1rem;
+    /*   padding-bottom: 0; */
+    background-color: #e6e6e6;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    color: #333;
+}
+
+/* Popup Styling */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* overflow: auto;  */
+    background-color: rgba(0, 0, 0, 0.4);
+}
+label#questionnaireSelectLabel {
+    margin-bottom: 0.5em;
+}
+
+strong#questionnaire-select-label {
+    font-size: 1.1em;
+}
+
+select#questionnaireSelect {
+    height: 4vh;
+    width: 40vw;
+}
+
+select#questionnaireSelect option {
+    color: black;
+}
+
+h3#assignQuestionnairePopupLabel {
+    padding-left: 0.5rem;
+    padding-bottom: 0.25rem;
+    border-left: 0.25em solid var(--nhs-dark-green);
+    border-bottom: 1px solid var(--nhs-mid-grey);
+    margin-bottom: 1em;
+    font-size: 1.75em;
+}
+
+.popup-content {
+    /* background-color: #fefefe; */
+    margin: 15em auto;
+    margin-left: 20vw;
+    padding: 1rem;
+    border: 1px solid var(--nhs-mid-grey);
+    width: 60vw;
+    background-color: var(--nhs-pale-grey);
+}
+
+.close-popup {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-popup:hover,
+.close-popup:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Form Styling */
+.nhsuk-form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    margin-left: 0;
+}
+
+fieldset.nhsuk-fieldset {
+    border: none;
+}
+
+.nhsuk-date-input {
+    display: flex;
+}
+
+strong#due-date-label {
+    font-size: 1.1em;
+}
+
+p.nhsuk-hint.due-date-example {
+    color: var(--nhs-dark-grey);
+    font-size: 0.9em;
+    margin-top: 0.2em;
+}
+
+input#dueYear {
+    border: 1px solid var(--nhs-dark-grey);
+    border-radius: 0;
+    width: 6vw;
+    height: 4vh;
+    margin: 0.2em;
+    padding: 0.75em;
+}
+
+input#dueMonth {
+    border: 1px solid var(--nhs-dark-grey);
+    border-radius: 0;
+    width: 8vw;
+    height: 4vh;
+    margin: 0.2em;
+    margin-left: 0;
+    padding: 0.75em;
+}
+
+input#dueDay {
+    border: 1px solid var(--nhs-dark-grey);
+    border-radius: 0;
+    height: 4vh;
+    margin: 0.2em;
+    margin-left: 0;
+    width: 4vw;
+    padding: 0.75em;
+}
+
+/* Button Group Styling */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.nhsuk-button--secondary {
+    background-color: #5a6670;
+    color: #ffff;
+    border: 4px solid #27323a;
+    width: 12em;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    margin-left: 7em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.nhsuk-button--secondary:hover {
+    background-color: #3f474e;
+}
+
+.nhsuk-button--primary {
+    background-color: #00782f;
+    border-bottom: 4px solid #002218;
+    border-top: 0;
+    width: 12em;
+    font-weight: bold;
+    color: white;
+    border-left: 0;
+    border-right: 0;
+    height: 3em;
+    border-radius: 6px;
+    margin-right: 7em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.nhsuk-button--primary:hover {
+    background-color: #005a22;
+}
