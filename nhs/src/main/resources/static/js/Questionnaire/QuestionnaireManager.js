@@ -72,10 +72,63 @@ export class QuestionnaireManager {
 
       this.renderer.renderQuestions(questions);
 
+      // Fetch and populate user's previous responses
+      const previousResponses = await this.loadUserResponses(questionnaireId);
+      if (previousResponses) {
+        this.populatePreviousResponses(previousResponses);
+      }
+
       await this.updateUserQuestionnaireProgress(questionnaireId);
     } catch (error) {
       console.error("Error loading questionnaire:", error);
     }
+  }
+
+  async loadUserResponses(questionnaireId) {
+    console.log(
+      `Loading user responses for questionnaire ID: ${questionnaireId}`
+    );
+
+    try {
+      const responses = await fetchData(
+        `/api/userQuestions/userQuestionnaire/${questionnaireId}`
+      );
+      console.log("Fetched user responses: ", responses);
+      return responses;
+    } catch (error) {
+      console.error("Error loading user responses:", error);
+      return null;
+    }
+  }
+
+  populatePreviousResponses(responses) {
+    if (!responses) return;
+
+    responses.forEach((response) => {
+      const questionId = response.question.questionID;
+      const responseValue =
+        response.userResponseScore || response.userResponseText;
+
+      // If the response is a score (radio button)
+      if (response.userResponseScore !== null) {
+        const radioInput = document.querySelector(
+          `input[name="question_${questionId}"][value="${responseValue}"]`
+        );
+        if (radioInput) {
+          radioInput.checked = true;
+        }
+      } else if (response.userResponseText) {
+        // If the response is text input
+        const textInput = document.querySelector(
+          `input[name="question_${questionId}"]`
+        );
+        if (textInput) {
+          textInput.value = responseValue;
+        }
+      }
+    });
+
+    console.log("Populated form with previous responses.");
   }
 
   async updateUserQuestionnaireProgress(questionnaireId) {
