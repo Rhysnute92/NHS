@@ -33,9 +33,6 @@ public class PatientStatisticsController {
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
             ) {
 
-        System.out.println(startDate);
-        System.out.println(endDate);
-
         // Retrieve measurements filtered by user ID, measurement type and date range
         List<Measurement> measurements = measurementService.getMeasurementsByUserIdTypeAndDateRange(userId, measurementType, startDate, endDate);
 

@@ -105,7 +105,15 @@ public class DiaryEntryService {
     private List<Measurement> processMeasurements(List<MeasurementDTO> measurementDTOs, Long userId, DiaryEntry diaryEntry) {
         return measurementDTOs.stream()
                 .map(measurementDTO -> {
-                    Measurement measurement = new Measurement(measurementDTO.getType(), measurementDTO.getValue(), measurementDTO.getUnit(), userId, LocalDate.now());
+                    Measurement measurement = new Measurement(
+                            measurementDTO.getType(),
+                            measurementDTO.getValue(),
+                            measurementDTO.getUnit(),
+                            userId,
+                            LocalDate.now(),
+                            measurementDTO.getLocation(),
+                            measurementDTO.getSide()
+                    );
                     measurement.setDiaryEntry(diaryEntry);
                     return measurement;
                 })

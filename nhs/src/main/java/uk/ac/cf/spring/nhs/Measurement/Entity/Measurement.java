@@ -29,8 +29,14 @@ public class Measurement {
     @Column(name = "MeasurementUnit")
     private String unit;
 
+    @Column(name = "MeasurementLocation")
+    private String location;
+
     @Column(name = "MeasurementDate")
     private LocalDate date;
+
+    @Column(name = "MeasurementSide")
+    private String side;
 
     @Column(name = "UserID")
     private long userId;
@@ -46,12 +52,14 @@ public class Measurement {
     protected Measurement() {}
 
     // Constructor for standalone measurement
-    public Measurement(String type, float value, String unit, long userId, LocalDate date) {
+    public Measurement(String type, float value, String unit, long userId, LocalDate date, String location, String side) {
         this.type = type;
         this.value = value;
         this.unit = unit;
         this.userId = userId;
         this.date = date;
+        this.location = location;
+        this.side = side;
     }
 
     @Override
