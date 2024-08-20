@@ -11,8 +11,12 @@
 <div class="container">
     <h2>Search patient page!</h2>
     <form action="/provider/search/patientsearch" method="post">
-        <label for="patientNhsNumber">Patient NHS number:</label>
-        <input type="text" id="patientNhsNumber" name="patientNhsNumber" required>
+        <!-- <label for="patientNhsNumber">Patient NHS number:</label>
+        <input type="text" id="patientNhsNumber" name="patientNhsNumber"> -->
+        <label for="patientName">Patient First Name:</label>
+        <input type="text" id="patientName" name="patientName">
+        <label for="patientLastName">Patient Last Name:</label>
+        <input type="text" id="patientLastName" name="patientLastName">
         <input type="submit" value="Search" class="update_button"/>
     </form>
     <table th:if="${results != null}">
@@ -21,6 +25,7 @@
                 <th>NHS number</th>
                 <th>Patient name</th>
                 <th>Date of birth</th>
+                <th>Patient email</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +33,7 @@
                 <td><a th:href="@{'/patientprofile/' + ${r.userId}}" class="row-link">[[${r.nhsNumber}]]</a></td>
                 <td><a th:href="@{'/patientprofile/' + ${r.userId}}" tabindex="-1" class="row-link">[[${r.patientName}]] [[${r.patientLastName}]]</a></td>
                 <td><a th:href="@{'/patientprofile/' + ${r.userId}}" tabindex="-1" class="row-link">[[${r.patientDOB}]]</a></td>
+                <td><a th:href="@{'/patientprofile/' + ${r.userId}}" tabindex="-1" class="row-link">[[${r.patientEmail}]]</a></td>
             </tr>
         </tbody>
     </table>

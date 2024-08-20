@@ -32,6 +32,12 @@ public class PatientSearchController {
             Patient result = patientService.findPatientbyNHSNumber(request.getPatientNhsNumber());
             result = patientService.decryptPatient(result);
             redirect.addFlashAttribute("results", result);
+        } else{
+            List<Patient> result = patientService.patientGeneralSearch(request);
+            for (Patient p : result){
+                p = patientService.decryptPatient(p);
+            }
+            redirect.addFlashAttribute("results", result);
         }
         return "redirect:/provider/search";
     }
