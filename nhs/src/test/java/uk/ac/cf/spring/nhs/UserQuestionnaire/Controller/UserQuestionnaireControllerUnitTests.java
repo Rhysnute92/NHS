@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -236,6 +237,72 @@ class UserQuestionnaireControllerUnitTests {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(userQuestionnaire, response.getBody());
+        verify(userQuestionnaireService, times(1)).saveUserQuestionnaire(userQuestionnaire);
+    }
+
+    @SuppressWarnings("null")
+    @Test
+    void testUpdateUserQuestionnaire_StartDateIsNotOverwritten() {
+        Long questionnaireId = 1L;
+        LocalDateTime initialStartDate = LocalDateTime.now().minusDays(1);
+
+        // Existing questionnaire with a start date already set
+        userQuestionnaire.setQuestionnaireStartDate(initialStartDate);
+        when(userQuestionnaireService.getUserQuestionnaire(123L, questionnaireId))
+                .thenReturn(Optional.of(userQuestionnaire));
+
+        // New data that simulates the user coming back to the questionnaire
+        UserQuestionnaire updatedUserQuestionnaire = new UserQuestionnaire();
+        updatedUserQuestionnaire.setQuestionnaireInProgress(true);
+        updatedUserQuestionnaire.setQuestionnaireStartDate(LocalDateTime.now());
+
+        // Mock the save method
+        when(userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire)).thenReturn(userQuestionnaire);
+
+        // Call the update method
+        ResponseEntity<UserQuestionnaire> response = userQuestionnaireController
+                .updateUserQuestionnaire(questionnaireId, updatedUserQuestionnaire);
+
+        // Verify that the start date has not been changed
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(initialStartDate, response.getBody().getQuestionnaireStartDate(),
+                "The questionnaireStartDate should not be overwritten");
+        assertEquals(true, response.getBody().getQuestionnaireInProgress(),
+                "The questionnaireInProgress should be updated to true");
+        verify(userQuestionnaireService, times(1)).saveUserQuestionnaire(userQuestionnaire);
+    }
+
+    @SuppressWarnings("null")
+    @Test
+    void testUpdateUserQuestionnaire_StartDateIsSetInitially() {
+        Long questionnaireId = 1L;
+        LocalDateTime now = LocalDateTime.now();
+
+        // Existing questionnaire with no start date set
+        userQuestionnaire.setQuestionnaireStartDate(null);
+        when(userQuestionnaireService.getUserQuestionnaire(123L, questionnaireId))
+                .thenReturn(Optional.of(userQuestionnaire));
+
+        // Data that simulates the user starting the questionnaire for the first time
+        UserQuestionnaire updatedUserQuestionnaire = new UserQuestionnaire();
+        updatedUserQuestionnaire.setQuestionnaireInProgress(true);
+        updatedUserQuestionnaire.setQuestionnaireStartDate(now);
+
+        // Mock the save method
+        when(userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire)).thenReturn(userQuestionnaire);
+
+        // Call the update method
+        ResponseEntity<UserQuestionnaire> response = userQuestionnaireController
+                .updateUserQuestionnaire(questionnaireId, updatedUserQuestionnaire);
+
+        // Verify that the start date is set correctly
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(now, response.getBody().getQuestionnaireStartDate(),
+                "The questionnaireStartDate should be set to the current time");
+        assertEquals(true, response.getBody().getQuestionnaireInProgress(),
+                "The questionnaireInProgress should be updated to true");
         verify(userQuestionnaireService, times(1)).saveUserQuestionnaire(userQuestionnaire);
     }
 }

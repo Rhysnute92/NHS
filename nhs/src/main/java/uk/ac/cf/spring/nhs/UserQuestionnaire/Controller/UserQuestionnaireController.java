@@ -167,7 +167,6 @@ public class UserQuestionnaireController {
         return ResponseEntity.ok(savedUserQuestionnaire);
     }
 
-    @PutMapping("/{id}")
     /**
      * Updates an existing user questionnaire for the authenticated user.
      *
@@ -175,6 +174,7 @@ public class UserQuestionnaireController {
      * @param userQuestionnaire the updated user questionnaire
      * @return the updated user questionnaire, or a 404 response if not found
      */
+    @PutMapping("/{id}")
     public ResponseEntity<UserQuestionnaire> updateUserQuestionnaire(@PathVariable Long id,
             @RequestBody UserQuestionnaire userQuestionnaire) {
         Long userID = getCurrentUserId();
@@ -184,9 +184,11 @@ public class UserQuestionnaireController {
         if (existingUserQuestionnaireOpt.isPresent()) {
             UserQuestionnaire existingUserQuestionnaire = existingUserQuestionnaireOpt.get();
 
-            // Update only the fields that are supposed to be modified
-            existingUserQuestionnaire.setQuestionnaireStartDate(userQuestionnaire.getQuestionnaireStartDate());
-            existingUserQuestionnaire.setQuestionnaireInProgress(userQuestionnaire.getQuestionnaireInProgress());
+            // Only set the start date if it hasn't been set before
+            if (existingUserQuestionnaire.getQuestionnaireStartDate() == null) {
+                existingUserQuestionnaire.setQuestionnaireStartDate(userQuestionnaire.getQuestionnaireStartDate());
+                existingUserQuestionnaire.setQuestionnaireInProgress(userQuestionnaire.getQuestionnaireInProgress());
+            }
 
             // Preserve the existing values for fields that should not change
             existingUserQuestionnaire.setUserQuestionnaireId(id);
