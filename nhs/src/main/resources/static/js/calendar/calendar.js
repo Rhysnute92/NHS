@@ -1,94 +1,11 @@
 let appointments = [];
 
-const apptDateInput = document.getElementById("apptDate");
-const apptTimeInput = document.getElementById("apptTime");
-const apptTypeInput = document.getElementById("apptType");
-const apptProviderInput = document.getElementById("apptProvider");
-const apptInfoInput = document.getElementById("apptInfo");
-const apptList = document.getElementById("apptList");
+// Current month and year for the calendar
+let currentMonth;
+let currentYear;
 
-const apptForm = document.getElementById("apptForm");
-
-if (apptForm) {
-    apptForm.addEventListener("submit", function (evt) {
-        evt.preventDefault();
-        addAppointment();
-    });
-}
-
-async function addAppointment() {
-    const appointment = {
-        date: apptDateInput.value,
-        time: apptTimeInput.value,
-        appointmentType: apptTypeInput.value,
-        provider: apptProviderInput.value,
-        description: apptInfoInput.value
-    };
-
-    const url = "/appointments";
-    try {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(appointment)
-        });
-        if (response.status === 201) {
-            if (window.location.href.includes("appt")) {
-                window.location.href = "/calendar";
-            }
-            const newAppointment = await response.json();
-            appointments.push(newAppointment);
-            clearForm();
-            showCalendar(currentMonth, currentYear);
-            displayAppointments();
-        }
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
-
-function clearForm() {
-    apptDateInput.value = "";
-    apptTimeInput.value = "";
-    apptTypeInput.value = "";
-    apptProviderInput.value = "";
-    apptInfoInput.value = "";
-}
-
-function deleteAppointment(appointmentID) {
-    let appointmentIndex = appointments.findIndex((appointment) => appointment.id === appointmentID);
-
-    if (appointmentIndex !== -1) {
-        appointments.splice(appointmentIndex, 1);
-
-        showCalendar(currentMonth, currentYear);
-        displayAppointments();
-    }
-}
-
-function displayAppointments() {
-    apptList.innerHTML = "";
-    for (let appointment of appointments) {
-        let apptDate = new Date(appointment.apptDateTime);
-        if (apptDate.getMonth() === currentMonth && apptDate.getFullYear() === currentYear) {
-            let listItem = document.createElement("li");
-            listItem.innerHTML = `<strong>${appointment.apptType}</strong> - ${appointment.apptInfo} on ${apptDate.toLocaleDateString()} at ${apptDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-            listItem.className = "appt-item";
-
-            let deleteButton = document.createElement("button");
-            deleteButton.className = "delete-appt";
-            deleteButton.textContent = "Delete";
-            deleteButton.onclick = function () {
-                deleteAppointment(appointment.id);
-            };
-
-            listItem.appendChild(deleteButton);
-            apptList.appendChild(listItem);
-        }
-    }
-}
+const createYear = generateYearRange(1970, 2050);
+document.getElementById("year").innerHTML = createYear;
 
 function generateYearRange(start, end) {
     let years = "";
@@ -98,115 +15,108 @@ function generateYearRange(start, end) {
     return years;
 }
 
-let today = new Date();
-let currentMonth = today.getMonth();
-let currentYear = today.getFullYear();
+// DOM elements for year and month selectors
 const selectYear = document.getElementById("year");
 const selectMonth = document.getElementById("month");
 
-const createYear = generateYearRange(1970, 2050);
-document.getElementById("year").innerHTML = createYear;
-
-const calendar = document.getElementById("calendar");
-
+// Month and day names for calendar
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-let dataHead = "<tr>";
-for (let day of days) {
-    dataHead += `<th data-days='${day}'>${day}</th>`;
-}
-dataHead += "</tr>";
-document.getElementById("thead-month").innerHTML = dataHead;
-
 const monthAndYear = document.getElementById("monthAndYear");
 
+// Initialize calendar on page load
 document.addEventListener("DOMContentLoaded", function () {
+    let today = new Date();
+    currentMonth = today.getMonth();
+    currentYear = today.getFullYear();
+
     showCalendar(currentMonth, currentYear);
-    fetchAppointments();
 });
 
-async function fetchAppointments() {
-    try {
-        const response = await fetch('/appointments');
-        if (response.ok) {
-            appointments = await response.json();
-            showCalendar(currentMonth, currentYear);
-            displayAppointments();
-        } else {
-            console.error("Failed to fetch appointments");
-        }
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
-
+// Function to go to the next month
 function next() {
     currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
     currentMonth = (currentMonth + 1) % 12;
     showCalendar(currentMonth, currentYear);
 }
 
+// Function to go to the previous month
 function previous() {
     currentYear = currentMonth === 0 ? currentYear - 1 : currentYear;
     currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
     showCalendar(currentMonth, currentYear);
 }
 
+// Function to jump to a specific month and year
 function jump() {
     currentYear = parseInt(selectYear.value);
     currentMonth = parseInt(selectMonth.value);
     showCalendar(currentMonth, currentYear);
 }
 
+// Function to create days of the week headers
+function createDaysOfWeekHeader() {
+    const daysHeader = document.getElementById("days-header");
+    daysHeader.innerHTML = "";
+
+    for (let day of days) {
+        const dayDiv = document.createElement("div");
+        dayDiv.textContent = day;
+        daysHeader.appendChild(dayDiv);
+    }
+}
+
+// Function to display the calendar for the current month and year
 function showCalendar(month, year) {
     let firstDay = new Date(year, month, 1).getDay();
-    const tbl = document.getElementById("calendar-body");
-    tbl.innerHTML = "";
+    const calendarGrid = document.getElementById("calendar-grid");
+    calendarGrid.innerHTML = "";
     monthAndYear.innerHTML = `${months[month]} ${year}`;
     selectYear.value = year;
     selectMonth.value = month;
 
+    createDaysOfWeekHeader();
+
     let date = 1;
-    const fragment = document.createDocumentFragment();
 
-    for (let i = 0; i < 6; i++) {
-        let row = document.createElement("tr");
-        for (let j = 0; j < 7; j++) {
-            let cell = document.createElement("td");
-
-            if (i === 0 && j < firstDay) {
-                cell.appendChild(document.createTextNode(""));
-            } else if (date > daysInMonth(month, year)) {
-                break;
-            } else {
-                cell.setAttribute("data-date", date);
-                cell.setAttribute("data-month", month + 1);
-                cell.setAttribute("data-year", year);
-                cell.setAttribute("data-month_name", months[month]);
-                cell.className = "date-picker";
-                cell.innerHTML = `<span>${date}</span>`;
-
-                if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
-                    cell.className = "date-picker selected";
-                }
-
-                if (hasAppointmentOnDate(date, month, year)) {
-                    cell.classList.add("appt-marker");
-                    cell.appendChild(createAppointmentTooltips(date, month, year));
-                }
-
-                date++;
-            }
-            row.appendChild(cell);
-        }
-        fragment.appendChild(row);
+    // Create empty cells for the days before the first day of the month
+    for (let i = 0; i < firstDay; i++) {
+        const emptyDiv = document.createElement("div");
+        calendarGrid.appendChild(emptyDiv);
     }
-    tbl.appendChild(fragment);
+
+    // Create cells for each date in the month
+    for (let i = firstDay; date <= daysInMonth(month, year); i++) {
+        const dateDiv = document.createElement("div");
+        dateDiv.setAttribute("data-date", date);
+        dateDiv.setAttribute("data-month", month + 1);
+        dateDiv.setAttribute("data-year", year);
+        dateDiv.setAttribute("data-month_name", months[month]);
+        dateDiv.className = "date-picker";
+        dateDiv.innerHTML = `<span>${date}</span>`;
+
+        const today = new Date();
+        // Highlight today's date
+        if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
+            dateDiv.classList.add("selected");
+        }
+
+        // Add appointment markers if there are appointments on this date
+        if (hasAppointmentOnDate(date, month, year)) {
+            dateDiv.classList.add("appt-marker");
+            dateDiv.appendChild(createAppointmentTooltips(date, month, year));
+        }
+
+        calendarGrid.appendChild(dateDiv);
+        date++;
+    }
 }
 
+// Function to create tooltips for appointments on a given date
 function createAppointmentTooltips(date, month, year) {
     const tooltips = document.createElement('div');
+    tooltips.className = 'appt-tooltips';
     const appointmentsOnDate = getAppointmentsOnDate(date, month, year);
     for (let appointment of appointmentsOnDate) {
         const tooltip = document.createElement('div');
@@ -217,6 +127,7 @@ function createAppointmentTooltips(date, month, year) {
     return tooltips;
 }
 
+// Function to get appointments on a specific date
 function getAppointmentsOnDate(date, month, year) {
     return appointments.filter(appointment => {
         let apptDate = new Date(appointment.apptDateTime);
@@ -224,10 +135,34 @@ function getAppointmentsOnDate(date, month, year) {
     });
 }
 
+// Function to check if there are appointments on a specific date
 function hasAppointmentOnDate(date, month, year) {
     return getAppointmentsOnDate(date, month, year).length > 0;
 }
 
+// Function to get the number of days in a month
 function daysInMonth(month, year) {
     return 32 - new Date(year, month, 32).getDate();
 }
+
+async function fetchAppointments() {
+    try {
+        const response = await fetch('/appointments');
+        if (response.ok) {
+            appointments = await response.json();
+            showCalendar(currentMonth, currentYear);
+            for (let appointment of appointments) {
+                displayAppointment(appointment);
+            }
+
+        } else {
+            console.error("Failed to fetch appointments");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetchAppointments();
+});

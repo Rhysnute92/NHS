@@ -20,65 +20,16 @@
 <!-- Main container for the calendar and schedule -->
 <div class="container-calendar">
     <!-- Calendar section -->
-    <div id="mobileMonth">
-        <!-- Display current month and year -->
-        <h3 id="monthAndYear"></h3>
-        <!-- Navigation buttons for previous and next months -->
-        <div class="button-container-calendar">
-            <button id="previous" onclick="previous()"> &lt; </button>
-            <button id="next" onclick="next()"> &gt; </button>
-        </div>
-        <!-- Calendar table structure -->
-        <table class="table-calendar" id="calendar" data-lang="en">
-            <thead id="thead-month"></thead> <!-- Table header for days of the week -->
-            <tbody id="calendar-body"></tbody> <!-- Table body for the dates -->
-        </table>
-        <!-- Dropdowns for quickly jumping to a specific month or year -->
-        <div class="footer-container-calendar">
-            <label for="month">Jump To: </label>
-            <select id="month" onchange="jump()">
-                <!-- Options for each month -->
-                <option value=0>Jan</option>
-                <option value=1>Feb</option>
-                <option value=2>Mar</option>
-                <option value=3>Apr</option>
-                <option value=4>May</option>
-                <option value=5>Jun</option>
-                <option value=6>Jul</option>
-                <option value=7>Aug</option>
-                <option value=8>Sep</option>
-                <option value=9>Oct</option>
-                <option value=10>Nov</option>
-                <option value=11>Dec</option>
-            </select>
-            <!-- Year selection dropdown -->
-            <select id="year" onchange="jump()"></select>
+    <div id="mobileMonth" th:replace="~{calendar/fragments/calendar}"></div>
+    <div id="appointments">
+        <h2>Appointment Schedule</h2>
+        <div class="no-appointments">
+            <p>No appointments scheduled yet</p>
         </div>
         <ul id="apptList">
-            <li class="no-appointments">
-                <p th:if="${appointments.isEmpty()}">No appointments scheduled yet</p>
-            </li>
-            <li th:each="appointment: ${appointments}" class="appt-item">
-                <strong th:text="${appointment.apptType}"></strong> -
-                <span th:text="${appointment.apptInfo}"></span>
-                on
-                <span th:text="${#temporals.format(appointment.apptDateTime, 'MM/dd/yyyy')}"></span>
-                at
-                <span th:text="${#temporals.format(appointment.apptDateTime, 'hh:mm a')}"></span>
-                <button class="delete-appt" th:onclick="deleteAppointment([[${appointment.apptID}]])">Delete</button>
-            </li>
         </ul>
-        <!--    <p th:if="${appointments.empty}">No appointments scheduled yet</p>-->
-<!--        <ul id="apptList">-->
-<!--            <li data-event-id="1">-->
-<!--                <p>No appointments scheduled for today</p>-->
-<!--            </li>-->
-<!--        </ul>-->
-    </div>
-    </div>
-    <!-- Button to add a new appointment, redirects to add appointment page -->
-    <div class="moblist">
-        <button onclick="location.href='/addappointment'" id="add-apt-btn" class="add-apt-btn">Add Appointment</button>
+        <!-- Button to add a new appointment, redirects to add appointment page -->
+        <button onclick="location.href='/addappointment'" id="add-appt-btn" class="add-appt-btn">Add Appointment</button>
     </div>
 </div>
 
