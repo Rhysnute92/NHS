@@ -55,4 +55,7 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
+    public List<AppointmentDTO> getAppointmentsForDate(Long userId, LocalDate date) {
+        return null;
+    }
 }

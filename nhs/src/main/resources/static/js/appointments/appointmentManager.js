@@ -1,17 +1,33 @@
 import { Appointment } from "./appointment.js"; // Import the Appointment class
 import { AppointmentRenderer } from "./appointmentRenderer.js"; // Import the AppointmentRenderer class
-import { fetchData } from "../common/utils/apiUtility.js"; // Utility for API calls
 
 export class AppointmentManager {
     constructor(eventQueue, appointmentRenderer) {
         this.appointments = [];
         this.appointmentRenderer = appointmentRenderer || new AppointmentRenderer(eventQueue); // Allow injection of an AppointmentRenderer instance
-        this.eventQueue = eventQueue;
     }
 
-    async fetchAppointments() {
+    async fetchAppointments(date = null) {
         try {
-            const appointmentData = await fetchData(`/userappointments/user`);
+            // Construct the URL with the optional date parameter
+            let url = '/userappointments/user';
+            if (date) {
+                url += `?date=${date}`;
+            }
+
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error fetching appointments: ${response.statusText}`);
+            }
+
+            const appointmentData = await response.json();
+
             this.appointments = appointmentData.map(
                 (userAppointment) =>
                     new Appointment(
@@ -22,6 +38,7 @@ export class AppointmentManager {
                         userAppointment.status
                     )
             );
+
             console.debug("Fetched appointments: ", this.appointments);
             return this.appointments; // Return appointments so they can be used externally if needed
         } catch (error) {

@@ -24,6 +24,9 @@ public class WidgetRestAPIController {
     @Autowired
     private UserTaskService userTaskService;
 
+    @Autowired
+    private AppointmentService appointmentService;
+
     /**
      * Endpoint to fetch task completion data for the task widget.
      *
@@ -53,23 +56,23 @@ public class WidgetRestAPIController {
 
         return new UserTaskDTO(totalTasks, completedTasks);
     }
-//    @GetMapping("/api/widgets/appointments-tracker/data")
-//    public List<AppointmentDTO> getAppointmentsTrackerData(@RequestParam(name = "date", required = false) LocalDate date) {
-//
-//        Object principal = authenticationFacade.getAuthentication().getPrincipal();
-//        Long userId = ((CustomUserDetails) principal).getUserId();
-//
-//        if (date == null) {
-//            date = LocalDate.now();
-//            System.out.println("Defaulted to current date: " + date);
-//        } else {
-//            System.out.println("Requested date: " + date);
-//        }
-//
-//        List<AppointmentDTO> appointments = appointmentService.getAppointmentsForDate(userId, date);
-//
-//        System.out.println("Appointments for user " + userId + " on date " + date + ": " + appointments.size());
-//
-//        return appointments;
-//    }
+    @GetMapping("/api/widgets/appointments-tracker/data")
+    public List<AppointmentDTO> getAppointmentsTrackerData(@RequestParam(name = "date", required = false) LocalDate date) {
+
+        Object principal = authenticationFacade.getAuthentication().getPrincipal();
+        Long userId = ((CustomUserDetails) principal).getUserId();
+
+        if (date == null) {
+            date = LocalDate.now();
+            System.out.println("Defaulted to current date: " + date);
+        } else {
+            System.out.println("Requested date: " + date);
+        }
+
+        List<AppointmentDTO> appointments = appointmentService.getAppointmentsForDate(userId, date);
+
+        System.out.println("Appointments for user " + userId + " on date " + date + ": " + appointments.size());
+
+        return appointments;
+    }
 }
