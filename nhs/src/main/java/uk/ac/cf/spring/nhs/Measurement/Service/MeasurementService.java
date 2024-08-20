@@ -29,7 +29,9 @@ public class MeasurementService {
                 measurementDTO.getValue(),
                 measurementDTO.getUnit(),
                 userId,
-                LocalDate.now()
+                LocalDate.now(),
+                measurementDTO.getLocation(),
+                measurementDTO.getSide()
         );
 
         return measurementRepository.save(measurement);
@@ -43,10 +45,10 @@ public class MeasurementService {
     public List<Measurement> getMeasurementsByUserIdTypeAndDateRange(long userId, String measurementType, LocalDate startDate, LocalDate endDate) {
         // If startDate or endDate are null, default to the earliest/latest possible dates
         if (startDate == null) {
-            startDate = LocalDate.MIN;
+            startDate = LocalDate.of(1900, 1, 1);
         }
         if (endDate == null) {
-            endDate = LocalDate.MAX;
+            endDate = LocalDate.now();
         }
 
         return measurementRepository.findByUserIdAndTypeAndDateBetween(userId, measurementType, startDate, endDate);
