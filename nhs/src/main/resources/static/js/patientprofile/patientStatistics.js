@@ -1,48 +1,21 @@
-// Initialize empty data structure for the chart
-const data = {
-    labels: [], // Dates will go here
-    datasets: [
-        {
-            label: 'Weight (kg)',
+// Get the canvas context
+const ctx = document.getElementById('patientChart').getContext('2d');
+
+// Initialize the Chart.js chart with empty data
+const myChart = new Chart(ctx, {
+    type: 'line',  // Set the type of chart
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Measurement',
             data: [],
             borderColor: 'rgba(255, 99, 132, 1)',
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            fill: false,
-            tension: 0.1
-        },
-        {
-            label: 'Arm Circumference (cm)',
-            data: [],
-            borderColor: 'rgba(54, 162, 235, 1)',
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            fill: false,
-            tension: 0.1
-        },
-        {
-            label: 'Leg Circumference (cm)',
-            data: [],
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            fill: false,
-            tension: 0.1
-        }
-    ]
-};
-
-const config = {
-    type: 'line',
-    data: data,
+            fill: false
+        }]
+    },
     options: {
         responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Patient Measurements Over Time'
-            }
-        },
         scales: {
             x: {
                 title: {
@@ -53,41 +26,54 @@ const config = {
             y: {
                 title: {
                     display: true,
-                    text: 'Measurement'
-                },
-                beginAtZero: false
+                    text: 'Measurement Value'
+                }
             }
         }
     }
-};
+});
 
-async function fetchData() {
+async function updateChart() {
     try {
-        const response = await fetch('/patientprofile/statistics/measurements'); // Replace with your server URL
+        // Get selected measurement type and date range
+        const measurementType = document.getElementById('measurementType').value;
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+
+        // Build the query string with type and date range
+        let query = `type=${measurementType}`.toLowerCase();
+        if (startDate) {
+            query += `&startDate=${startDate}`;
+        }
+        if (endDate) {
+            query += `&endDate=${endDate}`;
+        }
+
+        // Fetch data from the server
+        const response = await fetch(`/patientprofile/statistics/measurements?${query}`);
+
+        if (!response.ok) {
+            console.error(`Server error: ${response.statusText}`);
+            return;
+        }
+
         const measurements = await response.json();
 
-        measurements.forEach(measurement => {
-            console.log(measurement);
-            const date = measurement.date;
-            const type = measurement.type;
-            const value = measurement.value;
+        if (!measurements || measurements.length === 0) {
+            console.warn('No data found for the selected criteria.');
+            return;
+        }
 
-            // Add dates to the labels array if not already present
-            if (!data.labels.includes(date)) {
-                data.labels.push(date);
-            }
+        // Extract labels (dates) and data (measurement values) from the data
+        const labels = measurements.map(m => m.date);
+        const data = measurements.map(m => m.value);
 
-            // Assign measurement values to the corresponding dataset
-            if (type === 'Weight') {
-                data.datasets[0].data.push(value);
-            } else if (type === 'Arm Circumference') {
-                data.datasets[1].data.push(value);
-            } else if (type === 'Leg Circumference') {
-                data.datasets[2].data.push(value);
-            }
-        });
+        // Update the chart labels and dataset with the new data
+        myChart.data.labels = labels;
+        myChart.data.datasets[0].label = measurementType;
+        myChart.data.datasets[0].data = data;
 
-        // Update the chart with the new data
+        // Update the chart
         myChart.update();
 
     } catch (error) {
@@ -95,12 +81,9 @@ async function fetchData() {
     }
 }
 
-// Create the chart
-const myChart = new Chart(
-    document.getElementById('patientChart'),
-    config
-);
+document.getElementById('updateChartButton').addEventListener('click', updateChart);
 
+// Load chart initially with default measurement type and date range
 document.addEventListener('DOMContentLoaded', () => {
-    fetchData();
+    updateChart();
 });

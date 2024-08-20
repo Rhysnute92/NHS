@@ -53,4 +53,18 @@ public class Measurement {
         this.userId = userId;
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Measurement{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", value=" + value +
+                ", unit='" + unit + '\'' +
+                ", date=" + date +
+                ", userId=" + userId +
+                ", event=" + event +
+                ", diaryEntry=" + diaryEntry +
+                '}';
+    }
 }

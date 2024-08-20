@@ -38,4 +38,19 @@ public class MeasurementService {
     public void saveAll(List<Measurement> measurements) {
         measurementRepository.saveAll(measurements);
     }
+
+    // Fetch measurements by user ID, type, and date range
+    public List<Measurement> getMeasurementsByUserIdTypeAndDateRange(long userId, String measurementType, LocalDate startDate, LocalDate endDate) {
+        // If startDate or endDate are null, default to the earliest/latest possible dates
+        if (startDate == null) {
+            startDate = LocalDate.MIN;
+        }
+        if (endDate == null) {
+            endDate = LocalDate.MAX;
+        }
+
+        return measurementRepository.findByUserIdAndTypeAndDateBetween(userId, measurementType, startDate, endDate);
+    }
+
+
 }
