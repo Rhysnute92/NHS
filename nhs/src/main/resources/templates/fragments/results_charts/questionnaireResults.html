@@ -4,33 +4,48 @@
       <div class="left-column">
         <h3>Previous Questionnaires</h3>
         <div>
+          <ul id="questionnaire-list">
+            <!-- Pagination controls and questionnaire dates will be injected here -->
+          </ul>
+          <div id="pagination-controls">
+            <!-- Pagination controls like Previous/Next will go here -->
+          </div>
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="tabs">
+          <button id="table-results-tab" class="page-tab active">
+            Table Results
+          </button>
+          <button id="trends-tab" class="page-tab">Trends</button>
+        </div>
+        <div class="main-table-area">
+          <div class="section-headers">
+            <button class="section-tab" data-section="function">
+              Function
+            </button>
+            <button class="section-tab" data-section="appearance">
+              Appearance
+            </button>
+            <button class="section-tab" data-section="symptoms">
+              Symptoms
+            </button>
+            <button class="section-tab" data-section="emotion">Emotion</button>
+            <button class="section-tab" data-section="qualityOfLife">
+              Quality of Life
+            </button>
+          </div>
           <table id="resultsTable" class="custom-table">
             <thead>
               <tr>
-                <!-- First row: Page selection -->
-                <th></th>
-                <th id="table-results-tab" class="page-tab active">
-                  Table Results
-                </th>
-                <th id="trends-tab" class="page-tab">Trends</th>
-              </tr>
-              <tr>
-                <!-- Second row: Headers for the table -->
-                <th></th>
-                <!-- This will remain empty -->
-                <th id="table-header" colspan="6">Date</th>
+                <th>Question</th>
+                <th>Answer</th>
               </tr>
             </thead>
             <tbody>
               <!-- Data will be dynamically populated here -->
             </tbody>
           </table>
-        </div>
-      </div>
-      <div class="right-column">
-        <div class="column-content">
-          <h4>Additional Information</h4>
-          <!-- Add any content for the right column here -->
         </div>
       </div>
     </div>

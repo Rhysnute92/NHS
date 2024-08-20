@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.UserQuestionnaire.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,5 +74,11 @@ public class UserQuestionnaireService {
      */
     public void deleteUserQuestionnaire(Long userQuestionnaireId) {
         userQuestionnaireRepository.deleteById(userQuestionnaireId);
+    }
+
+    public Optional<UserQuestionnaire> getUserQuestionnaireByUserIDAndQuestionnaireIdAndQuestionnaireCreatedDate(
+            Long userID, Long questionnaireId, LocalDateTime createdDate) {
+        return userQuestionnaireRepository.findByUserIDAndQuestionnaire_IdAndQuestionnaireCreatedDate(userID,
+                questionnaireId, createdDate);
     }
 }

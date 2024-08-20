@@ -1,4 +1,3 @@
-import { ChartRenderer } from "../Questionnaire/ChartRenderer.js";
 import { initializeCollapsible } from "./collapsible.js";
 import { initializeQuestionnaireManager } from "../questionnaire/QuestionaireInitializer.js";
 import { initializeTaskManager } from "../tasks/TaskInitializer.js";
@@ -6,7 +5,6 @@ import { WorkerManager } from "../tasks/WorkerManager.js";
 import { fetchUserID } from "../common/utils/accountUtility.js";
 import { TaskManager } from "../tasks/taskManager.js";
 import { EventQueue } from "../tasks/eventQueue.js";
-import { QuestionnaireResultsRenderer } from "../Questionnaire/QuestionnaireResultsRenderer.js";
 
 const worker = new Worker("/js/tasks/worker.js");
 console.log("Worker:", worker);
@@ -52,8 +50,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (questionnaireManager) {
     await questionnaireManager.loadAssignedQuestionnaires();
   }
-
-  const resultsRenderer = new QuestionnaireResultsRenderer();
 
   taskManager
     .fetchTasks()

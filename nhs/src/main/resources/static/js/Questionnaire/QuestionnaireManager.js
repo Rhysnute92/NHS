@@ -1,21 +1,15 @@
 import { fetchData, postData, putData } from "../common/utils/apiUtility.js";
 import { QuestionnaireRenderer } from "./QuestionnaireRenderer.js";
-import { ChartRenderer } from "./ChartRenderer.js";
 
 export class QuestionnaireManager {
-  constructor(containerId, noAssignmentId, userID) {
+  constructor(containerId, noAssignmentId) {
     this.containerId = containerId;
     this.noAssignmentId = noAssignmentId;
-    this.userID = userID;
-    this.chartRenderer = new ChartRenderer("resultsChart");
     this.renderer = new QuestionnaireRenderer(
       "questions-container",
       "questionnaire-title",
       "questionnaire-description"
     );
-
-    // Debugging information
-    console.log(`QuestionnaireManager initialized with userID: ${this.userID}`);
 
     // Bind the form submission event
     const form = document.getElementById("questionnaire-form");
@@ -49,6 +43,11 @@ export class QuestionnaireManager {
   }
 
   async loadCompletedQuestionnaires() {
+    // Check if we already have the data
+    if (this.completedQuestionnaires) {
+      return this.completedQuestionnaires;
+    }
+
     const endpoint = `/api/userQuestionnaires/user/completed`;
     console.log(
       `Fetching completed questionnaires for user ${this.userID} from: ${endpoint}`
@@ -57,22 +56,32 @@ export class QuestionnaireManager {
     try {
       const completedQuestionnaires = await fetchData(endpoint);
       console.log(
-        `Received completed questionnaires: `,
+        "Received completed questionnaires:",
         completedQuestionnaires
       );
 
-      return completedQuestionnaires; // Return the data for further processing
+      // Simply store the raw data
+      this.completedQuestionnaires = completedQuestionnaires;
+
+      // Return the data for use in rendering
+      return this.completedQuestionnaires;
     } catch (error) {
       console.error("Error loading completed questionnaires:", error);
-      return null;
+      return [];
     }
   }
 
-  async loadQuestionnaire(questionnaireId) {
-    console.log(`Loading questionnaire with ID: ${questionnaireId}`);
+  async loadQuestionnaire(userQuestionnaireId, questionnaireId) {
+    console.log(
+      `Loading questionnaire with userQuestionnaireId: ${userQuestionnaireId} and questionnaireId: ${questionnaireId}`
+    );
 
-    if (!questionnaireId || questionnaireId === "undefined") {
-      console.error("Invalid questionnaireId provided:", questionnaireId);
+    if (
+      !userQuestionnaireId ||
+      userQuestionnaireId === "undefined" ||
+      !questionnaireId
+    ) {
+      console.error("Invalid userQuestionnaireId or questionnaireId provided");
       return;
     }
 
@@ -83,7 +92,7 @@ export class QuestionnaireManager {
       console.log("Fetched questionnaire details: ", questionnaire);
 
       const form = document.getElementById("questionnaire-form");
-      form.setAttribute("data-questionnaire-id", questionnaireId);
+      form.setAttribute("data-user-questionnaire-id", userQuestionnaireId);
 
       this.renderer.renderQuestionnaireDetails(questionnaire);
 
@@ -94,32 +103,34 @@ export class QuestionnaireManager {
 
       this.renderer.renderQuestions(questions);
 
-      // Fetch and populate user's previous responses
-      const previousResponses = await this.loadUserResponses(questionnaireId);
+      // Fetch and populate user's previous responses using userQuestionnaireId
+      const previousResponses = await this.loadUserResponses(
+        userQuestionnaireId
+      );
       if (previousResponses) {
         this.populatePreviousResponses(previousResponses);
       }
 
-      await this.updateUserQuestionnaireProgress(questionnaireId);
+      await this.updateUserQuestionnaireProgress(userQuestionnaireId);
     } catch (error) {
       console.error("Error loading questionnaire:", error);
     }
   }
 
-  async loadUserResponses(questionnaireId) {
+  async loadUserResponses(userQuestionnaireId) {
     console.log(
-      `Loading user responses for questionnaire ID: ${questionnaireId}`
+      `Loading user responses for userQuestionnaireId: ${userQuestionnaireId}`
     );
 
     try {
       const responses = await fetchData(
-        `/api/userQuestions/userQuestionnaire/${questionnaireId}`
+        `/api/userQuestions/userQuestionnaire/${userQuestionnaireId}`
       );
       console.log("Fetched user responses: ", responses);
       return responses;
     } catch (error) {
       console.error("Error loading user responses:", error);
-      return null;
+      return [];
     }
   }
 
