@@ -30,7 +30,7 @@ public class ProviderAppointmentController {
         return List.of(
                 new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
                 new NavMenuItem("Set plan", "", "fa-solid fa-book"),
-                new NavMenuItem("Appointments", "/provider-calendar",
+                new NavMenuItem("Appointments", "/providerCalendar",
                         "fa-solid fa-user-check"),
                 new NavMenuItem("Questionnaires", "/questionnairehub",
                         "fa-solid fa-book"),
