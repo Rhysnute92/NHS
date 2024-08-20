@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="r : ${results}">
+            <tr th:each="r : ${results}" onclick="window.location='/patientprofile/1';">
                 <td th:text="${r.nhsNumber}"></td>
                 <td th:text="${r.patientName + ' ' + r.patientLastName}"></td>
                 <td th:text="${r.patientDOB}"></td>
