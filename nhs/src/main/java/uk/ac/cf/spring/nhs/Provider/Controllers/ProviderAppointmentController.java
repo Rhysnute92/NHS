@@ -16,7 +16,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Controller
-@RequestMapping("/provideradd")
+@RequestMapping("/provider-calendar")
 public class ProviderAppointmentController {
 
     @Autowired
@@ -62,7 +62,7 @@ public class ProviderAppointmentController {
         return "redirect:/patients/" + patientId + "/appointments";
     }
 
-    @PostMapping("/patients/{patientId/appointments/{appointmentsId}/delete")
+    @PostMapping("/patients/{patientId}/appointments/{appointmentsId}/delete")
     public String deleteAppointment(@PathVariable("patientId") Long patientId,
                                     @PathVariable("appointmentId") Long appointmentsId) {
         Appointment appointment = appointmentService.findById(appointmentsId).orElse(null);
