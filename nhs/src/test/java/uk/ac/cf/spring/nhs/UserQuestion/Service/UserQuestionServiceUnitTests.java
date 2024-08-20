@@ -42,10 +42,11 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the getUserQuestionsByUserQuestionnaireId method of UserQuestionService 
-     * to ensure it returns an empty list when no UserQuestions are found for the given UserQuestionnaire ID.
+     * Tests the getUserQuestionsByUserQuestionnaireId method of UserQuestionService
+     * to ensure it returns an empty list when no UserQuestions are found for the
+     * given UserQuestionnaire ID.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testGetUserQuestionsByUserQuestionnaireIdReturnsEmptyList() {
@@ -61,10 +62,11 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the getUserQuestionsByUserQuestionnaireId method of UserQuestionService 
-     * to ensure it returns a populated list when UserQuestions are found for the given UserQuestionnaire ID.
+     * Tests the getUserQuestionsByUserQuestionnaireId method of UserQuestionService
+     * to ensure it returns a populated list when UserQuestions are found for the
+     * given UserQuestionnaire ID.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testGetUserQuestionsByUserQuestionnaireIdReturnsPopulatedList() {
@@ -83,10 +85,11 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the getUserQuestionsByQuestionId method of UserQuestionService 
-     * to ensure it returns an empty list when no UserQuestions are found for the given Question ID.
+     * Tests the getUserQuestionsByQuestionId method of UserQuestionService
+     * to ensure it returns an empty list when no UserQuestions are found for the
+     * given Question ID.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testGetUserQuestionsByQuestionIdReturnsEmptyList() {
@@ -101,10 +104,11 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the getUserQuestionsByQuestionId method of UserQuestionService 
-     * to ensure it returns a populated list when UserQuestions are found for the given Question ID.
+     * Tests the getUserQuestionsByQuestionId method of UserQuestionService
+     * to ensure it returns a populated list when UserQuestions are found for the
+     * given Question ID.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testGetUserQuestionsByQuestionIdReturnsPopulatedList() {
@@ -122,10 +126,11 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the getUserQuestion method of UserQuestionService 
-     * to ensure it returns an empty Optional when no UserQuestion is found for the given UserQuestionnaire ID and Question ID.
+     * Tests the getUserQuestion method of UserQuestionService
+     * to ensure it returns an empty Optional when no UserQuestion is found for the
+     * given UserQuestionnaire ID and Question ID.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testGetUserQuestionReturnsEmptyOptional() {
@@ -144,10 +149,11 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the getUserQuestion method of UserQuestionService 
-     * to ensure it returns a populated Optional when a UserQuestion is found for the given UserQuestionnaire ID and Question ID.
+     * Tests the getUserQuestion method of UserQuestionService
+     * to ensure it returns a populated Optional when a UserQuestion is found for
+     * the given UserQuestionnaire ID and Question ID.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testGetUserQuestionReturnsPopulatedOptional() {
@@ -167,10 +173,10 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the saveUserQuestion method of UserQuestionService 
+     * Tests the saveUserQuestion method of UserQuestionService
      * to ensure it correctly saves a UserQuestion.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testSaveUserQuestion() {
@@ -184,10 +190,10 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the deleteUserQuestion method of UserQuestionService 
+     * Tests the deleteUserQuestion method of UserQuestionService
      * to ensure it correctly deletes a UserQuestion.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testDeleteUserQuestion() {
@@ -200,10 +206,10 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the deleteUserQuestion method of UserQuestionService 
+     * Tests the deleteUserQuestion method of UserQuestionService
      * to ensure it throws an exception when a UserQuestion is not found.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testDeleteUserQuestionNotFound() {
@@ -218,4 +224,5 @@ class UserQuestionServiceUnitTests {
         assertEquals("UserQuestion not found", exception.getMessage());
         verify(userQuestionRepository, times(1)).deleteById(userQuestionId);
     }
+
 }

@@ -1,0 +1,44 @@
+.event-modal {
+    overflow-y: auto;
+    height: 70vh;
+}
+
+.modal-section {
+    margin-bottom: 1rem;
+}
+
+button {
+    border: none;
+    background-color: var(--nhs-light-green);
+    border-radius: 5px;
+    padding: 0.5rem;
+    color: var(--nhs-white);
+    width: 50%;
+    font-size: 1rem;
+    font-family: var(--regular-font-family);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: opacity 0.5s;
+    margin: 2rem auto auto;
+}
+
+.event-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.conditional-hidden {
+    display: none;
+}
+
+.checkin-symptom-selection, .treatment-details {
+    padding-left: 1rem;
+}
+
+input[type="date"] {
+    font-family: var(--regular-font-family);
+}

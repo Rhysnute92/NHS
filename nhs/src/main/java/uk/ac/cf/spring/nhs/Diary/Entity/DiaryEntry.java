@@ -1,19 +1,28 @@
 package uk.ac.cf.spring.nhs.Diary.Entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "DiaryEntries")
+@FilterDef(name = "relatedEntityTypeFilter", parameters = @ParamDef(name = "relatedEntityType", type = String.class))
 public class DiaryEntry {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "EntryID")
     private long id;
 
@@ -24,30 +33,14 @@ public class DiaryEntry {
     @Column(name = "EntryMood")
     private Mood mood;
 
-    @ManyToMany
-    @JoinTable(
-            name = "DiaryMeasurements",
-            joinColumns = @JoinColumn(name = "EntryId"),
-            inverseJoinColumns = @JoinColumn(name = "MeasurementId")
-    )
-    private Set<Measurement> measurements;
+    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Measurement> measurements = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "DiarySymptoms",
-            joinColumns = @JoinColumn(name = "EntryId"),
-            inverseJoinColumns = @JoinColumn(name = "SymptomId")
-    )
-    private Set<Symptom> symptoms;
+    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Symptom> symptoms = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "DiaryPhotos",
-            joinColumns = @JoinColumn(name = "EntryId"),
-            inverseJoinColumns = @JoinColumn(name = "PhotoId")
-    )
-    private Set<Photo> photos;
-
+    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Photo> photos = new ArrayList<>();
 
     @Column(name = "EntryNotes")
     private String notes;
@@ -61,71 +54,6 @@ public class DiaryEntry {
         this.userId = userId;
         this.date = date;
     }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Mood getMood() {
-        return mood;
-    }
-
-    public void setMood(Mood mood) {
-        this.mood = mood;
-    }
-
-    public Set<Symptom> getSymptoms() {
-        return symptoms;
-    }
-
-    public void setSymptoms(Set<Symptom> symptoms) {
-        this.symptoms = symptoms;
-    }
-
-    public Set<Measurement> getMeasurements() {
-        return measurements;
-    }
-
-    public void setMeasurements(Set<Measurement> measurements) {
-        this.measurements = measurements;
-    }
-
-    public Set<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(Set<Photo> photos) {
-        this.photos = photos;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
 
     @Override
     public String toString() {
