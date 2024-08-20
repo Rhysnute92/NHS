@@ -6,6 +6,8 @@
     padding: 10px 20px;
     margin-right: 5px;
     cursor: pointer;
+    background-color: #009639;
+    color: white;
 }
 #appointment-list, #calendar {
     display: none;
