@@ -1,6 +1,7 @@
 package uk.ac.cf.spring.nhs.UserQuestionnaire.Model;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,7 +36,7 @@ public class UserQuestionnaire {
     private LocalDateTime questionnaireCreatedDate;
 
     @Column(name = "QuestionnaireDueDate", nullable = false)
-    private LocalDateTime questionnaireDueDate;
+    private LocalDate questionnaireDueDate;
 
     @Column(name = "QuestionnaireInProgress", nullable = false)
     private Boolean questionnaireInProgress = false;
@@ -191,14 +192,14 @@ public class UserQuestionnaire {
     /**
      * @return the questionnaireDueDate
      */
-    public LocalDateTime getQuestionnaireDueDate() {
+    public LocalDate getQuestionnaireDueDate() {
         return questionnaireDueDate;
     }
 
     /**
      * @param questionnaireDueDate the questionnaireDueDate to set
      */
-    public void setQuestionnaireDueDate(LocalDateTime questionnaireDueDate) {
+    public void setQuestionnaireDueDate(LocalDate questionnaireDueDate) {
         this.questionnaireDueDate = questionnaireDueDate;
     }
 

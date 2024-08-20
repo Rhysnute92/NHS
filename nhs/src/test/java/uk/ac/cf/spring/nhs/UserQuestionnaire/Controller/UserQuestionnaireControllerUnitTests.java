@@ -219,4 +219,20 @@ class UserQuestionnaireControllerUnitTests {
         assertEquals(1, response.getBody().size());
         verify(userQuestionnaireService, times(1)).getIncompleteUserQuestionnaires(patientId);
     }
+
+    @Test
+    void testAssignQuestionnaireToPatient() {
+        Long patientId = 456L;
+        userQuestionnaire.setUserID(patientId);
+        when(userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire))
+                .thenReturn(userQuestionnaire);
+
+        ResponseEntity<UserQuestionnaire> response = userQuestionnaireController
+                .assignQuestionnaireToPatient(patientId, userQuestionnaire);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(userQuestionnaire, response.getBody());
+        verify(userQuestionnaireService, times(1)).saveUserQuestionnaire(userQuestionnaire);
+    }
 }

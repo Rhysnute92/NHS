@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.UserQuestionnaire.Controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -139,6 +140,30 @@ public class UserQuestionnaireController {
         Long userID = getCurrentUserId();
         userQuestionnaire.setUserID(userID);
         UserQuestionnaire savedUserQuestionnaire = userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
+        return ResponseEntity.ok(savedUserQuestionnaire);
+    }
+
+    /**
+     * Creates a new user questionnaire for a specified user (provider).
+     *
+     * @param patientId         the ID of the patient
+     * @param userQuestionnaire the user questionnaire to be created
+     * @return the created user questionnaire
+     */
+    @PostMapping("provider/{patientId}/assign-questionnaire")
+    public ResponseEntity<UserQuestionnaire> assignQuestionnaireToPatient(
+            @PathVariable Long patientId,
+            @RequestBody UserQuestionnaire userQuestionnaire) {
+
+        // Set the patient ID
+        userQuestionnaire.setUserID(patientId);
+
+        // Set the creation date to now
+        userQuestionnaire.setQuestionnaireCreatedDate(LocalDateTime.now());
+
+        // Save the new UserQuestionnaire
+        UserQuestionnaire savedUserQuestionnaire = userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
+
         return ResponseEntity.ok(savedUserQuestionnaire);
     }
 

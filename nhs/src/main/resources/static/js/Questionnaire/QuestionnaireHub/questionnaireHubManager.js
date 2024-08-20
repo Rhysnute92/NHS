@@ -50,11 +50,22 @@ export class QuestionnaireHubManager {
 
   async assignQuestionnaire(patientId, questionnaireId, dueDate) {
     const endpoint = `/api/userQuestionnaires/provider/${patientId}/assign-questionnaire`;
-    const data = { questionnaireId, dueDate };
+
+    // Prepare the request payload
+    const data = {
+      questionnaire: {
+        id: questionnaireId,
+      },
+      questionnaireDueDate: dueDate, // Ensure this is in the correct format (e.g., "2025-06-15")
+      questionnaireInProgress: false,
+      questionnaireIsCompleted: false,
+    };
 
     try {
+      // Send the POST request
       await postData(endpoint, data);
       alert("Questionnaire assigned successfully.");
+
       // Reload the assigned questionnaires
       await this.loadAssignedQuestionnaires(patientId);
     } catch (error) {
