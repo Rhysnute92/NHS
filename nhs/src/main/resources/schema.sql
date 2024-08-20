@@ -95,7 +95,6 @@ CREATE TABLE Appointments (
     UserID BIGINT,
     FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID)
 );
-ALTER TABLE Appointments ADD COLUMN is_deletable BOOLEAN DEFAULT TRUE;
 
 --Events--
 CREATE TABLE Events (

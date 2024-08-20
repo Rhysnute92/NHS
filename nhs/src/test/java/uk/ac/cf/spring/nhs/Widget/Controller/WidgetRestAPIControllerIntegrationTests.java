@@ -111,7 +111,7 @@ class WidgetRestAPIControllerIntegrationTests {
 
         int currentDay = LocalDate.now().getDayOfWeek().getValue();
 
-        // Creating 5 tasks, where 2 tasks are completed
+        // Creating 5 tasks, 2 tasks are completed
         List<UserTask> tasks = mockTaskList(5);
         tasks.get(0).setBitmask(BitmaskUtility.setBit(0, LocalDate.now().getDayOfMonth())); // Task 1 completed
         tasks.get(1).setBitmask(BitmaskUtility.setBit(0, LocalDate.now().getDayOfMonth())); // Task 2 completed
@@ -119,7 +119,6 @@ class WidgetRestAPIControllerIntegrationTests {
         when(userTaskService.getTasksForUser(userId)).thenReturn(tasks); // 5 tasks in total
         when(userTaskService.countCompletedTasksForday(userId, currentDay)).thenReturn(2); // 2 completed tasks
 
-        // Act & Assert
         mockMvc.perform(get("/api/widgets/task-completion/data")
                 .param("day", String.valueOf(currentDay)))
                 .andExpect(status().isOk())

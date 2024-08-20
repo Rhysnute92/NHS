@@ -6,8 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -23,8 +21,6 @@ import uk.ac.cf.spring.nhs.UserTaskLog.Service.UserTaskLogService;
 @Service
 public class UserTaskService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserTaskService.class);
-
     @Autowired
     private JpaUserTaskRepository userTaskRepository;
 
@@ -33,12 +29,13 @@ public class UserTaskService {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void toggleTaskCompletion(UserTask userTask) {
-        System.out.println("toggleTaskCompletion called for UserTask ID: " + userTask.getId() + " from " + new Exception().getStackTrace()[1]);
-        
+        System.out.println("toggleTaskCompletion called for UserTask ID: " + userTask.getId() + " from "
+                + new Exception().getStackTrace()[1]);
+
         int currentDay = DateUtils.getCurrentDayOfMonth();
         System.out.println("Current day according to toggleTaskCompletion: " + currentDay);
         int updatedBitmask;
-    
+
         if (BitmaskUtility.isBitSet(userTask.getBitmask(), currentDay)) {
             updatedBitmask = BitmaskUtility.clearBit(userTask.getBitmask(), currentDay);
             System.out.println("Marked task as incomplete. UserTask ID: " + userTask.getId() + ", Updated Bitmask: "
@@ -48,7 +45,7 @@ public class UserTaskService {
             System.out.println("Marked task as completed. UserTask ID: " + userTask.getId() + ", Updated Bitmask: "
                     + Integer.toBinaryString(updatedBitmask));
         }
-    
+
         userTask.setBitmask(updatedBitmask);
         userTaskRepository.save(userTask);
     }

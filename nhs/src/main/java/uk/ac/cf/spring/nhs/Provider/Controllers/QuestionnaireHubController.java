@@ -2,21 +2,20 @@ package uk.ac.cf.spring.nhs.Provider.Controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import uk.ac.cf.spring.nhs.AddPatient.Service.PatientService;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 
 @Controller
-@RequestMapping("/patientprofile")
-public class PatientProfileController {
+@RequestMapping("/questionnairehub")
+public class QuestionnaireHubController {
 
-    @Autowired
-    private PatientService patientService;
+    // Hardcoded patient ID for testing purposes
+    private final Long hardcodedPatientId = 2L;
 
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {
@@ -32,9 +31,13 @@ public class PatientProfileController {
                 new NavMenuItem("Email history", " ", "fa-solid fa-book"));
     }
 
-    @GetMapping("/info")
-    public String patientProfileAdmin() {
-        return "patientprofile/profileInfo";
-    }
+    @GetMapping
+    public String showQuestionnaireHub(Model model) {
+        // Added hardcoded patientId to the model to use it in the view
 
+        // TODO: remove hardcoded patientId
+
+        model.addAttribute("patientId", hardcodedPatientId);
+        return "patientprofile/questionnaireHub";
+    }
 }
