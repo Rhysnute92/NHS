@@ -21,8 +21,9 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     @GetMapping
-    public List<Appointment> getAllAppointments() {
-        return appointmentService.getAppointmentsByUserId(1L);
+    public List<Appointment> getAllAppointments(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        long userId = userDetails.getUserId();
+        return appointmentService.getAppointmentsByUserId(userId);
     }
 
     @GetMapping("/{id}")
