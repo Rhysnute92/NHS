@@ -1,18 +1,22 @@
 package uk.ac.cf.spring.nhs.Symptom.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Symptoms")
 public class Symptom {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "SymptomID")
     private long id;
 
@@ -31,62 +35,22 @@ public class Symptom {
     @Column(name = "UserID")
     private long userId;
 
-    @ManyToMany(mappedBy = "symptoms")
-    private Set<DiaryEntry> diaryEntries;
+    @ManyToOne
+    @JoinColumn(name = "EventID", nullable = true)
+    @JsonIgnore
+    private Event event;
 
-    public Symptom() {}
+    @ManyToOne
+    @JoinColumn(name = "EntryID", nullable = true)
+    @JsonIgnore
+    private DiaryEntry diaryEntry;
 
+    protected Symptom() {}
+
+    // Constructor for standalone symptom
     public Symptom(String name, int severity, long userId) {
         this.name = name;
         this.severity = severity;
-        this.userId = userId;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getSeverity() {
-        return severity;
-    }
-
-    public void setSeverity(int severity) {
-        this.severity = severity;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
         this.userId = userId;
     }
 }

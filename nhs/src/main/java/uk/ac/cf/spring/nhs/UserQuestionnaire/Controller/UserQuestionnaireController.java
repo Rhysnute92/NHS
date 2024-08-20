@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.UserQuestionnaire.Controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -80,6 +81,37 @@ public class UserQuestionnaireController {
     }
 
     /**
+     * Retrieves incomplete user questionnaires for a specific patient by their ID.
+     *
+     * @param patientId the ID of the patient
+     * @return a ResponseEntity containing a list of incomplete user questionnaires
+     *         for the patient
+     */
+    @GetMapping("/provider/incomplete/{patientId}")
+    public ResponseEntity<List<UserQuestionnaire>> getIncompleteUserQuestionnairesForPatient(
+            @PathVariable Long patientId) {
+        List<UserQuestionnaire> userQuestionnaires = userQuestionnaireService
+                .getIncompleteUserQuestionnaires(patientId);
+        return ResponseEntity.ok(userQuestionnaires);
+    }
+
+    /**
+     * Retrieves a list of completed user questionnaires for a specific patient by
+     * their ID.
+     *
+     * @param patientId the ID of the patient
+     * @return a ResponseEntity containing a list of completed user questionnaires
+     *         for the patient
+     */
+    @GetMapping("/provider/completed/{patientId}")
+    public ResponseEntity<List<UserQuestionnaire>> getCompletedUserQuestionnairesForPatient(
+            @PathVariable Long patientId) {
+        List<UserQuestionnaire> userQuestionnaires = userQuestionnaireService
+                .getCompletedUserQuestionnaires(patientId);
+        return ResponseEntity.ok(userQuestionnaires);
+    }
+
+    /**
      * Retrieves a user questionnaire for the authenticated user and questionnaire
      * ID.
      *
@@ -108,6 +140,30 @@ public class UserQuestionnaireController {
         Long userID = getCurrentUserId();
         userQuestionnaire.setUserID(userID);
         UserQuestionnaire savedUserQuestionnaire = userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
+        return ResponseEntity.ok(savedUserQuestionnaire);
+    }
+
+    /**
+     * Creates a new user questionnaire for a specified user (provider).
+     *
+     * @param patientId         the ID of the patient
+     * @param userQuestionnaire the user questionnaire to be created
+     * @return the created user questionnaire
+     */
+    @PostMapping("provider/{patientId}/assign-questionnaire")
+    public ResponseEntity<UserQuestionnaire> assignQuestionnaireToPatient(
+            @PathVariable Long patientId,
+            @RequestBody UserQuestionnaire userQuestionnaire) {
+
+        // Set the patient ID
+        userQuestionnaire.setUserID(patientId);
+
+        // Set the creation date to now
+        userQuestionnaire.setQuestionnaireCreatedDate(LocalDateTime.now());
+
+        // Save the new UserQuestionnaire
+        UserQuestionnaire savedUserQuestionnaire = userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
+
         return ResponseEntity.ok(savedUserQuestionnaire);
     }
 

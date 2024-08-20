@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -79,6 +80,13 @@ class UserQuestionnaireUnitTests {
     }
 
     @Test
+    void testSetAndGetQuestionnaireDueDate() {
+        LocalDate dueDate = LocalDate.of(2025, 6, 15);
+        userQuestionnaire.setQuestionnaireDueDate(dueDate);
+        assertEquals(dueDate, userQuestionnaire.getQuestionnaireDueDate());
+    }
+
+    @Test
     void testSetQuestionnaireToNull() {
         Exception exception = assertThrows(NullPointerException.class, () -> {
             userQuestionnaire.setQuestionnaire(null);
@@ -106,5 +114,11 @@ class UserQuestionnaireUnitTests {
     void testCompletionDateCanBeNull() {
         userQuestionnaire.setQuestionnaireCompletionDate(null);
         assertNull(userQuestionnaire.getQuestionnaireCompletionDate(), "QuestionnaireCompletionDate should be null");
+    }
+
+    @Test
+    void testQuestionnaireDueDateCanBeNull() {
+        userQuestionnaire.setQuestionnaireDueDate(null);
+        assertNull(userQuestionnaire.getQuestionnaireDueDate(), "QuestionnaireDueDate should be null");
     }
 }

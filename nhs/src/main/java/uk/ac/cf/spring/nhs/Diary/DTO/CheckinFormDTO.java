@@ -9,9 +9,9 @@ import java.util.List;
 
 public class CheckinFormDTO {
     private String mood;
+    private String notes;
     private List<SymptomDTO> symptoms;
     private List<MeasurementDTO> measurements;
-    private String notes;
     private List<PhotoDTO> photos;
 
     public CheckinFormDTO() {
@@ -25,7 +25,6 @@ public class CheckinFormDTO {
         this.symptoms = symptoms != null ? symptoms : new ArrayList<>();
         this.measurements = measurements != null ? measurements : new ArrayList<>();
         this.notes = notes;
-        System.out.println("photos: " + photos);
         this.photos = photos != null ? photos : new ArrayList<>();
     }
 

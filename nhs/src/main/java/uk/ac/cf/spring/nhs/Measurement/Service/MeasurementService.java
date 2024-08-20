@@ -6,6 +6,9 @@ import uk.ac.cf.spring.nhs.Measurement.DTO.MeasurementDTO;
 import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Measurement.Repository.MeasurementRepository;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class MeasurementService {
     private final MeasurementRepository measurementRepository;
@@ -16,12 +19,17 @@ public class MeasurementService {
 
     @Transactional
     public Measurement saveMeasurement(MeasurementDTO measurementDTO, long userId) {
-        Measurement measurement = new Measurement();
-        measurement.setUserId(userId);
-        measurement.setType(measurementDTO.getType());
-        measurement.setValue(measurementDTO.getValue());
-        measurement.setUnit(measurementDTO.getUnit());
+        Measurement measurement = new Measurement(
+                measurementDTO.getType(),
+                measurementDTO.getValue(),
+                measurementDTO.getUnit(),
+                userId
+        );
 
         return measurementRepository.save(measurement);
+    }
+
+    public void saveAll(List<Measurement> measurements) {
+        measurementRepository.saveAll(measurements);
     }
 }
