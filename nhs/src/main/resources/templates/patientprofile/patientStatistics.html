@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/provider}"
+>
+<head>
+  <title>Patient Statistics</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+  <link rel="stylesheet" th:href="@{/css/common/defaultLayout.css}" />
+</head>
+<body>
+<main layout:fragment="content" class="main-content">
+  <h1 class="page-title">Patient Statistics</h1>
+  <div class="container">
+  </div>
+</main>
+<th:block layout:fragment="scripts">
+  <script th:src="@{/js/patientprofile/patientStatistics.js}"></script>
+</th:block>
+</body>
+</html>
