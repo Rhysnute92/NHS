@@ -10,12 +10,14 @@ function changeSearchForm(){
     var form = document.getElementById('searchForm'); 
 
     if (type == "NHS number"){
+        document.getElementById('inputMessage').innerHTML = ``;
         form.innerHTML = `
         <label for="patientNhsNumber">Patient NHS number:</label>
-        <input type="text" id="patientNhsNumber" name="patientNhsNumber">
+        <input type="text" id="patientNhsNumber" name="patientNhsNumber" required>
         <input type="submit" value="Search" class="search_button"/>
         `;
     } else if (type == "Patient data"){
+        document.getElementById('inputMessage').innerHTML = `All search fields are optional`;
         form.innerHTML = `
         <label for="patientName">Patient First Name:</label>
         <input type="text" id="patientName" name="patientName">

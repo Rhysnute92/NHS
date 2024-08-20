@@ -4,23 +4,25 @@
     <meta charset="UTF-8">
     <title>Search</title>
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/search.css}" />
 </head>
 <body>
     <header th:replace="~{common/fragments/header}"></header>
     <nav th:replace="~{common/fragments/navbaradmin}" class="nav"></nav>
 <div class="container">
-    <h2>Search patient page!</h2>
+    <h2>Look up patient</h2>
     <label for="searchType">Search by: </label>
     <select id="searchType">
         <option value="NHS number">NHS number</option>
         <option value="Patient data">Patient data</option>
     </select>
+    <div id="inputMessage"></div>
     <form action="/provider/search/patientsearch" id="searchForm" method="post">
         <label for="patientNhsNumber">Patient NHS number:</label>
-        <input type="text" id="patientNhsNumber" name="patientNhsNumber">
+        <input type="text" id="patientNhsNumber" name="patientNhsNumber" required>
         <input type="submit" value="Search" class="search_button"/>
     </form>
-    <table th:if="${results != null}">
+    <table th:if="${results != null}" class="results_table">
         <thead>
             <tr>
                 <th>NHS number</th>
