@@ -10,7 +10,7 @@ import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 import java.util.List;
 
 @Controller
-@RequestMapping("/provider-calendar")
+@RequestMapping("/providercalendar")
 public class ProviderCalendarController {
     //added hardcoded patientID for testing
     private final Long hardcodedPatientId = 2L;
@@ -20,7 +20,7 @@ public class ProviderCalendarController {
         return List.of(
                 new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
                 new NavMenuItem("Set plan", "", "fa-solid fa-book"),
-                new NavMenuItem("Appointments", "/provider-calendar", "fa-solid fa-user-check"),
+                new NavMenuItem("Appointments", "/providercalendar", "fa-solid fa-user-check"),
                 new NavMenuItem("Questionnaires", "/questionnairehub",
                         "fa-solid fa-book"),
                 new NavMenuItem("Patient trends", " ", "fa-solid fa-user-check"),

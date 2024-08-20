@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
       layout:decorate="~{layout/provider}">
   <head>
     <title>Provider Calendar</title>
-    <link rel="stylesheet" th:href="@{/css/calendar/desktop/calendar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/providerCalendar/providerCalendar.css}"/>
     <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.4/fullcalendar.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 <body>
-<div th:replace="~{common/fragments/header}"></div>
-<nav th:replace="~{common/fragments/navbar}"></nav>
+<main layout:fragment="content" class="main-content">
+  <div class="container">
+    <h1 class="management-desktop-title"><%= patient %> Calendar</h1>
+    <p class="management-desktop-subtitle">
+      Here you can view a patients calendar and view any
+      upcoming appointments they have relating to lymphoedema
+    </p>
 <div id="tabs">
   <button onclick="showList()">View List</button>
-  <button onclick="showCalendarpro()">View Calendar</button>
+  <button onclick="showProviderCalendar()">View Calendar</button>
 </div>
 <div id="appointment-list" class="active">
   <table>
@@ -36,9 +41,15 @@
     </tbody>
   </table>
 </div>
-
-<div id="calendar" th:insert="~{calendar/fragments/calendar}"></div>
-
+    <div id="no-appointments" class="no-appointments"
+            style="display: none"
+    >
+      <p>No appointments at the moment.</p>
+    </div>
+<div id="calendar"></div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.4/fullcalendar.min.js"></script>
 <script th:src="@{/js/calendar/providerCalendar.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>

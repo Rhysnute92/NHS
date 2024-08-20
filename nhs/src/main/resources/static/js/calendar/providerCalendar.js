@@ -20,10 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
 // Toggle views
 function showList() {
     document.getElementById('appointment-list').classList.add('active');
+    document.getElementById('appointment-list').classList.remove('inactive');
     document.getElementById('calendar').classList.remove('active');
+    document.getElementById('calendar').classList.add('inactive');
 }
 
-function showCalendar() {
+function showProviderCalendar() {
     document.getElementById('calendar').classList.add('active');
+    document.getElementById('calendar').classList.remove('inactive');
     document.getElementById('appointment-list').classList.remove('active');
+    document.getElementById('appointment-list').classList.add('inactive');
 }
+
+const patient = "Lord John Doe"; //testing purposes only
+document.querySelector(".management-desktop-title").innerHTML = '${patient} Calendar';
