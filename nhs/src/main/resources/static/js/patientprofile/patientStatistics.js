@@ -1,18 +1,13 @@
 // Get the canvas context
 const ctx = document.getElementById('patientChart').getContext('2d');
 
-// Initialize the Chart.js chart with empty data
-const myChart = new Chart(ctx, {
-    type: 'line',  // Set the type of chart
+// Uses Chart.js to create the chart with a line for each location (e.g. for arm showing wrist, elbow, etc.)
+// Initialise the chart with empty data
+const patientChart = new Chart(ctx, {
+    type: 'line',
     data: {
         labels: [],
-        datasets: [{
-            label: 'Measurement',
-            data: [],
-            borderColor: 'rgba(255, 99, 132, 1)',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            fill: false
-        }]
+        datasets: []
     },
     options: {
         responsive: true,
@@ -48,8 +43,7 @@ async function updateChart() {
         if (endDate) {
             query += `&endDate=${endDate}`;
         }
-
-        // Fetch data from the server
+        
         const response = await fetch(`/patientprofile/statistics/measurements?${query}`);
 
         if (!response.ok) {
@@ -64,21 +58,59 @@ async function updateChart() {
             return;
         }
 
-        // Extract labels (dates) and data (measurement values) from the data
-        const labels = measurements.map(m => m.date);
-        const data = measurements.map(m => m.value);
+        // Extract unique dates for the x-axis labels
+        const labels = [...new Set(measurements.map(m => m.date))];
 
-        // Update the chart labels and dataset with the new data
-        myChart.data.labels = labels;
-        myChart.data.datasets[0].label = measurementType;
-        myChart.data.datasets[0].data = data;
+        // Group data by location
+        const locationDataMap = {};
+        measurements.forEach(m => {
+            const location = m.location;
 
-        // Update the chart
-        myChart.update();
+            // Create array for this location if it doesn't exist
+            if (!locationDataMap[location]) {
+                locationDataMap[location] = [];
+            }
+
+            // Push the measurement value for this date and location
+            locationDataMap[location].push({ date: m.date, value: m.value });
+        });
+
+        // Clear existing datasets
+        patientChart.data.datasets = [];
+
+        // Create a dataset for each location
+        Object.keys(locationDataMap).forEach(location => {
+            const locationData = locationDataMap[location];
+
+            // Create an array for the measurement values aligned with the dates
+            const data = labels.map(label => {
+                const measurement = locationData.find(m => m.date === label);
+                return measurement ? measurement.value : null;
+            });
+
+            patientChart.data.datasets.push({
+                label: location,
+                data: data,
+                borderColor: getRandomColor(),
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                fill: false
+            });
+        });
+
+        patientChart.data.labels = labels;
+        patientChart.update();
 
     } catch (error) {
         console.error('Error fetching data:', error);
     }
+}
+
+function getRandomColor() {
+    // Generate a random color for each line
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    return `rgba(${r}, ${g}, ${b}, 1)`;
 }
 
 document.getElementById('updateChartButton').addEventListener('click', updateChart);
