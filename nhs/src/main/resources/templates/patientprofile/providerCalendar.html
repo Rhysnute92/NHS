@@ -6,6 +6,7 @@
     <title>Provider Calendar</title>
     <link rel="stylesheet" th:href="@{/css/providerCalendar/providerCalendar.css}"/>
     <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.4/fullcalendar.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 <body>
@@ -21,12 +22,27 @@
   <button onclick="showList()">View List</button>
   <button onclick="showProviderCalendar()">View Calendar</button>
   <custom-modal class="appt-modal">
-    <button slot="open-btn" id="add-appt-btn" class="add-appt-btn">Add Appointment</button>
-    <span slot="title" class="modal-title">Add Appointment</span>
-    <div slot="content" class="modal-content">
-      <div th:replace="~{appointmentFormProvider}"></div>
+    <button slot="open-btn" id="add-appt-btn" class="add-appt-btn" onclick="openModal()">Add Appointment</button>
+    <!-- Form for adding appointments -->
+    <div id="appointment-modal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <form id="appointment-form">
+          <label for="patient">Patient:</label>
+          <input type="text" id="patient" name="patient" required>
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required>
+          <label for="time">Time:</label>
+          <input th:ty="time" id="time" name="time" required>
+          <label for="type">Type:</label>
+          <input th:type="text" id="type" name="type" required>
+          <label for="location">Location:</label>
+          <input th:type="text" id="location" name="location" required>
+          <button type="submit">Add Appointment</button>
+        </form>
+      </div>
     </div>
-  </custom-modal>
+    </custom-modal>
 </div>
 <div id="appointment-list" class="active">
   <table>
@@ -56,6 +72,7 @@
   </div>
 </main>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.4/fullcalendar.min.js"></script>
 <script th:src="@{/js/calendar/providerCalendar.js}"></script>
 <script th:src="@{/js/common/customModal.js}"></script>
 <script th:src="@{/js/calendar/calendar.js}"></script>
