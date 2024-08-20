@@ -1,24 +1,35 @@
 <form th:action="@{/appointments}" method="post" id="apptForm">
 <!-- Get date and time separately then combine later -->
-  <label>Date of Appointment:<br>
-    <input type="date" id="apptDate" name="apptDate" required><br>
+  <label class="form-section">
+    <span>Date of Appointment:</span>
+    <input type="date" id="apptDate" name="apptDate" required>
   </label>
-  <label>Time of Appointment:<br>
-    <input type="time" id="apptTime" name="apptTime" required><br>
+  <label class="form-section">
+    <span>Time of Appointment:</span>
+    <input type="time" id="apptTime" name="apptTime" required>
   </label>
-  <label>Appointment Type:<br>
-    <input type="text" id="apptType" placeholder="Please enter what your appointment is" name="apptType"><br>
+  <label class="form-section">
+    <span>Appointment Location:</span>
+    <input type="text" id="apptLocation" placeholder="Please enter the location of your appointment" required>
   </label>
-  <label>Provider's Name:<br>
-    <input type="text" id="apptProvider" placeholder="Please enter the name of your provider" name="apptProvider"><br>
+  <label class="form-section">
+    <span>Appointment Type:</span>
+    <input type="text" id="apptType" placeholder="Please enter what your appointment is" name="apptType">
   </label>
-  <label>Information about your Appointment:<br>
-    <textarea id="apptInfo" placeholder="Info about your appointment" name="apptInfo"></textarea><br>
+  <label class="form-section">
+    <span>Provider's Name:</span>
+    <input type="text" id="apptProvider" placeholder="Please enter the name of your provider" name="apptProvider">
   </label>
-  <button type="submit" id="addAppointment">
-    Add
-  </button>
-  <button type="reset" id="deleteAppointment">
-    Clear
-  </button>
+  <label class="form-section">
+    <span>Information about your Appointment:</span>
+    <textarea id="apptInfo" placeholder="Info about your appointment" name="apptInfo"></textarea>
+  </label>
+  <div class="button-container">
+    <button type="submit" id="addAppointment">
+      Add
+    </button>
+    <button type="reset" id="deleteAppointment">
+      Clear
+    </button>
+  </div>
 </form>
