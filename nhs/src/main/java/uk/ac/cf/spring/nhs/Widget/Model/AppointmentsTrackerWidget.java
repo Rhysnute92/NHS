@@ -4,6 +4,6 @@ public class AppointmentsTrackerWidget implements Widget {
 
     @Override
     public String render() {
-        return "AppointmentsTrackerWidget";
+        return "fragments/widgets/appointmentsTracker";
     }
 }
