@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -256,7 +257,7 @@ class UserQuestionnaireControllerIntegrationTests {
          * userQuestionnaire.setUserID(patientId);
          * userQuestionnaire.setQuestionnaire(questionnaire);
          * userQuestionnaire.setQuestionnaireCreatedDate(LocalDateTime.now());
-         * userQuestionnaire.setQuestionnaireDueDate(LocalDateTime.now().plusDays(7));
+         * userQuestionnaire.setQuestionnaireDueDate(LocalDate.now().plusDays(7));
          * 
          * when(userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire))
          * .thenReturn(userQuestionnaire);

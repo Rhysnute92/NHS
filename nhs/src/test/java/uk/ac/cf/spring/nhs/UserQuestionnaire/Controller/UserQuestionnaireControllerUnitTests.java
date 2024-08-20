@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -224,6 +225,8 @@ class UserQuestionnaireControllerUnitTests {
     void testAssignQuestionnaireToPatient() {
         Long patientId = 456L;
         userQuestionnaire.setUserID(patientId);
+        userQuestionnaire.setQuestionnaireDueDate(LocalDate.now().plusDays(7)); // Setting a due date 7 days in the
+                                                                                // future
         when(userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire))
                 .thenReturn(userQuestionnaire);
 
