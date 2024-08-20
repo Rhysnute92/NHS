@@ -9,25 +9,27 @@
 <body>
 <div th:replace="~{common/fragments/header}"></div>
 <nav th:replace="~{common/fragments/navbar}"></nav>
-<div id="header">
-  <h1>Appointment Calendar</h1>
-  <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
-</div>
-<div class="container-calendar">
-  <div id="left">
-    <div id="appointments">
-      <h3>Add Appointment</h3>
-      <form th:replace="~{calendar/fragments/appointmentForm}"></form>
+<main>
+  <div id="header">
+    <h1>Appointment Calendar</h1>
+    <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
+  </div>
+  <div class="container-calendar">
+    <div id="left">
+      <div id="appointments">
+        <h3>Add Appointment</h3>
+        <form th:replace="~{calendar/fragments/appointmentForm}"></form>
+      </div>
     </div>
-  </div>
 
-  <div id="center">
-    <h3>Appointment Schedule</h3>
-    <ul id="apptList">
-    </ul>
+    <div id="center">
+      <h3>Appointment Schedule</h3>
+      <ul id="apptList">
+      </ul>
+    </div>
+    <div id="right" th:insert="~{calendar/fragments/calendar}"></div>
   </div>
-  <div id="right" th:insert="~{calendar/fragments/calendar}"></div>
-</div>
+</main>
 <script th:src="@{/js/calendar/calendar.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>

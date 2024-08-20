@@ -6,21 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body class="mobilePages">
-    <div class="container">
-      <div th:replace="~{common/fragments/header}"></div>
-      <div class="mobileFrag">
-      <div th:replace="~{guest/fragments/appointment :: info1}"></div>
-        </div>
-    </div>
-    <div class="btn-container">
-      <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
-    </div>
-    <div class="back-btn" onclick="location.href='/guest'">
-      Back
-    </div>
-  <script th:src="@{/js/common/header.js}"></script>
+    <main>
+      <div class="container">
+        <div th:replace="~{common/fragments/header}"></div>
+        <div class="mobileFrag">
+        <div th:replace="~{guest/fragments/appointment :: info1}"></div>
+          </div>
+      </div>
+      <div class="btn-container">
+        <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
+      </div>
+      <div class="back-btn" onclick="location.href='/guest'">
+        Back
+      </div>
+    </main>
+    <script th:src="@{/js/common/header.js}"></script>
     <script th:src="@{/js/Guest/guestMobile.js}"></script>
     <script th:src="@{/js/Guest/guest.js}"></script>
-
   </body>
 </html>

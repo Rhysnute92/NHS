@@ -9,7 +9,7 @@
   <body>
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-    <div class="management-container">
+    <main class="management-container">
       <div class="management-title-container">
         <h1 class="management-desktop-title">My Lymphoedema Management Plan</h1>
         <p class="management-desktop-subtitle">
@@ -89,7 +89,7 @@
           <!-- Add more treatment items as needed -->
         </div>
       </section>
-    </div>
+    </main>
     <script th:src="@{/js/common/header.js}"></script>
     <script type="module" th:src="@{/js/management/management.js}"></script>
   </body>
