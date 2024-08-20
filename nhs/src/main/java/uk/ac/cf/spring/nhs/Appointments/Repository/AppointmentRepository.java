@@ -9,5 +9,5 @@ import org.springframework.data.repository.query.Param;
 import uk.ac.cf.spring.nhs.Appointments.Model.Appointment;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
-    List<Appointment> findByUserID(Integer userId);
+    List<Appointment> findByUserID(Long userId);
 }

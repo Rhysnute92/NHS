@@ -18,11 +18,19 @@
 @import url("/css/utility/variables.css");
 @import url("/css/utility/variables.css");
 
-body {
+* {
   font-family: var(--regular-font-family);
+}
+
+body {
   background-color: #e8edee;
   margin: 0;
   padding: 0;
+}
+
+.subtitle {
+  font-size: 1.5em;
+  color: var(--nhs-dark-grey);
 }
 
 .profile-icon {

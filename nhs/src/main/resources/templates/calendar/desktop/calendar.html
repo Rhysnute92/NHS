@@ -3,32 +3,43 @@
 <head>
   <title>Appointment Calendar</title>
   <link rel="stylesheet" th:href="@{/css/calendar/desktop/calendar.css}"/>
+  <link rel="stylesheet" th:href="@{/css/calendar/addAppointment.css}"/>
   <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
 <div th:replace="~{common/fragments/header}"></div>
 <nav th:replace="~{common/fragments/navbar}"></nav>
-<div id="header">
-  <h1>Appointment Calendar</h1>
-  <p>You do not have to add lymphoedema appointments these will be done by your physician</p>
-</div>
-<div class="container-calendar">
-  <div id="left">
+<main>
+  <div id="header">
+    <h1>Appointment Calendar</h1>
+    <p class="subtitle">View your lymphoedema appointments and add your other medical appointments</p>
+  </div>
+  <div class="container-calendar">
     <div id="appointments">
-      <h3>Add Appointment</h3>
-      <form th:replace="~{calendar/fragments/appointmentForm}"></form>
+      <h2>Appointment Schedule</h2>
+      <div class="no-appointments">
+        <p>No appointments scheduled yet</p>
+      </div>
+      <ul id="apptList">
+      </ul>
+      <custom-modal class="appt-modal">
+        <button slot="open-btn" id="add-appt-btn" class="add-appt-btn">Add Appointment</button>
+        <span slot="title" class="modal-title">Add Appointment</span>
+        <div slot="content" class="modal-content">
+          <div th:replace="~{calendar/fragments/appointmentForm}"></div>
+        </div>
+      </custom-modal>
+    </div>
+
+    <div id="center">
+      <div th:insert="~{calendar/fragments/calendar}"></div>
     </div>
   </div>
-
-  <div id="center">
-    <h3>Appointment Schedule</h3>
-    <ul id="apptList">
-    </ul>
-  </div>
-  <div id="right" th:insert="~{calendar/fragments/calendar}"></div>
-</div>
+</main>
+<script th:src="@{/js/common/customModal.js}"></script>
 <script th:src="@{/js/calendar/calendar.js}"></script>
+<script th:src="@{/js/calendar/addAppointment.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>
