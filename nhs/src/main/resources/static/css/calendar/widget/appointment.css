@@ -57,3 +57,18 @@
 .add-appointment-button:hover {
     background-color: #4338ca; /* Darker shade of your primary color */
 }
+
+/* Add this to your CSS file, e.g., dashboard.css */
+.widget {
+    background-color: #f5f5f5;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.widget h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}
+
