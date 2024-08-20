@@ -26,14 +26,8 @@ public class CalendarController {
      * @return
      */
     @GetMapping("/calendar")
-    public ModelAndView Calendar(HttpServletRequest request,
-                                 @AuthenticationPrincipal CustomUserDetails userDetails) {
+    public ModelAndView Calendar(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-
-        Long userId = userDetails.getUserId();
-        List<Appointment> appointments = appointmentService.getAppointmentsByUserId(userId);
-        System.out.println(appointments);
-        modelAndView.addObject("appointments", appointments);
 
         if (DeviceDetector.isMobile(request)) {
             modelAndView.setViewName("calendar/mobile/calendar");

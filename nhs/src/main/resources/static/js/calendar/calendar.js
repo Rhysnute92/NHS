@@ -1,6 +1,19 @@
+let appointments = [];
+
 // Current month and year for the calendar
 let currentMonth;
 let currentYear;
+
+const createYear = generateYearRange(1970, 2050);
+document.getElementById("year").innerHTML = createYear;
+
+function generateYearRange(start, end) {
+    let years = "";
+    for (let year = start; year <= end; year++) {
+        years += `<option value='${year}'>${year}</option>`;
+    }
+    return years;
+}
 
 // DOM elements for year and month selectors
 const selectYear = document.getElementById("year");
@@ -9,13 +22,6 @@ const selectMonth = document.getElementById("month");
 // Month and day names for calendar
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-// Create table header for days of the week
-let dataHead = "<tr>";
-for (let day of days) {
-    dataHead += `<th data-days='${day}'>${day}</th>`;
-}
-dataHead += "</tr>";
 
 const monthAndYear = document.getElementById("monthAndYear");
 
@@ -138,3 +144,25 @@ function hasAppointmentOnDate(date, month, year) {
 function daysInMonth(month, year) {
     return 32 - new Date(year, month, 32).getDate();
 }
+
+async function fetchAppointments() {
+    try {
+        const response = await fetch('/appointments');
+        if (response.ok) {
+            appointments = await response.json();
+            showCalendar(currentMonth, currentYear);
+            for (let appointment of appointments) {
+                displayAppointment(appointment);
+            }
+
+        } else {
+            console.error("Failed to fetch appointments");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetchAppointments();
+});

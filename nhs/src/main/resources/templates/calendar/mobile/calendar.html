@@ -23,21 +23,10 @@
     <div id="mobileMonth" th:replace="~{calendar/fragments/calendar}"></div>
     <div id="appointments">
         <h2>Appointment Schedule</h2>
-        <div th:if="${appointments.isEmpty()}" class="no-appointments">
+        <div class="no-appointments">
             <p>No appointments scheduled yet</p>
         </div>
         <ul id="apptList">
-            <li th:each="appointment: ${appointments}" class="appt-item">
-                <span>
-                    <strong th:text="${appointment.apptType}"></strong> -
-                    <span th:text="${appointment.apptInfo}"></span>
-                    on
-                    <span th:text="${#temporals.format(appointment.apptDateTime, 'MM/dd/yyyy')}"></span>
-                    at
-                    <span th:text="${#temporals.format(appointment.apptDateTime, 'hh:mm a')}"></span>
-                </span>
-                <button class="delete-appt" th:onclick="deleteAppointment([[${appointment.apptID}]])">Delete</button>
-            </li>
         </ul>
         <!-- Button to add a new appointment, redirects to add appointment page -->
         <button onclick="location.href='/addappointment'" id="add-appt-btn" class="add-appt-btn">Add Appointment</button>

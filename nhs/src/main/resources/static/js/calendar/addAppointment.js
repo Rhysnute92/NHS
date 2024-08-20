@@ -1,6 +1,3 @@
-// Array to store appointment data
-let appointments = [];
-
 const apptModal = document.querySelector('.appt-modal');
 // DOM elements for appointment form fields
 const apptDateInput = document.getElementById("apptDate");
@@ -54,14 +51,12 @@ async function addAppointment() {
             }
 
             const newAppointment = await response.json();
-            // appointments.push(newAppointment);
+            appointments.push(newAppointment);
             displayAppointment(newAppointment);
             apptForm.reset();
 
             // Update calendar and display appointments
-            if (typeof showCalendar === "function") {
-                showCalendar(currentMonth, currentYear);
-            }
+            showCalendar(currentMonth, currentYear);
         }
     } catch (error) {
         console.error("Error:", error);
@@ -82,11 +77,10 @@ function deleteAppointment(appointmentID) {
         }
 
         // Update calendar and display appointments
-        if (typeof showCalendar === "function") {
-            showCalendar(currentMonth, currentYear);
-        }
+        showCalendar(currentMonth, currentYear);
     }
 }
+
 
 // Function to display appointments in the list
 function displayAppointment(appointment) {
