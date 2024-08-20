@@ -24,10 +24,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="r : ${results}" onclick="window.location='/patientprofile/1';">
-                <td th:text="${r.nhsNumber}"></td>
-                <td th:text="${r.patientName + ' ' + r.patientLastName}"></td>
-                <td th:text="${r.patientDOB}"></td>
+            <tr th:each="r : ${results}">
+                <td><a th:href="@{'/patientprofile/' + ${r.userId}}" class="row-link">[[${r.nhsNumber}]]</a></td>
+                <td><a th:href="@{'/patientprofile/' + ${r.userId}}" tabindex="-1" class="row-link">[[${r.patientName}]] [[${r.patientLastName}]]</a></td>
+                <td><a th:href="@{'/patientprofile/' + ${r.userId}}" tabindex="-1" class="row-link">[[${r.patientDOB}]]</a></td>
             </tr>
         </tbody>
     </table>
