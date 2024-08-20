@@ -2,10 +2,8 @@ package uk.ac.cf.spring.nhs.Provider.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import uk.ac.cf.spring.nhs.AddPatient.Entity.Patient;
 import uk.ac.cf.spring.nhs.AddPatient.Repository.PatientRepository;
 import uk.ac.cf.spring.nhs.Appointments.Model.Appointment;
@@ -18,6 +16,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Controller
+@RequestMapping("/provideradd")
 public class ProviderAppointmentController {
 
     @Autowired
@@ -31,7 +30,8 @@ public class ProviderAppointmentController {
         return List.of(
                 new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
                 new NavMenuItem("Set plan", "", "fa-solid fa-book"),
-                new NavMenuItem("Appointments", "/calendar", "fa-solid fa-user-check"),
+                new NavMenuItem("Appointments", "/calendar",
+                        "fa-solid fa-user-check"),
                 new NavMenuItem("Questionnaires", "/questionnairehub",
                         "fa-solid fa-book"),
                 new NavMenuItem("Patient trends", " ", "fa-solid fa-user-check"),
@@ -70,5 +70,10 @@ public class ProviderAppointmentController {
             appointmentService.deleteAppointment(3);
         }
         return "redirect:/patients/" + patientId + "/appointments";
+    }
+
+    @GetMapping
+    public String showProviderAddAppointment() {
+        return ("patientprofile/appointmentFormProvider");
     }
 }
