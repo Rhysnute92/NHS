@@ -1,5 +1,7 @@
-/* Import utility styles */
-@import url('/static/css/utility/variables.css');
+* {
+    box-sizing: border-box;
+    line-height: 1.5rem;
+}
 
 /* Container for the calendar, using a grid layout */
 .container-calendar {
@@ -7,60 +9,17 @@
     overflow: auto;
     justify-content: space-between;
     display: grid;
-    grid-template-columns: 1fr 3fr; /* Two-column layout */
+    grid-template-columns: 1fr 3fr;
 }
 
-/* Header styling */
-#header h1 {
-    font-size: 2em;
-}
-
-/* Appointments section styling */
+/* Styling for appointments section */
 #appointments {
-    padding: 10px;
-    margin: 0.5rem;
-    width: 100%;
-    position: relative;
+    border-right: 2px solid lightgrey;
+    padding-right: 1rem;
 }
 
-/* General header styling */
-#header {
-    color: #000000;
-    position: relative;
-    margin-left: 1rem;
-}
-
-#header p {
-    font-size: 1.5em;
-}
-
-/* Styling for headings within the appointments section */
-#apptForm h3 {
-    color: black;
-    margin: 0;
-}
-
-/* Input and textarea styling within the appointments section */
-#apptForm input[type="time"],
-#apptForm input[type="date"],
-#apptForm input[type="text"],
-#apptForm textarea {
-    margin: 10px 0;
-    padding: 5px;
-    width: 75%;
-    font-family: 'Frutiger', sans-serif;
-}
-
-/* Button styling within the appointments section */
-#apptForm button {
-    background: #005EB8;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 4rem;
-    height: 2rem;
+.no-appointments p {
+    color: var(--nhs-mid-grey);
 }
 
 /* Center section styling in the grid */
@@ -69,38 +28,21 @@
     grid-column: 2;
     padding-right: 4rem;
     padding-left: 4rem;
-    padding-top: 1rem;
-}
-
-/* Header styling for the center section */
-#center h3 {
-    color: black;
-    font-size: 2em;
-    position: relative;
-}
-
-#left h3 {
-    color: black;
-    font-size: 2em;
-    position: relative;
-}
-
-/* Appointment list styling */
-#apptList {
-    list-style: none;
-    padding: 0;
-    position: relative;
-}
-
-/* Styling for list items within the appointment list */
-#apptList li {
-    text-decoration: underline;
 }
 
 /* Left section styling in the grid */
 #left {
     margin-left: 1rem;
     grid-column: 1;
+}
+
+/* Appointment list styling */
+#apptList {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 /* Styling for the delete event button */
@@ -127,37 +69,17 @@
 .table-calendar {
     border-collapse: collapse;
     width: 100%;
-    position: relative;
 }
 
-/* Styling for table cells and headers */
-.table-calendar td {
-    border: 1px solid #e2e2e2;
-    text-align: center;
-    vertical-align: top;
-    width: 3rem;
-    height: 3rem;
-    padding: 0;
-}
-
-.table-calendar th {
-    border: 1px solid #e2e2e2;
-    text-align: center;
-    vertical-align: top;
-    width: 3rem;
-    height: 3rem;
-    padding-top: 1rem;
-}
 
 /* Styling for selected date in the calendar */
 .date-picker.selected {
     background-color: #f2f2f2;
     font-weight: bold;
     font-size: 1.5em;
-    outline: 1px dashed #005eb8;
+    border: 1px dashed #005eb8;
 }
 
-/* Additional styling for selected date */
 .date-picker.selected span {
     border-bottom: 2px solid currentColor;
 }
@@ -169,48 +91,35 @@
     cursor: pointer;
 }
 
-
-
 /* Styling for the month and year heading */
 #monthAndYear {
-    position: relative;
     text-align: center;
     margin-top: 0;
+    font-size: 2em;
 }
 
 /* Styling for the calendar button container */
 .button-container-calendar {
     position: relative;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
     overflow: hidden;
     clear: both;
 }
 
-/* Styling for add appointment button */
-#openaddappt {
-    width: 8rem;
-    height: 2rem;
-    color: white;
-    background-color: #005EB8;
-}
-
-/* Styling for the previous button */
 #previous {
     float: left;
-    margin-left: 3rem;
+    margin-left: 2rem;
 }
 
-/* Styling for the next button */
 #next {
     float: right;
-    margin-right: 3rem;
+    margin-right: 2rem;
 }
 
 /* Footer container styling */
 .footer-container-calendar {
-    text-align: center;
     padding: 10px 0;
-    position: relative;
+    text-align: center;
 }
 
 /* Styling for the select dropdown in the footer */
@@ -220,50 +129,10 @@
     color: #585858;
     border: 1px solid #bfc5c5;
     border-radius: 3px;
-    padding: 5px;
 }
 
-/* Calendar container header styling */
-.calendar-container header {
-    display: flex;
-    align-items: center;
-    padding: 25px 30px 10px;
-    justify-content: space-between;
-}
-
-/* Navigation buttons styling within the calendar header */
-header .calendar-navigation {
-    display: flex;
-}
-
-/* Individual navigation button styling */
-header .calendar-navigation span {
-    height: 38px;
-    width: 38px;
-    margin: 0 1px;
-    cursor: pointer;
-    text-align: center;
-    line-height: 38px;
-    border-radius: 50%;
-    user-select: none;
-    color: #aeabab;
-    font-size: 1.9rem;
-}
-
-/* Adjust the right margin for the last navigation button */
-.calendar-navigation span:last-child {
-    margin-right: -10px;
-}
-
-/* Hover effect for navigation buttons */
-header .calendar-navigation span:hover {
-    background: #f2f2f2;
-}
-
-/* Current date styling in the calendar header */
-header .calendar-current-date {
-    font-weight: 500;
-    font-size: 1.45rem;
+#header {
+    margin-bottom: 2rem;
 }
 
 /* Calendar body styling */
@@ -271,7 +140,6 @@ header .calendar-current-date {
     padding: 20px;
 }
 
-/* Styling for unordered lists in the calendar body */
 .calendar-body ul {
     list-style: none;
     flex-wrap: wrap;
@@ -279,25 +147,21 @@ header .calendar-current-date {
     text-align: center;
 }
 
-/* Styling for the calendar dates section */
 .calendar-body .calendar-dates {
     margin-bottom: 20px;
 }
 
-/* General list item styling in the calendar body */
 .calendar-body li {
     width: calc(100% / 7);
     font-size: 1.07rem;
     color: #414141;
 }
 
-/* Styling for weekdays in the calendar */
 .calendar-body .calendar-weekdays li {
     cursor: default;
     font-weight: 500;
 }
 
-/* Styling for individual date items in the calendar */
 .calendar-body .calendar-dates li {
     margin-top: 30px;
     position: relative;
@@ -305,17 +169,14 @@ header .calendar-current-date {
     cursor: pointer;
 }
 
-/* Styling for inactive (non-clickable) dates */
 .calendar-dates li.inactive {
     color: #aaa;
 }
 
-/* Styling for active (selected) dates */
 .calendar-dates li.active {
     color: #fff;
 }
 
-/* Common styling for all date items in the calendar */
 .calendar-dates li::before {
     position: absolute;
     content: "";
@@ -328,37 +189,33 @@ header .calendar-current-date {
     transform: translate(-50%, -50%);
 }
 
-/* Background color for active (selected) dates */
 .calendar-dates li.active::before {
     background: #6332c5;
 }
 
-/* Hover effect for non-active dates */
 .calendar-dates li:not(.active):hover::before {
     background: #e4e1e1;
 }
 
-/* The modal container, hidden by default */
+/* Modal styling */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    width: 100%;
+    height: 100%;
 }
 
-/* Modal content/box */
 .modalContent {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 80%;
 }
 
-/* The close button */
 .popup-close {
     color: #aaa;
     float: right;
@@ -372,67 +229,140 @@ header .calendar-current-date {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* Toast notification styling */
 .toast {
-    visibility: hidden; /* Hidden by default */
-    min-width: 250px; /* Set a minimum width */
-    margin-left: -125px; /* Center the toast */
-    background-color: #333; /* Black background */
-    color: #fff; /* White text */
-    text-align: center; /* Center align text */
-    border-radius: 2px; /* Rounded corners */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 50%; /* Center horizontally */
-    bottom: 30px; /* 30px from the bottom */
-    font-size: 17px; /* Font size */
-    padding: 16px; /* Padding */
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    padding: 16px;
 }
 
 .toast-message {
-    margin: 0; /* Remove default margin */
+    margin: 0;
 }
 
-/* Show the toast notification */
 .toast.show {
-    visibility: visible; /* Show the toast */
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s; /* Fade in and out */
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-/* Fade in animation */
 @-webkit-keyframes fadein {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-/* Fade out animation */
 @-webkit-keyframes fadeout {
     from { opacity: 1; }
     to { opacity: 0; }
 }
 
-/* Fade in animation */
 @keyframes fadein {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-/* Fade out animation */
 @keyframes fadeout {
     from { opacity: 1; }
     to { opacity: 0; }
 }
 
-/*css for showing on calendar*/
+/* Tooltip styling for calendar */
 .appt-tooltip {
-    background-color: var(--nhs-light-green);
+    background-color: var(--nhs-green);
+    color: var(--nhs-white);
     border-radius: 5px;
-    padding: 0.2rem;
     font-size: 0.7rem;
     overflow: hidden;
     text-align: center;
     white-space: nowrap;
-    max-width: 100%;
+    width: 100%;
+    margin-top: 0.2rem;
     margin-bottom: 0.2rem;
 }
 
+.appt-tooltips {
+    width: 90%;
+}
+
+/* Mobile-specific styles */
+#add-apt-btn {
+    float: left;
+    background: #005EB8;
+    color: white;
+    position: relative;
+    margin-left: 2rem;
+    width: 8rem;
+    height: 2rem;
+}
+
+#schedule {
+    float: right;
+    background: #005EB8;
+    color: white;
+    position: relative;
+    margin-right: 2rem;
+    width: 8rem;
+    height: 2rem;
+}
+
+#mobileSchedule {
+    position: relative;
+    grid-row: 2;
+}
+
+main {
+    margin: 2rem;
+}
+
+.grid-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-top: 20px;
+}
+
+.days-header {
+    display: contents;
+}
+
+.calendar-grid {
+    display: contents;
+}
+
+.days-header > div, .calendar-grid > div {
+    text-align: center;
+    border: 1px solid lightgrey;
+    display: flex;
+    flex-direction: column;
+    height: 5rem;
+    align-items: center;
+    overflow: hidden;
+}
+
+.date-picker {
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #2196F3;
+}
+
+.appt-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: lightgrey;
+}
