@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 1.1rem;
 }
 
 h1 {
@@ -191,22 +190,17 @@ input[type="radio"] {
     display: block;
 }
 
-.add-measurement-button, .checkin-submit {
-    font-family: var(--regular-font-family);
-    background-color: var(--nhs-light-green);
-    color: var(--nhs-white);
-    border: none;
-    padding: 0.5rem;
-    font-size: 1rem;
-    width: 100%;
-    /*border-radius: 0.4rem;*/
-    transition: opacity 0.5s;
-}
-
-.add-measurement-button:hover, .checkin-submit:hover {
-    cursor: pointer;
-    opacity: 80%;
-}
+/*.add-measurement-button, .checkin-submit {*/
+/*    font-family: var(--regular-font-family);*/
+/*    background-color: var(--nhs-light-green);*/
+/*    color: var(--nhs-white);*/
+/*    border: none;*/
+/*    padding: 0.5rem;*/
+/*    font-size: 1rem;*/
+/*    width: 100%;*/
+/*    !*border-radius: 0.4rem;*!*/
+/*    transition: opacity 0.5s;*/
+/*}*/
 
 .measurement {
     display: flex;
@@ -240,12 +234,6 @@ input[type="radio"] {
     width: 2rem;
     height: 2rem;
 }
-
-.measurement .remove-measurement-button:hover {
-    cursor: pointer;
-    opacity: 80%;
-}
-
 
 
 .measurement * {
