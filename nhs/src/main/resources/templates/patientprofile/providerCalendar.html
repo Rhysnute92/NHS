@@ -20,7 +20,13 @@
 <div id="tabs">
   <button onclick="showList()">View List</button>
   <button onclick="showProviderCalendar()">View Calendar</button>
-  <button onclick="showList()">Add Appointment</button>
+  <custom-modal class="appt-modal">
+    <button slot="open-btn" id="add-appt-btn" class="add-appt-btn">Add Appointment</button>
+    <span slot="title" class="modal-title">Add Appointment</span>
+    <div slot="content" class="modal-content">
+      <div th:replace="~{appointmentFormProvider}"></div>
+    </div>
+  </custom-modal>
 </div>
 <div id="appointment-list" class="active">
   <table>

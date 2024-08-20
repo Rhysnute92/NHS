@@ -16,7 +16,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Controller
-@RequestMapping("/provider-calendar")
+@RequestMapping("/provider-appointments")
 public class ProviderAppointmentController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class ProviderAppointmentController {
         return List.of(
                 new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
                 new NavMenuItem("Set plan", "", "fa-solid fa-book"),
-                new NavMenuItem("Appointments", "/calendar",
+                new NavMenuItem("Appointments", "/provider-calendar",
                         "fa-solid fa-user-check"),
                 new NavMenuItem("Questionnaires", "/questionnairehub",
                         "fa-solid fa-book"),
