@@ -14,7 +14,7 @@
 }
 
 /* Button styling within the appointments section */
-#apptForm button, .add-appt-btn {
+#addAppointment, .add-appt-btn {
     background: var(--nhs-green);
     color: white;
     border: none;
@@ -25,7 +25,7 @@
     height: 2rem;
 }
 
-#apptForm button:hover, .add-appt-btn:hover {
+#addAppointment:hover, .add-appt-btn:hover {
     background-color: var(--nhs-dark-green);
 }
 
@@ -35,6 +35,19 @@
     gap: 0.5rem;
 }
 
+#deleteAppointment {
+    background-color: var(--nhs-mid-grey);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    min-width: 40%;
+    height: 2rem;
+}
 
+#deleteAppointment:hover {
+    background-color: var(--nhs-dark-grey);
+}
 
 
