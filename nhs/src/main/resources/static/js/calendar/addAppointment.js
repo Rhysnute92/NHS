@@ -17,7 +17,9 @@ const apptForm = document.getElementById("apptForm");
 if (apptForm) {
     apptForm.addEventListener("submit", function (evt) {
         evt.preventDefault();
-        addAppointment();
+        addAppointment().then(() => {
+            apptModal.hide();
+        });
     });
 }
 
@@ -46,19 +48,19 @@ async function addAppointment() {
         // Check if the request was successful
         if (response.status === 201) {
             // Redirect to calendar if on the appointment page
-            if (window.location.href.includes("appt")) {
+            if (!window.location.href.includes("calendar")) {
                 window.location.href = "/calendar";
             }
 
             const newAppointment = await response.json();
-            appointments.push(newAppointment);
+            // appointments.push(newAppointment);
+            displayAppointment(newAppointment);
             apptForm.reset();
 
             // Update calendar and display appointments
             if (typeof showCalendar === "function") {
                 showCalendar(currentMonth, currentYear);
             }
-            displayAppointments();
         }
     } catch (error) {
         console.error("Error:", error);
@@ -70,24 +72,28 @@ function deleteAppointment(appointmentID) {
     let appointmentIndex = appointments.findIndex((appointment) => appointment.id === appointmentID);
 
     if (appointmentIndex !== -1) {
-        appointments.splice(appointmentIndex, 1);
+        document.querySelector(`[data-id="${appointmentID}"]`).remove();
 
         // Update calendar and display appointments
         if (typeof showCalendar === "function") {
             showCalendar(currentMonth, currentYear);
         }
-        displayAppointments();
     }
 }
 
 // Function to display appointments in the list
-function displayAppointments() {
-    apptList.innerHTML = "";
-    for (let appointment of appointments) {
+function displayAppointment(appointment) {
         let apptDate = new Date(appointment.apptDateTime);
         if (apptDate.getMonth() === currentMonth && apptDate.getFullYear() === currentYear) {
             let listItem = document.createElement("li");
-            listItem.innerHTML = `<strong>${appointment.apptType}</strong> - ${appointment.apptInfo} on ${apptDate.toLocaleDateString()} at ${apptDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+            listItem.innerHTML = `
+                <span>
+                    <strong><span>${appointment.apptType}</span></strong>
+                    - <span>${appointment.apptInfo}</span>
+                    on <span>${apptDate.toLocaleDateString()}</span>
+                    at <span>${apptDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                </span>            
+              `;
             listItem.className = "appt-item";
 
             // Create a delete button for each appointment
@@ -100,10 +106,11 @@ function displayAppointments() {
 
             listItem.appendChild(deleteButton);
             apptList.appendChild(listItem);
-        }
     }
 }
 
-apptModal.addEventListener('close', () => {
-    apptForm.reset();
-});
+if (apptModal) {
+    apptModal.addEventListener('close', () => {
+        apptForm.reset();
+    });
+}
