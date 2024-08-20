@@ -39,35 +39,44 @@ public class QuestionnaireFormController {
     @Autowired
     private UserQuestionService userQuestionService;
 
-    @GetMapping("/questionnaire/{id}")
+    @GetMapping("/questionnaire/{userQuestionnaireId}")
     public String getQuestionnairePage(
-            @PathVariable Long id,
-            @RequestParam("createdDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime createdDate,
+            @PathVariable Long userQuestionnaireId,
+            @RequestParam("questionnaireId") Long questionnaireId,
             Model model) {
+
+        // Retrieve the authenticated user's ID
         Object principal = authenticationFacade.getAuthentication().getPrincipal();
         Long userId = ((CustomUserDetails) principal).getUserId();
 
-        // Fetch the specific UserQuestionnaire using userId, questionnaireId, and
-        // createdDate
+        // Fetch the UserQuestionnaire by its ID
         Optional<UserQuestionnaire> userQuestionnaireOpt = userQuestionnaireService
-                .getUserQuestionnaireByUserIDAndQuestionnaireIdAndQuestionnaireCreatedDate(userId, id, createdDate);
+                .getUserQuestionnaireById(userQuestionnaireId);
 
         if (userQuestionnaireOpt.isPresent()) {
             UserQuestionnaire userQuestionnaire = userQuestionnaireOpt.get();
-            model.addAttribute("questionnaire", userQuestionnaire.getQuestionnaire());
 
-            // Check if the questionnaireStartDate is null and set it to now if it is
-            if (userQuestionnaire.getQuestionnaireStartDate() == null) {
-                userQuestionnaire.setQuestionnaireStartDate(LocalDateTime.now());
+            // Ensure the UserQuestionnaire belongs to the authenticated user and matches
+            // the questionnaireId
+            if (userQuestionnaire.getUserID().equals(userId)
+                    && userQuestionnaire.getQuestionnaire().getId().equals(questionnaireId)) {
+                model.addAttribute("questionnaire", userQuestionnaire.getQuestionnaire());
+
+                // Check if the questionnaireStartDate is null and set it to now if it is
+                if (userQuestionnaire.getQuestionnaireStartDate() == null) {
+                    userQuestionnaire.setQuestionnaireStartDate(LocalDateTime.now());
+                }
+
+                // Mark the questionnaire as in progress
+                userQuestionnaire.setQuestionnaireInProgress(true);
+                userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
+
+                return "questionnaire/questionnaire";
+            } else {
+                return "error/404"; // Unauthorized access or mismatched questionnaire
             }
-
-            // Mark the questionnaire as in progress
-            userQuestionnaire.setQuestionnaireInProgress(true);
-            userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
-
-            return "questionnaire/questionnaire";
         } else {
-            return "error/404";
+            return "error/404"; // UserQuestionnaire not found
         }
     }
 

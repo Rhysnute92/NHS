@@ -1,12 +1,16 @@
 import { QuestionnaireManager } from "./QuestionnaireManager.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
-  const urlParams = new URLSearchParams(window.location.search);
-  const questionnaireId = urlParams.get("questionnaireId");
-  const userQuestionnaireId = window.location.pathname.split("/").pop();
+  // Extract the full query string from the URL
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
 
-  console.log(`Extracted userQuestionnaireId from URL: ${userQuestionnaireId}`);
-  console.log(`Extracted questionnaireId from URL: ${questionnaireId}`);
+  // Extract both IDs from the URL
+  const userQuestionnaireId = window.location.pathname.split("/").pop();
+  const questionnaireId = urlParams.get("questionnaireId");
+
+  console.log(`Extracted userQuestionnaireId from URL: ${userQuestionnaireId}`); // Debugging
+  console.log(`Extracted questionnaireId from URL: ${questionnaireId}`); // Debugging
 
   if (
     !userQuestionnaireId ||
@@ -14,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     !questionnaireId
   ) {
     console.error(
-      "No valid userQuestionnaire ID or questionnaire ID found in the URL"
+      "No valid userQuestionnaireId or questionnaireId found in the URL"
     );
     return;
   }
@@ -31,8 +35,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       event.preventDefault();
       const formData = new FormData(event.target);
       await questionnaireManager.submitQuestionnaire(
-        formData,
-        userQuestionnaireId
+        event,
+        userQuestionnaireId,
+        questionnaireId
       );
     });
 

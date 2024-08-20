@@ -221,23 +221,18 @@ public class UserQuestionnaireController {
         }
     }
 
-    /**
-     * Handles the saving of user responses for a specific questionnaire without
-     * marking it as complete.
-     *
-     * @param questionnaireId the ID of the questionnaire being saved
-     * @param responses       a map of question IDs to user responses
-     * @return a ResponseEntity indicating the result of the operation
-     */
-    @PostMapping("/save/{questionnaireId}")
+    @PostMapping("/save/{userQuestionnaireId}")
     public ResponseEntity<?> saveUserQuestions(
-            @PathVariable Long questionnaireId,
+            @PathVariable Long userQuestionnaireId,
             @RequestBody Map<String, String> responses) {
         try {
-            userQuestionService.saveResponsesWithoutCompletion(questionnaireId, responses);
+            userQuestionService.saveResponsesWithoutCompletion(userQuestionnaireId, responses);
+
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving responses");
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error saving responses: " + e.getMessage());
         }
     }
 }

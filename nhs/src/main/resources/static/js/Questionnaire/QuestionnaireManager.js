@@ -111,7 +111,7 @@ export class QuestionnaireManager {
         this.populatePreviousResponses(previousResponses);
       }
 
-      await this.updateUserQuestionnaireProgress(userQuestionnaireId);
+      /* await this.updateUserQuestionnaireProgress(userQuestionnaireId); */
     } catch (error) {
       console.error("Error loading questionnaire:", error);
     }
@@ -164,7 +164,7 @@ export class QuestionnaireManager {
     console.log("Populated form with previous responses.");
   }
 
-  async updateUserQuestionnaireProgress(questionnaireId) {
+  /*   async updateUserQuestionnaireProgress(questionnaireId) {
     console.log(`Updating questionnaire progress for ID: ${questionnaireId}`);
 
     try {
@@ -186,19 +186,22 @@ export class QuestionnaireManager {
     } catch (error) {
       console.error("Error updating user questionnaire progress:", error);
     }
-  }
+  } */
 
-  async saveQuestionnaire(formData, questionnaireId) {
-    console.log(`Saving form data for questionnaire ID: ${questionnaireId}`);
+  async saveQuestionnaire(formData, userQuestionnaireId) {
+    console.log(
+      `Saving form data for userQuestionnaireId: ${userQuestionnaireId}`
+    );
 
     const responses = {};
     formData.forEach((value, key) => {
       responses[key.replace("question_", "")] = value;
     });
+    console.log(responses);
 
     try {
       await postData(
-        `/api/userQuestionnaires/save/${questionnaireId}`,
+        `/api/userQuestionnaires/save/${userQuestionnaireId}`,
         responses
       );
       alert(
@@ -211,7 +214,7 @@ export class QuestionnaireManager {
     }
   }
 
-  async submitQuestionnaire(event) {
+  async submitQuestionnaire(event, userQuestionnaireId, questionnaireId) {
     event.preventDefault(); // Prevent the default form submission behavior
 
     console.log("event.target:", event.target);
@@ -222,10 +225,9 @@ export class QuestionnaireManager {
     console.log("event.target.dataset:", event.target.dataset);
 
     const formData = new FormData(event.target);
-    const questionnaireId = event.target.dataset.questionnaireId;
 
-    if (!questionnaireId) {
-      console.error("Questionnaire ID is missing in the form dataset.");
+    if (!userQuestionnaireId || !questionnaireId) {
+      console.error("UserQuestionnaire ID or Questionnaire ID is missing.");
       return;
     }
 
@@ -236,7 +238,9 @@ export class QuestionnaireManager {
       return;
     }
 
-    console.log(`Submitting form for questionnaire ID: ${questionnaireId}`);
+    console.log(
+      `Submitting form for userQuestionnaireId: ${userQuestionnaireId}, questionnaireId: ${questionnaireId}`
+    );
 
     const responses = {};
     formData.forEach((value, key) => {
@@ -245,13 +249,13 @@ export class QuestionnaireManager {
 
     try {
       const response = await postData(
-        `/api/userQuestions/submit/${questionnaireId}`, // Correct endpoint
+        `/api/userQuestions/submit/${userQuestionnaireId}`, // Correct endpoint
         responses
       );
       console.log("Form submitted successfully:", response);
 
       // Redirect to the questionnaire details page
-      window.location.href = `/questionnaire/${questionnaireId}/details`;
+      window.location.href = `/questionnaire/${userQuestionnaireId}/details`;
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("An error occurred while submitting the questionnaire.");

@@ -26,6 +26,10 @@ public class UserQuestionnaireService {
         return userQuestionnaireRepository.findByUserID(userID);
     }
 
+    public Optional<UserQuestionnaire> getUserQuestionnaireById(Long userQuestionnaireId) {
+        return userQuestionnaireRepository.findById(userQuestionnaireId);
+    }
+
     /**
      * Retrieves a list of completed user questionnaires for a specific user.
      *

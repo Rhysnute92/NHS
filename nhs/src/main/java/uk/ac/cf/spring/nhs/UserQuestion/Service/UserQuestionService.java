@@ -128,25 +128,24 @@ public class UserQuestionService {
         userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire); // Use the service to save
     }
 
-    /**
-     * Saves user responses for a given questionnaire without marking it as complete.
-     *
-     * @param userQuestionnaireId the ID of the user questionnaire being saved
-     * @param responses           a map of question IDs to user responses
-     */
     public void saveResponsesWithoutCompletion(Long userQuestionnaireId, Map<String, String> responses) {
-        Object principal = authenticationFacade.getAuthentication().getPrincipal();
-        Long userId = ((CustomUserDetails) principal).getUserId();
+        System.out.println("Saving responses for UserQuestionnaireID: " + userQuestionnaireId);
+        System.out.println("Responses: " + responses);
+
+        // Fetch the UserQuestionnaire directly by its ID
         Optional<UserQuestionnaire> userQuestionnaireOpt = userQuestionnaireService
-                .getUserQuestionnaire(userId, userQuestionnaireId);
+                .getUserQuestionnaireById(userQuestionnaireId);
         if (!userQuestionnaireOpt.isPresent()) {
             throw new IllegalArgumentException("Invalid user questionnaire ID");
         }
         UserQuestionnaire userQuestionnaire = userQuestionnaireOpt.get();
 
-        // Save each response
+        System.out.println("Fetched UserQuestionnaire: " + userQuestionnaire);
+
         responses.forEach((questionIdStr, answer) -> {
             Long questionId = Long.parseLong(questionIdStr);
+            System.out.println("Processing QuestionID: " + questionId + " with answer: " + answer);
+
             UserQuestion userQuestion = new UserQuestion();
             userQuestion.setUserQuestionnaire(userQuestionnaire);
 
@@ -154,19 +153,23 @@ public class UserQuestionService {
             question.setQuestionID(questionId);
             userQuestion.setQuestion(question);
 
-            // Determine if the answer is a text or a score response
             try {
+                // Attempt to parse the answer as an integer (score)
                 Integer score = Integer.parseInt(answer);
                 userQuestion.setUserResponseScore(score);
+                userQuestion.setUserResponseText(null); // Ensure text is null for scores
             } catch (NumberFormatException e) {
+                // If parsing fails, treat it as a text response
                 userQuestion.setUserResponseText(answer);
+                userQuestion.setUserResponseScore(null); // Ensure score is null for text responses
             }
 
             userQuestion.setResponseDateTime(LocalDateTime.now());
             userQuestionRepository.save(userQuestion);
+
+            System.out.println("Saved UserQuestion: " + userQuestion);
         });
 
-        // Do not mark the questionnaire as completed
         userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
     }
 }
