@@ -3,6 +3,7 @@ package uk.ac.cf.spring.nhs.Appointments.Model;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
+import groovyjarjarantlr4.v4.analysis.AnalysisPipeline;
 import jakarta.persistence.*;
 import uk.ac.cf.spring.nhs.AddPatient.Entity.Patient;
 
@@ -90,5 +91,13 @@ public class Appointment {
     public void setIsDeletable(Boolean isDeletable){this.isDeletable = isDeletable;}
 
     public void setPatient(Patient patient) {
+    }
+
+    public Appointment orElse(Object o) {
+        return null;
+    }
+
+    public Patient getPatient() {
+        return this.patient;
     }
 }

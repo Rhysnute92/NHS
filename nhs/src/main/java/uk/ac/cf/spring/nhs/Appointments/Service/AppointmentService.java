@@ -55,4 +55,7 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
+    public Appointment findById(Long appointmentsId) {
+        return null;
+    }
 }
