@@ -7,6 +7,7 @@ import lombok.Setter;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -24,7 +25,7 @@ public class Photo {
     private String url;
 
     @Column(name = "PhotoDate")
-    private Date date;
+    private LocalDate date;
 
     @Column(name = "PhotoBodyPart")
     private String bodyPart;
@@ -45,10 +46,10 @@ public class Photo {
     protected Photo() {}
 
     // Constructor for standalone photo
-    public Photo(String url, Date date, String bodyPart, long userId) {
+    public Photo(String url, String bodyPart, long userId, LocalDate date) {
         this.url = url;
-        this.date = date;
         this.bodyPart = bodyPart;
         this.userId = userId;
+        this.date = date;
     }
 }

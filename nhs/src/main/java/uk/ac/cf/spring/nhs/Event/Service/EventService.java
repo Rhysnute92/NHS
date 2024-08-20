@@ -11,6 +11,7 @@ import uk.ac.cf.spring.nhs.Symptom.Service.SymptomService;
 import uk.ac.cf.spring.nhs.Treatment.Entity.Treatment;
 import uk.ac.cf.spring.nhs.Treatment.Service.TreatmentService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +40,8 @@ public class EventService {
                 .map(symptomDTO -> new Symptom(
                         symptomDTO.getName(),
                         symptomDTO.getSeverity(),
-                        userId))
+                        userId,
+                        LocalDate.now()))
                 .collect(Collectors.toList());
 
         List<Treatment> treatments = eventDTO.getTreatments().stream()
@@ -47,7 +49,8 @@ public class EventService {
                 .map(treatmentDTO -> new Treatment(
                         treatmentDTO.getType(),
                         treatmentDTO.getDetails(),
-                        userId))
+                        userId,
+                        LocalDate.now()))
                 .collect(Collectors.toList());
 
         // Set symptoms and treatments in the event

@@ -18,6 +18,7 @@ import uk.ac.cf.spring.nhs.Symptom.DTO.SymptomDTO;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 import uk.ac.cf.spring.nhs.Symptom.Service.SymptomService;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -83,7 +84,7 @@ public class DiaryEntryService {
                 .map(photoDTO -> {
                     String photoUrl = fileStorageService.storeFile(photoDTO.getFile());
                     String bodyPart = photoDTO.getBodyPart();
-                    Photo photo = new Photo(photoUrl, new Date(), bodyPart, userId);
+                    Photo photo = new Photo(photoUrl, bodyPart, userId, LocalDate.now());
                     photo.setDiaryEntry(diaryEntry);
                     return photo;
                 })
@@ -94,7 +95,7 @@ public class DiaryEntryService {
         return symptomDTOs.stream()
                 .filter(symptomDTO -> symptomDTO.getSeverity() != null)
                 .map(symptomDTO -> {
-                    Symptom symptom = new Symptom(symptomDTO.getName(), symptomDTO.getSeverity(), userId);
+                    Symptom symptom = new Symptom(symptomDTO.getName(), symptomDTO.getSeverity(), userId, LocalDate.now());
                     symptom.setDiaryEntry(diaryEntry);
                     return symptom;
                 })
@@ -104,7 +105,7 @@ public class DiaryEntryService {
     private List<Measurement> processMeasurements(List<MeasurementDTO> measurementDTOs, Long userId, DiaryEntry diaryEntry) {
         return measurementDTOs.stream()
                 .map(measurementDTO -> {
-                    Measurement measurement = new Measurement(measurementDTO.getType(), measurementDTO.getValue(), measurementDTO.getUnit(), userId);
+                    Measurement measurement = new Measurement(measurementDTO.getType(), measurementDTO.getValue(), measurementDTO.getUnit(), userId, LocalDate.now());
                     measurement.setDiaryEntry(diaryEntry);
                     return measurement;
                 })

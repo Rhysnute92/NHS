@@ -8,6 +8,7 @@ import uk.ac.cf.spring.nhs.Files.Service.FileStorageService;
 import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
 import uk.ac.cf.spring.nhs.Photo.Repository.PhotoRepository;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,7 @@ public class PhotoService {
 
     public Photo savePhoto(PhotoDTO photoDTO, long userId) {
         String photoUrl = fileStorageService.storeFile(photoDTO.getFile());
-        Photo photo = new Photo(photoUrl, new Date(), photoDTO.getBodyPart(), userId);
+        Photo photo = new Photo(photoUrl, photoDTO.getBodyPart(), userId, LocalDate.now());
         return photoRepository.save(photo);
     }
 

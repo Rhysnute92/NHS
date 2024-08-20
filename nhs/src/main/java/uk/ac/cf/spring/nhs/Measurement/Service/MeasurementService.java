@@ -6,6 +6,7 @@ import uk.ac.cf.spring.nhs.Measurement.DTO.MeasurementDTO;
 import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Measurement.Repository.MeasurementRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -17,13 +18,18 @@ public class MeasurementService {
         this.measurementRepository = measurementRepository;
     }
 
+    public List<Measurement> getMeasurementsByUserId(long userId) {
+        return measurementRepository.findByUserId(userId);
+    }
+
     @Transactional
     public Measurement saveMeasurement(MeasurementDTO measurementDTO, long userId) {
         Measurement measurement = new Measurement(
                 measurementDTO.getType(),
                 measurementDTO.getValue(),
                 measurementDTO.getUnit(),
-                userId
+                userId,
+                LocalDate.now()
         );
 
         return measurementRepository.save(measurement);

@@ -6,6 +6,7 @@ import uk.ac.cf.spring.nhs.Symptom.DTO.SymptomDTO;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 import uk.ac.cf.spring.nhs.Symptom.Repository.SymptomRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +23,8 @@ public class SymptomService {
         Symptom symptom = new Symptom(
                 symptomDTO.getName(),
                 symptomDTO.getSeverity(),
-                userId
+                userId,
+                LocalDate.now()
         );
         return symptomRepository.save(symptom);
     }

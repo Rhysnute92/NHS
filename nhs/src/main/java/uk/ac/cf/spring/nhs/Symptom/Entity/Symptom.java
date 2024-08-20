@@ -7,6 +7,7 @@ import lombok.Setter;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -26,8 +27,8 @@ public class Symptom {
     @Column(name = "SymptomSeverity", nullable = false)
     private int severity;
 
-    @Column(name = "SymptomStartDate")
-    private Date startDate;
+    @Column(name = "SymptomDate")
+    private LocalDate date;
 
     @Column(name = "SymptomIsActive")
     private Boolean isActive;
@@ -45,12 +46,14 @@ public class Symptom {
     @JsonIgnore
     private DiaryEntry diaryEntry;
 
+
     protected Symptom() {}
 
     // Constructor for standalone symptom
-    public Symptom(String name, int severity, long userId) {
+    public Symptom(String name, int severity, long userId, LocalDate date) {
         this.name = name;
         this.severity = severity;
         this.userId = userId;
+        this.date = date;
     }
 }
