@@ -1,0 +1,39 @@
+<div th:fragment="questionnaireResults">
+  <div class="container">
+    <h3>Previous Questionnaires</h3>
+    <div>
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#table-results" data-toggle="tab">Table Results</a>
+        </li>
+        <li><a href="#trends" data-toggle="tab">Trends</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <!-- Table Results Tab -->
+        <div id="table-results" class="tab-pane fade in active">
+          <table id="resultsTable" class="display" style="width: 100%">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Function</th>
+                <th>Appearance</th>
+                <th>Symptoms</th>
+                <th>Emotion</th>
+                <th>Quality of Life</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data will be dynamically populated here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Trends Tab -->
+        <div id="trends" class="tab-pane fade">
+          <canvas id="resultsChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
