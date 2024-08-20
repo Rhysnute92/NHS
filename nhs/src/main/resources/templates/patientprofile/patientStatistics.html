@@ -14,10 +14,14 @@
 <main layout:fragment="content" class="main-content">
   <h1 class="page-title">Patient Statistics</h1>
   <div class="container">
+    <canvas id="patientChart" style="width:100%;max-width:700px"></canvas>
   </div>
 </main>
 <th:block layout:fragment="scripts">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   <script th:src="@{/js/patientprofile/patientStatistics.js}"></script>
+
 </th:block>
 </body>
+
 </html>
