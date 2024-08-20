@@ -30,6 +30,7 @@ public class PatientSearchController {
     public String nhsSearch(@ModelAttribute SearchRequest request, RedirectAttributes redirect){
         if (request.getPatientNhsNumber() != null){
             Patient result = patientService.findPatientbyNHSNumber(request.getPatientNhsNumber());
+            result = patientService.decryptPatient(result);
             redirect.addFlashAttribute("results", result);
         }
         return "redirect:/provider/search";

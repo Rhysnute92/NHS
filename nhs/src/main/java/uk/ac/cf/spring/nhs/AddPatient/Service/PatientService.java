@@ -80,6 +80,20 @@ public class PatientService {
         return new String(decryptedBytes);
     }
 
+    //Returns Patient object with decrypted data
+    public Patient decryptPatient(Patient patient){
+        SecretKey key = decodeKey(patient.getEncryptionKey());
+        try{
+            patient.setPatientName(decrypt(patient.getPatientName(), key));
+            patient.setPatientLastName(decrypt(patient.getPatientLastName(), key));
+            patient.setPatientEmail(decrypt(patient.getPatientEmail(), key));
+            patient.setPatientMobile(decrypt(patient.getPatientMobile(), key));
+            return patient;} catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+    }
+
     public String registerPatient(RegisterRequest request) {
         try {
             SecretKey secretKey = generatePatientKey();
