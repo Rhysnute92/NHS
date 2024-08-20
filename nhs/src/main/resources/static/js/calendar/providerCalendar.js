@@ -1,36 +1,51 @@
-const appointments = /*[[${appointments}]]*/ [];
+document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
 
-// Initialize FullCalendar
-document.addEventListener('DOMContentLoaded', function() {
-    const calendarEl = document.getElementById('calendar');
-    const calendar = new FullCalendar.Calendar(calendarEl, {
+    var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        events: appointments.map(appointment => ({
-            title: appointment.type,
-            start: `${appointment.date}T${appointment.time}`,
-            description: appointment.location,
-        })),
-        eventClick: function(info) {
-            alert(`Appointment Type: ${info.event.title}\nLocation: ${info.event.extendedProps.description}`);
-        }
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: [
+            /* Thymeleaf variables converted to JavaScript objects */
+            /* Convert Thymeleaf appointments to JavaScript format */
+            /* Example of dynamically generated events from Thymeleaf */
+            /* Note: Ensure appointments data is serialized to JSON correctly */
+            [[${appointments}]].map(function(appointment) {
+                return {
+                    title: appointment.type,
+                    start: appointment.date + 'T' + appointment.time,
+                    /* Optional end time and other properties */
+                };
+            })
+        ]
     });
+
     calendar.render();
 });
 
-// Toggle views
 function showList() {
-    document.getElementById('appointment-list').classList.add('active');
-    document.getElementById('appointment-list').classList.remove('inactive');
-    document.getElementById('calendar').classList.remove('active');
-    document.getElementById('calendar').classList.add('inactive');
+    document.getElementById('appointment-list').style.display = 'block'; // Show the list
+    document.getElementById('calendar').style.display = 'none'; // Hide the calendar
+    document.getElementById('no-appointments').style.display = 'none'; // Hide "No appointments" message
 }
 
 function showProviderCalendar() {
-    document.getElementById('calendar').classList.add('active');
-    document.getElementById('calendar').classList.remove('inactive');
-    document.getElementById('appointment-list').classList.remove('active');
-    document.getElementById('appointment-list').classList.add('inactive');
+    document.getElementById('appointment-list').style.display = 'none'; // Hide the list
+    document.getElementById('calendar').style.display = 'block'; // Show the calendar
+    document.getElementById('no-appointments').style.display = 'none'; // Hide "No appointments" message
 }
 
-const patient = "Lord John Doe"; //testing purposes only
-document.querySelector(".management-desktop-title").innerHTML = '${patient} Calendar';
+// Initial setup to display the correct tab based on available data
+window.onload = function() {
+    const appointmentsExist = document.querySelector('#appointment-list tbody tr');
+    if (appointmentsExist) {
+        showList(); // Show list by default if appointments exist
+    } else {
+        document.getElementById('appointment-list').style.display = 'none';
+        document.getElementById('calendar').style.display = 'none';
+        document.getElementById('no-appointments').style.display = 'block';
+    }
+}

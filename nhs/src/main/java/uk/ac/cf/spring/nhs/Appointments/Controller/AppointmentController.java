@@ -3,6 +3,7 @@ package uk.ac.cf.spring.nhs.Appointments.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import uk.ac.cf.spring.nhs.AddPatient.Entity.Patient;
@@ -11,6 +12,7 @@ import uk.ac.cf.spring.nhs.AddPatient.Service.PatientService;
 import uk.ac.cf.spring.nhs.Appointments.DTO.AppointmentDTO;
 import uk.ac.cf.spring.nhs.Appointments.Model.Appointment;
 import uk.ac.cf.spring.nhs.Appointments.Service.AppointmentService;
+import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,8 +27,9 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     @GetMapping
-    public List<Appointment> getAllAppointments() {
-        return appointmentService.getAppointmentsByUserId(1);
+    public List<Appointment> getAppointments(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        long userId = userDetails.getUserId();
+        return appointmentService.getAppointmentsByUserId(userId);
     }
 
     @GetMapping("/{id}")
@@ -35,8 +38,10 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public ResponseEntity<Appointment> createAppointment(@RequestBody AppointmentDTO appointmentDTO) {
-        Appointment savedAppointment = appointmentService.saveAppointment(appointmentDTO);
+    public ResponseEntity<Appointment> createAppointment(@RequestBody AppointmentDTO appointmentDTO,
+                                                         @AuthenticationPrincipal CustomUserDetails userDetails) {
+        long userId = userDetails.getUserId();
+        Appointment savedAppointment = appointmentService.saveAppointment(appointmentDTO, userId);
         return new ResponseEntity<>(savedAppointment, HttpStatus.CREATED);
     }
 

@@ -26,7 +26,7 @@ public class AppointmentService {
         return appointmentRepository.findById(id).orElse(null);
     }
 
-    public List<Appointment> getAppointmentsByUserId(Integer userId) {
+    public List<Appointment> getAppointmentsByUserId(Long userId) {
         return appointmentRepository.findByUserID(userId);
     }
 
@@ -38,7 +38,7 @@ public class AppointmentService {
         appointmentRepository.deleteById(id);
     }
 
-    public Appointment saveAppointment(AppointmentDTO appointmentDTO) {
+    public Appointment saveAppointment(AppointmentDTO appointmentDTO, Long userId) {
         // Combine date and time into a single LocalDateTime object
         LocalDate date = LocalDate.parse(appointmentDTO.getDate());
         LocalTime time = LocalTime.parse(appointmentDTO.getTime());
@@ -49,8 +49,7 @@ public class AppointmentService {
         appointment.setApptType(appointmentDTO.getAppointmentType());
         appointment.setApptProvider(appointmentDTO.getProvider());
         appointment.setApptInfo(appointmentDTO.getDescription());
-
-        appointment.setUserID(1L); // Hardcoded for now
+        appointment.setUserID(userId);
 
         return appointmentRepository.save(appointment);
     }
