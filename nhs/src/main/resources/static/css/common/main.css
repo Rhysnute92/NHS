@@ -18,8 +18,11 @@
 @import url("/css/utility/variables.css");
 @import url("/css/utility/variables.css");
 
-body {
+* {
   font-family: var(--regular-font-family);
+}
+
+body {
   background-color: #e8edee;
   margin: 0;
   padding: 0;

@@ -12,9 +12,7 @@
 <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
 <div th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
 <div class="container-calendar">
-    <div id="appointments">
-        <form th:replace="~{calendar/fragments/appointmentForm}"></form>
-    </div>
+    <form th:replace="~{calendar/fragments/appointmentForm}"></form>
 </div>
 <script th:src="@{/js/calendar/addAppointment.js}"></script>
 <script th:src="@{/js/calendar/calendar.js}"></script>
