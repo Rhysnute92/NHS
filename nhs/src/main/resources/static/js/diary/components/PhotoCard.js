@@ -1,4 +1,4 @@
-class PhotoComponent extends HTMLElement {
+class PhotoCard extends HTMLElement {
     // Watch for changes to the URL and photo ID attributes
     static observedAttributes = ['url', 'photo-id'];
 
@@ -7,7 +7,7 @@ class PhotoComponent extends HTMLElement {
         this.attachShadow({ mode: 'open' });
 
         this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="/css/diary/photoComponent.css">
+            <link rel="stylesheet" href="/css/diary/photoCard.css">
             <div class="photo">
                 <img alt="Photo" />
                 <button type="button" class="delete-photo">&times;</button>
@@ -88,4 +88,4 @@ class PhotoComponent extends HTMLElement {
     }
 }
 
-customElements.define('photo-component', PhotoComponent);
+customElements.define('photo-component', PhotoCard);
