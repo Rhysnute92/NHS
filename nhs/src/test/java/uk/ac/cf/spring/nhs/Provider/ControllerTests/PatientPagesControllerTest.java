@@ -49,7 +49,7 @@ public class PatientPagesControllerTest {
                 new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
                 new NavMenuItem("Set plan", "", "fa-solid fa-book"),
                 new NavMenuItem("Appointments", " ", "fa-solid fa-user-check"),
-                new NavMenuItem("Questionnaires", "/questionnairehub", "fa-solid fa-book"),
+                new NavMenuItem("Questionnaires", "/patientprofile/questionnairehub", "fa-solid fa-book"),
                 new NavMenuItem("Patient trends", " ", "fa-solid fa-user-check"),
                 new NavMenuItem("Event log", " ", "fa-solid fa-book"),
                 new NavMenuItem("Photos", " ", "fa-solid fa-camera"),
