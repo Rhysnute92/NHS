@@ -47,6 +47,14 @@ public class UserTaskController {
         return ResponseEntity.ok(userTasks);
     }
 
+    //Get user tasks by id for provider view
+    @GetMapping("/{id}")
+    public ResponseEntity<List<UserTask>> getTasksForUser(@PathVariable("id") int id) {
+        Long userId = Long.valueOf(id);
+        List<UserTask> userTasks = userTaskService.getTasksForUser(userId);
+        return ResponseEntity.ok(userTasks);
+    }
+
     @PostMapping
     public ResponseEntity<UserTask> assignTaskToUser(@RequestBody UserTask userTask) {
         userTask.setUserID(getCurrentUserId()); // Set the current user ID to the task userID //TODO: will need to make
