@@ -11,14 +11,21 @@ p.questionnaire-data-subtitle {
 
 .questionnaire-data-container {
   padding: 2em;
+  padding-top: 0;
 }
 .questionnaire-table-container {
   padding-bottom: 2em;
 }
 
-h3.lymph-qol-arm-title {
+h2.questionnaire-table-header {
   font-size: 1.5em;
   border-bottom: 1px solid var(--nhs-dark-grey);
+  padding-bottom: 0.25em;
+}
+
+h3.lymph-qol-arm-title {
+  font-size: 1.2em;
+  /* border-bottom: 1px solid var(--nhs-dark-grey); */
   padding-bottom: 0.25em;
 }
 
