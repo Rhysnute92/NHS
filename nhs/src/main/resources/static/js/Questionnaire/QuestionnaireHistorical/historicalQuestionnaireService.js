@@ -17,4 +17,23 @@ export class UserQuestionnaireService {
       throw error;
     }
   }
+
+  async getUserQuestions(userQuestionnaireId) {
+    try {
+      const url = `/api/userQuestions/userQuestionnaire/${userQuestionnaireId}`;
+      const data = await fetchData(url);
+      console.log(
+        "UserQuestions for UserQuestionnaire:",
+        userQuestionnaireId,
+        data
+      );
+      return data;
+    } catch (error) {
+      console.error(
+        `Error fetching UserQuestions for UserQuestionnaire ${userQuestionnaireId}:`,
+        error
+      );
+      throw error;
+    }
+  }
 }

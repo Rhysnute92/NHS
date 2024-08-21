@@ -1,64 +1,117 @@
 import { UserQuestionnaireService } from "./historicalQuestionnaireService.js";
 
 let table;
+const questionnaireService = new UserQuestionnaireService();
 
 $(document).ready(function () {
   // Initialize DataTable and assign to the table variable
   table = $("#questionnaireTable").DataTable({
-    paging: true,
+    paging: false, // Disable paging
     searching: false,
     lengthChange: false,
-    pageLength: 5,
+    info: false, // Disable the info text
     order: [[0, "desc"]],
   });
 
-  // Create an instance of the UserQuestionnaireService
-  const questionnaireService = new UserQuestionnaireService();
-
-  // Fetch completed user questionnaires and log them to the console
+  // Fetch completed user questionnaires and display them
   questionnaireService
     .getCompletedUserQuestionnaires()
     .then((data) => {
       console.log("Fetched UserQuestionnaires:", data);
+      populateDateColumn(data);
+      if (data.length > 0) {
+        generateCategoryTabs(data[0].userQuestionnaireId);
+        loadCategoryData(data[0].userQuestionnaireId, "Function"); // Default to "Function" category
+      }
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
     });
-
-  // Load default category on page load
-  loadCategoryData("function");
 });
 
-// Load category data (this would typically fetch data from the server)
-function loadCategoryData(category) {
-  // Example static data - replace with actual AJAX call
-  const data = {
-    function: [
-      { date: "2024-08-21", question: "Question 1", result: "Result 1" },
-      { date: "2024-08-21", question: "Question 2", result: "Result 2" },
-      { date: "2024-07-15", question: "Question 1", result: "Result 3" },
-      { date: "2024-07-15", question: "Question 2", result: "Result 4" },
-    ],
-    appearance: [
-      { date: "2024-08-21", question: "Question 1", result: "Result A1" },
-      { date: "2024-08-21", question: "Question 2", result: "Result A2" },
-      { date: "2024-07-15", question: "Question 1", result: "Result A3" },
-      { date: "2024-07-15", question: "Question 2", result: "Result A4" },
-    ],
-    // Add more categories and data here...
-  };
+function populateDateColumn(userQuestionnaires) {
+  const dateColumn = $("#dateColumn");
+  userQuestionnaires.forEach((questionnaire, index) => {
+    const date = new Date(
+      questionnaire.questionnaireCompletionDate
+    ).toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
-  // Clear the table
-  table.clear();
+    const button = $("<button>")
+      .addClass("date-button")
+      .text(date)
+      .on("click", function () {
+        loadCategoryData(questionnaire.userQuestionnaireId, "Function");
+        generateCategoryTabs(questionnaire.userQuestionnaireId);
+      });
 
-  // Populate the table with new data
-  data[category].forEach((entry) => {
-    table.row.add([entry.date, entry.question, entry.result]).draw(false);
+    dateColumn.append(button);
+
+    // Select the most recent by default
+    if (index === 0) {
+      button.addClass("active");
+      loadCategoryData(questionnaire.userQuestionnaireId, "Function");
+      generateCategoryTabs(questionnaire.userQuestionnaireId);
+    }
   });
 }
 
-// Event listener for category tabs
-$(".category-tab").on("click", function () {
-  const category = $(this).data("category");
-  loadCategoryData(category);
-});
+function generateCategoryTabs(userQuestionnaireId) {
+  questionnaireService
+    .getUserQuestions(userQuestionnaireId)
+    .then((userQuestions) => {
+      const categories = [
+        ...new Set(userQuestions.map((q) => q.question.questionCategory)),
+      ];
+
+      const categoryTabs = $("#category-tabs");
+      categoryTabs.empty(); // Clear existing tabs
+
+      categories.forEach((category) => {
+        const button = $("<button>")
+          .addClass("category-tab")
+          .text(category)
+          .data("category", category)
+          .on("click", function () {
+            loadCategoryData(userQuestionnaireId, category);
+          });
+
+        categoryTabs.append(button);
+      });
+    })
+    .catch((error) => {
+      console.error("Error generating category tabs:", error);
+    });
+}
+
+function loadCategoryData(userQuestionnaireId, category) {
+  questionnaireService
+    .getUserQuestions(userQuestionnaireId)
+    .then((userQuestions) => {
+      const filteredQuestions = userQuestions.filter(
+        (q) => q.question.questionCategory === category
+      );
+
+      // Clear the table
+      table.clear();
+
+      // Populate the table with new data
+      filteredQuestions.forEach((entry, index) => {
+        const result =
+          entry.userResponseText || entry.userResponseScore || "No Response";
+        const dateCell =
+          index === 0
+            ? new Date(entry.responseDateTime).toLocaleDateString("en-GB")
+            : "";
+        table.row
+          .add([dateCell, entry.question.questionText, result])
+          .draw(false);
+      });
+    })
+    .catch((error) => {
+      console.error("Error loading category data:", error);
+    });
+}
