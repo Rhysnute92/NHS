@@ -3,9 +3,13 @@
   <head>
     <title>Questionnaire Data</title>
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Include any additional libraries needed -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
   </head>
   <body>
     <!-- Header and Navbar -->
@@ -26,45 +30,47 @@
       <!-- Container for Previous Questionnaire Tabular Data -->
       <div id="previous-questionnaires" class="mb-4">
         <h2>Previous Questionnaire Data</h2>
-        <!-- Table or content for tabular data will be inserted here -->
+        <table id="questionnaireTable" class="display" style="width: 100%">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Function</th>
+              <th>Appearance</th>
+              <th>Category 3</th>
+              <th>Category 4</th>
+              <!-- Add more categories as needed -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2024-08-21</td>
+              <td>Score 1</td>
+              <td>Score 2</td>
+              <td>Score 3</td>
+              <td>Score 4</td>
+            </tr>
+            <tr>
+              <td>2024-07-15</td>
+              <td>Score 1</td>
+              <td>Score 2</td>
+              <td>Score 3</td>
+              <td>Score 4</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
       </div>
 
       <!-- Container for Previous Questionnaire Trends -->
       <div id="questionnaire-trends">
         <h2>Questionnaire Trends</h2>
         <!-- Charts or trend analysis will be inserted here -->
-        <canvas id="trendChart"></canvas>
       </div>
     </div>
 
-    <!-- Common JS -->
     <script th:src="@{/js/common/header.js}"></script>
-
-    <!-- Page specific JS for charts -->
-    <script>
-      var ctx = document.getElementById("trendChart").getContext("2d");
-      var trendChart = new Chart(ctx, {
-        type: "line", // Example chart type
-        data: {
-          labels: ["January", "February", "March", "April", "May"],
-          datasets: [
-            {
-              label: "Trend Over Time",
-              data: [3, 4, 2, 5, 3],
-              backgroundColor: "rgba(54, 162, 235, 0.2)",
-              borderColor: "rgba(54, 162, 235, 1)",
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
-    </script>
+    <script type="module"
+      th:src="@{/js/Questionnaire/QuestionnaireHistorical/historicalQuestionnaire.js}"
+    ></script>
   </body>
 </html>
