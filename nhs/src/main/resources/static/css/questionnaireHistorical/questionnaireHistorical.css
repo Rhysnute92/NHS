@@ -113,3 +113,56 @@ button.date-button.active {
 .dataTables_info {
   display: none; /* Hide pagination and info text */
 }
+
+/* Enhance the styling for trend buttons */
+div#trend-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2em;
+}
+
+.trend-button {
+  background-color: var(--nhs-bright-blue);
+  color: white;
+  border: 2px solid var(--nhs-bright-blue);
+  padding: 0.5em 1.5em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.trend-button:hover {
+  background-color: var(--nhs-dark-blue);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.trend-button.active {
+  background-color: var(--nhs-yellow);
+  color: black;
+}
+
+/* Style the chart container */
+#trendChart {
+  max-width: 100%;
+  height: 400px;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1em;
+}
+
+/* Add subtle hover effects on the buttons */
+button.trend-button:hover {
+  background-color: var(--nhs-dark-blue);
+  color: white;
+}
+
+/* Add focus effect for accessibility */
+button.trend-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
+}

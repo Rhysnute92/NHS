@@ -151,6 +151,11 @@ function loadCategoryData(userQuestionnaire, category) {
     });
 }
 
+function setActiveTrendButton(category) {
+  $(".trend-button").removeClass("active"); // Remove active class from all buttons
+  $(`.trend-button[data-category="${category}"]`).addClass("active"); // Add active class to the clicked button
+}
+
 function generateTrendButtons(userQuestionnaires) {
   questionnaireService
     .getUserQuestions(userQuestionnaires[0].userQuestionnaireId)
@@ -169,10 +174,14 @@ function generateTrendButtons(userQuestionnaires) {
           .data("category", category)
           .on("click", function () {
             loadTrendChart(userQuestionnaires, category);
+            setActiveTrendButton(category); // Set the clicked button as active
           });
 
         trendButtons.append(button);
       });
+
+      // Set the first button as active by default
+      setActiveTrendButton(categories[0]);
     })
     .catch((error) => {
       console.error("Error generating trend buttons:", error);
