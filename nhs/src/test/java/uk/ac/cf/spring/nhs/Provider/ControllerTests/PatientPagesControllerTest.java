@@ -47,7 +47,7 @@ public class PatientPagesControllerTest {
     void testNavMenuItems() {
         List<NavMenuItem> expectedNavMenuItems = List.of(
                 new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
-                new NavMenuItem("Set plan", "", "fa-solid fa-book"),
+                new NavMenuItem("Set plan", "/patientprofile/plan", "fa-solid fa-book"),
                 new NavMenuItem("Appointments", " ", "fa-solid fa-user-check"),
                 new NavMenuItem("Questionnaires", "/patientprofile/questionnairehub", "fa-solid fa-book"),
                 new NavMenuItem("Patient trends", " ", "fa-solid fa-user-check"),

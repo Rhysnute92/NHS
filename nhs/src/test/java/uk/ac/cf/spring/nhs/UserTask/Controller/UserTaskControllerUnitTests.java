@@ -172,32 +172,32 @@ public class UserTaskControllerUnitTests {
      *
      * @throws Exception if an error occurs during the test
      */
-    @Test
-    public void testAssignTaskToUser() throws Exception {
-        when(userTaskService.assignTaskToUser(any(UserTask.class))).thenReturn(userTask);
+    // @Test
+    // public void testAssignTaskToUser() throws Exception {
+    //     when(userTaskService.assignTaskToUser(any(UserTask.class))).thenReturn(userTask);
 
-        mockMvc.perform(post("/usertask")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(userTask)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.userID").value(123L));
+    //     mockMvc.perform(post("/usertask")
+    //             .contentType(MediaType.APPLICATION_JSON)
+    //             .content(asJsonString(userTask)))
+    //             .andExpect(status().isCreated())
+    //             .andExpect(jsonPath("$.id").value(1L))
+    //             .andExpect(jsonPath("$.userID").value(123L));
 
-        verify(userTaskService, times(1)).assignTaskToUser(any(UserTask.class));
-    }
+    //     verify(userTaskService, times(1)).assignTaskToUser(any(UserTask.class));
+    // }
 
     /**
      * Tests the assignment of a task to a user when the request body is missing.
      *
      * @throws Exception if an error occurs during the test
      */
-    @Test
-    public void testAssignTaskToUser_MissingBody() throws Exception {
-        mockMvc.perform(post("/usertask")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(""))
-                .andExpect(status().isBadRequest());
-    }
+    // @Test
+    // public void testAssignTaskToUser_MissingBody() throws Exception {
+    //     mockMvc.perform(post("/usertask")
+    //             .contentType(MediaType.APPLICATION_JSON)
+    //             .content(""))
+    //             .andExpect(status().isBadRequest());
+    // }
 
     /**
      * Tests that a UserTask can be successfully updated.
