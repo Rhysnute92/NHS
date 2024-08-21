@@ -27,36 +27,33 @@
         to help you track your progress and well-being.
       </p>
 
+      <!-- Category Tabs -->
+      <div id="category-tabs" class="mb-4">
+        <button class="category-tab" data-category="function">Function</button>
+        <button class="category-tab" data-category="appearance">
+          Appearance
+        </button>
+        <button class="category-tab" data-category="category3">
+          Category 3
+        </button>
+        <button class="category-tab" data-category="category4">
+          Category 4
+        </button>
+        <!-- Add more categories as needed -->
+      </div>
+
       <!-- Container for Previous Questionnaire Tabular Data -->
       <div id="previous-questionnaires" class="mb-4">
-        <h2>Previous Questionnaire Data</h2>
         <table id="questionnaireTable" class="display" style="width: 100%">
           <thead>
             <tr>
               <th>Date</th>
-              <th>Function</th>
-              <th>Appearance</th>
-              <th>Category 3</th>
-              <th>Category 4</th>
-              <!-- Add more categories as needed -->
+              <th>Question</th>
+              <th>Result</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>2024-08-21</td>
-              <td>Score 1</td>
-              <td>Score 2</td>
-              <td>Score 3</td>
-              <td>Score 4</td>
-            </tr>
-            <tr>
-              <td>2024-07-15</td>
-              <td>Score 1</td>
-              <td>Score 2</td>
-              <td>Score 3</td>
-              <td>Score 4</td>
-            </tr>
-            <!-- Add more rows as needed -->
+            <!-- Rows will be dynamically populated here -->
           </tbody>
         </table>
       </div>
@@ -68,8 +65,10 @@
       </div>
     </div>
 
+    <!-- Common JS -->
     <script th:src="@{/js/common/header.js}"></script>
-    <script type="module"
+    <script
+      type="module"
       th:src="@{/js/Questionnaire/QuestionnaireHistorical/historicalQuestionnaire.js}"
     ></script>
   </body>
