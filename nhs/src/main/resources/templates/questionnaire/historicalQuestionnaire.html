@@ -23,53 +23,58 @@
     <!-- Main Container -->
     <div class="container mt-5">
       <!-- Main Header -->
-      <h1>Questionnaire Data</h1>
+      <h1 class="questionnaire-data-header">Questionnaire Data</h1>
 
       <!-- Subtitle -->
-      <p class="subtitle">
+      <p class="questionnaire-data-subtitle">
         This page displays your previous questionnaire data and trends over time
         to help you track your progress and well-being.
       </p>
+      <div class="questionnaire-data-container">
+        <div class="questionnaire-table-container">
+          <h3 class="lymph-qol-arm-title">
+            Lymphoedema Quality of Life Questionnaire - Arm
+          </h3>
 
-      <!-- Date Column for Previous Questionnaires -->
-      <div id="dateColumn" class="mb-4">
-        <!-- Date buttons will be dynamically populated here -->
-      </div>
-      <!-- Date Column for Previous Questionnaires -->
-      <div id="date-select-container" class="mb-4">
-        <label for="date-select">Select Completion Date:</label>
-        <select id="date-select" class="form-control">
-          <!-- Date options will be dynamically populated here -->
-        </select>
-      </div>
-      <!-- Category Tabs -->
-      <div id="category-tabs" class="mb-4">
-        <!-- Category tabs will be dynamically populated here -->
-      </div>
+          <!-- Date Column for Previous Questionnaires -->
+          <div id="dateColumn" class="mb-4">
+            <!-- Date buttons will be dynamically populated here -->
+          </div>
+          <!-- Date Column for Previous Questionnaires -->
+          <div id="date-select-container" class="mb-4">
+            <label for="date-select">Select Completion Date:</label>
+            <select id="date-select" class="form-control">
+              <!-- Date options will be dynamically populated here -->
+            </select>
+          </div>
+          <!-- Category Tabs -->
+          <div id="category-tabs" class="mb-4">
+            <!-- Category tabs will be dynamically populated here -->
+          </div>
 
-      <!-- Container for Previous Questionnaire Tabular Data -->
-      <div id="previous-questionnaires" class="mb-4">
-        <table id="questionnaireTable" class="display" style="width: 100%">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Question</th>
-              <th>Result</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Rows will be dynamically populated here -->
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Container for Previous Questionnaire Trends -->
-      <div id="questionnaire-trends">
-        <h2>Questionnaire Trends</h2>
-        <!-- Charts or trend analysis will be inserted here -->
+          <!-- Container for Previous Questionnaire Tabular Data -->
+          <div id="previous-questionnaires" class="mb-4">
+            <table id="questionnaireTable" class="display" style="width: 100%">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Question</th>
+                  <th>Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Rows will be dynamically populated here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Container for Previous Questionnaire Trends -->
+        <div id="questionnaire-trends">
+          <h2>Questionnaire Trends</h2>
+          <!-- Charts or trend analysis will be inserted here -->
+        </div>
       </div>
     </div>
-
     <!-- Common JS -->
     <script th:src="@{/js/common/header.js}"></script>
     <script
