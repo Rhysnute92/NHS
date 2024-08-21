@@ -109,41 +109,33 @@ h3.questionnaire-card-title {
   font-style: italic; /* Italicize "In Progress" text */
 }
 
-/* View Results Section */
-.view-results-section {
-  background-color: #ffffff;
-  padding: 1em;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Container for the View Previous Questionnaire button */
+.view-previous-questionnaire-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  margin-bottom: 3em;
 }
 
-.table-striped {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.table-striped th,
-.table-striped td {
-  padding: 0.75em;
-  text-align: left;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.table-striped tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.btn-secondary {
-  background-color: var(--nhs-blue);
+/* Styling for the primary button */
+button.btn.btn-primary {
+  background-color: #00782f;
+  border-bottom: 4px solid #002218;
+  border-top: 0;
+  width: 20em;
+  font-weight: bold;
   color: white;
-  padding: 0.5em 1em;
-  border: none;
-  border-radius: 4px;
+  border-left: 0;
+  border-right: 0;
+  height: 3em;
+  border-radius: 6px;
+  margin-top: 1em;
   cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.btn-secondary:hover {
-  background-color: var(--nhs-dark-blue);
+button.btn.btn-primary:hover {
+  background-color: #005a22;
 }
 
 /* No Assignment Message */
@@ -197,12 +189,14 @@ h3#assignQuestionnairePopupLabel {
 
 .popup-content {
   /* background-color: #fefefe; */
-  margin: 15em auto;
-  margin-left: 20vw;
   padding: 1rem;
   border: 1px solid var(--nhs-mid-grey);
   width: 60vw;
   background-color: var(--nhs-pale-grey);
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
 .close-popup {

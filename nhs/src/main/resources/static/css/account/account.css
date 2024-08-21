@@ -1,28 +1,33 @@
 .welcome {
     flex: auto;
     text-align: center;
-    margin: 2rem;
     color: #005EB8;
+    margin: 2rem;
     width:100%
 }
 .account-container {
     text-align: center;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
 }
+
+.info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .personal_info{
-    margin: auto;
     width: 60%;
 }
-.account_info{
-    width: 30%;
-    margin-left: auto;
-    margin-right: auto;
-    background: var(--nhs-mid-grey);
+.account_info {
+    background: lightgrey;
+    padding: 2rem;
 }
 .info_list{
     list-style: none;
-    padding: 0 15%;
+    padding: 1rem;
     text-align: justify;
 }
 
@@ -41,17 +46,7 @@
 }
 .logout{
     flex: auto;
-}
-
-.logout-button {
-    font-weight: 600;
-    transition:all 300ms ease;
-    padding: 1rem;
-    margin: 5vh;
-    width: 8rem;
-    border:none;
-    background-color: var(--nhs-blue);
-    color: var(--nhs-white);
+    margin: 2rem;
 }
 
 .logout-button:hover {

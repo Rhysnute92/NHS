@@ -11,15 +11,19 @@
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <div th:if="${navMenuItems != null}" th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
     <div class="container_m">
-      <h2 class="title">Cellulitis</h2>
-      <p>Cellulitis is an infection of the skin or tissues under the skin caused by bacteria (germs). 
-        People with oedema/swelling are prone to cellulitis because their lymphatic system does 
-        not work normally. Cellulitis may occur after damage to the skin, such as an insect bite, cut, 
-        scratch or athlete's foot. It can sometimes occur without an obvious cause.</p>
+      <div class="infosection">
+        <h2 class="title">Cellulitis</h2>
+        <p>Cellulitis is an infection of the skin or tissues under the skin caused by bacteria (germs).
+          People with oedema/swelling are prone to cellulitis because their lymphatic system does
+          not work normally. Cellulitis may occur after damage to the skin, such as an insect bite, cut,
+          scratch or athlete's foot. It can sometimes occur without an obvious cause.
+        </p>
         <p>Early treatment with antibiotics is very important. If an infection is not controlled quickly, a 
           person may require hospital treatment with intravenous antibiotics (antibiotics given 
           through a drip). There is a risk that cellulitis can damage the lymphatic system and make 
-          swelling worse. Occasionally, cellulitis infections can be life-threatening.</p>
+          swelling worse. Occasionally, cellulitis infections can be life-threatening.
+        </p>
+      </div>
       <div class="important_info">
       <div class="important_info_header">What to do if I think I have cellulitis?</div>
       <ul class="important_info_list">

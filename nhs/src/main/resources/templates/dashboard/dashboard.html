@@ -9,7 +9,7 @@
   <body>
     <header th:replace="~{common/fragments/header}"></header>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-    <div class="dashboard-container">
+    <main class="dashboard-container">
       <div class="welcome-container">
         <h1 id="welcome-message" th:inline="text"> Welcome, [[${patientName}]]!</h1>
         <!-- <h1 id="patient-name"></h1> -->
@@ -21,7 +21,7 @@
       <div class="button-container">
         <button class="add-widget-button">+ Add Widget</button>
       </div>
-    </div>
+    </main>
     <script th:src="@{/js/common/header.js}"></script>
     <script type="module" th:src="@{/js/Widget/widget.js}"></script>
     <script type="module" th:src="@{/js/widgets/taskCompletionWidget.js}"></script>

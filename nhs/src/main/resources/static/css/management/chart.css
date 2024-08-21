@@ -1,0 +1,89 @@
+/*  .container {
+  background-color: var(--nhs-mid-grey);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 1200px; 
+}
+
+.table-container {
+  margin-top: 20px;
+}
+
+.table-container h3 {
+  color: white; 
+  margin-bottom: 10px;
+}
+
+.dataTables_wrapper {
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+} */
+
+/* Override DataTables styling */
+/* #resultsTable_wrapper {
+  background-color: var(--nhs-mid-grey);
+  color: #ffffff;
+}
+
+#resultsTable {
+  width: 100%;
+  background-color: white;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+
+#resultsTable thead {
+  background-color: var(--nhs-dark-grey);
+  color: white;
+}
+
+#resultsTable thead th {
+  padding: 10px;
+}
+
+#resultsTable tbody tr {
+  background-color: #ffffff;
+  color: #333;
+}
+
+#resultsTable tbody tr:hover {
+  background-color: var(--nhs-light-grey);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  background-color: var(--nhs-dark-grey);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 2px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background-color: var(--nhs-blue);
+  color: white;
+  cursor: pointer;
+}
+
+
+.nav-tabs .nav-link {
+  background-color: var(--nhs-mid-grey);
+  color: white;
+  border: none;
+  margin-right: 5px;
+  border-radius: 5px 5px 0 0;
+  padding: 10px;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: var(--nhs-dark-grey);
+  color: white;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: var(--nhs-light-grey);
+  color: white;
+} */

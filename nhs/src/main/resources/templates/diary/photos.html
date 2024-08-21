@@ -10,6 +10,7 @@
 <body>
 <main layout:fragment="content">
   <h1 class="page-title">Photos</h1>
+  <p class="page-subtitle">Track your condition over time by taking guided photos</p>
   <div class="container">
     <div th:replace="~{diary/fragments/photoGuidance}"></div>
     <form class="photos-form" action="/diary/photos" enctype="multipart/form-data">
@@ -21,10 +22,10 @@
   </div>
 </main>
 <th:block layout:fragment="scripts">
-  <script th:src="@{/js/common/customModal.js}"></script>
+  <script th:src="@{/js/common/components/customModal.js}"></script>
   <script th:src="@{/js/diary/components/PhotoContainer.js}"></script>
   <script th:src="@{/js/diary/components/CameraComponent.js}"></script>
-  <script th:src="@{/js/diary/components/PhotoComponent.js}"></script>
+  <script th:src="@{/js/diary/components/PhotoCard.js}"></script>
   <script th:src="@{/js/diary/photos.js}"></script>
 </th:block>
 </body>

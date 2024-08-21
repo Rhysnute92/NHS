@@ -4,19 +4,20 @@
     <title>Treatment Plan</title>
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
     <link rel="stylesheet" th:href="@{/css/management/management.css}" />
+    <!-- Include Chart.js  -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-    <div class="management-container">
+    <main class="management-container">
       <div class="management-title-container">
         <h1 class="management-desktop-title">My Lymphoedema Management Plan</h1>
         <p class="management-desktop-subtitle">
           Find support, your tasks, and information for your lymphoedema
-          management plan.
-          Find support, your tasks, and information for your lymphoedema
-          management plan.
+          management plan. Find support, your tasks, and information for your
+          lymphoedema management plan.
         </p>
       </div>
       <section class="collapsible urgent-care-plan">
@@ -59,7 +60,22 @@
                 <p>No questionnaires assigned at the moment.</p>
               </div>
             </div>
+            <div class="previous-questionnaire-data-container">
+              <h3 class="previous-questionnaire-title">
+                View Previous Questionnaire Data
+              </h3>
+              <div class="view-previous-questionnaire-button-container">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="window.location.href='/questionnaire/historical/user'"
+                >
+                  View Historical Questionnaires
+                </button>
+              </div>
+            </div>
           </div>
+
           <div class="action-item">
             <h3>Your Tasks</h3>
             <div class="tasks-container">
@@ -89,7 +105,7 @@
           <!-- Add more treatment items as needed -->
         </div>
       </section>
-    </div>
+    </main>
     <script th:src="@{/js/common/header.js}"></script>
     <script type="module" th:src="@{/js/management/management.js}"></script>
   </body>

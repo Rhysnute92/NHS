@@ -9,13 +9,15 @@
 <body>
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-    <div class="account-container">
-        <h2 th:if="${param.success}">Successfully updated your data!</h2>
-        <div th:unless="${param.success}">
-        <div th:replace="~{account/fragments/profileUpdate}"></div>
-    </div>
-    </div>
-    <div class="back" onclick="location.href='/account'">Back to profile</a>
+    <main>
+        <div class="account-container">
+            <h2 th:if="${param.success}">Successfully updated your data!</h2>
+            <div th:unless="${param.success}">
+            <div th:replace="~{account/fragments/profileUpdate}"></div>
+        </div>
+        </div>
+        <a class="back" onclick="location.href='/account'">Back to profile</a>
+    </main>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>
