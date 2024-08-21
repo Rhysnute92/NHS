@@ -38,6 +38,9 @@ class PhotoCard extends HTMLElement {
     }
 
     connectedCallback() {
+        if (window.location.href.includes('patient')) {
+            this.deleteButton.style.display = 'none';
+        }
         // Add event listeners
         this.photoElement.addEventListener('click', this.showEnlargedPhoto.bind(this));
         this.closeButton.addEventListener('click', this.hideEnlargedPhoto.bind(this));
