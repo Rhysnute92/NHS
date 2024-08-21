@@ -173,3 +173,87 @@ button.trend-button:focus {
   outline: none;
   box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
 }
+
+/* General mobile adjustments */
+@media (max-width: 768px) {
+  .container.mt-5 {
+    padding: 0.5em;
+  }
+
+  h1.questionnaire-data-header {
+    display: none;
+  }
+
+  p.questionnaire-data-subtitle {
+    display: none;
+  }
+
+  .questionnaire-data-container {
+    padding: 1em;
+  }
+
+  h2.questionnaire-table-header,
+  h3.lymph-qol-arm-title,
+  h3.questionnaire-trends-title {
+    font-size: 1.2em;
+  }
+
+  select#date-select {
+    margin-bottom: 1em;
+  }
+
+  #category-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1em;
+  }
+
+  .category-tab {
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    font-size: 0.9em;
+    width: 48%; /* Make buttons take up half width each */
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  #questionnaireTable th,
+  #questionnaireTable td {
+    padding: 8px;
+    font-size: 0.9em;
+  }
+
+  /* Adjust the table for better mobile viewing */
+  #questionnaireTable {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  /* Ensure table fits better on mobile */
+  #questionnaireTable th,
+  #questionnaireTable td {
+    white-space: nowrap;
+    text-align: left;
+    font-size: 0.8em;
+  }
+
+  #trend-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1.5em;
+  }
+
+  .trend-button {
+    padding: 0.5em;
+    font-size: 0.9em;
+    width: 100%; /* Full width buttons */
+    margin-bottom: 0.5em;
+    box-sizing: border-box;
+  }
+
+  #trendChart {
+    height: 450px; /* Increase height to ensure legibility */
+    padding: 1em;
+  }
+}
