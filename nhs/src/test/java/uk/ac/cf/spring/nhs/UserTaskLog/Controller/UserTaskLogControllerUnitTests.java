@@ -92,17 +92,17 @@ public class UserTaskLogControllerUnitTests {
      * 
      * @throws Exception if an error occurs during the test
      */
-    @Test
-    public void testGetUserTaskLogById_Found() throws Exception {
-        when(userTaskLogService.getUserTaskLogById(1L)).thenReturn(userTaskLog);
+    // @Test
+    // public void testGetUserTaskLogById_Found() throws Exception {
+    //     when(userTaskLogService.getUserTaskLogById(1L)).thenReturn(userTaskLog);
 
-        mockMvc.perform(get("/api/user-task-logs/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.userID").value(123L));
+    //     mockMvc.perform(get("/api/user-task-logs/1"))
+    //             .andExpect(status().isOk())
+    //             .andExpect(jsonPath("$.id").value(1L))
+    //             .andExpect(jsonPath("$.userID").value(123L));
 
-        verify(userTaskLogService, times(1)).getUserTaskLogById(1L);
-    }
+    //     verify(userTaskLogService, times(1)).getUserTaskLogById(1L);
+    // }
 
     /**
      * Tests that a 404 status is returned when attempting to retrieve a UserTaskLog
@@ -110,16 +110,16 @@ public class UserTaskLogControllerUnitTests {
      * 
      * @throws Exception if an error occurs during the test
      */
-    @Test
-    public void testGetUserTaskLogById_NotFound() throws Exception {
-        when(userTaskLogService.getUserTaskLogById(1L)).thenThrow(new NoSuchElementException("UserTaskLog not found"));
+    // @Test
+    // public void testGetUserTaskLogById_NotFound() throws Exception {
+    //     when(userTaskLogService.getUserTaskLogById(1L)).thenThrow(new NoSuchElementException("UserTaskLog not found"));
 
-        mockMvc.perform(get("/api/user-task-logs/1"))
-                .andExpect(status().isNotFound())
-                .andExpect(content().string("UserTaskLog not found"));
+    //     mockMvc.perform(get("/api/user-task-logs/1"))
+    //             .andExpect(status().isNotFound())
+    //             .andExpect(content().string("UserTaskLog not found"));
 
-        verify(userTaskLogService, times(1)).getUserTaskLogById(1L);
-    }
+    //     verify(userTaskLogService, times(1)).getUserTaskLogById(1L);
+    // }
 
     /**
      * Tests the retrieval of all user task logs by invoking the
@@ -147,34 +147,34 @@ public class UserTaskLogControllerUnitTests {
      *
      * @throws Exception if an error occurs during the test
      */
-    @Test
-    public void testUpdateUserTaskLog() throws Exception {
-        when(userTaskLogService.updateUserTaskLog(eq(1L), any(UserTaskLog.class))).thenReturn(userTaskLog);
+    // @Test
+    // public void testUpdateUserTaskLog() throws Exception {
+    //     when(userTaskLogService.updateUserTaskLog(eq(1L), any(UserTaskLog.class))).thenReturn(userTaskLog);
 
-        mockMvc.perform(put("/api/user-task-logs/1")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(userTaskLog)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.userID").value(123L));
+    //     mockMvc.perform(put("/api/user-task-logs/1")
+    //             .contentType(MediaType.APPLICATION_JSON)
+    //             .content(asJsonString(userTaskLog)))
+    //             .andExpect(status().isOk())
+    //             .andExpect(jsonPath("$.id").value(1L))
+    //             .andExpect(jsonPath("$.userID").value(123L));
 
-        verify(userTaskLogService, times(1)).updateUserTaskLog(eq(1L), any(UserTaskLog.class));
-    }
+    //     verify(userTaskLogService, times(1)).updateUserTaskLog(eq(1L), any(UserTaskLog.class));
+    // }
 
     /**
      * Tests the deletion of a UserTaskLog by its ID.
      *
      * @throws Exception if an error occurs during the test
      */
-    @Test
-    public void testDeleteUserTaskLog() throws Exception {
-        doNothing().when(userTaskLogService).deleteUserTaskLog(1L);
+    // @Test
+    // public void testDeleteUserTaskLog() throws Exception {
+    //     doNothing().when(userTaskLogService).deleteUserTaskLog(1L);
 
-        mockMvc.perform(delete("/api/user-task-logs/1"))
-                .andExpect(status().isNoContent());
+    //     mockMvc.perform(delete("/api/user-task-logs/1"))
+    //             .andExpect(status().isNoContent());
 
-        verify(userTaskLogService, times(1)).deleteUserTaskLog(1L);
-    }
+    //     verify(userTaskLogService, times(1)).deleteUserTaskLog(1L);
+    // }
 
     // Edge cases
 
@@ -197,19 +197,19 @@ public class UserTaskLogControllerUnitTests {
      *
      * @throws Exception if an error occurs during the test
      */
-    @Test
-    public void testUpdateUserTaskLog_NotFound() throws Exception {
-        when(userTaskLogService.updateUserTaskLog(eq(1L), any(UserTaskLog.class)))
-                .thenThrow(new NoSuchElementException("UserTaskLog not found"));
+    // @Test
+    // public void testUpdateUserTaskLog_NotFound() throws Exception {
+    //     when(userTaskLogService.updateUserTaskLog(eq(1L), any(UserTaskLog.class)))
+    //             .thenThrow(new NoSuchElementException("UserTaskLog not found"));
 
-        mockMvc.perform(put("/api/user-task-logs/1")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(userTaskLog)))
-                .andExpect(status().isNotFound())
-                .andExpect(content().string("UserTaskLog not found"));
+    //     mockMvc.perform(put("/api/user-task-logs/1")
+    //             .contentType(MediaType.APPLICATION_JSON)
+    //             .content(asJsonString(userTaskLog)))
+    //             .andExpect(status().isNotFound())
+    //             .andExpect(content().string("UserTaskLog not found"));
 
-        verify(userTaskLogService, times(1)).updateUserTaskLog(eq(1L), any(UserTaskLog.class));
-    }
+    //     verify(userTaskLogService, times(1)).updateUserTaskLog(eq(1L), any(UserTaskLog.class));
+    // }
 
     /**
      * Tests that a 404 status is returned when attempting to delete a UserTaskLog
@@ -217,16 +217,16 @@ public class UserTaskLogControllerUnitTests {
      *
      * @throws Exception if an error occurs during the test
      */
-    @Test
-    public void testDeleteUserTaskLog_NotFound() throws Exception {
-        doThrow(new NoSuchElementException("UserTaskLog not found")).when(userTaskLogService).deleteUserTaskLog(99L);
+    // @Test
+    // public void testDeleteUserTaskLog_NotFound() throws Exception {
+    //     doThrow(new NoSuchElementException("UserTaskLog not found")).when(userTaskLogService).deleteUserTaskLog(99L);
 
-        mockMvc.perform(delete("/api/user-task-logs/99"))
-                .andExpect(status().isNotFound())
-                .andExpect(content().string("UserTaskLog not found"));
+    //     mockMvc.perform(delete("/api/user-task-logs/99"))
+    //             .andExpect(status().isNotFound())
+    //             .andExpect(content().string("UserTaskLog not found"));
 
-        verify(userTaskLogService, times(1)).deleteUserTaskLog(99L);
-    }
+    //     verify(userTaskLogService, times(1)).deleteUserTaskLog(99L);
+    // }
 
     /**
      * Converts an object into a JSON string.

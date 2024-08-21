@@ -1,0 +1,49 @@
+#newPlanLink{
+    background: var(--nhs-green);
+    color: white;
+    padding: 2vh;
+    margin-bottom: 2vh;
+    text-decoration: none;
+    display: inline-block;
+}
+#patientTasks {
+    margin-top: 5vh;
+    border-collapse: collapse;
+}
+
+#patientTasks tbody{
+    background: var(--nhs-white);
+}
+  
+#patientTasks td {
+    border: 1px solid #ccd2ff;
+    position: relative;
+    padding: 1vh;
+}
+
+#selects{
+    margin: 2vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.taskSelect{
+    padding: 2vh;
+    margin-bottom: 2vh;
+}
+
+#newTask{
+    background: var(--nhs-blue);
+    border: none;
+    padding: 1vh;
+    color: white;
+}
+
+.plan_button{
+    background: var(--nhs-green);
+    border: none;
+    padding: 1vh;
+    color: white;
+    font-size: large;
+    margin: 5vh;;
+}

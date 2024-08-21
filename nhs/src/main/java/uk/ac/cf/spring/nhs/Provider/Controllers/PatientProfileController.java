@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
+
 
 import uk.ac.cf.spring.nhs.Account.PatientProfileDTO;
 import uk.ac.cf.spring.nhs.AddPatient.Service.PatientService;
@@ -37,7 +36,7 @@ public class PatientProfileController {
     public List<NavMenuItem> navMenuItems() {
         return List.of(
                 new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
-                new NavMenuItem("Set plan", "", "fa-solid fa-book"),
+                new NavMenuItem("Set plan", "/patientprofile/plan", "fa-solid fa-book"),
                 new NavMenuItem("Questionnaires", "/patientprofile/questionnairehub",
                         "fa-solid fa-book"),
                 new NavMenuItem("Photos", "/patientprofile/photos", "fa-solid fa-camera"));
@@ -73,6 +72,16 @@ public class PatientProfileController {
         model.addAttribute("objectMapper", objectMapper);
         model.addAttribute("photos", photoService.getPhotosByUserId(userID));
         return "patientprofile/photos";
+    }
+
+    @GetMapping("/plan")
+    public String treatmentPlanPage(){
+        return "patientprofile/treatmentPlan";
+    }
+
+    @GetMapping("/setplan")
+    public String treatmentPlanSet(){
+        return "patientprofile/setPlan";
     }
 
 }

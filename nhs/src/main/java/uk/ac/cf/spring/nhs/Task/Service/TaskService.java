@@ -30,7 +30,7 @@ public class TaskService {
      * @param  id	the ID of the task to retrieve
      * @return      an Optional containing the task if found, or an empty Optional if the task is not found
      */
-    public Optional<Task> getTaskById(Long id) {
+    public Task getTaskById(long id) {
         return taskRepository.findById(id);
     }
 

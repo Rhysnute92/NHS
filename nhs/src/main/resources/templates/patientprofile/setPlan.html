@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/provider}"
+>
+  <head>
+    <title>Patient Profile</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/common/defaultLayout.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/plan.css}" />
+</head>
+<body>
+<main layout:fragment="content" class="main-content">
+    <h1 class="page-title">Set treatment plan</h1>
+    <div class="container">
+        <div id="selects">
+        <label for="tasks-0">Select task: </label>
+        <select class="taskSelect" id="tasks-0" name="taskList[0]" form="newplan"></select>
+    </div>
+    <button id="newTask">Add task</button>
+        <form th:action="@{/usertask/newplan/{id}(id = ${userID})}" method="post" id="newplan">
+            <input type="submit" value="Set plan" class="plan_button"/>
+        </form>
+    </div>
+</main>
+<th:block layout:fragment="scripts">
+    <script th:inline="javascript" type="text/javascript">const userId = [[${userID}]];</script>
+    <script th:src="@{/js/admin/setplan.js}"></script>
+</th:block>
+</body>
+</html>

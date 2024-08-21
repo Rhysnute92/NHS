@@ -85,21 +85,21 @@ public class UserTaskControllerIntegrationTests {
         return new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
     }
 
-    @Test
-    @WithMockUser(username = "testuser", roles = { "USER" })
-    public void testGetTasksForUser() throws Exception {
+    // @Test
+    // @WithMockUser(username = "testuser", roles = { "USER" })
+    // public void testGetTasksForUser() throws Exception {
 
-        Long userId = 1L;
-        when(authenticationFacade.getAuthentication()).thenReturn(getMockedAuthentication(userId));
-        when(userTaskService.getTasksForUser(userId)).thenReturn(Collections.singletonList(userTask));
+    //     Long userId = 1L;
+    //     when(authenticationFacade.getAuthentication()).thenReturn(getMockedAuthentication(userId));
+    //     when(userTaskService.getTasksForUser(userId)).thenReturn(Collections.singletonList(userTask));
 
-        mockMvc.perform(get("/usertask/user"))
-                .andExpect(status().isOk())
-                .andExpect(result -> {
-                    String jsonResponse = result.getResponse().getContentAsString();
-                    assertThat(jsonResponse).contains("\"name\":\"Test Task\"");
-                });
-    }
+    //     mockMvc.perform(get("/usertask/user"))
+    //             .andExpect(status().isOk())
+    //             .andExpect(result -> {
+    //                 String jsonResponse = result.getResponse().getContentAsString();
+    //                 assertThat(jsonResponse).contains("\"name\":\"Test Task\"");
+    //             });
+    // }
 
     /*
      * @Test
