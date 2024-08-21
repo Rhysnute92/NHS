@@ -8,6 +8,9 @@
 .no-entries {
     text-align: center;
     margin-top: 2rem;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--nhs-mid-grey);
 }
 
 @media (max-width: 768px) {

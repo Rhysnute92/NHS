@@ -4,20 +4,21 @@
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
     <link rel="stylesheet" th:href="@{/css/guest/guest.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services</title>
   </head>
   <body class="mobilePages">
-    <div class="container">
-      <div th:replace="~{common/fragments/header}"></div>
-      <div class="mobileFrag">
-        <div th:replace="~{guest/fragments/services :: info2}"></div>
+      <div class="container">
+        <div th:replace="~{common/fragments/header}"></div>
+        <div class="mobileFrag">
+          <div th:replace="~{guest/fragments/services :: info2}"></div>
+        </div>
+    </div>
+      <div class="btn-container">
+        <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
       </div>
-  </div>
-    <div class="btn-container">
-      <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
-    </div>
-    <div class="back-btn" onclick="location.href='/guest'">
-      Back
-    </div>
+      <div class="back-btn" onclick="location.href='/guest'">
+        Back
+      </div>
     <script th:src="@{/js/common/header.js}"></script>
     <script th:src="@{/js/Guest/guestMobile.js}"></script>
     <script th:src="@{/js/Guest/guest.js}"></script>

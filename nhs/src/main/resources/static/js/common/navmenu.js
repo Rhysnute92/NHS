@@ -1,5 +1,5 @@
 const navmenu = document.querySelector('.navmenu');
-const navmenuToggle = document.querySelector('.navmenu-toggle');
+const navmenuToggle = document.querySelector('.navmenu-toggle-icon');
 const body = document.body;
 const mobileBreakpoint = 480;
 

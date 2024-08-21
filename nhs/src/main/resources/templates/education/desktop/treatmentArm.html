@@ -10,115 +10,118 @@
   <body>
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-    <div th:replace="~{education/fragments/desktop/infomenu :: infomenu}"></div>
-    <div class="container">
-      <h2>Treatments for lymphedema of the arms</h2>
-    <div class="section_container">
-    <div class="section">
-      <button type="button" class="collapsible_button">Skincare</button>
-      <div class="collapsible">
-        <ul>
-            <li>Wear rubber gloves when washing up or using cleaning materials - as they can irritate the skin.</li>
-            <li>Wear gloves when gardening to prevent any cuts or scratches to your arm or hand.</li>
-            <li>Use a thimble when sewing.</li>
-            <li>Try to avoid having your blood pressure checked on a swollen arm.</li>
-            <li>Do not wear tight clothing, i.e. tight bra straps, t-shirts or vests with tight arm holes as they can restrict fluid flow. This can also apply to watches and jewellery such as rings or bracelets.</li>
-            <li>Avoid carrying or lifting heavy objects - including full shopping bags - as this puts strain on your arm and could lead to an increase in swelling.</li>
-            </ul>
-      </div></div>
+    <main>
+      <div th:replace="~{education/fragments/desktop/infomenu :: infomenu}"></div>
+      <div class="container">
+        <h2>Treatments for lymphedema of the arms</h2>
+      <div class="section_container">
       <div class="section">
-      <button type="button" class="collapsible_button">Wraps</button>
-      <div class="collapsible">
-          <p>You have been given wraps to reduce or manage your swollen arm. There are different makes of Velcro wraps. Basically, they are very much the same.</p>
-          <div class="display">
-          <button type="button" onclick="backClick()">&larr;</button>
-          <div class="display_item" id="display_item">
-            <img src="/images/info/garments/g1a.png" style="display: inline-block;">
-            <img src="/images/info/garments/g2a.png">
-            <img src="/images/info/garments/g3a.png">
-          </div>
-          <button type="button" onclick="forwardClick()">&rarr;</button>
-        </div>
-          <h3>Advice for using your wraps</h3>
+        <button type="button" class="collapsible_button">Skincare</button>
+        <div class="collapsible">
           <ul>
-            <li>We always advise you wear a glove underneath your hand piece</li>
-            <li>Never wear the arm wrap without the hand wrap unless you have been advised to do so</li>
-            <li>Ensure there is no gap between the hand and arm pieces at the wrist</li>
-            <li>Wear the wraps as advised by your therapist</li>
-            <li>Regularly adjust the wrap throughout the day as it may become loose as swelling reduces.</li>
-            <li>Adjust or loosen the wrap if it feels uncomfortable or you get pins and needles or blue fingers.</li>
-            <li>Remove the wrap if you have a sudden onset of shortness of breathe</li>
-            <li>Remove the wrap if you develop any skin allergy to the material</li>
-            </ul>
-          <h3>How to put on your wraps</h3>
-          <p>Your wraps will have arrived with written instructions and maybe pictures on how to put on your wraps. To help you we have also put together some videos which might help you too.</p>
-          <p>Please select the appropriate make for the wrap you have been provided with.</p>
-          <button type="button" class="collapsible_video_button">Haddenham Easy Wrap for Arm and Hand</button>
-          <div class="collapsible_video">
-            <p>How to apply the Haddenham Easywrap for the Arm </p>
-            <iframe src="https://www.youtube.com/embed/XN5jDbOXSOo"></iframe>
-            <p>How to apply the Haddenham Easywrap for the Hand </p>
-            <iframe src="https://www.youtube.com/embed/ci9-WlNEW8k"></iframe>
-          </div>
-          <button type="button" class="collapsible_video_button">Jobst Farrowwrap for arm and hand supplied by Essity/BSN</button>
-          <div class="collapsible_video">
-            <p>How to apply the Farrowwrap hand and arm pieces</p>
-            <iframe src="https://www.youtube.com/embed/8roSCOJUXHE?list=PLZpegAc41YsLTI1D51tzguKDD59dY5Cvx"></iframe>
-          </div>
-          <button type="button" class="collapsible_video_button">Juzo ACS Light Arm and Hand pieces</button>
-          <div class="collapsible_video">
-            <p>How to apply the Juzo Leg and Foot pieces</p>
-            <iframe src="https://www.youtube.com/embed/5Xroar_DoTw"></iframe>
-          </div>
-          <p>A good tip is to always remember to turn the velcro straps back on themselves once, then twice, to prevent the velcro sticking to everything and getting in a tangle! If you do this as and when you take off the wraps, it will make it much easier to put them on the next time.</p>
+              <li>Wear rubber gloves when washing up or using cleaning materials - as they can irritate the skin.</li>
+              <li>Wear gloves when gardening to prevent any cuts or scratches to your arm or hand.</li>
+              <li>Use a thimble when sewing.</li>
+              <li>Try to avoid having your blood pressure checked on a swollen arm.</li>
+              <li>Do not wear tight clothing, i.e. tight bra straps, t-shirts or vests with tight arm holes as they can restrict fluid flow. This can also apply to watches and jewellery such as rings or bracelets.</li>
+              <li>Avoid carrying or lifting heavy objects - including full shopping bags - as this puts strain on your arm and could lead to an increase in swelling.</li>
+              </ul>
         </div></div>
         <div class="section">
-        <button type="button" class="collapsible_button">Excercises</button>
+        <button type="button" class="collapsible_button">Wraps</button>
         <div class="collapsible">
-          <p>Repeat 10 times both sides. You can increase the number of repetitions as you get stronger</p>
-          <div class="excercise">
-          <h3>Excercise 1:</h3>
-          <img src="/images/info/excercises/ex1a.png">
-          <p>Open and close your hand.</p></div>
-          <div class="excercise">
-          <h3>Excercise 2:</h3>
-          <img src="/images/info/excercises/ex2a.png">
-          <p>Move your wrist forward and back.</p> </div>
-          <div class="excercise">
-          <h3>Excercise 3:</h3>
-          <img src="/images/info/excercises/ex3a.png">
-          <p>Bend and streighten your elbow.</p> </div>
-          <div class="excercise">
-            <h3>Excercise 4:</h3>
-            <img src="/images/info/excercises/ex4a.png">
-            <p>Roll your shoulders in a backwards direction.
-            </p>
+            <p>You have been given wraps to reduce or manage your swollen arm. There are different makes of Velcro wraps. Basically, they are very much the same.</p>
+            <div class="display">
+            <button type="button" onclick="backClick()">&larr;</button>
+            <div class="display_item" id="display_item">
+              <img src="/images/info/garments/g1a.png" style="display: inline-block;">
+              <img src="/images/info/garments/g2a.png">
+              <img src="/images/info/garments/g3a.png">
+            </div>
+            <button type="button" onclick="forwardClick()">&rarr;</button>
           </div>
-          <div class="excercise">
-            <h3>Excercise 5:</h3>
-            <img src="/images/info/excercises/ex5a.png">
-            <p>Lift your hand up towards the ceiling and gently lower it back down.
-            </p>
-          </div>
-          <div class="excercise">
-            <h3>Excercise 6:</h3>
-            <img src="/images/info/excercises/ex6a.png">
-            <p>Raise arms from your side up above your head and gently lower back down.
-            </p>
-          </div>
-      </div></div>
-      <div class="section">
-        <button type="button" class="collapsible_button">Lymphatic drainage</button>
-        <div class="collapsible">
-          <p>Manual and simple lymphatic drainage is a gentle massage where the skin is stretched along the lymphatic pathway. Regular simple Lymphatic Drainage can help move extra fluid from swollen areas damaged by cancer treatments to areas where the lymphatic system is working well. To be effective Simple Lymphatic drainage needs to be carried out daily and may be a long-term requirement to support the Lymphatic system.</p>
-          <iframe src="https://www.youtube.com/embed/kLFq5ZZYeL0"></iframe>
+            <h3>Advice for using your wraps</h3>
+            <ul>
+              <li>We always advise you wear a glove underneath your hand piece</li>
+              <li>Never wear the arm wrap without the hand wrap unless you have been advised to do so</li>
+              <li>Ensure there is no gap between the hand and arm pieces at the wrist</li>
+              <li>Wear the wraps as advised by your therapist</li>
+              <li>Regularly adjust the wrap throughout the day as it may become loose as swelling reduces.</li>
+              <li>Adjust or loosen the wrap if it feels uncomfortable or you get pins and needles or blue fingers.</li>
+              <li>Remove the wrap if you have a sudden onset of shortness of breathe</li>
+              <li>Remove the wrap if you develop any skin allergy to the material</li>
+              </ul>
+            <h3>How to put on your wraps</h3>
+            <p>Your wraps will have arrived with written instructions and maybe pictures on how to put on your wraps. To help you we have also put together some videos which might help you too.</p>
+            <p>Please select the appropriate make for the wrap you have been provided with.</p>
+            <button type="button" class="collapsible_video_button">Haddenham Easy Wrap for Arm and Hand</button>
+            <div class="collapsible_video">
+              <p>How to apply the Haddenham Easywrap for the Arm </p>
+              <iframe src="https://www.youtube.com/embed/XN5jDbOXSOo"></iframe>
+              <p>How to apply the Haddenham Easywrap for the Hand </p>
+              <iframe src="https://www.youtube.com/embed/ci9-WlNEW8k"></iframe>
+            </div>
+            <button type="button" class="collapsible_video_button">Jobst Farrowwrap for arm and hand supplied by Essity/BSN</button>
+            <div class="collapsible_video">
+              <p>How to apply the Farrowwrap hand and arm pieces</p>
+              <iframe src="https://www.youtube.com/embed/8roSCOJUXHE?list=PLZpegAc41YsLTI1D51tzguKDD59dY5Cvx"></iframe>
+            </div>
+            <button type="button" class="collapsible_video_button">Juzo ACS Light Arm and Hand pieces</button>
+            <div class="collapsible_video">
+              <p>How to apply the Juzo Leg and Foot pieces</p>
+              <iframe src="https://www.youtube.com/embed/5Xroar_DoTw"></iframe>
+            </div>
+            <p>A good tip is to always remember to turn the velcro straps back on themselves once, then twice, to prevent the velcro sticking to everything and getting in a tangle! If you do this as and when you take off the wraps, it will make it much easier to put them on the next time.</p>
+          </div></div>
+          <div class="section">
+          <button type="button" class="collapsible_button">Excercises</button>
+          <div class="collapsible">
+            <p>Repeat 10 times both sides. You can increase the number of repetitions as you get stronger</p>
+            <div class="excercise">
+            <h3>Excercise 1:</h3>
+            <img src="/images/info/excercises/ex1a.png">
+            <p>Open and close your hand.</p></div>
+            <div class="excercise">
+            <h3>Excercise 2:</h3>
+            <img src="/images/info/excercises/ex2a.png">
+            <p>Move your wrist forward and back.</p> </div>
+            <div class="excercise">
+            <h3>Excercise 3:</h3>
+            <img src="/images/info/excercises/ex3a.png">
+            <p>Bend and streighten your elbow.</p> </div>
+            <div class="excercise">
+              <h3>Excercise 4:</h3>
+              <img src="/images/info/excercises/ex4a.png">
+              <p>Roll your shoulders in a backwards direction.
+              </p>
+            </div>
+            <div class="excercise">
+              <h3>Excercise 5:</h3>
+              <img src="/images/info/excercises/ex5a.png">
+              <p>Lift your hand up towards the ceiling and gently lower it back down.
+              </p>
+            </div>
+            <div class="excercise">
+              <h3>Excercise 6:</h3>
+              <img src="/images/info/excercises/ex6a.png">
+              <p>Raise arms from your side up above your head and gently lower back down.
+              </p>
+            </div>
         </div></div>
+        <div class="section">
+          <button type="button" class="collapsible_button">Lymphatic drainage</button>
+          <div class="collapsible">
+            <p>Manual and simple lymphatic drainage is a gentle massage where the skin is stretched along the lymphatic pathway. Regular simple Lymphatic Drainage can help move extra fluid from swollen areas damaged by cancer treatments to areas where the lymphatic system is working well. To be effective Simple Lymphatic drainage needs to be carried out daily and may be a long-term requirement to support the Lymphatic system.</p>
+            <iframe src="https://www.youtube.com/embed/kLFq5ZZYeL0"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="section_nav">
+          <a th:href="@{/treatment}" class="section_link">&larr; Back to full list</a>
+      </div>
     </div>
-    <div class="section_nav">
-        <a th:href="@{/treatment}" class="section_link">&larr; Back to full list</a>
-    </div>
-  </div>
-    <script th:src="@{/js/education/treatmentSpec.js}"></script>
-    <script th:src="@{/js/common/header.js}"></script>
+  </main>
+  <script th:src="@{/js/education/treatmentSpec.js}"></script>
+  <script th:src="@{/js/common/header.js}"></script>
   </body>
 </html>

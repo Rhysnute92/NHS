@@ -25,10 +25,13 @@
   <main layout:fragment="content" class="main-content">
     <!-- Page content will be inserted here -->
   </main>
+
+  <div th:if="${navMenuItems != null}" class="navmenu-spacer"></div>
 </div>
 
 <!-- Common JavaScript -->
 <script th:src="@{/js/common/header.js}"></script>
+<script th:src="@{/js/common/components/NHSButton.js}"></script>
 
 <!-- Page specific JavaScript -->
 <th:block layout:fragment="scripts"></th:block>

@@ -9,22 +9,28 @@
   <body>
     <header th:replace="~{common/fragments/header}"></header>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-    <h1 class="pagename">Helpful resources</h1>
-    <div th:replace="~{education/fragments/desktop/infomenu :: infomenu}"></div>
-    <div class="container_d">
-      <h3 class="subtitle">Lymphoedema</h3>
-        <ul class="resource_list">
-            <li class="res_item"><a href="https://www.lymphoedema.org/">Lymphoedema Support Network</a></li>
-        </ul>
-      <h3 class="subtitle">Cancer</h3>
-        <ul class="resource_list">
-            <li class="res_item"><a href="https://www.maggies.org/">Maggie's</a> - Cancer care centers</li>
-            <li class="res_item"><a href="https://theswallows.org.uk/">Swallows</a> - Head and Neck cancer support groups</li>
-        </ul>
-    </div>
-    <div class="section_nav">
-        <a th:href="@{/treatment}" class="section_link_l">&larr;Treatments</a>
-    </div>
+    <main>
+      <h1 class="pagename">Helpful resources</h1>
+      <div th:replace="~{education/fragments/desktop/infomenu :: infomenu}"></div>
+      <div class="container_d">
+        <div class="infosection">
+          <h3 class="subtitle">Lymphoedema</h3>
+            <ul class="resource_list">
+                <li class="res_item"><a href="https://www.lymphoedema.org/">Lymphoedema Support Network</a></li>
+            </ul>
+        </div>
+        <div class="infosection">
+          <h3 class="subtitle">Cancer</h3>
+            <ul class="resource_list">
+                <li class="res_item"><a href="https://www.maggies.org/">Maggie's</a> - Cancer care centers</li>
+                <li class="res_item"><a href="https://theswallows.org.uk/">Swallows</a> - Head and Neck cancer support groups</li>
+            </ul>
+        </div>
+      </div>
+      <div class="section_nav">
+          <a th:href="@{/treatment}" class="section_link_l">&larr;Treatments</a>
+      </div>
+    </main>
     <script th:src="@{/js/common/header.js}"></script>
   </body>
 </html>

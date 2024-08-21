@@ -9,8 +9,9 @@
 <body>
 <main layout:fragment="content">
     <h1 class="page-title">Diary</h1>
+    <p class="page-subtitle">Your daily wellness log</p>
     <div class="container">
-        <h2 th:if="${diaryEntries.empty}" class="no-entries">No diary entries yet</h2>
+        <p th:if="${diaryEntries.empty}" class="no-entries">No diary entries yet</p>
         <th:block th:each="diaryEntry : ${diaryEntries}">
             <div th:replace="~{diary/fragments/diaryEntry :: diaryEntry(diaryEntry=${diaryEntry})}">
             </div>
