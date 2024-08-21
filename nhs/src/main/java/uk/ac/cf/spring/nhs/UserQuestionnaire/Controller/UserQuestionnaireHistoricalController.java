@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserQuestionnaireHistoricalController {
 
     @GetMapping("/questionnaire/historical/user")
-    public String showHistoricalQuestionnaire() {
+    public String showHistoricalQuestionnaireUser() {
         return "questionnaire/historicalQuestionnaire";
+    }
+
+    @GetMapping("/questionnaire/historical/provider")
+    public String showHistoricalQuestionnaireProvider() {
+        return "questionnaire/providerHistoricalQuestionnaire";
     }
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <title>Questionnaire Data</title>
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"
+    />
+    <link
+      rel="stylesheet"
+      th:href="@{/css/questionnaireHistorical/questionnaireHistorical.css}"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <!-- Header and Navbar -->
+    <div th:replace="~{common/fragments/header :: header}"></div>
+    <nav
+      th:replace="~{common/fragments/navbaradmin :: navbar}"
+      class="nav"
+    ></nav>
+
+    <!-- Main Container -->
+    <div class="container mt-5">
+      <!-- Main Header -->
+      <h1 class="questionnaire-data-header">Questionnaire Data</h1>
+
+      <!-- Subtitle -->
+      <p class="questionnaire-data-subtitle">
+        This page displays your previous questionnaire data and trends over time
+        to help you track your progress and well-being.
+      </p>
+      <div class="questionnaire-data-container">
+        <div class="questionnaire-table-container">
+          <h2 class="questionnaire-table-header">
+            Historical Questionnaire Responses
+          </h2>
+          <h3 class="lymph-qol-arm-title">
+            Lymphoedema Quality of Life Questionnaire - Arm
+          </h3>
+
+          <!-- Date Column for Previous Questionnaires -->
+          <div id="dateColumn" class="mb-4">
+            <!-- Date buttons will be dynamically populated here -->
+          </div>
+          <!-- Date Column for Previous Questionnaires -->
+          <div id="date-select-container" class="mb-4">
+            <label for="date-select">Select Completion Date:</label>
+            <select id="date-select" class="form-control">
+              <!-- Date options will be dynamically populated here -->
+            </select>
+          </div>
+          <!-- Category Tabs -->
+          <div id="category-tabs" class="mb-4">
+            <!-- Category tabs will be dynamically populated here -->
+          </div>
+
+          <!-- Container for Previous Questionnaire Tabular Data -->
+          <div id="previous-questionnaires" class="mb-4">
+            <table id="questionnaireTable" class="display" style="width: 100%">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Question</th>
+                  <th>Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Rows will be dynamically populated here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Container for Previous Questionnaire Trends -->
+        <div id="questionnaire-trends" class="mb-4">
+          <h3 class="questionnaire-trends-title">Questionnaire Data Trends</h3>
+
+          <div id="trend-buttons" class="mb-4">
+            <!-- Trend buttons will be dynamically populated here -->
+          </div>
+          <canvas id="trendChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <!-- Common JS -->
+    <script th:src="@{/js/common/header.js}"></script>
+    <script
+      type="module"
+      th:src="@{/js/Questionnaire/QuestionnaireHistorical/providerHistoricalQuestionnaire.js}"
+    ></script>
+  </body>
+</html>

@@ -36,4 +36,19 @@ export class UserQuestionnaireService {
       throw error;
     }
   }
+
+  async getCompletedUserQuestionnairesForPatient(patientId) {
+    try {
+      const url = `${this.baseUrl}/provider/completed/${patientId}`;
+      const data = await fetchData(url);
+      console.log("Completed UserQuestionnaires for Patient:", data);
+      return data;
+    } catch (error) {
+      console.error(
+        "Error fetching completed UserQuestionnaires for Patient:",
+        error
+      );
+      throw error;
+    }
+  }
 }
