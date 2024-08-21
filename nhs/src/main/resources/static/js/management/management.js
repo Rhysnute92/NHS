@@ -41,10 +41,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   const questionnaireContainerId = "questionnaire-container";
   const noAssignmentContainerId = "no-assignment";
 
-  await initializeQuestionnaireManager(
+  // Initialize the questionnaireManager
+  const questionnaireManager = await initializeQuestionnaireManager(
     questionnaireContainerId,
     noAssignmentContainerId
   );
+
+  if (questionnaireManager) {
+    await questionnaireManager.loadAssignedQuestionnaires();
+  }
 
   taskManager
     .fetchTasks()

@@ -62,29 +62,16 @@
         </section>
 
         <!-- Section 2: View Previous Results -->
-        <div class="view-results-section mt-5">
+        <div class="view-previous-questionnaire-results-section">
           <h2>View Previous Results</h2>
-          <div class="results-list">
-            <!-- List or table of previous questionnaire results -->
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Questionnaire</th>
-                  <th>Date Completed</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Questionnaire 1</td>
-                  <td>01/01/2024</td>
-                  <td>
-                    <button class="btn btn-secondary">View Results</button>
-                  </td>
-                </tr>
-                <!-- More rows as needed -->
-              </tbody>
-            </table>
+          <div class="view-prev-button-container">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="window.location.href='/questionnaire/historical/provider'"
+            >
+              View Historical Questionnaires
+            </button>
           </div>
         </div>
       </div>
