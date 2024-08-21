@@ -1,6 +1,8 @@
 package uk.ac.cf.spring.nhs.AddPatient.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import uk.ac.cf.spring.nhs.AddPatient.Repository.PatientRepository;
 import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentials;
 import uk.ac.cf.spring.nhs.Security.UserCredentials.UserCredentialsRepository;
 import uk.ac.cf.spring.nhs.Common.util.PatientDataUtility;
+import uk.ac.cf.spring.nhs.Provider.DTOs.SearchRequest;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -20,6 +24,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import java.time.LocalDate;
 import java.util.Base64;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -39,9 +44,33 @@ public class PatientService {
     @Autowired
     private EmailService emailService;
 
+    //Repository search functions
     public Patient findPatientbyId(long userId){
         Patient user = patientRepository.findById(userId);
         return user;
+    }
+    public Patient findPatientbyNHSNumber(String nhsNumber){
+        Patient result = patientRepository.findByNHSNumber(nhsNumber);
+        return result;
+    }
+    public List<Patient> patientGeneralSearch(SearchRequest request){
+        //Set the example values
+        Patient model = new Patient();
+        model.setPatientName(request.getPatientName());
+        model.setPatientLastName(request.getPatientLastName());
+        model.setPatientDOB(request.getPatientDOB());
+        model.setPatientEmail(request.getPatientEmail());
+        //Set matching rules
+        ExampleMatcher matcher = ExampleMatcher.matchingAny()
+        .withMatcher("patientName", match -> match.contains().ignoreCase())
+        .withMatcher("patientLastName", match -> match.contains().ignoreCase())
+        .withMatcher("patientEmail", match -> match.contains().ignoreCase())
+        .withMatcher("patientDOB", match -> match.exact())
+        .withIgnorePaths("userId", "patientMobile", "nhsNumber", "patientClinic");
+        //Search with example
+        Example<Patient> example = Example.of(model, matcher);
+        List<Patient> result = patientRepository.findAll(example);
+        return result;
     }
 
     // Generating a key for the patient
@@ -73,6 +102,20 @@ public class PatientService {
         byte[] decodedBytes = Base64.getDecoder().decode(encryptedData);
         byte[] decryptedBytes = cipher.doFinal(decodedBytes);
         return new String(decryptedBytes);
+    }
+
+    //Returns Patient object with decrypted data
+    public Patient decryptPatient(Patient patient){
+        SecretKey key = decodeKey(patient.getEncryptionKey());
+        try{
+            patient.setPatientName(decrypt(patient.getPatientName(), key));
+            patient.setPatientLastName(decrypt(patient.getPatientLastName(), key));
+            patient.setPatientEmail(decrypt(patient.getPatientEmail(), key));
+            patient.setPatientMobile(decrypt(patient.getPatientMobile(), key));
+            return patient;} catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
     }
 
     public String registerPatient(RegisterRequest request) {
