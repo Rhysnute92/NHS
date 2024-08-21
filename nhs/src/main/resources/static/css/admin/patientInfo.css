@@ -1,0 +1,16 @@
+.info_list{
+    list-style: none;
+    text-align: justify;
+}
+
+.info_list li{
+    background: white;
+    width: 25vw;
+    margin: 1vh;
+    padding: 1vh;
+    border: 1px solid var(--nhs-dark-grey);
+}
+
+.info_list span{
+    float: right;
+}

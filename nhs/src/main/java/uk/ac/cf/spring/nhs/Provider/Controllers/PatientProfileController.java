@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import uk.ac.cf.spring.nhs.Account.PatientProfileDTO;
 import uk.ac.cf.spring.nhs.AddPatient.Service.PatientService;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
 
@@ -53,7 +54,9 @@ public class PatientProfileController {
     } 
 
     @GetMapping("/info")
-    public String patientProfileAdmin() {
+    public String patientProfileAdmin(@ModelAttribute("userID") Long userID, Model model) {
+        PatientProfileDTO profile = patientService.profile(userID);
+        model.addAttribute("patient", profile);
         return "patientprofile/profileInfo";
     }
 

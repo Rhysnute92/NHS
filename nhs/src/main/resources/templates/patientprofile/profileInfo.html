@@ -9,11 +9,24 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
     <link rel="stylesheet" th:href="@{/css/common/defaultLayout.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/patientInfo.css}" />
 </head>
 <body>
 <main layout:fragment="content" class="main-content">
-    <h1 class="page-title">Patient info for User [[${userID}]]</h1>
-    <div class="container"></div>
+    <h1 class="page-title">Patient information</h1>
+    <div class="container">
+      <div class="personal_info">
+        <ul class="info_list">
+        <li th:inline="text">Full name: <span th:text="${patient.fullName}"></span></li>
+        <li th:inline="text">NHS number: <span th:text="${patient.nhsNumber}"></span></li>
+        <li th:inline="text">Email: <span th:text="${patient.email}"></span></li>
+        <li th:inline="text">Phone number: <span th:text="${patient.mobile}"></span></li>
+        <li th:inline="text">Date of Birth: <span th:text="${patient.dateOB}"></span></li>
+        <li th:inline="text">Age:  <span th:text="${patient.age}"></span></li>
+        <li th:inline="text">Clinic: <span th:text="${patient.clinic}"></span></li>
+      </ul>
+    </div>
+    </div>
 </main>
 </body>
 </html>
