@@ -2,6 +2,7 @@ import { UserQuestionnaireService } from "./historicalQuestionnaireService.js";
 
 let table;
 const questionnaireService = new UserQuestionnaireService();
+let chart;
 
 $(document).ready(function () {
   // Initialize DataTable and assign to the table variable
@@ -22,6 +23,8 @@ $(document).ready(function () {
       if (data.length > 0) {
         generateCategoryTabs(data[0]);
         loadCategoryData(data[0], "Function"); // Default to "Function" category
+        generateTrendButtons(data); // Generate trend buttons for each category
+        loadTrendChart(data, "Function"); // Load the trend chart for the default category
       }
     })
     .catch((error) => {
@@ -146,4 +149,110 @@ function loadCategoryData(userQuestionnaire, category) {
     .catch((error) => {
       console.error("Error loading category data:", error);
     });
+}
+
+function generateTrendButtons(userQuestionnaires) {
+  questionnaireService
+    .getUserQuestions(userQuestionnaires[0].userQuestionnaireId)
+    .then((userQuestions) => {
+      const categories = [
+        ...new Set(userQuestions.map((q) => q.question.questionCategory)),
+      ];
+
+      const trendButtons = $("#trend-buttons");
+      trendButtons.empty(); // Clear existing buttons
+
+      categories.forEach((category) => {
+        const button = $("<button>")
+          .addClass("trend-button btn btn-primary")
+          .text(category)
+          .data("category", category)
+          .on("click", function () {
+            loadTrendChart(userQuestionnaires, category);
+          });
+
+        trendButtons.append(button);
+      });
+    })
+    .catch((error) => {
+      console.error("Error generating trend buttons:", error);
+    });
+}
+
+function loadTrendChart(userQuestionnaires, category) {
+  const labels = [];
+  const dataPoints = [];
+
+  userQuestionnaires.forEach((questionnaire) => {
+    questionnaireService
+      .getUserQuestions(questionnaire.userQuestionnaireId)
+      .then((userQuestions) => {
+        const filteredQuestions = userQuestions.filter(
+          (q) => q.question.questionCategory === category
+        );
+
+        let totalScore = 0;
+        let answeredQuestionsCount = 0;
+
+        filteredQuestions.forEach((entry) => {
+          if (typeof entry.userResponseScore === "number") {
+            totalScore += entry.userResponseScore;
+            answeredQuestionsCount++;
+          }
+        });
+
+        const averageScore =
+          answeredQuestionsCount > 0
+            ? (totalScore / answeredQuestionsCount).toFixed(2)
+            : 0;
+
+        labels.push(
+          new Date(
+            questionnaire.questionnaireCompletionDate
+          ).toLocaleDateString("en-GB")
+        );
+        dataPoints.push(averageScore);
+
+        if (chart) {
+          chart.destroy();
+        }
+
+        const ctx = $("#trendChart");
+        chart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: `Average Score for ${category}`,
+                data: dataPoints,
+                borderColor: "rgba(75, 192, 192, 1)",
+                fill: false,
+                tension: 0.1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Completion Date",
+                },
+              },
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "Average Score",
+                },
+              },
+            },
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Error loading trend chart data:", error);
+      });
+  });
 }

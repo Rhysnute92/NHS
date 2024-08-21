@@ -22,6 +22,12 @@ h3.lymph-qol-arm-title {
   padding-bottom: 0.25em;
 }
 
+h3.questionnaire-trends-title {
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--nhs-dark-grey);
+  padding-bottom: 0.25em;
+}
+
 /* Styling the category buttons */
 .category-tab {
   background-color: var(--nhs-bright-blue);

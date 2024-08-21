@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <!-- Header and Navbar -->
@@ -69,9 +70,12 @@
           </div>
         </div>
         <!-- Container for Previous Questionnaire Trends -->
-        <div id="questionnaire-trends">
-          <h2>Questionnaire Trends</h2>
-          <!-- Charts or trend analysis will be inserted here -->
+        <div id="questionnaire-trends" class="mb-4">
+          <h3 class="questionnaire-trends-title">Questionnaire Data Trends</h3>
+          <div id="trend-buttons" class="mb-4">
+            <!-- Trend buttons will be dynamically populated here -->
+          </div>
+          <canvas id="trendChart"></canvas>
         </div>
       </div>
     </div>
