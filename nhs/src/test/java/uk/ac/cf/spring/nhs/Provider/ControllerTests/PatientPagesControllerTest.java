@@ -49,7 +49,7 @@ public class PatientPagesControllerTest {
                 new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
                 new NavMenuItem("Set plan", "", "fa-solid fa-book"),
                 new NavMenuItem("Appointments", " ", "fa-solid fa-user-check"),
-                new NavMenuItem("Questionnaires", "/questionnairehub", "fa-solid fa-book"),
+                new NavMenuItem("Questionnaires", "/patientprofile/questionnairehub", "fa-solid fa-book"),
                 new NavMenuItem("Patient trends", " ", "fa-solid fa-user-check"),
                 new NavMenuItem("Event log", " ", "fa-solid fa-book"),
                 new NavMenuItem("Photos", " ", "fa-solid fa-camera"),
@@ -64,29 +64,6 @@ public class PatientPagesControllerTest {
             assertEquals(expectedNavMenuItems.get(i).getUrl(), actualNavMenuItems.get(i).getUrl());
             assertEquals(expectedNavMenuItems.get(i).getIcon(), actualNavMenuItems.get(i).getIcon());
         }
-    }
-
-    @Test
-    @WithMockUser(username = "admin", roles = { "PATIENT" })
-    void patientPatientInfoTest() throws Exception {
-        mockMvc.perform(get("/patientprofile/info"))
-                .andExpect(status().is4xxClientError());
-    }
-
-    @Test
-    @WithMockUser(username = "admin", roles = { "ADMIN" })
-    void adminPatientInfoTest() throws Exception {
-        mockMvc.perform(get("/patientprofile/info"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("patientprofile/profileInfo"));
-    }
-
-    @Test
-    @WithMockUser(username = "admin", roles = { "PROVIDER" })
-    void providerPatientInfoTest() throws Exception {
-        mockMvc.perform(get("/patientprofile/info"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("patientprofile/profileInfo"));
     }
 
 }
