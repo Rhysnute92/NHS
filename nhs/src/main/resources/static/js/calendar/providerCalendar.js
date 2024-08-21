@@ -27,14 +27,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function showList() {
-    document.getElementById('appointment-list').style.display = 'block'; // Show the list
-    document.getElementById('calendar').style.display = 'none'; // Hide the calendar
+    document.getElementById('appointment-list1').style.display = 'block'; // Show the list
+    document.getElementById('calendar1').style.display = 'none'; // Hide the calendar
     document.getElementById('no-appointments').style.display = 'none'; // Hide "No appointments" message
 }
 
 function showProviderCalendar() {
-    document.getElementById('appointment-list').style.display = 'none'; // Hide the list
-    document.getElementById('calendar').style.display = 'block'; // Show the calendar
+    document.getElementById('appointment-list1').style.display = 'none'; // Hide the list
+    document.getElementById('calendar1').style.display = 'block'; // Show the calendar
     document.getElementById('no-appointments').style.display = 'none'; // Hide "No appointments" message
 }
 
@@ -44,8 +44,8 @@ window.onload = function() {
     if (appointmentsExist) {
         showList(); // Show list by default if appointments exist
     } else {
-        document.getElementById('appointment-list').style.display = 'none';
-        document.getElementById('calendar').style.display = 'none';
+        document.getElementById('appointment-list1').style.display = 'none';
+        document.getElementById('calendar1').style.display = 'none';
         document.getElementById('no-appointments').style.display = 'block';
     }
 }
