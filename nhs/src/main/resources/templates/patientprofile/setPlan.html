@@ -14,11 +14,19 @@
 <main layout:fragment="content" class="main-content">
     <h1 class="page-title">Set treatment plan</h1>
     <div class="container">
+        <div id="selects">
+        <label for="tasks-0">Select task: </label>
+        <select class="taskSelect" id="tasks-0" name="taskList[0].id" form="newplan"></select>
+    </div>
+    <button id="newTask">Add task</button>
+        <form action="" method="post" id="newplan">
+            <input type="submit" value="Set plan" class="plan_button"/>
+        </form>
     </div>
 </main>
 <th:block layout:fragment="scripts">
     <script th:inline="javascript" type="text/javascript">const userId = [[${userID}]];</script>
-    <!-- <script th:src="@{/js/admin/plan.js}"></script> -->
+    <script th:src="@{/js/admin/setplan.js}"></script>
 </th:block>
 </body>
 </html>
