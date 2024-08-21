@@ -532,6 +532,74 @@ VALUES -- Function (Daily Activities)
  QuestionnaireDueDate
  )
  VALUES (1, 2, NOW(), '2024-12-31'); */
+INSERT INTO UserQuestionnaires (
+        QuestionnaireID,
+        UserID,
+        QuestionnaireCreatedDate,
+        QuestionnaireDueDate,
+        QuestionnaireStartDate,
+        QuestionnaireInProgress,
+        QuestionnaireIsCompleted,
+        QuestionnaireCompletionDate
+    )
+VALUES (
+        1,
+        2,
+        '2024-01-01 09:00:00',
+        '2024-01-31 23:59:59',
+        '2024-01-02 09:00:00',
+        FALSE,
+        TRUE,
+        '2024-02-02 15:00:00' -- The date when the questionnaire was completed
+    );
+-- Insert corresponding UserQuestion entries for each question in the questionnaire
+INSERT INTO UserQuestion (
+        QuestionID,
+        UserQuestionnaireID,
+        UserResponseText,
+        UserResponseScore,
+        ResponseDateTime
+    )
+VALUES -- Function (Daily Activities)
+    (1, 1, NULL, 3, '2024-01-02 15:00:00'),
+    (2, 1, NULL, 4, '2024-01-02 15:05:00'),
+    (3, 1, NULL, 2, '2024-01-02 15:10:00'),
+    (4, 1, NULL, 3, '2024-01-02 15:15:00'),
+    (5, 1, NULL, 4, '2024-01-02 15:20:00'),
+    (6, 1, NULL, 2, '2024-01-02 15:25:00'),
+    (7, 1, NULL, 4, '2024-01-02 15:30:00'),
+    (8, 1, NULL, 3, '2024-01-02 15:35:00'),
+    (9, 1, NULL, 4, '2024-01-02 15:40:00'),
+    (
+        10,
+        1,
+        'Struggles with some activities, but manageable.',
+        NULL,
+        '2024-01-02 15:45:00'
+    ),
+    (11, 1, NULL, 2, '2024-01-02 15:50:00'),
+    -- Appearance
+    (12, 1, NULL, 3, '2024-01-02 15:55:00'),
+    (13, 1, NULL, 4, '2024-01-02 16:00:00'),
+    (14, 1, NULL, 2, '2024-01-02 16:05:00'),
+    (15, 1, NULL, 3, '2024-01-02 16:10:00'),
+    (16, 1, NULL, 4, '2024-01-02 16:15:00'),
+    -- Symptoms
+    (17, 1, NULL, 2, '2024-01-02 16:20:00'),
+    (18, 1, NULL, 3, '2024-01-02 16:25:00'),
+    (19, 1, NULL, 4, '2024-01-02 16:30:00'),
+    (20, 1, NULL, 2, '2024-01-02 16:35:00'),
+    (21, 1, NULL, 3, '2024-01-02 16:40:00'),
+    (22, 1, NULL, 4, '2024-01-02 16:45:00'),
+    -- Emotion
+    (23, 1, NULL, 2, '2024-01-02 16:50:00'),
+    (24, 1, NULL, 3, '2024-01-02 16:55:00'),
+    (25, 1, NULL, 4, '2024-01-02 17:00:00'),
+    (26, 1, NULL, 2, '2024-01-02 17:05:00'),
+    (27, 1, NULL, 3, '2024-01-02 17:10:00'),
+    (28, 1, NULL, 4, '2024-01-02 17:15:00'),
+    -- Overall Quality of Life
+    (29, 1, NULL, 3, '2024-01-02 17:20:00');
 INSERT INTO Patients (
         PatientEmail,
         PatientMobile,

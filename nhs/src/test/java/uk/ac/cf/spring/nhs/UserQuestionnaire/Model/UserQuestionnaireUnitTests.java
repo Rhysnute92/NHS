@@ -103,14 +103,6 @@ class UserQuestionnaireUnitTests {
     }
 
     @Test
-    void testSetQuestionnaireStartDateToNull() {
-        Exception exception = assertThrows(NullPointerException.class, () -> {
-            userQuestionnaire.setQuestionnaireStartDate(null);
-        });
-        assertEquals("Questionnaire start date cannot be null", exception.getMessage());
-    }
-
-    @Test
     void testCompletionDateCanBeNull() {
         userQuestionnaire.setQuestionnaireCompletionDate(null);
         assertNull(userQuestionnaire.getQuestionnaireCompletionDate(), "QuestionnaireCompletionDate should be null");
@@ -120,5 +112,11 @@ class UserQuestionnaireUnitTests {
     void testQuestionnaireDueDateCanBeNull() {
         userQuestionnaire.setQuestionnaireDueDate(null);
         assertNull(userQuestionnaire.getQuestionnaireDueDate(), "QuestionnaireDueDate should be null");
+    }
+
+    @Test
+    void testQuestionnaireStartDateCanBeNull() {
+        userQuestionnaire.setQuestionnaireStartDate(null);
+        assertNull(userQuestionnaire.getQuestionnaireStartDate(), "QuestionnaireStartDate should be null");
     }
 }

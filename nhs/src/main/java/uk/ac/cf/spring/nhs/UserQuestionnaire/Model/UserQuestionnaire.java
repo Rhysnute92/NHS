@@ -125,9 +125,6 @@ public class UserQuestionnaire {
      * @param questionnaireStartDate the start date of the questionnaire
      */
     public void setQuestionnaireStartDate(LocalDateTime questionnaireStartDate) {
-        if (questionnaireStartDate == null) {
-            throw new NullPointerException("Questionnaire start date cannot be null");
-        }
         this.questionnaireStartDate = questionnaireStartDate;
     }
 

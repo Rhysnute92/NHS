@@ -14,6 +14,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,11 +24,16 @@ import org.mockito.MockitoAnnotations;
 
 import uk.ac.cf.spring.nhs.UserQuestion.Model.UserQuestion;
 import uk.ac.cf.spring.nhs.UserQuestion.Repository.JpaUserQuestionRepository;
+import uk.ac.cf.spring.nhs.UserQuestionnaire.Model.UserQuestionnaire;
+import uk.ac.cf.spring.nhs.UserQuestionnaire.Service.UserQuestionnaireService;
 
 class UserQuestionServiceUnitTests {
 
     @Mock
     private JpaUserQuestionRepository userQuestionRepository;
+
+    @Mock
+    private UserQuestionnaireService userQuestionnaireService;
 
     @InjectMocks
     private UserQuestionService userQuestionService;
@@ -223,6 +229,57 @@ class UserQuestionServiceUnitTests {
 
         assertEquals("UserQuestion not found", exception.getMessage());
         verify(userQuestionRepository, times(1)).deleteById(userQuestionId);
+    }
+
+    @Test
+    void testSaveResponsesWithMixedResponses() {
+        Long userQuestionnaireId = 1L;
+
+        // Mocking the UserQuestionnaire
+        UserQuestionnaire userQuestionnaire = new UserQuestionnaire();
+        userQuestionnaire.setUserQuestionnaireId(userQuestionnaireId);
+
+        // Mocking the responses
+        Map<String, String> responses = Map.of(
+                "1", "3", // Score response
+                "2", "This is a text response" // Text response
+        );
+
+        when(userQuestionnaireService.getUserQuestionnaireById(userQuestionnaireId))
+                .thenReturn(Optional.of(userQuestionnaire));
+
+        // Act
+        userQuestionService.saveResponses(userQuestionnaireId, responses);
+
+        // Verify that the UserQuestions were saved with correct values
+        verify(userQuestionRepository, times(2)).save(org.mockito.ArgumentMatchers.any(UserQuestion.class));
+    }
+
+    @Test
+    void testSaveResponsesMarksQuestionnaireAsCompleted() {
+        Long userQuestionnaireId = 1L;
+
+        // Mocking the UserQuestionnaire
+        UserQuestionnaire userQuestionnaire = new UserQuestionnaire();
+        userQuestionnaire.setUserQuestionnaireId(userQuestionnaireId);
+
+        // Mocking the responses
+        Map<String, String> responses = Map.of(
+                "1", "5" // Score response
+        );
+
+        when(userQuestionnaireService.getUserQuestionnaireById(userQuestionnaireId))
+                .thenReturn(Optional.of(userQuestionnaire));
+
+        // Act
+        userQuestionService.saveResponses(userQuestionnaireId, responses);
+
+        // Verify that the questionnaire is marked as completed
+        assertTrue(userQuestionnaire.getQuestionnaireIsCompleted());
+        assertNotNull(userQuestionnaire.getQuestionnaireCompletionDate());
+
+        // Verify that the UserQuestionnaire was saved
+        verify(userQuestionnaireService, times(1)).saveUserQuestionnaire(userQuestionnaire);
     }
 
 }
