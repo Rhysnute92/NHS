@@ -18,10 +18,10 @@ $(document).ready(function () {
     .getCompletedUserQuestionnaires()
     .then((data) => {
       console.log("Fetched UserQuestionnaires:", data);
-      populateDateColumn(data);
+      populateDateSelect(data);
       if (data.length > 0) {
-        generateCategoryTabs(data[0].userQuestionnaireId);
-        loadCategoryData(data[0].userQuestionnaireId, "Function"); // Default to "Function" category
+        generateCategoryTabs(data[0]);
+        loadCategoryData(data[0], "Function"); // Default to "Function" category
       }
     })
     .catch((error) => {
@@ -29,8 +29,10 @@ $(document).ready(function () {
     });
 });
 
-function populateDateColumn(userQuestionnaires) {
-  const dateColumn = $("#dateColumn");
+function populateDateSelect(userQuestionnaires) {
+  const dateSelect = $("#date-select");
+  dateSelect.empty(); // Clear existing options
+
   userQuestionnaires.forEach((questionnaire, index) => {
     const date = new Date(
       questionnaire.questionnaireCompletionDate
@@ -40,28 +42,31 @@ function populateDateColumn(userQuestionnaires) {
       day: "numeric",
     });
 
-    const button = $("<button>")
-      .addClass("date-button")
+    const option = $("<option>")
+      .val(index)
       .text(date)
-      .on("click", function () {
-        loadCategoryData(questionnaire.userQuestionnaireId, "Function");
-        generateCategoryTabs(questionnaire.userQuestionnaireId);
-      });
+      .data("questionnaire", questionnaire);
 
-    dateColumn.append(button);
-
-    // Select the most recent by default
-    if (index === 0) {
-      button.addClass("active");
-      loadCategoryData(questionnaire.userQuestionnaireId, "Function");
-      generateCategoryTabs(questionnaire.userQuestionnaireId);
-    }
+    dateSelect.append(option);
   });
+
+  // Automatically load the first questionnaire's data
+  dateSelect.on("change", function () {
+    const selectedIndex = $(this).val();
+    const selectedQuestionnaire = $(this)
+      .find("option:selected")
+      .data("questionnaire");
+    loadCategoryData(selectedQuestionnaire, "Function"); // Default to "Function" category
+    generateCategoryTabs(selectedQuestionnaire);
+  });
+
+  // Trigger the change event to load the first questionnaire's data by default
+  dateSelect.trigger("change");
 }
 
-function generateCategoryTabs(userQuestionnaireId) {
+function generateCategoryTabs(userQuestionnaire) {
   questionnaireService
-    .getUserQuestions(userQuestionnaireId)
+    .getUserQuestions(userQuestionnaire.userQuestionnaireId)
     .then((userQuestions) => {
       const categories = [
         ...new Set(userQuestions.map((q) => q.question.questionCategory)),
@@ -76,7 +81,7 @@ function generateCategoryTabs(userQuestionnaireId) {
           .text(category)
           .data("category", category)
           .on("click", function () {
-            loadCategoryData(userQuestionnaireId, category);
+            loadCategoryData(userQuestionnaire, category);
           });
 
         categoryTabs.append(button);
@@ -87,29 +92,56 @@ function generateCategoryTabs(userQuestionnaireId) {
     });
 }
 
-function loadCategoryData(userQuestionnaireId, category) {
+function loadCategoryData(userQuestionnaire, category) {
   questionnaireService
-    .getUserQuestions(userQuestionnaireId)
+    .getUserQuestions(userQuestionnaire.userQuestionnaireId)
     .then((userQuestions) => {
       const filteredQuestions = userQuestions.filter(
         (q) => q.question.questionCategory === category
       );
+
+      let totalScore = 0;
+      let answeredQuestionsCount = 0;
 
       // Clear the table
       table.clear();
 
       // Populate the table with new data
       filteredQuestions.forEach((entry, index) => {
-        const result =
-          entry.userResponseText || entry.userResponseScore || "No Response";
+        const result = entry.userResponseText || entry.userResponseScore || 0;
+
+        // Accumulate scores for calculation if it's a number
+        if (typeof entry.userResponseScore === "number") {
+          totalScore += entry.userResponseScore;
+          answeredQuestionsCount++;
+        }
+
         const dateCell =
           index === 0
-            ? new Date(entry.responseDateTime).toLocaleDateString("en-GB")
+            ? new Date(
+                userQuestionnaire.questionnaireCompletionDate
+              ).toLocaleDateString("en-GB")
             : "";
+
         table.row
           .add([dateCell, entry.question.questionText, result])
           .draw(false);
       });
+
+      // Calculate the average score
+      const averageScore =
+        answeredQuestionsCount > 0
+          ? (totalScore / answeredQuestionsCount).toFixed(2)
+          : 0;
+
+      // Add the final row for the average score
+      table.row
+        .add([
+          "",
+          `<strong>Average Score for ${category}</strong>`,
+          `<strong>${averageScore}</strong>`,
+        ])
+        .draw(false);
     })
     .catch((error) => {
       console.error("Error loading category data:", error);
