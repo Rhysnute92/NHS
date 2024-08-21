@@ -3,8 +3,9 @@ header {
     width: 100%;
     box-sizing: border-box;
     z-index: 3;
-    display: flex;
     justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -101,9 +102,23 @@ header {
         display: flex;
     }
 
+    #page-title {
+        margin: 0;
+    }
+
     header {
         position: sticky;
         top: 0;
+    }
+
+    .header-container {
+        margin: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .navmenu-spacer {
+        display: none;
     }
 
     .profile-icon-text {

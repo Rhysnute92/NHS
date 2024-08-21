@@ -27,10 +27,6 @@
 }
 
 @media (max-width: 480px) {
-    .main-content {
-        padding: 0.5rem;
-    }
-
     .main-content .page-title {
         display: none;
     }

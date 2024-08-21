@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <main>
       <div th:replace="~{common/fragments/header}"></div>
       <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
       <div th:if="${navMenuItems != null}" th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
@@ -29,6 +28,5 @@
       <div class="spacer">&nbsp;</div>
       <script th:src="@{/js/common/header.js}"></script>
       <script th:src="@{/js/education/mobile/mbinfomenu.js}"></script>
-    </main>
   </body>
 </html>

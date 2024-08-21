@@ -55,7 +55,7 @@ main {
   max-width: 1000px;
   margin: auto;
   flex: 1;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 a:hover {

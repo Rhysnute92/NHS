@@ -87,6 +87,7 @@
 
     .navbar-item {
         width: 20%;
+        padding: 0;
     }
 
     .navbar-list {
@@ -94,6 +95,7 @@
         max-width: 400px;
         gap: 0.5rem;
         width: 90%;
+        padding: 0;
     }
 
     .navbar-link {

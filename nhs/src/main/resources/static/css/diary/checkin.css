@@ -48,7 +48,7 @@ h1 {
 
 .checkin-section {
     width: 100%;
-    box-shadow: 2px 2px 0.4rem var(--nhs-dark-grey);
+    /*box-shadow: 2px 2px 0.4rem var(--nhs-dark-grey);*/
 }
 
 .checkin-section .hidden {
