@@ -69,4 +69,9 @@ public class PatientProfileController {
         return "patientprofile/treatmentPlan";
     }
 
+    @GetMapping("/setplan")
+    public String treatmentPlanSet(){
+        return "patientprofile/setPlan";
+    }
+
 }
