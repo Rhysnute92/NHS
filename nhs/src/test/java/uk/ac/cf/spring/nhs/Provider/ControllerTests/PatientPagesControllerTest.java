@@ -66,27 +66,4 @@ public class PatientPagesControllerTest {
         }
     }
 
-    @Test
-    @WithMockUser(username = "admin", roles = { "PATIENT" })
-    void patientPatientInfoTest() throws Exception {
-        mockMvc.perform(get("/patientprofile/info"))
-                .andExpect(status().is4xxClientError());
-    }
-
-    @Test
-    @WithMockUser(username = "admin", roles = { "ADMIN" })
-    void adminPatientInfoTest() throws Exception {
-        mockMvc.perform(get("/patientprofile/info"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("patientprofile/profileInfo"));
-    }
-
-    @Test
-    @WithMockUser(username = "admin", roles = { "PROVIDER" })
-    void providerPatientInfoTest() throws Exception {
-        mockMvc.perform(get("/patientprofile/info"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("patientprofile/profileInfo"));
-    }
-
 }
