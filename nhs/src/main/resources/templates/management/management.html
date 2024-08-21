@@ -60,10 +60,13 @@
                 <p>No questionnaires assigned at the moment.</p>
               </div>
             </div>
-            <!-- questionnaire results fragment here -->
- <!--            <div
-              th:insert="~{fragments/results_charts/questionnaireResults :: questionnaireResults}"
-            ></div> -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="window.location.href='/questionnaire/historical/user'"
+            >
+              View Historical Questionnaires
+            </button>
           </div>
 
           <div class="action-item">

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <title>Questionnaire Data</title>
+    <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Include any additional libraries needed -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <!-- Header and Navbar -->
+    <div th:replace="~{common/fragments/header :: header}"></div>
+    <nav th:replace="~{common/fragments/navbar :: navbar}" class="nav"></nav>
+
+    <!-- Main Container -->
+    <div class="container mt-5">
+      <!-- Main Header -->
+      <h1>Questionnaire Data</h1>
+
+      <!-- Subtitle -->
+      <p class="subtitle">
+        This page displays your previous questionnaire data and trends over time
+        to help you track your progress and well-being.
+      </p>
+
+      <!-- Container for Previous Questionnaire Tabular Data -->
+      <div id="previous-questionnaires" class="mb-4">
+        <h2>Previous Questionnaire Data</h2>
+        <!-- Table or content for tabular data will be inserted here -->
+      </div>
+
+      <!-- Container for Previous Questionnaire Trends -->
+      <div id="questionnaire-trends">
+        <h2>Questionnaire Trends</h2>
+        <!-- Charts or trend analysis will be inserted here -->
+        <canvas id="trendChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Common JS -->
+    <script th:src="@{/js/common/header.js}"></script>
+
+    <!-- Page specific JS for charts -->
+    <script>
+      var ctx = document.getElementById("trendChart").getContext("2d");
+      var trendChart = new Chart(ctx, {
+        type: "line", // Example chart type
+        data: {
+          labels: ["January", "February", "March", "April", "May"],
+          datasets: [
+            {
+              label: "Trend Over Time",
+              data: [3, 4, 2, 5, 3],
+              backgroundColor: "rgba(54, 162, 235, 0.2)",
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
