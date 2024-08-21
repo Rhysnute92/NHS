@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.UserQuestion.Service;
 
+import java.io.ByteArrayInputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -8,12 +9,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uk.ac.cf.spring.nhs.AddPatient.Service.EmailService;
 import uk.ac.cf.spring.nhs.Question.Model.Question;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 import uk.ac.cf.spring.nhs.UserQuestion.Model.UserQuestion;
 import uk.ac.cf.spring.nhs.UserQuestion.Repository.JpaUserQuestionRepository;
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Model.UserQuestionnaire;
+import uk.ac.cf.spring.nhs.UserQuestionnaire.Service.PDFService;
 import uk.ac.cf.spring.nhs.UserQuestionnaire.Service.UserQuestionnaireService;
 
 @Service
@@ -27,6 +30,10 @@ public class UserQuestionService {
 
     @Autowired
     private AuthenticationInterface authenticationFacade;
+    @Autowired
+    private PDFService pdfService;
+    @Autowired
+    private EmailService emailService;
 
     /**
      * Retrieves a list of UserQuestions associated with a specific
@@ -126,6 +133,23 @@ public class UserQuestionService {
         userQuestionnaire.setQuestionnaireIsCompleted(true);
         userQuestionnaire.setQuestionnaireCompletionDate(LocalDateTime.now());
         userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire); // Use the service to save
+
+        // Generate the PDF
+        List<UserQuestion> userQuestions = userQuestionRepository.findByUserQuestionnaire_UserQuestionnaireId(userQuestionnaireId);
+        byte[] pdfBytes = pdfService.generatePDF(userQuestions);
+
+        // Send email with the PDF as an attachment
+        try {
+            emailService.sendEmailWithQuestionnaire(
+                    "derbyandburton.mscproject@gmail.com",
+                    "Completed Questionnaire",
+                    "Please find attached a completed questionnaire.",
+                    pdfBytes
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

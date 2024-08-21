@@ -18,4 +18,5 @@ public interface JpaUserQuestionRepository extends JpaRepository<UserQuestion, L
     // Find a specific UserQuestion by UserQuestionnaire ID and Question ID
     UserQuestion findByUserQuestionnaire_UserQuestionnaireIdAndQuestion_QuestionID(Long userQuestionnaireId,
             Long questionId);
+
 }
