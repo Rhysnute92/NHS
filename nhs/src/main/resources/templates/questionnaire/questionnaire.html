@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="https://assets.nhs.uk/styles/nhsuk.css" />
   </head>
   <body>
+    <div th:replace="~{common/fragments/header}"></div>
+    <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <main>
-      <div th:replace="~{common/fragments/header}"></div>
-      <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
       <div class="questionnaire-container">
         <h1 id="questionnaire-title">Questionnaire Title</h1>
         <p id="questionnaire-description">Description of the questionnaire.</p>

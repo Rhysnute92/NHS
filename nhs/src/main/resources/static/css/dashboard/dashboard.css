@@ -43,3 +43,8 @@
 .add-widget-button:hover {
   background-color: #004d36;
 }
+
+#widget-container {
+  display: flex;
+  justify-content: center;
+}

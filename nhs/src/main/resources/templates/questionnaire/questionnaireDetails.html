@@ -11,9 +11,9 @@
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
   </head>
   <body>
+    <div th:replace="~{common/fragments/header}"></div>
+    <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <main>
-      <div th:replace="~{common/fragments/header}"></div>
-      <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
       <div class="questionnaire-container">
         <h1 id="questionnaire-title" th:text="${questionnaire.title}">
           Questionnaire Title

@@ -29,7 +29,7 @@ class NHSButton extends HTMLElement {
             
             .primary {
               background-color: #007f3b;
-              box-shadow: 0 4px 0 #00401e;
+              /*box-shadow: 0 4px 0 #00401e;*/
             }
             
             .primary:hover {
@@ -38,7 +38,7 @@ class NHSButton extends HTMLElement {
             
             .secondary {
               background-color: #4c6272;
-              box-shadow: 0 4px 0 #263139;
+              /*box-shadow: 0 4px 0 #263139;*/
             }
             
             .secondary:hover {
@@ -47,7 +47,7 @@ class NHSButton extends HTMLElement {
             
             .reverse {
               background-color: #FFFFFF;
-              box-shadow: 0 4px 0 #212B32;
+              /*box-shadow: 0 4px 0 #212B32;*/
               color: #212B32;
             }
             
@@ -57,7 +57,7 @@ class NHSButton extends HTMLElement {
             
             .warning {
               background-color: #d5281b;
-              box-shadow: 0 4px 0 #6b140e
+              /*box-shadow: 0 4px 0 #6b140e*/
             }
             
             .warning:hover {

@@ -1,5 +1,5 @@
 .diary-entry {
-    border-radius: 0.4rem;
+    /*border-radius: 0.4rem;*/
     color: var(--nhs-black);
     box-shadow: 2px 2px 0.4rem var(--nhs-dark-grey);
     overflow: hidden;

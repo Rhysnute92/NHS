@@ -48,6 +48,7 @@ h1 {
 
 .checkin-section {
     width: 100%;
+    box-shadow: 2px 2px 0.4rem var(--nhs-dark-grey);
 }
 
 .checkin-section .hidden {
@@ -132,6 +133,24 @@ input[type="radio"] {
 .checkin-symptom-selection h4, .photo-text, .add-measurement-button, .checkin-submit {
     font-size: 1.15rem;
 }
+
+.add-measurement-button, .checkin-submit {
+    font-family: var(--regular-font-family);
+    background-color: var(--nhs-light-green);
+    color: var(--nhs-white);
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+    border-radius: 0.4rem;
+    transition: opacity 0.5s;
+}
+
+.add-measurement-button:hover, .checkin-submit:hover {
+    cursor: pointer;
+    opacity: 80%;
+}
+
 
 .checkin-photos {
     display: flex;
@@ -229,7 +248,7 @@ input[type="radio"] {
     color: var(--nhs-white);
     border: none;
     padding: 0.5rem;
-    /*border-radius: 0.4rem;*/
+    border-radius: 0.4rem;
     transition: opacity 0.5s;
     width: 2rem;
     height: 2rem;

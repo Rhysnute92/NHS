@@ -7,7 +7,8 @@ header {
     justify-content: center;
 }
 
-.header-container {
+
+.header-container, .header {
     height: 2.8rem;
     min-height: 30px;
     display: flex;
