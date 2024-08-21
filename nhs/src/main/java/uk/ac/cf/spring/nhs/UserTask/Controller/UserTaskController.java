@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,9 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+import uk.ac.cf.spring.nhs.Provider.DTOs.PlanTaskList;
 import uk.ac.cf.spring.nhs.Security.AuthenticationFacade;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
+import uk.ac.cf.spring.nhs.Task.Model.Task;
+import uk.ac.cf.spring.nhs.Task.Service.TaskService;
 import uk.ac.cf.spring.nhs.UserTask.Model.UserTask;
 import uk.ac.cf.spring.nhs.UserTask.Service.UserTaskService;
 
@@ -30,6 +35,9 @@ public class UserTaskController {
 
     @Autowired
     private UserTaskService userTaskService;
+
+    @Autowired
+    private TaskService taskService;
 
     @Autowired
     private AuthenticationFacade authenticationFacade; // To access the current authenticated user
@@ -55,12 +63,24 @@ public class UserTaskController {
         return ResponseEntity.ok(userTasks);
     }
 
-    @PostMapping
-    public ResponseEntity<UserTask> assignTaskToUser(@RequestBody UserTask userTask) {
-        userTask.setUserID(getCurrentUserId()); // Set the current user ID to the task userID //TODO: will need to make
-                                                // sure this is changed for provider assigned userTask
-        UserTask createdUserTask = userTaskService.assignTaskToUser(userTask);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUserTask);
+    // @PostMapping
+    // public ResponseEntity<UserTask> assignTaskToUser(@RequestBody UserTask userTask) {
+    //     userTask.setUserID(getCurrentUserId()); // Set the current user ID to the task userID //TODO: will need to make
+    //                                             // sure this is changed for provider assigned userTask
+    //     UserTask createdUserTask = userTaskService.assignTaskToUser(userTask);
+    //     return ResponseEntity.status(HttpStatus.CREATED).body(createdUserTask);
+    // }
+
+    @PostMapping("/newplan/{id}")
+    public ModelAndView setNewPlan(@PathVariable("id") int userID, @ModelAttribute PlanTaskList formList){
+        Long userId = Long.valueOf(userID);
+        userTaskService.deleteAllTasksForUser(userId);
+        for(String s : formList.getTaskList()){
+            Long id = Long.valueOf(s);
+            Task task = taskService.getTaskById(id);
+            userTaskService.assignTaskToUser(task, userId);
+        }
+        return new ModelAndView("redirect:/patientprofile/plan");
     }
 
     @GetMapping("/task/{userTaskID}")

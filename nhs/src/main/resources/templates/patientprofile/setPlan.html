@@ -16,10 +16,10 @@
     <div class="container">
         <div id="selects">
         <label for="tasks-0">Select task: </label>
-        <select class="taskSelect" id="tasks-0" name="taskList[0].id" form="newplan"></select>
+        <select class="taskSelect" id="tasks-0" name="taskList[0]" form="newplan"></select>
     </div>
     <button id="newTask">Add task</button>
-        <form action="" method="post" id="newplan">
+        <form th:action="@{/usertask/newplan/{id}(id = ${userID})}" method="post" id="newplan">
             <input type="submit" value="Set plan" class="plan_button"/>
         </form>
     </div>

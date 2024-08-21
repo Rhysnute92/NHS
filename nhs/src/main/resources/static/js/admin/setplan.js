@@ -22,7 +22,7 @@ function addTask(){
     var select = document.createElement('select');
     select.classList.add('taskSelect');
     select.setAttribute("id", `tasks-${index}`);
-    select.setAttribute("name", `taskList[${index}].id`);
+    select.setAttribute("name", `taskList[${index}]`);
     select.setAttribute("form", "newplan");
     var selectLabel = document.createElement('label');
     selectLabel.setAttribute("for", `tasks-${index}`);
