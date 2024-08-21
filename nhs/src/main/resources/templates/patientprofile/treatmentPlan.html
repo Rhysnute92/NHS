@@ -9,12 +9,13 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
     <link rel="stylesheet" th:href="@{/css/common/defaultLayout.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/plan.css}" />
 </head>
 <body>
 <main layout:fragment="content" class="main-content">
     <h1 class="page-title">Set treatment plan</h1>
     <div class="container">
-        <a th:href="@{/patientprofile/setplan}">Set new treatment plan</a>
+        <a th:href="@{/patientprofile/setplan}" id="newPlanLink">Set new treatment plan</a>
         <h2>Tasks assigned</h2>
         <table id="patientTasks">
             <thead>
