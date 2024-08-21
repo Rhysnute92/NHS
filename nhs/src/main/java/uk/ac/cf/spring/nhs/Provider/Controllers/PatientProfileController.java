@@ -3,6 +3,7 @@ package uk.ac.cf.spring.nhs.Provider.Controllers;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import uk.ac.cf.spring.nhs.Account.PatientProfileDTO;
 import uk.ac.cf.spring.nhs.AddPatient.Service.PatientService;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
+import uk.ac.cf.spring.nhs.Photo.Service.PhotoService;
 
 @Controller
 @SessionAttributes("userID")
@@ -24,6 +26,11 @@ public class PatientProfileController {
 
     @Autowired
     private PatientService patientService;
+
+    @Autowired
+    private PhotoService photoService;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {
@@ -35,7 +42,7 @@ public class PatientProfileController {
                         "fa-solid fa-book"),
                 new NavMenuItem("Patient trends", " ", "fa-solid fa-user-check"),
                 new NavMenuItem("Event log", " ", "fa-solid fa-book"),
-                new NavMenuItem("Photos", " ", "fa-solid fa-camera"),
+                new NavMenuItem("Photos", "/patientprofile/photos", "fa-solid fa-camera"),
                 new NavMenuItem("Email history", " ", "fa-solid fa-book"));
     }
 
@@ -62,6 +69,13 @@ public class PatientProfileController {
     @GetMapping("/questionnairehub")
     public String showQuestionnaireHub(Model model) {
         return "patientprofile/questionnaireHub";
+    }
+
+    @GetMapping("/photos")
+    public String showPhoto(Model model, @ModelAttribute("userID") Long userID) {
+        model.addAttribute("objectMapper", objectMapper);
+        model.addAttribute("photos", photoService.getPhotosByUserId(userID));
+        return "patientprofile/photos";
     }
 
     @GetMapping("/plan")
