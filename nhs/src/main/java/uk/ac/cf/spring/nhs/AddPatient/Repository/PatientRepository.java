@@ -12,6 +12,9 @@ import uk.ac.cf.spring.nhs.AddPatient.Entity.Patient;
 public interface PatientRepository extends JpaRepository<Patient, Long> {
     Patient findById(long userId);
 
+    @Query(value = "SELECT * FROM Patients p WHERE p.NHSNumber LIKE :nhsNumber", nativeQuery = true)
+    Patient findByNHSNumber(@Param("nhsNumber") String nhsNumber);
+
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Transactional 
     @Query("update Patient u set u.patientTitle = :title, u.patientName = :name, u.patientLastName = :lastname, u.patientMobile = :mobile, u.patientEmail = :email where u.userId = :id")
