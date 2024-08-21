@@ -104,6 +104,7 @@
                 <label>${location} (Left):</label>
                 <input type="hidden" name="measurements[${index + locationIndex}].location" value="${location}">
                 <input type="hidden" name="measurements[${index + locationIndex}].side" value="Left">
+                <input type="hidden" name="measurements[${index + locationIndex}].type" value="${bodyPart}">
                 <div>
                     <input type="number" name="measurements[${index + locationIndex}].value" step="0.1" placeholder="Value"> 
                     <select name="measurements[${index + locationIndex}].unit">
@@ -121,6 +122,7 @@
                 <label>${location} (Right):</label>
                 <input type="hidden" name="measurements[${index + locationIndex}].location" value="${location}">
                 <input type="hidden" name="measurements[${index + locationIndex}].side" value="Right">
+                <input type="hidden" name="measurements[${index + locationIndex}].type" value="${bodyPart}">
                 <div>
                     <input type="number" name="measurements[${index + locationIndex}].value" step="0.1" placeholder="Value">
                     <select name="measurements[${index + locationIndex}].unit">
@@ -138,6 +140,7 @@
             singlePointInput.classList.add('measurement-point');
             singlePointInput.innerHTML = `
             <label>Weight:</label>
+            <input type="hidden" name="measurements[${index}].type" value="${bodyPart}">
             <div>
                 <input type="number" name="measurements[${index}].value" step="0.1" placeholder="Value">
                 <select name="measurements[${index}].unit">
@@ -146,7 +149,7 @@
                 </select>
             <div>
         `;
-            leftPointsContainer.appendChild(singlePointInput); // Just add it to the left column for simplicity
+            leftPointsContainer.appendChild(singlePointInput);
         }
 
         updateMeasurementNames(); // Reindex all names in case measurements were added/removed
@@ -160,6 +163,7 @@
                 // Update the name attributes for the dynamically generated fields
                 locationField.querySelector('input[name*="location"]').name = `measurements[${index + locationIndex}].location`;
                 locationField.querySelector('input[name*="side"]').name = `measurements[${index + locationIndex}].side`;
+                locationField.querySelector('input[name*="type"]').name = `measurements[${index + locationIndex}].type`;
                 locationField.querySelector('input[type="number"]').name = `measurements[${index + locationIndex}].value`;
                 locationField.querySelector('select[name*="unit"]').name = `measurements[${index + locationIndex}].unit`;
             });
@@ -168,6 +172,7 @@
             item.querySelector('.body-part-select').name = `measurements[${index}].type`;
         });
     }
+
 
     let capturedPhotos = [];
 
