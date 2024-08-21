@@ -21,23 +21,7 @@ public class PatientStatisticsController {
     @Autowired
     MeasurementService measurementService;
 
-    @GetMapping
-    public String patientStatistics() {
-        return "patientprofile/patientStatistics";
-    }
 
-    @GetMapping("/measurements")
-    public ResponseEntity<?> patientMeasurements(
-            @RequestParam("type") String measurementType,
-            @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
-            ) {
-
-        // Retrieve measurements filtered by user ID, measurement type and date range
-        List<Measurement> measurements = measurementService.getMeasurementsByUserIdTypeAndDateRange(userId, measurementType, startDate, endDate);
-
-        return ResponseEntity.ok(measurements);
-    }
 
 
 }
