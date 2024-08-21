@@ -21,28 +21,8 @@
 <div id="tabs">
   <button onclick="showList()">View List</button>
   <button onclick="showProviderCalendar()">View Calendar</button>
-  <custom-modal class="appt-modal">
-    <button slot="open-btn" id="add-appt-btn" class="add-appt-btn" onclick="openModal()">Add Appointment</button>
-    <!-- Form for adding appointments -->
-    <div id="appointment-modal" class="modal" style="display: none;">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <form id="appointment-form">
-          <label for="patient">Patient:</label>
-          <input type="text" id="patient" name="patient" required>
-          <label for="date">Date:</label>
-          <input type="date" id="date" name="date" required>
-          <label for="time">Time:</label>
-          <input th:ty="time" id="time" name="time" required>
-          <label for="type">Type:</label>
-          <input th:type="text" id="type" name="type" required>
-          <label for="location">Location:</label>
-          <input th:type="text" id="location" name="location" required>
-          <button type="submit">Add Appointment</button>
-        </form>
-      </div>
-    </div>
-    </custom-modal>
+  <button slot="open-btn" id="add-appt-btn" class="add-appt-btn" onclick="openModal()">Add Appointment</button>
+
 </div>
 <div id="appointment-list" class="active">
   <table>
@@ -70,6 +50,27 @@
 
     <div id="calendar" th:insert="~{calendar/fragments/calendar}"></div>
   </div>
+  <custom-modal class="appt-modal">
+  <!-- Form for adding appointments -->
+  <div id="appointment-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <form id="appointment-form">
+        <label for="patient">Patient:</label>
+        <input type="text" id="patient" name="patient" required>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        <label for="time">Time:</label>
+        <input th:ty="time" id="time" name="time" required>
+        <label for="type">Type:</label>
+        <input th:type="text" id="type" name="type" required>
+        <label for="location">Location:</label>
+        <input th:type="text" id="location" name="location" required>
+        <button type="submit">Add Appointment</button>
+      </form>
+    </div>
+  </div>
+</custom-modal>
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.4/fullcalendar.min.js"></script>
