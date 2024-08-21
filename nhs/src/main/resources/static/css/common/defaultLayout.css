@@ -10,31 +10,28 @@
     background-color: var(--nhs-pale-grey);
 }
 
-.main-content {
-    flex-grow: 1;
-    padding: 2rem;
-}
-
 .container {
     /*background-color: var(--nhs-white);*/
     border-radius: 0.4rem;
     min-height: 100vh;
 }
 
-.page-title {
-    font-size: 1.5rem;
-}
-
 .main-content .page-title {
     margin-bottom: 1rem;
 }
 
+.page-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--nhs-dark-grey);
+}
+
 @media (max-width: 480px) {
-    .main-content {
-        padding: 0.5rem;
+    .main-content .page-title {
+        display: none;
     }
 
-    .main-content .page-title {
+    .page-subtitle {
         display: none;
     }
 }

@@ -1,27 +1,46 @@
 header {
-    background-color:var(--nhs-blue);
+    background-color: var(--nhs-blue);
     width: 100%;
     box-sizing: border-box;
-    font-size: 1.5rem;
     z-index: 3;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
 
-.header {
-    height: 8vh;
+
+.header-container, .header {
+    height: 2.8rem;
     min-height: 30px;
     display: flex;
     align-items: center;
-    padding: clamp(15px, 4vh, 4vh);
+    padding: clamp(15px, 1.4rem, 1.4rem);
     background-color: var(--nhs-blue);
-    justify-content: space-between;
+    justify-content: flex-start;
     box-sizing: content-box;
-    border-bottom: 1px solid var(--nhs-pale-grey);
     color: var(--nhs-white);
+    position: relative;
+    max-width: 1000px;
+    border-bottom: 1px solid rgb(255, 255, 255, 0.3);
+    width: 100%;
+    margin: 0 2rem;
+}
+
+.header-logo-link {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .header-logo {
     height: 100%;
+    width: auto;
 }
+
+/*.header-logo-link, .header-logo {*/
+/*    height: 100%;*/
+/*}*/
 
 .header-title {
     background-color: var(--nhs-blue);
@@ -40,33 +59,79 @@ header {
     padding: 1vh;
 }
 
-.page-title {
-    font-size: 2rem;
+.header-icon {
+    color: var(--nhs-white);
 }
 
-.header-icon {
-    font-size: 3.5vh;
+.navmenu-toggle-icon {
+    position: absolute;
+    left: clamp(15px, 4vh, 4vh);
+}
+
+.profile-icon {
+    position: absolute;
+    right: clamp(15px, 4vh, 4vh);
+    text-decoration: none;
+}
+
+.profile-icon-text {
+    color: var(--nhs-white);
+    text-decoration: underline;
 }
 
 @media (max-width: 480px) {
-    .header {
-        background-color: var(--nhs-blue);
+    .header-container {
         height: 4vh;
         padding: clamp(15px, 2vh, 2vh);
+        justify-content: center;
+    }
+
+    .header-icon {
+        font-size: 1.5rem;
+    }
+
+    .navmenu-toggle-icon {
+        left: 1rem;
+    }
+
+    .profile-icon {
+        right: 1rem;
     }
 
     .header-title {
         display: flex;
     }
 
+    #page-title {
+        margin: 0;
+    }
+
     header {
         position: sticky;
         top: 0;
     }
+
+    .header-container {
+        margin: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .navmenu-spacer {
+        display: none;
+    }
+
+    .profile-icon-text {
+        display: none;
+    }
+
+    #page-title {
+        font-size: 1.5rem;
+    }
 }
 
 @media (min-width: 481px) {
-    .header .navmenu-toggle {
+    .header-container .navmenu-toggle-icon {
         display: none;
     }
 }

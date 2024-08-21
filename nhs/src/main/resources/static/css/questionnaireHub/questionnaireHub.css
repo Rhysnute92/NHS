@@ -189,12 +189,14 @@ h3#assignQuestionnairePopupLabel {
 
 .popup-content {
   /* background-color: #fefefe; */
-  margin: 15em auto;
-  margin-left: 20vw;
   padding: 1rem;
   border: 1px solid var(--nhs-mid-grey);
   width: 60vw;
   background-color: var(--nhs-pale-grey);
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
 .close-popup {

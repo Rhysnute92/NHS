@@ -4,43 +4,44 @@
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
     <link rel="stylesheet" th:href="@{/css/guest/guest.css}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guest</title>
 </head>
 <body class="guest-page">
-<div class="container">
-    <div th:replace="~{common/fragments/header}"></div>
-    <div class="icon-container">
-        <div class="icon-wrapper" id="firstAppointment">
-            <img
-                    src="/images/appointment.jpg"
-                    alt="Appointment Image"
-                    class="icon"
-                    onclick="location. href='/guest/appointment'"
-            />
-            <p class="icon-text">Your First Appointment</p>
-        </div>
-        <div class="icon-wrapper" id="ourServices">
-            <img
-                    src="/images/services.jpg"
-                    alt="Services Image"
-                    class="icon"
-                    onclick="location. href='/guest/services'"
-            />
-            <p class="icon-text">Our Services</p>
-        </div>
-        <div class="icon-wrapper" id="findUs">
-            <img
-                    src="/images/find.jpg"
-                    alt="Find Us Image"
-                    class="icon"
-                    onclick="location. href='/guest/find'"
-            />
-            <p class="icon-text">Come and Find Us</p>
+    <div class="container">
+        <div th:replace="~{common/fragments/header}"></div>
+        <div class="icon-container">
+            <div class="icon-wrapper" id="firstAppointment">
+                <img
+                        src="/images/appointment.jpg"
+                        alt="Appointment Image"
+                        class="icon"
+                        onclick="location. href='/guest/appointment'"
+                />
+                <p class="icon-text">Your First Appointment</p>
+            </div>
+            <div class="icon-wrapper" id="ourServices">
+                <img
+                        src="/images/services.jpg"
+                        alt="Services Image"
+                        class="icon"
+                        onclick="location. href='/guest/services'"
+                />
+                <p class="icon-text">Our Services</p>
+            </div>
+            <div class="icon-wrapper" id="findUs">
+                <img
+                        src="/images/find.jpg"
+                        alt="Find Us Image"
+                        class="icon"
+                        onclick="location. href='/guest/find'"
+                />
+                <p class="icon-text">Come and Find Us</p>
+            </div>
         </div>
     </div>
-</div>
-<div class="btn-container">
-    <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
-</div>
+    <div class="btn-container">
+        <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
+    </div>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>

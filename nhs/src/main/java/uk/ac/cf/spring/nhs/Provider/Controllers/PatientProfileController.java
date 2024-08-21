@@ -37,13 +37,9 @@ public class PatientProfileController {
         return List.of(
                 new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
                 new NavMenuItem("Set plan", "/patientprofile/plan", "fa-solid fa-book"),
-                new NavMenuItem("Appointments", " ", "fa-solid fa-user-check"),
                 new NavMenuItem("Questionnaires", "/patientprofile/questionnairehub",
                         "fa-solid fa-book"),
-                new NavMenuItem("Patient trends", " ", "fa-solid fa-user-check"),
-                new NavMenuItem("Event log", " ", "fa-solid fa-book"),
-                new NavMenuItem("Photos", "/patientprofile/photos", "fa-solid fa-camera"),
-                new NavMenuItem("Email history", " ", "fa-solid fa-book"));
+                new NavMenuItem("Photos", "/patientprofile/photos", "fa-solid fa-camera"));
     }
 
     @ModelAttribute("userID")

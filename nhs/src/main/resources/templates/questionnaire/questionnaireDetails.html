@@ -13,38 +13,40 @@
   <body>
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-    <div class="questionnaire-container">
-      <h1 id="questionnaire-title" th:text="${questionnaire.title}">
-        Questionnaire Title
-      </h1>
-      <p id="questionnaire-description" th:text="${questionnaire.description}">
-        Description of the questionnaire.
-      </p>
+    <main>
+      <div class="questionnaire-container">
+        <h1 id="questionnaire-title" th:text="${questionnaire.title}">
+          Questionnaire Title
+        </h1>
+        <p id="questionnaire-description" th:text="${questionnaire.description}">
+          Description of the questionnaire.
+        </p>
 
-      <!-- Category Sections -->
-      <div th:each="category : ${groupedResponses}">
-        <h2 th:text="${category.key}">Category Name</h2>
-        <ul>
-          <li th:each="response : ${category.value}">
-            <strong th:text="${response.question.questionText}">
-              Question Text
-            </strong>
-            :
-            <span
-              th:text="${response.userResponseText != null ? response.userResponseText : response.userResponseScore}"
-            >
-              User's answer
-            </span>
-          </li>
-        </ul>
-      </div>
+        <!-- Category Sections -->
+        <div th:each="category : ${groupedResponses}">
+          <h2 th:text="${category.key}">Category Name</h2>
+          <ul>
+            <li th:each="response : ${category.value}">
+              <strong th:text="${response.question.questionText}">
+                Question Text
+              </strong>
+              :
+              <span
+                th:text="${response.userResponseText != null ? response.userResponseText : response.userResponseScore}"
+              >
+                User's answer
+              </span>
+            </li>
+          </ul>
+        </div>
 
-      <div class="actions">
-        <a th:href="@{/management}" class="button">
-          Back to Management Page
-        </a>
+        <div class="actions">
+          <a th:href="@{/management}" class="button">
+            Back to Management Page
+          </a>
+        </div>
       </div>
-    </div>
+    </main>
     <script th:src="@{/js/common/header.js}"></script>
   </body>
 </html>

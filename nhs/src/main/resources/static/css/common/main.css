@@ -8,9 +8,6 @@
 /* Import desktop-specific component styles */
 @import url("/css/education/desktop/infomenu.css");
 
-/* Import mobile-specific component styles */
-@import url("/css/education/mobile/mobileinfomenu.css");
-
 /* Import widget component styles */
 @import url("/css/components/widgets/taskCompletion.css");
 
@@ -18,20 +15,54 @@
 @import url("/css/utility/variables.css");
 
 * {
-  font-family: var(--regular-font-family);
-}
-
-body {
-  background-color: #e8edee;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-.subtitle {
-  font-size: 1.5em;
-  color: var(--nhs-dark-grey);
+body {
+  font-family: var(--regular-font-family);
+  background-color: #e8edee;
+  color: var(--nhs-black);
+  line-height: 1.5;
+  font-size: 1.1rem;
 }
 
-.profile-icon {
-  opacity: 0;
+h1 {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+main {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  flex: 1;
+  padding: 1rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.page-subtitle {
+  font-weight: normal;
+  color: var(--nhs-mid-grey);
 }
