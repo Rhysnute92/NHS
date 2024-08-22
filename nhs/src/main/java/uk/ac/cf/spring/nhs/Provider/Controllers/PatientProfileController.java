@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import uk.ac.cf.spring.nhs.Account.PatientProfileDTO;
 import uk.ac.cf.spring.nhs.AddPatient.Service.PatientService;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
+import uk.ac.cf.spring.nhs.Event.Service.EventService;
 import uk.ac.cf.spring.nhs.Photo.Service.PhotoService;
 
 @Controller
@@ -30,6 +31,9 @@ public class PatientProfileController {
     @Autowired
     private PhotoService photoService;
 
+    @Autowired
+    private EventService eventService;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @ModelAttribute("navMenuItems")
@@ -39,7 +43,8 @@ public class PatientProfileController {
                 new NavMenuItem("Set plan", "/patientprofile/plan", "fa-solid fa-book"),
                 new NavMenuItem("Questionnaires", "/patientprofile/questionnairehub",
                         "fa-solid fa-book"),
-                new NavMenuItem("Photos", "/patientprofile/photos", "fa-solid fa-camera"));
+                new NavMenuItem("Photos", "/patientprofile/photos", "fa-solid fa-camera"),
+                new NavMenuItem("Events", "/patientprofile/events", "fa-solid fa-receipt"));
     }
 
     @ModelAttribute("userID")
@@ -72,6 +77,12 @@ public class PatientProfileController {
         model.addAttribute("objectMapper", objectMapper);
         model.addAttribute("photos", photoService.getPhotosByUserId(userID));
         return "patientprofile/photos";
+    }
+
+    @GetMapping("/events")
+    public String showEvents(Model model, @ModelAttribute("userID") Long userID) {
+        model.addAttribute("events", eventService.getEventsByUserId(userID));
+        return "patientprofile/events";
     }
 
     @GetMapping("/plan")
