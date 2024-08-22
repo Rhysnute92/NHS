@@ -75,7 +75,7 @@ a:hover {
 
 @media (max-width: 768px) {
   main {
-    margin: 0;
-    padding: 1rem;
+    margin: 1rem;
+    padding: 0;
   }
 }
