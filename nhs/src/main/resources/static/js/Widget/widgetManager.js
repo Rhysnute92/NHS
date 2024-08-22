@@ -13,6 +13,7 @@ export class WidgetManager {
         threshold: 0.1,
       }
     );
+    this.fetchedWidgets = new Set();
   }
 
   setupWidgetPlaceholders() {
@@ -43,12 +44,18 @@ export class WidgetManager {
   }
 
   async fetchAndPopulateWidget(widgetName, placeholder) {
+    if (this.fetchedWidgets.has(widgetName)) {
+      return;
+    }
+
     try {
       const fragmentContent = await WidgetService.fetchWidgetFragment(
         widgetName
       );
       placeholder.innerHTML = fragmentContent;
-      this.activateWidgetFunctionality(widgetName);
+      this.fetchedWidgets.add(widgetName);
+
+      await this.activateWidgetFunctionality(widgetName);
     } catch (error) {
       console.error(
         `Failed to fetch and populate widget ${widgetName}:`,
@@ -67,13 +74,7 @@ export class WidgetManager {
         const widgetInstance = new WidgetClass();
         if (typeof widgetInstance.updateWidgetData === "function") {
           await widgetInstance.updateWidgetData();
-        } else {
-          console.log(
-            `Widget ${widgetName} does not have an updateWidgetData method`
-          );
         }
-      } else {
-        console.log(`No valid widget class found for ${widgetName}`);
       }
     } catch (error) {
       console.error(
@@ -86,13 +87,13 @@ export class WidgetManager {
   async renderAllUserWidgets() {
     for (const userWidget of this.userWidgets) {
       const widgetName = userWidget.widgetName;
+
       if (!this.renderedWidgets.has(widgetName)) {
         const placeholder = this.generatePlaceholderElement(widgetName);
         document.getElementById("widget-container").appendChild(placeholder);
+
         await this.fetchAndPopulateWidget(widgetName, placeholder);
         this.renderedWidgets.add(widgetName);
-      } else {
-        console.log(`Widget ${widgetName} already rendered. Skipping.`);
       }
     }
   }

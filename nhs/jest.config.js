@@ -12,7 +12,7 @@ module.exports = {
         pageTitle: "Test Report",
         outputPath: "test-report.html",
         includeFailureMsg: true,
-        includeConsoleLog: false,
+        includeConsoleLog: true,
       },
     ],
   ],

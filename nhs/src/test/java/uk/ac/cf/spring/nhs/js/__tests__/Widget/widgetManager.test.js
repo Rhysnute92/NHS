@@ -29,6 +29,7 @@ describe("WidgetManager", () => {
 
     // Mock activateWidgetFunctionality to prevent additional calls
     widgetManager.activateWidgetFunctionality = jest.fn();
+    jest.clearAllMocks();
   });
 
   test("setupWidgetPlaceholders creates placeholders for all user widgets", () => {
@@ -61,12 +62,29 @@ describe("WidgetManager", () => {
     );
   });
 
-  test("renderAllUserWidgets renders all widgets", async () => {
-    WidgetService.fetchWidgetFragment.mockImplementation((widgetName) => {
-      console.log(`Fetching widget: ${widgetName}`);
-      return Promise.resolve("<div>Widget Content</div>");
-    });
+  test("fetchAndPopulateWidget doesn't fetch already fetched widgets", async () => {
+    const widgetName = "test-widget";
+    const placeholder = document.createElement("div");
 
+    WidgetService.fetchWidgetFragment.mockResolvedValue(
+      "<div>Widget Content</div>"
+    );
+
+    // First fetch
+    await widgetManager.fetchAndPopulateWidget(widgetName, placeholder);
+    expect(WidgetService.fetchWidgetFragment).toHaveBeenCalledTimes(1);
+
+    // Second fetch (should not actually fetch)
+    await widgetManager.fetchAndPopulateWidget(widgetName, placeholder);
+    expect(WidgetService.fetchWidgetFragment).toHaveBeenCalledTimes(1);
+  });
+
+  test("renderAllUserWidgets renders all widgets and prevents duplicate renders", async () => {
+    WidgetService.fetchWidgetFragment.mockResolvedValue(
+      "<div>Widget Content</div>"
+    );
+
+    // First render
     await widgetManager.renderAllUserWidgets();
 
     const renderedWidgets = document.querySelectorAll(".widget-placeholder");
@@ -75,11 +93,28 @@ describe("WidgetManager", () => {
       mockUserWidgets.length
     );
 
+    // Check if all widgets are marked as rendered
+    expect(widgetManager.renderedWidgets.size).toBe(mockUserWidgets.length);
     mockUserWidgets.forEach((widget) => {
-      expect(WidgetService.fetchWidgetFragment).toHaveBeenCalledWith(
-        widget.widgetName
-      );
+      expect(widgetManager.renderedWidgets.has(widget.widgetName)).toBe(true);
     });
+
+    // Clear mock calls
+    WidgetService.fetchWidgetFragment.mockClear();
+
+    // Second render
+    await widgetManager.renderAllUserWidgets();
+
+    // Check that no additional fetches were made
+    expect(WidgetService.fetchWidgetFragment).not.toHaveBeenCalled();
+
+    // Ensure the number of rendered widgets hasn't changed
+    const renderedWidgetsAfterSecondRender = document.querySelectorAll(
+      ".widget-placeholder"
+    );
+    expect(renderedWidgetsAfterSecondRender.length).toBe(
+      mockUserWidgets.length
+    );
   });
 
   test("activateWidgetFunctionality dynamically imports and initializes widget", async () => {
