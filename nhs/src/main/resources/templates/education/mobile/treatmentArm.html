@@ -10,8 +10,9 @@
   <body>
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+    <main>
     <div th:if="${navMenuItems != null}" th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
-      <div class="container">
+    <div class="container">
         <h2>Treatments for lymphedema of the legs</h2>
         <div class="section_container">
         <div class="section">
@@ -127,11 +128,12 @@
                   <iframe src="https://www.youtube.com/embed/kLFq5ZZYeL0"></iframe>
                 </div></div>
         </div>
-        <div class="section_nav">
-            <a th:href="@{/treatment}" class="section_link">&larr; Back to full list</a>
-        </div>
       </div>
-      <div class="spacer">&nbsp;</div>
+    </main>
+    <div class="section_nav">
+      <a th:href="@{/treatment}" class="section_link">&larr; Back to full list</a>
+    </div>
+    <div class="spacer">&nbsp;</div>
     <script th:src="@{/js/common/header.js}"></script>
     <script th:src="@{/js/education/treatmentSpec.js}"></script>
   </body>
