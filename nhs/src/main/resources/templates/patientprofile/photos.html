@@ -11,7 +11,7 @@
 <body>
   <main layout:fragment="content" class="main-content">
     <h1 class="page-title">Patient photos</h1>
-    <div th:if="${photos.empty}" class="no-photos">No photos yet</div>
+    <div th:if="${photos.isEmpty()}" class="not-available-text">No photos available for this patient</div>
     <photo-container th:attr="photos=${photos != null && !photos.isEmpty() ? objectMapper.writeValueAsString(photos) : '[]'}">
     </photo-container>
   </main>

@@ -4,10 +4,13 @@
     box-sizing: border-box;
 }
 
-.main-container {
-    display: flex;
+.main-content {
     width: 100%;
-    background-color: var(--nhs-pale-grey);
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: clamp(150px, 20vw, 220px) 1fr;
 }
 
 .container {
