@@ -52,7 +52,7 @@ html {
 }
 
 /* LANDING PAGE */
-body.landing-page {
+.landing-page {
     margin: 0;
     padding: 0;
     background: linear-gradient(to bottom, var(--nhs-blue), var(--nhs-dark-blue));

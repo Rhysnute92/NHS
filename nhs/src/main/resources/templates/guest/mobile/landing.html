@@ -8,6 +8,7 @@
   </head>
   <body class="landing-page">
   <main>
+    <div class="landing-page">
     <img
             th:src="@{/images/NHS_logos/nhs-logo.jpg}"
             alt="NHS Logo"
@@ -22,7 +23,8 @@
         <button onclick="location. href='/login'" class="log-in-btn">Log In</button>
         <button onclick="location. href='/guest'" class="guest-btn">Guest</button>
       </div>
+      <div>
       <script th:src="@{/js/common/header.js}"></script>
-    </body>
-  </main>
+    </main>
+  </body>
 </html>
