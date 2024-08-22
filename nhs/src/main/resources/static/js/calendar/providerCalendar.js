@@ -120,4 +120,36 @@ if (apptModal) {
     apptModal.addEventListener('close', () => {
         apptForm.reset();
     });
+
+    function showList() {
+        document.getElementById('appointment-list1').style.display = 'block'; // Show the list
+        document.getElementById('calendar1').style.display = 'none'; // Hide the calendar
+        document.getElementById('no-appointments').style.display = 'none'; // Hide "No appointments" message
+        document.getElementById('addAppointment').style.display = 'none';
+    }
+
+    function showProviderCalendar() {
+        document.getElementById('appointment-list1').style.display = 'none'; // Hide the list
+        document.getElementById('calendar1').style.display = 'block'; // Show the calendar
+        document.getElementById('no-appointments').style.display = 'none'; // Hide "No appointments" message
+        document.getElementById('addAppointment').style.display = 'none';
+    }
+    function showProviderAddAppointment() {
+        document.getElementById('appointment-list1').style.display = 'none'; // Show the list
+        document.getElementById('calendar1').style.display = 'none'; // Hide the calendar
+        document.getElementById('no-appointments').style.display = 'none'; // Hide "No appointments" message
+        document.getElementById('addAppointment').style.display = 'block';
+    }
+// Initial setup to display the correct tab based on available data
+    window.onload = function () {
+        const appointmentsExist = document.querySelector('#appointment-list tbody tr');
+        if (appointmentsExist) {
+            showList(); // Show list by default if appointments exist
+        } else {
+            document.getElementById('appointment-list1').style.display = 'none';
+            document.getElementById('calendar1').style.display = 'none';
+            document.getElementById('no-appointments').style.display = 'block';
+            document.getElementById('addAppointment').style.display = 'none';
+        }
+    }
 }
