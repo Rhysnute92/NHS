@@ -86,10 +86,6 @@ ul {
     display: none;
   }
 
-  .management-container {
-    margin-top: 1.5em;
-  }
-
   .collapsible:hover:not(.expanded) {
     background-color: #ffff;
   }

@@ -4,19 +4,12 @@
     box-sizing: border-box;
 }
 
-.main-content {
-    width: 100%;
-}
-
 .main-container {
-    display: grid;
-    grid-template-columns: clamp(150px, 20vw, 220px) 1fr;
+    display: flex;
 }
 
-.container {
-    /*background-color: var(--nhs-white);*/
-    border-radius: 0.4rem;
-    min-height: 100vh;
+.centre-container {
+    width: 100%;
 }
 
 .main-content .page-title {
