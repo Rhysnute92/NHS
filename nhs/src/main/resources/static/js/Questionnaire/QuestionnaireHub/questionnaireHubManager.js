@@ -1,5 +1,5 @@
 import { fetchData, postData } from "../../common/utils/apiUtility.js";
-import { QuestionnaireHubRendererProviderView } from "./questionnaireHubRenderer.js";
+import { QuestionnaireHubRendererProviderView } from "./QuestionnaireHubRendererProviderView.js";
 
 export class QuestionnaireHubManager {
   constructor(containerId, noAssignmentId) {

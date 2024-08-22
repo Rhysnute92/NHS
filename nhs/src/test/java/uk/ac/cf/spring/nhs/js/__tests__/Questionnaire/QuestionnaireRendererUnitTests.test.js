@@ -1,4 +1,4 @@
-import { QuestionnaireRenderer } from "../../Questionnaire/QuestionnaireRenderer";
+import { QuestionnaireRenderer } from "../../../../../../../../../../main/resources/static/js/Questionnaire/QuestionnaireRenderer";
 
 describe("QuestionnaireRenderer", () => {
   let renderer;

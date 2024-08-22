@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.log("User widgets:", userWidgets);
 
     const widgetManager = new WidgetManager(userWidgets);
-    await widgetManager.loadWidgets();
+    await widgetManager.setupWidgetPlaceholders();
+    // The renderAllUserWidgets method will handle loading and activating widgets
+    await widgetManager.renderAllUserWidgets();
   } catch (error) {
     console.error("Error occurred:", error);
   }
