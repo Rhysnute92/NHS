@@ -5,15 +5,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import uk.ac.cf.spring.nhs.Common.util.BitmaskUtility;
 import uk.ac.cf.spring.nhs.Common.util.DateUtils;
+import uk.ac.cf.spring.nhs.Task.Model.Task;
 import uk.ac.cf.spring.nhs.UserTask.Model.UserTask;
 import uk.ac.cf.spring.nhs.UserTask.Repository.JpaUserTaskRepository;
 import uk.ac.cf.spring.nhs.UserTaskLog.Model.UserTaskLog;
@@ -22,38 +23,39 @@ import uk.ac.cf.spring.nhs.UserTaskLog.Service.UserTaskLogService;
 @Service
 public class UserTaskService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserTaskService.class);
-
     @Autowired
     private JpaUserTaskRepository userTaskRepository;
 
     @Autowired
     private UserTaskLogService userTaskLogService;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void toggleTaskCompletion(UserTask userTask) {
+        System.out.println("toggleTaskCompletion called for UserTask ID: " + userTask.getId() + " from "
+                + new Exception().getStackTrace()[1]);
+
         int currentDay = DateUtils.getCurrentDayOfMonth();
+        System.out.println("Current day according to toggleTaskCompletion: " + currentDay);
         int updatedBitmask;
 
         if (BitmaskUtility.isBitSet(userTask.getBitmask(), currentDay)) {
-            // Unset the bit if it's already set (mark as incomplete)
             updatedBitmask = BitmaskUtility.clearBit(userTask.getBitmask(), currentDay);
-            logger.debug("Marked task as incomplete. UserTask ID: {}, Updated Bitmask: {}", userTask.getId(),
-                    Integer.toBinaryString(updatedBitmask));
+            System.out.println("Marked task as incomplete. UserTask ID: " + userTask.getId() + ", Updated Bitmask: "
+                    + Integer.toBinaryString(updatedBitmask));
         } else {
-            // Set the bit if it's not set (mark as complete)
             updatedBitmask = BitmaskUtility.setBit(userTask.getBitmask(), currentDay);
-            logger.debug("Marked task as completed. UserTask ID: {}, Updated Bitmask: {}", userTask.getId(),
-                    Integer.toBinaryString(updatedBitmask));
+            System.out.println("Marked task as completed. UserTask ID: " + userTask.getId() + ", Updated Bitmask: "
+                    + Integer.toBinaryString(updatedBitmask));
         }
 
         userTask.setBitmask(updatedBitmask);
         userTaskRepository.save(userTask);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public boolean isTaskCompleted(UserTask userTask) {
         int currentDay = DateUtils.getCurrentDayOfMonth();
+        System.out.println("Current day according to isTaskCompleted: " + currentDay);
         return BitmaskUtility.isBitSet(userTask.getBitmask(), currentDay);
     }
 
@@ -126,6 +128,7 @@ public class UserTaskService {
                 count++;
             }
         }
+        System.out.println("Count of completed tasks for user " + userId + " on day " + day + " is: " + count);
         return count;
     }
 
@@ -137,8 +140,12 @@ public class UserTaskService {
      * @param userTask the user task details to be saved
      * @return the saved user task details
      */
-    public UserTask assignTaskToUser(UserTask userTask) {
-        return userTaskRepository.save(userTask); // TODO: add exception handling
+
+    public UserTask assignTaskToUser(Task task, Long userId) {
+        UserTask userTask = new UserTask();
+        userTask.setTask(task);
+        userTask.setUserID(userId);
+        return userTaskRepository.save(userTask);
     }
 
     /**
@@ -199,4 +206,10 @@ public class UserTaskService {
         userTaskRepository.delete(userTask); // TODO: add exception handling
     }
 
+    public void deleteAllTasksForUser(Long userId){
+        List<UserTask> allTasks = getTasksForUser(userId);
+        for(UserTask task: allTasks){
+            deleteUserTask(task.getId());
+        }
+    }
 }

@@ -2,39 +2,33 @@
 DROP TABLE IF EXISTS UserTaskLog;
 DROP TABLE IF EXISTS UserTask;
 DROP TABLE IF EXISTS Task;
-
 DROP TABLE IF EXISTS InfoAssets;
 DROP TABLE IF EXISTS InfoSections;
 DROP TABLE IF EXISTS Articles;
-
 DROP TABLE IF EXISTS UserQuestion;
+DROP TABLE IF EXISTS UserResponses;
 DROP TABLE IF EXISTS UserQuestionnaires;
 DROP TABLE IF EXISTS Question;
+DROP TABLE IF EXISTS Questions;
 DROP TABLE IF EXISTS Questionnaires;
-
+DROP TABLE IF EXISTS Treatments;
 DROP TABLE IF EXISTS DiarySymptoms;
-DROP TABLE IF EXISTS DiaryMeasurements;
 DROP TABLE IF EXISTS DiaryPhotos;
-DROP TABLE IF EXISTS DiaryEntries;
+DROP TABLE IF EXISTS DiaryMeasurements;
 DROP TABLE IF EXISTS Symptoms;
 DROP TABLE IF EXISTS Measurements;
 DROP TABLE IF EXISTS Photos;
-
+DROP TABLE IF EXISTS DiaryEntries;
+DROP TABLE IF EXISTS Events;
 DROP TABLE IF EXISTS Appointments;
 DROP TABLE IF EXISTS UserWidgets;
-
 DROP TABLE IF EXISTS Providers;
 DROP TABLE IF EXISTS PatientDiagnosis;
 DROP TABLE IF EXISTS Patients;
-
 DROP TABLE IF EXISTS ProviderCredentials;
 DROP TABLE IF EXISTS PatientCredentials;
-
 DROP TABLE IF EXISTS Admin;
 DROP TABLE IF EXISTS UserCredentials;
-/* DROP Database IF EXISTS nhs;
- CREATE Database nhs;
- USE nhs; */
 --Log in information and credentials--
 CREATE TABLE UserCredentials (
     UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -100,13 +94,33 @@ CREATE TABLE Appointments (
     UserID BIGINT,
     FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID)
 );
+--Events--
+CREATE TABLE Events (
+    EventID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    EventDate DATE NOT NULL,
+    EventDuration INT,
+    UserID BIGINT,
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+);
 --Diary--
+CREATE TABLE DiaryEntries (
+    EntryID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    EntryDate DATE NOT NULL,
+    EntryMood TINYINT,
+    EntryNotes TEXT,
+    UserID BIGINT NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+);
 CREATE TABLE Photos (
     PhotoID BIGINT AUTO_INCREMENT PRIMARY KEY,
     PhotoURL TEXT,
     PhotoDate DATETIME,
     PhotoBodypart VARCHAR(255),
     UserID BIGINT,
+    EventID BIGINT,
+    EntryID BIGINT,
+    FOREIGN KEY (EventID) REFERENCES Events(EventID),
+    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 CREATE TABLE Measurements (
@@ -115,6 +129,10 @@ CREATE TABLE Measurements (
     MeasurementValue FLOAT,
     MeasurementUnit VARCHAR(100),
     UserID BIGINT,
+    EventID BIGINT,
+    EntryID BIGINT,
+    FOREIGN KEY (EventID) REFERENCES Events(EventID),
+    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
 CREATE TABLE Symptoms (
@@ -124,36 +142,20 @@ CREATE TABLE Symptoms (
     SymptomStartDate DATETIME,
     SymptomIsActive BOOLEAN,
     UserID BIGINT,
+    EventID BIGINT,
+    EntryID BIGINT,
+    FOREIGN KEY (EventID) REFERENCES Events(EventID),
+    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
-CREATE TABLE DiaryEntries (
-    EntryID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    EntryDate DATE NOT NULL,
-    EntryMood TINYINT,
-    EntryNotes TEXT,
-    UserID BIGINT NOT NULL,
+CREATE TABLE Treatments (
+    TreatmentID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    TreatmentType VARCHAR(255),
+    TreatmentDetails TEXT,
+    UserID BIGINT,
+    EventID BIGINT,
+    FOREIGN KEY (EventID) REFERENCES Events(EventID),
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
-);
-CREATE TABLE DiaryPhotos (
-    DiaryPhotoID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    EntryID BIGINT,
-    PhotoID BIGINT,
-    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-    FOREIGN KEY (PhotoID) REFERENCES Photos(PhotoID)
-);
-CREATE TABLE DiaryMeasurements (
-    DiaryMeasurementID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    EntryID BIGINT,
-    MeasurementID BIGINT,
-    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-    FOREIGN KEY (MeasurementID) REFERENCES Measurements(MeasurementID)
-);
-CREATE TABLE DiarySymptoms (
-    DiarySymptomID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    EntryID BIGINT NOT NULL,
-    SymptomID BIGINT NOT NULL,
-    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-    FOREIGN KEY (SymptomID) REFERENCES Symptoms(SymptomID)
 );
 --Not implemented yet--
 --CREATE TABLE Event ()
@@ -179,7 +181,9 @@ CREATE TABLE UserQuestionnaires (
     UserQuestionnaireID BIGINT AUTO_INCREMENT PRIMARY KEY,
     QuestionnaireID BIGINT NOT NULL,
     UserID BIGINT NOT NULL,
-    QuestionnaireStartDate DATETIME NOT NULL,
+    QuestionnaireCreatedDate DATETIME NOT NULL,
+    QuestionnaireDueDate DATETIME NOT NULL,
+    QuestionnaireStartDate DATETIME DEFAULT NULL,
     QuestionnaireInProgress BOOLEAN DEFAULT FALSE,
     QuestionnaireIsCompleted BOOLEAN DEFAULT FALSE,
     QuestionnaireCompletionDate DATETIME,

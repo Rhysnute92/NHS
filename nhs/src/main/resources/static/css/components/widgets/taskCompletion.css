@@ -1,49 +1,43 @@
+@import url("../popups/taskPopup.css");
+
 .task-widget {
-  background-color: #ffffff;
+  background-color: var(--nhs-white);
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
   margin: 20px 0;
-}
-
-.task-widget-header {
-  margin-bottom: 20px;
-}
-
-.task-widget-header h3 {
-  font-size: 24px;
-  color: #111827;
-  margin: 0 0 10px 0;
-}
-
-.task-widget-header p {
-  font-size: 14px;
-  color: #6b7280;
-  margin: 0;
+  width: 33vw;
+  min-height: 300px;
 }
 
 .task-widget-body {
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
 }
 
 .progress-circle {
-  transform: rotate(-90deg);
+  transform: rotate(315deg);
+  transform-origin: center;
 }
 
 .bg-circle {
   fill: none;
-  stroke: #e5e7eb;
-  stroke-width: 10;
+  stroke: var(--nhs-pale-grey);
+  stroke-width: 20;
 }
 
 .progress-circle .progress-circle {
+  stroke-dashoffset: 0;
   fill: none;
-  stroke: #4f46e5; /* Your primary color */
-  stroke-width: 10;
-  transition: stroke-dashoffset 0.3s ease;
+  stroke-width: 20;
+  stroke: var(--nhs-light-green);
+  transition: stroke-dashoffset 0.3s ease, stroke 0.3s ease;
 }
 
 .progress-text {
@@ -51,25 +45,60 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 18px;
-  color: #111827;
+  text-align: center;
+}
+
+.progress-text h3 {
+  font-size: 1.8rem;
+  color: var(--nhs-black);
+  margin-bottom: 0;
+  padding: 0;
+  width: 90%;
+  padding-left: 0.25em;
+}
+
+.progress-text p {
+  font-size: 1.5em;
+  color: var(--nhs-black);
+  margin-bottom: 1em;
+  margin-top: 0;
 }
 
 .task-widget-footer {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .complete-task-button {
-  background-color: #4f46e5; /* Your primary color */
+  background-color: #4f46e5;
   color: #ffffff;
   border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
+  border-radius: 3px;
+  padding: 0.8em 1.8em;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.8em;
+  font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
 .complete-task-button:hover {
-  background-color: #4338ca; /* Darker shade of your primary color */
+  background-color: #4338ca;
+}
+
+@media screen and (max-width: 768px) {
+  .task-widget {
+    width: 80vw;
+    min-height: auto;
+  }
+
+  .task-widget-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  /* 
+  .progress-circle {
+    width: 10em;
+    height: 10em;
+  } */
 }

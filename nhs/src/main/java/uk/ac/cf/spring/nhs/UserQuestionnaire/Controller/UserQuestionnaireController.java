@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.UserQuestionnaire.Controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import uk.ac.cf.spring.nhs.Questionnaire.Model.Questionnaire;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 import uk.ac.cf.spring.nhs.UserQuestion.Service.UserQuestionService;
@@ -80,6 +80,37 @@ public class UserQuestionnaireController {
     }
 
     /**
+     * Retrieves incomplete user questionnaires for a specific patient by their ID.
+     *
+     * @param patientId the ID of the patient
+     * @return a ResponseEntity containing a list of incomplete user questionnaires
+     *         for the patient
+     */
+    @GetMapping("/provider/incomplete/{patientId}")
+    public ResponseEntity<List<UserQuestionnaire>> getIncompleteUserQuestionnairesForPatient(
+            @PathVariable Long patientId) {
+        List<UserQuestionnaire> userQuestionnaires = userQuestionnaireService
+                .getIncompleteUserQuestionnaires(patientId);
+        return ResponseEntity.ok(userQuestionnaires);
+    }
+
+    /**
+     * Retrieves a list of completed user questionnaires for a specific patient by
+     * their ID.
+     *
+     * @param patientId the ID of the patient
+     * @return a ResponseEntity containing a list of completed user questionnaires
+     *         for the patient
+     */
+    @GetMapping("/provider/completed/{patientId}")
+    public ResponseEntity<List<UserQuestionnaire>> getCompletedUserQuestionnairesForPatient(
+            @PathVariable Long patientId) {
+        List<UserQuestionnaire> userQuestionnaires = userQuestionnaireService
+                .getCompletedUserQuestionnaires(patientId);
+        return ResponseEntity.ok(userQuestionnaires);
+    }
+
+    /**
      * Retrieves a user questionnaire for the authenticated user and questionnaire
      * ID.
      *
@@ -112,6 +143,30 @@ public class UserQuestionnaireController {
     }
 
     /**
+     * Creates a new user questionnaire for a specified user (provider).
+     *
+     * @param patientId         the ID of the patient
+     * @param userQuestionnaire the user questionnaire to be created
+     * @return the created user questionnaire
+     */
+    @PostMapping("provider/{patientId}/assign-questionnaire")
+    public ResponseEntity<UserQuestionnaire> assignQuestionnaireToPatient(
+            @PathVariable Long patientId,
+            @RequestBody UserQuestionnaire userQuestionnaire) {
+
+        // Set the patient ID
+        userQuestionnaire.setUserID(patientId);
+
+        // Set the creation date to now
+        userQuestionnaire.setQuestionnaireCreatedDate(LocalDateTime.now());
+
+        // Save the new UserQuestionnaire
+        UserQuestionnaire savedUserQuestionnaire = userQuestionnaireService.saveUserQuestionnaire(userQuestionnaire);
+
+        return ResponseEntity.ok(savedUserQuestionnaire);
+    }
+
+    /**
      * Updates an existing user questionnaire for the authenticated user.
      *
      * @param id                the ID of the user questionnaire to update
@@ -122,16 +177,25 @@ public class UserQuestionnaireController {
     public ResponseEntity<UserQuestionnaire> updateUserQuestionnaire(@PathVariable Long id,
             @RequestBody UserQuestionnaire userQuestionnaire) {
         Long userID = getCurrentUserId();
-        Optional<UserQuestionnaire> existingUserQuestionnaire = userQuestionnaireService.getUserQuestionnaire(userID,
+        Optional<UserQuestionnaire> existingUserQuestionnaireOpt = userQuestionnaireService.getUserQuestionnaire(userID,
                 id);
 
-        if (existingUserQuestionnaire.isPresent()) {
-            Questionnaire existingQuestionnaire = existingUserQuestionnaire.get().getQuestionnaire();
-            userQuestionnaire.setQuestionnaire(existingQuestionnaire);
-            userQuestionnaire.setUserQuestionnaireId(id);
-            userQuestionnaire.setUserID(userID); // Ensure the user ID is set correctly
+        if (existingUserQuestionnaireOpt.isPresent()) {
+            UserQuestionnaire existingUserQuestionnaire = existingUserQuestionnaireOpt.get();
+
+            // Only set the start date if it hasn't been set before
+            if (existingUserQuestionnaire.getQuestionnaireStartDate() == null) {
+                existingUserQuestionnaire.setQuestionnaireStartDate(userQuestionnaire.getQuestionnaireStartDate());
+                existingUserQuestionnaire.setQuestionnaireInProgress(userQuestionnaire.getQuestionnaireInProgress());
+            }
+
+            // Preserve the existing values for fields that should not change
+            existingUserQuestionnaire.setUserQuestionnaireId(id);
+            existingUserQuestionnaire.setUserID(userID);
+
+            // Save the updated UserQuestionnaire
             UserQuestionnaire updatedUserQuestionnaire = userQuestionnaireService
-                    .saveUserQuestionnaire(userQuestionnaire);
+                    .saveUserQuestionnaire(existingUserQuestionnaire);
             return ResponseEntity.ok(updatedUserQuestionnaire);
         } else {
             return ResponseEntity.notFound().build();
@@ -157,23 +221,18 @@ public class UserQuestionnaireController {
         }
     }
 
-    /**
-     * Handles the saving of user responses for a specific questionnaire without
-     * marking it as complete.
-     *
-     * @param questionnaireId the ID of the questionnaire being saved
-     * @param responses       a map of question IDs to user responses
-     * @return a ResponseEntity indicating the result of the operation
-     */
-    @PostMapping("/save/{questionnaireId}")
+    @PostMapping("/save/{userQuestionnaireId}")
     public ResponseEntity<?> saveUserQuestions(
-            @PathVariable Long questionnaireId,
+            @PathVariable Long userQuestionnaireId,
             @RequestBody Map<String, String> responses) {
         try {
-            userQuestionService.saveResponsesWithoutCompletion(questionnaireId, responses);
+            userQuestionService.saveResponsesWithoutCompletion(userQuestionnaireId, responses);
+
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving responses");
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error saving responses: " + e.getMessage());
         }
     }
 }

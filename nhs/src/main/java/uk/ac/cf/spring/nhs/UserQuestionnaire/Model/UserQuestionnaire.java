@@ -1,6 +1,7 @@
 package uk.ac.cf.spring.nhs.UserQuestionnaire.Model;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,8 +29,14 @@ public class UserQuestionnaire {
     @Column(name = "UserID", nullable = false)
     private Long userID;
 
-    @Column(name = "QuestionnaireStartDate", nullable = false)
+    @Column(name = "QuestionnaireStartDate", nullable = true)
     private LocalDateTime questionnaireStartDate;
+
+    @Column(name = "QuestionnaireCreatedDate", nullable = false)
+    private LocalDateTime questionnaireCreatedDate;
+
+    @Column(name = "QuestionnaireDueDate", nullable = false)
+    private LocalDate questionnaireDueDate;
 
     @Column(name = "QuestionnaireInProgress", nullable = false)
     private Boolean questionnaireInProgress = false;
@@ -118,9 +125,6 @@ public class UserQuestionnaire {
      * @param questionnaireStartDate the start date of the questionnaire
      */
     public void setQuestionnaireStartDate(LocalDateTime questionnaireStartDate) {
-        if (questionnaireStartDate == null) {
-            throw new NullPointerException("Questionnaire start date cannot be null");
-        }
         this.questionnaireStartDate = questionnaireStartDate;
     }
 
@@ -167,4 +171,33 @@ public class UserQuestionnaire {
     public void setQuestionnaireCompletionDate(LocalDateTime questionnaireCompletionDate) {
         this.questionnaireCompletionDate = questionnaireCompletionDate;
     }
+
+    /**
+     * @return the questionnaireCreatedDate
+     */
+    public LocalDateTime getQuestionnaireCreatedDate() {
+        return questionnaireCreatedDate;
+    }
+
+    /**
+     * @param questionnaireCreatedDate the questionnaireCreatedDate to set
+     */
+    public void setQuestionnaireCreatedDate(LocalDateTime questionnaireCreatedDate) {
+        this.questionnaireCreatedDate = questionnaireCreatedDate;
+    }
+
+    /**
+     * @return the questionnaireDueDate
+     */
+    public LocalDate getQuestionnaireDueDate() {
+        return questionnaireDueDate;
+    }
+
+    /**
+     * @param questionnaireDueDate the questionnaireDueDate to set
+     */
+    public void setQuestionnaireDueDate(LocalDate questionnaireDueDate) {
+        this.questionnaireDueDate = questionnaireDueDate;
+    }
+
 }

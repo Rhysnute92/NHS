@@ -2,20 +2,33 @@ package uk.ac.cf.spring.nhs.Appointment.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import uk.ac.cf.spring.nhs.Appointments.Controller.AppointmentController;
 import uk.ac.cf.spring.nhs.Appointments.DTO.AppointmentDTO;
 import uk.ac.cf.spring.nhs.Appointments.Model.Appointment;
 import uk.ac.cf.spring.nhs.Appointments.Service.AppointmentService;
+import uk.ac.cf.spring.nhs.Calendar.Controller.CalendarController;
+import uk.ac.cf.spring.nhs.Security.AuthenticationFacade;
+import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
+import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -33,9 +46,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest(AppointmentController.class)
+@AutoConfigureMockMvc(addFilters = false)
 public class AppointmentControllerTest {
+
+    @MockBean
+    private AuthenticationInterface authenticationFacade;
 
     @Autowired
     private MockMvc mockMvc;
@@ -52,11 +68,26 @@ public class AppointmentControllerTest {
     /**
      * Set up security before each test
      */
-    @Before
-    public void setup() {
-        this.mockMvc = webAppContextSetup(context)
+    private AutoCloseable closeable;
+
+    @BeforeEach
+    public void setUp() {
+        // Initialize mocks and security context
+        closeable = MockitoAnnotations.openMocks(this);
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
+
+        CustomUserDetails customUserDetails = new CustomUserDetails(1L, "patient", "password",
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_PATIENT")));
+        Authentication authentication = new UsernamePasswordAuthenticationToken(customUserDetails, "password", customUserDetails.getAuthorities());
+        when(authenticationFacade.getAuthentication()).thenReturn(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        closeable.close();
     }
 
     /**

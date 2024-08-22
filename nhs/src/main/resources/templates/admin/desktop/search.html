@@ -4,13 +4,46 @@
     <meta charset="UTF-8">
     <title>Search</title>
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/search.css}" />
 </head>
 <body>
     <header th:replace="~{common/fragments/header}"></header>
     <nav th:replace="~{common/fragments/navbaradmin}" class="nav"></nav>
-<div class="container">
-    <h2>Search patient page</h2>
-</div>
+    <main>
+    <div class="container">
+        <h2>Look up patient</h2>
+        <label for="searchType">Search by: </label>
+        <select id="searchType">
+            <option value="NHS number">NHS number</option>
+            <option value="Patient data">Patient data</option>
+        </select>
+        <div id="inputMessage"></div>
+        <form action="/provider/search/patientsearch" id="searchForm" method="post">
+            <label for="patientNhsNumber">Patient NHS number:</label>
+            <input type="text" id="patientNhsNumber" name="patientNhsNumber" required>
+            <input type="submit" value="Search" class="search_button"/>
+        </form>
+        <table th:if="${results != null}" class="results_table">
+            <thead>
+                <tr>
+                    <th>NHS number</th>
+                    <th>Patient name</th>
+                    <th>Date of birth</th>
+                    <th>Patient email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="r : ${results}">
+                    <td><a th:href="@{'/patientprofile/' + ${r.userId}}" class="row-link">[[${r.nhsNumber}]]</a></td>
+                    <td><a th:href="@{'/patientprofile/' + ${r.userId}}" tabindex="-1" class="row-link">[[${r.patientName}]] [[${r.patientLastName}]]</a></td>
+                    <td><a th:href="@{'/patientprofile/' + ${r.userId}}" tabindex="-1" class="row-link">[[${r.patientDOB}]]</a></td>
+                    <td><a th:href="@{'/patientprofile/' + ${r.userId}}" tabindex="-1" class="row-link">[[${r.patientEmail}]]</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
 <script th:src="@{/js/common/header.js}"></script>
+<script th:src="@{/js/admin/search.js}"></script>
 </body>
 </html>

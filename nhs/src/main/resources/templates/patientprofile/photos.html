@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/provider}"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Photos</title>
+</head>
+<body>
+  <main layout:fragment="content" class="main-content">
+    <h1 class="page-title">Patient photos</h1>
+    <div th:if="${photos.empty}" class="no-photos">No photos yet</div>
+    <photo-container th:attr="photos=${photos != null && !photos.isEmpty() ? objectMapper.writeValueAsString(photos) : '[]'}">
+    </photo-container>
+  </main>
+  <th:block layout:fragment="scripts">
+    <script th:src="@{/js/diary/components/PhotoCard.js}"></script>
+    <script th:src="@{/js/diary/components/PhotoContainer.js}"></script>
+  </th:block>
+</body>
+</html>

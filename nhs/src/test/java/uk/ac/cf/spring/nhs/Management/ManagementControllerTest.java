@@ -18,7 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ManagementControllerTest {
-    
+
     @Autowired
     private WebApplicationContext context;
 
@@ -28,26 +28,26 @@ public class ManagementControllerTest {
     @Before
     public void setup() {
         this.mockMvc = webAppContextSetup(context)
-        .apply(springSecurity())
-        .build();
+                .apply(springSecurity())
+                .build();
     }
 
     @Test
-    @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
+    @WithMockUser(username = "admin", roles = { "PATIENT", "ADMIN" })
     public void testMobileManagement() throws Exception {
         mockMvc.perform(get("/management")
-                        .header("User-Agent",
-                                "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"))
+                .header("User-Agent",
+                        "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("management/management"));
     }
 
     @Test
-    @WithMockUser(username="admin",roles={"PATIENT","ADMIN"})
+    @WithMockUser(username = "admin", roles = { "PATIENT", "ADMIN" })
     public void testDesktopManagement() throws Exception {
         mockMvc.perform(get("/management")
-                        .header("User-Agent",
-                                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"))
+                .header("User-Agent",
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("management/management"));
     }

@@ -66,9 +66,11 @@ public class AppointmentServiceTest {
     /**
      * Test case for the getAllAppointments method when the appointment ID is valid.
      *
-     * This test verifies that when the getAllAppointments method is called with a valid
+     * This test verifies that when the getAllAppointments method is called with a
+     * valid
      * appointment ID,
      * the correct list of user appointments is returned.
+     * 
      * @return void
      */
     @Test
@@ -86,9 +88,11 @@ public class AppointmentServiceTest {
     /**
      * Test case for the getAppointmentById method when the appointment ID is valid.
      *
-     * This test verifies that when the getAppointmentById method is called with a valid
+     * This test verifies that when the getAppointmentById method is called with a
+     * valid
      * appointment ID,
      * the correct list of user appointments is returned.
+     * 
      * @return void
      */
     @Test
@@ -105,17 +109,19 @@ public class AppointmentServiceTest {
     /**
      * Test case for the getAppointmentsByUserId method when the user ID is valid.
      *
-     * This test verifies that when the getAppointmentById method is called with a valid
+     * This test verifies that when the getAppointmentById method is called with a
+     * valid
      * user ID,
      * the correct list of user appointments is returned.
+     * 
      * @return void
      */
     @Test
     public void testGetAppointmentsByUserId() {
         List<Appointment> appointments = Arrays.asList(appointment1, appointment2);
-        when(appointmentRepository.findByUserID(1)).thenReturn(appointments);
+        when(appointmentRepository.findByUserID(1L)).thenReturn(appointments);
 
-        List<Appointment> result = appointmentService.getAppointmentsByUserId(1);
+        List<Appointment> result = appointmentService.getAppointmentsByUserId(1L);
 
         assertThat(result).isNotNull();
         assertThat(result.size()).isEqualTo(2);

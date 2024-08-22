@@ -14,6 +14,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,11 +24,16 @@ import org.mockito.MockitoAnnotations;
 
 import uk.ac.cf.spring.nhs.UserQuestion.Model.UserQuestion;
 import uk.ac.cf.spring.nhs.UserQuestion.Repository.JpaUserQuestionRepository;
+import uk.ac.cf.spring.nhs.UserQuestionnaire.Model.UserQuestionnaire;
+import uk.ac.cf.spring.nhs.UserQuestionnaire.Service.UserQuestionnaireService;
 
 class UserQuestionServiceUnitTests {
 
     @Mock
     private JpaUserQuestionRepository userQuestionRepository;
+
+    @Mock
+    private UserQuestionnaireService userQuestionnaireService;
 
     @InjectMocks
     private UserQuestionService userQuestionService;
@@ -42,10 +48,11 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the getUserQuestionsByUserQuestionnaireId method of UserQuestionService 
-     * to ensure it returns an empty list when no UserQuestions are found for the given UserQuestionnaire ID.
+     * Tests the getUserQuestionsByUserQuestionnaireId method of UserQuestionService
+     * to ensure it returns an empty list when no UserQuestions are found for the
+     * given UserQuestionnaire ID.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testGetUserQuestionsByUserQuestionnaireIdReturnsEmptyList() {
@@ -61,10 +68,11 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the getUserQuestionsByUserQuestionnaireId method of UserQuestionService 
-     * to ensure it returns a populated list when UserQuestions are found for the given UserQuestionnaire ID.
+     * Tests the getUserQuestionsByUserQuestionnaireId method of UserQuestionService
+     * to ensure it returns a populated list when UserQuestions are found for the
+     * given UserQuestionnaire ID.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testGetUserQuestionsByUserQuestionnaireIdReturnsPopulatedList() {
@@ -83,10 +91,11 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the getUserQuestionsByQuestionId method of UserQuestionService 
-     * to ensure it returns an empty list when no UserQuestions are found for the given Question ID.
+     * Tests the getUserQuestionsByQuestionId method of UserQuestionService
+     * to ensure it returns an empty list when no UserQuestions are found for the
+     * given Question ID.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testGetUserQuestionsByQuestionIdReturnsEmptyList() {
@@ -101,10 +110,11 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the getUserQuestionsByQuestionId method of UserQuestionService 
-     * to ensure it returns a populated list when UserQuestions are found for the given Question ID.
+     * Tests the getUserQuestionsByQuestionId method of UserQuestionService
+     * to ensure it returns a populated list when UserQuestions are found for the
+     * given Question ID.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testGetUserQuestionsByQuestionIdReturnsPopulatedList() {
@@ -122,10 +132,11 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the getUserQuestion method of UserQuestionService 
-     * to ensure it returns an empty Optional when no UserQuestion is found for the given UserQuestionnaire ID and Question ID.
+     * Tests the getUserQuestion method of UserQuestionService
+     * to ensure it returns an empty Optional when no UserQuestion is found for the
+     * given UserQuestionnaire ID and Question ID.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testGetUserQuestionReturnsEmptyOptional() {
@@ -144,10 +155,11 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the getUserQuestion method of UserQuestionService 
-     * to ensure it returns a populated Optional when a UserQuestion is found for the given UserQuestionnaire ID and Question ID.
+     * Tests the getUserQuestion method of UserQuestionService
+     * to ensure it returns a populated Optional when a UserQuestion is found for
+     * the given UserQuestionnaire ID and Question ID.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testGetUserQuestionReturnsPopulatedOptional() {
@@ -167,10 +179,10 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the saveUserQuestion method of UserQuestionService 
+     * Tests the saveUserQuestion method of UserQuestionService
      * to ensure it correctly saves a UserQuestion.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testSaveUserQuestion() {
@@ -184,10 +196,10 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the deleteUserQuestion method of UserQuestionService 
+     * Tests the deleteUserQuestion method of UserQuestionService
      * to ensure it correctly deletes a UserQuestion.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testDeleteUserQuestion() {
@@ -200,10 +212,10 @@ class UserQuestionServiceUnitTests {
     }
 
     /**
-     * Tests the deleteUserQuestion method of UserQuestionService 
+     * Tests the deleteUserQuestion method of UserQuestionService
      * to ensure it throws an exception when a UserQuestion is not found.
      *
-     * @return         	void
+     * @return void
      */
     @Test
     void testDeleteUserQuestionNotFound() {
@@ -218,4 +230,56 @@ class UserQuestionServiceUnitTests {
         assertEquals("UserQuestion not found", exception.getMessage());
         verify(userQuestionRepository, times(1)).deleteById(userQuestionId);
     }
+
+    @Test
+    void testSaveResponsesWithMixedResponses() {
+        Long userQuestionnaireId = 1L;
+
+        // Mocking the UserQuestionnaire
+        UserQuestionnaire userQuestionnaire = new UserQuestionnaire();
+        userQuestionnaire.setUserQuestionnaireId(userQuestionnaireId);
+
+        // Mocking the responses
+        Map<String, String> responses = Map.of(
+                "1", "3", // Score response
+                "2", "This is a text response" // Text response
+        );
+
+        when(userQuestionnaireService.getUserQuestionnaireById(userQuestionnaireId))
+                .thenReturn(Optional.of(userQuestionnaire));
+
+        // Act
+        userQuestionService.saveResponses(userQuestionnaireId, responses);
+
+        // Verify that the UserQuestions were saved with correct values
+        verify(userQuestionRepository, times(2)).save(org.mockito.ArgumentMatchers.any(UserQuestion.class));
+    }
+
+    @Test
+    void testSaveResponsesMarksQuestionnaireAsCompleted() {
+        Long userQuestionnaireId = 1L;
+
+        // Mocking the UserQuestionnaire
+        UserQuestionnaire userQuestionnaire = new UserQuestionnaire();
+        userQuestionnaire.setUserQuestionnaireId(userQuestionnaireId);
+
+        // Mocking the responses
+        Map<String, String> responses = Map.of(
+                "1", "5" // Score response
+        );
+
+        when(userQuestionnaireService.getUserQuestionnaireById(userQuestionnaireId))
+                .thenReturn(Optional.of(userQuestionnaire));
+
+        // Act
+        userQuestionService.saveResponses(userQuestionnaireId, responses);
+
+        // Verify that the questionnaire is marked as completed
+        assertTrue(userQuestionnaire.getQuestionnaireIsCompleted());
+        assertNotNull(userQuestionnaire.getQuestionnaireCompletionDate());
+
+        // Verify that the UserQuestionnaire was saved
+        verify(userQuestionnaireService, times(1)).saveUserQuestionnaire(userQuestionnaire);
+    }
+
 }

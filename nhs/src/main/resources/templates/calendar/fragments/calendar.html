@@ -1,23 +1,18 @@
 <!DOCTYPE html>
 <div th:fragment="calendar">
-  <h3 id="monthAndYear"></h3>
+  <h2 id="monthAndYear"></h2>
   <div class="button-container-calendar">
-    <button id="previous" onclick="previous()">
-      <
-    </button>
-    <button id="next" onclick="next()">
-      >
-    </button>
+    <button id="previous" onclick="previous()"> < </button>
+    <button id="next" onclick="next()"> > </button>
   </div>
-  <table class="table-calendar"
-         id="calendar"
-         data-lang="en">
-    <thead id="thead-month"></thead>
-    <tbody id="calendar-body"></tbody>
-  </table>
+
+  <div class="grid-calendar">
+    <div class="days-header" id="days-header"></div>
+    <div class="calendar-grid" id="calendar-grid"></div>
+  </div>
+
   <div class="footer-container-calendar">
     <label for="month">Jump To: </label>
-
     <select id="month" onchange="jump()">
       <option value=0>Jan</option>
       <option value=1>Feb</option>

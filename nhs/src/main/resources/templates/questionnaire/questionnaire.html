@@ -14,36 +14,38 @@
   <body>
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-    <div class="questionnaire-container">
-      <h1 id="questionnaire-title">Questionnaire Title</h1>
-      <p id="questionnaire-description">Description of the questionnaire.</p>
+    <main>
+      <div class="questionnaire-container">
+        <h1 id="questionnaire-title">Questionnaire Title</h1>
+        <p id="questionnaire-description">Description of the questionnaire.</p>
 
-      <form id="questionnaire-form">
-        <div id="questions-container"></div>
-        <!-- Questions will be dynamically loaded here -->
-        <div class="form-buttons">
-          <!-- Secondary Button -->
-          <button
-            class="nhsuk-button nhsuk-button--secondary"
-            data-module="nhsuk-button"
-            type="button"
-            id="save-questionnaire"
-          >
-            Save and Come Back
-          </button>
+        <form id="questionnaire-form">
+          <div id="questions-container"></div>
+          <!-- Questions will be dynamically loaded here -->
+          <div class="form-buttons">
+            <!-- Secondary Button -->
+            <button
+              class="nhsuk-button nhsuk-button--secondary"
+              data-module="nhsuk-button"
+              type="button"
+              id="save-questionnaire"
+            >
+              Save and Come Back
+            </button>
 
-          <!-- Primary Button -->
-          <button
-            class="nhsuk-button"
-            data-module="nhsuk-button"
-            type="submit"
-            id="submit-questionnaire"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
+            <!-- Primary Button -->
+            <button
+              class="nhsuk-button"
+              data-module="nhsuk-button"
+              type="submit"
+              id="submit-questionnaire"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
     <script th:src="@{/js/common/header.js}"></script>
     <script
       type="module"

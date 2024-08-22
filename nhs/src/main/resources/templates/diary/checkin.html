@@ -10,15 +10,16 @@
 <body>
 <main layout:fragment="content">
   <h1 class="page-title">Check-in</h1>
+  <h2 class="page-subtitle">How are you feeling today?</h2>
   <div class="container">
     <div th:replace="~{diary/fragments/checkinForm}"></div>
   </div>
 </main>
 <th:block layout:fragment="scripts">
-  <script th:src="@{/js/common/customModal.js}"></script>
-  <script th:src="@{/js/diary/components/photoContainer.js}"></script>
-  <script th:src="@{/js/diary/components/cameraComponent.js}"></script>
-  <script th:src="@{/js/diary/components/photoComponent.js}"></script>
+  <script th:src="@{/js/common/components/customModal.js}"></script>
+  <script th:src="@{/js/diary/components/PhotoContainer.js}"></script>
+  <script th:src="@{/js/diary/components/CameraComponent.js}"></script>
+  <script th:src="@{/js/diary/components/PhotoCard.js}"></script>
   <script th:src="@{/js/diary/checkin.js}"></script>
 </th:block>
 </body>

@@ -1,17 +1,22 @@
 package uk.ac.cf.spring.nhs.Photo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
 import java.util.Date;
-import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Photos")
 public class Photo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "PhotoID")
     private long id;
 
@@ -27,58 +32,23 @@ public class Photo {
     @Column(name = "UserID")
     private long userId;
 
-    @ManyToMany(mappedBy = "photos")
-    private Set<DiaryEntry> diaryEntries;
+    @ManyToOne
+    @JoinColumn(name = "EventID", nullable = true)
+    @JsonIgnore
+    private Event event;
 
-    public Photo() {}
+    @ManyToOne
+    @JoinColumn(name = "EntryID", nullable = true)
+    @JsonIgnore
+    private DiaryEntry diaryEntry;
 
+    protected Photo() {}
+
+    // Constructor for standalone photo
     public Photo(String url, Date date, String bodyPart, long userId) {
         this.url = url;
         this.date = date;
         this.bodyPart = bodyPart;
         this.userId = userId;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getBodyPart() {
-        return bodyPart;
-    }
-
-    public void setBodyPart(String bodyPart) {
-        this.bodyPart = bodyPart;
-    }
-
-    @Override
-    public String toString() {
-        return "Photo{" +
-                "id=" + id +
-                ", url='" + url + '\'' +
-                ", date=" + date +
-                ", bodyPart='" + bodyPart + '\'' +
-                ", userId=" + userId +
-                '}';
     }
 }

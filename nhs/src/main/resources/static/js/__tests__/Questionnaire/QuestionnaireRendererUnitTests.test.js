@@ -147,7 +147,7 @@ describe("QuestionnaireRenderer", () => {
     );
 
     const renderedQuestionnaires = document.querySelectorAll(
-      ".questionnaire-item"
+      ".questionnaire-card"
     );
     expect(renderedQuestionnaires.length).toBe(2);
     expect(document.getElementById("no-assignment").style.display).toBe("none");
