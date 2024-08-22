@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/provider}"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Photos</title>
+</head>
+<body>
+<main layout:fragment="content" class="main-content">
+  <h1 class="page-title">Patient Events</h1>
+  <div th:if="${events.isEmpty()}" class="not-available-text">No events available for this patient</div>
+  <div th:unless="${events.isEmpty()}" class="event-list" id="event-list">
+    <event-card th:each="event : ${events}" th:attr="event-data=${objectMapper.writeValueAsString(event)}"></event-card>
+  </div>
+</main>
+<th:block layout:fragment="scripts">
+  <script th:src="@{/js/diary/components/EventCard.js}"></script>
+</th:block>
+</body>
+</html>
