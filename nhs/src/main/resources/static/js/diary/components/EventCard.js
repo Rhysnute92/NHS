@@ -1,4 +1,4 @@
-import { treatmentText, symptomNameText, symptomSeverityText } from '../textMappings.js';
+import { patientTreatmentText, providerTreatmentText, symptomNameText, symptomSeverityText } from '../textMappings.js';
 
 class EventCard extends HTMLElement {
     constructor() {
@@ -28,6 +28,12 @@ class EventCard extends HTMLElement {
     }
 
     render() {
+        if (window.location.href.includes('patient')) {
+            this.treatmentText = providerTreatmentText;
+        } else {
+            this.treatmentText = patientTreatmentText;
+        }
+
         const event = this.event;
         const date = event.date;
 
@@ -40,7 +46,7 @@ class EventCard extends HTMLElement {
             <div class="event">
                 <div class="event-header">
                     <h3>${date || 'Date not available'}</h3>
-                    <button class="delete-event">&times;</button>
+                    <button class="delete-event-btn">&times;</button>
                 </div>
                 <div class="event-body">
                     <div class="event-duration">
@@ -62,7 +68,7 @@ class EventCard extends HTMLElement {
                             ${treatments.length > 0
                                 ? treatments.map(treatment =>
                                     `<li>
-                                    ${treatmentText[treatment.type] || 'N/A'}
+                                    ${this.treatmentText[treatment.type] || 'N/A'}
                                     ${treatment.details && treatment.details.trim() !== '' ? ` (${treatment.details})` : ''}
                                 </li>`
                                 ).join('')
@@ -75,7 +81,11 @@ class EventCard extends HTMLElement {
         `;
 
         // Add delete event listener
-        this.shadowRoot.querySelector('.delete-event').addEventListener('click', () => this.confirmDelete());
+        this.deleteButton = this.shadowRoot.querySelector('.delete-event-btn');
+        this.deleteButton.addEventListener('click', () => this.confirmDelete());
+
+        this.deleteButton.style.display = window.location.href.includes('patient') ? 'none' : 'block';
+
     }
 
     confirmDelete() {
