@@ -81,6 +81,7 @@ public class PatientProfileController {
 
     @GetMapping("/events")
     public String showEvents(Model model, @ModelAttribute("userID") Long userID) {
+        model.addAttribute("objectMapper", objectMapper);
         model.addAttribute("events", eventService.getEventsByUserId(userID));
         return "patientprofile/events";
     }
