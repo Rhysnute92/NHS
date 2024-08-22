@@ -17,8 +17,8 @@ public class WidgetRegistryConfig {
     @Bean
     public WidgetRegistry widgetRegistry() {
         WidgetRegistry registry = new WidgetRegistry();
-        WidgetRegistry.registerWidget("task-completion", new TaskCompletionWidget());
-        WidgetRegistry.registerWidget("Appointments-tracker", new AppointmentsTrackerWidget());
+        registry.registerWidget("task-completion", new TaskCompletionWidget());
+        registry.registerWidget("Appointments-tracker", new AppointmentsTrackerWidget());
         return registry;
     }
 

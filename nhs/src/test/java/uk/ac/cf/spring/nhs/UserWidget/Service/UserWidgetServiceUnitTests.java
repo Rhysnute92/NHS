@@ -26,15 +26,6 @@ class UserWidgetServiceUnitTests {
     @InjectMocks
     private UserWidgetService userWidgetService;
 
-    /**
-     * Initializes the test environment before each test case.
-     *
-     * This method is annotated with `@BeforeEach` which means it will be
-     * executed before each test case. It initializes the test environment by
-     * calling `MockitoAnnotations.openMocks(this)`.
-     *
-     * @return void
-     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);

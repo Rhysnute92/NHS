@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.Widget.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,9 @@ import uk.ac.cf.spring.nhs.Widget.Registry.WidgetRegistry;
 @Controller
 public class WidgetController {
 
+    @Autowired
+    private WidgetRegistry widgetRegistry;
+
     /**
      * Handles GET requests for fetching and rendering a specific widget's content.
      *
@@ -25,7 +29,7 @@ public class WidgetController {
     @GetMapping("/api/widgets/{widgetName}")
     public String getWidgetContent(@PathVariable String widgetName, Model model) {
         // Fetch the widget from the WidgetRegistry using the provided widget name
-        Widget widget = WidgetRegistry.getWidget(widgetName);
+        Widget widget = widgetRegistry.getWidget(widgetName);
 
         // Check if the widget exists
         if (widget != null) {
