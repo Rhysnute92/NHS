@@ -5,45 +5,78 @@ export class WidgetManager {
   constructor(userWidgets) {
     this.userWidgets = userWidgets;
     this.addedWidgets = new Set();
+    this.observer = new IntersectionObserver(
+      this.handleIntersection.bind(this),
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      }
+    );
+  }
+
+  initializeUserWidgets() {
+    const container = document.getElementById("widget-container");
+    this.userWidgets.forEach((widget) => {
+      const placeholder = this.createWidgetPlaceholder(widget.widgetName);
+      container.appendChild(placeholder);
+      this.observer.observe(placeholder);
+    });
+  }
+
+  createWidgetPlaceholder(widgetName) {
+    const placeholder = document.createElement("div");
+    placeholder.className = "widget-placeholder";
+    placeholder.dataset.widgetName = widgetName;
+    placeholder.textContent = `Loading ${widgetName} widget...`;
+    return placeholder;
+  }
+
+  async handleIntersection(entries, observer) {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        const widgetName = entry.target.dataset.widgetName;
+        await this.loadWidget(widgetName, entry.target);
+        observer.unobserve(entry.target);
+      }
+    }
+  }
+
+  async loadWidget(widgetName, placeholder) {
+    try {
+      const fragmentContent = await WidgetService.fetchWidgetFragment(
+        widgetName
+      );
+      placeholder.innerHTML = fragmentContent;
+      this.initializeWidget(widgetName);
+    } catch (error) {
+      console.error(`Failed to load widget ${widgetName}:`, error);
+    }
+  }
+
+  initializeWidget(widgetName) {
+    switch (widgetName) {
+      case "task-completion":
+        const taskWidget = new TaskWidget();
+        taskWidget.updateWidgetData();
+        break;
+      default:
+        console.log(`No specific initialization for widget ${widgetName}`);
+        break;
+    }
   }
 
   async loadWidgets() {
     for (const userWidget of this.userWidgets) {
       const widgetName = userWidget.widgetName;
-      console.log("Widget name:", widgetName);
-
       if (!this.addedWidgets.has(widgetName)) {
-        const fragmentContent = await WidgetService.fetchWidgetFragment(widgetName);
-        this.appendWidgetToDOM(widgetName, fragmentContent);
+        const placeholder = this.createWidgetPlaceholder(widgetName);
+        document.getElementById("widget-container").appendChild(placeholder);
+        await this.loadWidget(widgetName, placeholder);
         this.addedWidgets.add(widgetName);
-
-        this.initializeWidget(widgetName); // Initialize the widget after adding it to DOM
       } else {
         console.log(`Widget ${widgetName} already added. Skipping.`);
       }
-    }
-  }
-
-  appendWidgetToDOM(widgetName, fragmentContent) {
-    const fragment = document.createElement("div");
-    fragment.innerHTML = fragmentContent;
-    fragment.classList.add(`widget-${widgetName}`); // Add a unique class
-    document.getElementById("widget-container").appendChild(fragment);
-  }
-
-  initializeWidget(widgetName) {
-    // Dynamically initialize the widget based on its name
-    switch (widgetName) {
-      case "task-completion":
-        const taskWidget = new TaskWidget();
-        taskWidget.updateWidgetData(); // Update widget data immediately
-        break;
-
-      // Add initialization for more widgets here if needed
-
-      default:
-        console.log(`No specific initialization for widget ${widgetName}`);
-        break;
     }
   }
 }
