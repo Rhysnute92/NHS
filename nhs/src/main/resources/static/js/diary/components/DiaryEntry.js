@@ -26,7 +26,7 @@ class DiaryEntry extends HTMLElement {
                 
                 .icon-container {
                   display: flex;
-                  gap: 0.5rem;
+                  gap: 1rem;
                 }
                 
                 .diary-entry-content svg {
@@ -110,13 +110,14 @@ class DiaryEntry extends HTMLElement {
                     flex-direction: column;
                     gap: 1rem;
                 }
-                
-                .diary-entry-symptoms {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.5rem;
+
+                ul {
+                    padding-left: 1rem;
                 }
-                
+
+                li {
+                    margin-bottom: 0.5rem;
+                }
                 
                 .measurement-unit {
                     text-transform: lowercase;
@@ -147,21 +148,31 @@ class DiaryEntry extends HTMLElement {
                     </div>
                     <div class="diary-entry-full hidden">
                         <!-- Mood Section -->
-                        <div class="diary-entry-section mood-section"></div>
+                        <div class="diary-entry-section mood-section">
+                          <h3>Mood</h3>
+                        </div>
                         
                         <!-- Symptoms Section -->
-                        <div class="diary-entry-section symptoms-section"></div>
+                        <div class="diary-entry-section symptoms-section">
+                            <h3>Symptoms</h3>
+                            <ul></ul>
+                        </div>
 
                         <!-- Photos Section -->
                         <div class="diary-entry-section photos-section">
+                            <h3>Photos</h3>
                             <div class="diary-entry-photos-container"></div>
                         </div>
 
                         <!-- Measurements Section -->
-                        <div class="diary-entry-section measurements-section"></div>
+                        <div class="diary-entry-section measurements-section">
+                            <h3>Measurements</h3>
+                            <ul></ul>
+                        </div>
 
                         <!-- Notes Section -->
                         <div class="diary-entry-section notes-section">
+                            <h3>Notes</h3>
                             <p class="diary-entry-notes"></p>
                         </div>
                     </div>
@@ -187,6 +198,10 @@ class DiaryEntry extends HTMLElement {
     handleDelete(event) {
         event.stopPropagation();
         const entryId = this.getAttribute('data-id');
+
+        if (!window.confirm('Are you sure you want to delete this entry?')) {
+            return;
+        }
         fetch(`/diary/delete/${entryId}`, { method: 'DELETE' })
             .then(response => {
                 if (response.ok) {
@@ -240,17 +255,21 @@ class DiaryEntry extends HTMLElement {
 
     renderMood(mood) {
         const moodSection = this.shadowRoot.querySelector('.mood-section');
-        const moodIcon = document.createElement('svg');
+
+        const moodContainer = document.createElement('div');
+        const moodIcon = document.createElement('span');
         moodIcon.innerHTML = diaryEntryIcons.mood[mood];
-        moodSection.appendChild(moodIcon);
+        moodContainer.appendChild(moodIcon);
 
         const moodText = document.createElement('span');
         moodText.textContent = this.formatText(mood);
-        moodSection.appendChild(moodText);
+        moodContainer.appendChild(moodText);
+
+        moodSection.appendChild(moodContainer);
     }
 
     renderSymptoms(symptoms) {
-        const symptomsSection = this.shadowRoot.querySelector('.symptoms-section');
+        const symptomsList = this.shadowRoot.querySelector('.symptoms-section ul');
         symptoms.forEach(symptom => {
             let severityText = '';
             switch (symptom.severity) {
@@ -259,11 +278,11 @@ class DiaryEntry extends HTMLElement {
                 case 3: severityText = 'Quite a bit'; break;
                 case 4: severityText = 'A lot'; break;
             }
-            symptomsSection.innerHTML += `
-                <div class="diary-entry-symptom">
-                    <h4>${symptom.name}</h4>
+            symptomsList.innerHTML += `
+                <li class="diary-entry-symptom">
+                    <span>${symptom.name} - </span>
                     <span>${severityText}</span>
-                </div>
+                </li>
             `;
         });
     }
@@ -276,14 +295,14 @@ class DiaryEntry extends HTMLElement {
     }
 
     renderMeasurements(measurements) {
-        const measurementsSection = this.shadowRoot.querySelector('.measurements-section');
+        const measurementsList = this.shadowRoot.querySelector('.measurements-section ul');
         measurements.forEach(measurement => {
-            measurementsSection.innerHTML += `
-                <div class="diary-entry-measurement">
-                    <h4 class="measurement-type">${measurement.type}</h4>
+            measurementsList.innerHTML += `
+                <li class="diary-entry-measurement">
+                    <span class="measurement-type">${measurement.type} - </span>
                     <span class="measurement-value">${measurement.value}</span>
                     <span class="measurement-unit">${measurement.unit}</span>
-                </div>
+                </li>
             `;
         });
 
@@ -299,7 +318,6 @@ class DiaryEntry extends HTMLElement {
     formatText(text) {
         return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
     }
-
 
     renderNotes(notes) {
         const notesSection = this.shadowRoot.querySelector('.diary-entry-notes');
