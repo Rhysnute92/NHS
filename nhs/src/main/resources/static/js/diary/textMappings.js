@@ -17,7 +17,8 @@ export const symptomNameText = {
     'redness': 'Redness',
     'swelling': 'Swelling',
     'blisteredSkin': 'Blistered skin',
-    'pain': 'Pain'
+    'pain': 'Pain',
+    'fever': 'Fever'
 }
 
 export const symptomSeverityText = {
