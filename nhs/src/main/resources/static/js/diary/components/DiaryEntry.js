@@ -1,3 +1,4 @@
+import { moodIcons } from "../diaryMappings.js";
 
 class DiaryEntry extends HTMLElement {
     constructor() {
@@ -193,11 +194,12 @@ class DiaryEntry extends HTMLElement {
         this.renderNotes(notes);
 
         // Add icons for the sections that have content
-        this.addIcons(symptoms, photos, measurements, notes);
+        this.addIcons(mood, symptoms, photos, measurements, notes);
     }
 
-    addIcons(symptoms, photos, measurements, notes) {
+    addIcons(mood, symptoms, photos, measurements, notes) {
         const iconsContainer = this.shadowRoot.querySelector('.icons-container');
+        if (mood) iconsContainer.innerHTML += moodIcons[mood];
         if (symptoms.length > 0) iconsContainer.innerHTML += '<i class="fa-solid fa-notes-medical"></i>';
         if (photos.length > 0) iconsContainer.innerHTML += '<i class="fa-solid fa-camera"></i>';
         if (measurements.length > 0) iconsContainer.innerHTML += '<i class="fa-solid fa-ruler"></i>';
@@ -206,30 +208,13 @@ class DiaryEntry extends HTMLElement {
 
     renderMood(mood) {
         const moodSection = this.shadowRoot.querySelector('.mood-section');
-        let moodHtml = '';
+        const moodIcon = document.createElement('svg');
+        moodIcon.innerHTML = moodIcons[mood];
+        moodSection.appendChild(moodIcon);
 
-        switch (mood) {
-            case 'GREAT':
-                moodHtml = '<i class="fa-regular fa-face-grin-beam"></i><span>Great</span>';
-                break;
-            case 'GOOD':
-                moodHtml = '<i class="fa-regular fa-face-smile"></i><span>Good</span>';
-                break;
-            case 'OKAY':
-                moodHtml = '<i class="fa-regular fa-face-meh"></i><span>Okay</span>';
-                break;
-            case 'BAD':
-                moodHtml = '<i class="fa-regular fa-face-frown"></i><span>Bad</span>';
-                break;
-            case 'AWFUL':
-                moodHtml = '<i class="fa-regular fa-face-sad-tear"></i><span>Awful</span>';
-                break;
-            default:
-                moodHtml = '<i class="fa-regular fa-question-circle"></i><span>Mood not set</span>';
-                break;
-        }
-
-        moodSection.innerHTML = moodHtml;
+        const moodText = document.createElement('span');
+        moodText.textContent = this.formatText(mood);
+        moodSection.appendChild(moodText);
     }
 
     renderSymptoms(symptoms) {
@@ -272,12 +257,17 @@ class DiaryEntry extends HTMLElement {
 
         // Format measurement type text (capitalise first letter)
         const measurementTypes = this.shadowRoot.querySelectorAll('.measurement-type');
+
         measurementTypes.forEach(type => {
             let text = type.textContent.toLowerCase();
-            text = text.charAt(0).toUpperCase() + text.slice(1);
-            type.textContent = text;
+            type.textContent = this.formatText(text);
         });
     }
+
+    formatText(text) {
+        return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+    }
+
 
     renderNotes(notes) {
         const notesSection = this.shadowRoot.querySelector('.diary-entry-notes');
