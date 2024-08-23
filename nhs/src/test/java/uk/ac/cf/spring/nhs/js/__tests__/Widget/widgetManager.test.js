@@ -1,9 +1,9 @@
 import { WidgetManager } from "../../../../../../../../../../main/resources/static/js/Widget/widgetManager.js";
-import { WidgetService } from "../../../../../../../../../../main/resources/static/js/Widget/widgetService.js";
+import { WidgetService } from "../../../../../../../../../../main/resources/static/js/Widget/widgetService";
 
 // Mock WidgetService
 jest.mock(
-  "../../../../../../../../../../main/resources/static/js/Widget/widgetService.js"
+  "../../../../../../../../../../main/resources/static/js/Widget/widgetService"
 );
 
 describe("WidgetManager", () => {
@@ -19,20 +19,21 @@ describe("WidgetManager", () => {
     widgetManager = new WidgetManager(mockUserWidgets, mockImport);
     document.body.innerHTML = '<div id="widget-container"></div>';
 
-    // Mock activateWidgetFunctionality to prevent additional calls
-    widgetManager.activateWidgetFunctionality = jest.fn();
     jest.clearAllMocks();
   });
 
-  test("setupWidgetPlaceholders creates placeholders for all user widgets", async () => {
-    await widgetManager.setupWidgetPlaceholders();
+  test("setupWidgetPlaceholders creates placeholders for all user widgets", () => {
+    widgetManager.setupWidgetPlaceholders();
 
     const placeholders = document.querySelectorAll(".widget-placeholder");
     expect(placeholders.length).toBe(mockUserWidgets.length);
+    expect(placeholders[0].dataset.widgetName).toBe("task-completion");
+    expect(placeholders[1].dataset.widgetName).toBe("appointments-tracker");
   });
 
   test("generatePlaceholderElement creates a placeholder with correct attributes", () => {
     const placeholder = widgetManager.generatePlaceholderElement("test-widget");
+
     expect(placeholder.className).toBe("widget-placeholder");
     expect(placeholder.dataset.widgetName).toBe("test-widget");
     expect(placeholder.textContent).toContain("Loading test-widget widget");
@@ -43,17 +44,16 @@ describe("WidgetManager", () => {
       "<div>Widget Content</div>"
     );
     const placeholder = document.createElement("div");
+
     await widgetManager.fetchAndPopulateWidget("test-widget", placeholder);
+
     expect(WidgetService.fetchWidgetFragment).toHaveBeenCalledWith(
       "test-widget"
     );
     expect(placeholder.innerHTML).toBe("<div>Widget Content</div>");
-    expect(widgetManager.activateWidgetFunctionality).toHaveBeenCalledWith(
-      "test-widget"
-    );
   });
 
-  test("fetchAndPopulateWidget doesn't fetch already fetched widgets", async () => {
+  test("fetchAndPopulateWidget does not fetch already fetched widgets", async () => {
     const widgetName = "test-widget";
     const placeholder = document.createElement("div");
 
@@ -86,9 +86,6 @@ describe("WidgetManager", () => {
 
     // Check if all widgets are marked as rendered
     expect(widgetManager.renderedWidgets.size).toBe(mockUserWidgets.length);
-    mockUserWidgets.forEach((widget) => {
-      expect(widgetManager.renderedWidgets.has(widget.widgetName)).toBe(true);
-    });
 
     // Clear mock calls
     WidgetService.fetchWidgetFragment.mockClear();

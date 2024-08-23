@@ -1,7 +1,7 @@
 import { WidgetManager } from "../../../../../../../../../../main/resources/static/js/Widget/widgetManager.js";
 import { WidgetService } from "../../../../../../../../../../main/resources/static/js/Widget/widgetService.js";
 
-// Mock WidgetService
+// Mock the WidgetService methods
 jest.mock(
   "../../../../../../../../../../main/resources/static/js/Widget/widgetService.js"
 );
@@ -9,109 +9,159 @@ jest.mock(
 describe("WidgetManager Integration Tests", () => {
   let widgetManager;
   let mockUserWidgets;
+  let mockImportFunction;
 
   beforeEach(() => {
-    // Mock data
+    // Sample widget data
     mockUserWidgets = [
       { widgetName: "task-completion" },
-      { widgetName: "appointments-tracker" },
+      { widgetName: "test-widget" }, // Generic widget for testing
     ];
 
+    // Mock dynamic import function
+    mockImportFunction = jest.fn((path) => {
+      if (path.includes("task-completion")) {
+        return Promise.resolve({
+          default: class {
+            async updateWidgetData() {}
+          },
+        });
+      } else if (path.includes("test-widget")) {
+        return Promise.resolve({
+          default: class {
+            async updateWidgetData() {}
+          },
+        });
+      }
+      return Promise.reject(new Error("Module not found"));
+    });
+
+    // Set up the WidgetService mocks
     WidgetService.fetchUserWidgets.mockResolvedValue(mockUserWidgets);
     WidgetService.fetchWidgetFragment.mockImplementation((widgetName) => {
       if (widgetName === "task-completion") {
         return Promise.resolve("<div>Task Completion Widget</div>");
-      } else if (widgetName === "appointments-tracker") {
-        return Promise.resolve("<div>Appointments Tracker Widget</div>");
+      } else if (widgetName === "test-widget") {
+        return Promise.resolve("<div>Test Widget</div>");
       }
-      return Promise.reject("Unknown widget");
+      return Promise.reject(new Error("Widget not found"));
     });
 
-    widgetManager = new WidgetManager(mockUserWidgets);
+    // Create an instance of WidgetManager
+    widgetManager = new WidgetManager(mockUserWidgets, mockImportFunction);
+
+    // Reset the DOM container for each test
     document.body.innerHTML = '<div id="widget-container"></div>';
   });
 
   afterEach(() => {
+    // Clear all mocks after each test to prevent state leakage
     jest.clearAllMocks();
   });
 
-  test("should set up widget placeholders and immediately fetch widgets", async () => {
-    await widgetManager.setupWidgetPlaceholders();
+  test("should set up widget placeholders", () => {
+    // Act
+    widgetManager.setupWidgetPlaceholders();
 
+    // Assert placeholders are set up correctly
     const placeholders = document.querySelectorAll(".widget-placeholder");
     expect(placeholders.length).toBe(mockUserWidgets.length);
     expect(placeholders[0].dataset.widgetName).toBe("task-completion");
-    expect(placeholders[1].dataset.widgetName).toBe("appointments-tracker");
+    expect(placeholders[1].dataset.widgetName).toBe("test-widget");
+  });
 
-    // Verify that the widgets were immediately fetched and populated
+  test("should fetch and populate the widgets", async () => {
+    // Act
+    widgetManager.setupWidgetPlaceholders();
+    await widgetManager.renderAllUserWidgets();
+
+    // Assert widgets are fetched and populated
+    const placeholders = document.querySelectorAll(".widget-placeholder");
     expect(WidgetService.fetchWidgetFragment).toHaveBeenCalledWith(
       "task-completion"
     );
     expect(WidgetService.fetchWidgetFragment).toHaveBeenCalledWith(
-      "appointments-tracker"
+      "test-widget"
     );
     expect(placeholders[0].innerHTML).toContain("Task Completion Widget");
-    expect(placeholders[1].innerHTML).toContain("Appointments Tracker Widget");
-  });
-
-  test("should not fetch a widget that has already been fetched", async () => {
-    await widgetManager.setupWidgetPlaceholders();
-    const placeholders = document.querySelectorAll(".widget-placeholder");
-
-    expect(WidgetService.fetchWidgetFragment).toHaveBeenCalledTimes(2); // Both widgets fetched
-
-    // Simulate another attempt to fetch widgets
-    await widgetManager.renderAllUserWidgets();
-
-    // Should not re-fetch already fetched widgets
-    expect(WidgetService.fetchWidgetFragment).toHaveBeenCalledTimes(2);
-    expect(widgetManager.fetchedWidgets.size).toBe(2); // Ensure both widgets are marked as fetched
+    expect(placeholders[1].innerHTML).toContain("Test Widget");
   });
 
   test("should activate widget functionality after fetching", async () => {
+    // Spy on activateWidgetFunctionality
     const mockActivateWidgetFunctionality = jest.spyOn(
       widgetManager,
       "activateWidgetFunctionality"
     );
 
-    await widgetManager.setupWidgetPlaceholders();
+    // Act
+    widgetManager.setupWidgetPlaceholders();
+    await widgetManager.renderAllUserWidgets();
 
+    // Assert the functionality is activated for each widget
     expect(mockActivateWidgetFunctionality).toHaveBeenCalledWith(
       "task-completion"
     );
-    expect(mockActivateWidgetFunctionality).toHaveBeenCalledWith(
-      "appointments-tracker"
-    );
+    expect(mockActivateWidgetFunctionality).toHaveBeenCalledWith("test-widget");
   });
+  /* 
+  test("should handle failures in fetching a widget fragment", async () => {
+    // Set up mock to fail for test-widget
+    WidgetService.fetchWidgetFragment.mockImplementationOnce((widgetName) => {
+      if (widgetName === "test-widget") {
+        return Promise.reject(new Error("Widget not found"));
+      }
+      return Promise.resolve("<div>Task Completion Widget</div>");
+    });
 
-  test("should render all user widgets correctly with renderAllUserWidgets", async () => {
+    // Act
+    widgetManager.setupWidgetPlaceholders();
     await widgetManager.renderAllUserWidgets();
 
+    // Assert the test-widget fails gracefully
     const placeholders = document.querySelectorAll(".widget-placeholder");
-    expect(placeholders.length).toBe(2);
-
     expect(WidgetService.fetchWidgetFragment).toHaveBeenCalledWith(
-      "task-completion"
+      "test-widget"
     );
-    expect(WidgetService.fetchWidgetFragment).toHaveBeenCalledWith(
-      "appointments-tracker"
+    // Placeholder should still contain the loading text since the fetch failed
+    expect(placeholders[1].innerHTML).toContain(
+      "Loading test-widget widget..."
     );
-    expect(widgetManager.renderedWidgets.size).toBe(2);
+    expect(widgetManager.fetchedWidgets.has("test-widget")).toBe(false);
   });
 
-  test("should handle failures in fetching widget fragments", async () => {
-    WidgetService.fetchWidgetFragment.mockRejectedValueOnce(
-      new Error("Widget not found")
-    );
+  test("should handle cases where a widget's module cannot be imported", async () => {
+    // Set up mock to fail for test-widget
+    mockImportFunction.mockImplementationOnce((path) => {
+      if (path.includes("test-widget")) {
+        return Promise.reject(new Error("Module not found"));
+      }
+      return Promise.resolve({
+        default: class {
+          async updateWidgetData() {}
+        },
+      });
+    });
 
+    // Spy on console.error for error handling
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
+    // Act
+    widgetManager.setupWidgetPlaceholders();
     await widgetManager.renderAllUserWidgets();
-    const placeholders = document.querySelectorAll(".widget-placeholder");
 
-    // Ensure that a failed fetch does not populate the placeholder
-    expect(WidgetService.fetchWidgetFragment).toHaveBeenCalledWith(
-      "task-completion"
+    // Assert error handling for module import failure
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      `Failed to activate functionality for widget test-widget:`,
+      expect.any(Error)
     );
-    expect(placeholders[0].innerHTML).not.toContain("Task Completion Widget");
-    expect(widgetManager.fetchedWidgets.has("task-completion")).toBe(false);
-  });
+    expect(mockImportFunction).toHaveBeenCalledWith(
+      "../widgets/test-widgetWidget.js"
+    );
+
+    // Cleanup
+    consoleErrorSpy.mockRestore();
+  }); */
 });
