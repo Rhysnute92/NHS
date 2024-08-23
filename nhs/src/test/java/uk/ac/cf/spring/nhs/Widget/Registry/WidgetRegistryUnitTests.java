@@ -91,54 +91,6 @@ class WidgetRegistryUnitTests {
     }
 
     @Test
-    void getWidgetScript_widgetWithScript_returnsScriptPath() {
-
-        String widgetName = "Test Widget";
-        Widget widget = new Widget() {
-            @Override
-            public String render() {
-                return "testRender";
-            }
-
-            @Override
-            public String getScript() {
-                return "testScript";
-            }
-        };
-        widgetRegistry.registerWidget(widgetName, widget);
-
-        String scriptPath = widgetRegistry.getWidgetScript(widgetName);
-
-        assertEquals("/js/widgets/testScript.js", scriptPath);
-    }
-
-    @Test
-    void getWidgetScript_widgetWithoutScript_returnsNull() {
-
-        String widgetName = "Test Widget";
-        Widget widget = () -> "testRender";
-        widgetRegistry.registerWidget(widgetName, widget);
-
-        String scriptPath = widgetRegistry.getWidgetScript(widgetName);
-
-        assertNull(scriptPath);
-    }
-
-    @Test
-    void getWidgetScript_nonExistingWidget_returnsNull() {
-
-        String scriptPath = widgetRegistry.getWidgetScript("Non-existing Widget");
-
-        assertNull(scriptPath);
-    }
-
-    @Test
-    void getWidgetScript_nullName_throwsIllegalArgumentException() {
-
-        assertThrows(IllegalArgumentException.class, () -> widgetRegistry.getWidgetScript(null));
-    }
-
-    @Test
     void hasWidget_existingWidget_returnsTrue() {
 
         String widgetName = "Test Widget";

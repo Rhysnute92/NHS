@@ -1,14 +1,6 @@
 import { WidgetManager } from "../../../../../../../../../../main/resources/static/js/Widget/widgetManager.js";
 import { WidgetService } from "../../../../../../../../../../main/resources/static/js/Widget/widgetService.js";
 
-// Mock IntersectionObserver
-global.IntersectionObserver = class IntersectionObserver {
-  constructor() {}
-  observe() {}
-  unobserve() {}
-  disconnect() {}
-};
-
 // Mock WidgetService
 jest.mock(
   "../../../../../../../../../../main/resources/static/js/Widget/widgetService.js"
@@ -32,8 +24,9 @@ describe("WidgetManager", () => {
     jest.clearAllMocks();
   });
 
-  test("setupWidgetPlaceholders creates placeholders for all user widgets", () => {
-    widgetManager.setupWidgetPlaceholders();
+  test("setupWidgetPlaceholders creates placeholders for all user widgets", async () => {
+    await widgetManager.setupWidgetPlaceholders();
+
     const placeholders = document.querySelectorAll(".widget-placeholder");
     expect(placeholders.length).toBe(mockUserWidgets.length);
   });
@@ -49,10 +42,8 @@ describe("WidgetManager", () => {
     WidgetService.fetchWidgetFragment.mockResolvedValue(
       "<div>Widget Content</div>"
     );
-
     const placeholder = document.createElement("div");
     await widgetManager.fetchAndPopulateWidget("test-widget", placeholder);
-
     expect(WidgetService.fetchWidgetFragment).toHaveBeenCalledWith(
       "test-widget"
     );
@@ -151,7 +142,9 @@ describe("WidgetManager", () => {
     expect(mockImport).toHaveBeenCalledWith("../widgets/test-widgetWidget.js");
     expect(mockWidgetClass).toHaveBeenCalled();
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Widget test-widget does not have an updateWidgetData method"
+      expect.stringContaining(
+        "Widget test-widget does not have an updateWidgetData method"
+      )
     );
 
     consoleSpy.mockRestore();

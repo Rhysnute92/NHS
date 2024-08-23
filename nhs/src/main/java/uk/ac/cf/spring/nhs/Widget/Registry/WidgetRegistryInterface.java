@@ -9,8 +9,6 @@ public interface WidgetRegistryInterface {
 
     Widget getWidget(String name);
 
-    String getWidgetScript(String name);
-
     Set<String> getRegisteredWidgetNames();
 
     boolean hasWidget(String name);

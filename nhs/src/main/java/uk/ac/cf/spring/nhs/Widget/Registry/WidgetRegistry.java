@@ -37,19 +37,6 @@ public class WidgetRegistry implements WidgetRegistryInterface {
         return widget;
     }
 
-    @Override
-    public String getWidgetScript(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Name cannot be null");
-        }
-        String formattedName = formatWidgetName(name);
-        Widget widget = widgets.get(formattedName);
-        if (widget != null && widget.getScript() != null) {
-            return "/js/widgets/" + widget.getScript() + ".js";
-        }
-        return null;
-    }
-
     private String formatWidgetName(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Widget name cannot be null");

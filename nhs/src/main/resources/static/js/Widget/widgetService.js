@@ -1,7 +1,14 @@
 export class WidgetService {
   static async fetchUserWidgets() {
+    const logId = Math.random().toString(36).substring(2, 10);
+    const timestamp = new Date().toISOString();
+
     const response = await fetch(`/api/user-widgets`);
-    console.log("Fetched user widgets response:", response);
+    console.log(
+      `[${timestamp}] [${logId}] Fetched user widgets response:`,
+      response
+    );
+
     if (!response.ok) {
       throw new Error("Failed to fetch user widgets");
     }
@@ -9,23 +16,21 @@ export class WidgetService {
   }
 
   static async fetchWidgetFragment(widgetName) {
+    const logId = Math.random().toString(36).substring(2, 10);
+    const timestamp = new Date().toISOString();
+
+    console.log(
+      `[${timestamp}] [${logId}] Fetching widget fragment for: ${widgetName}`
+    );
     const response = await fetch(`/api/widgets/${widgetName}`);
-    console.log(`Fetched widget (${widgetName}) response:`, response);
+    console.log(
+      `[${timestamp}] [${logId}] Fetched widget (${widgetName}) response:`,
+      response
+    );
+
     if (!response.ok) {
       throw new Error("Widget not found");
     }
     return response.text();
   }
-
-  /*   static async fetchWidgetScript(widgetName) {
-    const response = await fetch(`/api/widgets/${widgetName}/script`);
-    console.log(`Fetched widget (${widgetName}) script response:`, response);
-    if (response.ok) {
-      const scriptName = await response.text();
-      if (scriptName) {
-        return `/js/widgets/${scriptName}.js`; // Construct the URL directly
-      }
-    }
-    return null;
-  } */
 }
