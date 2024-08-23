@@ -1,4 +1,4 @@
-import { moodIcons } from "../diaryMappings.js";
+import { diaryEntryIcons } from "../diaryMappings.js";
 
 class DiaryEntry extends HTMLElement {
     constructor() {
@@ -199,17 +199,17 @@ class DiaryEntry extends HTMLElement {
 
     addIcons(mood, symptoms, photos, measurements, notes) {
         const iconsContainer = this.shadowRoot.querySelector('.icons-container');
-        if (mood) iconsContainer.innerHTML += moodIcons[mood];
-        if (symptoms.length > 0) iconsContainer.innerHTML += '<i class="fa-solid fa-notes-medical"></i>';
-        if (photos.length > 0) iconsContainer.innerHTML += '<i class="fa-solid fa-camera"></i>';
-        if (measurements.length > 0) iconsContainer.innerHTML += '<i class="fa-solid fa-ruler"></i>';
-        if (notes) iconsContainer.innerHTML += '<i class="fa-solid fa-file-lines"></i>';
+        if (mood) iconsContainer.innerHTML += diaryEntryIcons.mood[mood];
+        if (symptoms.length > 0) iconsContainer.innerHTML += diaryEntryIcons.symptoms;
+        if (photos.length > 0) iconsContainer.innerHTML += diaryEntryIcons.photos;
+        if (measurements.length > 0) iconsContainer.innerHTML += diaryEntryIcons.measurements;
+        if (notes) iconsContainer.innerHTML += diaryEntryIcons.notes;
     }
 
     renderMood(mood) {
         const moodSection = this.shadowRoot.querySelector('.mood-section');
         const moodIcon = document.createElement('svg');
-        moodIcon.innerHTML = moodIcons[mood];
+        moodIcon.innerHTML = diaryEntryIcons.mood[mood];
         moodSection.appendChild(moodIcon);
 
         const moodText = document.createElement('span');
