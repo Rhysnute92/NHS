@@ -8,6 +8,12 @@ class DiaryEntry extends HTMLElement {
 
         shadow.innerHTML = `
             <style>
+                * {
+                    box-sizing: border-box;
+                    margin: 0;
+                    padding: 0;
+                }
+                
                 .diary-entry {
                     /*border-radius: 0.4rem;*/
                     color: var(--nhs-black);
@@ -18,9 +24,24 @@ class DiaryEntry extends HTMLElement {
                     margin-bottom: 1rem;
                 }
                 
+                .icon-container {
+                  display: flex;
+                  gap: 0.5rem;
+                }
+                
+                .diary-entry-content svg {
+                    height: 3.5rem;
+                    width: auto;
+                }
+                
+                .diary-entry-content svg, .diary-entry-content svg path {
+                    fill: currentColor !important;
+                }
+                
                 .diary-entry-title-container {
                     display: flex;
                     align-items: center;
+                    justify-content: space-between;
                     padding: 1rem;
                     background-color: var(--nhs-bright-blue);
                     color: white;
@@ -29,6 +50,17 @@ class DiaryEntry extends HTMLElement {
                 
                 .diary-entry-title {
                     text-align: left;
+                }
+                
+                .delete-button {
+                    border: none;
+                    background: none;
+                    color: white;
+                    font-size: 2rem;
+                }
+
+                .diary-entry-icon {
+                  fill: currentColor;
                 }
                 
                 .diary-entry-content {
@@ -107,11 +139,11 @@ class DiaryEntry extends HTMLElement {
             <div class="diary-entry">
                 <div class="diary-entry-title-container">
                     <h2 class="diary-entry-title"></h2>
-                    <button class="delete-button">Delete</button>
+                    <button class="delete-button">&times;</button>
                 </div>
                 <div class="diary-entry-content">
                     <div class="diary-entry-preview">
-                        <div class="icons-container"></div>
+                        <div class="icon-container"></div>
                     </div>
                     <div class="diary-entry-full hidden">
                         <!-- Mood Section -->
@@ -198,12 +230,12 @@ class DiaryEntry extends HTMLElement {
     }
 
     addIcons(mood, symptoms, photos, measurements, notes) {
-        const iconsContainer = this.shadowRoot.querySelector('.icons-container');
-        if (mood) iconsContainer.innerHTML += diaryEntryIcons.mood[mood];
-        if (symptoms.length > 0) iconsContainer.innerHTML += diaryEntryIcons.symptoms;
-        if (photos.length > 0) iconsContainer.innerHTML += diaryEntryIcons.photos;
-        if (measurements.length > 0) iconsContainer.innerHTML += diaryEntryIcons.measurements;
-        if (notes) iconsContainer.innerHTML += diaryEntryIcons.notes;
+        const iconContainer = this.shadowRoot.querySelector('.icon-container');
+        if (mood) iconContainer.innerHTML += diaryEntryIcons.mood[mood];
+        if (symptoms.length > 0) iconContainer.innerHTML += diaryEntryIcons.symptoms;
+        if (photos.length > 0) iconContainer.innerHTML += diaryEntryIcons.photos;
+        if (measurements.length > 0) iconContainer.innerHTML += diaryEntryIcons.measurements;
+        if (notes) iconContainer.innerHTML += diaryEntryIcons.notes;
     }
 
     renderMood(mood) {
