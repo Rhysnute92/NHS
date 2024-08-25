@@ -1,6 +1,6 @@
-import { Task } from "./task.js"; // Import the Task class
-import { TaskRenderer } from "./taskRenderer.js"; // Import the TaskRenderer class
-import { fetchData } from "../common/utils/apiUtility.js"; // Utility for API calls
+import { Task } from "./task.js";
+import { TaskRenderer } from "./taskRenderer.js";
+import { fetchData } from "../common/utils/apiUtility.js";
 
 export class TaskManager {
   constructor(eventQueue, taskRenderer) {

@@ -28,7 +28,6 @@ export class TaskWidget {
         );
         this.worker.postMessage({
           queue: this.eventQueue.getEvents(),
-          apiUrl: "/usertask/task-update/batch",
         });
 
         // Clear the queue after sending it to the worker
