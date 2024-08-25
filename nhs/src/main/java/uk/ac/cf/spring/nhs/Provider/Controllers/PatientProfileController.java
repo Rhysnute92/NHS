@@ -18,11 +18,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import uk.ac.cf.spring.nhs.Account.PatientProfileDTO;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestParam;
 import uk.ac.cf.spring.nhs.AddPatient.Service.PatientService;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
+import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
 import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Measurement.Service.MeasurementService;
 import uk.ac.cf.spring.nhs.Photo.Service.PhotoService;
+import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
+import uk.ac.cf.spring.nhs.Symptom.Service.SymptomService;
 
 @Controller
 @SessionAttributes("userID")
@@ -34,6 +39,12 @@ public class PatientProfileController {
 
     @Autowired
     private MeasurementService measurementService;
+
+    @Autowired
+    private SymptomService symptomService;
+
+    @Autowired
+    private DiaryEntryService diaryEntryService;
 
     @Autowired
     private PhotoService photoService;
@@ -48,7 +59,7 @@ public class PatientProfileController {
                 new NavMenuItem("Appointments", " ", "fa-solid fa-user-check"),
                 new NavMenuItem("Questionnaires", "/patientprofile/questionnairehub",
                         "fa-solid fa-book"),
-                new NavMenuItem("Patient trends", " ", "fa-solid fa-user-check"),
+                new NavMenuItem("Patient trends", "/patientprofile/trends", "fa-solid fa-user-check"),
                 new NavMenuItem("Event log", " ", "fa-solid fa-book"),
                 new NavMenuItem("Photos", "/patientprofile/photos", "fa-solid fa-camera"),
                 new NavMenuItem("Email history", " ", "fa-solid fa-book"));
@@ -74,23 +85,49 @@ public class PatientProfileController {
         return "patientprofile/profileInfo";
     }
 
+
     @GetMapping("/trends")
     public String patientStatistics() {
-        return "patientTrends";
+        return "patientprofile/patientTrends";
     }
 
     @GetMapping("/trends/measurements")
     public ResponseEntity<?> patientMeasurements(
             @ModelAttribute("userID") Long userId,
-            @RequestParam("type") String measurementType,
+            @RequestParam(value = "type", required = false, defaultValue = "defaultType") String measurementType,            @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
+    ) {
+
+        List<Measurement> measurements = measurementService.getMeasurementsByUserIdTypeAndDateRange(userId, measurementType, startDate, endDate);
+        return ResponseEntity.ok(measurements);
+    }
+
+    @GetMapping("/trends/symptoms")
+    public ResponseEntity<?> patientSymptoms(
+            @ModelAttribute("userID") Long userId,
+            @RequestParam(value = "type", required = false, defaultValue = "defaultType") String symptomType,  // Default value
             @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
     ) {
 
-        // Retrieve measurements filtered by user ID, measurement type and date range
-        List<Measurement> measurements = measurementService.getMeasurementsByUserIdTypeAndDateRange(userId, measurementType, startDate, endDate);
+        List<Symptom> symptoms = symptomService.getSymptomsByUserIdTypeAndDateRange(userId, symptomType, startDate, endDate);
+        return ResponseEntity.ok(symptoms);
+    }
 
-        return ResponseEntity.ok(measurements);
+    @GetMapping("/trends/mood")
+    public ResponseEntity<?> patientMood(
+            @ModelAttribute("userID") Long userId,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
+    ) {
+
+        List<DiaryEntry> diaryEntries = diaryEntryService.getDiaryEntriesByUserIdAndDateRange(userId, startDate, endDate);
+        List<String> moods = diaryEntries.stream()
+                .map(DiaryEntry::getMood)
+                .map(Enum::name)
+                .toList();
+
+        return ResponseEntity.ok(moods);
     }
 
     @GetMapping("/questionnairehub")

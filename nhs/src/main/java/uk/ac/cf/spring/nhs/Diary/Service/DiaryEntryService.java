@@ -73,7 +73,7 @@ public class DiaryEntryService {
     }
 
     private DiaryEntry createDiaryEntry(Long userId, String mood, String notes) {
-        DiaryEntry diaryEntry = new DiaryEntry(userId, new Date());
+        DiaryEntry diaryEntry = new DiaryEntry(userId, LocalDate.now());
         diaryEntry.setMood(mood != null ? Mood.valueOf(mood) : null);
         diaryEntry.setNotes(notes);
         return diaryEntry;
@@ -134,5 +134,9 @@ public class DiaryEntryService {
 
     public List<DiaryEntry> getDiaryEntriesByUserId(long userId) {
         return diaryEntryRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"));
+    }
+
+    public List<DiaryEntry> getDiaryEntriesByUserIdAndDateRange(Long userId, LocalDate startDate, LocalDate endDate) {
+        return diaryEntryRepository.findByUserIdAndDateBetween(userId, startDate, endDate);
     }
 }

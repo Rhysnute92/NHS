@@ -8,7 +8,6 @@ import uk.ac.cf.spring.nhs.Symptom.Repository.SymptomRepository;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class SymptomService {
@@ -31,5 +30,9 @@ public class SymptomService {
 
     public void saveAll(List<Symptom> symptoms) {
         symptomRepository.saveAll(symptoms);
+    }
+
+    public List<Symptom> getSymptomsByUserIdTypeAndDateRange(Long userId, String symptomType, LocalDate startDate, LocalDate endDate) {
+        return symptomRepository.findByUserIdAndNameAndDateBetween(userId, symptomType, startDate, endDate);
     }
 }
