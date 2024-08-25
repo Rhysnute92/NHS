@@ -12,6 +12,7 @@
     <!-- Common CSS -->
     <link rel="stylesheet" th:href="@{/css/common/main.css}" />
     <link rel="stylesheet" th:href="@{/css/common/defaultLayout.css}" />
+    <link rel="stylesheet" th:href="@{/css/widgetLibrary/widgetLibrary.css}" />
 
     <!-- Page specific CSS -->
     <th:block layout:fragment="css"></th:block>
@@ -30,6 +31,59 @@
       <!-- Main content -->
       <main layout:fragment="content" class="main-content">
         <!-- Page content will be inserted here -->
+        <div class="library-title-container">
+          <h1 class="library-title">Widget Library</h1>
+          <p class="library-subtitle">
+            This is a library of widgets that can be added or removed from your
+            personal dashboard. The widgets provide convenient and quick access
+            to your most used functions, like tracking your daily health
+            actions.
+          </p>
+        </div>
+
+        <!-- Section: Widgets Currently on Dashboard -->
+        <section class="widget-section">
+          <h2 class="widget-section-title-dashboard-current">
+            Widgets Currently on Your Dashboard
+          </h2>
+          <p class="widget-section-description">
+            To remove a widget from your dashboard, tap each widget icon to select them,
+            then tap on the button saying "Remove Widget."
+          </p>
+
+          <!-- Widgets Grid -->
+          <div class="widget-grid">
+            <!-- Example Widget -->
+          </div>
+
+          <!-- Remove Widget Button -->
+          <button class="action-button remove-widget-button">
+            Remove Widget
+          </button>
+        </section>
+
+        <!-- Section: Available Widgets -->
+        <section class="widget-section">
+          <h2 class="widget-section-title-dashboard-add">Available Widgets</h2>
+          <p class="widget-section-description">
+            To add a widget to your dashboard, tap the icon of the widget you
+            want and then tap on the button "Add Widget."
+          </p>
+
+          <!-- Widgets Grid -->
+          <div class="widget-grid">
+            <!-- Example Widget -->
+<!--             <div class="widget-item" th:each="widget : ${availableWidgets}">
+              <div class="widget-icon" style="background-color: #f8d7da"></div>
+              <p class="widget-name" th:text="${widget.name}">
+                Task Completion
+              </p> -->
+            </div>
+          </div>
+
+          <!-- Add Widget Button -->
+          <button class="action-button add-widget-button">Add Widget</button>
+        </section>
       </main>
 
       <div th:if="${navMenuItems != null}" class="navmenu-spacer"></div>
