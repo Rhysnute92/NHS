@@ -48,37 +48,19 @@
   margin-bottom: 20px;
 }
 
-.widget-item {
+.action-button-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.widget-icon {
-  width: 100px;
-  height: 100px;
-  background-color: var(--nhs-light-blue);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
-}
-
-.widget-name {
-  text-align: center;
-  font-size: 1em;
-  color: var(--nhs-blue);
 }
 
 .action-button {
   display: block;
-  width: 100%;
-  padding: 10px;
+  width: 23vw;
+  padding: 0.5em;
   background-color: var(--nhs-blue);
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 1em;
   cursor: pointer;
   text-align: center;
@@ -89,9 +71,45 @@
 }
 
 .remove-widget-button {
-  background-color: var(--nhs-red);
+  background-color: #f70202;
+  border-bottom: 4px solid #930000;
 }
 
 .remove-widget-button:hover {
-  background-color: var(--nhs-dark-red);
+  background-color: #bb0000;
+}
+
+/* widget icon styling */
+.widget-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
+  height: auto;
+  /* border-radius: 8px; */
+  /* background-color: #0072ce; */
+  margin: 0.5em;
+  cursor: pointer;
+}
+
+.widget-icon {
+  width: 10vw;
+  height: 10vw;
+  background-color: #0073e6;
+  border-radius: 20px;
+  margin-bottom: 0.5em;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.widget-icon.selected {
+  border: 1px solid #ff0101;
+  box-shadow: 0 0 0.5em 1px rgb(255 0 0);
+}
+
+.widget-name {
+  font-size: 0.9em;
+  text-align: center;
+  color: #333;
 }

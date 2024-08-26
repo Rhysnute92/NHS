@@ -47,19 +47,21 @@
             Widgets Currently on Your Dashboard
           </h2>
           <p class="widget-section-description">
-            To remove a widget from your dashboard, tap each widget icon to select them,
-            then tap on the button saying "Remove Widget."
+            To remove a widget from your dashboard, tap each widget icon to
+            select them, then tap on the button saying "Remove Widget."
           </p>
 
           <!-- Widgets Grid -->
-          <div class="widget-grid">
+          <div class="widget-grid" id="current-widgets-grid">
             <!-- Example Widget -->
           </div>
 
           <!-- Remove Widget Button -->
-          <button class="action-button remove-widget-button">
-            Remove Widget
-          </button>
+          <div class="action-button-container">
+            <button class="action-button remove-widget-button">
+              Remove Widget
+            </button>
+          </div>
         </section>
 
         <!-- Section: Available Widgets -->
@@ -71,18 +73,13 @@
           </p>
 
           <!-- Widgets Grid -->
-          <div class="widget-grid">
-            <!-- Example Widget -->
-<!--             <div class="widget-item" th:each="widget : ${availableWidgets}">
-              <div class="widget-icon" style="background-color: #f8d7da"></div>
-              <p class="widget-name" th:text="${widget.name}">
-                Task Completion
-              </p> -->
-            </div>
+          <div class="widget-grid" id="available-widgets-grid">
+            <!-- js will dynamically insert widgets here -->
           </div>
-
           <!-- Add Widget Button -->
-          <button class="action-button add-widget-button">Add Widget</button>
+          <div class="action-button-container">
+            <button class="action-button add-widget-button">Add Widget</button>
+          </div>
         </section>
       </main>
 
@@ -94,6 +91,8 @@
     <script th:src="@{/js/common/components/NHSButton.js}"></script>
 
     <!-- Page specific JavaScript -->
-    <th:block layout:fragment="scripts"></th:block>
+    <th:block layout:fragment="scripts">
+      <script type="module" th:src="@{/js/Widget/widgetLibrary.js}"></script
+    ></th:block>
   </body>
 </html>

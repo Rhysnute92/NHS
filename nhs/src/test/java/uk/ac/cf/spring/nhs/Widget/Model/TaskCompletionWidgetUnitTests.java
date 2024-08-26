@@ -9,7 +9,7 @@ class TaskCompletionWidgetUnitTests {
     @Test
     void render_returnsCorrectFragmentPath() {
         // Arrange
-        TaskCompletionWidget taskCompletionWidget = new TaskCompletionWidget();
+        HealthActionCompletionWidget taskCompletionWidget = new HealthActionCompletionWidget();
 
         // Act
         String result = taskCompletionWidget.render();

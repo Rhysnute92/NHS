@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import uk.ac.cf.spring.nhs.Widget.Model.AppointmentsTrackerWidget;
-import uk.ac.cf.spring.nhs.Widget.Model.TaskCompletionWidget;
+import uk.ac.cf.spring.nhs.Widget.Model.HealthActionTrackerWidget;
 
 @Configuration
 public class WidgetRegistryConfig {
@@ -17,7 +17,7 @@ public class WidgetRegistryConfig {
     @Bean
     public WidgetRegistry widgetRegistry() {
         WidgetRegistry registry = new WidgetRegistry();
-        registry.registerWidget("task-completion", new TaskCompletionWidget());
+        registry.registerWidget("health-action-tracker", new HealthActionTrackerWidget());
         registry.registerWidget("Appointments-tracker", new AppointmentsTrackerWidget());
         return registry;
     }
