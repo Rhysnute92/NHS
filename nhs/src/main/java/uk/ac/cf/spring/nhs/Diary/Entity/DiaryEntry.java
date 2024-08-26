@@ -12,6 +12,7 @@ import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,9 +29,9 @@ public class DiaryEntry {
     @Column(name = "EntryID")
     private long id;
 
-    @Column(name = "EntryDate", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    @Column(name = "EntryDateTime", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime date;
 
     @Column(name = "EntryMood")
     private Mood mood;
@@ -55,7 +56,7 @@ public class DiaryEntry {
 
     public DiaryEntry() {}
 
-    public DiaryEntry(long userId, Date date) {
+    public DiaryEntry(long userId, LocalDateTime date) {
         this.userId = userId;
         this.date = date;
     }

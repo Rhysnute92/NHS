@@ -105,7 +105,7 @@ CREATE TABLE Events (
 --Diary--
 CREATE TABLE DiaryEntries (
     EntryID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    EntryDate DATE NOT NULL,
+    EntryDateTime DATETIME NOT NULL,
     EntryMood TINYINT,
     EntryNotes TEXT,
     UserID BIGINT NOT NULL,
