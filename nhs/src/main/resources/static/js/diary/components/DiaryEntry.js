@@ -21,7 +21,12 @@ class DiaryEntry extends HTMLElement {
                     overflow: hidden;
                     width: 100%;
                     background-color: var(--nhs-white);
-                    margin-bottom: 1rem;
+                    position: relative;
+                    border-bottom: 1px solid lightgrey;
+                }
+                
+                .diary-entry:hover {
+                  background-color: lightgrey;
                 }
                 
                 .icon-container {
@@ -35,16 +40,20 @@ class DiaryEntry extends HTMLElement {
                 }
                 
                 .diary-entry-content svg, .diary-entry-content svg path {
-                    fill: currentColor !important;
+                    fill: var(--nhs-dark-grey);
+                }
+                
+                .diary-entry-section svg, .diary-entry-section svg path {
+                    height: 2rem;
+                    width: auto;
                 }
                 
                 .diary-entry-title-container {
                     display: flex;
                     align-items: center;
-                    justify-content: space-between;
+                    justify-content: flex-end;
                     padding: 1rem;
-                    background-color: var(--nhs-bright-blue);
-                    color: white;
+                    color: var(--nhs-dark-grey);
                     width: 100%;
                 }
                 
@@ -55,8 +64,12 @@ class DiaryEntry extends HTMLElement {
                 .delete-button {
                     border: none;
                     background: none;
-                    color: white;
+                    color: var(--nhs-dark-grey);
                     font-size: 2rem;
+                    cursor: pointer;
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
                 }
 
                 .diary-entry-icon {
@@ -67,6 +80,12 @@ class DiaryEntry extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     padding: 1rem;
+                }
+                
+                .mood-section div {
+                    display: flex;
+                    gap: 0.5rem;
+                    align-items: center;  
                 }
                 
                 .diary-entry-full {
@@ -138,10 +157,7 @@ class DiaryEntry extends HTMLElement {
                 }
             </style>
             <div class="diary-entry">
-                <div class="diary-entry-title-container">
-                    <h2 class="diary-entry-title"></h2>
-                    <button class="delete-button">&times;</button>
-                </div>
+                <button class="delete-button">&times;</button>
                 <div class="diary-entry-content">
                     <div class="diary-entry-preview">
                         <div class="icon-container"></div>
@@ -221,17 +237,11 @@ class DiaryEntry extends HTMLElement {
     }
 
     render() {
-        const dateStr = this.getAttribute('data-date');
         const mood = this.getAttribute('data-mood');
         const symptoms = JSON.parse(this.getAttribute('data-symptoms') || '[]');
         const photos = JSON.parse(this.getAttribute('data-photos') || '[]');
         const measurements = JSON.parse(this.getAttribute('data-measurements') || '[]');
         const notes = this.getAttribute('data-notes');
-
-        // Format the date
-        const date = new Date(dateStr);
-        const options = { weekday: "long", day: '2-digit', month: 'long' };
-        this.shadowRoot.querySelector('.diary-entry-title').textContent = date.toLocaleDateString('en-GB', options);
 
         // Render the mood, symptoms, photos, measurements, and notes
         this.renderMood(mood);
