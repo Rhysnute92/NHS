@@ -1,121 +1,189 @@
-// Get the canvas context
-const ctx = document.getElementById('patientChart').getContext('2d');
+// Declare charts object globally to store all chart instances
+let charts = {};
 
-// Uses Chart.js to create the chart with a line for each location (e.g. for arm showing wrist, elbow, etc.)
-// Initialise the chart with empty data
-const patientChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: [],
-        datasets: []
-    },
-    options: {
-        responsive: true,
-        scales: {
-            x: {
-                title: {
-                    display: true,
-                    text: 'Date'
-                }
+// Function to get the canvas context for a given chart type
+function getChartContext(chartType) {
+    const canvasId = `${chartType}Chart`;
+    const canvas = document.getElementById(canvasId);
+
+    if (canvas) {
+        return canvas.getContext('2d');
+    } else {
+        console.error(`Canvas element for chart ${canvasId} not found`);
+        return null;
+    }
+}
+
+function initialiseChart(chartType) {
+    const ctx = getChartContext(chartType);
+
+    if (ctx) {
+        console.log(`Initialising chart: ${chartType}`);
+        charts[`${chartType}Chart`] = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: []
             },
-            y: {
-                title: {
-                    display: true,
-                    text: 'Measurement Value'
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Value'
+                        }
+                    }
                 }
             }
-        }
+        });
+    } else {
+        console.error(`Failed to initialise chart: ${chartType}`);
     }
-});
+}
 
-async function updateChart() {
+// Function to fetch data and update the chart with new data
+async function updateChart(chartType) {
     try {
-        // Get selected measurement type and date range
-        const measurementType = document.getElementById('measurementType').value;
-        const startDate = document.getElementById('startDate').value;
-        const endDate = document.getElementById('endDate').value;
+        let startDate, endDate;
+        let query = '';
+        let endpoint = '';
 
-        // Build the query string with type and date range
-        let query = `type=${measurementType}`.toLowerCase();
-        if (startDate) {
-            query += `&startDate=${startDate}`;
+        // Handle date inputs for each chart type
+        switch (chartType) {
+            case 'mood':
+                startDate = document.getElementById('startDateMood').value;
+                endDate = document.getElementById('endDateMood').value;
+                query = `?startDate=${startDate}&endDate=${endDate}`;
+                endpoint = `/patientprofile/trends/mood${query}`;
+                break;
+            case 'symptoms':
+                startDate = document.getElementById('startDateSymptoms').value;
+                endDate = document.getElementById('endDateSymptoms').value;
+                query = `?startDate=${startDate}&endDate=${endDate}`;
+                const symptomType = document.getElementById('symptomType').value;
+                query += `&type=${symptomType}`;
+                endpoint = `/patientprofile/trends/symptoms${query}`;
+                break;
+            case 'measurements':
+                startDate = document.getElementById('startDateMeasurements').value;
+                endDate = document.getElementById('endDateMeasurements').value;
+                query = `?startDate=${startDate}&endDate=${endDate}`;
+                const measurementType = document.getElementById('measurementType').value;
+                query += `&type=${measurementType}`;
+                endpoint = `/patientprofile/trends/measurements${query}`;
+                break;
+            default:
+                return;
         }
-        if (endDate) {
-            query += `&endDate=${endDate}`;
-        }
-        
-        const response = await fetch(`/patientprofile/statistics/measurements?${query}`);
+
+        const response = await fetch(endpoint);
 
         if (!response.ok) {
             console.error(`Server error: ${response.statusText}`);
             return;
         }
 
-        const measurements = await response.json();
+        const data = await response.json();
 
-        if (!measurements || measurements.length === 0) {
+        if (!data || data.length === 0) {
             console.warn('No data found for the selected criteria.');
+            charts[`${chartType}Chart`].data.datasets = [];
+            charts[`${chartType}Chart`].update();
             return;
         }
 
-        // Extract unique dates for the x-axis labels
-        const labels = [...new Set(measurements.map(m => m.date))];
+        const labels = [...new Set(data.map(item => item.date))];
+        const dataMap = {};
 
-        // Group data by location
-        const locationDataMap = {};
-        measurements.forEach(m => {
-            const location = m.location;
-
-            // Create array for this location if it doesn't exist
-            if (!locationDataMap[location]) {
-                locationDataMap[location] = [];
+        data.forEach(item => {
+            const category = item.category || item.location || item.mood;
+            if (!dataMap[category]) {
+                dataMap[category] = [];
             }
-
-            // Push the measurement value for this date and location
-            locationDataMap[location].push({ date: m.date, value: m.value });
+            dataMap[category].push({ date: item.date, value: item.value });
         });
 
-        // Clear existing datasets
-        patientChart.data.datasets = [];
+        charts[`${chartType}Chart`].data.datasets = [];
 
-        // Create a dataset for each location
-        Object.keys(locationDataMap).forEach(location => {
-            const locationData = locationDataMap[location];
-
-            // Create an array for the measurement values aligned with the dates
-            const data = labels.map(label => {
-                const measurement = locationData.find(m => m.date === label);
+        Object.keys(dataMap).forEach(category => {
+            const chartData = labels.map(label => {
+                const measurement = dataMap[category].find(item => item.date === label);
                 return measurement ? measurement.value : null;
             });
 
-            patientChart.data.datasets.push({
-                label: location,
-                data: data,
+            charts[`${chartType}Chart`].data.datasets.push({
+                label: category,
+                data: chartData,
                 borderColor: getRandomColor(),
                 backgroundColor: 'rgba(0, 0, 0, 0)',
                 fill: false
             });
         });
 
-        patientChart.data.labels = labels;
-        patientChart.update();
+        charts[`${chartType}Chart`].data.labels = labels;
+        charts[`${chartType}Chart`].update();
 
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 }
 
+// Generate a random color for each line
 function getRandomColor() {
-    // Generate a random color for each line
     const r = Math.floor(Math.random() * 255);
     const g = Math.floor(Math.random() * 255);
     const b = Math.floor(Math.random() * 255);
     return `rgba(${r}, ${g}, ${b}, 1)`;
 }
 
-document.getElementById('updateChartButton').addEventListener('click', updateChart);
+// Handle tab switching and chart initialisation
+function handleTabActivation() {
+    const tabs = document.querySelectorAll('tabs-container div[slot="tab"]');
+    const tabContents = document.querySelectorAll('.tab-content');
 
-// Load chart initially with default measurement type and date range
-document.addEventListener('DOMContentLoaded', () => {
-    updateChart();
-});
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            tab.classList.add('active');
+            tabContents[index].classList.add('active');
+
+            let activeChart = tabContents[index].dataset.chart;
+
+            if (!charts[`${activeChart}Chart`]) {
+                initialiseChart(activeChart);
+            }
+
+            updateChart(activeChart);
+        });
+    });
+
+    // Initialise the first chart by default
+    tabs[0].classList.add('active');
+    tabContents[0].classList.add('active');
+    let defaultChartType = tabContents[0].dataset.chart;
+    initialiseChart(defaultChartType);
+    updateChart(defaultChartType);
+
+    // Add event listeners to dropdowns to update the chart when selection changes
+    const symptomTypeDropdown = document.getElementById('symptomType');
+    if (symptomTypeDropdown) {
+        symptomTypeDropdown.addEventListener('change', () => updateChart('symptoms'));
+    }
+
+    const measurementTypeDropdown = document.getElementById('measurementType');
+    if (measurementTypeDropdown) {
+        measurementTypeDropdown.addEventListener('change', () => updateChart('measurements'));
+    }
+}
+
+document.addEventListener('DOMContentLoaded', handleTabActivation);

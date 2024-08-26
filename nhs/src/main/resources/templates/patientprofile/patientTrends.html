@@ -7,50 +7,71 @@
 <head>
   <title>Patient Statistics</title>
   <meta charset="UTF-8" />
+  <link rel="stylesheet" th:href="@{/css/patientprofile/patientTrends.css}" />
   <link rel="stylesheet" th:href="@{/css/common/main.css}" />
   <link rel="stylesheet" th:href="@{/css/common/defaultLayout.css}" />
 </head>
 <body>
 <main layout:fragment="content" class="main-content">
-  <h1 class="page-title">Patient Statistics</h1>
+  <h1 class="page-title">Patient Trends</h1>
   <div class="container">
+    <tabs-container>
+      <div slot="tab">Mood</div>
+      <div slot="tab">Symptoms</div>
+      <div slot="tab">Measurements</div>
 
-    <!-- Date range inputs -->
-    <label for="startDate">Start Date:</label>
-    <input type="date" id="startDate">
+      <!-- Mood chart tab content -->
+      <div slot="content" class="tab-content" data-chart="mood">
+        <label for="startDateMood">Start Date:</label>
+        <input type="date" id="startDateMood">
 
-    <label for="endDate">End Date:</label>
-    <input type="date" id="endDate">
+        <label for="endDateMood">End Date:</label>
+        <input type="date" id="endDateMood">
 
-    <!-- Dropdown to select measurement type -->
-    <label for="measurementType">Select Measurement Type:</label>
-    <select id="measurementType">
-      <option value="weight">Weight</option>
-      <option value="arm">Arm Circumference</option>
-      <option value="leg">Leg Circumference</option>
-      <option value="bicep">Arm - Bicep</option>
-      <option value="forearm">Arm - Forearm</option>
-      <option value="wrist">Arm - Wrist</option>
-      <option value="upper arm">Arm - Palm</option>
-      <option value="index finger">Arm - Index finger</option>
-      <option value="upper thigh">Leg - Upper thigh</option>
-      <option value="lower thigh">Leg - Mid thigh</option>
-      <option value="over kneecap">Leg - Over kneecap</option>
-      <option value="calf">Leg - Widest part of calf</option>
-      <option value="2cm above ankle">Leg - 2cm above ankle</option>
-      <option value="base of toes">Leg - Base of toes</option>
-    </select>
+        <canvas id="moodChart"></canvas>
+      </div>
 
-    <!-- Button to update chart based on selected criteria -->
-    <button id="updateChartButton">Update Chart</button>
+      <!-- Symptoms chart tab content -->
+      <div slot="content" class="tab-content" data-chart="symptoms">
+        <label for="startDateSymptoms">Start Date:</label>
+        <input type="date" id="startDateSymptoms">
 
-    <canvas id="patientChart" style="width:100%;max-width:700px"></canvas>
+        <label for="endDateSymptoms">End Date:</label>
+        <input type="date" id="endDateSymptoms">
+
+        <!-- Dropdown for selecting symptom type -->
+        <label for="symptomType">Select Symptom Type:</label>
+        <select id="symptomType">
+          <option value="pain">Pain</option>
+          <option value="numbness">Numbness</option>
+        </select>
+        <canvas id="symptomsChart"></canvas>
+      </div>
+
+      <!-- Measurements chart tab content -->
+      <div slot="content" class="tab-content" data-chart="measurements">
+        <label for="startDateMeasurements">Start Date:</label>
+        <input type="date" id="startDateMeasurements">
+
+        <label for="endDateMeasurements">End Date:</label>
+        <input type="date" id="endDateMeasurements">
+
+        <!-- Dropdown for selecting measurement type -->
+        <label for="measurementType">Select Measurement Type:</label>
+        <select id="measurementType">
+          <option value="weight">Weight</option>
+          <option value="arm">Arm Circumference</option>
+          <option value="leg">Leg Circumference</option>
+        </select>
+        <canvas id="measurementsChart"></canvas>
+      </div>
+    </tabs-container>
   </div>
 </main>
 <th:block layout:fragment="scripts">
+  <script th:src="@{/js/common/components/tabsContainer.js}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   <script th:src="@{/js/patientprofile/patientTrends.js}"></script>
 </th:block>
 </body>
-
 </html>
