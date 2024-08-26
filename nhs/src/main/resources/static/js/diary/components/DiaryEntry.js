@@ -15,9 +15,7 @@ class DiaryEntry extends HTMLElement {
                 }
                 
                 .diary-entry {
-                    /*border-radius: 0.4rem;*/
                     color: var(--nhs-black);
-                    /*box-shadow: 2px 2px 0.4rem var(--nhs-dark-grey);*/
                     overflow: hidden;
                     width: 100%;
                     background-color: var(--nhs-white);
@@ -35,7 +33,7 @@ class DiaryEntry extends HTMLElement {
                 }
                 
                 .diary-entry-content svg {
-                    height: 3.5rem;
+                    height: 3rem;
                     width: auto;
                 }
                 
@@ -46,6 +44,10 @@ class DiaryEntry extends HTMLElement {
                 .diary-entry-section svg, .diary-entry-section svg path {
                     height: 2rem;
                     width: auto;
+                }
+                
+                .diary-entry-section h3 {
+                    margin-bottom: 1rem;
                 }
                 
                 .diary-entry-title-container {
@@ -65,11 +67,12 @@ class DiaryEntry extends HTMLElement {
                     border: none;
                     background: none;
                     color: var(--nhs-dark-grey);
-                    font-size: 2rem;
+                    font-size: 2.5rem;
                     cursor: pointer;
                     position: absolute;
-                    top: 1rem;
-                    right: 1rem;
+                    top: 50%;
+                    right: 0;
+                    transform: translate(-50%, -50%);
                 }
 
                 .diary-entry-icon {
@@ -82,28 +85,27 @@ class DiaryEntry extends HTMLElement {
                     padding: 1rem;
                 }
                 
-                .mood-section div {
-                    display: flex;
-                    gap: 0.5rem;
-                    align-items: center;  
-                }
-                
                 .diary-entry-full {
                     display: flex;
                     flex-direction: column;
                     gap: 1rem;
+                    margin-top: 2rem;
                 }
                 
                 .diary-entry-full.hidden {
                     height: 0;
                     overflow: hidden;
+                    transition: height 0.3s;
+                    margin-top: 0;
                 }
                 
                 .diary-entry-preview {
                     display: flex;
                     gap: 1rem;
-                    font-size: 2rem;
-                    color: var(--nhs-dark-grey);
+                    font-size: 1.5rem;
+                    color: var(--nhs-mid-grey);
+                    align-items: center;
+                    position: relative;
                 }
                 
                 .diary-entry-preview.hidden {
@@ -124,10 +126,10 @@ class DiaryEntry extends HTMLElement {
                     aspect-ratio: 1 / 1;
                 }
                 
-                .diary-entry-section {
+                .mood-section div {
                     display: flex;
-                    flex-direction: column;
-                    gap: 1rem;
+                    gap: 0.5rem;
+                    align-items: center;
                 }
 
                 ul {
@@ -157,40 +159,13 @@ class DiaryEntry extends HTMLElement {
                 }
             </style>
             <div class="diary-entry">
-                <button class="delete-button">&times;</button>
                 <div class="diary-entry-content">
                     <div class="diary-entry-preview">
-                        <div class="icon-container"></div>
+                      <div class="diary-timestamp"></div>
+                      <div class="icon-container"></div>
+                      <button class="delete-button">&times;</button>
                     </div>
                     <div class="diary-entry-full hidden">
-                        <!-- Mood Section -->
-                        <div class="diary-entry-section mood-section">
-                          <h3>Mood</h3>
-                        </div>
-                        
-                        <!-- Symptoms Section -->
-                        <div class="diary-entry-section symptoms-section">
-                            <h3>Symptoms</h3>
-                            <ul></ul>
-                        </div>
-
-                        <!-- Photos Section -->
-                        <div class="diary-entry-section photos-section">
-                            <h3>Photos</h3>
-                            <div class="diary-entry-photos-container"></div>
-                        </div>
-
-                        <!-- Measurements Section -->
-                        <div class="diary-entry-section measurements-section">
-                            <h3>Measurements</h3>
-                            <ul></ul>
-                        </div>
-
-                        <!-- Notes Section -->
-                        <div class="diary-entry-section notes-section">
-                            <h3>Notes</h3>
-                            <p class="diary-entry-notes"></p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -230,9 +205,7 @@ class DiaryEntry extends HTMLElement {
     }
 
     toggleDetails(event) {
-        const preview = this.shadowRoot.querySelector('.diary-entry-preview');
         const full = this.shadowRoot.querySelector('.diary-entry-full');
-        preview.classList.toggle('hidden');
         full.classList.toggle('hidden');
     }
 
@@ -242,13 +215,20 @@ class DiaryEntry extends HTMLElement {
         const photos = JSON.parse(this.getAttribute('data-photos') || '[]');
         const measurements = JSON.parse(this.getAttribute('data-measurements') || '[]');
         const notes = this.getAttribute('data-notes');
+        const date = this.getAttribute('data-date');
+
+        // Clear full entry content
+        const fullContent = this.shadowRoot.querySelector('.diary-entry-full');
+        fullContent.innerHTML = '';
 
         // Render the mood, symptoms, photos, measurements, and notes
-        this.renderMood(mood);
-        this.renderSymptoms(symptoms);
-        this.renderPhotos(photos);
-        this.renderMeasurements(measurements);
-        this.renderNotes(notes);
+        if (mood) this.renderMood(mood, fullContent);
+        if (symptoms.length) this.renderSymptoms(symptoms, fullContent);
+        if (photos.length) this.renderPhotos(photos, fullContent);
+        if (measurements.length) this.renderMeasurements(measurements, fullContent);
+        if (notes) this.renderNotes(notes, fullContent);
+
+        this.renderDate(date);
 
         // Add icons for the sections that have content
         this.addIcons(mood, symptoms, photos, measurements, notes);
@@ -256,6 +236,7 @@ class DiaryEntry extends HTMLElement {
 
     addIcons(mood, symptoms, photos, measurements, notes) {
         const iconContainer = this.shadowRoot.querySelector('.icon-container');
+        iconContainer.innerHTML = ''; // Clear existing icons
         if (mood) iconContainer.innerHTML += diaryEntryIcons.mood[mood];
         if (symptoms.length > 0) iconContainer.innerHTML += diaryEntryIcons.symptoms;
         if (photos.length > 0) iconContainer.innerHTML += diaryEntryIcons.photos;
@@ -263,8 +244,24 @@ class DiaryEntry extends HTMLElement {
         if (notes) iconContainer.innerHTML += diaryEntryIcons.notes;
     }
 
-    renderMood(mood) {
-        const moodSection = this.shadowRoot.querySelector('.mood-section');
+    renderDate(date) {
+        const diaryTimestamp = this.shadowRoot.querySelector('.diary-timestamp');
+        if (date) {
+            const formattedDate = new Date(date).toLocaleString('en-GB', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            diaryTimestamp.textContent = formattedDate;
+        }
+    }
+
+    renderMood(mood, fullContent) {
+        const moodSection = document.createElement('div');
+        moodSection.classList.add('diary-entry-section', 'mood-section');
+
+        const moodTitle = document.createElement('h3');
+        moodTitle.textContent = 'Mood';
+        moodSection.appendChild(moodTitle);
 
         const moodContainer = document.createElement('div');
         const moodIcon = document.createElement('span');
@@ -276,10 +273,18 @@ class DiaryEntry extends HTMLElement {
         moodContainer.appendChild(moodText);
 
         moodSection.appendChild(moodContainer);
+        fullContent.appendChild(moodSection);
     }
 
-    renderSymptoms(symptoms) {
-        const symptomsList = this.shadowRoot.querySelector('.symptoms-section ul');
+    renderSymptoms(symptoms, fullContent) {
+        const symptomsSection = document.createElement('div');
+        symptomsSection.classList.add('diary-entry-section', 'symptoms-section');
+
+        const symptomsTitle = document.createElement('h3');
+        symptomsTitle.textContent = 'Symptoms';
+        symptomsSection.appendChild(symptomsTitle);
+
+        const symptomsList = document.createElement('ul');
         symptoms.forEach(symptom => {
             let severityText = '';
             switch (symptom.severity) {
@@ -295,43 +300,70 @@ class DiaryEntry extends HTMLElement {
                 </li>
             `;
         });
+        symptomsSection.appendChild(symptomsList);
+        fullContent.appendChild(symptomsSection);
     }
 
-    renderPhotos(photos) {
-        const photosContainer = this.shadowRoot.querySelector('.diary-entry-photos-container');
+    renderPhotos(photos, fullContent) {
+        const photosSection = document.createElement('div');
+        photosSection.classList.add('diary-entry-section', 'photos-section');
+
+        const photosTitle = document.createElement('h3');
+        photosTitle.textContent = 'Photos';
+        photosSection.appendChild(photosTitle);
+
+        const photosContainer = document.createElement('div');
+        photosContainer.classList.add('diary-entry-photos-container');
+
         photos.forEach(photo => {
             photosContainer.innerHTML += `<img src="/files/${photo.url}" class="diary-entry-photo" />`;
         });
+
+        photosSection.appendChild(photosContainer);
+        fullContent.appendChild(photosSection);
     }
 
-    renderMeasurements(measurements) {
-        const measurementsList = this.shadowRoot.querySelector('.measurements-section ul');
+    renderMeasurements(measurements, fullContent) {
+        const measurementsSection = document.createElement('div');
+        measurementsSection.classList.add('diary-entry-section', 'measurements-section');
+
+        const measurementsTitle = document.createElement('h3');
+        measurementsTitle.textContent = 'Measurements';
+        measurementsSection.appendChild(measurementsTitle);
+
+        const measurementsList = document.createElement('ul');
         measurements.forEach(measurement => {
             measurementsList.innerHTML += `
                 <li class="diary-entry-measurement">
-                    <span class="measurement-type">${measurement.type} - </span>
+                    <span class="measurement-type">${this.formatText(measurement.type)} - </span>
                     <span class="measurement-value">${measurement.value}</span>
                     <span class="measurement-unit">${measurement.unit}</span>
                 </li>
             `;
         });
 
-        // Format measurement type text (capitalise first letter)
-        const measurementTypes = this.shadowRoot.querySelectorAll('.measurement-type');
+        measurementsSection.appendChild(measurementsList);
+        fullContent.appendChild(measurementsSection);
+    }
 
-        measurementTypes.forEach(type => {
-            let text = type.textContent.toLowerCase();
-            type.textContent = this.formatText(text);
-        });
+    renderNotes(notes, fullContent) {
+        const notesSection = document.createElement('div');
+        notesSection.classList.add('diary-entry-section', 'notes-section');
+
+        const notesTitle = document.createElement('h3');
+        notesTitle.textContent = 'Notes';
+        notesSection.appendChild(notesTitle);
+
+        const notesContent = document.createElement('p');
+        notesContent.classList.add('diary-entry-notes');
+        notesContent.textContent = notes || '';
+
+        notesSection.appendChild(notesContent);
+        fullContent.appendChild(notesSection);
     }
 
     formatText(text) {
         return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-    }
-
-    renderNotes(notes) {
-        const notesSection = this.shadowRoot.querySelector('.diary-entry-notes');
-        notesSection.textContent = notes || '';
     }
 }
 

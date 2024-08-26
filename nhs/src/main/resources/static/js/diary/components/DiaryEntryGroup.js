@@ -40,6 +40,7 @@ class DiaryEntryGroup extends HTMLElement {
         entries.forEach(entry => {
             const diaryEntry = document.createElement('diary-entry');
             diaryEntry.setAttribute('data-id', entry.id);
+            diaryEntry.setAttribute('data-date', entry.date);
             diaryEntry.setAttribute('data-mood', entry.mood);
             diaryEntry.setAttribute('data-symptoms', JSON.stringify(entry.symptoms));
             diaryEntry.setAttribute('data-photos', JSON.stringify(entry.photos));
