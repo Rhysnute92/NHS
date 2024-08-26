@@ -18,12 +18,12 @@ export class WidgetService {
   }
 
   static async removeUserWidgets(widgetIds) {
-    const response = await fetch(`/api/user-widgets`, {
+    const response = await fetch(`/api/user-widgets/delete`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ widgetIds }),
+      body: JSON.stringify(widgetIds), //send just the array as controller expecting an array
     });
 
     if (!response.ok) {

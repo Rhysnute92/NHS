@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       const widgetIcon = document.createElement("div");
       widgetIcon.className = "widget-icon";
-      widgetIcon.dataset.userWidgetID = widget.userWidgetID;
+      widgetIcon.dataset.userWidgetid = widget.userWidgetID;
 
       const formattedName = formatWidgetName(widget.widgetName);
       const widgetName = document.createElement("p");
@@ -71,7 +71,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   async function removeSelectedWidgets() {
     const selectedWidgets = document.querySelectorAll(".widget-icon.selected");
     const widgetIdsToRemove = Array.from(selectedWidgets).map(
-      (widget) => widget.dataset.userWidgetId
+      (widget) => widget.dataset.userwidgetid
+    );
+    console.log(
+      `[${timestamp}] [${logId}]Selected widget IDs:`,
+      widgetIdsToRemove
     );
 
     if (widgetIdsToRemove.length === 0) {
@@ -81,7 +85,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     try {
       await WidgetService.removeUserWidgets(widgetIdsToRemove);
-      console.log("Selected widgets removed successfully.");
+      console.log(
+        `[${timestamp}] [${logId}] Selected widgets removed successfully.`
+      );
       selectedWidgets.forEach((widget) => widget.remove()); // Remove from UI
     } catch (error) {
       console.error("Error removing widgets:", error);
