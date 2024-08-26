@@ -31,4 +31,12 @@ public class UserWidgetService {
     public UserWidgets saveUserWidget(UserWidgets UserWidget) {
         return userWidgetRepository.save(UserWidget);
     }
+
+    public void deleteUserWidgetById(Long userWidgetID) {
+        userWidgetRepository.deleteById(userWidgetID);
+    }
+
+    public void deleteUserWidgetsByIdList(List<Long> userWidgetIds) {
+        userWidgetRepository.deleteAllById(userWidgetIds);
+    }
 }

@@ -1,6 +1,8 @@
 package uk.ac.cf.spring.nhs.UserWidget.Controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -80,6 +82,21 @@ class UserWidgetControllerUnitTests {
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(userWidgets, response.getBody());
+    }
+
+    @Test
+    @WithMockUser(username = "testuser", roles = { "USER" })
+    void deleteUserWidgets_withValidWidgetIds_returnsNoContent() {
+        mockAuthenticatedUser();
+
+        List<Long> widgetIdsToDelete = Arrays.asList(1L, 2L);
+
+        // Mock the service to do nothing on delete call
+        doNothing().when(userWidgetService).deleteUserWidgetsByIdList(anyList());
+
+        ResponseEntity<Void> response = userWidgetController.deleteUserWidgets(widgetIdsToDelete);
+
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
     @SuppressWarnings("null")

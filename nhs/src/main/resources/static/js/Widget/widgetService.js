@@ -16,4 +16,20 @@ export class WidgetService {
     }
     return response.text();
   }
+
+  static async removeUserWidgets(widgetIds) {
+    const response = await fetch(`/api/user-widgets`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ widgetIds }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to remove widgets");
+    }
+
+    return response.json();
+  }
 }
