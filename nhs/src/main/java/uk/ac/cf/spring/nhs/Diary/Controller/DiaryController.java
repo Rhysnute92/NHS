@@ -11,12 +11,12 @@ import uk.ac.cf.spring.nhs.Diary.DTO.CheckinFormDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
+import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/diary")
@@ -34,6 +34,7 @@ public class DiaryController {
         model.addAttribute("diaryEntries", diaryEntries);
         return "diary/diary";
     }
+
 
     @GetMapping("/checkin")
     public String checkin(Model model) {

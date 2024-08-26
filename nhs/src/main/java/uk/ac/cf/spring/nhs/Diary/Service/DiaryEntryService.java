@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinFormDTO;
+import uk.ac.cf.spring.nhs.Diary.DTO.MoodDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Diary.Entity.Mood;
 import uk.ac.cf.spring.nhs.Diary.Repository.DiaryEntryRepository;
@@ -146,5 +147,17 @@ public class DiaryEntryService {
         }
 
         return diaryEntryRepository.findByUserIdAndDateBetween(userId, startDate, endDate);
+    }
+
+    public List<MoodDTO> getMoodByUserIdAndDateRange(Long userId, LocalDate startDate, LocalDate endDate) {
+        // If startDate or endDate are null, default to the earliest/latest possible dates
+        if (startDate == null) {
+            startDate = LocalDate.of(1900, 1, 1);
+        }
+        if (endDate == null) {
+            endDate = LocalDate.now();
+        }
+
+        return diaryEntryRepository.findMoodByUserIdAndDateBetween(userId, startDate, endDate);
     }
 }
