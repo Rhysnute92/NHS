@@ -29,13 +29,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     container.innerHTML = ""; // Clear any existing content
 
     widgets.forEach((widget) => {
+      console.log(`Rendering widget: ${JSON.stringify(widget)}`);
       const widgetItem = document.createElement("div");
       widgetItem.className = "widget-item";
       widgetItem.dataset.widgetName = widget.widgetName;
 
       const widgetIcon = document.createElement("div");
       widgetIcon.className = "widget-icon";
-      widgetIcon.dataset.userWidgetid = widget.userWidgetID;
+      widgetIcon.dataset.userwidgetid = widget.userWidgetID; // Corrected to lowercase
+      console.log(`Assigned userWidgetID: ${widget.userWidgetID}`);
 
       const formattedName = formatWidgetName(widget.widgetName);
       const widgetName = document.createElement("p");
@@ -57,6 +59,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     document.querySelectorAll(".widget-icon").forEach((item) => {
       item.addEventListener("click", function () {
         item.classList.toggle("selected");
+        console.log(
+          `Widget clicked: ${
+            item.closest(".widget-item").dataset.widgetName
+          }, Selected: ${item.classList.contains("selected")}`
+        );
       });
     });
   }
@@ -70,16 +77,23 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   async function removeSelectedWidgets() {
     const selectedWidgets = document.querySelectorAll(".widget-icon.selected");
-    const widgetIdsToRemove = Array.from(selectedWidgets).map(
-      (widget) => widget.dataset.userwidgetid
-    );
+    const widgetIdsToRemove = Array.from(selectedWidgets).map((widget) => {
+      if (widget.dataset.userwidgetid) {
+        return widget.dataset.userwidgetid; // Directly use the dataset attribute
+      } else {
+        console.log(`Error: No widget ID found for selected widget:`, widget);
+        return null;
+      }
+    });
+
+    console.log(`[${timestamp}] [${logId}] Selected widgets:`, selectedWidgets);
     console.log(
       `[${timestamp}] [${logId}]Selected widget IDs:`,
       widgetIdsToRemove
     );
 
-    if (widgetIdsToRemove.length === 0) {
-      alert("No widgets selected for removal.");
+    if (widgetIdsToRemove.includes(null) || widgetIdsToRemove.length === 0) {
+      alert("No valid widgets selected for removal.");
       return;
     }
 

@@ -23,13 +23,18 @@ export class WidgetService {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(widgetIds), //send just the array as controller expecting an array
+      body: JSON.stringify(widgetIds), // Correctly formatted to just send the array
     });
 
     if (!response.ok) {
       throw new Error("Failed to remove widgets");
     }
 
-    return response.json();
+    // Only parse the response as JSON if the response is not 204 No Content
+    if (response.status !== 204) {
+      return response.json();
+    } else {
+      return {}; // Return an empty object or another value to indicate success
+    }
   }
 }
