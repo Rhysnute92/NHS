@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    alert("test test hello")
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -33,8 +34,9 @@ function showList() {
 }
 
 function showProviderCalendar() {
+    console.log("this is a test");
     document.getElementById('appointment-list1').style.display = 'none'; // Hide the list
-    document.getElementById('calendar1').style.display = 'block'; // Show the calendar
+    document.getElementById('calendar').style.display = 'block'; // Show the calendar
     document.getElementById('no-appointments').style.display = 'none'; // Hide "No appointments" message
 }
 
