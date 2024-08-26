@@ -46,10 +46,29 @@ class DiaryEntryGroup extends HTMLElement {
             diaryEntry.setAttribute('data-measurements', JSON.stringify(entry.measurements));
             diaryEntry.setAttribute('data-notes', entry.notes);
 
+            // Listen for removal events from diary entry components
+            diaryEntry.addEventListener('entryRemoved', this.handleEntryRemoved.bind(this));
+
             // Append the entry to the container
             entryContainer.appendChild(diaryEntry);
         });
     }
+
+    handleEntryRemoved(event) {
+        const entry = event.target;
+        entry.remove(); // Remove the entry from the DOM
+
+        const entryContainer = this.shadowRoot.querySelector('.diary-entry-container');
+
+        // Check if all entries are removed
+        if (entryContainer.children.length === 0) {
+
+            // Dispatch an event to notify that this group was removed
+            this.dispatchEvent(new CustomEvent('entryGroupRemoved', { bubbles: true, composed: true }));
+            this.remove(); // Remove the group from the DOM
+        }
+    }
+
 }
 
 customElements.define('diary-entry-group', DiaryEntryGroup);

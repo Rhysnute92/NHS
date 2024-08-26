@@ -221,7 +221,7 @@ class DiaryEntry extends HTMLElement {
         fetch(`/diary/delete/${entryId}`, { method: 'DELETE' })
             .then(response => {
                 if (response.ok) {
-                    this.remove();
+                    this.dispatchEvent(new CustomEvent('entryRemoved', { bubbles: true, composed: true }));
                 } else {
                     console.error('Failed to delete entry');
                 }
