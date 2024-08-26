@@ -40,9 +40,9 @@
 
         newMeasurement.innerHTML = `
         <div class="measurement-header">
-            <label for="body-part-select-${index}">Select measurement:</label>
-            <select class="body-part-select" id="body-part-select-${index}" name="measurements[${index}].type">
-                <option value="">Measurement</option>
+            <label for="body-part-select-${index}">Select Body Part:</label>
+            <select class="body-part-select" id="body-part-select-${index}">
+                <option value="">Select Body Part</option>
                 <option value="ARM">Arm</option>
                 <option value="LEG">Leg</option>
                 <option value="WEIGHT">Weight</option>
@@ -67,7 +67,7 @@
             updateMeasurementNames();
         });
 
-        const bodyPartSelect = newMeasurement.querySelector(`select[name="measurements[${index}].type"]`);
+        const bodyPartSelect = newMeasurement.querySelector(`#body-part-select-${index}`);
         bodyPartSelect.addEventListener('change', () => {
             loadMeasurementFields(newMeasurement, index);
         });
@@ -76,7 +76,7 @@
     }
 
     function loadMeasurementFields(newMeasurement, index) {
-        const bodyPart = newMeasurement.querySelector(`select[name="measurements[${index}].type"]`).value;
+        const bodyPart = newMeasurement.querySelector(`select#body-part-select-${index}`).value;
         const columnsContainer = newMeasurement.querySelector('.measurement-columns');
         const leftPointsContainer = newMeasurement.querySelector('.left-points');
         const rightPointsContainer = newMeasurement.querySelector('.right-points');
@@ -155,21 +155,25 @@
         updateMeasurementNames(); // Reindex all names in case measurements were added/removed
     }
 
+
     function updateMeasurementNames() {
         const measurementItems = document.querySelectorAll('.measurement');
         measurementItems.forEach((item, index) => {
             const locationFields = item.querySelectorAll('.measurement-point');
-            locationFields.forEach((locationField, locationIndex) => {
+            locationFields.forEach((locationField) => {
                 // Update the name attributes for the dynamically generated fields
-                locationField.querySelector('input[name*="location"]').name = `measurements[${index + locationIndex}].location`;
-                locationField.querySelector('input[name*="side"]').name = `measurements[${index + locationIndex}].side`;
-                locationField.querySelector('input[name*="type"]').name = `measurements[${index + locationIndex}].type`;
-                locationField.querySelector('input[type="number"]').name = `measurements[${index + locationIndex}].value`;
-                locationField.querySelector('select[name*="unit"]').name = `measurements[${index + locationIndex}].unit`;
-            });
+                locationField.querySelector('input[name*="location"]').name = `measurements[${index}].location`;
+                locationField.querySelector('input[name*="side"]').name = `measurements[${index}].side`;
+                locationField.querySelector('input[type="number"]').name = `measurements[${index}].value`;
+                locationField.querySelector('select[name*="unit"]').name = `measurements[${index}].unit`;
 
-            // Update the body part type selection
-            item.querySelector('.body-part-select').name = `measurements[${index}].type`;
+                const typeField = locationField.querySelector('input[name*="type"]');
+                if (typeField) {
+                    typeField.name = `measurements[${index}].type`;
+                }
+
+                index++; // Increment the index for the next measurement
+            });
         });
     }
 
