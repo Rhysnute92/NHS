@@ -33,7 +33,7 @@ class DiaryEntry extends HTMLElement {
                 }
                 
                 .diary-entry-content svg {
-                    height: 3rem;
+                    height: 2.5rem;
                     width: auto;
                 }
                 
@@ -67,12 +67,12 @@ class DiaryEntry extends HTMLElement {
                     border: none;
                     background: none;
                     color: var(--nhs-dark-grey);
-                    font-size: 2.5rem;
+                    font-size: 2rem;
                     cursor: pointer;
                     position: absolute;
                     top: 50%;
                     right: 0;
-                    transform: translate(-50%, -50%);
+                    transform: translate(0, -50%);
                 }
 
                 .diary-entry-icon {
@@ -145,6 +145,10 @@ class DiaryEntry extends HTMLElement {
                 }
                 
                 @media (max-width: 768px) {
+                    .diary-entry:hover {
+                        background-color: var(--nhs-white);
+                    }
+                
                     .diary-entry-photos-container {
                         grid-template-columns: repeat(3, 1fr);
                     }
@@ -153,9 +157,15 @@ class DiaryEntry extends HTMLElement {
                         opacity: 100% !important;
                     }
                 
-                    .diary-entry-section {
+                    .diary-entry-section, .diary-timestamp {
                         font-size: 1.2rem;
                     }
+                    
+                    .icon-container {
+                        gap: 0.5rem;
+                    }
+                    
+            
                 }
             </style>
             <div class="diary-entry">

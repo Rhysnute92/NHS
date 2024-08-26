@@ -4,11 +4,7 @@ class DiaryEntryGroup extends HTMLElement {
         const shadow = this.attachShadow({ mode: 'open' });
 
         shadow.innerHTML = `
-            <style>
-                .diary-entry-group {
-                    margin-bottom: 2rem;
-                }
-                
+            <style>                
                 .diary-entry-group-title {
                     background-color: var(--nhs-bright-blue);
                     color: white;
