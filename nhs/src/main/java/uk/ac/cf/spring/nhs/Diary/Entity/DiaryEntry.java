@@ -1,5 +1,7 @@
 package uk.ac.cf.spring.nhs.Diary.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,12 +35,15 @@ public class DiaryEntry {
     @Column(name = "EntryMood")
     private Mood mood;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Measurement> measurements = new ArrayList<>();
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Symptom> symptoms = new ArrayList<>();
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Photo> photos = new ArrayList<>();
 

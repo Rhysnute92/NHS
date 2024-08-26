@@ -111,11 +111,11 @@ public class DiaryEntryService {
                 .collect(Collectors.toList());
     }
 
-    public void deleteDiaryEntryById(int id) {
+    public void deleteDiaryEntryById(Long id) {
         diaryEntryRepository.deleteById(id);
     }
 
-    public DiaryEntry getDiaryEntryById(int id) {
+    public DiaryEntry getDiaryEntryById(Long id) {
         return diaryEntryRepository.findById(id).orElse(null);
     }
 
@@ -125,5 +125,14 @@ public class DiaryEntryService {
 
     public List<DiaryEntry> getDiaryEntriesByUserId(long userId) {
         return diaryEntryRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"));
+    }
+
+    public boolean deleteById(Long id) {
+        if (diaryEntryRepository.existsById(id)) {
+            diaryEntryRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
