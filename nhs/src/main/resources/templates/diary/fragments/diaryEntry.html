@@ -1,11 +1,10 @@
-<!DOCTYPE html>
 <div th:fragment="diaryEntry" class="diary-entry">
     <div class="diary-entry-title-container">
-        <h2 class="diary-entry-title" th:attr="data-date=${diaryEntry.date}"></h2>
+        <h2 class="diary-entry-title" th:attr="data-date=${diaryEntryDTO.date}"></h2>
     </div>
     <div class="diary-entry-content">
         <div class="diary-entry-preview">
-            <div th:if="${diaryEntry.mood}" th:switch="${diaryEntry.mood.name()}">
+            <div th:if="${diaryEntryDTO.mood}" th:switch="${diaryEntryDTO.mood.name()}">
                 <div th:case="'GREAT'">
                     <i class="fa-regular fa-face-grin-beam"></i>
                 </div>
@@ -22,23 +21,23 @@
                     <i class="fa-regular fa-face-sad-tear"></i>
                 </div>
             </div>
-            <div th:if="${diaryEntry.symptoms != null and diaryEntry.symptoms.size > 0}">
+            <div th:if="${diaryEntryDTO.symptoms != null and diaryEntryDTO.symptoms.size() > 0}">
                 <i class="fa-solid fa-notes-medical"></i>
             </div>
-            <div th:if="${diaryEntry.photos != null and diaryEntry.photos.size > 0}">
+            <div th:if="${diaryEntryDTO.photos != null and diaryEntryDTO.photos.size() > 0}">
                 <i class="fa-solid fa-camera"></i>
             </div>
-            <div th:if="${diaryEntry.measurements != null and diaryEntry.measurements.size > 0}">
+            <div th:if="${diaryEntryDTO.measurements != null and diaryEntryDTO.measurements.size() > 0}">
                 <i class="fa-solid fa-ruler"></i>
             </div>
-            <div th:if="${diaryEntry.notes != null and !#strings.isEmpty(diaryEntry.notes)}">
+            <div th:if="${diaryEntryDTO.notes != null and !#strings.isEmpty(diaryEntryDTO.notes)}">
                 <i class="fa-solid fa-file-lines"></i>
             </div>
         </div>
         <div class="diary-entry-full hidden">
             <div class="diary-entry-section">
                 <h3>Mood</h3>
-                <th:block th:if="${diaryEntry.mood}" th:switch="${diaryEntry.mood.name()}">
+                <th:block th:if="${diaryEntryDTO.mood}" th:switch="${diaryEntryDTO.mood.name()}">
                     <div th:case="'GREAT'">
                         <i class="fa-regular fa-face-grin-beam"></i>
                         <span>Great</span>
@@ -65,9 +64,10 @@
                     </div>
                 </th:block>
             </div>
+
             <div class="diary-entry-section">
                 <h3>Symptoms</h3>
-                <th:block th:each="symptom : ${diaryEntry.symptoms}">
+                <th:block th:each="symptom : ${diaryEntryDTO.symptoms}">
                     <div class="diary-entry-symptom">
                         <h4 th:text="${symptom.name}"></h4>
                         <th:block th:switch="${symptom.severity}">
@@ -87,27 +87,59 @@
                     </div>
                 </th:block>
             </div>
+
             <div class="diary-entry-section">
                 <h3>Photos</h3>
                 <div class="diary-entry-photos-container">
-                    <th:block th:each="photo : ${diaryEntry.photos}">
+                    <th:block th:each="photo : ${diaryEntryDTO.photos}">
                         <img th:src="@{/files/{filename}(filename=${photo.url})}" class="diary-entry-photo" />
                     </th:block>
                 </div>
             </div>
-            <div class="diary-entry-section">
-                <h3>Measurements</h3>
-                <th:block th:each="measurement : ${diaryEntry.measurements}">
-                    <div class="diary-entry-measurement">
-                        <h4 class="measurement-type" th:text="${measurement.type}"></h4>
-                        <span class="measurement-value" th:text="${measurement.value}"></span>
-                        <span class="measurement-unit" th:text="${measurement.unit}"></span>
-                    </div>
-                </th:block>
+
+            <div th:if="${diaryEntryDTO.measurements != null and diaryEntryDTO.measurements.size() > 0}" class="diary-entry-section">
+                <h4>Measurements</h4>
+
+                <div class="diary-entry-body-part">
+                    <!-- Create a table for the measurements grouped by location -->
+                    <table class="measurement-table">
+                        <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Left Side</th>
+                            <th>Right Side</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="locationGroup : ${diaryEntryDTO.measurementsGroupedByLocation.entrySet()}">
+                            <tr>
+                                <td th:text="${locationGroup.key}"></td>
+
+                                <!-- Left side measurements -->
+                                <td>
+                                    <th:block th:if="${locationGroup.value.Left}">
+                                        <span class="measurement-value" th:text="${locationGroup.value.Left.value}"></span>
+                                        <span class="measurement-unit" th:text="${locationGroup.value.Left.unit}"></span>
+                                    </th:block>
+                                </td>
+
+                                <!-- Right side measurements -->
+                                <td>
+                                    <th:block th:if="${locationGroup.value.Right}">
+                                        <span class="measurement-value" th:text="'Value: ' + ${locationGroup.value.Right.value}"></span>
+                                        <span class="measurement-unit" th:text="'Unit: ' + ${locationGroup.value.Right.unit}"></span>
+                                    </th:block>
+                                </td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
             <div class="diary-entry-section">
                 <h3>Notes</h3>
-                <p th:text="${diaryEntry.notes}"></p>
+                <p th:text="${diaryEntryDTO.notes}"></p>
             </div>
         </div>
     </div>
