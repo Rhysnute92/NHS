@@ -40,7 +40,7 @@ class DiaryEntry extends HTMLElement {
                 }
                 
                 .diary-entry-content svg, .diary-entry-content svg path {
-                    fill: var(--nhs-dark-grey);
+                    fill: var(--nhs-dark-grey) !important;
                 }
                 
                 .diary-entry-section svg, .diary-entry-section svg path {

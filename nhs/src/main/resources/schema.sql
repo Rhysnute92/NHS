@@ -129,9 +129,7 @@ CREATE TABLE Measurements (
     MeasurementValue FLOAT,
     MeasurementUnit VARCHAR(100),
     UserID BIGINT,
-    EventID BIGINT,
     EntryID BIGINT,
-    FOREIGN KEY (EventID) REFERENCES Events(EventID),
     FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
