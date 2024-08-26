@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestParam;
 import uk.ac.cf.spring.nhs.AddPatient.Service.PatientService;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
+import uk.ac.cf.spring.nhs.Diary.DTO.MoodDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
+import uk.ac.cf.spring.nhs.Diary.Entity.Mood;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
 import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Measurement.Service.MeasurementService;
@@ -85,16 +87,25 @@ public class PatientProfileController {
         return "patientprofile/profileInfo";
     }
 
-
     @GetMapping("/trends")
-    public String patientStatistics() {
+    public String patientTrends(@ModelAttribute("userID") Long userId, Model model) {
+        // Fetch reported measurement types and symptom types for the user
+        List<String> measurementTypes = measurementService.findDistinctMeasurementLocationsByUserId(userId);
+        List<String> symptomTypes = symptomService.findDistinctSymptomTypesByUserId(userId);
+
+        // Add them to the model
+        model.addAttribute("measurementTypes", measurementTypes);
+        model.addAttribute("symptomTypes", symptomTypes);
+
+        // Return the view name
         return "patientprofile/patientTrends";
     }
 
     @GetMapping("/trends/measurements")
     public ResponseEntity<?> patientMeasurements(
             @ModelAttribute("userID") Long userId,
-            @RequestParam(value = "type", required = false, defaultValue = "defaultType") String measurementType,            @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(value = "type", required = false, defaultValue = "defaultType") String measurementType,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
     ) {
 
@@ -110,6 +121,7 @@ public class PatientProfileController {
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
     ) {
 
+        System.out.println("Symptom type: " + symptomType);
         List<Symptom> symptoms = symptomService.getSymptomsByUserIdTypeAndDateRange(userId, symptomType, startDate, endDate);
         return ResponseEntity.ok(symptoms);
     }
@@ -121,11 +133,7 @@ public class PatientProfileController {
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
     ) {
 
-        List<DiaryEntry> diaryEntries = diaryEntryService.getDiaryEntriesByUserIdAndDateRange(userId, startDate, endDate);
-        List<String> moods = diaryEntries.stream()
-                .map(DiaryEntry::getMood)
-                .map(Enum::name)
-                .toList();
+        List<MoodDTO> moods = diaryEntryService.getMoodByUserIdAndDateRange(userId, startDate, endDate);
 
         return ResponseEntity.ok(moods);
     }

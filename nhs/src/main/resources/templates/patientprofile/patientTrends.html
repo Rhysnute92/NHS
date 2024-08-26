@@ -42,8 +42,11 @@
         <!-- Dropdown for selecting symptom type -->
         <label for="symptomType">Select Symptom Type:</label>
         <select id="symptomType">
-          <option value="pain">Pain</option>
-          <option value="numbness">Numbness</option>
+          <option value="" disabled selected>Select a symptom</option>
+          <option th:each="symptomType : ${symptomTypes}"
+                  th:value="${symptomType}"
+                  th:text="${symptomType}">
+          </option>
         </select>
         <canvas id="symptomsChart"></canvas>
       </div>
@@ -59,12 +62,15 @@
         <!-- Dropdown for selecting measurement type -->
         <label for="measurementType">Select Measurement Type:</label>
         <select id="measurementType">
-          <option value="weight">Weight</option>
-          <option value="arm">Arm Circumference</option>
-          <option value="leg">Leg Circumference</option>
+          <option value="" disabled selected>Select a measurement</option>
+          <option th:each="measurementType : ${measurementTypes}"
+                  th:value="${measurementType}"
+                  th:text="${measurementType}">
+          </option>
         </select>
         <canvas id="measurementsChart"></canvas>
       </div>
+
     </tabs-container>
   </div>
 </main>

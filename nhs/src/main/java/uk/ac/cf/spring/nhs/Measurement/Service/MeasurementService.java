@@ -55,4 +55,7 @@ public class MeasurementService {
     }
 
 
+    public List<String> findDistinctMeasurementLocationsByUserId(Long userId) {
+        return measurementRepository.findDistinctLocationsByUserId(userId);
+    }
 }

@@ -43,4 +43,8 @@ public class SymptomService {
 
         return symptomRepository.findByUserIdAndNameAndDateBetween(userId, symptomName, startDate, endDate);
     }
+
+    public List<String> findDistinctSymptomTypesByUserId(Long userId) {
+        return symptomRepository.findDistinctNamesByUserId(userId);
+    }
 }
