@@ -69,10 +69,10 @@ public class Measurement {
                 ", type='" + type + '\'' +
                 ", value=" + value +
                 ", unit='" + unit + '\'' +
+                ", location='" + location + '\'' +
                 ", date=" + date +
+                ", side='" + side + '\'' +
                 ", userId=" + userId +
-                ", event=" + event +
-                ", diaryEntry=" + diaryEntry +
                 '}';
     }
 }

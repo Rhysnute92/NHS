@@ -13,6 +13,8 @@ import uk.ac.cf.spring.nhs.Diary.DTO.DiaryEntryDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
+import uk.ac.cf.spring.nhs.Measurement.DTO.MeasurementGroupDTO;
+import uk.ac.cf.spring.nhs.Measurement.DTO.MeasurementLocationDTO;
 import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
@@ -32,29 +34,54 @@ public class DiaryController {
         Long userId = user.getUserId();
         List<DiaryEntry> diaryEntries = diaryEntryService.getDiaryEntriesByUserId(userId);
 
-        // Create a list of DTOs to hold the diary entries with grouped measurements
         List<DiaryEntryDTO> diaryEntryDTOs = new ArrayList<>();
 
         for (DiaryEntry entry : diaryEntries) {
-            Map<String, Map<String, Measurement>> groupedMeasurementsByLocation = new HashMap<>();
+            List<MeasurementGroupDTO> twoSidedMeasurementGroups = new ArrayList<>();
+            List<Measurement> nonSidedMeasurements = new ArrayList<>();
 
-            // Group measurements by location and side
-            for (Measurement measurement : entry.getMeasurements()) {
-                String location = Optional.ofNullable(measurement.getLocation()).orElse("Unknown");
+            // Group measurements by type
+            Map<String, List<Measurement>> measurementsByType = entry.getMeasurements().stream()
+                    .collect(Collectors.groupingBy(Measurement::getType));
 
-                groupedMeasurementsByLocation.putIfAbsent(location, new HashMap<>());
+            for (Map.Entry<String, List<Measurement>> typeEntry : measurementsByType.entrySet()) {
+                String type = typeEntry.getKey();
+                List<Measurement> measurements = typeEntry.getValue();
 
-                // Store the measurement based on side
-                groupedMeasurementsByLocation.get(location).put(measurement.getSide(), measurement);
+                Map<String, MeasurementLocationDTO> locationMap = new HashMap<>();
+
+                for (Measurement measurement : measurements) {
+                    // If the measurement has no side add it to the non-sided measurements list
+                    if (measurement.getSide() == null || measurement.getSide().isEmpty()) {
+                        nonSidedMeasurements.add(measurement);
+                    } else {
+                        String location = Optional.ofNullable(measurement.getLocation()).orElse("Unknown");
+                        locationMap.putIfAbsent(location, new MeasurementLocationDTO(location, null, null));
+                        MeasurementLocationDTO locationDTO = locationMap.get(location);
+
+                        if ("Left".equals(measurement.getSide())) {
+                            locationDTO.setLeftMeasurement(measurement);
+                        } else if ("Right".equals(measurement.getSide())) {
+                            locationDTO.setRightMeasurement(measurement);
+                        }
+                    }
+                }
+
+                if (!locationMap.isEmpty()) {
+                    MeasurementGroupDTO groupDTO = new MeasurementGroupDTO();
+                    groupDTO.setType(type);
+                    groupDTO.setLocations(new ArrayList<>(locationMap.values()));
+                    twoSidedMeasurementGroups.add(groupDTO);
+                }
             }
 
-            // Create a DTO with the diary entry and its grouped measurements
+            // Create DiaryEntryDTO and add two-sided and non-sided measurements
             DiaryEntryDTO dto = new DiaryEntryDTO(
                     entry.getDate(),
-                    groupedMeasurementsByLocation,
+                    twoSidedMeasurementGroups,
+                    nonSidedMeasurements,
                     entry.getMood(),
                     entry.getNotes(),
-                    entry.getMeasurements(),
                     entry.getSymptoms(),
                     entry.getPhotos()
             );
@@ -65,6 +92,7 @@ public class DiaryController {
         model.addAttribute("diaryEntryDTOs", diaryEntryDTOs);
         return "diary/diary";
     }
+
 
 
 

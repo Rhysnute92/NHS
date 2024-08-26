@@ -85,29 +85,48 @@
 
         let measurementLocations = [];
 
-        // Predefined measurement locations for each body part
         if (bodyPart === 'ARM') {
             measurementLocations = ['Bicep', 'Forearm', 'Wrist', 'Palm', 'Index finger'];
+            columnsContainer.classList.remove('hidden');
         } else if (bodyPart === 'LEG') {
             measurementLocations = ['Upper thigh', 'Mid thigh', 'Over kneecap', '2 cm below knee crease', 'Widest part of calf', '2 cm above ankle bone', 'Base of toes'];
+            columnsContainer.classList.remove('hidden');
         } else if (bodyPart === 'WEIGHT') {
-            measurementLocations = ['Weight'];
+            columnsContainer.classList.add('hidden');
+            const singlePointInput = document.createElement('div');
+            singlePointInput.classList.add('measurement-point');
+            singlePointInput.innerHTML = `
+            <label>Weight:</label>
+            <input type="hidden" name="measurements[${index}].type" value="WEIGHT">
+            <input type="hidden" name="measurements[${index}].location" value="n">
+            <input type="hidden" name="measurements[${index}].side" value="">
+            <div>
+                <input type="number" name="measurements[${index}].value" step="0.1" placeholder="Value">
+                <select name="measurements[${index}].unit">
+                    <option value="kg">kg</option>
+                    <option value="lbs">lbs</option>
+                </select>
+            </div>
+        `;
+            newMeasurement.appendChild(singlePointInput);
+            return;
         }
 
         if (bodyPart === 'ARM' || bodyPart === 'LEG') {
-            columnsContainer.classList.remove('hidden');
-            measurementLocations.forEach((location, locationIndex) => {
+            let measurementIndex = 0;
+
+            measurementLocations.forEach((location) => {
                 // Left side
                 const leftPointInput = document.createElement('div');
                 leftPointInput.classList.add('measurement-point');
                 leftPointInput.innerHTML = `
                 <label>${location} (Left):</label>
-                <input type="hidden" name="measurements[${index + locationIndex}].location" value="${location}">
-                <input type="hidden" name="measurements[${index + locationIndex}].side" value="Left">
-                <input type="hidden" name="measurements[${index + locationIndex}].type" value="${bodyPart}">
+                <input type="hidden" name="measurements[${index}_${measurementIndex}].location" value="${location}">
+                <input type="hidden" name="measurements[${index}_${measurementIndex}].side" value="Left">
+                <input type="hidden" name="measurements[${index}_${measurementIndex}].type" value="${bodyPart}">
                 <div>
-                    <input type="number" name="measurements[${index + locationIndex}].value" step="0.1" placeholder="Value"> 
-                    <select name="measurements[${index + locationIndex}].unit">
+                    <input type="number" name="measurements[${index}_${measurementIndex}].value" step="0.1" placeholder="Value"> 
+                    <select name="measurements[${index}_${measurementIndex}].unit">
                         <option value="cm">cm</option>
                         <option value="inches">inches</option>
                     </select>
@@ -120,52 +139,44 @@
                 rightPointInput.classList.add('measurement-point');
                 rightPointInput.innerHTML = `
                 <label>${location} (Right):</label>
-                <input type="hidden" name="measurements[${index + locationIndex}].location" value="${location}">
-                <input type="hidden" name="measurements[${index + locationIndex}].side" value="Right">
-                <input type="hidden" name="measurements[${index + locationIndex}].type" value="${bodyPart}">
+                <input type="hidden" name="measurements[${index}_${measurementIndex + 1}].location" value="${location}">
+                <input type="hidden" name="measurements[${index}_${measurementIndex + 1}].side" value="Right">
+                <input type="hidden" name="measurements[${index}_${measurementIndex + 1}].type" value="${bodyPart}">
                 <div>
-                    <input type="number" name="measurements[${index + locationIndex}].value" step="0.1" placeholder="Value">
-                    <select name="measurements[${index + locationIndex}].unit">
+                    <input type="number" name="measurements[${index}_${measurementIndex + 1}].value" step="0.1" placeholder="Value">
+                    <select name="measurements[${index}_${measurementIndex + 1}].unit">
                         <option value="cm">cm</option>
                         <option value="inches">inches</option>
                     </select>
-                <div>
+                </div>
             `;
                 rightPointsContainer.appendChild(rightPointInput);
+
+                // Increment the measurement index by 2 (for left and right side)
+                measurementIndex += 2;
             });
-        } else {
-            // For measurements like WEIGHT, just generate a single input field
-            columnsContainer.classList.remove('hidden');
-            const singlePointInput = document.createElement('div');
-            singlePointInput.classList.add('measurement-point');
-            singlePointInput.innerHTML = `
-            <label>Weight:</label>
-            <input type="hidden" name="measurements[${index}].type" value="${bodyPart}">
-            <div>
-                <input type="number" name="measurements[${index}].value" step="0.1" placeholder="Value">
-                <select name="measurements[${index}].unit">
-                    <option value="kg">kg</option>
-                    <option value="lbs">lbs</option>
-                </select>
-            <div>
-        `;
-            leftPointsContainer.appendChild(singlePointInput);
         }
 
         updateMeasurementNames(); // Reindex all names in case measurements were added/removed
     }
 
-
     function updateMeasurementNames() {
         const measurementItems = document.querySelectorAll('.measurement');
-        measurementItems.forEach((item, index) => {
+        let index = 0;
+
+        measurementItems.forEach((item) => {
             const locationFields = item.querySelectorAll('.measurement-point');
             locationFields.forEach((locationField) => {
-                // Update the name attributes for the dynamically generated fields
-                locationField.querySelector('input[name*="location"]').name = `measurements[${index}].location`;
-                locationField.querySelector('input[name*="side"]').name = `measurements[${index}].side`;
-                locationField.querySelector('input[type="number"]').name = `measurements[${index}].value`;
-                locationField.querySelector('select[name*="unit"]').name = `measurements[${index}].unit`;
+                const locationInput = locationField.querySelector('input[name*="location"]');
+                const sideInput = locationField.querySelector('input[name*="side"]');
+                const valueInput = locationField.querySelector('input[type="number"]');
+                const unitSelect = locationField.querySelector('select[name*="unit"]');
+
+                // Only update if the input fields exist
+                if (locationInput) locationInput.name = `measurements[${index}].location`;
+                if (sideInput) sideInput.name = `measurements[${index}].side`;
+                if (valueInput) valueInput.name = `measurements[${index}].value`;
+                if (unitSelect) unitSelect.name = `measurements[${index}].unit`;
 
                 const typeField = locationField.querySelector('input[name*="type"]');
                 if (typeField) {
@@ -177,45 +188,37 @@
         });
     }
 
-
     let capturedPhotos = [];
 
     const photoCaptureElement = document.querySelector('camera-component');
 
     // Listen for the 'photos-confirmed' event to get the captured photos
     photoCaptureElement.addEventListener('photos-confirmed', function (event) {
-        // Access the captured photos from the event's detail
         capturedPhotos = event.detail;
-
-        // Display the captured photos in the UI
         updatePhotosPreview(capturedPhotos);
     });
 
     function updatePhotosPreview(capturedPhotos) {
         const photosContainer = document.querySelector('photo-container');
-
-        // Clear the container before adding new photos
         photosContainer.innerHTML = '';
-
-        // Display each captured photo in the container using a custom element
         capturedPhotos.forEach(photo => {
             let currentPhotos = JSON.parse(photosContainer.getAttribute('photos') || '[]');
-
-            // Add the new photo to the array
             currentPhotos.push(photo);
-
-            // Update the photos attribute with the new array
             photosContainer.setAttribute('photos', JSON.stringify(currentPhotos));
         });
     }
 
+    // Submit the form data along with photos
     document.querySelector('.checkin-form').addEventListener('submit', function (event) {
         event.preventDefault();
-
         const form = event.target;
         const formData = new FormData(form);
 
-        // Append the captured photos to the form data
+        for (const pair of formData.entries()) {
+            console.log(pair[0], pair[1]);
+        }
+
+        // Append captured photos to form data
         capturedPhotos.forEach((photo, index) => {
             formData.append(`photos[${index}].file`, photo.blob);
             formData.append(`photos[${index}].bodyPart`, photo.bodyPart);

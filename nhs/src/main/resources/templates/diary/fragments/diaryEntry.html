@@ -1,4 +1,4 @@
-<div th:fragment="diaryEntry" class="diary-entry">
+<div th:fragment="diaryEntry(diaryEntryDTO)" class="diary-entry">
     <div class="diary-entry-title-container">
         <h2 class="diary-entry-title" th:attr="data-date=${diaryEntryDTO.date}"></h2>
     </div>
@@ -27,9 +27,9 @@
             <div th:if="${diaryEntryDTO.photos != null and diaryEntryDTO.photos.size() > 0}">
                 <i class="fa-solid fa-camera"></i>
             </div>
-            <div th:if="${diaryEntryDTO.measurements != null and diaryEntryDTO.measurements.size() > 0}">
-                <i class="fa-solid fa-ruler"></i>
-            </div>
+<!--            <div th:if="${diaryEntryDTO.measurements != null and diaryEntryDTO.measurements.size() > 0}">-->
+<!--                <i class="fa-solid fa-ruler"></i>-->
+<!--            </div>-->
             <div th:if="${diaryEntryDTO.notes != null and !#strings.isEmpty(diaryEntryDTO.notes)}">
                 <i class="fa-solid fa-file-lines"></i>
             </div>
@@ -97,12 +97,13 @@
                 </div>
             </div>
 
-            <div th:if="${diaryEntryDTO.measurements != null and diaryEntryDTO.measurements.size() > 0}" class="diary-entry-section">
-                <h4>Measurements</h4>
+            <div class="measurement-section">
+                <!-- Iterate over two-sided measurement groups (e.g., ARM, LEG) -->
+                <div th:each="group : ${diaryEntryDTO.twoSidedMeasurementGroups}">
+                    <h5 th:text="${group.type}"></h5>
 
-                <div class="diary-entry-body-part">
-                    <!-- Create a table for the measurements grouped by location -->
-                    <table class="measurement-table">
+                    <!-- Table for two-sided measurements -->
+                    <table>
                         <thead>
                         <tr>
                             <th>Location</th>
@@ -111,29 +112,29 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <th:block th:each="locationGroup : ${diaryEntryDTO.measurementsGroupedByLocation.entrySet()}">
-                            <tr>
-                                <td th:text="${locationGroup.key}"></td>
-
-                                <!-- Left side measurements -->
-                                <td>
-                                    <th:block th:if="${locationGroup.value.Left}">
-                                        <span class="measurement-value" th:text="${locationGroup.value.Left.value}"></span>
-                                        <span class="measurement-unit" th:text="${locationGroup.value.Left.unit}"></span>
-                                    </th:block>
-                                </td>
-
-                                <!-- Right side measurements -->
-                                <td>
-                                    <th:block th:if="${locationGroup.value.Right}">
-                                        <span class="measurement-value" th:text="'Value: ' + ${locationGroup.value.Right.value}"></span>
-                                        <span class="measurement-unit" th:text="'Unit: ' + ${locationGroup.value.Right.unit}"></span>
-                                    </th:block>
-                                </td>
-                            </tr>
-                        </th:block>
+                        <!-- Iterate over each location in the group -->
+                        <tr th:each="location : ${group.locations}">
+                            <td th:text="${location.location}"></td>
+                            <td th:if="${location.leftMeasurement != null}">
+                                <span th:text="${location.leftMeasurement.value}"></span>
+                                <span th:text="${location.leftMeasurement.unit}"></span>
+                            </td>
+                            <td th:if="${location.rightMeasurement != null}">
+                                <span th:text="${location.rightMeasurement.value}"></span>
+                                <span th:text="${location.rightMeasurement.unit}"></span>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Non-sided measurements section -->
+                <div th:if="${diaryEntryDTO.nonSidedMeasurements.size() > 0}">
+                    <div th:each="measurement : ${diaryEntryDTO.nonSidedMeasurements}">
+                        <h5 th:text="${measurement.type}"></h5>
+                        <span th:text="${measurement.value}"></span>
+                        <span th:text="${measurement.unit}"></span>
+                    </div>
                 </div>
             </div>
 

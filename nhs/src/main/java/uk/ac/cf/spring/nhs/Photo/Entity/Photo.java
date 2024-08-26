@@ -35,12 +35,10 @@ public class Photo {
 
     @ManyToOne
     @JoinColumn(name = "EventID", nullable = true)
-    @JsonIgnore
     private Event event;
 
     @ManyToOne
     @JoinColumn(name = "EntryID", nullable = true)
-    @JsonIgnore
     private DiaryEntry diaryEntry;
 
     protected Photo() {}
