@@ -136,36 +136,93 @@ function updateChartWithData(chartType, data) {
     }
 
     const labels = [...new Set(data.map(item => item.date))];
-    const dataMap = {};
 
-    data.forEach(item => {
-        const category = item.category || item.location || item.mood;
-        if (!dataMap[category]) {
-            dataMap[category] = [];
-        }
-        dataMap[category].push({ date: item.date, value: item.value });
-    });
-
+    // Clear existing datasets before updating
     charts[`${chartType}Chart`].data.datasets = [];
 
-    Object.keys(dataMap).forEach(category => {
-        const chartData = labels.map(label => {
-            const measurement = dataMap[category].find(item => item.date === label);
-            return measurement ? measurement.value : null;
+    if (chartType === 'mood') {
+        // Map mood values to a numerical scale
+        const moodMapping = {
+            'AWFUL': 1,
+            'BAD': 2,
+            'OKAY': 3,
+            'GOOD': 4,
+            'GREAT': 5
+        };
+
+        // Map mood data to the corresponding values
+        const moodData = labels.map(label => {
+            const moodItem = data.find(item => item.date === label);
+            return moodItem ? moodMapping[moodItem.mood] : null;
         });
 
+
         charts[`${chartType}Chart`].data.datasets.push({
-            label: category,
-            data: chartData,
+            label: 'Mood',
+            data: moodData,
             borderColor: getRandomColor(),
             backgroundColor: 'rgba(0, 0, 0, 0)',
             fill: false
         });
-    });
+    } else if (chartType === 'symptoms') {
+        // Use "severity" field for symptoms data
+        const symptomType = document.getElementById('symptomType').value;
+        const symptomsDataMap = {};
+
+        data.forEach(item => {
+            const category = item.symptom || symptomType;
+            if (!symptomsDataMap[category]) {
+                symptomsDataMap[category] = [];
+            }
+            symptomsDataMap[category].push({ date: item.date, severity: item.severity });
+        });
+
+        Object.keys(symptomsDataMap).forEach(category => {
+            const symptomData = labels.map(label => {
+                const severityItem = symptomsDataMap[category].find(item => item.date === label);
+                return severityItem ? severityItem.severity : null;
+            });
+
+            charts[`${chartType}Chart`].data.datasets.push({
+                label: category,
+                data: symptomData,
+                borderColor: getRandomColor(),
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                fill: false
+            });
+        });
+    } else if (chartType === 'measurements') {
+        // Handle measurements data by using the "value" field
+        const dataMap = {};
+
+        data.forEach(item => {
+            const category = item.name || item.location || item;
+            if (!dataMap[category]) {
+                dataMap[category] = [];
+            }
+            dataMap[category].push({ date: item.date, value: item.value });
+        });
+
+        Object.keys(dataMap).forEach(category => {
+            const measurementData = labels.map(label => {
+                const measurement = dataMap[category].find(item => item.date === label);
+                return measurement ? measurement.value : null;
+            });
+
+            charts[`${chartType}Chart`].data.datasets.push({
+                label: category,
+                data: measurementData,
+                borderColor: getRandomColor(),
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                fill: false
+            });
+        });
+    }
 
     charts[`${chartType}Chart`].data.labels = labels;
     charts[`${chartType}Chart`].update();
 }
+
 
 // Generate a random color for each line
 function getRandomColor() {
