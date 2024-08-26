@@ -32,7 +32,15 @@ public class SymptomService {
         symptomRepository.saveAll(symptoms);
     }
 
-    public List<Symptom> getSymptomsByUserIdTypeAndDateRange(Long userId, String symptomType, LocalDate startDate, LocalDate endDate) {
-        return symptomRepository.findByUserIdAndNameAndDateBetween(userId, symptomType, startDate, endDate);
+    public List<Symptom> getSymptomsByUserIdTypeAndDateRange(Long userId, String symptomName, LocalDate startDate, LocalDate endDate) {
+        // If startDate or endDate are null, default to the earliest/latest possible dates
+        if (startDate == null) {
+            startDate = LocalDate.of(1900, 1, 1);
+        }
+        if (endDate == null) {
+            endDate = LocalDate.now();
+        }
+
+        return symptomRepository.findByUserIdAndNameAndDateBetween(userId, symptomName, startDate, endDate);
     }
 }

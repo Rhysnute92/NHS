@@ -137,6 +137,14 @@ public class DiaryEntryService {
     }
 
     public List<DiaryEntry> getDiaryEntriesByUserIdAndDateRange(Long userId, LocalDate startDate, LocalDate endDate) {
+        // If startDate or endDate are null, default to the earliest/latest possible dates
+        if (startDate == null) {
+            startDate = LocalDate.of(1900, 1, 1);
+        }
+        if (endDate == null) {
+            endDate = LocalDate.now();
+        }
+
         return diaryEntryRepository.findByUserIdAndDateBetween(userId, startDate, endDate);
     }
 }
