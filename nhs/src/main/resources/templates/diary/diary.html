@@ -12,12 +12,13 @@
     <p class="page-subtitle">Your daily wellness log</p>
     <div class="container">
         <p th:if="${diaryEntries.empty}" class="no-entries">No diary entries yet</p>
-        <th:block th:each="diaryEntry : ${diaryEntries}">
-            <div th:replace="~{diary/fragments/diaryEntry :: diaryEntry(diaryEntry=${diaryEntry})}">
-            </div>
-        </th:block>
+        <div class="diary-entries-container"></div>
     </div>
 </main>
-<script layout:fragment="scripts" th:src="@{/js/diary/diary.js}"></script>
+<th:block layout:fragment="scripts">
+    <script th:src="@{/js/diary/components/DiaryEntryGroup.js}" type="module"></script>
+    <script th:src="@{/js/diary/components/DiaryEntry.js}" type="module"></script>
+    <script th:src="@{/js/diary/diary.js}"></script>
+</th:block>
 </body>
 </html>

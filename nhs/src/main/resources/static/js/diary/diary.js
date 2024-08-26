@@ -28,3 +28,35 @@ measurementTypes.forEach((type) => {
     text = text.charAt(0).toUpperCase() + text.slice(1);
     type.textContent = text;
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchDiaryEntries();
+});
+function groupEntriesByDate(entries) {
+    return entries.reduce((acc, entry) => {
+        const date = entry.date.split('T')[0];
+        if (!acc[date]) {
+            acc[date] = [];
+        }
+        acc[date].push(entry);
+        return acc;
+    }, {});
+}
+
+function fetchDiaryEntries() {
+    fetch('/diary/entries')
+        .then(response => response.json())
+        .then(data => {
+            const groupedEntries = groupEntriesByDate(data);
+            const container = document.querySelector('.diary-entries-container');
+
+            Object.keys(groupedEntries).forEach(date => {
+                const diaryGroup = document.createElement('diary-entry-group');
+                diaryGroup.setAttribute('data-date', date);
+                diaryGroup.setAttribute('entries', JSON.stringify(groupedEntries[date]));
+
+                container.appendChild(diaryGroup);
+            });
+        })
+        .catch(error => console.error('Error fetching diary entries:', error));
+}
