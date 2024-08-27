@@ -1,9 +1,13 @@
-import { QuestionnaireManager } from "../../Questionnaire/QuestionnaireManager";
-import { fetchData, postData, putData } from "../../common/utils/apiUtility";
-import { QuestionnaireRenderer } from "../../Questionnaire/QuestionnaireRenderer";
+import { QuestionnaireManager } from "../../../../../../../../../../main/resources/static/js/Questionnaire/QuestionnaireManager";
+import { fetchData, postData, putData } from "../../../../../../../../../../main/resources/static/js/common/utils/apiUtility";
+import { QuestionnaireRenderer } from "../../../../../../../../../../main/resources/static/js/Questionnaire/QuestionnaireRenderer";
 
-jest.mock("../../common/utils/apiUtility");
-jest.mock("../../Questionnaire/QuestionnaireRenderer");
+jest.mock(
+  "../../../../../../../../../../main/resources/static/js/common/utils/apiUtility"
+);
+jest.mock(
+  "../../../../../../../../../../main/resources/static/js/Questionnaire/QuestionnaireRenderer"
+);
 
 describe("QuestionnaireManager", () => {
   let manager;

@@ -1,49 +1,105 @@
 import { WidgetService } from "./widgetService.js";
-import { TaskWidget } from "../widgets/taskCompletionWidget.js";
 
 export class WidgetManager {
-  constructor(userWidgets) {
+  constructor(userWidgets, importFunction = null) {
     this.userWidgets = userWidgets;
-    this.addedWidgets = new Set();
+    this.renderedWidgets = new Set();
+    this.importFunction = importFunction || ((path) => import(path));
+    this.fetchedWidgets = new Set();
   }
 
-  async loadWidgets() {
-    for (const userWidget of this.userWidgets) {
-      const widgetName = userWidget.widgetName;
-      console.log("Widget name:", widgetName);
+  setupWidgetPlaceholders() {
+    const container = document.getElementById("widget-container");
+    this.userWidgets.forEach((widget) => {
+      const placeholder = this.generatePlaceholderElement(widget.widgetName);
+      container.appendChild(placeholder);
+    });
+  }
 
-      if (!this.addedWidgets.has(widgetName)) {
-        const fragmentContent = await WidgetService.fetchWidgetFragment(widgetName);
-        this.appendWidgetToDOM(widgetName, fragmentContent);
-        this.addedWidgets.add(widgetName);
+  generatePlaceholderElement(widgetName) {
+    const placeholder = document.createElement("div");
+    placeholder.className = "widget-placeholder";
+    placeholder.dataset.widgetName = widgetName;
+    placeholder.textContent = `Loading ${widgetName} widget...`;
+    return placeholder;
+  }
 
-        this.initializeWidget(widgetName); // Initialize the widget after adding it to DOM
-      } else {
-        console.log(`Widget ${widgetName} already added. Skipping.`);
-      }
+  async fetchAndPopulateWidget(widgetName, placeholder) {
+    if (
+      this.fetchedWidgets.has(widgetName) ||
+      placeholder.dataset.loading === "true"
+    ) {
+      return;
+    }
+
+    this.fetchedWidgets.add(widgetName);
+    placeholder.dataset.loading = "true";
+
+    try {
+      const fragmentContent = await WidgetService.fetchWidgetFragment(
+        widgetName
+      );
+      placeholder.innerHTML = fragmentContent;
+      await this.activateWidgetFunctionality(widgetName);
+    } catch (error) {
+      console.error(
+        `Failed to fetch and populate widget ${widgetName}:`,
+        error
+      );
+    } finally {
+      delete placeholder.dataset.loading;
     }
   }
 
-  appendWidgetToDOM(widgetName, fragmentContent) {
-    const fragment = document.createElement("div");
-    fragment.innerHTML = fragmentContent;
-    fragment.classList.add(`widget-${widgetName}`); // Add a unique class
-    document.getElementById("widget-container").appendChild(fragment);
+  async activateWidgetFunctionality(widgetName) {
+    try {
+      const module = await this.importFunction(
+        `../widgets/${widgetName}Widget.js`
+      );
+
+      const WidgetClass = module.default || module.TaskWidget;
+
+      if (WidgetClass && typeof WidgetClass === "function") {
+        const widgetInstance = new WidgetClass();
+        if (typeof widgetInstance.updateWidgetData === "function") {
+          await widgetInstance.updateWidgetData();
+        } else {
+          console.log(
+            `Widget ${widgetName} does not have an updateWidgetData method`
+          );
+        }
+      } else {
+        console.log(`No valid WidgetClass found for widget: ${widgetName}`);
+      }
+    } catch (error) {
+      console.error(
+        `Failed to activate functionality for widget ${widgetName}:`,
+        error
+      );
+    }
   }
 
-  initializeWidget(widgetName) {
-    // Dynamically initialize the widget based on its name
-    switch (widgetName) {
-      case "task-completion":
-        const taskWidget = new TaskWidget();
-        taskWidget.updateWidgetData(); // Update widget data immediately
-        break;
-
-      // Add initialization for more widgets here if needed
-
-      default:
-        console.log(`No specific initialization for widget ${widgetName}`);
-        break;
+  async renderAllUserWidgets() {
+    for (const userWidget of this.userWidgets) {
+      const widgetName = userWidget.widgetName;
+      if (
+        !this.renderedWidgets.has(widgetName) &&
+        !this.fetchedWidgets.has(widgetName)
+      ) {
+        const placeholder = document.querySelector(
+          `.widget-placeholder[data-widget-name="${widgetName}"]`
+        );
+        if (!placeholder) {
+          const newPlaceholder = this.generatePlaceholderElement(widgetName);
+          document
+            .getElementById("widget-container")
+            .appendChild(newPlaceholder);
+          await this.fetchAndPopulateWidget(widgetName, newPlaceholder);
+        } else {
+          await this.fetchAndPopulateWidget(widgetName, placeholder);
+        }
+        this.renderedWidgets.add(widgetName);
+      }
     }
   }
 }

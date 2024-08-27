@@ -4,7 +4,7 @@ import { EventQueue } from "../tasks/eventQueue.js";
 
 export class TaskWidget {
   constructor() {
-    this.widgetElement = document.querySelector(".widget-task-completion");
+    this.widgetElement = document.querySelector(".task-widget");
     if (!this.widgetElement) {
       console.error("Task widget element not found.");
       return;
@@ -28,7 +28,6 @@ export class TaskWidget {
         );
         this.worker.postMessage({
           queue: this.eventQueue.getEvents(),
-          apiUrl: "/usertask/task-update/batch",
         });
 
         // Clear the queue after sending it to the worker

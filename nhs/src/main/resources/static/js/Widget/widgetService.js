@@ -1,33 +1,77 @@
-//widgetService.js
-
 export class WidgetService {
   static async fetchUserWidgets() {
     const response = await fetch(`/api/user-widgets`);
-    console.log("Fetched user widgets response:", response);
+
     if (!response.ok) {
       throw new Error("Failed to fetch user widgets");
     }
     return response.json();
   }
 
+  static async fetchAvailableWidgets() {
+    const response = await fetch(`/api/widgets/available`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch available widgets");
+    }
+    return response.json();
+  }
+
   static async fetchWidgetFragment(widgetName) {
     const response = await fetch(`/api/widgets/${widgetName}`);
-    console.log(`Fetched widget (${widgetName}) response:`, response);
+
     if (!response.ok) {
       throw new Error("Widget not found");
     }
     return response.text();
   }
 
-/*   static async fetchWidgetScript(widgetName) {
-    const response = await fetch(`/api/widgets/${widgetName}/script`);
-    console.log(`Fetched widget (${widgetName}) script response:`, response);
-    if (response.ok) {
-      const scriptName = await response.text();
-      if (scriptName) {
-        return `/js/widgets/${scriptName}.js`; // Construct the URL directly
-      }
+  static async removeUserWidgets(widgetIds) {
+    const response = await fetch(`/api/user-widgets/delete`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(widgetIds),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to remove widgets");
     }
-    return null;
-  } */
+
+    if (response.status !== 204) {
+      return response.json();
+    } else {
+      return {};
+    }
+  }
+
+  static async addUserWidgets(widgetNames) {
+    const response = await fetch(`/api/user-widgets/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(widgetNames),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to add widgets");
+    }
+
+    if (response.status !== 204) {
+      return response.json();
+    } else {
+      return {};
+    }
+  }
+
+  static async fetchWidgetIconPath(widgetName) {
+    const response = await fetch(`/api/widgets/${widgetName}/icon-path`);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch icon path for widget: ${widgetName}`);
+    }
+    return response.text(); // Assuming icon path is returned as plain text
+  }
 }

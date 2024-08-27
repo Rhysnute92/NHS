@@ -55,7 +55,7 @@ public class UserTaskController {
         return ResponseEntity.ok(userTasks);
     }
 
-    //Get user tasks by id for provider view
+    // Get user tasks by id for provider view
     @GetMapping("/{id}")
     public ResponseEntity<List<UserTask>> getTasksForUser(@PathVariable("id") int id) {
         Long userId = Long.valueOf(id);
@@ -64,18 +64,20 @@ public class UserTaskController {
     }
 
     // @PostMapping
-    // public ResponseEntity<UserTask> assignTaskToUser(@RequestBody UserTask userTask) {
-    //     userTask.setUserID(getCurrentUserId()); // Set the current user ID to the task userID //TODO: will need to make
-    //                                             // sure this is changed for provider assigned userTask
-    //     UserTask createdUserTask = userTaskService.assignTaskToUser(userTask);
-    //     return ResponseEntity.status(HttpStatus.CREATED).body(createdUserTask);
+    // public ResponseEntity<UserTask> assignTaskToUser(@RequestBody UserTask
+    // userTask) {
+    // userTask.setUserID(getCurrentUserId()); // Set the current user ID to the
+    // task userID //TODO: will need to make
+    // // sure this is changed for provider assigned userTask
+    // UserTask createdUserTask = userTaskService.assignTaskToUser(userTask);
+    // return ResponseEntity.status(HttpStatus.CREATED).body(createdUserTask);
     // }
 
     @PostMapping("/newplan/{id}")
-    public ModelAndView setNewPlan(@PathVariable("id") int userID, @ModelAttribute PlanTaskList formList){
+    public ModelAndView setNewPlan(@PathVariable("id") int userID, @ModelAttribute PlanTaskList formList) {
         Long userId = Long.valueOf(userID);
         userTaskService.deleteAllTasksForUser(userId);
-        for(String s : formList.getTaskList()){
+        for (String s : formList.getTaskList()) {
             Long id = Long.valueOf(s);
             Task task = taskService.getTaskById(id);
             userTaskService.assignTaskToUser(task, userId);
@@ -85,6 +87,7 @@ public class UserTaskController {
 
     @GetMapping("/task/{userTaskID}")
     public ResponseEntity<UserTask> getUserTaskById(@PathVariable("userTaskID") Long userTaskID) {
+
         UserTask userTask = userTaskService.getUserTaskById(userTaskID);
         return ResponseEntity.ok(userTask);
     }

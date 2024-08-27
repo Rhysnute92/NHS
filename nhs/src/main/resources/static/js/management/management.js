@@ -9,7 +9,6 @@ import { EventQueue } from "../tasks/eventQueue.js";
 const worker = new Worker("/js/tasks/worker.js");
 console.log("Worker:", worker);
 const eventQueue = new EventQueue();
-const apiUrl = "/usertask/task-update/batch";
 
 // Store pending tasks in localStorage before unloading the page
 window.addEventListener("beforeunload", () => {
@@ -66,7 +65,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       console.log("Sending event queue to worker:", eventQueue.getEvents());
       worker.postMessage({
         queue: eventQueue.getEvents(),
-        apiUrl: apiUrl,
       });
 
       // Clear the queue after sending it to the worker
