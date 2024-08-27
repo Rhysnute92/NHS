@@ -128,6 +128,17 @@ public class DiaryController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteDiaryEntry(@PathVariable Long id) {
+        boolean deleted = diaryEntryService.deleteById(id);
+        if (deleted) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {
         return List.of(

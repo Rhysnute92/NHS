@@ -1,5 +1,7 @@
 package uk.ac.cf.spring.nhs.Diary.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +12,7 @@ import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,20 +29,23 @@ public class DiaryEntry {
     @Column(name = "EntryID")
     private long id;
 
-    @Column(name = "EntryDate", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private LocalDate date;
+    @Column(name = "EntryDateTime", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime date;
 
     @Column(name = "EntryMood")
     private Mood mood;
 
-    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Measurement> measurements = new ArrayList<>();
 
-    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Symptom> symptoms = new ArrayList<>();
 
-    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Photo> photos = new ArrayList<>();
 
     @Column(name = "EntryNotes")
@@ -51,7 +56,7 @@ public class DiaryEntry {
 
     public DiaryEntry() {}
 
-    public DiaryEntry(long userId, LocalDate date) {
+    public DiaryEntry(long userId, LocalDateTime date) {
         this.userId = userId;
         this.date = date;
     }

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface DiaryEntryRepository extends JpaRepository<DiaryEntry, Integer> {
+public interface DiaryEntryRepository extends JpaRepository<DiaryEntry, Long> {
     List<DiaryEntry> findByUserId(long userId, Sort sort);
 
     List<DiaryEntry> findByUserIdAndDateBetween(Long userId, LocalDate startDate, LocalDate endDate);

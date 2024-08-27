@@ -19,7 +19,7 @@ import uk.ac.cf.spring.nhs.Symptom.DTO.SymptomDTO;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 import uk.ac.cf.spring.nhs.Symptom.Service.SymptomService;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -74,7 +74,7 @@ public class DiaryEntryService {
     }
 
     private DiaryEntry createDiaryEntry(Long userId, String mood, String notes) {
-        DiaryEntry diaryEntry = new DiaryEntry(userId, LocalDate.now());
+        DiaryEntry diaryEntry = new DiaryEntry(userId, LocalDateTime.now());
         diaryEntry.setMood(mood != null ? Mood.valueOf(mood) : null);
         diaryEntry.setNotes(notes);
         return diaryEntry;
@@ -121,11 +121,11 @@ public class DiaryEntryService {
                 .collect(Collectors.toList());
     }
 
-    public void deleteDiaryEntryById(int id) {
+    public void deleteDiaryEntryById(Long id) {
         diaryEntryRepository.deleteById(id);
     }
 
-    public DiaryEntry getDiaryEntryById(int id) {
+    public DiaryEntry getDiaryEntryById(Long id) {
         return diaryEntryRepository.findById(id).orElse(null);
     }
 
@@ -159,5 +159,14 @@ public class DiaryEntryService {
         }
 
         return diaryEntryRepository.findMoodByUserIdAndDateBetween(userId, startDate, endDate);
+    }
+
+    public boolean deleteById(Long id) {
+        if (diaryEntryRepository.existsById(id)) {
+            diaryEntryRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

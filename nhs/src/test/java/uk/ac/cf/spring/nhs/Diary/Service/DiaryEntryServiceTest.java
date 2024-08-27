@@ -15,6 +15,7 @@ import uk.ac.cf.spring.nhs.Measurement.Service.MeasurementService;
 import uk.ac.cf.spring.nhs.Photo.Service.PhotoService;
 import uk.ac.cf.spring.nhs.Symptom.Service.SymptomService;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -66,7 +67,7 @@ class DiaryEntryServiceTest {
         checkinForm.setSymptoms(Collections.emptyList());
         checkinForm.setMeasurements(Collections.emptyList());
 
-        DiaryEntry diaryEntry = new DiaryEntry(1L, new Date());
+        DiaryEntry diaryEntry = new DiaryEntry(1L, LocalDateTime.now());
         when(diaryEntryRepository.save(any(DiaryEntry.class))).thenReturn(diaryEntry);
 
         // Test the service
@@ -84,14 +85,14 @@ class DiaryEntryServiceTest {
     @Test
     void testGetDiaryEntryById() {
         // Prepare mock data
-        DiaryEntry diaryEntry = new DiaryEntry(1L, new Date());
-        when(diaryEntryRepository.findById(1)).thenReturn(Optional.of(diaryEntry));
+        DiaryEntry diaryEntry = new DiaryEntry(1L, LocalDateTime.now());
+        when(diaryEntryRepository.findById(1L)).thenReturn(Optional.of(diaryEntry));
 
         // Test the service
-        DiaryEntry foundDiaryEntry = diaryEntryService.getDiaryEntryById(1);
+        DiaryEntry foundDiaryEntry = diaryEntryService.getDiaryEntryById(1L);
 
         // Verify diary entry is found
-        verify(diaryEntryRepository, times(1)).findById(1);
+        verify(diaryEntryRepository, times(1)).findById(1L);
         assertNotNull(foundDiaryEntry);
         assertEquals(1L, foundDiaryEntry.getUserId());
     }
@@ -99,29 +100,29 @@ class DiaryEntryServiceTest {
     @Test
     void testGetDiaryEntryById_NotFound() {
         // Mocking the case where the diary entry is not found
-        when(diaryEntryRepository.findById(1)).thenReturn(Optional.empty());
+        when(diaryEntryRepository.findById(1L)).thenReturn(Optional.empty());
 
         // Test the service
-        DiaryEntry foundDiaryEntry = diaryEntryService.getDiaryEntryById(1);
+        DiaryEntry foundDiaryEntry = diaryEntryService.getDiaryEntryById(1L);
 
         // Verify diary entry is not found
-        verify(diaryEntryRepository, times(1)).findById(1);
+        verify(diaryEntryRepository, times(1)).findById(1L);
         assertNull(foundDiaryEntry);
     }
 
     @Test
     void testDeleteDiaryEntryById() {
         // Test the service
-        diaryEntryService.deleteDiaryEntryById(1);
+        diaryEntryService.deleteDiaryEntryById(1L);
 
         // Verify diary entry is deleted
-        verify(diaryEntryRepository, times(1)).deleteById(1);
+        verify(diaryEntryRepository, times(1)).deleteById(1L);
     }
 
     @Test
     void testGetAllDiaryEntries() {
         // Prepare mock data
-        List<DiaryEntry> diaryEntries = Collections.singletonList(new DiaryEntry(1L, new Date()));
+        List<DiaryEntry> diaryEntries = Collections.singletonList(new DiaryEntry(1L, LocalDateTime.now()));
         when(diaryEntryRepository.findAll(any(Sort.class))).thenReturn(diaryEntries);
 
         // Test the service
@@ -134,7 +135,7 @@ class DiaryEntryServiceTest {
     @Test
     void testGetDiaryEntriesByUserId() {
         // Prepare mock data
-        List<DiaryEntry> diaryEntries = Collections.singletonList(new DiaryEntry(1L, new Date()));
+        List<DiaryEntry> diaryEntries = Collections.singletonList(new DiaryEntry(1L, LocalDateTime.now()));
         when(diaryEntryRepository.findByUserId(eq(1L), any(Sort.class))).thenReturn(diaryEntries);
 
         // Test the service

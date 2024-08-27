@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.Symptom.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -38,12 +39,12 @@ public class Symptom {
 
     @ManyToOne
     @JoinColumn(name = "EventID", nullable = true)
-    @JsonIgnore
+    @JsonBackReference
     private Event event;
 
     @ManyToOne
     @JoinColumn(name = "EntryID", nullable = true)
-    @JsonIgnore
+    @JsonBackReference
     private DiaryEntry diaryEntry;
 
 
