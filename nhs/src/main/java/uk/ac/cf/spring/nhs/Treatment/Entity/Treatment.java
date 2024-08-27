@@ -7,6 +7,8 @@ import lombok.Setter;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @Entity
@@ -23,6 +25,9 @@ public class Treatment {
     @Column(name = "TreatmentDetails")
     private String details;
 
+    @Column(name = "TreatmentDate")
+    private LocalDate date;
+
     @Column(name = "UserID", nullable = false)
     private long userId;
 
@@ -33,9 +38,10 @@ public class Treatment {
 
     protected Treatment() {}
 
-    public Treatment(String type, String details, long userId) {
+    public Treatment(String type, String details, long userId, LocalDate date) {
         this.type = type;
         this.details = details;
         this.userId = userId;
+        this.date = date;
     }
 }

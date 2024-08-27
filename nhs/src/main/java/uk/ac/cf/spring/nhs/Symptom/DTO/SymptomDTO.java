@@ -1,15 +1,19 @@
 package uk.ac.cf.spring.nhs.Symptom.DTO;
 
+import java.time.LocalDate;
+
 public class SymptomDTO {
     private String name;
     private Integer severity;
+    private LocalDate date;
 
     public SymptomDTO() {
     }
 
-    public SymptomDTO(String name, Integer severity) {
+    public SymptomDTO(String name, Integer severity, LocalDate date) {
         this.name = name;
         this.severity = severity;
+        this.date = date;
     }
 
     public String getName() {
@@ -26,6 +30,14 @@ public class SymptomDTO {
 
     public void setSeverity(Integer severity) {
         this.severity = severity;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     @Override

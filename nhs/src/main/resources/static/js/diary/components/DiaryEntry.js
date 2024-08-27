@@ -63,6 +63,10 @@ class DiaryEntry extends HTMLElement {
                     text-align: left;
                 }
                 
+                .measurement-container {
+                    margin-bottom: 1rem;
+                }
+                
                 .delete-button {
                     border: none;
                     background: none;
@@ -144,6 +148,12 @@ class DiaryEntry extends HTMLElement {
                     text-transform: lowercase;
                 }
                 
+                td, th {
+                    padding: 0.5rem;
+                    border-bottom: 1px solid lightgrey;
+                    text-align: left;
+                }
+                
                 @media (max-width: 768px) {
                     .diary-entry:hover {
                         background-color: var(--nhs-white);
@@ -223,26 +233,26 @@ class DiaryEntry extends HTMLElement {
         const mood = this.getAttribute('data-mood');
         const symptoms = JSON.parse(this.getAttribute('data-symptoms') || '[]');
         const photos = JSON.parse(this.getAttribute('data-photos') || '[]');
-        const measurements = JSON.parse(this.getAttribute('data-measurements') || '[]');
+        const nonSidedMeasurements = JSON.parse(this.getAttribute('data-nonsidedmeasurements') || '[]');
+        const twoSidedMeasurementGroups = JSON.parse(this.getAttribute('data-twosidedmeasurementgroups') || '[]');
         const notes = this.getAttribute('data-notes');
         const date = this.getAttribute('data-date');
 
-        // Clear full entry content
         const fullContent = this.shadowRoot.querySelector('.diary-entry-full');
         fullContent.innerHTML = '';
 
-        // Render the mood, symptoms, photos, measurements, and notes
         if (mood) this.renderMood(mood, fullContent);
         if (symptoms.length) this.renderSymptoms(symptoms, fullContent);
         if (photos.length) this.renderPhotos(photos, fullContent);
-        if (measurements.length) this.renderMeasurements(measurements, fullContent);
+        if (nonSidedMeasurements.length || twoSidedMeasurementGroups.length) {
+            this.renderMeasurements(nonSidedMeasurements, twoSidedMeasurementGroups, fullContent);
+        }
         if (notes) this.renderNotes(notes, fullContent);
 
         this.renderDate(date);
-
-        // Add icons for the sections that have content
-        this.addIcons(mood, symptoms, photos, measurements, notes);
+        this.addIcons(mood, symptoms, photos, nonSidedMeasurements, notes);
     }
+
 
     addIcons(mood, symptoms, photos, measurements, notes) {
         const iconContainer = this.shadowRoot.querySelector('.icon-container');
@@ -333,28 +343,143 @@ class DiaryEntry extends HTMLElement {
         fullContent.appendChild(photosSection);
     }
 
-    renderMeasurements(measurements, fullContent) {
+    renderMeasurements(nonSidedMeasurements, twoSidedMeasurementGroups, fullContent) {
+        // Filter out non-sided measurements with an empty type or value of 0
+        const filteredNonSidedMeasurements = nonSidedMeasurements
+            .filter(measurement => measurement.type && measurement.type.trim() !== '' && measurement.value !== 0);
+
+        // Filter out two-sided measurement groups with empty types and any locations where the type is empty
+        const filteredTwoSidedMeasurementGroups = twoSidedMeasurementGroups
+            .filter(group => group.type && group.type.trim() !== '')
+            .map(group => {
+                // Also filter locations inside the group
+                const filteredLocations = group.locations.filter(location => location.location && location.location.trim() !== '');
+                return { ...group, locations: filteredLocations };
+            });
+
+        // Create a section for all measurements
         const measurementsSection = document.createElement('div');
         measurementsSection.classList.add('diary-entry-section', 'measurements-section');
 
+        // Add a title for the section
         const measurementsTitle = document.createElement('h3');
         measurementsTitle.textContent = 'Measurements';
         measurementsSection.appendChild(measurementsTitle);
 
-        const measurementsList = document.createElement('ul');
-        measurements.forEach(measurement => {
-            measurementsList.innerHTML += `
-                <li class="diary-entry-measurement">
-                    <span class="measurement-type">${this.formatText(measurement.type)} - </span>
-                    <span class="measurement-value">${measurement.value}</span>
-                    <span class="measurement-unit">${measurement.unit}</span>
-                </li>
-            `;
-        });
+        // Add non-sided measurements to the section
+        if (filteredNonSidedMeasurements.length) {
+            filteredNonSidedMeasurements.forEach(measurement => {
+                const measurementContainer = document.createElement('div');
+                measurementContainer.className = 'measurement-container';
 
-        measurementsSection.appendChild(measurementsList);
+                const measurementDiv = document.createElement('div');
+
+                const measurementTitle = document.createElement('h4');
+                measurementTitle.textContent = measurement.type;
+                measurementDiv.appendChild(measurementTitle);
+
+                const valueSpan = document.createElement('span');
+                valueSpan.textContent = measurement.value;
+                measurementDiv.appendChild(valueSpan);
+
+                const unitSpan = document.createElement('span');
+                unitSpan.textContent = ` ${measurement.unit}`;
+                measurementDiv.appendChild(unitSpan);
+
+                measurementContainer.appendChild(measurementDiv);
+                measurementsSection.appendChild(measurementContainer);
+            });
+        }
+
+        // Add two-sided measurement groups to the section
+        if (filteredTwoSidedMeasurementGroups.length) {
+            filteredTwoSidedMeasurementGroups.forEach(group => {
+                const measurementContainer = document.createElement('div');
+                measurementContainer.className = 'measurement-container';
+
+                const groupTitle = document.createElement('h4');
+                groupTitle.textContent = group.type;
+                measurementsSection.appendChild(groupTitle);
+
+                const table = document.createElement('table');
+                const thead = document.createElement('thead');
+                const trHeader = document.createElement('tr');
+
+                // Create the header row for the table
+                trHeader.innerHTML = `
+                <th>Location</th>
+                <th>Left Side</th>
+                <th>Right Side</th>
+            `;
+                thead.appendChild(trHeader);
+                table.appendChild(thead);
+
+                const tbody = document.createElement('tbody');
+
+                // Populate the table with two-sided measurements
+                group.locations.forEach(location => {
+                    const tr = document.createElement('tr');
+
+                    const locationCell = document.createElement('td');
+                    locationCell.textContent = location.location || 'Unknown Location';
+                    tr.appendChild(locationCell);
+
+                    const leftCell = document.createElement('td');
+                    leftCell.textContent = location.leftMeasurement
+                        ? `${location.leftMeasurement.value}${location.leftMeasurement.unit}`
+                        : '-';
+                    tr.appendChild(leftCell);
+
+                    const rightCell = document.createElement('td');
+                    rightCell.textContent = location.rightMeasurement
+                        ? `${location.rightMeasurement.value}${location.rightMeasurement.unit}`
+                        : '-';
+                    tr.appendChild(rightCell);
+
+                    tbody.appendChild(tr);
+                });
+
+                table.appendChild(tbody);
+
+                measurementContainer.appendChild(table);
+                measurementsSection.appendChild(measurementContainer);
+            });
+        }
+
+        // Append the combined measurements section to the full content
         fullContent.appendChild(measurementsSection);
     }
+
+
+    groupMeasurementsByType(measurements) {
+        const groupedMeasurements = [];
+
+        measurements.forEach(measurement => {
+            // Find existing group or create a new one
+            let group = groupedMeasurements.find(g => g.type === measurement.type);
+            if (!group) {
+                group = { type: measurement.type, locations: [] };
+                groupedMeasurements.push(group);
+            }
+
+            // Find or create location entry
+            let locationEntry = group.locations.find(l => l.location === measurement.location);
+            if (!locationEntry) {
+                locationEntry = { location: measurement.location, leftMeasurement: null, rightMeasurement: null };
+                group.locations.push(locationEntry);
+            }
+
+            // Assign the measurement to the correct side
+            if (measurement.side === 'left') {
+                locationEntry.leftMeasurement = measurement;
+            } else if (measurement.side === 'right') {
+                locationEntry.rightMeasurement = measurement;
+            }
+        });
+
+        return groupedMeasurements;
+    }
+
 
     renderNotes(notes, fullContent) {
         const notesSection = document.createElement('div');

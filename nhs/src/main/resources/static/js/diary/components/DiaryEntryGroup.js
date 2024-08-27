@@ -34,13 +34,16 @@ class DiaryEntryGroup extends HTMLElement {
 
         // Create a diary entry component for each entry
         entries.forEach(entry => {
+            console.log(entry)
             const diaryEntry = document.createElement('diary-entry');
             diaryEntry.setAttribute('data-id', entry.id);
             diaryEntry.setAttribute('data-date', entry.date);
             diaryEntry.setAttribute('data-mood', entry.mood);
             diaryEntry.setAttribute('data-symptoms', JSON.stringify(entry.symptoms));
             diaryEntry.setAttribute('data-photos', JSON.stringify(entry.photos));
-            diaryEntry.setAttribute('data-measurements', JSON.stringify(entry.measurements));
+            // diaryEntry.setAttribute('data-measurements', JSON.stringify(entry.measurements));
+            diaryEntry.setAttribute('data-nonsidedmeasurements', JSON.stringify(entry.nonSidedMeasurements || []));
+            diaryEntry.setAttribute('data-twosidedmeasurementgroups', JSON.stringify(entry.twoSidedMeasurementGroups || []));
             diaryEntry.setAttribute('data-notes', entry.notes);
 
             // Listen for removal events from diary entry components

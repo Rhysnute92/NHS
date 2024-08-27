@@ -8,6 +8,8 @@ import org.hibernate.annotations.Filter;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @Entity
@@ -28,6 +30,15 @@ public class Measurement {
     @Column(name = "MeasurementUnit")
     private String unit;
 
+    @Column(name = "MeasurementLocation")
+    private String location;
+
+    @Column(name = "MeasurementDate")
+    private LocalDate date;
+
+    @Column(name = "MeasurementSide")
+    private String side;
+
     @Column(name = "UserID")
     private long userId;
 
@@ -39,10 +50,27 @@ public class Measurement {
     protected Measurement() {}
 
     // Constructor for standalone measurement
-    public Measurement(String type, float value, String unit, long userId) {
+    public Measurement(String type, float value, String unit, long userId, LocalDate date, String location, String side) {
         this.type = type;
         this.value = value;
         this.unit = unit;
         this.userId = userId;
+        this.date = date;
+        this.location = location;
+        this.side = side;
+    }
+
+    @Override
+    public String toString() {
+        return "Measurement{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", value=" + value +
+                ", unit='" + unit + '\'' +
+                ", location='" + location + '\'' +
+                ", date=" + date +
+                ", side='" + side + '\'' +
+                ", userId=" + userId +
+                '}';
     }
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/provider}"
+>
+<head>
+  <title>Patient Statistics</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" th:href="@{/css/patientprofile/patientTrends.css}" />
+  <link rel="stylesheet" th:href="@{/css/common/main.css}" />
+  <link rel="stylesheet" th:href="@{/css/common/defaultLayout.css}" />
+</head>
+<body>
+<main layout:fragment="content" class="main-content">
+  <h1 class="page-title">Patient Trends</h1>
+  <div class="container">
+    <tabs-container>
+      <div slot="tab">Mood</div>
+      <div slot="tab">Symptoms</div>
+      <div slot="tab">Measurements</div>
+
+      <!-- Mood chart tab content -->
+      <div slot="content" class="tab-content" data-chart="mood">
+        <label for="startDateMood">Start Date:</label>
+        <input type="date" id="startDateMood">
+
+        <label for="endDateMood">End Date:</label>
+        <input type="date" id="endDateMood">
+
+        <canvas id="moodChart" class="patient-chart" width="916" height="458" style="display: block; box-sizing: border-box; height: 382px; width: 764px;"></canvas>
+      </div>
+
+      <!-- Symptoms chart tab content -->
+      <div slot="content" class="tab-content" data-chart="symptoms">
+        <label for="startDateSymptoms">Start Date:</label>
+        <input type="date" id="startDateSymptoms">
+
+        <label for="endDateSymptoms">End Date:</label>
+        <input type="date" id="endDateSymptoms">
+
+        <!-- Dropdown for selecting symptom type -->
+        <label for="symptomType">Select Symptom Type:</label>
+        <select id="symptomType">
+          <option value="" disabled selected>Select a symptom</option>
+          <option th:each="symptomType : ${symptomTypes}"
+                  th:value="${symptomType}"
+                  th:text="${symptomType}">
+          </option>
+        </select>
+        <canvas id="symptomsChart" class="patient-chart" width="916" height="458" style="display: block; box-sizing: border-box; height: 382px; width: 764px;"></canvas>
+      </div>
+
+      <!-- Measurements chart tab content -->
+      <div slot="content" class="tab-content" data-chart="measurements">
+        <label for="startDateMeasurements">Start Date:</label>
+        <input type="date" id="startDateMeasurements">
+
+        <label for="endDateMeasurements">End Date:</label>
+        <input type="date" id="endDateMeasurements">
+
+        <!-- Dropdown for selecting measurement type -->
+        <label for="measurementType">Select Measurement Type:</label>
+        <select id="measurementType">
+          <option value="" disabled selected>Select a measurement</option>
+          <option th:each="measurementType : ${measurementTypes}"
+                  th:value="${measurementType}"
+                  th:text="${measurementType}">
+          </option>
+        </select>
+        <canvas id="measurementsChart" class="patient-chart" width="916" height="458" style="display: block; box-sizing: border-box; height: 382px; width: 764px;"></canvas>
+      </div>
+
+    </tabs-container>
+  </div>
+</main>
+<th:block layout:fragment="scripts">
+  <script th:src="@{/js/common/components/tabsContainer.js}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <script th:src="@{/js/patientprofile/patientTrends.js}"></script>
+</th:block>
+</body>
+</html>
