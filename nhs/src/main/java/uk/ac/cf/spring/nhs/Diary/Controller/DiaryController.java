@@ -25,14 +25,17 @@ public class DiaryController {
     @Autowired
     DiaryEntryService diaryEntryService;
 
-    @GetMapping("")
-    public String diary(Model model,
-                        @AuthenticationPrincipal CustomUserDetails user
-    ) {
-        Long userId = user.getUserId();
-        List<DiaryEntry> diaryEntries = diaryEntryService.getDiaryEntriesByUserId(userId);
-        model.addAttribute("diaryEntries", diaryEntries);
+    @GetMapping
+    public String diary() {
         return "diary/diary";
+    }
+
+    @ResponseBody
+    @GetMapping("/entries")
+    public List<DiaryEntry> getDiaryEntries(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        Long userId = userDetails.getUserId();
+        List<DiaryEntry> diaryEntries = diaryEntryService.getDiaryEntriesByUserId(userId);
+        return diaryEntries;
     }
 
     @GetMapping("/checkin")
@@ -60,6 +63,17 @@ public class DiaryController {
             return ResponseEntity.badRequest().body(errorResponse);
         }
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteDiaryEntry(@PathVariable Long id) {
+        boolean deleted = diaryEntryService.deleteById(id);
+        if (deleted) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {
