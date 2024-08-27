@@ -147,7 +147,11 @@ public class DiaryEntryService {
             endDate = LocalDate.now();
         }
 
-        return diaryEntryRepository.findByUserIdAndDateBetween(userId, startDate, endDate);
+        // Convert LocalDate to LocalDateTime
+        LocalDateTime startDateTime = startDate.atStartOfDay();
+        LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
+
+        return diaryEntryRepository.findByUserIdAndDateBetween(userId, startDateTime, endDateTime);
     }
 
     public List<MoodDTO> getMoodByUserIdAndDateRange(Long userId, LocalDate startDate, LocalDate endDate) {
@@ -159,8 +163,13 @@ public class DiaryEntryService {
             endDate = LocalDate.now();
         }
 
-        return diaryEntryRepository.findMoodByUserIdAndDateBetween(userId, startDate, endDate);
+        // Convert LocalDate to LocalDateTime
+        LocalDateTime startDateTime = startDate.atStartOfDay();
+        LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
+
+        return diaryEntryRepository.findMoodByUserIdAndDateBetween(userId, startDateTime, endDateTime);
     }
+
 
     public boolean deleteById(Long id) {
         if (diaryEntryRepository.existsById(id)) {

@@ -10,16 +10,17 @@ import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Diary.Entity.Mood;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public interface DiaryEntryRepository extends JpaRepository<DiaryEntry, Long> {
     List<DiaryEntry> findByUserId(long userId, Sort sort);
 
-    List<DiaryEntry> findByUserIdAndDateBetween(Long userId, LocalDate startDate, LocalDate endDate);
+    List<DiaryEntry> findByUserIdAndDateBetween(Long userId, LocalDateTime startDate, LocalDateTime endDate);
 
     @Query("SELECT new uk.ac.cf.spring.nhs.Diary.DTO.MoodDTO(d.mood, d.date) " +
             "FROM DiaryEntry d " +
             "WHERE d.userId = :userId AND d.date BETWEEN :startDate AND :endDate")
-    List<MoodDTO> findMoodByUserIdAndDateBetween(@Param("userId") Long userId, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    List<MoodDTO> findMoodByUserIdAndDateBetween(@Param("userId") Long userId, @Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 }

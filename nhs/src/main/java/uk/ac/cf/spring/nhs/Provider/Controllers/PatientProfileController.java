@@ -95,6 +95,8 @@ public class PatientProfileController {
         List<String> measurementTypes = measurementService.findDistinctMeasurementLocationsByUserId(userId);
         List<String> symptomTypes = symptomService.findDistinctSymptomTypesByUserId(userId);
 
+        System.out.println("Symptom types: " + symptomTypes);
+        System.out.println("Measurement types: " + measurementTypes);
         // Add them to the model
         model.addAttribute("measurementTypes", measurementTypes);
         model.addAttribute("symptomTypes", symptomTypes);
