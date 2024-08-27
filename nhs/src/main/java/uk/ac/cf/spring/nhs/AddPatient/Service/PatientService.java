@@ -44,6 +44,9 @@ public class PatientService {
     @Autowired
     private EmailService emailService;
 
+    //TEMPORARY ENCODED KEY TO USE FOR ALL PATIENTS
+    private String tempKey = "xlHXWQORPy97Go4sJsrY+XNNEx59m/NaDZ7K7OOuEVY=";
+
     //Repository search functions
     public Patient findPatientbyId(long userId){
         Patient user = patientRepository.findById(userId);
@@ -56,14 +59,16 @@ public class PatientService {
     public List<Patient> patientGeneralSearch(SearchRequest request){
         //Set the example values
         Patient model = new Patient();
+        SecretKey secretKey = decodeKey(tempKey);
+        try{
         if(request.getPatientName() != ""){
-            model.setPatientName(request.getPatientName());
+            model.setPatientName(encrypt(request.getPatientName(), secretKey));
         }
         if(request.getPatientLastName() != ""){
-            model.setPatientLastName(request.getPatientLastName());
+            model.setPatientLastName(encrypt(request.getPatientLastName(), secretKey));
         }
         if(request.getPatientEmail() != ""){
-            model.setPatientEmail(request.getPatientEmail());
+            model.setPatientEmail(encrypt(request.getPatientEmail(), secretKey));
         }
         model.setPatientDOB(request.getPatientDOB());
         //Set matching rules
@@ -76,7 +81,11 @@ public class PatientService {
         //Search with example
         Example<Patient> example = Example.of(model, matcher);
         List<Patient> result = patientRepository.findAll(example);
-        return result;
+        return result;}
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     // Generating a key for the patient
@@ -126,7 +135,9 @@ public class PatientService {
 
     public String registerPatient(RegisterRequest request) {
         try {
-            SecretKey secretKey = generatePatientKey();
+            //SecretKey secretKey = generatePatientKey();
+            //Temporarily switched to using a single pre-set key to ensure search function can work
+            SecretKey secretKey = decodeKey(tempKey);
             String encryptedEmail = encrypt(request.getPatientEmail(), secretKey);
             String encryptedMobile = encrypt(request.getPatientMobile(), secretKey);
             String encryptedName = encrypt(request.getPatientName(), secretKey);
