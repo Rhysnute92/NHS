@@ -34,10 +34,11 @@
         </div>
     </div>
         <form th:action="@{/logout}" method="post" class="logout">
-            <input type="submit" class="logout-button primary" value="LOG OUT"/>
+            <nhs-button type="submit" class="logout-button primary">Log out</nhs-button>
         </form>
     </div>
 </main>
+<script th:src="@{/js/common/components/NHSButton.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>
