@@ -10,7 +10,6 @@ body {
 }
 
 .management-container {
-  padding: 1em;
   background-color: var(--nhs-pale-grey);
 }
 
@@ -85,10 +84,6 @@ ul {
   .management-desktop-title,
   .management-desktop-subtitle {
     display: none;
-  }
-
-  .management-container {
-    margin-top: 1.5em;
   }
 
   .collapsible:hover:not(.expanded) {
