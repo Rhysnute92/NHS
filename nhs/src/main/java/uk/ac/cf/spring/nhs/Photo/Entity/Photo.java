@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.Photo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.Setter;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Event.Entity.Event;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -24,7 +26,7 @@ public class Photo {
     private String url;
 
     @Column(name = "PhotoDate")
-    private Date date;
+    private LocalDate date;
 
     @Column(name = "PhotoBodyPart")
     private String bodyPart;
@@ -33,22 +35,17 @@ public class Photo {
     private long userId;
 
     @ManyToOne
-    @JoinColumn(name = "EventID", nullable = true)
-    @JsonIgnore
-    private Event event;
-
-    @ManyToOne
     @JoinColumn(name = "EntryID", nullable = true)
-    @JsonIgnore
+    @JsonBackReference
     private DiaryEntry diaryEntry;
 
     protected Photo() {}
 
     // Constructor for standalone photo
-    public Photo(String url, Date date, String bodyPart, long userId) {
+    public Photo(String url, String bodyPart, long userId, LocalDate date) {
         this.url = url;
-        this.date = date;
         this.bodyPart = bodyPart;
         this.userId = userId;
+        this.date = date;
     }
 }

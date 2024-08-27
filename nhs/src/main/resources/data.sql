@@ -716,7 +716,7 @@ INSERT INTO Providers (
         ProviderOccupation,
         UserID
     )
-# VALUES ('Jane', 'Doe', 'Mrs', 'Nurse', 3);
+VALUES ('Jane', 'Doe', 'Mrs', 'Nurse', 3);
 # INSERT INTO UserWidgets (UserID, WidgetName, Position)
 # VALUES (2, 'health-action-tracker', 1);
 INSERT INTO Task (TaskType, TaskName, TaskDesc, TaskRepeatPeriod)
@@ -784,6 +784,13 @@ VALUES
 
 
 -- Insert data into Measurements
+INSERT INTO Measurements (MeasurementType, MeasurementValue, MeasurementUnit, UserID, EntryID, MeasurementDate, MeasurementLocation)
+VALUES
+    ('Weight', 70, 'kg', 2, 1, '2024-08-20 08:30:00', 'Weight'),
+    ('Weight', 71, 'kg', 2, 3, '2024-08-21 10:15:00', 'Weight'),
+    ('Weight', 71.5, 'kg', 2, 4, '2024-08-22 09:00:00', 'Weight'),
+    ('Weight', 71, 'kg', 2, 5, '2024-08-23 18:20:00', 'Weight');
+
 # INSERT INTO Measurements (MeasurementType, MeasurementValue, MeasurementUnit, UserID, EntryID, MeasurementDate, MeasurementLocation)
 # VALUES
 #     ('Weight', 70, 'kg', 2, 1, '2024-08-20 08:30:00', 'Weight'),
@@ -830,4 +837,12 @@ VALUES
     ('Pain', 4, '2024-08-21 10:30:00', TRUE, 2, NULL, 3),
     ('Trouble sleeping', 3, '2024-08-23 08:00:00', TRUE, 2, NULL, 5),
     ('Numbness', 2, '2024-08-22 09:15:00', TRUE, 2, NULL, 4),
-    ('Fever', 3, '2024-08-23 12:45:00', TRUE, 2, NULL, 5);
+    ('Fever', 3, '2024-08-23 12:45:00', TRUE, 2, NULL, 5),
+    ('Pain', 3, '2024-08-22 10:30:00', TRUE, 2, NULL, 3),
+    ('Trouble sleeping', 2, '2024-08-24 08:00:00', TRUE, 2, NULL, 5),
+    ('Numbness', 3, '2024-08-23 09:15:00', TRUE, 2, NULL, 4),
+    ('Fever', 4, '2024-08-24 12:45:00', TRUE, 2, NULL, 5),
+    ('Pain', 1, '2024-08-23 10:30:00', TRUE, 2, NULL, 3),
+    ('Trouble sleeping', 4, '2024-08-25 08:00:00', TRUE, 2, NULL, 5),
+    ('Numbness', 1, '2024-08-24 09:15:00', TRUE, 2, NULL, 4),
+    ('Fever', 3, '2024-08-25 12:45:00', TRUE, 2, NULL, 5);

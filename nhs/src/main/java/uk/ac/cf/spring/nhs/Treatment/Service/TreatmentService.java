@@ -6,6 +6,7 @@ import uk.ac.cf.spring.nhs.Treatment.Entity.Treatment;
 import uk.ac.cf.spring.nhs.Treatment.DTO.TreatmentDTO;
 import uk.ac.cf.spring.nhs.Treatment.Repository.TreatmentRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +23,8 @@ public class TreatmentService {
         Treatment treatment = new Treatment(
                 treatmentDTO.getType(),
                 treatmentDTO.getDetails(),
-                userId
+                userId,
+                LocalDate.now()
         );
 
         return treatmentRepository.save(treatment);
