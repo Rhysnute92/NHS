@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+
 import uk.ac.cf.spring.nhs.Account.PatientProfileDTO;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestParam;
 import uk.ac.cf.spring.nhs.AddPatient.Service.PatientService;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
+import uk.ac.cf.spring.nhs.Event.Service.EventService;
 import uk.ac.cf.spring.nhs.Diary.DTO.MoodDTO;
-import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
-import uk.ac.cf.spring.nhs.Diary.Entity.Mood;
 import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
 import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Measurement.Service.MeasurementService;
@@ -51,20 +52,21 @@ public class PatientProfileController {
     @Autowired
     private PhotoService photoService;
 
+    @Autowired
+    private EventService eventService;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {
         return List.of(
                 new NavMenuItem("Patient", "/patientprofile/info", "fa-solid fa-user-check"),
-                new NavMenuItem("Set plan", "", "fa-solid fa-book"),
-                new NavMenuItem("Appointments", " ", "fa-solid fa-user-check"),
+                new NavMenuItem("Set plan", "/patientprofile/plan", "fa-solid fa-book"),
                 new NavMenuItem("Questionnaires", "/patientprofile/questionnairehub",
                         "fa-solid fa-book"),
                 new NavMenuItem("Patient trends", "/patientprofile/trends", "fa-solid fa-user-check"),
-                new NavMenuItem("Event log", " ", "fa-solid fa-book"),
                 new NavMenuItem("Photos", "/patientprofile/photos", "fa-solid fa-camera"),
-                new NavMenuItem("Email history", " ", "fa-solid fa-book"));
+                new NavMenuItem("Event log", "/patientprofile/events", "fa-solid fa-receipt"));
     }
 
     @ModelAttribute("userID")
@@ -148,6 +150,28 @@ public class PatientProfileController {
         model.addAttribute("objectMapper", objectMapper);
         model.addAttribute("photos", photoService.getPhotosByUserId(userID));
         return "patientprofile/photos";
+    }
+
+    @GetMapping("/events")
+    public String showEvents(Model model, @ModelAttribute("userID") Long userID) {
+        // Add ObjectMapper to model so Thymeleaf can use it to convert to JSON
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        model.addAttribute("objectMapper", objectMapper);
+
+        model.addAttribute("events", eventService.getEventsByUserId(userID));
+        return "patientprofile/events";
+    }
+
+    @GetMapping("/plan")
+    public String treatmentPlanPage(){
+        return "patientprofile/treatmentPlan";
+    }
+
+    @GetMapping("/setplan")
+    public String treatmentPlanSet(){
+        return "patientprofile/setPlan";
     }
 
 }

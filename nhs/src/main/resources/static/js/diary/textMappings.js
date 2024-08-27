@@ -1,16 +1,24 @@
 // Map symptom and treatment data to text
-export const treatmentText = {
+export const patientTreatmentText = {
     'hospital': 'I was admitted to hospital',
     'antibiotics': 'I was prescribed oral antibiotics',
-    'IV antibiotics': 'I received IV antibiotics',
+    'antibioticsIV': 'I received IV antibiotics',
     'painkillers': 'I took painkillers'
+};
+
+export const providerTreatmentText = {
+    'hospital': 'Patient was admitted to hospital',
+    'antibiotics': 'Patient was prescribed oral antibiotics',
+    'antibioticsIV': 'Patient received IV antibiotics',
+    'painkillers': 'Patient took painkillers'
 };
 
 export const symptomNameText = {
     'redness': 'Redness',
     'swelling': 'Swelling',
     'blisteredSkin': 'Blistered skin',
-    'pain': 'Pain'
+    'pain': 'Pain',
+    'fever': 'Fever'
 }
 
 export const symptomSeverityText = {

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import uk.ac.cf.spring.nhs.Common.util.BitmaskUtility;
 import uk.ac.cf.spring.nhs.Common.util.DateUtils;
+import uk.ac.cf.spring.nhs.Task.Model.Task;
 import uk.ac.cf.spring.nhs.UserTask.Model.UserTask;
 import uk.ac.cf.spring.nhs.UserTask.Repository.JpaUserTaskRepository;
 import uk.ac.cf.spring.nhs.UserTaskLog.Model.UserTaskLog;
@@ -138,8 +140,12 @@ public class UserTaskService {
      * @param userTask the user task details to be saved
      * @return the saved user task details
      */
-    public UserTask assignTaskToUser(UserTask userTask) {
-        return userTaskRepository.save(userTask); // TODO: add exception handling
+
+    public UserTask assignTaskToUser(Task task, Long userId) {
+        UserTask userTask = new UserTask();
+        userTask.setTask(task);
+        userTask.setUserID(userId);
+        return userTaskRepository.save(userTask);
     }
 
     /**
@@ -200,4 +206,10 @@ public class UserTaskService {
         userTaskRepository.delete(userTask); // TODO: add exception handling
     }
 
+    public void deleteAllTasksForUser(Long userId){
+        List<UserTask> allTasks = getTasksForUser(userId);
+        for(UserTask task: allTasks){
+            deleteUserTask(task.getId());
+        }
+    }
 }
