@@ -126,6 +126,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         await WidgetService.fetchAvailableWidgets();
       renderWidgets(updatedUserWidgets, "current-widgets-grid");
       renderAvailableWidgets(updatedAvailableWidgets, "available-widgets-grid");
+      setupWidgetSelection();
     } catch (error) {
       console.error("Error adding widgets:", error);
       alert("Failed to add selected widgets.");
@@ -184,6 +185,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         await WidgetService.fetchAvailableWidgets();
       renderWidgets(updatedUserWidgets, "current-widgets-grid");
       renderAvailableWidgets(updatedAvailableWidgets, "available-widgets-grid");
+      setupWidgetSelection();
     } catch (error) {
       console.error("Error removing widgets:", error);
       alert("Failed to remove selected widgets.");
