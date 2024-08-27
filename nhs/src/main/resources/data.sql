@@ -13,6 +13,31 @@ VALUES (
         'testProvider',
         '$2a$10$cibnUtr2BBkAQ2HibZDFWOarJcCtfRg1uj0HcfEd8z2WQyN4EePlC',
         'ROLE_PROVIDER'
+    ),
+    (
+        'ms@testmail.ua',
+        '$2a$10$VCmoUTlG5pfm0T8KuEFyZ.64mk0Y6xhpuoUjbUiEZqm4JyAOErnpG',
+        'ROLE_PATIENT'
+    ),
+        (
+        'db@testmail.com',
+        '$2a$10$dV3B.pHh4trd.xu3O0zw5eAendv3pRHbpBG4llYOxywUHg89d542S',
+        'ROLE_PATIENT'
+    ),
+        (
+        'es@testmail.uk',
+        '$2a$10$l93GjjS.lMd7z3cjFIJLqugkTOqoh4Ly5e7HIM88s.mrTlSz4UHkO',
+        'ROLE_PATIENT'
+    ),
+    (
+        'sa@testEmail.ua',
+        '$2a$10$WJQ0iV7zpX07m.rKSPakr.6Yyyuorvcbh0ROHpoWuNyf7Q.OR9oSm',
+        'ROLE_PATIENT'
+    ),
+    (
+        'am@testEmail.uk',
+        '$2a$10$Nv/oBsP/AARjTesWOeShI.l.aS30cqDqrTCz6/Lq8CvkBGnb2RCwu',
+        'ROLE_PATIENT'
     );
 INSERT INTO Questionnaires (
         QuestionnaireType,
