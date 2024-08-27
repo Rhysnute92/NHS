@@ -6,6 +6,9 @@
 
 .main-container {
     display: flex;
+}
+
+.centre-container {
     width: 100%;
     background-color: var(--nhs-pale-grey);
 }

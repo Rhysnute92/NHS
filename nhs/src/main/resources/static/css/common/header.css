@@ -6,24 +6,20 @@ header {
     justify-content: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-
 .header-container, .header {
-    height: 2.8rem;
     min-height: 30px;
     display: flex;
     align-items: center;
     padding: clamp(15px, 1.4rem, 1.4rem);
     background-color: var(--nhs-blue);
     justify-content: flex-start;
-    box-sizing: content-box;
     color: var(--nhs-white);
     position: relative;
-    max-width: 1000px;
     border-bottom: 1px solid rgb(255, 255, 255, 0.3);
     width: 100%;
-    margin: 0 2rem;
 }
 
 .header-logo-link {
@@ -34,7 +30,7 @@ header {
 }
 
 .header-logo {
-    height: 100%;
+    height: clamp(30px, 3rem, 3rem);
     width: auto;
 }
 
@@ -65,12 +61,12 @@ header {
 
 .navmenu-toggle-icon {
     position: absolute;
-    left: clamp(15px, 4vh, 4vh);
+    left: clamp(15px, 1.5rem, 1.5rem);
 }
 
 .profile-icon {
     position: absolute;
-    right: clamp(15px, 4vh, 4vh);
+    right: clamp(15px, 1.5rem, 1.5rem);
     text-decoration: none;
 }
 
@@ -81,9 +77,13 @@ header {
 
 @media (max-width: 480px) {
     .header-container {
-        height: 4vh;
-        padding: clamp(15px, 2vh, 2vh);
+        height: auto;
+        padding: clamp(15px, 1rem, 1rem);
         justify-content: center;
+    }
+
+    .header-logo {
+        height: clamp(30px, 2rem, 2rem);
     }
 
     .header-icon {
