@@ -32,10 +32,20 @@ public class UserWidgetService {
         return userWidgetRepository.save(UserWidget);
     }
 
+    /**
+     * Deletes a UserWidgets object from the repository by ID.
+     *
+     * @param userWidgetID the ID of the UserWidgets object to be deleted
+     */
     public void deleteUserWidgetById(Long userWidgetID) {
         userWidgetRepository.deleteById(userWidgetID);
     }
 
+    /**
+     * Deletes a list of UserWidgets objects from the repository by ID.
+     *
+     * @param userWidgetIds the IDs of the UserWidgets objects to be deleted
+     */
     public void deleteUserWidgetsByIdList(List<Long> userWidgetIds) {
         userWidgetRepository.deleteAllById(userWidgetIds);
     }

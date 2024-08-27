@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,6 +49,35 @@ public class UserWidgetController {
         }
 
         userWidgetService.deleteUserWidgetsByIdList(widgetIds);
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Adds a list of user widgets for a given user ID.
+     *
+     * @param widgetNames a list of widget names to be added
+     * @return a ResponseEntity containing no content if the operation was
+     *         successful,
+     *         a bad request response if the user ID is null or less than or equal
+     *         to zero,
+     *         or a bad request response if the widgetNames list is null or empty
+     */
+    @PostMapping("/api/user-widgets/add")
+    public ResponseEntity<Void> addUserWidgets(@RequestBody List<String> widgetNames) {
+        if (widgetNames == null || widgetNames.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Object principal = authenticationFacade.getAuthentication().getPrincipal();
+        Long userId = ((CustomUserDetails) principal).getUserId();
+
+        widgetNames.forEach(widgetName -> {
+            UserWidgets userWidget = new UserWidgets();
+            userWidget.setUserID(userId);
+            userWidget.setWidgetName(widgetName);
+            userWidgetService.saveUserWidget(userWidget);
+        });
+
         return ResponseEntity.noContent().build();
     }
 

@@ -8,6 +8,15 @@ export class WidgetService {
     return response.json();
   }
 
+  static async fetchAvailableWidgets() {
+    const response = await fetch(`/api/widgets/available`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch available widgets");
+    }
+    return response.json();
+  }
+
   static async fetchWidgetFragment(widgetName) {
     const response = await fetch(`/api/widgets/${widgetName}`);
 
@@ -23,18 +32,37 @@ export class WidgetService {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(widgetIds), // Correctly formatted to just send the array
+      body: JSON.stringify(widgetIds),
     });
 
     if (!response.ok) {
       throw new Error("Failed to remove widgets");
     }
 
-    // Only parse the response as JSON if the response is not 204 No Content
     if (response.status !== 204) {
       return response.json();
     } else {
-      return {}; // Return an empty object or another value to indicate success
+      return {};
+    }
+  }
+
+  static async addUserWidgets(widgetNames) {
+    const response = await fetch(`/api/user-widgets/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(widgetNames),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to add widgets");
+    }
+
+    if (response.status !== 204) {
+      return response.json();
+    } else {
+      return {};
     }
   }
 }

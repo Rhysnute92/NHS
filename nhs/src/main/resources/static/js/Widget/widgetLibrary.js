@@ -8,10 +8,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   try {
     console.log(`[${timestamp}] [${logId}] Initializing widget library page`);
     const userWidgets = await WidgetService.fetchUserWidgets();
+    const availableWidgets = await WidgetService.fetchAvailableWidgets();
     console.log(`[${timestamp}] [${logId}] User widgets:`, userWidgets);
+    console.log(
+      `[${timestamp}] [${logId}] Available widgets:`,
+      availableWidgets
+    );
 
     // Render current user widgets on the dashboard
     renderWidgets(userWidgets, "current-widgets-grid");
+
+    // Render available widgets not on the dashboard
+    renderAvailableWidgets(availableWidgets, "available-widgets-grid");
 
     // Handle click events for widgets to indicate selection
     setupWidgetSelection();
@@ -20,6 +28,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     document
       .querySelector(".remove-widget-button")
       .addEventListener("click", removeSelectedWidgets);
+
+    // Handle click event for the add widget button
+    document
+      .querySelector(".add-widget-button")
+      .addEventListener("click", addSelectedWidgets);
   } catch (error) {
     console.error(`[${timestamp}] [${logId}] Error occurred:`, error);
   }
@@ -36,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       const widgetIcon = document.createElement("div");
       widgetIcon.className = "widget-icon";
-      widgetIcon.dataset.userwidgetid = widget.userWidgetID; // Corrected to lowercase
+      widgetIcon.dataset.userwidgetid = widget.userWidgetID;
       console.log(`Assigned userWidgetID: ${widget.userWidgetID}`);
 
       const formattedName = formatWidgetName(widget.widgetName);
@@ -55,6 +68,69 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
+  function renderAvailableWidgets(widgetNames, containerId) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = ""; // Clear any existing content
+
+    widgetNames.forEach((widgetName) => {
+      console.log(`Rendering available widget: ${widgetName}`);
+      const widgetItem = document.createElement("div");
+      widgetItem.className = "widget-item";
+      widgetItem.dataset.widgetName = widgetName;
+
+      const widgetIcon = document.createElement("div");
+      widgetIcon.className = "widget-icon";
+      widgetIcon.dataset.widgetname = widgetName;
+
+      const formattedName = formatWidgetName(widgetName);
+      const widgetNameElem = document.createElement("p");
+      widgetNameElem.className = "widget-name";
+      widgetNameElem.textContent = formattedName;
+
+      widgetItem.appendChild(widgetIcon);
+      widgetItem.appendChild(widgetNameElem);
+      container.appendChild(widgetItem);
+
+      // click event to select/deselect widget
+      widgetItem.addEventListener("click", function () {
+        widgetItem.classList.toggle("selected");
+      });
+    });
+  }
+  async function addSelectedWidgets() {
+    const selectedWidgets = document.querySelectorAll(
+      "#available-widgets-grid .widget-icon.selected"
+    );
+    const widgetNamesToAdd = Array.from(selectedWidgets).map((widget) => {
+      return widget.dataset.widgetname; // Directly use the dataset attribute
+    });
+
+    console.log(
+      `[${timestamp}] [${logId}] Selected widgets to add:`,
+      widgetNamesToAdd
+    );
+
+    if (widgetNamesToAdd.includes(undefined) || widgetNamesToAdd.length === 0) {
+      alert("No widgets selected for addition.");
+      return;
+    }
+
+    try {
+      await WidgetService.addUserWidgets(widgetNamesToAdd);
+      console.log(
+        `[${timestamp}] [${logId}] Selected widgets added successfully.`
+      );
+      // Refresh the lists after adding widgets
+      const updatedUserWidgets = await WidgetService.fetchUserWidgets();
+      const updatedAvailableWidgets =
+        await WidgetService.fetchAvailableWidgets();
+      renderWidgets(updatedUserWidgets, "current-widgets-grid");
+      renderAvailableWidgets(updatedAvailableWidgets, "available-widgets-grid");
+    } catch (error) {
+      console.error("Error adding widgets:", error);
+      alert("Failed to add selected widgets.");
+    }
+  }
   function setupWidgetSelection() {
     document.querySelectorAll(".widget-icon").forEach((item) => {
       item.addEventListener("click", function () {
@@ -102,7 +178,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       console.log(
         `[${timestamp}] [${logId}] Selected widgets removed successfully.`
       );
-      selectedWidgets.forEach((widget) => widget.remove()); // Remove from UI
+      // Refresh the lists after removing widgets
+      const updatedUserWidgets = await WidgetService.fetchUserWidgets();
+      const updatedAvailableWidgets =
+        await WidgetService.fetchAvailableWidgets();
+      renderWidgets(updatedUserWidgets, "current-widgets-grid");
+      renderAvailableWidgets(updatedAvailableWidgets, "available-widgets-grid");
     } catch (error) {
       console.error("Error removing widgets:", error);
       alert("Failed to remove selected widgets.");
