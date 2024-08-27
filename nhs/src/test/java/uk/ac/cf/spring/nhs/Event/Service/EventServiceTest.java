@@ -58,7 +58,7 @@ class EventServiceTest {
         EventDTO eventDTO = new EventDTO();
         eventDTO.setDate(LocalDate.now());
         eventDTO.setDuration(120);
-        eventDTO.setSymptoms(Collections.singletonList(new SymptomDTO("Headache", 5)));
+        eventDTO.setSymptoms(Collections.singletonList(new SymptomDTO("Headache", 5, LocalDate.now())));
         eventDTO.setTreatments(Collections.singletonList(new TreatmentDTO("Medication", "Ibuprofen")));
 
         Event event = new Event(eventDTO.getDate(), eventDTO.getDuration(), 1L);
