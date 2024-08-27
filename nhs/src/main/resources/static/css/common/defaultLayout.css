@@ -10,6 +10,12 @@
 
 .centre-container {
     width: 100%;
+    background-color: var(--nhs-pale-grey);
+}
+
+.container {
+    /*background-color: var(--nhs-white);*/
+    border-radius: 0.4rem;
 }
 
 .main-content .page-title {
