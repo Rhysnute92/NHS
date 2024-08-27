@@ -76,6 +76,7 @@ public class PatientProfileController {
 
     @GetMapping("/photos")
     public String showPhoto(Model model, @ModelAttribute("userID") Long userID) {
+        objectMapper.registerModule(new JavaTimeModule());
         model.addAttribute("objectMapper", objectMapper);
         model.addAttribute("photos", photoService.getPhotosByUserId(userID));
         return "patientprofile/photos";

@@ -716,9 +716,9 @@ INSERT INTO Providers (
         ProviderOccupation,
         UserID
     )
-VALUES ('Jane', 'Doe', 'Mrs', 'Nurse', 3);
-INSERT INTO UserWidgets (UserID, WidgetName, Position)
-VALUES (2, 'health-action-tracker', 1);
+# VALUES ('Jane', 'Doe', 'Mrs', 'Nurse', 3);
+# INSERT INTO UserWidgets (UserID, WidgetName, Position)
+# VALUES (2, 'health-action-tracker', 1);
 INSERT INTO Task (TaskType, TaskName, TaskDesc, TaskRepeatPeriod)
 VALUES (
         'Home Monitoring',
@@ -784,16 +784,48 @@ VALUES
 
 
 -- Insert data into Measurements
-INSERT INTO Measurements (MeasurementType, MeasurementValue, MeasurementUnit, UserID, EntryID)
-VALUES
-    ('Weight', 70, 'kg', 2, 1),
-    ('Weight', 70, 'kg', 2, 1),
-    ('Weight', 70, 'kg', 2, 2),
-    ('Weight', 70, 'kg', 2, 4),
-    ('Weight', 70, 'kg', 2, 5);
+# INSERT INTO Measurements (MeasurementType, MeasurementValue, MeasurementUnit, UserID, EntryID, MeasurementDate, MeasurementLocation)
+# VALUES
+#     ('Weight', 70, 'kg', 2, 1, '2024-08-20 08:30:00', 'Weight'),
+#     ('Weight', 71, 'kg', 2, 3, '2024-08-21 10:15:00', 'Weight'),
+#     ('Weight', 71.5, 'kg', 2, 4, '2024-08-22 09:00:00', 'Weight'),
+#     ('Weight', 71, 'kg', 2, 5, '2024-08-23 18:20:00', 'Weight'),
+#     ('Arm', 40, 'cm', 2, 1, '2024-08-20 08:30:00', 'Forearm'),
+#     ('Arm', 41, 'cm', 2, 3, '2024-08-21 10:15:00', 'Forearm'),
+#     ('Arm', 41.5, 'cm', 2, 4, '2024-08-22 09:00:00', 'Forearm'),
+#     ('Arm', 41, 'cm', 2, 5, '2024-08-23 18:20:00', 'Bicep'),
+#     ('Arm', 40, 'cm', 2, 1, '2024-08-20 08:30:00', 'Bicep'),
+#     ('Arm', 41, 'cm', 2, 3, '2024-08-21 10:15:00', 'Bicep'),
+#     ('Arm', 41.5, 'cm', 2, 4, '2024-08-22 09:00:00', 'Bicep'),
+#     ('Arm', 41, 'cm', 2, 5, '2024-08-23 18:20:00', 'Bicep'),
+#     ('Leg', 50, 'cm', 2, 1, '2024-08-20 08:30:00', 'Calf'),
+#     ('Leg', 51, 'cm', 2, 3, '2024-08-21 10:15:00', 'Calf'),
+#     ('Leg', 51.5, 'cm', 2, 4, '2024-08-22 09:00:00', 'Calf'),
+#     ('Leg', 51, 'cm', 2, 5, '2024-08-23 18:20:00', 'Calf'),
+#     ('Leg', 60, 'cm', 2, 1, '2024-08-20 08:30:00', 'Thigh'),
+#     ('Leg', 61, 'cm', 2, 3, '2024-08-21 10:15:00', 'Thigh'),
+#     ('Leg', 61.5, 'cm', 2, 4, '2024-08-22 09:00:00', 'Thigh'),
+#     ('Leg', 61, 'cm', 2, 5, '2024-08-23 18:20:00', 'Thigh'),
+#     ('Leg', 50, 'cm', 2, 1, '2024-08-20 08:30:00', 'Calf'),
+#     ('Leg', 51, 'cm', 2, 3, '2024-08-21 10:15:00', 'Calf'),
+#     ('Leg', 51.5, 'cm', 2, 4, '2024-08-22 09:00:00', 'Calf'),
+#     ('Leg', 51, 'cm', 2, 5, '2024-08-23 18:20:00', 'Calf'),
+#     ('Leg', 60, 'cm', 2, 1, '2024-08-20 08:30:00', 'Thigh'),
+#     ('Leg', 61, 'cm', 2, 3, '2024-08-21 10:15:00', 'Thigh'),
+#     ('Leg', 61.5, 'cm', 2, 4, '2024-08-22 09:00:00', 'Thigh'),
+#     ('Leg', 61, 'cm', 2, 5, '2024-08-23 18:20:00', 'Thigh'),
+#     ('Leg', 50, 'cm', 2, 1, '2024-08-20 08:30:00', 'Calf'),
+#     ('Leg', 51, 'cm', 2, 3, '2024-08-21 10:15:00', 'Calf'),
+#     ('Leg', 51.5, 'cm', 2, 4, '2024-08-22 09:00:00', 'Calf'),
+#     ('Leg', 51, 'cm', 2, 5, '2024-08-23 18:20:00', 'Calf'),
+#     ('Leg', 60, 'cm', 2, 1, '2024-08-20 08:30:00', 'Thigh'),
+#     ('Leg', 61, 'cm', 2, 3, '2024-08-21 10:15:00', 'Thigh'),
+#     ('Leg', 61.5, 'cm', 2, 4, '2024-08-22 09:00:00', 'Thigh'),
+#     ('Leg', 61, 'cm', 2, 5, '2024-08-23 18:20:00', 'Thigh');
+#
 
 -- Insert data into Symptoms
-INSERT INTO Symptoms (SymptomName, SymptomSeverity, SymptomStartDate, SymptomIsActive, UserID, EventID, EntryID)
+INSERT INTO Symptoms (SymptomName, SymptomSeverity, SymptomDate, SymptomIsActive, UserID, EventID, EntryID)
 VALUES
     ('Pain', 4, '2024-08-21 10:30:00', TRUE, 2, NULL, 3),
     ('Trouble sleeping', 3, '2024-08-23 08:00:00', TRUE, 2, NULL, 5),
