@@ -28,7 +28,7 @@
         <label for="endDateMood">End Date:</label>
         <input type="date" id="endDateMood">
 
-        <canvas id="moodChart"></canvas>
+        <canvas id="moodChart" class="patient-chart" width="916" height="458" style="display: block; box-sizing: border-box; height: 382px; width: 764px;"></canvas>
       </div>
 
       <!-- Symptoms chart tab content -->
@@ -48,7 +48,7 @@
                   th:text="${symptomType}">
           </option>
         </select>
-        <canvas id="symptomsChart"></canvas>
+        <canvas id="symptomsChart" class="patient-chart" width="916" height="458" style="display: block; box-sizing: border-box; height: 382px; width: 764px;"></canvas>
       </div>
 
       <!-- Measurements chart tab content -->
@@ -68,7 +68,7 @@
                   th:text="${measurementType}">
           </option>
         </select>
-        <canvas id="measurementsChart"></canvas>
+        <canvas id="measurementsChart" class="patient-chart" width="916" height="458" style="display: block; box-sizing: border-box; height: 382px; width: 764px;"></canvas>
       </div>
 
     </tabs-container>

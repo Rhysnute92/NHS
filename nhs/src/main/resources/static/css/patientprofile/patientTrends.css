@@ -8,3 +8,14 @@
     padding: 1rem;
     border-radius: 5px;
 }
+
+.patient-chart {
+    max-width: 100%;
+    margin: auto;
+    background-color: white;
+    padding: 1em;
+}
+
+td, th {
+    padding: 0.5em;
+}

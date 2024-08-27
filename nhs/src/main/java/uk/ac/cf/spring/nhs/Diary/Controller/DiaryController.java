@@ -94,8 +94,6 @@ public class DiaryController {
     }
 
 
-
-
     @GetMapping("/checkin")
     public String checkin(Model model) {
         return "diary/checkin";
@@ -123,6 +121,7 @@ public class DiaryController {
 
             return ResponseEntity.ok(response);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("error", e.getMessage());
             return ResponseEntity.badRequest().body(errorResponse);

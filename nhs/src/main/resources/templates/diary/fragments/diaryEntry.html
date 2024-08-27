@@ -130,7 +130,7 @@
 
                 <!-- Non-sided measurements section -->
                 <div th:if="${diaryEntryDTO.nonSidedMeasurements.size() > 0}">
-                    <div th:each="measurement : ${diaryEntryDTO.nonSidedMeasurements}">
+                    <div th:each="measurement : ${diaryEntryDTO.nonSidedMeasurements}" th:unless="${measurement.value == 0}">
                         <h5 th:text="${measurement.type}"></h5>
                         <span th:text="${measurement.value}"></span>
                         <span th:text="${measurement.unit}"></span>

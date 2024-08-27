@@ -227,31 +227,29 @@ input[type="radio"] {
     gap: 0.5rem;
 }
 
-.measurement input[type="number"] {
-    width: 20%;
-    padding: 0.5rem;
-}
-
 .measurement .unit-select {
     width: 25%;
-    padding: 0.5rem;
+    padding: 0.2rem;
 }
 
 .measurement .type-select {
     width: 35%;
-    padding: 0.5rem;
+    padding: 0.2rem;
 }
 
 .measurement input[type="number"] {
     width: 50%;
+    padding: 0.2rem;
 }
 
 .measurement select {
     width: 40%;
+    padding: 0.2rem;
 }
 
 .measurement-header select {
     width: auto;
+    padding: 0.2rem;
 }
 
 .measurement .remove-measurement-button {
@@ -302,6 +300,14 @@ input[type="radio"] {
 
 .measurement-point {
     margin-bottom: 10px;
+}
+
+.measurement-point, .measurement-column {
+    width: 50%;
+}
+
+.right-column .measurement-point, .left-column .measurement-point {
+    width: 100%;
 }
 
 

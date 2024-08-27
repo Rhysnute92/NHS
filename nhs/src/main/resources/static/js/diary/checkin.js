@@ -30,18 +30,21 @@
         });
     });
 
+    let globalMeasurementIndex = 0; // Single global index for all measurements
+
     document.getElementById('add-measurement-button').addEventListener('click', addMeasurement);
 
     function addMeasurement() {
         const container = document.querySelector('.checkin-measurements-container');
-        const index = container.querySelectorAll('.measurement').length;
         const newMeasurement = document.createElement('div');
         newMeasurement.classList.add('measurement');
 
+        const currentMeasurementIndex = globalMeasurementIndex; // Use the global index
+
         newMeasurement.innerHTML = `
         <div class="measurement-header">
-            <label for="body-part-select-${index}">Select Body Part:</label>
-            <select class="body-part-select" id="body-part-select-${index}">
+            <label for="body-part-select-${currentMeasurementIndex}">Select Body Part:</label>
+            <select class="body-part-select" id="body-part-select-${currentMeasurementIndex}">
                 <option value="">Select Body Part</option>
                 <option value="ARM">Arm</option>
                 <option value="LEG">Leg</option>
@@ -67,12 +70,15 @@
             updateMeasurementNames();
         });
 
-        const bodyPartSelect = newMeasurement.querySelector(`#body-part-select-${index}`);
+        const bodyPartSelect = newMeasurement.querySelector(`#body-part-select-${currentMeasurementIndex}`);
         bodyPartSelect.addEventListener('change', () => {
-            loadMeasurementFields(newMeasurement, index);
+            loadMeasurementFields(newMeasurement, currentMeasurementIndex);
         });
 
         container.appendChild(newMeasurement);
+
+        // Increment the global index after adding the measurement
+        globalMeasurementIndex++;
     }
 
     function loadMeasurementFields(newMeasurement, index) {
@@ -112,52 +118,46 @@
             return;
         }
 
-        if (bodyPart === 'ARM' || bodyPart === 'LEG') {
-            let measurementIndex = 0;
+        // Add left and right inputs for body parts that have sides
+        measurementLocations.forEach((location) => {
+            // Left side
+            const leftPointInput = document.createElement('div');
+            leftPointInput.classList.add('measurement-point');
+            leftPointInput.innerHTML = `
+            <label>${location} (Left):</label>
+            <input type="hidden" name="measurements[${globalMeasurementIndex}].location" value="${location}">
+            <input type="hidden" name="measurements[${globalMeasurementIndex}].side" value="Left">
+            <input type="hidden" name="measurements[${globalMeasurementIndex}].type" value="${bodyPart}">
+            <div>
+                <input type="number" name="measurements[${globalMeasurementIndex}].value" step="0.1" placeholder="Value">
+                <select name="measurements[${globalMeasurementIndex}].unit">
+                    <option value="cm">cm</option>
+                    <option value="inches">inches</option>
+                </select>
+            </div>
+        `;
+            leftPointsContainer.appendChild(leftPointInput);
+            globalMeasurementIndex++;
 
-            measurementLocations.forEach((location) => {
-                // Left side
-                const leftPointInput = document.createElement('div');
-                leftPointInput.classList.add('measurement-point');
-                leftPointInput.innerHTML = `
-                <label>${location} (Left):</label>
-                <input type="hidden" name="measurements[${index}_${measurementIndex}].location" value="${location}">
-                <input type="hidden" name="measurements[${index}_${measurementIndex}].side" value="Left">
-                <input type="hidden" name="measurements[${index}_${measurementIndex}].type" value="${bodyPart}">
-                <div>
-                    <input type="number" name="measurements[${index}_${measurementIndex}].value" step="0.1" placeholder="Value"> 
-                    <select name="measurements[${index}_${measurementIndex}].unit">
-                        <option value="cm">cm</option>
-                        <option value="inches">inches</option>
-                    </select>
-                </div>
-            `;
-                leftPointsContainer.appendChild(leftPointInput);
-
-                // Right side
-                const rightPointInput = document.createElement('div');
-                rightPointInput.classList.add('measurement-point');
-                rightPointInput.innerHTML = `
-                <label>${location} (Right):</label>
-                <input type="hidden" name="measurements[${index}_${measurementIndex + 1}].location" value="${location}">
-                <input type="hidden" name="measurements[${index}_${measurementIndex + 1}].side" value="Right">
-                <input type="hidden" name="measurements[${index}_${measurementIndex + 1}].type" value="${bodyPart}">
-                <div>
-                    <input type="number" name="measurements[${index}_${measurementIndex + 1}].value" step="0.1" placeholder="Value">
-                    <select name="measurements[${index}_${measurementIndex + 1}].unit">
-                        <option value="cm">cm</option>
-                        <option value="inches">inches</option>
-                    </select>
-                </div>
-            `;
-                rightPointsContainer.appendChild(rightPointInput);
-
-                // Increment the measurement index by 2 (for left and right side)
-                measurementIndex += 2;
-            });
-        }
-
-        updateMeasurementNames(); // Reindex all names in case measurements were added/removed
+            // Right side
+            const rightPointInput = document.createElement('div');
+            rightPointInput.classList.add('measurement-point');
+            rightPointInput.innerHTML = `
+            <label>${location} (Right):</label>
+            <input type="hidden" name="measurements[${globalMeasurementIndex}].location" value="${location}">
+            <input type="hidden" name="measurements[${globalMeasurementIndex}].side" value="Right">
+            <input type="hidden" name="measurements[${globalMeasurementIndex}].type" value="${bodyPart}">
+            <div>
+                <input type="number" name="measurements[${globalMeasurementIndex}].value" step="0.1" placeholder="Value">
+                <select name="measurements[${globalMeasurementIndex}].unit">
+                    <option value="cm">cm</option>
+                    <option value="inches">inches</option>
+                </select>
+            </div>
+        `;
+            rightPointsContainer.appendChild(rightPointInput);
+            globalMeasurementIndex++;
+        });
     }
 
     function updateMeasurementNames() {
@@ -188,6 +188,7 @@
         });
     }
 
+
     let capturedPhotos = [];
 
     const photoCaptureElement = document.querySelector('camera-component');
@@ -213,10 +214,6 @@
         event.preventDefault();
         const form = event.target;
         const formData = new FormData(form);
-
-        for (const pair of formData.entries()) {
-            console.log(pair[0], pair[1]);
-        }
 
         // Append captured photos to form data
         capturedPhotos.forEach((photo, index) => {

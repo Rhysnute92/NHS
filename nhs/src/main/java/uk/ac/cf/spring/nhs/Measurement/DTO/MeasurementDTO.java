@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class MeasurementDTO {
-    private String type;
-    private Float value;
+    private String type = "";
+    private Float value = 0.0f;
     private String unit;
     private String location;
     private String side;

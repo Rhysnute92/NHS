@@ -8,6 +8,7 @@ import uk.ac.cf.spring.nhs.Measurement.Repository.MeasurementRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Service
@@ -24,6 +25,10 @@ public class MeasurementService {
 
     @Transactional
     public Measurement saveMeasurement(MeasurementDTO measurementDTO, long userId) {
+        if (Objects.equals(measurementDTO.getType(), "") || measurementDTO.getValue() == 0.0f) {
+            return null;
+        }
+
         Measurement measurement = new Measurement(
                 measurementDTO.getType(),
                 measurementDTO.getValue(),
