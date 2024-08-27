@@ -12,6 +12,7 @@
     <main>
         <div class="account-container">
         <h1 class="welcome"> Welcome to your profile!</h1>
+        <div class="info-container">
         <div class="personal_info">
             <h2 class="section_title">My Details</h2>
             <ul class="info_list">
@@ -31,8 +32,9 @@
                 </form>
         </div>
         </div>
+    </div>
         <form th:action="@{/logout}" method="post" class="logout">
-            <input type="submit" class="logout-button" value="LOG OUT"/>
+            <input type="submit" class="logout-button primary" value="LOG OUT"/>
         </form>
     </div>
 </main>
