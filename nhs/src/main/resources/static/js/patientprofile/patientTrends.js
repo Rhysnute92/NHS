@@ -94,7 +94,6 @@ async function updateChart(chartType) {
                 return;
         }
 
-        console.log(cachedData)
         // Check if data is already cached
         if (cachedData[endpoint]) {
 
@@ -170,6 +169,7 @@ function updateChartWithData(chartType, data) {
         const symptomsDataMap = {};
 
         data.forEach(item => {
+            console.log(item)
             const category = item.symptom || symptomType;
             if (!symptomsDataMap[category]) {
                 symptomsDataMap[category] = [];
@@ -182,6 +182,8 @@ function updateChartWithData(chartType, data) {
                 const severityItem = symptomsDataMap[category].find(item => item.date === label);
                 return severityItem ? severityItem.severity : null;
             });
+
+            console.log(symptomData)
 
             charts[`${chartType}Chart`].data.datasets.push({
                 label: category,
@@ -196,7 +198,7 @@ function updateChartWithData(chartType, data) {
         const dataMap = {};
 
         data.forEach(item => {
-            const category = item.name || item.location || item;
+            const category = item.type || item.type + ": " + item.location || item;
             if (!dataMap[category]) {
                 dataMap[category] = [];
             }

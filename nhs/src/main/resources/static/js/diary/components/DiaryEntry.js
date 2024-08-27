@@ -63,6 +63,10 @@ class DiaryEntry extends HTMLElement {
                     text-align: left;
                 }
                 
+                .measurement-container {
+                    margin-bottom: 1rem;
+                }
+                
                 .delete-button {
                     border: none;
                     background: none;
@@ -365,9 +369,12 @@ class DiaryEntry extends HTMLElement {
         // Add non-sided measurements to the section
         if (filteredNonSidedMeasurements.length) {
             filteredNonSidedMeasurements.forEach(measurement => {
+                const measurementContainer = document.createElement('div');
+                measurementContainer.className = 'measurement-container';
+
                 const measurementDiv = document.createElement('div');
 
-                const measurementTitle = document.createElement('h5');
+                const measurementTitle = document.createElement('h4');
                 measurementTitle.textContent = measurement.type;
                 measurementDiv.appendChild(measurementTitle);
 
@@ -379,14 +386,18 @@ class DiaryEntry extends HTMLElement {
                 unitSpan.textContent = ` ${measurement.unit}`;
                 measurementDiv.appendChild(unitSpan);
 
-                measurementsSection.appendChild(measurementDiv);
+                measurementContainer.appendChild(measurementDiv);
+                measurementsSection.appendChild(measurementContainer);
             });
         }
 
         // Add two-sided measurement groups to the section
         if (filteredTwoSidedMeasurementGroups.length) {
             filteredTwoSidedMeasurementGroups.forEach(group => {
-                const groupTitle = document.createElement('h5');
+                const measurementContainer = document.createElement('div');
+                measurementContainer.className = 'measurement-container';
+
+                const groupTitle = document.createElement('h4');
                 groupTitle.textContent = group.type;
                 measurementsSection.appendChild(groupTitle);
 
@@ -429,7 +440,9 @@ class DiaryEntry extends HTMLElement {
                 });
 
                 table.appendChild(tbody);
-                measurementsSection.appendChild(table);
+
+                measurementContainer.appendChild(table);
+                measurementsSection.appendChild(measurementContainer);
             });
         }
 

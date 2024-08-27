@@ -43,12 +43,12 @@
 
         newMeasurement.innerHTML = `
         <div class="measurement-header">
-            <label for="body-part-select-${currentMeasurementIndex}">Select Body Part:</label>
+            <label for="body-part-select-${currentMeasurementIndex}">Measurement type:</label>
             <select class="body-part-select" id="body-part-select-${currentMeasurementIndex}">
-                <option value="">Select Body Part</option>
-                <option value="ARM">Arm</option>
-                <option value="LEG">Leg</option>
-                <option value="WEIGHT">Weight</option>
+                <option value="">Select type</option>
+                <option value="Arm">Arm</option>
+                <option value="Leg">Leg</option>
+                <option value="Weight">Weight</option>
             </select>
             <button type="button" class="fa-solid fa-xmark remove-measurement-button"></button>
         </div>
@@ -91,20 +91,20 @@
 
         let measurementLocations = [];
 
-        if (bodyPart === 'ARM') {
+        if (bodyPart === 'Arm') {
             measurementLocations = ['Bicep', 'Forearm', 'Wrist', 'Palm', 'Index finger'];
             columnsContainer.classList.remove('hidden');
-        } else if (bodyPart === 'LEG') {
+        } else if (bodyPart === 'Leg') {
             measurementLocations = ['Upper thigh', 'Mid thigh', 'Over kneecap', '2 cm below knee crease', 'Widest part of calf', '2 cm above ankle bone', 'Base of toes'];
             columnsContainer.classList.remove('hidden');
-        } else if (bodyPart === 'WEIGHT') {
+        } else if (bodyPart === 'Weight') {
             columnsContainer.classList.add('hidden');
             const singlePointInput = document.createElement('div');
             singlePointInput.classList.add('measurement-point');
             singlePointInput.innerHTML = `
             <label>Weight:</label>
-            <input type="hidden" name="measurements[${index}].type" value="WEIGHT">
-            <input type="hidden" name="measurements[${index}].location" value="">
+            <input type="hidden" name="measurements[${index}].type" value="Weight">
+            <input type="hidden" name="measurements[${index}].location" value="Weight">
             <input type="hidden" name="measurements[${index}].side" value="">
             <div>
                 <input type="number" name="measurements[${index}].value" step="0.1" placeholder="Value">

@@ -338,4 +338,12 @@ input[type="radio"] {
     .checkin-mood-button input[type="radio"]:hover {
         opacity: 0 !important;
     }
+
+    .measurement-columns {
+        flex-direction: column;
+    }
+
+    .measurement-point, .measurement-column {
+        width: 100%;
+    }
 }

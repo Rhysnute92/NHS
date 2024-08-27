@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.Photo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -34,11 +35,8 @@ public class Photo {
     private long userId;
 
     @ManyToOne
-    @JoinColumn(name = "EventID", nullable = true)
-    private Event event;
-
-    @ManyToOne
     @JoinColumn(name = "EntryID", nullable = true)
+    @JsonBackReference
     private DiaryEntry diaryEntry;
 
     protected Photo() {}
