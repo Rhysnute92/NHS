@@ -128,3 +128,26 @@
   color: #333;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  .widget-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  .widget-item {
+    width: 8vw;
+  }
+
+  .widget-icon {
+    width: 8vw;
+    height: 8vw;
+  }
+
+  .library-title {
+    display: none;
+  }
+
+    .library-subtitle {
+        display: none;
+    }
+}
