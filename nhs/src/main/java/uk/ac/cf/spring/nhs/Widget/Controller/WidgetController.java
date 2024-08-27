@@ -78,4 +78,20 @@ public class WidgetController {
         return ResponseEntity.ok(allWidgets);
     }
 
+    /**
+     * New endpoint to fetch icon path of a widget by its name.
+     *
+     * @param widgetName the name of the widget
+     * @return a ResponseEntity containing the icon path of the widget
+     */
+    @GetMapping("/api/widgets/{widgetName}/icon-path")
+    public ResponseEntity<String> getWidgetIconPath(@PathVariable String widgetName) {
+        Widget widget = widgetRegistry.getWidget(widgetName);
+        if (widget != null) {
+            return ResponseEntity.ok(widget.getIconPath());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

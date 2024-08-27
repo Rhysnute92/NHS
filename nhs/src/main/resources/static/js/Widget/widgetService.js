@@ -65,4 +65,13 @@ export class WidgetService {
       return {};
     }
   }
+
+  static async fetchWidgetIconPath(widgetName) {
+    const response = await fetch(`/api/widgets/${widgetName}/icon-path`);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch icon path for widget: ${widgetName}`);
+    }
+    return response.text(); // Assuming icon path is returned as plain text
+  }
 }

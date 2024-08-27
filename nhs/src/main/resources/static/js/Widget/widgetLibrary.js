@@ -37,11 +37,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.error(`[${timestamp}] [${logId}] Error occurred:`, error);
   }
 
-  function renderWidgets(widgets, containerId) {
+  async function renderWidgets(widgets, containerId) {
     const container = document.getElementById(containerId);
     container.innerHTML = ""; // Clear any existing content
 
-    widgets.forEach((widget) => {
+    for (const widget of widgets) {
       console.log(`Rendering widget: ${JSON.stringify(widget)}`);
       const widgetItem = document.createElement("div");
       widgetItem.className = "widget-item";
@@ -51,6 +51,22 @@ document.addEventListener("DOMContentLoaded", async function () {
       widgetIcon.className = "widget-icon current";
       widgetIcon.dataset.userwidgetid = widget.userWidgetID;
       console.log(`Assigned userWidgetID: ${widget.userWidgetID}`);
+
+      // Fetch icon path dynamically
+      try {
+        const iconPath = await WidgetService.fetchWidgetIconPath(
+          widget.widgetName
+        );
+        if (iconPath) {
+          widgetIcon.style.backgroundImage = `url(${iconPath})`;
+          widgetIcon.style.backgroundSize = "cover";
+        }
+      } catch (error) {
+        console.error(
+          `Error fetching icon path for widget: ${widget.widgetName}`,
+          error
+        );
+      }
 
       const formattedName = formatWidgetName(widget.widgetName);
       const widgetName = document.createElement("p");
@@ -65,14 +81,14 @@ document.addEventListener("DOMContentLoaded", async function () {
       widgetItem.addEventListener("click", function () {
         widgetItem.classList.toggle("selected");
       });
-    });
+    }
   }
 
-  function renderAvailableWidgets(widgetNames, containerId) {
+  async function renderAvailableWidgets(widgetNames, containerId) {
     const container = document.getElementById(containerId);
     container.innerHTML = ""; // Clear any existing content
 
-    widgetNames.forEach((widgetName) => {
+    for (const widgetName of widgetNames) {
       console.log(`Rendering available widget: ${widgetName}`);
       const widgetItem = document.createElement("div");
       widgetItem.className = "widget-item";
@@ -81,6 +97,20 @@ document.addEventListener("DOMContentLoaded", async function () {
       const widgetIcon = document.createElement("div");
       widgetIcon.className = "widget-icon available";
       widgetIcon.dataset.widgetname = widgetName;
+
+      // Fetch icon path dynamically
+      try {
+        const iconPath = await WidgetService.fetchWidgetIconPath(widgetName);
+        if (iconPath) {
+          widgetIcon.style.backgroundImage = `url(${iconPath})`;
+          widgetIcon.style.backgroundSize = "cover";
+        }
+      } catch (error) {
+        console.error(
+          `Error fetching icon path for widget: ${widgetName}`,
+          error
+        );
+      }
 
       const formattedName = formatWidgetName(widgetName);
       const widgetNameElem = document.createElement("p");
@@ -95,8 +125,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       widgetItem.addEventListener("click", function () {
         widgetItem.classList.toggle("selected");
       });
-    });
+    }
   }
+
   async function addSelectedWidgets() {
     const selectedWidgets = document.querySelectorAll(
       "#available-widgets-grid .widget-icon.selected"
