@@ -56,12 +56,18 @@ public class PatientService {
     public List<Patient> patientGeneralSearch(SearchRequest request){
         //Set the example values
         Patient model = new Patient();
-        model.setPatientName(request.getPatientName());
-        model.setPatientLastName(request.getPatientLastName());
+        if(request.getPatientName() != ""){
+            model.setPatientName(request.getPatientName());
+        }
+        if(request.getPatientLastName() != ""){
+            model.setPatientLastName(request.getPatientLastName());
+        }
+        if(request.getPatientEmail() != ""){
+            model.setPatientEmail(request.getPatientEmail());
+        }
         model.setPatientDOB(request.getPatientDOB());
-        model.setPatientEmail(request.getPatientEmail());
         //Set matching rules
-        ExampleMatcher matcher = ExampleMatcher.matchingAny()
+        ExampleMatcher matcher = ExampleMatcher.matching()
         .withMatcher("patientName", match -> match.contains().ignoreCase())
         .withMatcher("patientLastName", match -> match.contains().ignoreCase())
         .withMatcher("patientEmail", match -> match.contains().ignoreCase())
