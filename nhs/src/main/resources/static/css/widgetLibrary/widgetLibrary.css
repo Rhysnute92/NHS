@@ -103,9 +103,14 @@
   border: 2px solid transparent;
 }
 
-.widget-icon.selected {
+.widget-icon.current.selected {
   border: 1px solid #ff0101;
   box-shadow: 0 0 0.5em 1px rgb(255 0 0);
+}
+
+.widget-icon.available.selected {
+  border: 1px solid #02ff02;
+  box-shadow: 0 0 0.5em 1px #02ff02;
 }
 
 .widget-name {

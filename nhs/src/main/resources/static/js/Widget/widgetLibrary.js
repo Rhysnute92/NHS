@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       widgetItem.dataset.widgetName = widget.widgetName;
 
       const widgetIcon = document.createElement("div");
-      widgetIcon.className = "widget-icon";
+      widgetIcon.className = "widget-icon current";
       widgetIcon.dataset.userwidgetid = widget.userWidgetID;
       console.log(`Assigned userWidgetID: ${widget.userWidgetID}`);
 
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       widgetItem.dataset.widgetName = widgetName;
 
       const widgetIcon = document.createElement("div");
-      widgetIcon.className = "widget-icon";
+      widgetIcon.className = "widget-icon available";
       widgetIcon.dataset.widgetname = widgetName;
 
       const formattedName = formatWidgetName(widgetName);
