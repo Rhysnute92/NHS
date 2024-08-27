@@ -10,10 +10,12 @@
 </head>
 <body>
 <main layout:fragment="content" class="main-content">
-  <h1 class="page-title">Patient Events</h1>
-  <div th:if="${events.isEmpty()}" class="not-available-text">No events available for this patient</div>
-  <div th:unless="${events.isEmpty()}" class="event-list" id="event-list">
-    <event-card th:each="event : ${events}" th:attr="event-data=${objectMapper.writeValueAsString(event)}"></event-card>
+  <div class="container">
+    <h1 class="page-title">Patient Events</h1>
+    <div th:if="${events.isEmpty()}" class="not-available-text">No events available for this patient</div>
+    <div th:unless="${events.isEmpty()}" class="event-list" id="event-list">
+      <event-card th:each="event : ${events}" th:attr="event-data=${objectMapper.writeValueAsString(event)}"></event-card>
+    </div>
   </div>
 </main>
 <th:block layout:fragment="scripts">

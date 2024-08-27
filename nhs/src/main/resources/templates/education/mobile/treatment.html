@@ -9,8 +9,8 @@
   <body>
     <div th:replace="~{common/fragments/header}"></div>
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
-    <main>
     <div th:if="${navMenuItems != null}" th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
+    <main>
       <div class="container_m">
           <h2 class="title">Treatments for lymphoedema</h2>
           <p>There are many options for managing the symptoms of lymphoedema, including skincare, compression garments, excercise, manual lymphatic drainage and general lifestyle changes.
@@ -91,9 +91,9 @@
           <p>There you will be able to find specific advice on garments, as well as guidance for excercises and manual massage techniques.</p>
           <nav class="t_types">
             <ul>
-              <li><a th:href="@{/treatmentLeg}">Treatments for lymphedema of the legs</a></li>
-              <li><a th:href="@{/treatmentArm}">Treatments for lymphedema of the arms</a></li>
-              <li><a th:href="@{/treatmentHead}">Treatments for lymphedema of head and neck</a></li>
+              <li><a th:href="@{/treatmentLeg}">Treatments for lymphoedema of the legs</a></li>
+              <li><a th:href="@{/treatmentArm}">Treatments for lymphoedema of the arms</a></li>
+              <li><a th:href="@{/treatmentHead}">Treatments for lymphoedema of head and neck</a></li>
             </ul>
           </nav>
         </div>

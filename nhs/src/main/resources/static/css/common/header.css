@@ -9,7 +9,6 @@ header {
     align-items: center;
 }
 
-
 .header-container, .header {
     min-height: 30px;
     display: flex;

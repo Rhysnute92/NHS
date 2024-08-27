@@ -45,7 +45,7 @@ class EventCard extends HTMLElement {
             <link rel="stylesheet" href="/css/diary/eventCard.css">
             <div class="event">
                 <div class="event-header">
-                    <h3>${date || 'Date not available'}</h3>
+                    <h3>${date || 'Date not available'} - Cellulitis</h3>
                     <button class="delete-event-btn">&times;</button>
                 </div>
                 <div class="event-body">

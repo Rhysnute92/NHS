@@ -9,8 +9,8 @@
   <body>
       <div th:replace="~{common/fragments/header}"></div>
       <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
+      <div th:if="${navMenuItems != null}" th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
       <main>
-        <div th:if="${navMenuItems != null}" th:replace="~{common/fragments/navmenu :: navmenu (${navMenuItems})}"></div>
         <div class="container_m">
           <h2 class="title">Helpful resources</h2>
           <h3 class="subtitle">Lymphoedema</h3>
