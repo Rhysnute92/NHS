@@ -12,6 +12,7 @@
     <main>
         <div class="account-container">
         <h1 class="welcome"> Welcome to your profile!</h1>
+        <div class="info-container">
         <div class="personal_info">
             <h2 class="section_title">My Details</h2>
             <ul class="info_list">
@@ -31,11 +32,13 @@
                 </form>
         </div>
         </div>
+    </div>
         <form th:action="@{/logout}" method="post" class="logout">
-            <input type="submit" class="logout-button" value="LOG OUT"/>
+            <nhs-button type="submit" class="logout-button primary">Log out</nhs-button>
         </form>
     </div>
 </main>
+<script th:src="@{/js/common/components/NHSButton.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>

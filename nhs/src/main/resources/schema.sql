@@ -208,30 +208,30 @@ CREATE TABLE UserQuestion (
 --CREATE TABLE AppointmentRecord ()
 -----------------------
 --Education--
-CREATE TABLE Articles (
-    ArticleID INT AUTO_INCREMENT PRIMARY KEY,
-    ArticleTitle VARCHAR(255),
-    ArticleCreated DATETIME,
-    ArticleUpdated DATETIME
-);
-CREATE TABLE InfoSections (
-    SectionID INT AUTO_INCREMENT PRIMARY KEY,
-    SectionTitle VARCHAR(255),
-    SectionLevel VARCHAR(255),
-    SectionInfo TEXT,
-    SectionCanRemind BOOLEAN,
-    ArticleID INT,
-    FOREIGN KEY (ArticleID) REFERENCES Articles(ArticleID)
-);
-CREATE TABLE InfoAssets (
-    AssetID INT AUTO_INCREMENT PRIMARY KEY,
-    AssetType VARCHAR(255),
-    AssetName VARCHAR(255),
-    AssetLink TEXT,
-    AssetSource TEXT,
-    SectionID INT,
-    FOREIGN KEY (SectionID) REFERENCES InfoSections(SectionID)
-);
+-- CREATE TABLE Articles (
+--     ArticleID INT AUTO_INCREMENT PRIMARY KEY,
+--     ArticleTitle VARCHAR(255),
+--     ArticleCreated DATETIME,
+--     ArticleUpdated DATETIME
+-- );
+-- CREATE TABLE InfoSections (
+--     SectionID INT AUTO_INCREMENT PRIMARY KEY,
+--     SectionTitle VARCHAR(255),
+--     SectionLevel VARCHAR(255),
+--     SectionInfo TEXT,
+--     SectionCanRemind BOOLEAN,
+--     ArticleID INT,
+--     FOREIGN KEY (ArticleID) REFERENCES Articles(ArticleID)
+-- );
+-- CREATE TABLE InfoAssets (
+--     AssetID INT AUTO_INCREMENT PRIMARY KEY,
+--     AssetType VARCHAR(255),
+--     AssetName VARCHAR(255),
+--     AssetLink TEXT,
+--     AssetSource TEXT,
+--     SectionID INT,
+--     FOREIGN KEY (SectionID) REFERENCES InfoSections(SectionID)
+-- );
 --General use--
 CREATE TABLE Task (
     TaskID BIGINT AUTO_INCREMENT PRIMARY KEY,

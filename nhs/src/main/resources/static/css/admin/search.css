@@ -24,6 +24,11 @@
     color: var(--nhs-white);
     border: none;
 }
+
+#search_error{
+    color: red;
+    font-size: medium;
+}
 .results_table {
     margin: auto;
     margin-top: 5vh;

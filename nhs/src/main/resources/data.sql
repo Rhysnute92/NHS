@@ -13,6 +13,31 @@ VALUES (
         'testProvider',
         '$2a$10$cibnUtr2BBkAQ2HibZDFWOarJcCtfRg1uj0HcfEd8z2WQyN4EePlC',
         'ROLE_PROVIDER'
+    ),
+    (
+        'ms@testmail.ua',
+        '$2a$10$VCmoUTlG5pfm0T8KuEFyZ.64mk0Y6xhpuoUjbUiEZqm4JyAOErnpG',
+        'ROLE_PATIENT'
+    ),
+        (
+        'db@testmail.com',
+        '$2a$10$dV3B.pHh4trd.xu3O0zw5eAendv3pRHbpBG4llYOxywUHg89d542S',
+        'ROLE_PATIENT'
+    ),
+        (
+        'es@testmail.uk',
+        '$2a$10$l93GjjS.lMd7z3cjFIJLqugkTOqoh4Ly5e7HIM88s.mrTlSz4UHkO',
+        'ROLE_PATIENT'
+    ),
+    (
+        'sa@testEmail.ua',
+        '$2a$10$WJQ0iV7zpX07m.rKSPakr.6Yyyuorvcbh0ROHpoWuNyf7Q.OR9oSm',
+        'ROLE_PATIENT'
+    ),
+    (
+        'am@testEmail.uk',
+        '$2a$10$Nv/oBsP/AARjTesWOeShI.l.aS30cqDqrTCz6/Lq8CvkBGnb2RCwu',
+        'ROLE_PATIENT'
     );
 INSERT INTO Questionnaires (
         QuestionnaireType,
@@ -623,6 +648,66 @@ VALUES (
         'Sherwood Forrest Hospitals',
         '2',
         'xlHXWQORPy97Go4sJsrY+XNNEx59m/NaDZ7K7OOuEVY='
+    ),
+    (
+        'N1ZK5L3yQ43exR/4hJ5koA==',
+        'm6ryU6G2k7uQBLfqiNLhSA==',
+        '101',
+        '1970-04-12',
+        'X1Qv/v6uCfuQHsy2k5zMlQ==',
+        'd/LvY1D9MoEa5a2DmahA/g==',
+        'Ms',
+        'Florence Nightingale Community Hospital',
+        '4',
+        'xlHXWQORPy97Go4sJsrY+XNNEx59m/NaDZ7K7OOuEVY='
+    ),
+    (
+        'ArEH0sLs2dK7C4JTBrWPnw==',
+        '7cMlSea03MaohInkTlpGuQ==',
+        '102',
+        '1950-12-01',
+        'ssTusH2CtyDvzEL7LnD+6A==',
+        '2TxbufnHhP0zsxQQRDSV9g==',
+        'Mr',
+        'Long Eaton Health Centre',
+        '5',
+        'xlHXWQORPy97Go4sJsrY+XNNEx59m/NaDZ7K7OOuEVY='
+    ),
+    (
+        '4aQU1iCNtsoPM0h2Lu8Kwg==',
+        '2br52wR3xuVMW6s4qJz9VA==',
+        '103',
+        '1982-11-23',
+        '4xLXfYk4oPqqdLVhpNfkpQ==',
+        'wYy+w30qVGDFm7ZGEBxA6A==',
+        'Mr',
+        'Sherwood Forrest Hospitals',
+        '6',
+        'xlHXWQORPy97Go4sJsrY+XNNEx59m/NaDZ7K7OOuEVY='
+    ),
+    (
+        'hXeSZSd6zEhUQ5ODMUCZzA==',
+        'KZIjJAtJgfrwUBVIadfXjA==',
+        '104',
+        '1967-07-14',
+        'FNB+J0TDCFfMThNld3Y8Gw==',
+        'dIHO2i8uS0Ygvcyh5ejH0Q==',
+        'Mrs',
+        'Long Eaton Health Centre',
+        '7',
+        'xlHXWQORPy97Go4sJsrY+XNNEx59m/NaDZ7K7OOuEVY='
+    ),
+    (
+        's+N8esUPyIobptdk9W1jjg==',
+        'bJm0QtoRIWGWTYH8BIjVbQ==',
+        '105',
+        '1956-10-30',
+        'IR1fDczIUfdx3oBce43KWA==',
+        'foP0i+sfwoaebgZBoQHIuw==',
+        'Dr',
+        'Florence Nightingale Community Hospital',
+        '8',
+        'xlHXWQORPy97Go4sJsrY+XNNEx59m/NaDZ7K7OOuEVY='
     );
 INSERT INTO Providers (
         ProviderFirstName,
@@ -633,7 +718,7 @@ INSERT INTO Providers (
     )
 VALUES ('Jane', 'Doe', 'Mrs', 'Nurse', 3);
 INSERT INTO UserWidgets (UserID, WidgetName, Position)
-VALUES (2, 'task-completion', 1);
+VALUES (2, 'health-action-tracker', 1);
 INSERT INTO Task (TaskType, TaskName, TaskDesc, TaskRepeatPeriod)
 VALUES (
         'Home Monitoring',

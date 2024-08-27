@@ -1,10 +1,14 @@
-import { fetchData } from "../../common/utils/apiUtility.js";
-import { QuestionnaireHubManager } from "../../Questionnaire/QuestionnaireHub/questionaireHubManager";
-import { QuestionnaireHubRendererProviderView } from "../../Questionnaire/QuestionnaireHub/questionnaireHubRenderer";
+import { fetchData } from "../../../../../../../../../../main/resources/static/js/common/utils/apiUtility";
+import { QuestionnaireHubManager } from "../../../../../../../../../../main/resources/static/js/Questionnaire/QuestionnaireHub/QuestionnaireHubManager.js";
+import { QuestionnaireHubRendererProviderView } from "../../../../../../../../../../main/resources/static/js/Questionnaire/QuestionnaireHub/QuestionnaireHubRendererProviderView.js";
 
 // Mock the necessary imports
-jest.mock("../../common/utils/apiUtility");
-jest.mock("../../Questionnaire/QuestionnaireHub/questionnaireHubRenderer");
+jest.mock(
+  "../../../../../../../../../../main/resources/static/js/common/utils/apiUtility.js"
+);
+jest.mock(
+  "../../../../../../../../../../main/resources/static/js/Questionnaire/QuestionnaireHub/QuestionnaireHubRendererProviderView.js"
+);
 
 describe("QuestionnaireHubManager", () => {
   let manager;

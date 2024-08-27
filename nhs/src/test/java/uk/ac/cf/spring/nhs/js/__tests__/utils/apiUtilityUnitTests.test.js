@@ -1,4 +1,8 @@
-import { fetchData, postData, putData } from "../../common/utils/apiUtility";
+import {
+  fetchData,
+  postData,
+  putData,
+} from "../../../../../../../../../../main/resources/static/js/common/utils/apiUtility";
 
 describe("fetchData", () => {
   beforeEach(() => {
