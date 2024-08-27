@@ -19,6 +19,7 @@ import uk.ac.cf.spring.nhs.Symptom.DTO.SymptomDTO;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 import uk.ac.cf.spring.nhs.Symptom.Service.SymptomService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Date;

@@ -3,12 +3,13 @@ package uk.ac.cf.spring.nhs.Diary.DTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.Mood;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class MoodDTO {
     private Mood mood;
-    private LocalDate date;
+    private LocalDateTime date;
 
-    public MoodDTO(Mood mood, LocalDate date) {
+    public MoodDTO(Mood mood, LocalDateTime date) {
         this.mood = mood;
         this.date = date;
     }
@@ -21,11 +22,11 @@ public class MoodDTO {
         this.mood = mood;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

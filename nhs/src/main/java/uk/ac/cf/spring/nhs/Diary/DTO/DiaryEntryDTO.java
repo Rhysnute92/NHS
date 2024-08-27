@@ -9,14 +9,14 @@ import uk.ac.cf.spring.nhs.Measurement.Entity.Measurement;
 import uk.ac.cf.spring.nhs.Photo.Entity.Photo;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 @Getter
 @Setter
 public class DiaryEntryDTO {
-    private LocalDate date;
+    private LocalDateTime date;
     private List<MeasurementGroupDTO> twoSidedMeasurementGroups;
     private List<Measurement> nonSidedMeasurements;
     private Mood mood;
@@ -27,7 +27,7 @@ public class DiaryEntryDTO {
     public DiaryEntryDTO() {
     }
 
-    public DiaryEntryDTO(LocalDate date, List<MeasurementGroupDTO> twoSidedMeasurementGroups, List<Measurement> nonSidedMeasurements, Mood mood, String notes, List<Symptom> symptoms, List<Photo> photos) {
+    public DiaryEntryDTO(LocalDateTime date, List<MeasurementGroupDTO> twoSidedMeasurementGroups, List<Measurement> nonSidedMeasurements, Mood mood, String notes, List<Symptom> symptoms, List<Photo> photos) {
         this.date = date;
         this.twoSidedMeasurementGroups = twoSidedMeasurementGroups;
         this.nonSidedMeasurements = nonSidedMeasurements;

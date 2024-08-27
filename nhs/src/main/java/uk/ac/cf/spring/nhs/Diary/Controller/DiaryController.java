@@ -31,6 +31,11 @@ public class DiaryController {
 
     @GetMapping
     public String diary(Model model, @AuthenticationPrincipal CustomUserDetails user) {
+        return "diary/diary";
+    }
+
+    @GetMapping("/entries")
+    public ResponseEntity<List<DiaryEntryDTO>> getDiaryEntriesAsJson(@AuthenticationPrincipal CustomUserDetails user) {
         Long userId = user.getUserId();
         List<DiaryEntry> diaryEntries = diaryEntryService.getDiaryEntriesByUserId(userId);
 
@@ -89,8 +94,7 @@ public class DiaryController {
             diaryEntryDTOs.add(dto);
         }
 
-        model.addAttribute("diaryEntryDTOs", diaryEntryDTOs);
-        return "diary/diary";
+        return ResponseEntity.ok(diaryEntryDTOs);
     }
 
 
