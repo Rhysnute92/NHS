@@ -98,7 +98,7 @@
             singlePointInput.innerHTML = `
             <label>Weight:</label>
             <input type="hidden" name="measurements[${index}].type" value="WEIGHT">
-            <input type="hidden" name="measurements[${index}].location" value="n">
+            <input type="hidden" name="measurements[${index}].location" value="">
             <input type="hidden" name="measurements[${index}].side" value="">
             <div>
                 <input type="number" name="measurements[${index}].value" step="0.1" placeholder="Value">
