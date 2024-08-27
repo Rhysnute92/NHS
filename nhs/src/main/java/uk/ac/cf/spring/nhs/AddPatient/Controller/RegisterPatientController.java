@@ -21,6 +21,6 @@ public class RegisterPatientController {
     @PostMapping("/register")
     public String registerPatient(@ModelAttribute RegisterRequest request, RedirectAttributes redirectAttributes) {
         patientService.registerPatient(request);
-        return "redirect:/patientprofile/info";
+        return "redirect:/provider/search";
     }
 }
