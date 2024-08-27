@@ -29,14 +29,24 @@ public class PatientSearchController {
     public String nhsSearch(@ModelAttribute SearchRequest request, RedirectAttributes redirect){
         if (request.getPatientNhsNumber() != null){
             Patient result = patientService.findPatientbyNHSNumber(request.getPatientNhsNumber());
-            result = patientService.decryptPatient(result);
-            redirect.addFlashAttribute("results", result);
+            if(result != null){
+                result = patientService.decryptPatient(result);
+                redirect.addFlashAttribute("results", result);
+            } else {
+                String error = "Patient not found.";
+                redirect.addFlashAttribute("error", error);
+            }
         } else{
             List<Patient> result = patientService.patientGeneralSearch(request);
-            for (Patient p : result){
-                p = patientService.decryptPatient(p);
+            if(result != null && result.size()>0){
+                for (Patient p : result){
+                    p = patientService.decryptPatient(p);
+                }
+                redirect.addFlashAttribute("results", result);
+            } else {
+                String error = "No patients found matching search criteria";
+                redirect.addFlashAttribute("error", error);
             }
-            redirect.addFlashAttribute("results", result);
         }
         return "redirect:/provider/search";
     }
