@@ -1,4 +1,4 @@
-import { QuestionnaireHubManager } from "./questionnaireHubManager.js";
+import { QuestionnaireHubManager } from "./QuestionnaireHubManager.js";
 
 let manager;
 let patientId;

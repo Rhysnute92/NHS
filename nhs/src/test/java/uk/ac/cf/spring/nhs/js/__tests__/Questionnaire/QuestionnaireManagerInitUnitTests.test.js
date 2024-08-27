@@ -1,4 +1,4 @@
-import { QuestionnaireManager } from "../../Questionnaire/QuestionnaireManager";
+import { QuestionnaireManager } from "../../../../../../../../../../main/resources/static/js/Questionnaire/QuestionnaireManager";
 
 // Mock the DOM content
 document.body.innerHTML = `
@@ -6,17 +6,20 @@ document.body.innerHTML = `
   <button id="save-questionnaire"></button>
 `;
 
-jest.mock("../../Questionnaire/QuestionnaireManager.js", () => {
-  return {
-    QuestionnaireManager: jest.fn().mockImplementation(() => {
-      return {
-        loadQuestionnaire: jest.fn(),
-        submitQuestionnaire: jest.fn(),
-        saveQuestionnaire: jest.fn(),
-      };
-    }),
-  };
-});
+jest.mock(
+  "../../../../../../../../../../main/resources/static/js/Questionnaire/QuestionnaireManager",
+  () => {
+    return {
+      QuestionnaireManager: jest.fn().mockImplementation(() => {
+        return {
+          loadQuestionnaire: jest.fn(),
+          submitQuestionnaire: jest.fn(),
+          saveQuestionnaire: jest.fn(),
+        };
+      }),
+    };
+  }
+);
 
 describe("QuestionnaireManager Initialization", () => {
   let questionnaireManager;

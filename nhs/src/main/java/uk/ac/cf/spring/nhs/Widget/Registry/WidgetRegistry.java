@@ -1,54 +1,61 @@
 package uk.ac.cf.spring.nhs.Widget.Registry;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import uk.ac.cf.spring.nhs.Widget.Model.Widget;
 
-public class WidgetRegistry {
-    private static Map<String, Widget> widgets = new HashMap<>();
+@Component
+public class WidgetRegistry implements WidgetRegistryInterface {
+    private static final Logger logger = LoggerFactory.getLogger(WidgetRegistry.class);
+    private final Map<String, Widget> widgets = new HashMap<>();
 
-    /**
-     * Registers a widget with the given name in the WidgetRegistry.
-     *
-     * @param name   the name of the widget
-     * @param widget the widget to be registered
-     * @throws IllegalArgumentException if the name or widget is null
-     */
-    public static void registerWidget(String name, Widget widget) {
+    @Override
+    public void registerWidget(String name, Widget widget) {
         if (name == null || widget == null) {
             throw new IllegalArgumentException("Name and widget cannot be null");
         }
-        widgets.put(name, widget);
+        String formattedName = formatWidgetName(name);
+        widgets.put(formattedName, widget);
+        logger.info("Registered widget: {} (formatted: {})", name, formattedName);
     }
 
-    /**
-     * Retrieves a widget from the widget registry based on its name.
-     *
-     * @param name the name of the widget to retrieve
-     * @return the widget with the specified name, or null if not found
-     * @throws IllegalArgumentException if the name is null
-     */
-    public static Widget getWidget(String name) {
+    @Override
+    public Widget getWidget(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Name cannot be null");
         }
-
-        return widgets.get(name);
+        String formattedName = formatWidgetName(name);
+        Widget widget = widgets.get(formattedName);
+        logger.debug("Retrieved widget: {} (formatted: {})", name, formattedName);
+        return widget;
     }
 
-    public static String getWidgetScript(String name) {
+    private String formatWidgetName(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("Widget name cannot be null");
+        }
+        return name.toLowerCase().replaceAll("\\s+", "-").replaceAll("[^a-z0-9-]", "");
+    }
+
+    @Override
+    public boolean hasWidget(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Name cannot be null");
         }
-
-        Widget widget = widgets.get(name);
-        if (widget != null) {
-            String script = widget.getScript();
-            if (script != null) {
-                return "/js/widgets/" + script + ".js"; // Full path to the static resource
-            }
-        }
-        return null;
+        String formattedName = formatWidgetName(name);
+        return widgets.containsKey(formattedName);
     }
+
+    @Override
+    public Set<String> getRegisteredWidgetNames() {
+        return new HashSet<>(widgets.keySet());
+    }
+
 }

@@ -11,20 +11,38 @@
     <nav th:replace="~{common/fragments/navbar}" class="nav"></nav>
     <main class="dashboard-container">
       <div class="welcome-container">
-        <h1 id="welcome-message" th:inline="text"> Welcome, [[${patientName}]]!</h1>
+        <h1 id="welcome-message" th:inline="text">
+          Welcome, [[${patientName}]]!
+        </h1>
         <!-- <h1 id="patient-name"></h1> -->
       </div>
       <h2 class="dashboard-subtitle">
         Last logged in: <span id="last-logged-in">July 31, 2024</span>
       </h2>
       <div id="widget-container"></div>
-      <div class="button-container">
-        <button class="add-widget-button">+ Add Widget</button>
+      <div class="action-link-container">
+        <a class="action-link" href="/widgetLibrary">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            width="36"
+            height="36"
+          >
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path
+              d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"
+            ></path>
+          </svg>
+          <span class="action-link__text"
+            >Customise your dashboard with more widgets</span
+          >
+        </a>
       </div>
     </main>
     <script th:src="@{/js/common/header.js}"></script>
     <script type="module" th:src="@{/js/Widget/widget.js}"></script>
-    <script type="module" th:src="@{/js/widgets/taskCompletionWidget.js}"></script>
+    <!--  <script type="module" th:src="@{/js/widgets/taskCompletionWidget.js}"></script> -->
     <script type="module" src="/js/dashboard/dashboard.js"></script>
   </body>
 </html>

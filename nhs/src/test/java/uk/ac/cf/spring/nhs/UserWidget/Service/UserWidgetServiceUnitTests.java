@@ -3,6 +3,7 @@ package uk.ac.cf.spring.nhs.UserWidget.Service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -26,15 +27,6 @@ class UserWidgetServiceUnitTests {
     @InjectMocks
     private UserWidgetService userWidgetService;
 
-    /**
-     * Initializes the test environment before each test case.
-     *
-     * This method is annotated with `@BeforeEach` which means it will be
-     * executed before each test case. It initializes the test environment by
-     * calling `MockitoAnnotations.openMocks(this)`.
-     *
-     * @return void
-     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -71,6 +63,29 @@ class UserWidgetServiceUnitTests {
         assertEquals("Widget 1", result.get(0).getWidgetName());
         assertEquals("Widget 2", result.get(1).getWidgetName());
         verify(userWidgetRepository).findAllByUserID(userId);
+    }
+
+    @Test
+    void deleteUserWidgetById_validWidgetId_deletesWidget() {
+        Long widgetId = 1L;
+
+        doNothing().when(userWidgetRepository).deleteById(widgetId);
+
+        userWidgetService.deleteUserWidgetById(widgetId);
+
+        verify(userWidgetRepository).deleteById(widgetId);
+    }
+
+    @Test
+    void deleteUserWidgetsByIdList_validIdList_deletesWidgets() {
+
+        List<Long> userWidgetIds = Arrays.asList(1L, 2L, 3L);
+
+        doNothing().when(userWidgetRepository).deleteAllById(userWidgetIds);
+
+        userWidgetService.deleteUserWidgetsByIdList(userWidgetIds);
+
+        verify(userWidgetRepository).deleteAllById(userWidgetIds);
     }
 
     /**
