@@ -78,8 +78,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       container.appendChild(widgetItem);
 
       // click event to select/deselect widget
-      widgetItem.addEventListener("click", function () {
-        widgetItem.classList.toggle("selected");
+      widgetIcon.addEventListener("click", function () {
+        widgetIcon.classList.toggle("selected");
       });
     }
   }
@@ -122,8 +122,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       container.appendChild(widgetItem);
 
       // click event to select/deselect widget
-      widgetItem.addEventListener("click", function () {
-        widgetItem.classList.toggle("selected");
+      widgetIcon.addEventListener("click", function () {
+        widgetIcon.classList.toggle("selected");
       });
     }
   }

@@ -101,11 +101,20 @@
   margin-bottom: 0.5em;
   transition: all 0.3s ease;
   border: 2px solid transparent;
+  box-shadow: 2px 2px 3px 1px var(--nhs-dark-grey);
+}
+
+.widget-icon.current:hover {
+  box-shadow: 0 0 0.5em 1px rgb(255 0 0);
 }
 
 .widget-icon.current.selected {
   border: 1px solid #ff0101;
   box-shadow: 0 0 0.5em 1px rgb(255 0 0);
+}
+
+.widget-icon.available:hover {
+  box-shadow: 0 0 0.5em 1px #02ff02;
 }
 
 .widget-icon.available.selected {
@@ -117,4 +126,5 @@
   font-size: 0.9em;
   text-align: center;
   color: #333;
+  font-weight: bold;
 }
