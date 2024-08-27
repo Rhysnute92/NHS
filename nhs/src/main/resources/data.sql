@@ -623,6 +623,66 @@ VALUES (
         'Sherwood Forrest Hospitals',
         '2',
         'xlHXWQORPy97Go4sJsrY+XNNEx59m/NaDZ7K7OOuEVY='
+    ),
+    (
+        '44xYLczYlnL+0R7V1daQSQ==',
+        'QWTFuYdUsObke29NGRdsFg==',
+        '101',
+        '1970-04-12',
+        '+0LTZ8axUjqia7uDXEfVsQ==',
+        'Ev3tsDFRXdxRYD/gOGfqEA==',
+        'Ms',
+        'Florence Nightingale Community Hospital',
+        '4',
+        '59+Eg0id2iwgoQyN4C+krhtXtyLpWK2cBxc5AmV2ngM='
+    ),
+    (
+        'Pgts1SUC35yDiC85snBUuw==',
+        'jtl48KkFHD4MX0Fv6ZT2Mw==',
+        '102',
+        '1950-12-01',
+        'xP/Vk0YDx75YoIoFRHNqsA==',
+        '+19rJmw3VKN1HuVO/m1p0w==',
+        'Mr',
+        'Long Eaton Health Centre',
+        '5',
+        'rXXcMwQDKf53pxmpLV+HG7gTbj3QSJ7V7z6m/2ai4/Q='
+    ),
+    (
+        '+jvL2b3H5pKDQkYvwQs9EA==',
+        'agKWlHWRDg1BRGryfzQUSA==',
+        '103',
+        '1982-11-23',
+        'sMQQoFzfbd4Vm0NZxguvwA==',
+        'ubQ8pbjSA8bZ0IHBbTdu+w==',
+        'Mr',
+        'Sherwood Forrest Hospitals',
+        '6',
+        '+xNT8/Bcs/8IWWU0AxV9bBLh5VsfJp37dLRZ1GKYGHs='
+    ),
+    (
+        '8GnLMyfwAl9QeKecoo5DhA==',
+        '04sqMGUpvxGWM+yD9l1g/g==',
+        '104',
+        '1967-07-14',
+        'aVdYyukjV7AEioA+HpK+Wg==',
+        'Lc3eCmH1c9E5N8+8ssjocA==',
+        'Mrs',
+        'Long Eaton Health Centre',
+        '7',
+        'hqZc7ZSg4sAD6MSk4DVrYsuw/W0Ud8tY2hxlWZZfZOo='
+    ),
+    (
+        '8FLb2VJYsAwmJ256Gn7pyg==',
+        '7Clmi3BWRNmep6GB4ChzpA==',
+        '105',
+        '1956-10-30',
+        'jaqW1dSzitnIKeydIG/fkA==',
+        'LtuUstv3TCTow48VwKTlPQ==',
+        'Dr',
+        'Florence Nightingale Community Hospital',
+        '8',
+        'zXyUf+Y6vYp5yEwwkxf0h3+fUn7H5Tov2OzlhMCKS8M='
     );
 INSERT INTO Providers (
         ProviderFirstName,
