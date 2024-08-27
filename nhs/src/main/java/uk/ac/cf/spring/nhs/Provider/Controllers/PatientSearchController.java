@@ -38,7 +38,7 @@ public class PatientSearchController {
             }
         } else{
             List<Patient> result = patientService.patientGeneralSearch(request);
-            if(result != null){
+            if(result != null && result.size()>0){
                 for (Patient p : result){
                     p = patientService.decryptPatient(p);
                 }
