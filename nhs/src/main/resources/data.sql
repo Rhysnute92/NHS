@@ -773,3 +773,29 @@ VALUES (1, 2, 2),
     -- Compression Therapy
     (6, 2, 1);
 -- Daily Exercises
+
+INSERT INTO DiaryEntries (EntryDateTime, EntryMood, EntryNotes, UserID)
+VALUES
+    ('2024-08-20 08:30:00', 0, 'Feeling great today!', 2),
+    ('2024-08-20 13:45:00', 2, 'A bit tired, but nothing unusual.', 2),
+    ('2024-08-21 10:15:00', 1, 'Not too bad today.', 2),
+    ('2024-08-22 09:00:00', 3, '', 2),
+    ('2024-08-23 18:20:00', 4, 'Extremely tired and feverish.', 2);
+
+
+-- Insert data into Measurements
+INSERT INTO Measurements (MeasurementType, MeasurementValue, MeasurementUnit, UserID, EntryID)
+VALUES
+    ('Weight', 70, 'kg', 2, 1),
+    ('Weight', 70, 'kg', 2, 1),
+    ('Weight', 70, 'kg', 2, 2),
+    ('Weight', 70, 'kg', 2, 4),
+    ('Weight', 70, 'kg', 2, 5);
+
+-- Insert data into Symptoms
+INSERT INTO Symptoms (SymptomName, SymptomSeverity, SymptomStartDate, SymptomIsActive, UserID, EventID, EntryID)
+VALUES
+    ('Pain', 4, '2024-08-21 10:30:00', TRUE, 2, NULL, 3),
+    ('Trouble sleeping', 3, '2024-08-23 08:00:00', TRUE, 2, NULL, 5),
+    ('Numbness', 2, '2024-08-22 09:15:00', TRUE, 2, NULL, 4),
+    ('Fever', 3, '2024-08-23 12:45:00', TRUE, 2, NULL, 5);

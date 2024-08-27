@@ -8,7 +8,7 @@ import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import java.util.List;
 
 @Repository
-public interface DiaryEntryRepository extends JpaRepository<DiaryEntry, Integer> {
+public interface DiaryEntryRepository extends JpaRepository<DiaryEntry, Long> {
     List<DiaryEntry> findByUserId(long userId, Sort sort);
 
 }
