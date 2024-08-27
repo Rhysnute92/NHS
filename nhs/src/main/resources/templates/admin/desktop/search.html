@@ -23,6 +23,7 @@
             <input type="text" id="patientNhsNumber" name="patientNhsNumber" required>
             <input type="submit" value="Search" class="search_button"/>
         </form>
+        <div th:if="${results == null}" id="search_error" th:text="${error}"></div>
         <table th:if="${results != null}" class="results_table">
             <thead>
                 <tr>
