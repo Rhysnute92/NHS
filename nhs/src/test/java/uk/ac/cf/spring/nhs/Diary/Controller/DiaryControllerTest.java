@@ -24,6 +24,7 @@ import uk.ac.cf.spring.nhs.Diary.Service.DiaryEntryService;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -84,8 +85,8 @@ public class DiaryControllerTest {
     @Test
     public void testDiary() throws Exception {
         List<DiaryEntry> diaryEntries = new ArrayList<>();
-        diaryEntries.add(new DiaryEntry(1L, new Date()));
-        diaryEntries.add(new DiaryEntry(2L, new Date()));
+        diaryEntries.add(new DiaryEntry(1L, LocalDateTime.now()));
+        diaryEntries.add(new DiaryEntry(2L, LocalDateTime.now()));
 
         when(diaryEntryService.getDiaryEntriesByUserId(1L)).thenReturn(diaryEntries);
 
@@ -99,7 +100,7 @@ public class DiaryControllerTest {
     @Test
     public void testCheckinSuccess() throws Exception {
         CheckinFormDTO checkinForm = new CheckinFormDTO();
-        DiaryEntry dummyDiaryEntry = new DiaryEntry(1L, new Date());
+        DiaryEntry dummyDiaryEntry = new DiaryEntry(1L, LocalDateTime.now());
 
         when(diaryEntryService.saveDiaryEntry(any(CheckinFormDTO.class), eq(1L))).thenReturn(dummyDiaryEntry);
 
@@ -151,13 +152,4 @@ public class DiaryControllerTest {
             assertEquals(expectedNavMenuItems.get(i).getIcon(), actualNavMenuItems.get(i).getIcon());
         }
     }
-
-    // Helper methods for creating test data
-    private List<DiaryEntry> createDummyDiaryEntries() {
-        List<DiaryEntry> entries = new ArrayList<>();
-        entries.add(new DiaryEntry(1L, new Date()));
-        entries.add(new DiaryEntry(2L, new Date()));
-        return entries;
-    }
-
 }

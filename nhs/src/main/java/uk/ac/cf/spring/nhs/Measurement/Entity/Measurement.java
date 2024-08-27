@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.nhs.Measurement.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,10 +31,7 @@ public class Measurement {
     @Column(name = "UserID")
     private long userId;
 
-    @ManyToOne
-    @JoinColumn(name = "EventID", nullable = true)
-    private Event event;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "EntryID", nullable = true)
     private DiaryEntry diaryEntry;
