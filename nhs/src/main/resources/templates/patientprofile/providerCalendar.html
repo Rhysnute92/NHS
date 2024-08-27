@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/provider}">
+  <head>
+    <title>Provider Calendar</title>
+    <link rel="stylesheet" th:href="@{/css/providerCalendar/providerCalendar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/common/main.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.4/fullcalendar.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+<body>
+<main layout:fragment="content" class="main-content">
+  <div class="container">
+    <h1 class="management-desktop-title">John Doe Patient Calendar</h1>
+    <p class="management-desktop-subtitle">
+      Here you can view a patients calendar and view any
+      upcoming appointments they have relating to lymphoedema
+      also add lymphoedema to their calendars
+    </p>
+<div id="tabs">
+  <button onclick="showList()">View List</button>
+  <button onclick="showProviderCalendar()">View Calendar</button>
+  <button onclick="showProviderAddAppointment()">Add Appointment</button>
+
+</div>
+<div id="appointment-list" class="active">
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Type</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr th:each="appointment : ${appointments}">
+      <td th:text="${appointment.date}">Date</td>
+      <td th:text="${appointment.time}">Time</td>
+      <td th:text="${appointment.type}">Type</td>
+      <td th:text="${appointment.location}">Location</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+    <div id="no-appointments" class="no-appointments" style="display: none">
+      <p>No appointments at the moment.</p>
+    </div>
+
+    <div id="calendar" th:insert="~{calendar/fragments/calendar}"></div>
+  </div>
+  <custom-modal class="appt-modal">
+  <!-- Form for adding appointments -->
+  <div id="appointment-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <form id="appointment-form">
+        <label for="patient">Patient:</label>
+        <input type="text" id="patient" name="patient" required>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        <label for="time">Time:</label>
+        <input th:ty="time" id="time" name="time" required>
+        <label for="type">Type:</label>
+        <input th:type="text" id="type" name="type" required>
+        <label for="location">Location:</label>
+        <input th:type="text" id="location" name="location" required>
+        <button type="submit">Add Appointment</button>
+      </form>
+    </div>
+  </div>
+</custom-modal>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.4/fullcalendar.min.js"></script>
+<script th:src="@{/js/calendar/providerCalendar.js}"></script>
+<script th:src="@{/js/common/customModal.js}"></script>
+<script th:src="@{/js/calendar/calendar.js}"></script>
+<script th:src="@{/js/calendar/addAppointment.js}"></script>
+</body>
+</html>

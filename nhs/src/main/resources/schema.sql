@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS UserQuestionnaires;
 DROP TABLE IF EXISTS Question;
 DROP TABLE IF EXISTS Questions;
 DROP TABLE IF EXISTS Questionnaires;
+
 DROP TABLE IF EXISTS Treatments;
 DROP TABLE IF EXISTS DiarySymptoms;
 DROP TABLE IF EXISTS DiaryPhotos;
@@ -18,9 +19,12 @@ DROP TABLE IF EXISTS DiaryMeasurements;
 DROP TABLE IF EXISTS Symptoms;
 DROP TABLE IF EXISTS Measurements;
 DROP TABLE IF EXISTS Photos;
+
 DROP TABLE IF EXISTS DiaryEntries;
 DROP TABLE IF EXISTS Events;
+
 DROP TABLE IF EXISTS Appointments;
+
 DROP TABLE IF EXISTS UserWidgets;
 DROP TABLE IF EXISTS Providers;
 DROP TABLE IF EXISTS PatientDiagnosis;
@@ -29,6 +33,8 @@ DROP TABLE IF EXISTS ProviderCredentials;
 DROP TABLE IF EXISTS PatientCredentials;
 DROP TABLE IF EXISTS Admin;
 DROP TABLE IF EXISTS UserCredentials;
+
+
 --Log in information and credentials--
 CREATE TABLE UserCredentials (
     UserID BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -94,6 +100,8 @@ CREATE TABLE Appointments (
     UserID BIGINT,
     FOREIGN KEY (UserID) REFERENCES UserCredentials (UserID)
 );
+ALTER TABLE Appointments ADD COLUMN  is_deletable BOOLEAN DEFAULT TRUE;
+
 --Events--
 CREATE TABLE Events (
     EventID BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -104,13 +112,14 @@ CREATE TABLE Events (
 );
 --Diary--
 CREATE TABLE DiaryEntries (
-    EntryID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    EntryDate DATE NOT NULL,
-    EntryMood TINYINT,
-    EntryNotes TEXT,
-    UserID BIGINT NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+  EntryID BIGINT AUTO_INCREMENT PRIMARY KEY,
+  EntryDate DATE NOT NULL,
+  EntryMood TINYINT,
+  EntryNotes TEXT,
+  UserID BIGINT NOT NULL,
+  FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
+
 CREATE TABLE Photos (
     PhotoID BIGINT AUTO_INCREMENT PRIMARY KEY,
     PhotoURL TEXT,
@@ -123,31 +132,34 @@ CREATE TABLE Photos (
     FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
+
 CREATE TABLE Measurements (
-    MeasurementID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    MeasurementType VARCHAR(255),
-    MeasurementValue FLOAT,
-    MeasurementUnit VARCHAR(100),
-    UserID BIGINT,
-    EventID BIGINT,
-    EntryID BIGINT,
-    FOREIGN KEY (EventID) REFERENCES Events(EventID),
-    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+  MeasurementID BIGINT AUTO_INCREMENT PRIMARY KEY,
+  MeasurementType VARCHAR(255),
+  MeasurementValue FLOAT,
+  MeasurementUnit VARCHAR(100),
+  UserID BIGINT,
+  EventID BIGINT,
+  EntryID BIGINT,
+  FOREIGN KEY (EventID) REFERENCES Events(EventID),
+  FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
+  FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
+
 CREATE TABLE Symptoms (
-    SymptomID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    SymptomName VARCHAR(255),
-    SymptomSeverity INT,
-    SymptomStartDate DATETIME,
-    SymptomIsActive BOOLEAN,
-    UserID BIGINT,
-    EventID BIGINT,
-    EntryID BIGINT,
-    FOREIGN KEY (EventID) REFERENCES Events(EventID),
-    FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
-    FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
+  SymptomID BIGINT AUTO_INCREMENT PRIMARY KEY,
+  SymptomName VARCHAR(255),
+  SymptomSeverity INT,
+  SymptomStartDate DATETIME,
+  SymptomIsActive BOOLEAN,
+  UserID BIGINT,
+  EventID BIGINT,
+  EntryID BIGINT,
+  FOREIGN KEY (EventID) REFERENCES Events(EventID),
+  FOREIGN KEY (EntryID) REFERENCES DiaryEntries(EntryID),
+  FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
+
 CREATE TABLE Treatments (
     TreatmentID BIGINT AUTO_INCREMENT PRIMARY KEY,
     TreatmentType VARCHAR(255),
@@ -157,6 +169,7 @@ CREATE TABLE Treatments (
     FOREIGN KEY (EventID) REFERENCES Events(EventID),
     FOREIGN KEY (UserID) REFERENCES UserCredentials(UserID)
 );
+
 --Not implemented yet--
 --CREATE TABLE Event ()
 --CREATE TABLE DiaryQuestions ()
@@ -181,9 +194,7 @@ CREATE TABLE UserQuestionnaires (
     UserQuestionnaireID BIGINT AUTO_INCREMENT PRIMARY KEY,
     QuestionnaireID BIGINT NOT NULL,
     UserID BIGINT NOT NULL,
-    QuestionnaireCreatedDate DATETIME NOT NULL,
-    QuestionnaireDueDate DATETIME NOT NULL,
-    QuestionnaireStartDate DATETIME DEFAULT NULL,
+    QuestionnaireStartDate DATETIME NOT NULL,
     QuestionnaireInProgress BOOLEAN DEFAULT FALSE,
     QuestionnaireIsCompleted BOOLEAN DEFAULT FALSE,
     QuestionnaireCompletionDate DATETIME,

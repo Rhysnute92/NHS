@@ -3,7 +3,9 @@ package uk.ac.cf.spring.nhs.Appointments.Model;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
+import groovyjarjarantlr4.v4.analysis.AnalysisPipeline;
 import jakarta.persistence.*;
+import uk.ac.cf.spring.nhs.AddPatient.Entity.Patient;
 
 @Entity
 @Table(name = "Appointments")
@@ -17,8 +19,14 @@ public class Appointment {
     private String apptProvider;
     private String apptLocation;
     private String apptInfo;
+
+    private Boolean isDeletable = true;
     @Column(name = "UserID", nullable = false)
     private Long userID;
+    
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
     // Getters and setters
 
@@ -76,5 +84,20 @@ public class Appointment {
 
     public void setUserID(Long userID) {
         this.userID = userID;
+    }
+
+    public Boolean getIsDeletable(){return isDeletable;}
+
+    public void setIsDeletable(Boolean isDeletable){this.isDeletable = isDeletable;}
+
+    public void setPatient(Patient patient) {
+    }
+
+    public Appointment orElse(Object o) {
+        return null;
+    }
+
+    public Patient getPatient() {
+        return this.patient;
     }
 }

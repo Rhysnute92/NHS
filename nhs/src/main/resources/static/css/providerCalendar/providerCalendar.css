@@ -1,0 +1,573 @@
+/* General Styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.management-desktop-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.management-desktop-subtitle {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* Tab Button Styles */
+#tabs {
+    margin-bottom: 20px;
+}
+
+#tabs button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--nhs-aqua-green);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#tabs button:hover {
+    background-color: var(--nhs-light-green);
+}
+
+#tabs button.active {
+    background-color: var(--nhs-light-green);
+}
+
+/* Appointment List Styles */
+#appointment-list {
+    display: none;
+}
+
+#appointment-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#appointment-list th,
+#appointment-list td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#appointment-list th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+#appointment-list td {
+    background-color: #fff;
+}
+
+/* No Appointments Message */
+.no-appointments {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+}
+
+/* Calendar Styles */
+#calendar {
+    display: none;
+    margin-top: 20px;
+}
+
+.fc {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .management-desktop-title {
+        font-size: 20px;
+    }
+
+    .management-desktop-subtitle {
+        font-size: 14px;
+    }
+
+    #tabs button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    #appointment-list th,
+    #appointment-list td {
+        font-size: 14px;
+        padding: 8px;
+    }
+    /* Set a custom background color for the calendar */
+    #calendar {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #f9f9f9; /* Light grey background */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    /* Custom styles for the header toolbar */
+    .fc-toolbar {
+        background-color: #007bff; /* Blue background */
+        color: #ffffff; /* White text */
+        padding: 10px;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .fc-toolbar .fc-button {
+        background-color: #0056b3; /* Darker blue for buttons */
+        color: #ffffff;
+        border: none;
+        margin-right: 5px;
+        border-radius: 4px;
+        padding: 5px 10px;
+    }
+
+    .fc-toolbar .fc-button:hover {
+        background-color: #004494; /* Even darker on hover */
+    }
+
+    .fc-toolbar h2 {
+        font-size: 24px;
+        margin: 0;
+        font-weight: bold;
+    }
+
+    /* Custom styling for the calendar cells */
+    .fc-daygrid-day {
+        border: 1px solid #dddddd;
+        cursor: pointer;
+    }
+
+    .fc-daygrid-day:hover {
+        background-color: #f0f8ff; /* Light blue on hover */
+    }
+
+    /* Style the event entries */
+    .fc-event {
+        background-color: #28a745; /* Green background for events */
+        border: none;
+        color: #ffffff; /* White text */
+        padding: 5px;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    * {
+        box-sizing: border-box;
+        line-height: 1.5rem;
+    }
+
+    /* Container for the calendar, using a grid layout */
+    .container-calendar {
+        margin: 0 auto;
+        overflow: auto;
+        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+
+    /* Styling for appointments section */
+    #appointments {
+        border-right: 2px solid lightgrey;
+        padding-right: 1rem;
+    }
+
+    .no-appointments p {
+        color: var(--nhs-mid-grey);
+    }
+
+    /* Center section styling in the grid */
+    #center {
+        margin: 1rem;
+        grid-column: 2;
+        padding-right: 4rem;
+        padding-left: 4rem;
+    }
+
+    /* Left section styling in the grid */
+    #left {
+        margin-left: 1rem;
+        grid-column: 1;
+    }
+
+    /* Appointment list styling */
+    #apptList {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    /* Styling for the delete event button */
+    .delete-appt {
+        background: rgb(237, 19, 19);
+        color: white;
+        margin-left: 0.5em;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* General button styling within the calendar container */
+    .button-container-calendar button {
+        cursor: pointer;
+        background: #005eb8;
+        color: #fff;
+        border: 1px solid #005eb8;
+        padding: 5px 10px;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    /* Styling for the calendar table */
+    .table-calendar {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+
+    /* Styling for selected date in the calendar */
+    .date-picker.selected {
+        background-color: #f2f2f2;
+        font-weight: bold;
+        font-size: 1.5em;
+        border: 1px dashed #005eb8;
+    }
+
+    .date-picker.selected span {
+        border-bottom: 2px solid currentColor;
+    }
+
+    /* Hover effect for date picker */
+    .date-picker:hover {
+        background-color: #005EB8;
+        color: white;
+        cursor: pointer;
+    }
+
+    /* Styling for the month and year heading */
+    #monthAndYear {
+        text-align: center;
+        margin-top: 0;
+        font-size: 2em;
+    }
+
+    /* Styling for the calendar button container */
+    .button-container-calendar {
+        position: relative;
+        margin-bottom: 1em;
+        overflow: hidden;
+        clear: both;
+    }
+
+    #previous {
+        float: left;
+        margin-left: 2rem;
+    }
+
+    #next {
+        float: right;
+        margin-right: 2rem;
+    }
+
+    /* Footer container styling */
+    .footer-container-calendar {
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    /* Styling for the select dropdown in the footer */
+    .footer-container-calendar select {
+        cursor: pointer;
+        background: #ffffff;
+        color: #585858;
+        border: 1px solid #bfc5c5;
+        border-radius: 3px;
+    }
+
+    #header {
+        margin-bottom: 2rem;
+    }
+
+    /* Calendar body styling */
+    .calendar-body {
+        padding: 20px;
+    }
+
+    .calendar-body ul {
+        list-style: none;
+        flex-wrap: wrap;
+        display: flex;
+        text-align: center;
+    }
+
+    .calendar-body .calendar-dates {
+        margin-bottom: 20px;
+    }
+
+    .calendar-body li {
+        width: calc(100% / 7);
+        font-size: 1.07rem;
+        color: #414141;
+    }
+
+    .calendar-body .calendar-weekdays li {
+        cursor: default;
+        font-weight: 500;
+    }
+
+    .calendar-body .calendar-dates li {
+        margin-top: 30px;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+    }
+
+    .calendar-dates li.inactive {
+        color: #aaa;
+    }
+
+    .calendar-dates li.active {
+        color: #fff;
+    }
+
+    .calendar-dates li::before {
+        position: absolute;
+        content: "";
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .calendar-dates li.active::before {
+        background: #6332c5;
+    }
+
+    .calendar-dates li:not(.active):hover::before {
+        background: #e4e1e1;
+    }
+
+    /* Modal styling */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .modalContent {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .popup-close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .popup-close:hover,
+    .popup-close:focus {
+        color: red;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* Toast notification styling */
+    .toast {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+        padding: 16px;
+    }
+
+    .toast-message {
+        margin: 0;
+    }
+
+    .toast.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @-webkit-keyframes fadein {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @-webkit-keyframes fadeout {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+
+    @keyframes fadein {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes fadeout {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+
+    /* Tooltip styling for calendar */
+    .appt-tooltip {
+        background-color: var(--nhs-green);
+        color: var(--nhs-white);
+        border-radius: 5px;
+        font-size: 0.7rem;
+        overflow: hidden;
+        text-align: center;
+        white-space: nowrap;
+        width: 100%;
+        margin-top: 0.2rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .appt-tooltips {
+        width: 90%;
+    }
+
+    /* Mobile-specific styles */
+    #add-apt-btn {
+        float: left;
+        background: #005EB8;
+        color: white;
+        position: relative;
+        margin-left: 2rem;
+        width: 8rem;
+        height: 2rem;
+    }
+
+    main {
+        margin: 2rem;
+    }
+
+    .grid-calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        margin-top: 20px;
+    }
+
+    .days-header {
+        display: contents;
+    }
+
+    .calendar-grid {
+        display: contents;
+    }
+
+    .days-header > div, .calendar-grid > div {
+        text-align: center;
+        border: 1px solid lightgrey;
+        display: flex;
+        flex-direction: column;
+        height: 5rem;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .date-picker {
+        cursor: pointer;
+    }
+
+    .selected {
+        background-color: #2196F3;
+    }
+
+    .appt-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 5px;
+        background-color: lightgrey;
+    }
+
+    .fc-event:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+
+    /* Style for the "today" cell */
+    .fc-daygrid-day.fc-day-today {
+        background-color: #ffeeba; /* Light yellow background */
+        font-weight: bold;
+    }
+
+    /* Weekend styles (optional) */
+    .fc-daygrid-day.fc-day-sat,
+    .fc-daygrid-day.fc-day-sun {
+        background-color: #f2f2f2; /* Light grey for weekends */
+    }
+
+    /* Adjust the calendar title and navigation */
+    .fc .fc-header-toolbar .fc-button-group {
+        margin: 0;
+        padding: 0;
+    }
+}
