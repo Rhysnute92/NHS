@@ -136,6 +136,20 @@ body.landing-page .btn-container button {
     margin: 0 0 15px;
 }
 
+@media (max-width: 950px) {
+    .prev, .next {
+        top: 70%;
+    }
+
+    .next {
+        right: 30px;
+    }
+
+    .prev {
+        left: 30px;
+    }
+}
+
 .prev, .next {
     cursor: pointer;
     position: absolute;
@@ -158,20 +172,6 @@ body.landing-page .btn-container button {
     left: 0;
 }
 
-@media (max-width: 768px) {
-    .prev, .next {
-        padding: 12px;
-        top: 70%;
-    }
-
-    .next {
-        right: 10px;
-    }
-
-    .prev {
-        left: 10px;
-    }
-}
 
 /* MOBILE GUEST */
 body.guest-page {
@@ -327,6 +327,10 @@ body.guest-page {
     max-width: 100%;
     height: auto;
     border-radius: 5px;
+}
+
+.find-us-dropdown-wrapper .guest-btn {
+    margin: 1rem;
 }
 
 /* POPUP */
@@ -585,4 +589,3 @@ body.guest-page .btn-container button{
 }
 
 
-/* HEADER ICON FIX */
