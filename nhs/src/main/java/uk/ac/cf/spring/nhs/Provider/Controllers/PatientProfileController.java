@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import uk.ac.cf.spring.nhs.Account.PatientProfileDTO;
 import uk.ac.cf.spring.nhs.AddPatient.Service.PatientService;
 import uk.ac.cf.spring.nhs.Common.util.NavMenuItem;
+import uk.ac.cf.spring.nhs.Event.Service.EventService;
 import uk.ac.cf.spring.nhs.Photo.Service.PhotoService;
 
 @Controller
@@ -30,6 +33,9 @@ public class PatientProfileController {
     @Autowired
     private PhotoService photoService;
 
+    @Autowired
+    private EventService eventService;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @ModelAttribute("navMenuItems")
@@ -39,7 +45,8 @@ public class PatientProfileController {
                 new NavMenuItem("Set plan", "/patientprofile/plan", "fa-solid fa-book"),
                 new NavMenuItem("Questionnaires", "/patientprofile/questionnairehub",
                         "fa-solid fa-book"),
-                new NavMenuItem("Photos", "/patientprofile/photos", "fa-solid fa-camera"));
+                new NavMenuItem("Photos", "/patientprofile/photos", "fa-solid fa-camera"),
+                new NavMenuItem("Events", "/patientprofile/events", "fa-solid fa-receipt"));
     }
 
     @ModelAttribute("userID")
@@ -72,6 +79,18 @@ public class PatientProfileController {
         model.addAttribute("objectMapper", objectMapper);
         model.addAttribute("photos", photoService.getPhotosByUserId(userID));
         return "patientprofile/photos";
+    }
+
+    @GetMapping("/events")
+    public String showEvents(Model model, @ModelAttribute("userID") Long userID) {
+        // Add ObjectMapper to model so Thymeleaf can use it to convert to JSON
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        model.addAttribute("objectMapper", objectMapper);
+
+        model.addAttribute("events", eventService.getEventsByUserId(userID));
+        return "patientprofile/events";
     }
 
     @GetMapping("/plan")
