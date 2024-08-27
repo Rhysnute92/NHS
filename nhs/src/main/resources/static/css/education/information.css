@@ -1,13 +1,5 @@
 html, body, .main-container {height: 100%;}
 
-.container{
-    margin-left: 2vw;
-}
-
-.container_m p{
-    margin-left: 2vw;
-}
-
 .spacer{
     height: 15vh;
 }
@@ -22,29 +14,23 @@ html, body, .main-container {height: 100%;}
     background: red;
     color: white;
     text-align: center;
-    padding: 2vh;
+    overflow: hidden;
 }
 
 .important_info_content {
     padding: 1rem;
 }
 
-ul {
+.important_info_list {
     margin: 1rem;
-    padding-left: 1rem;
 }
 
-.edmenu_list, .t_types ul {
-    padding: 0;
-    margin: 0;
+ul {
+    padding-left: 1rem;
 }
 
 li {
     margin-bottom: 0.5rem;
-}
-
-.important_info p{
-    padding: 0 2vw;
 }
 
 .important_info h2{
@@ -81,7 +67,7 @@ li {
     text-align: left;
     outline: none;
     width: 100%;
-    margin-top: 1vh;
+    margin-top: 0.5rem;
 }
 
 .collapsible_button:after{
@@ -116,10 +102,7 @@ li {
     margin-left: 35%;
 }
 .collapsible ul {
-    padding: 20px;
     list-style: disc;
-    width: 80%;
-    margin: auto;
 }
 
 .collapsible ul li{
@@ -163,14 +146,8 @@ li {
     margin: 0;
 }
 
-
-.subtitle, .title {
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-}
-
 p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 @media screen and (max-device-width: 768px){
@@ -181,11 +158,11 @@ p {
         margin-left: 2vw;
     }
     .title{
-        margin: 1vh;
-        padding-top: 1vh;
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
     }
     .collapsible_button, .collapsible_button.active{
-        font-size: 1rem;
+        font-size: 1.1rem;
         width: 100%;
         margin-left: 0;
     }
@@ -198,3 +175,4 @@ p {
         margin: 0;
     }
 }
+

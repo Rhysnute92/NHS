@@ -19,12 +19,10 @@
     font-size: 1.5rem;
 }
 
-header {
-    display: none;
-}
-
 #infoContainer {
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 /* TEXT */
@@ -45,9 +43,16 @@ p {
     font-size: medium;
 }
 
+html {
+    padding: 0;
+}
+
+.header-title {
+    display: none;
+}
 
 /* LANDING PAGE */
-body.landing-page {
+.landing-page {
     margin: 0;
     padding: 0;
     background: linear-gradient(to bottom, var(--nhs-blue), var(--nhs-dark-blue));
@@ -59,7 +64,6 @@ body.landing-page {
 }
 
 .nhs-logo {
-    position: absolute;
     top: 30%;
     transform: translateY(-50%);
     width: 125px;
@@ -173,6 +177,7 @@ body.landing-page .btn-container button {
 body.guest-page {
     background: linear-gradient(var(--nhs-blue), var(--nhs-dark-blue));
     overflow: hidden;
+    height: 100vh;
 }
 
 .mobilePages h2 {
@@ -187,7 +192,7 @@ body.guest-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    margin: 0.5rem;
 }
 
 .icon-wrapper {
@@ -201,17 +206,19 @@ body.guest-page {
     box-shadow: 2px 2px 0.4rem var(--nhs-dark-grey);;
     background: var(--nhs-white);
     text-align: center;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     position: relative;
     box-sizing: border-box;
+    height: 25vh;
 }
 
 .icon-wrapper img {
     width: 100%;
-    height: auto;
+    height: 100%;
     margin-bottom: 0;
     box-sizing: border-box;
     border-radius: 8px 8px 0 0;
+    object-fit: cover;
 }
 
 .icon-text {
@@ -226,6 +233,10 @@ body.guest-page {
     position: absolute;
     bottom: 0;
     left: 0;
+}
+
+.mobileFrag {
+    padding: 1rem;
 }
 
 .mobileFrag .info-box {
@@ -326,6 +337,7 @@ body.guest-page {
     align-items: center;
     text-align: center;
     z-index: 1000;
+    margin: 0 1rem;
 }
 
 .popup-overlay {
@@ -374,18 +386,17 @@ body.guest-page {
     display: none;
     width: 90%;
     max-width: 800px;
-    margin: 2rem auto;
     padding: 1rem;
     box-sizing: border-box;
     text-align: center;
 }
 
 .sidebar, .sidebar-spacer {
-    flex: 1;
+    width: 25%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem;
+    padding: 1rem;
     box-sizing: border-box;
 }
 
@@ -440,7 +451,6 @@ body.guest-page {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 25vh;
     padding: 1rem;
     box-sizing: border-box;
 }
@@ -501,6 +511,7 @@ body.guest-page .btn-container button{
     display: flex;
     justify-content: center;
     gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .log-in-btn, .guest-btn {
@@ -569,8 +580,8 @@ body.guest-page .btn-container button{
     color: red;
 }
 
-.container {
-    justify-content: center;
+.mobile-container {
+    flex-direction: column;
 }
 
 

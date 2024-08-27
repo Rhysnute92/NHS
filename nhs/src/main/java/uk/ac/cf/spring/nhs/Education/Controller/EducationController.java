@@ -17,7 +17,7 @@ public class EducationController {
     @ModelAttribute("navMenuItems")
     public List<NavMenuItem> navMenuItems() {
         return List.of(
-            new NavMenuItem("What is Lymphedema?", "/information", "fa-solid fa-book"),
+            new NavMenuItem("What is lymphoedema?", "/information", "fa-solid fa-book"),
             new NavMenuItem("Cellulitis", "/cellulitis", "fa-solid fa-book"),
             new NavMenuItem("Treatment", "/treatment", "fa-solid fa-user-check"),
             new NavMenuItem("Helpful resources", "/resources", "fa-solid fa-camera")
