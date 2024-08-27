@@ -1,6 +1,7 @@
 package uk.ac.cf.spring.nhs.UserWidget.Controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -128,5 +129,40 @@ class UserWidgetControllerUnitTests {
         } catch (RuntimeException e) {
             assertEquals("Service exception", e.getMessage());
         }
+    }
+
+    @Test
+    @WithMockUser(username = "testuser", roles = { "USER" })
+    void addUserWidgets_withEmptyWidgetNames_returnsBadRequest() {
+        // Act
+        ResponseEntity<Void> response = userWidgetController.addUserWidgets(Collections.emptyList());
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+    @Test
+    @WithMockUser(username = "testuser", roles = { "USER" })
+    void addUserWidgets_withValidWidgetNames_returnsNoContent() {
+        mockAuthenticatedUser();
+
+        List<String> widgetNamesToAdd = Arrays.asList("Widget 1", "Widget 2");
+
+        // Mock the service to do nothing on save call
+        doNothing().when(userWidgetService).saveUserWidget(any());
+
+        ResponseEntity<Void> response = userWidgetController.addUserWidgets(widgetNamesToAdd);
+
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    @WithMockUser(username = "testuser", roles = { "USER" })
+    void deleteUserWidgets_withEmptyWidgetIds_returnsBadRequest() {
+        // Act
+        ResponseEntity<Void> response = userWidgetController.deleteUserWidgets(Collections.emptyList());
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 }
