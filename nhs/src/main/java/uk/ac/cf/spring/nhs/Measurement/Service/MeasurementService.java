@@ -56,7 +56,7 @@ public class MeasurementService {
             endDate = LocalDate.now();
         }
 
-        return measurementRepository.findByUserIdAndTypeAndDateBetween(userId, measurementType, startDate, endDate);
+        return measurementRepository.findByUserIdAndLocationAndDateBetween(userId, measurementType, startDate, endDate);
     }
 
 

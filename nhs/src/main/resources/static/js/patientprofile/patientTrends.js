@@ -198,7 +198,8 @@ function updateChartWithData(chartType, data) {
         const dataMap = {};
 
         data.forEach(item => {
-            const category = item.type || item.type + ": " + item.location || item;
+            console.log(item)
+            const category = item.location;
             if (!dataMap[category]) {
                 dataMap[category] = [];
             }

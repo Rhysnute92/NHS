@@ -11,7 +11,7 @@ import java.util.List;
 public interface MeasurementRepository extends JpaRepository<Measurement, Integer> {
     List<Measurement> findByUserId(long userId);
 
-    List<Measurement> findByUserIdAndTypeAndDateBetween(long userId, String measurementType, LocalDate startDate, LocalDate endDate);
+    List<Measurement> findByUserIdAndLocationAndDateBetween(long userId, String measurementType, LocalDate startDate, LocalDate endDate);
 
     @Query("SELECT DISTINCT m.location FROM Measurement m WHERE m.userId = :userId")
     List<String> findDistinctLocationsByUserId(@Param("userId") Long userId);
