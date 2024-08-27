@@ -25,6 +25,7 @@ import uk.ac.cf.spring.nhs.Photo.Service.PhotoService;
 import uk.ac.cf.spring.nhs.Security.AuthenticationInterface;
 import uk.ac.cf.spring.nhs.Security.CustomUserDetails;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -83,8 +84,8 @@ public class PhotoControllerTest {
     @Test
     public void testPhotos() throws Exception {
         List<Photo> photos = new ArrayList<>();
-        photos.add(new Photo("photo1.jpg", new Date(), "Arm", 1L));
-        photos.add(new Photo("photo2.jpg", new Date(), "Neck", 1L));
+        photos.add(new Photo("photo1.jpg", "Arm", 1L, LocalDate.now()));
+        photos.add(new Photo("photo2.jpg","Neck", 1L, LocalDate.now()));
 
         when(photoService.getPhotosByUserId(1L)).thenReturn(photos);
 
@@ -104,7 +105,7 @@ public class PhotoControllerTest {
                 new byte[]{1, 2, 3, 4});
 
         when(photoService.savePhoto(any(PhotoDTO.class), eq(1L)))
-                .thenReturn(new Photo("photo.jpg", new Date(), "leg", 1L));
+                .thenReturn(new Photo("photo.jpg","leg", 1L, LocalDate.now()));
 
         // Perform the mock request with the file and bodyPart as form parameters
         mockMvc.perform(multipart("/diary/photos")

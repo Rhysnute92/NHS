@@ -1,49 +1,41 @@
 package uk.ac.cf.spring.nhs.Measurement.DTO;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
+
+@Getter
+@Setter
 public class MeasurementDTO {
-    private String type;
-    private Float value;
+    private String type = "";
+    private Float value = 0.0f;
     private String unit;
+    private String location;
+    private String side;
+    private LocalDate date;
 
     public MeasurementDTO() {
     }
 
-    public MeasurementDTO(String type, Float value, String unit) {
+    public MeasurementDTO(String type, Float value, String unit, String location, String side, LocalDate date) {
         this.type = type;
         this.value = value;
         this.unit = unit;
+        this.location = location;
+        this.side = side;
+        this.date = date;
     }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Float getValue() {
-        return value;
-    }
-
-    public void setValue(Float value) {
-        this.value = value;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
     @Override
     public String toString() {
         return "MeasurementDTO{" +
                 "type='" + type + '\'' +
                 ", value=" + value +
                 ", unit='" + unit + '\'' +
+                ", location='" + location + '\'' +
+                ", side='" + side + '\'' +
                 '}';
     }
+
 }

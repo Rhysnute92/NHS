@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import uk.ac.cf.spring.nhs.Diary.DTO.CheckinFormDTO;
+import uk.ac.cf.spring.nhs.Diary.DTO.MoodDTO;
 import uk.ac.cf.spring.nhs.Diary.Entity.DiaryEntry;
 import uk.ac.cf.spring.nhs.Diary.Entity.Mood;
 import uk.ac.cf.spring.nhs.Diary.Repository.DiaryEntryRepository;
@@ -18,6 +19,7 @@ import uk.ac.cf.spring.nhs.Symptom.DTO.SymptomDTO;
 import uk.ac.cf.spring.nhs.Symptom.Entity.Symptom;
 import uk.ac.cf.spring.nhs.Symptom.Service.SymptomService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Date;
@@ -84,7 +86,7 @@ public class DiaryEntryService {
                 .map(photoDTO -> {
                     String photoUrl = fileStorageService.storeFile(photoDTO.getFile());
                     String bodyPart = photoDTO.getBodyPart();
-                    Photo photo = new Photo(photoUrl, new Date(), bodyPart, userId);
+                    Photo photo = new Photo(photoUrl, bodyPart, userId, LocalDate.now());
                     photo.setDiaryEntry(diaryEntry);
                     return photo;
                 })
@@ -95,7 +97,7 @@ public class DiaryEntryService {
         return symptomDTOs.stream()
                 .filter(symptomDTO -> symptomDTO.getSeverity() != null)
                 .map(symptomDTO -> {
-                    Symptom symptom = new Symptom(symptomDTO.getName(), symptomDTO.getSeverity(), userId);
+                    Symptom symptom = new Symptom(symptomDTO.getName(), symptomDTO.getSeverity(), userId, LocalDate.now());
                     symptom.setDiaryEntry(diaryEntry);
                     return symptom;
                 })
@@ -105,7 +107,15 @@ public class DiaryEntryService {
     private List<Measurement> processMeasurements(List<MeasurementDTO> measurementDTOs, Long userId, DiaryEntry diaryEntry) {
         return measurementDTOs.stream()
                 .map(measurementDTO -> {
-                    Measurement measurement = new Measurement(measurementDTO.getType(), measurementDTO.getValue(), measurementDTO.getUnit(), userId);
+                    Measurement measurement = new Measurement(
+                            measurementDTO.getType(),
+                            measurementDTO.getValue(),
+                            measurementDTO.getUnit(),
+                            userId,
+                            LocalDate.now(),
+                            measurementDTO.getLocation(),
+                            measurementDTO.getSide()
+                    );
                     measurement.setDiaryEntry(diaryEntry);
                     return measurement;
                 })
@@ -127,6 +137,39 @@ public class DiaryEntryService {
     public List<DiaryEntry> getDiaryEntriesByUserId(long userId) {
         return diaryEntryRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "date"));
     }
+
+    public List<DiaryEntry> getDiaryEntriesByUserIdAndDateRange(Long userId, LocalDate startDate, LocalDate endDate) {
+        // If startDate or endDate are null, default to the earliest/latest possible dates
+        if (startDate == null) {
+            startDate = LocalDate.of(1900, 1, 1);
+        }
+        if (endDate == null) {
+            endDate = LocalDate.now();
+        }
+
+        // Convert LocalDate to LocalDateTime
+        LocalDateTime startDateTime = startDate.atStartOfDay();
+        LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
+
+        return diaryEntryRepository.findByUserIdAndDateBetween(userId, startDateTime, endDateTime);
+    }
+
+    public List<MoodDTO> getMoodByUserIdAndDateRange(Long userId, LocalDate startDate, LocalDate endDate) {
+        // If startDate or endDate are null, default to the earliest/latest possible dates
+        if (startDate == null) {
+            startDate = LocalDate.of(1900, 1, 1);
+        }
+        if (endDate == null) {
+            endDate = LocalDate.now();
+        }
+
+        // Convert LocalDate to LocalDateTime
+        LocalDateTime startDateTime = startDate.atStartOfDay();
+        LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
+
+        return diaryEntryRepository.findMoodByUserIdAndDateBetween(userId, startDateTime, endDateTime);
+    }
+
 
     public boolean deleteById(Long id) {
         if (diaryEntryRepository.existsById(id)) {

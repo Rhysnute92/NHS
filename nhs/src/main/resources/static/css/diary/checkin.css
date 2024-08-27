@@ -222,42 +222,94 @@ input[type="radio"] {
 /*}*/
 
 .measurement {
-    display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
 }
 
-.measurement input[type="number"] {
-    width: 20%;
-    padding: 0.5rem;
-}
-
 .measurement .unit-select {
     width: 25%;
-    padding: 0.5rem;
+    padding: 0.2rem;
 }
 
 .measurement .type-select {
     width: 35%;
-    padding: 0.5rem;
+    padding: 0.2rem;
+}
+
+.measurement input[type="number"] {
+    width: 50%;
+    padding: 0.2rem;
+}
+
+.measurement select {
+    width: 40%;
+    padding: 0.2rem;
+}
+
+.measurement-header select {
+    width: auto;
+    padding: 0.2rem;
 }
 
 .measurement .remove-measurement-button {
-    background-color: var(--nhs-dark-red);
+    background-color: var(--emergency-services-red);
     color: var(--nhs-white);
     border: none;
     padding: 0.5rem;
     border-radius: 0.4rem;
     transition: opacity 0.5s;
-    width: 2rem;
-    height: 2rem;
+    width: 4vh;
+    height: 4vh;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
+.measurement .remove-measurement-button:hover {
+    cursor: pointer;
+    opacity: 80%;
+}
+
+.measurement {
+    margin-bottom: 2rem;
+}
 
 .measurement * {
     font-family: var(--regular-font-family);
 }
+
+.measurement-header {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.measurement-columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.measurement-columns.hidden {
+    display: none;
+}
+
+.measurement-column h4 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.measurement-point {
+    margin-bottom: 10px;
+}
+
+.measurement-point, .measurement-column {
+    width: 50%;
+}
+
+.right-column .measurement-point, .left-column .measurement-point {
+    width: 100%;
+}
+
 
 @media (max-width: 768px) {
     .checkin-form-container {
@@ -285,5 +337,13 @@ input[type="radio"] {
 
     .checkin-mood-button input[type="radio"]:hover {
         opacity: 0 !important;
+    }
+
+    .measurement-columns {
+        flex-direction: column;
+    }
+
+    .measurement-point, .measurement-column {
+        width: 100%;
     }
 }
