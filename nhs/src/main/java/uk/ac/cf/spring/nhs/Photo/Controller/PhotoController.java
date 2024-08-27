@@ -93,7 +93,8 @@ public class PhotoController {
         return List.of(
                 new NavMenuItem("Diary", "/diary", "fa-solid fa-book"),
                 new NavMenuItem("Check-in", "/diary/checkin", "fa-solid fa-user-check"),
-                new NavMenuItem("Photos", "/diary/photos", "fa-solid fa-camera")
+                new NavMenuItem("Photos", "/diary/photos", "fa-solid fa-camera"),
+                new NavMenuItem("Events", "/diary/events", "fa-solid fa-receipt")
         );
     }
 }

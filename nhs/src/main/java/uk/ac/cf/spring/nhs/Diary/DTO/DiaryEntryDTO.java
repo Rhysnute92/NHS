@@ -23,11 +23,12 @@ public class DiaryEntryDTO {
     private String notes;
     private List<Symptom> symptoms;
     private List<Photo> photos;
+    private Long id;
 
     public DiaryEntryDTO() {
     }
 
-    public DiaryEntryDTO(LocalDateTime date, List<MeasurementGroupDTO> twoSidedMeasurementGroups, List<Measurement> nonSidedMeasurements, Mood mood, String notes, List<Symptom> symptoms, List<Photo> photos) {
+    public DiaryEntryDTO(LocalDateTime date, List<MeasurementGroupDTO> twoSidedMeasurementGroups, List<Measurement> nonSidedMeasurements, Mood mood, String notes, List<Symptom> symptoms, List<Photo> photos, Long id) {
         this.date = date;
         this.twoSidedMeasurementGroups = twoSidedMeasurementGroups;
         this.nonSidedMeasurements = nonSidedMeasurements;
@@ -35,5 +36,6 @@ public class DiaryEntryDTO {
         this.notes = notes;
         this.symptoms = symptoms;
         this.photos = photos;
+        this.id = id;
     }
 }

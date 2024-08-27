@@ -208,6 +208,7 @@ class DiaryEntry extends HTMLElement {
 
     handleDelete(event) {
         event.stopPropagation();
+
         const entryId = this.getAttribute('data-id');
 
         if (!window.confirm('Are you sure you want to delete this entry?')) {

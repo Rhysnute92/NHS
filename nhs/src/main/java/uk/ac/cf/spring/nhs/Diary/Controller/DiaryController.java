@@ -88,7 +88,8 @@ public class DiaryController {
                     entry.getMood(),
                     entry.getNotes(),
                     entry.getSymptoms(),
-                    entry.getPhotos()
+                    entry.getPhotos(),
+                    entry.getId()
             );
 
             diaryEntryDTOs.add(dto);
