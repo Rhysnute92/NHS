@@ -16,7 +16,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     Patient findByNHSNumber(@Param("nhsNumber") String nhsNumber);
 
     @Modifying(clearAutomatically = true, flushAutomatically = true)
-    @Transactional 
+    @Transactional
     @Query("update Patient u set u.patientTitle = :title, u.patientName = :name, u.patientLastName = :lastname, u.patientMobile = :mobile, u.patientEmail = :email where u.userId = :id")
     void updatePatient(@Param("title") String title, @Param("name") String name, @Param("lastname") String lastname, @Param("mobile") String mobile, @Param("email") String email, @Param("id") Long id);
 }
