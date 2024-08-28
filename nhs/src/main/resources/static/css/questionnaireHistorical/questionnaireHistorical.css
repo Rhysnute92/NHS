@@ -128,7 +128,7 @@ div#trend-buttons {
   margin-bottom: 2em;
 }
 
-.trend-button {
+.trend-button, .download-btn {
   background-color: var(--nhs-bright-blue);
   color: white;
   border: 2px solid var(--nhs-bright-blue);
@@ -149,6 +149,15 @@ div#trend-buttons {
 .trend-button.active {
   background-color: var(--nhs-yellow);
   color: black;
+}
+
+.download-btn {
+  margin: 10px
+}
+
+.download-btn:hover {
+  background-color: var(--nhs-dark-blue);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Style the chart container */
