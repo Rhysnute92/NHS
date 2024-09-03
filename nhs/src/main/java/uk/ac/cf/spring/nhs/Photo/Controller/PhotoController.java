@@ -1,6 +1,8 @@
 package uk.ac.cf.spring.nhs.Photo.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,10 @@ public class PhotoController {
                          @AuthenticationPrincipal CustomUserDetails userDetails) {
         Long userId = userDetails.getUserId();
         List<Photo> photos = photoService.getPhotosByUserId(userId);
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         model.addAttribute("objectMapper", objectMapper);
+
         model.addAttribute("photos", photos);
         return "diary/photos";
     }
@@ -79,7 +84,6 @@ public class PhotoController {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("error", "An error occurred: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

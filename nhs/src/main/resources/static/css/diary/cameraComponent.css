@@ -94,6 +94,10 @@
     display: none;
 }
 
+.photos-inputs .photo-button {
+    height: 100%;
+}
+
 .photo-button {
     border: none;
     background-color: var(--nhs-light-green);
