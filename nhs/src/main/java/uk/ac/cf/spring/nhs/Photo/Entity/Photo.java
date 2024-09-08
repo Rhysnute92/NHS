@@ -18,7 +18,7 @@ import java.util.Date;
 public class Photo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PhotoID")
     private long id;
 

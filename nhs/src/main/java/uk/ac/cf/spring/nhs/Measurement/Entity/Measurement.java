@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class Measurement {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MeasurementID")
     private long id;
 

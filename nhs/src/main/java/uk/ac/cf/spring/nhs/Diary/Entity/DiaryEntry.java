@@ -21,12 +21,11 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "DiaryEntries")
-@FilterDef(name = "relatedEntityTypeFilter", parameters = @ParamDef(name = "relatedEntityType", type = String.class))
 public class DiaryEntry {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "EntryID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "EntryID", nullable = false)
     private long id;
 
     @Column(name = "EntryDateTime", nullable = false)

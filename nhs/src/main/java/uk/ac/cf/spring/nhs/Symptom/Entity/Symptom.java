@@ -18,7 +18,7 @@ import java.util.Date;
 public class Symptom {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SymptomID")
     private long id;
 
