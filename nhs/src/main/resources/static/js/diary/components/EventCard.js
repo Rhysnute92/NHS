@@ -1,4 +1,4 @@
-import { patientTreatmentText, providerTreatmentText, symptomNameText, symptomSeverityText } from '../textMappings.js';
+import { patientTreatmentText, providerTreatmentText, symptomNameText, symptomSeverityText } from '../diaryMappings.js';
 
 class EventCard extends HTMLElement {
     constructor() {

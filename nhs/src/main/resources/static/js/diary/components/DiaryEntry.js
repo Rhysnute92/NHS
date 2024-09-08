@@ -231,7 +231,7 @@ class DiaryEntry extends HTMLElement {
     }
 
     render() {
-        const mood = this.getAttribute('data-mood');
+        const mood = this.getAttribute('data-mood') !== 'null' ? this.getAttribute('data-mood') : null;
         const symptoms = JSON.parse(this.getAttribute('data-symptoms') || '[]');
         const photos = JSON.parse(this.getAttribute('data-photos') || '[]');
         const nonSidedMeasurements = JSON.parse(this.getAttribute('data-nonsidedmeasurements') || '[]');
@@ -242,7 +242,7 @@ class DiaryEntry extends HTMLElement {
         const fullContent = this.shadowRoot.querySelector('.diary-entry-full');
         fullContent.innerHTML = '';
 
-        if (mood) this.renderMood(mood, fullContent);
+        if (mood !== null) this.renderMood(mood, fullContent);
         if (symptoms.length) this.renderSymptoms(symptoms, fullContent);
         if (photos.length) this.renderPhotos(photos, fullContent);
         if (nonSidedMeasurements.length || twoSidedMeasurementGroups.length) {
